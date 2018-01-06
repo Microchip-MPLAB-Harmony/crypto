@@ -6,5 +6,12 @@ def instantiateComponent(cryptoComponent):
 
 	if (Peripheral.moduleExists("ICM")):
 		cryptoHW.setVisible(True)
+		cryptoHW.setDefaultValue(True)
 	else:
 		cryptoHW.setVisible(False)
+
+def onDependentComponentAdded(cryptoComponent, id, trngComponent):
+	
+	if id == "LIB_CRYPTO_Dependency":
+		trngComponent.setSymbolValue("TRNG_Reserved", "TRNGReservedSymbol", True, 1)
+

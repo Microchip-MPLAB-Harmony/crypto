@@ -1,8 +1,0 @@
-def loadModule():
-	print("Load Module: Harmony Crypto Library")
-
-	print("create component: Crypto")
-	usartComponent = Module.CreateComponent("lib_crypto", "Crypto", "/Libraries/", "config/crypto.py")
-	usartComponent.addCapability("LIB_CRYPTO")
-
-
