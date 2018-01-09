@@ -98,10 +98,6 @@ def instantiateComponent(cryptoComponent):
 	cryptoCipher3DES.setDescription("Enables (Triple) DES Cryptosystem")
 	cryptoCipher3DES.setDefaultValue(False)
 
-	# Pass define into compiler so Crypto will read config.h
-	#cryptoHaveConfig = cryptoComponent.createCompilerDefineSymbol("cryptoHaveConfig", None)
-	#cryptoHaveConfig.setDefaultValue("HAVE_CONFIG_H")
-
 	configName = Variables.get("__CONFIGURATION_NAME")
 
 	cryptoHeaderFile = cryptoComponent.createFileSymbol(None, None)
@@ -129,5 +125,3 @@ def cryptoHWLabels(cryptoHW, test):
 def onDependentComponentAdded(cryptoComponent, id, trngComponent):
 	if id == "LIB_CRYPTO_Dependency":
 		trngComponent.setSymbolValue("TRNG_Reserved", "TRNGReservedSymbol", True, 1)
-		trngSymbol = Database.getSymbolByID(trngComponent.getID(), "TRNG_Reserved")
-		trngSymbol.setReadOnly(True)
