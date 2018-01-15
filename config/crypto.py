@@ -104,7 +104,7 @@ def instantiateComponent(cryptoComponent):
 	cryptoHeaderFile.setSourcePath("templates/crypto_config.h.ftl")
 	cryptoHeaderFile.setOutputName("config.h")
 	cryptoHeaderFile.setDestPath("crypto/")
-	cryptoHeaderFile.setProjectPath("crypto/")
+	cryptoHeaderFile.setProjectPath("config/" + configName + "/crypto/")
 	cryptoHeaderFile.setMarkup(True)
 	cryptoHeaderFile.setType("HEADER")
 
@@ -112,7 +112,7 @@ def instantiateComponent(cryptoComponent):
 #	cryptoSourceFile.setSourcePath("crypto/templates/crypto_config.c.ftl")
 #	cryptoSourceFile.setOutputName("crypto.c")
 #	cryptoSourceFile.setDestPath("crypto/")
-#	cryptoSourceFile.setProjectPath("crypto/")
+#	cryptoSourceFile.setProjectPath("config/" + configName + "/crypto/")
 #	cryptoSourceFile.setType("SOURCE")
 
 def cryptoHWLabels(cryptoHW, test):
