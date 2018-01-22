@@ -24,7 +24,8 @@
 #ifndef WOLF_CRYPT_ENCRYPT_H
 #define WOLF_CRYPT_ENCRYPT_H
 
-#include <wolfssl/wolfcrypt/types.h>
+//#include <wolfssl/wolfcrypt/types.h>
+#include <crypto/src/types.h>
 
 #ifdef __cplusplus
     extern "C" {

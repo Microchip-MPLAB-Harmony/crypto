@@ -1132,6 +1132,7 @@ static int wc_GenerateRand_IntelRD(OS_Seed* os, byte* output, word32 sz)
 
     int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
     {
+        extern int pic32c_RNG_GenerateSeed(byte* output, word32 sz);
         (void)os; /* Suppress unused arg warning */
         return CUSTOM_RAND_GENERATE_SEED(output, sz);
     }
@@ -1656,9 +1657,8 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
     }
 
 #elif defined(CUSTOM_RAND_GENERATE_BLOCK)
-    /* #define CUSTOM_RAND_GENERATE_BLOCK myRngFunc
-     * extern int myRngFunc(byte* output, word32 sz);
-     */
+    extern int pic32c_RNG_GenerateBlock(byte* output, word32 sz);
+
 
 #elif defined(WOLFSSL_SAFERTOS) || defined(WOLFSSL_LEANPSK) || \
       defined(WOLFSSL_IAR_ARM)  || defined(WOLFSSL_MDK_ARM) || \

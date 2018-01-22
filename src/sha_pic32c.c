@@ -54,7 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #if !defined(NO_SHA)
 
 #include "crypto/src/sha.h"
-#include "arch/arm/devices_pic32c.h" /* PIC32C system header. */
+#include "system_definitions.h"
 
 
 

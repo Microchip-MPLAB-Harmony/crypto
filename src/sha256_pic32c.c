@@ -52,8 +52,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "crypto/src/settings.h"
 
-#include "arch/arm/devices_pic32c.h"
 #include "crypto/src/sha256.h"
+#include "system_definitions.h"
+
 
 #if !defined(NO_SHA256)
 

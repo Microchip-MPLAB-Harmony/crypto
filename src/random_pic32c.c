@@ -18,7 +18,7 @@
 //DOM-IGNORE-BEGIN
 /******************************************************************************
 File Name:  random_pic32c.c
-Copyright © 2017 released Microchip Technology Inc.  All rights reserved.
+Copyright ï¿½ 2017 released Microchip Technology Inc.  All rights reserved.
 
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
@@ -28,7 +28,7 @@ controller that is integrated into your product or third party product
 You should refer to the license agreement accompanying this Software for
 additional information regarding your rights and obligations.
 
-SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND,
+SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½AS ISï¿½ WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
 MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
 IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
@@ -54,7 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "crypto/src/error-crypt.h"
 
-#include "arch/arm/devices_pic32c.h" /* PIC32C system header. */
+#include "system_definitions.h"
 
 
 #define RNG_BYTES_AT_A_TIME 4
@@ -153,7 +153,7 @@ int pic32c_FreeRng(void)
 
 
 /* used by random.c */
-int pic32c_GenerateSeed(byte* output, word32 sz)
+int pic32c_RNG_GenerateSeed(byte* output, word32 sz)
 {
     int status;
 

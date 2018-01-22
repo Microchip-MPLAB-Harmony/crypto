@@ -50,6 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define WOLF_CRYPT_SHA256_H
 
 #include "crypto/src/types.h"
+#include "crypto/src/settings.h"
 
 #ifndef NO_SHA256
 

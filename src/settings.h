@@ -52,6 +52,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 
+
 #ifdef __cplusplus
     extern "C" {
 #endif
@@ -237,7 +238,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #endif
 
 #if defined(MICROCHIP_PIC32)
-    /* #define WOLFSSL_MICROCHIP_PIC32MZ */
     #define SIZEOF_LONG_LONG 8
     #define SINGLE_THREADED
     #define WOLFSSL_USER_IO
@@ -268,10 +268,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     #define WOLFSSL_PIC32MZ_HASH
     #define NO_BIG_INT
 #elif defined(WOLFSSL_MICROCHIP_PIC32C)
-    #define WOLFSSL_PIC32C_CE
     #define WOLFSSL_PIC32C_CRYPT
+    #define CUSTOM_RAND_GENERATE_BLOCK pic32c_RNG_GenerateBlock
+    #define CUSTOM_RAND_GENERATE_SEED  pic32c_RNG_GenerateSeed
     #define HAVE_AES_ENGINE
-    #define WOLFSSL_PIC32C_RNG
     #define WOLFSSL_AES_COUNTER
     #define HAVE_AESGCM
     #define NO_BIG_INT

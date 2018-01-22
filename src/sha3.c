@@ -6,12 +6,12 @@
 
   File Name:
     sha3.c
-  
+
   Summary:
     Crypto Framework Library source for cryptographic functions.
 
   Description:
-    This source file contains functions that make up the Cryptographic 
+    This source file contains functions that make up the Cryptographic
 	Framework Library for PIC32 families of Microchip microcontrollers.
 **************************************************************************/
 
@@ -45,12 +45,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     #include "config.h"
 #endif
 
-#include "cryto/src/settings.h"
+#include "crypto/src/settings.h"
 
 #if defined(WOLFSSL_SHA3) && !defined(WOLFSSL_XILINX_CRYPT)
 
-#include "cryto/src/sha3.h"
-#include "cryto/src/error-crypt.h"
+#include "crypto/src/sha3.h"
+#include "crypto/src/error-crypt.h"
 
 /* fips wrapper calls, user can call direct */
 #ifdef HAVE_FIPS
@@ -459,11 +459,11 @@ static int Sha3Update(Sha3* sha3, const byte* data, word32 len, byte p)
         for (i = 0; i < l; i++)
             t[i] = data[i];
         data += i;
-        len -= i; 
+        len -= i;
         sha3->i += i;
 
         if (sha3->i == p * 8)
-        {   
+        {
             for (i = 0; i < p; i++)
                 sha3->s[i] ^= Load64BitBigEndian(sha3->t + 8 * i);
             BlockSha3(sha3->s);

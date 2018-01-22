@@ -41,15 +41,15 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 *******************************************************************************/
 -->
 /*** Crypto Library Configuration ***/
-
 #define WC_NO_HARDEN
+#define NO_DSA
 #define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
 <#if maskFamily == "PIC32C">
   <#lt>#define MICROCHIP_PIC32C
   <#if cryptoHW == true>
     <#lt>#define WOLFSSL_MICROCHIP_PIC32C
-    <#if cryptoHashMD5 || cryptoHashSHA1 || cryptoHashSHA256 || cryptoHashSHA384 || cryptoHashSHA512>
+    <#if cryptoHashMD5 || cryptoHashSHA1 || cryptoHashSHA256 || cryptoHashSHA384 || cryptoHashSHA512 || cryptoRandom>
       <#lt>#define WOLFSSL_PIC32C_HASH
     </#if>
   </#if>
@@ -57,12 +57,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
   <#lt>#define MICROCHIP_PIC32
   <#if cryptoHW == true>
     <#lt>#define WOLFSSL_MICROCHIP_PIC32MZ
-    <#if cryptoHashMD5 || cryptoHashSHA1 || cryptoHashSHA256 || cryptoHashSHA384 || cryptoHashSHA512>
+    <#if cryptoHashMD5 || cryptoHashSHA1 || cryptoHashSHA256 || cryptoHashSHA384 || cryptoHashSHA512 || cryptoRandom>
       <#lt>#define WOLFSSL_PIC32MZ_HASH
     </#if>
   </#if>
 </#if>
-
 <#if CONFIG_USE_3RDPARTY_WOLFSSL!false == false>
     <#lt>#define NO_CERTS
     <#lt>#define NO_PWDBASED
@@ -76,7 +75,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#if cryptoCipherAES_CTR == false && cryptoCipherAES_CBC == false && cryptoCipherAES_ECB == false && cryptoCipherAES_GCM == false>
         <#lt>#define NO_AES
     </#if>
-    <#if cryptoHashSHA256 == false>
+    <#if cryptoHashSHA256 == false && cryptoRandom == false>
         <#lt>#define NO_SHA256
     </#if>
     <#if cryptoHashSHA384 == true>

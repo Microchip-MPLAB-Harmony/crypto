@@ -6,12 +6,12 @@
 
   File Name:
     pkcs7.c
-  
+
   Summary:
     Crypto Framework Libarary source for cryptographic functions.
 
   Description:
-    This source file contains functions that make up the Cryptographic 
+    This source file contains functions that make up the Cryptographic
 	Framework Library for PIC32 families of Microchip microcontrollers.
 **************************************************************************/
 
@@ -50,9 +50,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #ifdef HAVE_PKCS7
 
-#include "crypto/src/pkcs7.h>
-#include "crypto/src/error-crypt.h>
-#include "crypto/src/logging.h>
+#include "crypto/src/pkcs7.h"
+#include "crypto/src/error-crypt.h"
+#include "crypto/src/logging.h"
 #include "crypto/src/hash.h"
 #ifndef NO_RSA
     #include "crypto/src/rsa.h"

@@ -100,6 +100,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 
 #if defined(CUSTOM_RAND_GENERATE_BLOCK)
+    extern int pic32c_RNG_GenerateBlock(byte* output, word32 sz);
+    extern int pic32c_GenerateSeed(byte* output, word32 sz);
     /* To use define the following:
      * #define CUSTOM_RAND_GENERATE_BLOCK myRngFunc
      * extern int myRngFunc(byte* output, word32 sz);
