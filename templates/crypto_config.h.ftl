@@ -77,6 +77,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     </#if>
     <#if cryptoHashSHA256 == false && cryptoRandom == false>
         <#lt>#define NO_SHA256
+        <#lt>#define WC_NO_RNG
     </#if>
     <#if cryptoHashSHA384 == true>
         <#lt>#define WOLFSSL_SHA384

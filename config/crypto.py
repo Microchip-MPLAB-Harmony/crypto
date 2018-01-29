@@ -128,8 +128,9 @@ def instantiateComponent(cryptoComponent):
         'cmac.h', 'coding.c', 'coding.h', 'compress.c', 'compress.h',
         'crypto.c', 'curve25519.c', 'curve25519.h', 'des3.c', 'des3.h', 'dh.c',
         'dh.h', 'dsa.c', 'dsa.h', 'ecc.c', 'ecc.h', 'ecc_fp.c', 'ed25519.c',
-        'ed25519.h', 'error-crypt.h', 'error.c', 'evp.c', 'fe_low_mem.c',
-        'fe_operations.c', 'fe_operations.h', 'fips_test.h',
+        'ed25519.h', 'error-crypt.h', 'error.c', 
+        #'evp.c', 
+        'fe_low_mem.c', 'fe_operations.c', 'fe_operations.h', 'fips_test.h',
         # 'fp_mont_small.i', 'fp_mul_comba_12.i', 'fp_mul_comba_17.i',
         # 'fp_mul_comba_20.i', 'fp_mul_comba_24.i', 'fp_mul_comba_28.i',
         # 'fp_mul_comba_3.i', 'fp_mul_comba_32.i', 'fp_mul_comba_4.i',
@@ -157,9 +158,9 @@ def instantiateComponent(cryptoComponent):
         'wolfevent.c', 'wolfevent.h', 'wolfmath.c', 'wolfmath.h'
     ]
 
-    fileList_pic32c = ['aes.c', 'sha.c', 'sha256.c', 'random.c']
+    fileList_pic32c =    ['aes.c', 'sha.c', 'sha256.c', 'random.c']
     fileList_pic32c_HW = ['aes_pic32c.c', 'pic32c-hash.h', 'sha_pic32c.c', 'sha256_pic32c.c', 'random_pic32c.c']
-    fileList_pic32m = ['aes.c', 'aes.h', 'sha.c', 'sha256.c', 'pic32mz-crypt.c', 'pic32mz-crypt.h', 'random.c']
+    fileList_pic32m =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'pic32mz-crypt.c', 'pic32mz-crypt.h']
 
     # add all common files as enabled and no callback
     for filename in fileList_common:
@@ -167,18 +168,19 @@ def instantiateComponent(cryptoComponent):
 
     # add acceleration files if needed
     if maskFamily.getValue() == "PIC32C":
-        if (cryptoHW.getValue):
-            for filename in fileList_pic32c_HW:
-                addFileName(filename, cryptoComponent, cryptoHW.getValue(), onHWChanged)
-        else:
-            for filename in fileList_pic32c:
-                addFileName(filename, cryptoComponent, cryptoHW.getValue(), onHWChanged)
+        # These files are used for HW - notice the 'True' and 'Add' for enabled
+        for filename in fileList_pic32c_HW:
+            addFileName(filename, cryptoComponent, True, onHWChangedAdd)
+        # These files are disabled initialy when the 'HW' is the default condition
+        for filename in fileList_pic32c:
+            addFileName(filename, cryptoComponent, False, onHWChangedSub)
     else:
         for filename in fileList_pic32m:
-            addFileName(filename, cryptoComponent, cryptoHW.getValue(), onHWChanged)
+            addFileName(filename, cryptoComponent, True, onHWChangedAdd)
 
     # put header include into system_definitions.h - but should it be there?
-    headerList = Database.getSymbolByID("core", "LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
+    headerList = cryptoComponent.createListEntrySymbol(None, None)
+    headerList.setTarget("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
     headerList.addValue('#include "crypto/crypto.h"')
 
 
@@ -191,13 +193,19 @@ def onHWChangedDoLabel(symbol, isHWAccelerated):
         symbol.setLabel(symbol.getLabel() + " - HW")
 
 
-
-# This callback enables/disables files to be written depending on HW Acceleration choice
-def onHWChanged(filesymbol, isHWAccelerated):
+# This callback enables files to be written depending on HW Acceleration Enabled
+def onHWChangedAdd(filesymbol, isHWAccelerated):
     if isHWAccelerated.getValue() == True:
         filesymbol.setEnabled(True)
     else:
         filesymbol.setEnabled(False)
+
+# This callback disables files to be written depending on HW Acceleration Enabled
+def onHWChangedSub(filesymbol, isHWAccelerated):
+    if isHWAccelerated.getValue() == True:
+        filesymbol.setEnabled(False)
+    else:
+        filesymbol.setEnabled(True)
 
 
 def onDependentComponentAdded(cryptoComponent, id, trngComponent):
