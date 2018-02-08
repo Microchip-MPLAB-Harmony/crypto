@@ -18,7 +18,7 @@
 //DOM-IGNORE-BEGIN
 /******************************************************************************
 File Name:  sha.c
-Copyright © 2016 released Microchip Technology Inc.  All rights reserved.
+Copyright ï¿½ 2016 released Microchip Technology Inc.  All rights reserved.
 
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
@@ -102,18 +102,18 @@ static int32_t Sha1Process(Sha *sha, const uint8_t *input, word32 length)
                  | ICM_CFG_UALGO_SHA1
                  | ICM_CFG_UIHASH_Msk;
 
-    _ICM_REGS->ICM_UIHVAL[0].VAL = sha->digest[0];
-    _ICM_REGS->ICM_UIHVAL[1].VAL = sha->digest[1];
-    _ICM_REGS->ICM_UIHVAL[2].VAL = sha->digest[2];
-    _ICM_REGS->ICM_UIHVAL[3].VAL = sha->digest[3];
-    _ICM_REGS->ICM_UIHVAL[4].VAL = sha->digest[4];
+    _ICM_REGS->ICM_UIHVAL[0].w = sha->digest[0];
+    _ICM_REGS->ICM_UIHVAL[1].w = sha->digest[1];
+    _ICM_REGS->ICM_UIHVAL[2].w = sha->digest[2];
+    _ICM_REGS->ICM_UIHVAL[3].w = sha->digest[3];
+    _ICM_REGS->ICM_UIHVAL[4].w = sha->digest[4];
 
     /* memory barrier */
     __DMB();
 
-    /* enable the ICM and wait */
-    _ICM_REGS->ICM_CTRL.ENABLE = 1;
-    while (!(_ICM_REGS->ICM_ISR.RHC))
+    /* enable the ICM and wait ICM CTRL is write only - don't OR it */
+    _ICM_REGS->ICM_CTRL.w = ICM_CTRL_ENABLE_Msk;
+    while (!(_ICM_REGS->ICM_ISR.w & ICM_ISR_RHC_Msk))
     {
         /* wait - when finished digest will be updated */
     }

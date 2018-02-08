@@ -18,7 +18,7 @@
 //DOM-IGNORE-BEGIN
 /******************************************************************************
 File Name:  aes_pic32c.c
-Copyright © 2017 released Microchip Technology Inc.  All rights reserved.
+Copyright ï¿½ 2017 released Microchip Technology Inc.  All rights reserved.
 
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
@@ -28,7 +28,7 @@ controller that is integrated into your product or third party product
 You should refer to the license agreement accompanying this Software for
 additional information regarding your rights and obligations.
 
-SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND,
+SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½AS ISï¿½ WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
 MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
 IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
@@ -217,7 +217,7 @@ static void AesWriteKey(const word32 *AesKey, int key_length)
         key_length /= 4;
         for (i = 0; i < key_length; i++)
         {
-            _AES_REGS->AES_KEYWR[i].KEYW = *AesKey++;
+            _AES_REGS->AES_KEYWR[i].w = *AesKey++;
         }
     }
 }
@@ -359,19 +359,19 @@ int wc_AesCbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     for (block = 0; block < sz; block += 16)
     {
         /* Write the data to be ciphered to the input data registers. */
-        _AES_REGS->AES_IDATAR[0].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[1].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[2].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[3].IDATA = *inptr++;
+        _AES_REGS->AES_IDATAR[0].w = *inptr++;
+        _AES_REGS->AES_IDATAR[1].w = *inptr++;
+        _AES_REGS->AES_IDATAR[2].w = *inptr++;
+        _AES_REGS->AES_IDATAR[3].w = *inptr++;
 
         /* Note the blocking here - state machine this? */
         while (!(_AES_REGS->AES_ISR.w & AES_ISR_DATRDY_Msk))  ;
 
         /* encrypt complete - read out the data */
-        *outptr++ = _AES_REGS->AES_ODATAR[0].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[1].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[2].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[3].ODATA;
+        *outptr++ = _AES_REGS->AES_ODATAR[0].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[1].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[2].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[3].w;
     }
 
     /* Last IV equals last cipher text */
@@ -406,19 +406,19 @@ int wc_AesCbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     for (block = 0; block < sz; block += 16)
     {
         /* Write the data to be ciphered to the input data registers. */
-        _AES_REGS->AES_IDATAR[0].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[1].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[2].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[3].IDATA = *inptr++;
+        _AES_REGS->AES_IDATAR[0].w = *inptr++;
+        _AES_REGS->AES_IDATAR[1].w = *inptr++;
+        _AES_REGS->AES_IDATAR[2].w = *inptr++;
+        _AES_REGS->AES_IDATAR[3].w = *inptr++;
 
         /* Note the blocking here - state machine this? */
         while (!(_AES_REGS->AES_ISR.w & AES_ISR_DATRDY_Msk))  ;
 
         /* encrypt complete - read out the data */
-        *outptr++ = _AES_REGS->AES_ODATAR[0].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[1].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[2].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[3].ODATA;
+        *outptr++ = _AES_REGS->AES_ODATAR[0].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[1].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[2].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[3].w;
     }
 
     /* Last IV equals last cipher text */
@@ -459,19 +459,19 @@ int wc_AesCtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     for (block = 0; block < sz; block += 16)
     {
         /* Write the data to be ciphered to the input data registers. */
-        _AES_REGS->AES_IDATAR[0].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[1].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[2].IDATA = *inptr++;
-        _AES_REGS->AES_IDATAR[3].IDATA = *inptr++;
+        _AES_REGS->AES_IDATAR[0].w = *inptr++;
+        _AES_REGS->AES_IDATAR[1].w = *inptr++;
+        _AES_REGS->AES_IDATAR[2].w = *inptr++;
+        _AES_REGS->AES_IDATAR[3].w = *inptr++;
 
         /* Note the blocking here - state machine this? */
         while (!(_AES_REGS->AES_ISR.DATRDY))  ;
 
         /* encrypt complete - read out the data */
-        *outptr++ = _AES_REGS->AES_ODATAR[0].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[1].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[2].ODATA;
-        *outptr++ = _AES_REGS->AES_ODATAR[3].ODATA;
+        *outptr++ = _AES_REGS->AES_ODATAR[0].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[1].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[2].w;
+        *outptr++ = _AES_REGS->AES_ODATAR[3].w;
     }
     
     return 0;

@@ -87,13 +87,13 @@ int pic32c_RNG_GenerateBlock(byte* output, word32 sz)
     while (sz)
     {
         /* get 32 bits - BLOCKING */
-        while (!_TRNG_REGS->TRNG_ISR.DATRDY)
+        while (!(_TRNG_REGS->TRNG_ISR & TRNG_ISR_DATRDY_Msk))
         {
             /* Wait until data ready. */
         }
 
         /* get 32 bits */
-        uint32_t result = _TRNG_REGS->TRNG_ODATA.ODATA;
+        uint32_t result = _TRNG_REGS->TRNG_ODATA.w;
 
         /* stuff the data into the output buffer. Watch for buffer overrun */
         if (sz < RNG_BYTES_AT_A_TIME)
@@ -122,13 +122,13 @@ int pic32c_RNG_GenerateBlock(byte* output, word32 sz)
 int pic32c_RNG_GenerateByte(byte* b)
 {
     /* get 32 bits - BLOCKING */
-    while (!_TRNG_REGS->TRNG_ISR.DATRDY)
+        while (!(_TRNG_REGS->TRNG_ISR & TRNG_ISR_DATRDY_Msk))
     {
         /* Wait until data ready. */
     }
 
     /* cram 32 bits into one byte */
-    *b = (byte)_TRNG_REGS->TRNG_ODATA.ODATA;
+    *b = (byte)_TRNG_REGS->TRNG_ODATA.w;
 
     /* memory barrier */
     __DMB();

@@ -186,7 +186,7 @@ def instantiateComponent(cryptoComponent):
 
 # callback for when HW Accelerate is toggled
 def onHWChangedDoLabel(symbol, isHWAccelerated):
-    if isHWAccelerated.getValue() == False:
+    if isHWAccelerated['value'] == False:
         if symbol.getLabel()[-2:] == "HW":
             symbol.setLabel(symbol.getLabel()[:-5])
     else:
@@ -195,14 +195,14 @@ def onHWChangedDoLabel(symbol, isHWAccelerated):
 
 # This callback enables files to be written depending on HW Acceleration Enabled
 def onHWChangedAdd(filesymbol, isHWAccelerated):
-    if isHWAccelerated.getValue() == True:
+    if isHWAccelerated['value'] == True:
         filesymbol.setEnabled(True)
     else:
         filesymbol.setEnabled(False)
 
 # This callback disables files to be written depending on HW Acceleration Enabled
 def onHWChangedSub(filesymbol, isHWAccelerated):
-    if isHWAccelerated.getValue() == True:
+    if isHWAccelerated['value'] == True:
         filesymbol.setEnabled(False)
     else:
         filesymbol.setEnabled(True)

@@ -18,7 +18,7 @@
 //DOM-IGNORE-BEGIN
 /******************************************************************************
 File Name:  sha256_pic32c.c
-Copyright © 2016 released Microchip Technology Inc.  All rights reserved.
+Copyright ï¿½ 2016 released Microchip Technology Inc.  All rights reserved.
 
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
@@ -28,7 +28,7 @@ controller that is integrated into your product or third party product
 You should refer to the license agreement accompanying this Software for
 additional information regarding your rights and obligations.
 
-SOFTWARE AND DOCUMENTATION ARE PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND,
+SOFTWARE AND DOCUMENTATION ARE PROVIDED ï¿½AS ISï¿½ WITHOUT WARRANTY OF ANY KIND,
 EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
 MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
 IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
@@ -122,21 +122,21 @@ static int32_t Sha256Process(Sha256* sha256, const uint8_t *input, word32 length
     /* MUST BE ALIGNED at 128! */
     _ICM_REGS->ICM_HASH.w = (uint32_t)sha256->digest;
 
-    _ICM_REGS->ICM_UIHVAL[0].VAL = sha256->digest[0];
-    _ICM_REGS->ICM_UIHVAL[1].VAL = sha256->digest[1];
-    _ICM_REGS->ICM_UIHVAL[2].VAL = sha256->digest[2];
-    _ICM_REGS->ICM_UIHVAL[3].VAL = sha256->digest[3];
-    _ICM_REGS->ICM_UIHVAL[4].VAL = sha256->digest[4];
-    _ICM_REGS->ICM_UIHVAL[5].VAL = sha256->digest[5];
-    _ICM_REGS->ICM_UIHVAL[6].VAL = sha256->digest[6];
-    _ICM_REGS->ICM_UIHVAL[7].VAL = sha256->digest[7];
+    _ICM_REGS->ICM_UIHVAL[0].w = sha256->digest[0];
+    _ICM_REGS->ICM_UIHVAL[1].w = sha256->digest[1];
+    _ICM_REGS->ICM_UIHVAL[2].w = sha256->digest[2];
+    _ICM_REGS->ICM_UIHVAL[3].w = sha256->digest[3];
+    _ICM_REGS->ICM_UIHVAL[4].w = sha256->digest[4];
+    _ICM_REGS->ICM_UIHVAL[5].w = sha256->digest[5];
+    _ICM_REGS->ICM_UIHVAL[6].w = sha256->digest[6];
+    _ICM_REGS->ICM_UIHVAL[7].w = sha256->digest[7];
 
     /* memory barrier - sync all before enable ICM */
     __DMB();
 
     /* enable the ICM and wait */
-    _ICM_REGS->ICM_CTRL.ENABLE = 1;
-    while (!(_ICM_REGS->ICM_ISR.RHC))
+    _ICM_REGS->ICM_CTRL.w = ICM_CTRL_ENABLE_Msk;
+    while (!(_ICM_REGS->ICM_ISR.w & ICM_ISR_RHC_Msk))
     {
         /* wait for region to finish hash */
     }
