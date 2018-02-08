@@ -124,4 +124,4 @@ def cryptoHWLabels(cryptoHW, test):
 
 def onDependentComponentAdded(cryptoComponent, id, trngComponent):
 	if id == "LIB_CRYPTO_Dependency":
-		trngComponent.setSymbolValue("TRNG_Reserved", "TRNGReservedSymbol", True, 1)
+		trngComponent.setSymbolValue("TRNG_Reserved", True, 1)
