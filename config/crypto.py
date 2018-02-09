@@ -216,6 +216,7 @@ def onDependentComponentRemoved(cryptoComponent, id, trngComponent):
 	if id == "LIB_CRYPTO_Dependency":
 		trngComponent.clearSymbolValue("TRNG_Reserved")
 
+
 # all files go into src/
 def addFileName(fileName, component, enabled, callback):
     filename = component.createFileSymbol(None, None)
