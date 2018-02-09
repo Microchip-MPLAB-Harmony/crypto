@@ -87,7 +87,7 @@ int pic32c_RNG_GenerateBlock(byte* output, word32 sz)
     while (sz)
     {
         /* get 32 bits - BLOCKING */
-        while (!(_TRNG_REGS->TRNG_ISR & TRNG_ISR_DATRDY_Msk))
+        while (!(_TRNG_REGS->TRNG_ISR.w & TRNG_ISR_DATRDY_Msk))
         {
             /* Wait until data ready. */
         }
@@ -122,7 +122,7 @@ int pic32c_RNG_GenerateBlock(byte* output, word32 sz)
 int pic32c_RNG_GenerateByte(byte* b)
 {
     /* get 32 bits - BLOCKING */
-        while (!(_TRNG_REGS->TRNG_ISR & TRNG_ISR_DATRDY_Msk))
+        while (!(_TRNG_REGS->TRNG_ISR.w & TRNG_ISR_DATRDY_Msk))
     {
         /* Wait until data ready. */
     }
