@@ -17,7 +17,7 @@ def instantiateComponent(cryptoComponent):
     else:
         maskFamily.setDefaultValue("PIC32M")
 
-    cryptoMenu = cryptoComponent.createMenuSymbol(None, None)
+    cryptoMenu = cryptoComponent.createMenuSymbol("crypto_menu", None)
     cryptoMenu.setLabel("Crypto Settings")
 
     # Random Number Generation
@@ -107,14 +107,14 @@ def instantiateComponent(cryptoComponent):
     cryptoCipher3DES.setDefaultValue(False)
 
     # generate the config info and add it to list in system_config.h
-    cryptoConfigInfo = cryptoComponent.createFileSymbol(None, None)
+    cryptoConfigInfo = cryptoComponent.createFileSymbol("config_info", None)
     cryptoConfigInfo.setSourcePath("templates/crypto_config.h.ftl")
     cryptoConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
     cryptoConfigInfo.setMarkup(True)
     cryptoConfigInfo.setType("STRING")
 
     # add the crypto.h to the crypto directory (not in src)
-    includeFilename = cryptoComponent.createFileSymbol(None, None)
+    includeFilename = cryptoComponent.createFileSymbol("include_filename", None)
     includeFilename.setProjectPath("crypto/")
     includeFilename.setSourcePath("crypto.h")
     includeFilename.setDestPath("crypto/")
@@ -149,7 +149,7 @@ def instantiateComponent(cryptoComponent):
         'memory.c', 'memory.h', 'mem_track.h', 'misc.c', 'misc.h',
         'mpi_class.h', 'mpi_superclass.h', 'pkcs12.c', 'pkcs12.h', 'pkcs7.c',
         'pkcs7.h', 'poly1305.c', 'poly1305.h', 'pwdbased.c', 'pwdbased.h',
-        'rabbit.c', 'rabbit.h', 'random.c', 'random.h', 'ripemd.c', 'ripemd.h',
+        'rabbit.c', 'rabbit.h', 'random.h', 'ripemd.c', 'ripemd.h',
         'rsa.c', 'rsa.h', 'settings.h', 'sha.h', 
         'sha256.h', 'sha3.c', 'sha3.h', 'sha512.c', 'sha512.h',
         'signature.c', 'signature.h', 'srp.c', 'srp.h', 'ssl.h',
@@ -179,7 +179,7 @@ def instantiateComponent(cryptoComponent):
             addFileName(filename, cryptoComponent, True, onHWChangedAdd)
 
     # put header include into system_definitions.h - but should it be there?
-    headerList = cryptoComponent.createListEntrySymbol(None, None)
+    headerList = cryptoComponent.createListEntrySymbol("header_list", None)
     headerList.setTarget("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
     headerList.addValue('#include "crypto/crypto.h"')
 
@@ -219,7 +219,7 @@ def onDependentComponentRemoved(cryptoComponent, id, trngComponent):
 
 # all files go into src/
 def addFileName(fileName, component, enabled, callback):
-    filename = component.createFileSymbol(None, None)
+    filename = component.createFileSymbol(fileName+str(enabled), None)
     filename.setProjectPath("crypto/")
     filename.setSourcePath("src/" + fileName)
     filename.setOutputName(fileName)
