@@ -46,7 +46,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifdef HAVE_CONFIG_H
     #include "config.h"
 #endif
-#include "system_config.h"
+#include "configuration.h"
 
 #include "crypto/src/settings.h"
 
@@ -54,7 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "crypto/src/error-crypt.h"
 
-#include "system_definitions.h"
+#include "definitions.h"
 
 
 #define RNG_BYTES_AT_A_TIME 4
@@ -64,13 +64,13 @@ int pic32c_InitRng(void)
 {
     /* Enable Peripheral clock for TRNG in Power Management Contoller */
     uint32_t PmcBit = 1u << (ID_TRNG - 32);
-    if ((_PMC_REGS->PMC_PCSR1.w & PmcBit) != PmcBit)
+    if ((PMC_REGS->PMC_PCSR1 & PmcBit) != PmcBit)
     {
         /* turn on */
-        _PMC_REGS->PMC_PCER1.w = PmcBit;
+        PMC_REGS->PMC_PCER1 = PmcBit;
 
         /* enable */
-        _TRNG_REGS->TRNG_CR.w = TRNG_CR_KEY_PASSWD | TRNG_CR_ENABLE_Msk;
+        TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD | TRNG_CR_ENABLE_Msk;
 
         /* memory barrier */
         __DMB();
@@ -87,13 +87,13 @@ int pic32c_RNG_GenerateBlock(byte* output, word32 sz)
     while (sz)
     {
         /* get 32 bits - BLOCKING */
-        while (!(_TRNG_REGS->TRNG_ISR.w & TRNG_ISR_DATRDY_Msk))
+        while (!(TRNG_REGS->TRNG_ISR & TRNG_ISR_DATRDY_Msk))
         {
             /* Wait until data ready. */
         }
 
         /* get 32 bits */
-        uint32_t result = _TRNG_REGS->TRNG_ODATA.w;
+        uint32_t result = TRNG_REGS->TRNG_ODATA;
 
         /* stuff the data into the output buffer. Watch for buffer overrun */
         if (sz < RNG_BYTES_AT_A_TIME)
@@ -122,13 +122,13 @@ int pic32c_RNG_GenerateBlock(byte* output, word32 sz)
 int pic32c_RNG_GenerateByte(byte* b)
 {
     /* get 32 bits - BLOCKING */
-        while (!(_TRNG_REGS->TRNG_ISR.w & TRNG_ISR_DATRDY_Msk))
+        while (!(TRNG_REGS->TRNG_ISR & TRNG_ISR_DATRDY_Msk))
     {
         /* Wait until data ready. */
     }
 
     /* cram 32 bits into one byte */
-    *b = (byte)_TRNG_REGS->TRNG_ODATA.w;
+    *b = (byte)TRNG_REGS->TRNG_ODATA;
 
     /* memory barrier */
     __DMB();
@@ -141,11 +141,11 @@ int pic32c_RNG_GenerateByte(byte* b)
 int pic32c_FreeRng(void)
 {
     /* disable */
-    _TRNG_REGS->TRNG_CR.w = TRNG_CR_KEY_PASSWD;
+    TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD;
 
     /* Disable Peripheral Clock to TRNG by writing 1 to bit position */
     /* TRNG >=32 use PCDR1 not PCDR0 and remove 32 bit positions */
-    _PMC_REGS->PMC_PCDR1.w = 1u << (ID_TRNG - 32);
+    PMC_REGS->PMC_PCDR1 = 1u << (ID_TRNG - 32);
 
     return 0;
 }

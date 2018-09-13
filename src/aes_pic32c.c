@@ -46,7 +46,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifdef HAVE_CONFIG_H
     #include "config.h"
 #endif
-#include "system_config.h"
+#include "configuration.h"
 
 #include "crypto/src/settings.h"
 
@@ -54,7 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifndef NO_AES
 #include <stdint.h>
 
-#include "arch/arm/devices_pic32c.h" /* PIC32C system header. */
+#include "device.h" /* PIC32C system header. */
 #include "aes.h"
 
 #include "crypto/crypto.h"
@@ -202,7 +202,7 @@ static void AesConfigure(struct aes_config *const p_cfg)
 
     ul_mode |= AES_MR_CKEY_PASSWD;
 
-    _AES_REGS->AES_MR.w = ul_mode;
+    AES_REGS->AES_MR = ul_mode;
 }
 
 
@@ -217,7 +217,7 @@ static void AesWriteKey(const word32 *AesKey, int key_length)
         key_length /= 4;
         for (i = 0; i < key_length; i++)
         {
-            _AES_REGS->AES_KEYWR[i].w = *AesKey++;
+            AES_REGS->AES_KEYWR[i] = *AesKey++;
         }
     }
 }
@@ -226,10 +226,10 @@ static void AesWriteKey(const word32 *AesKey, int key_length)
 static void AesWriteIV(word32 *iv)
 {
     /* put AES IV into place */
-    _AES_REGS->AES_IVR[0].w = iv[0];
-    _AES_REGS->AES_IVR[1].w = iv[1];
-    _AES_REGS->AES_IVR[2].w = iv[2];
-    _AES_REGS->AES_IVR[3].w = iv[3];
+    AES_REGS->AES_IVR[0] = iv[0];
+    AES_REGS->AES_IVR[1] = iv[1];
+    AES_REGS->AES_IVR[2] = iv[2];
+    AES_REGS->AES_IVR[3] = iv[3];
 }
 
 
@@ -245,12 +245,12 @@ int wc_AesSetKey(Aes* aes, const byte* userKey, word32 keylen, const byte* iv, i
 
     /* Enable clock for AES */
     uint32_t AesPmcBit = 1u << (ID_AES - 32);
-    if ((_PMC_REGS->PMC_PCSR1.w & (AesPmcBit)) != (AesPmcBit))
+    if ((PMC_REGS->PMC_PCSR1 & (AesPmcBit)) != (AesPmcBit))
     {
-        _PMC_REGS->PMC_PCER1.w = AesPmcBit;
+        PMC_REGS->PMC_PCER1 = AesPmcBit;
 
         /* software reset */
-        _AES_REGS->AES_CR.w = AES_CR_SWRST_Msk;
+        AES_REGS->AES_CR = AES_CR_SWRST_Msk;
 
     }
 
@@ -359,19 +359,19 @@ int wc_AesCbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     for (block = 0; block < sz; block += 16)
     {
         /* Write the data to be ciphered to the input data registers. */
-        _AES_REGS->AES_IDATAR[0].w = *inptr++;
-        _AES_REGS->AES_IDATAR[1].w = *inptr++;
-        _AES_REGS->AES_IDATAR[2].w = *inptr++;
-        _AES_REGS->AES_IDATAR[3].w = *inptr++;
+        AES_REGS->AES_IDATAR[0] = *inptr++;
+        AES_REGS->AES_IDATAR[1] = *inptr++;
+        AES_REGS->AES_IDATAR[2] = *inptr++;
+        AES_REGS->AES_IDATAR[3] = *inptr++;
 
         /* Note the blocking here - state machine this? */
-        while (!(_AES_REGS->AES_ISR.w & AES_ISR_DATRDY_Msk))  ;
+        while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 
         /* encrypt complete - read out the data */
-        *outptr++ = _AES_REGS->AES_ODATAR[0].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[1].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[2].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[3].w;
+        *outptr++ = AES_REGS->AES_ODATAR[0];
+        *outptr++ = AES_REGS->AES_ODATAR[1];
+        *outptr++ = AES_REGS->AES_ODATAR[2];
+        *outptr++ = AES_REGS->AES_ODATAR[3];
     }
 
     /* Last IV equals last cipher text */
@@ -406,19 +406,19 @@ int wc_AesCbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     for (block = 0; block < sz; block += 16)
     {
         /* Write the data to be ciphered to the input data registers. */
-        _AES_REGS->AES_IDATAR[0].w = *inptr++;
-        _AES_REGS->AES_IDATAR[1].w = *inptr++;
-        _AES_REGS->AES_IDATAR[2].w = *inptr++;
-        _AES_REGS->AES_IDATAR[3].w = *inptr++;
+        AES_REGS->AES_IDATAR[0] = *inptr++;
+        AES_REGS->AES_IDATAR[1] = *inptr++;
+        AES_REGS->AES_IDATAR[2] = *inptr++;
+        AES_REGS->AES_IDATAR[3] = *inptr++;
 
         /* Note the blocking here - state machine this? */
-        while (!(_AES_REGS->AES_ISR.w & AES_ISR_DATRDY_Msk))  ;
+        while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 
         /* encrypt complete - read out the data */
-        *outptr++ = _AES_REGS->AES_ODATAR[0].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[1].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[2].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[3].w;
+        *outptr++ = AES_REGS->AES_ODATAR[0];
+        *outptr++ = AES_REGS->AES_ODATAR[1];
+        *outptr++ = AES_REGS->AES_ODATAR[2];
+        *outptr++ = AES_REGS->AES_ODATAR[3];
     }
 
     /* Last IV equals last cipher text */
@@ -459,19 +459,19 @@ int wc_AesCtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     for (block = 0; block < sz; block += 16)
     {
         /* Write the data to be ciphered to the input data registers. */
-        _AES_REGS->AES_IDATAR[0].w = *inptr++;
-        _AES_REGS->AES_IDATAR[1].w = *inptr++;
-        _AES_REGS->AES_IDATAR[2].w = *inptr++;
-        _AES_REGS->AES_IDATAR[3].w = *inptr++;
+        AES_REGS->AES_IDATAR[0] = *inptr++;
+        AES_REGS->AES_IDATAR[1] = *inptr++;
+        AES_REGS->AES_IDATAR[2] = *inptr++;
+        AES_REGS->AES_IDATAR[3] = *inptr++;
 
         /* Note the blocking here - state machine this? */
-        while (!(_AES_REGS->AES_ISR.DATRDY))  ;
+        while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 
         /* encrypt complete - read out the data */
-        *outptr++ = _AES_REGS->AES_ODATAR[0].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[1].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[2].w;
-        *outptr++ = _AES_REGS->AES_ODATAR[3].w;
+        *outptr++ = AES_REGS->AES_ODATAR[0];
+        *outptr++ = AES_REGS->AES_ODATAR[1];
+        *outptr++ = AES_REGS->AES_ODATAR[2];
+        *outptr++ = AES_REGS->AES_ODATAR[3];
     }
     
     return 0;

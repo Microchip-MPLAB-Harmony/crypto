@@ -1,7 +1,7 @@
 #ifndef _PIC32C_HASH_
 #define _PIC32C_HASH_
 
-#include "system_definitions.h"
+#include "definitions.h"
 
 
 

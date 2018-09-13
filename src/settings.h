@@ -50,7 +50,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifndef WOLF_CRYPT_SETTINGS_H
 #define WOLF_CRYPT_SETTINGS_H
 
-#include "system_config.h"
+#include "configuration.h"
 
 
 #ifdef __cplusplus
@@ -71,7 +71,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 /* Uncomment next line if using Microchip PIC32 ethernet starter kit */
 /* #define MICROCHIP_PIC32 */
-/* We use system_config.h to pass this in */
+/* We use configuration.h to pass this in */
 #if !(defined(MICROCHIP_PIC32) || defined(MICROCHIP_PIC32C))
 #define MICROCHIP_PIC32
 #endif

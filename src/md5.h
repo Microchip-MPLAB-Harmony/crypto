@@ -44,7 +44,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifndef WOLF_CRYPT_MD5_H
 #define WOLF_CRYPT_MD5_H
 
-#include "system_config.h"
+#include "configuration.h"
 #include "crypto/src/types.h"
 
 #ifndef NO_MD5

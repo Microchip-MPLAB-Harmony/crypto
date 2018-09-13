@@ -12,10 +12,10 @@ def instantiateComponent(cryptoComponent):
 
     maskFamily = cryptoComponent.createStringSymbol("maskFamily", None)
     maskFamily.setVisible(False)
-    if "PIC32C" in Variables.get("__PROCESSOR"):
-        maskFamily.setDefaultValue("PIC32C")
-    else:
+    if "PIC32M" in Variables.get("__PROCESSOR"):
         maskFamily.setDefaultValue("PIC32M")
+    else:
+        maskFamily.setDefaultValue("PIC32C")
 
     cryptoMenu = cryptoComponent.createMenuSymbol("crypto_menu", None)
     cryptoMenu.setLabel("Crypto Settings")

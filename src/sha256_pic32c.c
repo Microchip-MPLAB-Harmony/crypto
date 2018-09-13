@@ -49,11 +49,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifdef HAVE_CONFIG_H
     #include "config.h"
 #endif
-#include "system_config.h"
+#include "configuration.h"
 #include "crypto/src/settings.h"
 
 #include "crypto/src/sha256.h"
-#include "system_definitions.h"
+#include "definitions.h"
 
 
 #if !defined(NO_SHA256)
@@ -76,9 +76,9 @@ int wc_InitSha256(Sha256* sha256)
 {
     /* Enable ICM */
     uint32_t PmcBit = 1u << (ID_ICM - 32);
-    if ((_PMC_REGS->PMC_PCSR1.w & PmcBit) != PmcBit)
+    if ((PMC_REGS->PMC_PCSR1 & PmcBit) != PmcBit)
     {
-        _PMC_REGS->PMC_PCER1.w = PmcBit;
+        PMC_REGS->PMC_PCER1 = PmcBit;
     }
 
     sha256->icm_descriptor.cfg.reg = 0x0;
@@ -113,30 +113,30 @@ static int32_t Sha256Process(Sha256* sha256, const uint8_t *input, word32 length
     sha256->icm_descriptor.tran_size =  (length >> 6) - 1;
 
     /* ICM can set up FIPS default starting digest */
-    _ICM_REGS->ICM_DSCR.w = (uint32_t)&sha256->icm_descriptor;
-    _ICM_REGS->ICM_CFG.w = ICM_CFG_SLBDIS_Msk
+    ICM_REGS->ICM_DSCR = (uint32_t)&sha256->icm_descriptor;
+    ICM_REGS->ICM_CFG = ICM_CFG_SLBDIS_Msk
                  | ICM_CFG_BBC(0)
                  | ICM_CFG_UALGO_SHA256
                  | ICM_CFG_UIHASH_Msk;
 
     /* MUST BE ALIGNED at 128! */
-    _ICM_REGS->ICM_HASH.w = (uint32_t)sha256->digest;
+    ICM_REGS->ICM_HASH = (uint32_t)sha256->digest;
 
-    _ICM_REGS->ICM_UIHVAL[0].w = sha256->digest[0];
-    _ICM_REGS->ICM_UIHVAL[1].w = sha256->digest[1];
-    _ICM_REGS->ICM_UIHVAL[2].w = sha256->digest[2];
-    _ICM_REGS->ICM_UIHVAL[3].w = sha256->digest[3];
-    _ICM_REGS->ICM_UIHVAL[4].w = sha256->digest[4];
-    _ICM_REGS->ICM_UIHVAL[5].w = sha256->digest[5];
-    _ICM_REGS->ICM_UIHVAL[6].w = sha256->digest[6];
-    _ICM_REGS->ICM_UIHVAL[7].w = sha256->digest[7];
+    ICM_REGS->ICM_UIHVAL[0] = sha256->digest[0];
+    ICM_REGS->ICM_UIHVAL[1] = sha256->digest[1];
+    ICM_REGS->ICM_UIHVAL[2] = sha256->digest[2];
+    ICM_REGS->ICM_UIHVAL[3] = sha256->digest[3];
+    ICM_REGS->ICM_UIHVAL[4] = sha256->digest[4];
+    ICM_REGS->ICM_UIHVAL[5] = sha256->digest[5];
+    ICM_REGS->ICM_UIHVAL[6] = sha256->digest[6];
+    ICM_REGS->ICM_UIHVAL[7] = sha256->digest[7];
 
     /* memory barrier - sync all before enable ICM */
     __DMB();
 
     /* enable the ICM and wait */
-    _ICM_REGS->ICM_CTRL.w = ICM_CTRL_ENABLE_Msk;
-    while (!(_ICM_REGS->ICM_ISR.w & ICM_ISR_RHC_Msk))
+    ICM_REGS->ICM_CTRL = ICM_CTRL_ENABLE_Msk;
+    while (!(ICM_REGS->ICM_ISR & ICM_ISR_RHC_Msk))
     {
         /* wait for region to finish hash */
     }
