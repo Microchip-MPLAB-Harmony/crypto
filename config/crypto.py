@@ -150,7 +150,7 @@ def instantiateComponent(cryptoComponent):
         'mpi_class.h', 'mpi_superclass.h', 'pkcs12.c', 'pkcs12.h', 'pkcs7.c',
         'pkcs7.h', 'poly1305.c', 'poly1305.h', 'pwdbased.c', 'pwdbased.h',
         'rabbit.c', 'rabbit.h', 'random.h', 'ripemd.c', 'ripemd.h',
-        'rsa.c', 'rsa.h', 'settings.h', 'sha.h', 
+        'rsa.c', 'rsa.h', 'settings.h', 'sha.h',
         'sha256.h', 'sha3.c', 'sha3.h', 'sha512.c', 'sha512.h',
         'signature.c', 'signature.h', 'srp.c', 'srp.h', 'ssl.h',
         'tfm.c', 'tfm.h', 'types.h', 'version.h', 'visibility.h',
@@ -158,25 +158,30 @@ def instantiateComponent(cryptoComponent):
         'wolfevent.c', 'wolfevent.h', 'wolfmath.c', 'wolfmath.h'
     ]
 
+    fileList_zlib =      ['zlib.h', 'zconf.h']
     fileList_pic32c =    ['aes.c', 'sha.c', 'sha256.c', 'random.c']
     fileList_pic32c_HW = ['aes_pic32c.c', 'pic32c-hash.h', 'sha_pic32c.c', 'sha256_pic32c.c', 'random_pic32c.c']
     fileList_pic32m =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'pic32mz-crypt.c', 'pic32mz-crypt.h']
 
     # add all common files as enabled and no callback
     for filename in fileList_common:
-        addFileName(filename, cryptoComponent, True, None)
+        addFileName(filename, cryptoComponent, "src/", "crypto/src/", True, None)
+
+    # add all zlib files as enabled and no callback
+    for filename in fileList_zlib:
+        addFileName(filename, cryptoComponent, "src/zlib-1.2.7/", "crypto/src/zlib-1.2.7/", True, None)
 
     # add acceleration files if needed
     if maskFamily.getValue() == "PIC32C":
         # These files are used for HW - notice the 'True' and 'Add' for enabled
         for filename in fileList_pic32c_HW:
-            addFileName(filename, cryptoComponent, True, onHWChangedAdd)
+            addFileName(filename, cryptoComponent, "src/", "crypto/src/", True, onHWChangedAdd)
         # These files are disabled initialy when the 'HW' is the default condition
         for filename in fileList_pic32c:
-            addFileName(filename, cryptoComponent, False, onHWChangedSub)
+            addFileName(filename, cryptoComponent, "src/", "crypto/src/", False, onHWChangedSub)
     else:
         for filename in fileList_pic32m:
-            addFileName(filename, cryptoComponent, True, onHWChangedAdd)
+            addFileName(filename, cryptoComponent, "src/", "crypto/src/", True, onHWChangedAdd)
 
     # put header include into system_definitions.h - but should it be there?
     headerList = cryptoComponent.createListEntrySymbol("header_list", None)
@@ -216,22 +221,22 @@ def onDependentComponentRemoved(cryptoComponent, id, trngComponent):
 	if id == "LIB_CRYPTO_Dependency":
 		trngComponent.clearSymbolValue("TRNG_Reserved")
 
-
-# all files go into src/
-def addFileName(fileName, component, enabled, callback):
+# all files go into or under src/
+def addFileName(fileName, component, srcPath, destPath, enabled, callback):
     filename = component.createFileSymbol(fileName+str(enabled), None)
     filename.setProjectPath("crypto/")
-    filename.setSourcePath("src/" + fileName)
+    filename.setSourcePath(srcPath + fileName)
     filename.setOutputName(fileName)
 
     if fileName[-2:] == '.h':
-        filename.setDestPath("crypto/src/")
+        filename.setDestPath(destPath)
         filename.setType("HEADER")
     else:
-        filename.setDestPath("crypto/src/")
+        filename.setDestPath(destPath)
         filename.setType("SOURCE")
 
     filename.setEnabled(enabled)
     if callback != None:
         filename.setDependencies(callback, ["cryptoHW"])
+
 

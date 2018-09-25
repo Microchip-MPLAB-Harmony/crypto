@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/sam_e70_xplained_ultra/debug/sam_e70_xplained_ultra.X.debug.elf">
+    <memory name="program">
+      <units>bytes</units>
+      <length>2097152</length>
+      <used>55808</used>
+      <free>2041344</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>393216</length>
+      <used>56576</used>
+      <free>336640</free>
+    </memory>
+  </executable>
+</project>
