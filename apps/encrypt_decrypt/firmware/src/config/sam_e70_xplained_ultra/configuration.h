@@ -82,6 +82,12 @@ extern "C" {
 #define SYS_DEBUG_PRINT_BUFFER_SIZE        200
 #define SYS_DEBUG_BUFFER_DMA_READY
 
+#define SYS_CMD_ENABLE
+#define SYS_CMD_DEVICE_MAX_INSTANCES       SYS_CONSOLE_DEVICE_MAX_INSTANCES
+#define SYS_CMD_PRINT_BUFFER_SIZE          1024
+#define SYS_CMD_BUFFER_DMA_READY
+#define SYS_CMD_REMAP_SYS_CONSOLE_MESSAGE
+#define SYS_CMD_REMAP_SYS_DEBUG_MESSAGE
 
 /* TIME System Service Configuration Options */
 #define SYS_TIME_MAX_TIMERS                  10
@@ -115,6 +121,7 @@ extern "C" {
 #define WOLFSSL_SHA512
 #define HAVE_ECC
 #define USE_FAST_MATH
+#define HAVE_LIBZ
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
 

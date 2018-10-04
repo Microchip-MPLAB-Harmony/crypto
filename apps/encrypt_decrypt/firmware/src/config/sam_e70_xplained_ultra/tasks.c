@@ -72,6 +72,7 @@ void SYS_Tasks ( void )
 {
     /* Maintain system services */
     SYS_CONSOLE_Tasks(sysObj.sysConsole0);
+    SYS_CMD_Tasks();
 
 
 

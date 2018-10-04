@@ -60,13 +60,9 @@ void NVIC_Initialize( void )
      * from within the "Interrupt Manager" of MCC. */
     NVIC_SetPriority(USART1_IRQn, 7);
     NVIC_EnableIRQ(USART1_IRQn);
-    NVIC_SetPriority(TC0_CH0_IRQn, 7);
-    NVIC_EnableIRQ(TC0_CH0_IRQn);
+    NVIC_SetPriority(TC1_CH0_IRQn, 7);
+    NVIC_EnableIRQ(TC1_CH0_IRQn);
 
-    /* Enable Usage fault */
-    SCB->SHCSR |= (SCB_SHCSR_USGFAULTENA_Msk);
-    /* Trap divide by zero */
-    SCB->CCR   |= SCB_CCR_DIV_0_TRP_Msk;
 
 
 

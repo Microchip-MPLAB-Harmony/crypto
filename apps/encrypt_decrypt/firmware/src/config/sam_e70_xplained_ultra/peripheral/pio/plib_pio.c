@@ -108,8 +108,8 @@ void PIO_Initialize ( void )
     /* PORTC Output Write Enable */
     ((pio_registers_t*)PIO_PORT_C)->PIO_OWER = PIO_OWER_Msk;
 
-    /* PORTC Initial state Low */
-    ((pio_registers_t*)PIO_PORT_C)->PIO_CODR = 0x100;
+    /* PORTC Initial state High */
+    ((pio_registers_t*)PIO_PORT_C)->PIO_SODR = 0x00000100;
 
     /* PORTC Output Direction Enable */
     ((pio_registers_t*)PIO_PORT_C)->PIO_OER = 0x00000100;

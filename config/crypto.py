@@ -158,8 +158,12 @@ def instantiateComponent(cryptoComponent):
         'wolfevent.c', 'wolfevent.h', 'wolfmath.c', 'wolfmath.h'
     ]
 
-    fileList_zlib =      ['zlib.h', 'zconf.h']
-    fileList_pic32c =    ['aes.c', 'sha.c', 'sha256.c', 'random.c']
+    fileList_zlib =      ['crc32.h','deflate.h','inffast.h','inffixed.h','inflate.h','inftrees.h',
+	                      'trees.h','adler32.c','crc32.c','deflate.c','zconf.h','zutil.h','zlib.h',
+						  'deflate.c','inflate.c','trees.c','gzguts.h','zutil.c','inftrees.c','inffast.c'
+                          #,'compress.c','uncompr.c','gzclose.c','gzlib.c','gzread.c','gzwrite.c'						  
+						 ]
+    fileList_pic32c =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'random_pic32c.c']
     fileList_pic32c_HW = ['aes_pic32c.c', 'pic32c-hash.h', 'sha_pic32c.c', 'sha256_pic32c.c', 'random_pic32c.c']
     fileList_pic32m =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'pic32mz-crypt.c', 'pic32mz-crypt.h']
 
@@ -167,7 +171,7 @@ def instantiateComponent(cryptoComponent):
     for filename in fileList_common:
         addFileName(filename, cryptoComponent, "src/", "crypto/src/", True, None)
 
-    # add all zlib files as enabled and no callback
+	# add all zlib files as enabled and no callback
     for filename in fileList_zlib:
         addFileName(filename, cryptoComponent, "src/zlib-1.2.7/", "crypto/src/zlib-1.2.7/", True, None)
 
@@ -176,7 +180,7 @@ def instantiateComponent(cryptoComponent):
         # These files are used for HW - notice the 'True' and 'Add' for enabled
         for filename in fileList_pic32c_HW:
             addFileName(filename, cryptoComponent, "src/", "crypto/src/", True, onHWChangedAdd)
-        # These files are disabled initialy when the 'HW' is the default condition
+        # These files are disabled initially when the 'HW' is the default condition
         for filename in fileList_pic32c:
             addFileName(filename, cryptoComponent, "src/", "crypto/src/", False, onHWChangedSub)
     else:
@@ -187,6 +191,8 @@ def instantiateComponent(cryptoComponent):
     headerList = cryptoComponent.createListEntrySymbol("header_list", None)
     headerList.setTarget("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
     headerList.addValue('#include "crypto/crypto.h"')
+	
+
 
 
 # callback for when HW Accelerate is toggled
@@ -223,7 +229,7 @@ def onDependentComponentRemoved(cryptoComponent, id, trngComponent):
 
 # all files go into or under src/
 def addFileName(fileName, component, srcPath, destPath, enabled, callback):
-    filename = component.createFileSymbol(fileName+str(enabled), None)
+    filename = component.createFileSymbol(None, None)
     filename.setProjectPath("crypto/")
     filename.setSourcePath(srcPath + fileName)
     filename.setOutputName(fileName)

@@ -54,7 +54,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifdef __cplusplus
     extern "C" {
 #endif
-
+            
  /* Maximum generate block length */
 #ifndef RNG_MAX_BLOCK_LEN
     #ifdef HAVE_INTEL_QA
@@ -102,10 +102,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #if defined(CUSTOM_RAND_GENERATE_BLOCK)
     extern int pic32c_RNG_GenerateBlock(byte* output, word32 sz);
     extern int pic32c_GenerateSeed(byte* output, word32 sz);
-    /* To use define the following:
-     * #define CUSTOM_RAND_GENERATE_BLOCK myRngFunc
+    extern int pic32c_InitRng(void);
+    /* To use define the following: 
+     * # define CUSTOM_RAND_GENERATE_BLOCK myRngFunc
      * extern int myRngFunc(byte* output, word32 sz);
      */
+
 #elif defined(HAVE_HASHDRBG)
     #ifdef NO_SHA256
         #error "Hash DRBG requires SHA-256."
@@ -115,6 +117,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
      /* allow whitewood as direct RNG source using wc_GenerateSeed directly */
 #else
     #error No RNG source defined!
+#endif
+
+#ifdef MICROCHIP_PIC32C
+extern int pic32c_RNG_GenerateSeed(byte* output, word32 sz);
 #endif
 
 #ifdef HAVE_WNR

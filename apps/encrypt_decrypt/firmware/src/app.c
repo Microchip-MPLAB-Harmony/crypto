@@ -29,6 +29,8 @@
 
 #include "app.h"
 #include <stdio.h>
+#include "configuration.h"
+#include "crypto/src/settings.h"
 #include "crypto/src/md5.h"
 #include "crypto/src/sha.h"
 #include "crypto/src/sha256.h"
@@ -88,35 +90,26 @@ APP_DATA appData;
 // Section: Application Local Functions
 // *****************************************************************************
 // *****************************************************************************
-void  md5_test(void);
-void  sha_test(void);
-void  sha256_test(void);
-void  sha384_test(void);
-void  sha512_test(void);
-void  hmac_md5_test(void);
-void  hmac_sha_test(void);
-void  hmac_sha256_test(void);
-void  hmac_sha384_test(void);
-void  hmac_sha512_test(void);
-void  des_test(void);
-void  des3_test(void);
-void  aes_test(void);
-void  aesgcm_test(void);
-void  gmac_test(void);
-void  aesccm_test(void);
-void  rsa_test(void);
-void  random_test(void);
+void md5_test(void);
+void sha_test(void);
+void sha256_test(void);
+void sha384_test(void);
+void sha512_test(void);
+void hmac_md5_test(void);
+void hmac_sha_test(void);
+void hmac_sha256_test(void);
+void hmac_sha384_test(void);
+void hmac_sha512_test(void);
+void des_test(void);
+void des3_test(void);
+void aes_test(void);
+void rsa_test(void);
+void random_test(void);
 #ifdef HAVE_ECC
     void  ecc_test(void);
-    #ifdef HAVE_ECC_ENCRYPT
-        //void  ecc_encrypt_test(void);
-    #endif
-#endif
-#ifdef HAVE_BLAKE2
-    //void  blake2b_test(void);
 #endif
 #ifdef HAVE_LIBZ
-    //void compress_test(void);
+    void compress_test(void);
 #endif
     
 /*****************************************************
@@ -131,21 +124,56 @@ APP_DATA appData ={
     .rdComplete = true
 };
 
+#if !defined(NO_MD5)
 static const int MD5_Expected = 0;
+#endif
+#ifndef NO_SHA
 static const int SHA_Expected = 0;
+#endif
+#ifndef NO_SHA256
 static const int SHA256_Expected = 0;
+#endif
+#ifdef WOLFSSL_SHA384
 static const int SHA384_Expected = 0;
+#endif
+#ifdef WOLFSSL_SHA512
 static const int SHA512_Expected = 0;
+#endif
+#if !defined(NO_HMAC) && !defined(NO_MD5)
 static const int HMAC_MD5_Expected = 0;
+#endif
+#if !defined(NO_HMAC) && !defined(NO_SHA)
 static const int HMAC_SHA_Expected = 0;
+#endif
+#if !defined(NO_HMAC) && !defined(NO_SHA256)
 static const int HMAC_SHA256_Expected = 0;
+#endif
+#if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
 static const int HMAC_SHA384_Expected = 0;
+#endif
+#if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
 static const int HMAC_SHA512_Expected = 0;
+#endif
+#ifndef NO_DES3
 static const int DES_Expected = 0;
 static const int DES3_Expected = 0;
+#endif
+#ifndef NO_AES
 static const int AES_CBC_Expected = 0;
+#ifdef WOLFSSL_AES_COUNTER
 static const int AES_CTR_Expected = 0;
+#endif
+#endif
+#ifndef NO_RSA
+static const int RSA_Expected = 0;
+#endif
 static const int Random_Expected = 0;
+#ifdef HAVE_ECC
+static const int ECC_Expected = 0;
+#endif
+#ifdef HAVE_LIBZ
+static const int Compress_Expected = 0;
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -161,13 +189,11 @@ char printBuffer[50 * 1024] = {0};
 void APP_DisplayHash(uint8_t *hash, uint32_t hashSz) {
     while (hashSz--) {
         sprintf(printBuffer, "%s%02X", printBuffer, *hash++);
-
-        //sprintf(printBuffer, "%s%02X", *hash++);
     }
 }
 
 
-uint8_t __attribute__((aligned(64))) myBuf[1024];
+//uint8_t __attribute__((aligned(64))) myBuf[1024];
 
 
 #ifndef NO_MD5
@@ -220,15 +246,15 @@ void md5_test(void)
 
     CRYPT_MD5_Initialize(&md5);
 
-    appData.md5_test_result = 0;
+    appData.md5_test_result = times;
         
     for (i = 0; i < times; ++i) {
         CRYPT_MD5_DataAdd(&md5, (byte*)test_md5[i].input, (word32)test_md5[i].inLen);
         CRYPT_MD5_Finalize(&md5, hash);
 
-        if (memcmp(hash, test_md5[i].output, MD5_DIGEST_SIZE) != 0)
+        if (memcmp(hash, test_md5[i].output, MD5_DIGEST_SIZE) == 0)
         {
-            appData.md5_test_result++;
+            appData.md5_test_result--;
         }
     }
 }
@@ -278,14 +304,14 @@ void sha_test(void)
 
     CRYPT_SHA_Initialize(&sha);
 
-    appData.sha_test_result = 0;
+    appData.sha_test_result = times;
     
     for (i = 0; i < times; ++i) {
         CRYPT_SHA_DataAdd(&sha, (byte*)test_sha[i].input, (word32)test_sha[i].inLen);
         CRYPT_SHA_Finalize(&sha, hash);
 
-        if (memcmp(hash, test_sha[i].output, SHA_DIGEST_SIZE) != 0)
-            appData.sha_test_result++;
+        if (memcmp(hash, test_sha[i].output, SHA_DIGEST_SIZE) == 0)
+            appData.sha_test_result--;
     }
 }
 #endif /* NO_SHA */
@@ -319,14 +345,14 @@ void sha256_test(void)
 
     CRYPT_SHA256_Initialize(&sha);
 
-    appData.sha256_test_result = 0;
+    appData.sha256_test_result = times;
     
     for (i = 0; i < times; ++i) {
         CRYPT_SHA256_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA256_Finalize(&sha, hash);
 
-        if (memcmp(hash, test_sha[i].output, SHA256_DIGEST_SIZE) != 0)
-            appData.sha256_test_result++;
+        if (memcmp(hash, test_sha[i].output, SHA256_DIGEST_SIZE) == 0)
+            appData.sha256_test_result--;
     }
 }
 #endif /* NO_SHA256 */
@@ -363,14 +389,14 @@ void sha384_test(void)
 
     CRYPT_SHA384_Initialize(&sha);
 
-    appData.sha384_test_result = 0;
+    appData.sha384_test_result = times;
     
     for (i = 0; i < times; ++i) {
         CRYPT_SHA384_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA384_Finalize(&sha, hash);
 
-        if (memcmp(hash, test_sha[i].output, SHA384_DIGEST_SIZE) != 0)
-            appData.sha384_test_result++;
+        if (memcmp(hash, test_sha[i].output, SHA384_DIGEST_SIZE) == 0)
+            appData.sha384_test_result--;
     }
 }
 #endif /* WOLFSSL_SHA384 */
@@ -409,14 +435,14 @@ void sha512_test(void)
 
     CRYPT_SHA512_Initialize(&sha);
 
-    appData.sha512_test_result = 0;
+    appData.sha512_test_result = times;
     
     for (i = 0; i < times; ++i) {
         CRYPT_SHA512_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA512_Finalize(&sha, hash);
 
-        if (memcmp(hash, test_sha[i].output, SHA512_DIGEST_SIZE) != 0)
-            appData.sha512_test_result++;
+        if (memcmp(hash, test_sha[i].output, SHA512_DIGEST_SIZE) == 0)
+            appData.sha512_test_result--;
     }
 }
 #endif /* WOLFSSL_SHA512 */
@@ -464,7 +490,7 @@ void hmac_md5_test(void)
     test_hmac[1] = b;
     test_hmac[2] = c;
 
-    appData.hmac_md5_test_result = 0;
+    appData.hmac_md5_test_result = times;
     
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, MD5, (byte*)keys[i], (word32)strlen(keys[i]));
@@ -472,8 +498,8 @@ void hmac_md5_test(void)
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
-        if (memcmp(hash, test_hmac[i].output, MD5_DIGEST_SIZE) != 0)
-            appData.hmac_md5_test_result++;
+        if (memcmp(hash, test_hmac[i].output, MD5_DIGEST_SIZE) == 0)
+            appData.hmac_md5_test_result--;
     }
 }
 #endif /* NO_HMAC && NO_MD5 */
@@ -523,7 +549,7 @@ void hmac_sha_test(void)
     test_hmac[1] = b;
     test_hmac[2] = c;
 
-    appData.hmac_sha_test_result = 0;
+    appData.hmac_sha_test_result = times;
     
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA, (byte*)keys[i], (word32)strlen(keys[i]));
@@ -531,8 +557,8 @@ void hmac_sha_test(void)
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
-        if (memcmp(hash, test_hmac[i].output, SHA_DIGEST_SIZE) != 0)
-            appData.hmac_sha_test_result++;
+        if (memcmp(hash, test_hmac[i].output, SHA_DIGEST_SIZE) == 0)
+            appData.hmac_sha_test_result--;
     }
 }
 #endif /* NO_HMAC && NO_SHA */
@@ -585,7 +611,7 @@ void hmac_sha256_test(void)
     test_hmac[1] = b;
     test_hmac[2] = c;
 
-    appData.hmac_sha256_test_result = 0;
+    appData.hmac_sha256_test_result = times;
     
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA256, (byte*)keys[i], (word32)strlen(keys[i]));
@@ -593,8 +619,8 @@ void hmac_sha256_test(void)
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
-        if (memcmp(hash, test_hmac[i].output, SHA256_DIGEST_SIZE) != 0)
-            appData.hmac_sha256_test_result++;
+        if (memcmp(hash, test_hmac[i].output, SHA256_DIGEST_SIZE) == 0)
+            appData.hmac_sha256_test_result--;
     }
 }
 #endif /* NO_HMAC && NO_SHA256 */
@@ -650,7 +676,7 @@ void hmac_sha384_test(void)
     test_hmac[1] = b;
     test_hmac[2] = c;
 
-    appData.hmac_sha384_test_result = 0;
+    appData.hmac_sha384_test_result = times;
     
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA384, (byte*)keys[i], (word32)strlen(keys[i]));
@@ -658,8 +684,8 @@ void hmac_sha384_test(void)
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
-        if (memcmp(hash, test_hmac[i].output, SHA384_DIGEST_SIZE) != 0)
-            appData.hmac_sha384_test_result++;
+        if (memcmp(hash, test_hmac[i].output, SHA384_DIGEST_SIZE) == 0)
+            appData.hmac_sha384_test_result--;
     }
 }
 #endif /* NO_HMAC && WOLFSSL_SHA384 */
@@ -718,7 +744,7 @@ void hmac_sha512_test(void)
     test_hmac[1] = b;
     test_hmac[2] = c;
 
-    appData.hmac_sha512_test_result = 0;
+    appData.hmac_sha512_test_result = times;
     
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA512, (byte*)keys[i], (word32)strlen(keys[i]));
@@ -726,8 +752,8 @@ void hmac_sha512_test(void)
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
-        if (memcmp(hash, test_hmac[i].output, SHA512_DIGEST_SIZE) != 0)
-            appData.hmac_sha512_test_result++;
+        if (memcmp(hash, test_hmac[i].output, SHA512_DIGEST_SIZE) == 0)
+            appData.hmac_sha512_test_result--;
     }
 }
 #endif /* NO_HMAC && WOLFSSL_SHA512 */
@@ -764,6 +790,7 @@ void des_test(void)
         0x15,0x85,0xb3,0x22,0x4b,0x86,0x2b,0x4b
     };
 
+    int numSubTests = 2;
     
     /* The above const allocates in RAM, but does not flush out of cache. Copy
        it back out so it is in physical memory. */
@@ -772,18 +799,18 @@ void des_test(void)
 #endif
 
 
-    appData.des_test_result = 0;
+    appData.des_test_result = numSubTests;
 
     wc_Des_SetKey(&enc, key, iv, DES_ENCRYPTION);
     wc_Des_CbcEncrypt(&enc, gen_ct, exp_pt, sizeof(exp_pt));
     wc_Des_SetKey(&dec, key, iv, DES_DECRYPTION);
     wc_Des_CbcDecrypt(&dec, gen_pt, exp_ct, sizeof(exp_ct));
 
-    if (memcmp(gen_pt, exp_pt, sizeof(gen_pt)))
-        appData.des_test_result = 2;
+    if (!(memcmp(gen_pt, exp_pt, sizeof(gen_pt))))
+        appData.des_test_result--;
     
-    if (memcmp(gen_ct, exp_ct, sizeof(gen_ct)))
-        appData.des_test_result++;
+    if (!(memcmp(gen_ct, exp_ct, sizeof(gen_ct))))
+        appData.des_test_result--;
 }
 #endif /* NO_DES3 */
 
@@ -823,8 +850,10 @@ void des3_test(void)
         0x89,0x64,0x84,0x32,0x12,0xd5,0x08,0x98,
         0x18,0x94,0x15,0x74,0x87,0x12,0x7d,0xb0
     };
-
-    appData.des3_test_result = 0;
+    
+    int numSubTests = 2;
+    
+    appData.des3_test_result = numSubTests;
     
     /* The above const allocates in RAM, but does not flush out of cache. Copy
        it back out so it is in physical memory. */
@@ -836,11 +865,11 @@ void des3_test(void)
     CRYPT_TDES_CBC_Encrypt(&enc, cipher, vector, sizeof(vector));
     CRYPT_TDES_CBC_Decrypt(&dec, plain, verify3, sizeof(verify3));
 
-    if (memcmp(plain, vector, sizeof(plain)))
-        appData.des3_test_result = 2;
+    if (!(memcmp(plain, vector, sizeof(plain))))
+        appData.des3_test_result--;
 
-    if (memcmp(cipher, verify3, sizeof(cipher)))
-        appData.des3_test_result++;
+    if (!(memcmp(cipher, verify3, sizeof(cipher))))
+        appData.des3_test_result--;
 }
 #endif /* NO_DES3 */
 
@@ -878,13 +907,14 @@ void aes_test(void)
     CRYPT_AES_CBC_Encrypt(&enc, cipher, msg,   AES_BLOCK_SIZE);
     CRYPT_AES_CBC_Decrypt(&dec, plain, verify, AES_BLOCK_SIZE);
 
-    appData.aes_cbc_test_result = 0;
+    int numCbcSubTests = 2;
+    appData.aes_cbc_test_result = numCbcSubTests;
 
-    if (memcmp(plain, msg, AES_BLOCK_SIZE))
-        appData.aes_cbc_test_result = 2;
+    if (!(memcmp(plain, msg, AES_BLOCK_SIZE)))
+        appData.aes_cbc_test_result--;
 
-    if (memcmp(cipher, verify, AES_BLOCK_SIZE))
-        appData.aes_cbc_test_result++;
+    if (!(memcmp(cipher, verify, AES_BLOCK_SIZE)))
+        appData.aes_cbc_test_result--;
 
 #ifdef WOLFSSL_AES_COUNTER
     {
@@ -936,13 +966,14 @@ void aes_test(void)
         CRYPT_AES_CTR_Encrypt(&enc, cipher, ctrPlain, AES_BLOCK_SIZE*4);
         CRYPT_AES_CTR_Encrypt(&dec, plain, ctrCipher, AES_BLOCK_SIZE*4);
 
-        appData.aes_ctr_test_result = 0;
+        int numCtrSubTests = 2;
+        appData.aes_ctr_test_result = numCtrSubTests;
         
-        if (memcmp(plain, ctrPlain, AES_BLOCK_SIZE*4))
-            appData.aes_ctr_test_result = 2;
+        if (!(memcmp(plain, ctrPlain, AES_BLOCK_SIZE*4)))
+            appData.aes_ctr_test_result--;
 
-        if (memcmp(cipher, ctrCipher, AES_BLOCK_SIZE*4))
-            appData.aes_ctr_test_result++;
+        if (!(memcmp(cipher, ctrCipher, AES_BLOCK_SIZE*4)))
+            appData.aes_ctr_test_result--;
     }
 #endif /* WOLFSSL_AES_COUNTER */
 }
@@ -955,24 +986,814 @@ void random_test(void)
     byte block[32];
     int ret;
 
-    appData.random_test_result = 0;
+    appData.random_test_result = 1;
 
     ret = CRYPT_RNG_Initialize(&rng);
-    if (ret != 0) 
-    {
-        appData.random_test_result++;
-    }
-    else
+    if (ret == 0) 
     {
         ret = CRYPT_RNG_BlockGenerate(&rng, block, sizeof(block));   
-        if (ret != 0) 
-        {
-            appData.random_test_result++;
-        }
+        if (ret == 0) 
+            appData.random_test_result--;
     }
-  
 }
 
+#ifndef NO_RSA
+
+#if !defined(USE_CERT_BUFFERS_1024) && !defined(USE_CERT_BUFFERS_2048)
+    #ifdef FREESCALE_MQX
+        static const char* clientKey  = "a:\\certs\\client-key.der";
+        static const char* clientCert = "a:\\certs\\client-cert.der";
+        #ifdef WOLFSSL_CERT_GEN
+            static const char* caKeyFile  = "a:\\certs\\ca-key.der";
+            static const char* caCertFile = "a:\\certs\\ca-cert.pem";
+            #ifdef HAVE_ECC
+                static const char* eccCaKeyFile  = "a:\\certs\\ecc-key.der";
+                static const char* eccCaCertFile = "a:\\certs\\server-ecc.pem";
+            #endif
+        #endif
+    #elif defined(WOLFSSL_MKD_SHELL)
+        static char* clientKey = "certs/client-key.der";
+        static char* clientCert = "certs/client-cert.der";
+        void set_clientKey(char *key) {  clientKey = key ; }
+        void set_clientCert(char *cert) {  clientCert = cert ; }
+        #ifdef WOLFSSL_CERT_GEN
+            static char* caKeyFile  = "certs/ca-key.der";
+            static char* caCertFile = "certs/ca-cert.pem";
+            void set_caKeyFile (char * key)  { caKeyFile   = key ; }
+            void set_caCertFile(char * cert) { caCertFile = cert ; }
+            #ifdef HAVE_ECC
+                static const char* eccCaKeyFile  = "certs/ecc-key.der";
+                static const char* eccCaCertFile = "certs/server-ecc.pem";
+                void set_eccCaKeyFile (char * key)  { eccCaKeyFile  = key ; }
+                void set_eccCaCertFile(char * cert) { eccCaCertFile = cert ; }
+            #endif
+        #endif
+    #else
+        static const char* clientKey  = "./certs/client-key.der";
+        static const char* clientCert = "./certs/client-cert.der";
+        #ifdef WOLFSSL_CERT_GEN
+            static const char* caKeyFile  = "./certs/ca-key.der";
+            static const char* caCertFile = "./certs/ca-cert.pem";
+            #ifdef HAVE_ECC
+                static const char* eccCaKeyFile  = "./certs/ecc-key.der";
+                static const char* eccCaCertFile = "./certs/server-ecc.pem";
+            #endif
+        #endif
+    #endif
+#endif
+
+void rsa_test(void)
+{
+    byte*   tmp;
+    size_t  bytes;
+    RsaKey  key;
+    RNG     rng;
+    word32 idx = 0;
+    int    ret;
+    byte   in[] = "Everyone gets Friday off.";
+    word32 inLen = (word32)strlen((char*)in);
+    byte   out[256];
+    byte   plain[256];
+#if !defined(USE_CERT_BUFFERS_1024) && !defined(USE_CERT_BUFFERS_2048)
+    FILE*  file, * file2;
+#endif
+#ifdef WOLFSSL_TEST_CERT
+    DecodedCert cert;
+#endif
+    
+    appData.rsa_test_result = 9;
+        
+    tmp = (byte*)malloc(FOURK_BUF);
+    if (tmp != NULL)
+        appData.rsa_test_result--;
+
+#ifdef USE_CERT_BUFFERS_1024
+    XMEMCPY(tmp, client_key_der_1024, sizeof_client_key_der_1024);
+    bytes = sizeof_client_key_der_1024;
+#elif defined(USE_CERT_BUFFERS_2048)
+    XMEMCPY(tmp, client_key_der_2048, sizeof_client_key_der_2048);
+    bytes = sizeof_client_key_der_2048;
+#else
+    appData.rsa_test_result++;
+    file = fopen(clientKey, "rb");
+    if (file2)
+        appData.rsa_test_result--;
+    
+    bytes = fread(tmp, 1, FOURK_BUF, file);
+    fclose(file);
+#endif /* USE_CERT_BUFFERS */
+
+#ifdef HAVE_CAVIUM
+    RsaInitCavium(&key, CAVIUM_DEV_ID);
+#endif
+    wc_InitRsaKey(&key, 0);
+    ret = wc_RsaPrivateKeyDecode(tmp, &idx, &key, (word32)bytes);
+    if (ret == 0) appData.rsa_test_result--;
+
+    ret = CRYPT_RNG_Initialize((CRYPT_RNG_CTX*)&rng);
+    if (ret == 0) appData.rsa_test_result--;
+
+    ret = wc_RsaPublicEncrypt(in, inLen, out, sizeof(out), &key, &rng);
+    if (ret >= 0) appData.rsa_test_result--;
+
+    ret = wc_RsaPrivateDecrypt(out, ret, plain, sizeof(plain), &key);
+    if (ret >= 0) appData.rsa_test_result--;
+
+    if (!(memcmp(plain, in, inLen))) appData.rsa_test_result--;
+
+    ret = wc_RsaSSL_Sign(in, inLen, out, sizeof(out), &key, &rng);
+    if (ret >= 0) appData.rsa_test_result--;
+
+    memset(plain, 0, sizeof(plain));
+    ret = wc_RsaSSL_Verify(out, ret, plain, sizeof(plain), &key);
+    if (ret >= 0) appData.rsa_test_result--;
+
+    if (!(memcmp(plain, in, ret))) appData.rsa_test_result--;
+
+#if defined(WOLFSSL_MDK_ARM)
+    #define sizeof(s) strlen((char *)(s))
+#endif
+
+#ifdef USE_CERT_BUFFERS_1024
+    XMEMCPY(tmp, client_cert_der_1024, sizeof_client_cert_der_1024);
+    bytes = sizeof_client_cert_der_1024;
+#elif defined(USE_CERT_BUFFERS_2048)
+    XMEMCPY(tmp, client_cert_der_2048, sizeof_client_cert_der_2048);
+    bytes = sizeof_client_cert_der_2048;
+#else
+    appData.rsa_test_result++;
+    file2 = fopen(clientCert, "rb");
+    if (file2)
+        appData.rsa_test_result--;
+
+    bytes = fread(tmp, 1, FOURK_BUF, file2);
+    fclose(file2);
+#endif
+
+#ifdef sizeof
+		#undef sizeof
+#endif
+
+#ifdef WOLFSSL_TEST_CERT
+    appData.rsa_test_result++;
+    InitDecodedCert(&cert, tmp, (word32)bytes, 0);
+
+    ret = ParseCert(&cert, CERT_TYPE, NO_VERIFY, 0);
+    if (ret == 0) appData.rsa_test_result--;
+
+    FreeDecodedCert(&cert);
+#else
+    (void)bytes;
+#endif
+
+
+#ifdef WOLFSSL_KEY_GEN
+    {
+        byte*  der;
+        byte*  pem;
+        int    derSz = 0;
+        int    pemSz = 0;
+        RsaKey derIn;
+        RsaKey genKey;
+        FILE* keyFile;
+        FILE* pemFile;
+
+        appData.rsa_test_result += 8;
+        InitRsaKey(&genKey, 0);
+        ret = MakeRsaKey(&genKey, 1024, 65537, &rng);
+        if (ret == 0)
+            appData.rsa_test_result--;
+
+        der = (byte*)malloc(FOURK_BUF);
+        if (der != NULL)
+            appData.rsa_test_result--;
+        pem = (byte*)malloc(FOURK_BUF);
+        if (pem != NULL)
+            appData.rsa_test_result--;
+
+        derSz = RsaKeyToDer(&genKey, der, FOURK_BUF);
+        if (derSz >=0)
+            appData.rsa_test_result--;
+
+        keyFile = fopen("./key.der", "wb");
+        if (keyFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(der, derSz, 1, keyFile);
+        fclose(keyFile);
+
+        pemSz = DerToPem(der, derSz, pem, FOURK_BUF, PRIVATEKEY_TYPE);
+        if (pemSz >= 0)
+            appData.rsa_test_result--;
+
+        pemFile = fopen("./key.pem", "wb");
+        if (pemFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(pem, pemSz, 1, pemFile);
+        fclose(pemFile);
+
+        InitRsaKey(&derIn, 0);
+        idx = 0;
+        ret = RsaPrivateKeyDecode(der, &idx, &derIn, derSz);
+        if (ret == 0)
+            appData.rsa_test_result--;
+
+        FreeRsaKey(&derIn);
+        FreeRsaKey(&genKey);
+        free(pem);
+        free(der);
+    }
+#endif /* WOLFSSL_KEY_GEN */
+
+
+#ifdef WOLFSSL_CERT_GEN
+    /* self signed */
+    {
+        Cert        myCert;
+        byte*       derCert;
+        byte*       pem;
+        FILE*       derFile;
+        FILE*       pemFile;
+        int         certSz;
+        int         pemSz;
+#ifdef WOLFSSL_TEST_CERT
+        DecodedCert decode;
+#endif
+        appData.rsa_test_result += 16;
+        
+        derCert = (byte*)malloc(FOURK_BUF);
+        if (derCert != NULL)
+            appData.rsa_test_result--;
+        pem = (byte*)malloc(FOURK_BUF);
+        if (pem != NULL)
+            appData.rsa_test_result--;
+
+        InitCert(&myCert);
+
+        strncpy(myCert.subject.country, "US", CTC_NAME_SIZE);
+        strncpy(myCert.subject.state, "OR", CTC_NAME_SIZE);
+        strncpy(myCert.subject.locality, "Portland", CTC_NAME_SIZE);
+        strncpy(myCert.subject.org, "yaSSL", CTC_NAME_SIZE);
+        strncpy(myCert.subject.unit, "Development", CTC_NAME_SIZE);
+        strncpy(myCert.subject.commonName, "www.yassl.com", CTC_NAME_SIZE);
+        strncpy(myCert.subject.email, "info@yassl.com", CTC_NAME_SIZE);
+        myCert.isCA    = 1;
+        myCert.sigType = CTC_SHA256wRSA;
+
+        certSz = MakeSelfCert(&myCert, derCert, FOURK_BUF, &key, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+#ifdef WOLFSSL_TEST_CERT
+        appData.rsa_test_result++;
+        InitDecodedCert(&decode, derCert, certSz, 0);
+        ret = ParseCert(&decode, CERT_TYPE, NO_VERIFY, 0);
+        if (ret == 0)
+            appData.rsa_test_result--;
+        FreeDecodedCert(&decode);
+#endif
+        derFile = fopen("./cert.der", "wb");
+        if (derFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(derCert, certSz, 1, derFile);
+        fclose(derFile);
+
+        pemSz = DerToPem(derCert, certSz, pem, FOURK_BUF, CERT_TYPE);
+        if (pemSz >= 0)
+            appData.rsa_test_result--;
+
+        pemFile = fopen("./cert.pem", "wb");
+        if (pemFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(pem, pemSz, 1, pemFile);
+        fclose(pemFile);
+        free(pem);
+        free(derCert);
+    }
+    /* CA style */
+    {
+        RsaKey      caKey;
+        Cert        myCert;
+        byte*       derCert;
+        byte*       pem;
+        FILE*       derFile;
+        FILE*       pemFile;
+        int         certSz;
+        int         pemSz;
+        size_t      bytes3;
+        word32      idx3 = 0;
+			  FILE* file3 ;
+#ifdef WOLFSSL_TEST_CERT
+        DecodedCert decode;
+#endif
+
+        derCert = (byte*)malloc(FOURK_BUF);
+        if (derCert != NULL)
+            appData.rsa_test_result--;
+        pem = (byte*)malloc(FOURK_BUF);
+        if (pem != NULL)
+            appData.rsa_test_result--;
+
+        file3 = fopen(caKeyFile, "rb");
+
+        if (file3)
+            appData.rsa_test_result--;
+
+        bytes3 = fread(tmp, 1, FOURK_BUF, file3);
+        fclose(file3);
+
+        InitRsaKey(&caKey, 0);
+        ret = RsaPrivateKeyDecode(tmp, &idx3, &caKey, (word32)bytes3);
+        if (ret == 0) appData.rsa_test_result--;
+
+        InitCert(&myCert);
+
+        strncpy(myCert.subject.country, "US", CTC_NAME_SIZE);
+        strncpy(myCert.subject.state, "OR", CTC_NAME_SIZE);
+        strncpy(myCert.subject.locality, "Portland", CTC_NAME_SIZE);
+        strncpy(myCert.subject.org, "yaSSL", CTC_NAME_SIZE);
+        strncpy(myCert.subject.unit, "Development", CTC_NAME_SIZE);
+        strncpy(myCert.subject.commonName, "www.yassl.com", CTC_NAME_SIZE);
+        strncpy(myCert.subject.email, "info@yassl.com", CTC_NAME_SIZE);
+
+        ret = SetIssuer(&myCert, caCertFile);
+        if (ret >= 0)
+            appData.rsa_test_result--;
+
+        certSz = MakeCert(&myCert, derCert, FOURK_BUF, &key, NULL, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+        certSz = SignCert(myCert.bodySz, myCert.sigType, derCert, FOURK_BUF,
+                          &caKey, NULL, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+
+#ifdef WOLFSSL_TEST_CERT
+        appData.rsa_test_result++;
+        InitDecodedCert(&decode, derCert, certSz, 0);
+        ret = ParseCert(&decode, CERT_TYPE, NO_VERIFY, 0);
+        if (ret == 0)
+            appData.rsa_test_result--;
+        FreeDecodedCert(&decode);
+#endif
+
+        derFile = fopen("./othercert.der", "wb");
+        if (derFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(derCert, certSz, 1, derFile);
+        fclose(derFile);
+
+        pemSz = DerToPem(derCert, certSz, pem, FOURK_BUF, CERT_TYPE);
+        if (pemSz >= 0)
+            appData.rsa_test_result--;
+
+        pemFile = fopen("./othercert.pem", "wb");
+        if (pemFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(pem, pemSz, 1, pemFile);
+        fclose(pemFile);
+        free(pem);
+        free(derCert);
+        FreeRsaKey(&caKey);
+    }
+#ifdef HAVE_ECC
+    /* ECC CA style */
+    {
+        ecc_key     caKey;
+        Cert        myCert;
+        byte*       derCert;
+        byte*       pem;
+        FILE*       derFile;
+        FILE*       pemFile;
+        int         certSz;
+        int         pemSz;
+        size_t      bytes3;
+        word32      idx3 = 0;
+			  FILE* file3 ;
+#ifdef WOLFSSL_TEST_CERT
+        DecodedCert decode;
+#endif
+        appData.rsa_test_result += 10;
+        derCert = (byte*)malloc(FOURK_BUF);
+        if (derCert != NULL)
+            appData.rsa_test_result--;
+        pem = (byte*)malloc(FOURK_BUF);
+        if (pem != NULL)
+            appData.rsa_test_result--;
+
+        file3 = fopen(eccCaKeyFile, "rb");
+
+        if (file3)
+            appData.rsa_test_result--;
+
+        bytes3 = fread(tmp, 1, FOURK_BUF, file3);
+        fclose(file3);
+
+        ecc_init(&caKey);
+        ret = EccPrivateKeyDecode(tmp, &idx3, &caKey, (word32)bytes3);
+        if (ret == 0) appData.rsa_test_result--;
+
+        InitCert(&myCert);
+        myCert.sigType = CTC_SHA256wECDSA;
+
+        strncpy(myCert.subject.country, "US", CTC_NAME_SIZE);
+        strncpy(myCert.subject.state, "OR", CTC_NAME_SIZE);
+        strncpy(myCert.subject.locality, "Portland", CTC_NAME_SIZE);
+        strncpy(myCert.subject.org, "wolfSSL", CTC_NAME_SIZE);
+        strncpy(myCert.subject.unit, "Development", CTC_NAME_SIZE);
+        strncpy(myCert.subject.commonName, "www.wolfssl.com", CTC_NAME_SIZE);
+        strncpy(myCert.subject.email, "info@wolfssl.com", CTC_NAME_SIZE);
+
+        ret = SetIssuer(&myCert, eccCaCertFile);
+        if (ret >= 0)
+            appData.rsa_test_result--;
+
+        certSz = MakeCert(&myCert, derCert, FOURK_BUF, NULL, &caKey, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+        certSz = SignCert(myCert.bodySz, myCert.sigType, derCert, FOURK_BUF,
+                          NULL, &caKey, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+#ifdef WOLFSSL_TEST_CERT
+        appData.rsa_test_result++;
+        InitDecodedCert(&decode, derCert, certSz, 0);
+        ret = ParseCert(&decode, CERT_TYPE, NO_VERIFY, 0);
+        if (ret == 0)
+            appData.rsa_test_result--;
+        FreeDecodedCert(&decode);
+#endif
+
+        derFile = fopen("./certecc.der", "wb");
+        if (derFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(derCert, certSz, 1, derFile);
+        fclose(derFile);
+
+        pemSz = DerToPem(derCert, certSz, pem, FOURK_BUF, CERT_TYPE);
+        if (pemSz >= 0)
+            appData.rsa_test_result--;
+
+        pemFile = fopen("./certecc.pem", "wb");
+        if (pemFile)
+            appData.rsa_test_result--;
+        ret = (int)fwrite(pem, pemSz, 1, pemFile);
+        fclose(pemFile);
+        free(pem);
+        free(derCert);
+        ecc_free(&caKey);
+    }
+#endif /* HAVE_ECC */
+#ifdef HAVE_NTRU
+    {
+        RsaKey      caKey;
+        Cert        myCert;
+        byte*       derCert;
+        byte*       pem;
+        FILE*       derFile;
+        FILE*       pemFile;
+        FILE*       caFile;
+        FILE*       ntruPrivFile;
+        int         certSz;
+        int         pemSz;
+        size_t      bytes;
+        word32      idx = 0;
+#ifdef WOLFSSL_TEST_CERT
+        DecodedCert decode;
+#endif
+        appData.rsa_test_result += 14;
+        derCert = (byte*)malloc(FOURK_BUF);
+        if (derCert != NULL)
+            appData.rsa_test_result--;
+        pem = (byte*)malloc(FOURK_BUF);
+        if (pem != NULL)
+            appData.rsa_test_result--;
+
+        byte   public_key[557];          /* sized for EES401EP2 */
+        word16 public_key_len;           /* no. of octets in public key */
+        byte   private_key[607];         /* sized for EES401EP2 */
+        word16 private_key_len;          /* no. of octets in private key */
+        DRBG_HANDLE drbg;
+        static uint8_t const pers_str[] = {
+                'C', 'y', 'a', 'S', 'S', 'L', ' ', 't', 'e', 's', 't'
+        };
+        word32 rc = crypto_drbg_instantiate(112, pers_str, sizeof(pers_str),
+                                            GetEntropy, &drbg);
+        if (rc == DRBG_OK)
+            appData.rsa_test_result--;
+
+        rc = crypto_ntru_encrypt_keygen(drbg, NTRU_EES401EP2, &public_key_len,
+                                        NULL, &private_key_len, NULL);
+        if (rc == NTRU_OK)
+            appData.rsa_test_result--;
+
+        rc = crypto_ntru_encrypt_keygen(drbg, NTRU_EES401EP2, &public_key_len,
+                                     public_key, &private_key_len, private_key);
+        crypto_drbg_uninstantiate(drbg);
+
+        if (rc == NTRU_OK)
+            appData.rsa_test_result--;
+
+        caFile = fopen(caKeyFile, "rb");
+
+        if (caFile)
+            appData.rsa_test_result--;
+
+        bytes = fread(tmp, 1, FOURK_BUF, caFile);
+        fclose(caFile);
+
+        InitRsaKey(&caKey, 0);
+        ret = RsaPrivateKeyDecode(tmp, &idx, &caKey, (word32)bytes);
+        if (ret == 0) appData.rsa_test_result--;
+
+        InitCert(&myCert);
+
+        strncpy(myCert.subject.country, "US", CTC_NAME_SIZE);
+        strncpy(myCert.subject.state, "OR", CTC_NAME_SIZE);
+        strncpy(myCert.subject.locality, "Portland", CTC_NAME_SIZE);
+        strncpy(myCert.subject.org, "yaSSL", CTC_NAME_SIZE);
+        strncpy(myCert.subject.unit, "Development", CTC_NAME_SIZE);
+        strncpy(myCert.subject.commonName, "www.yassl.com", CTC_NAME_SIZE);
+        strncpy(myCert.subject.email, "info@yassl.com", CTC_NAME_SIZE);
+
+        ret = SetIssuer(&myCert, caCertFile);
+        if (ret >= 0)
+            appData.rsa_test_result--;
+
+        certSz = MakeNtruCert(&myCert, derCert, FOURK_BUF, public_key,
+                              public_key_len, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+        certSz = SignCert(myCert.bodySz, myCert.sigType, derCert, FOURK_BUF,
+                          &caKey, NULL, &rng);
+        if (certSz >= 0)
+            appData.rsa_test_result--;
+
+
+#ifdef WOLFSSL_TEST_CERT
+        appData.rsa_test_result++;
+        InitDecodedCert(&decode, derCert, certSz, 0);
+        ret = ParseCert(&decode, CERT_TYPE, NO_VERIFY, 0);
+        if (ret == 0)
+            appData.rsa_test_result--;
+        FreeDecodedCert(&decode);
+#endif
+        derFile = fopen("./ntru-cert.der", "wb");
+        if (derFile)
+            appData.rsa_test_result--;
+        ret = fwrite(derCert, certSz, 1, derFile);
+        fclose(derFile);
+
+        pemSz = DerToPem(derCert, certSz, pem, FOURK_BUF, CERT_TYPE);
+        if (pemSz >= 0)
+            appData.rsa_test_result--;
+
+        pemFile = fopen("./ntru-cert.pem", "wb");
+        if (pemFile)
+            appData.rsa_test_result--;
+        ret = fwrite(pem, pemSz, 1, pemFile);
+        fclose(pemFile);
+
+        ntruPrivFile = fopen("./ntru-key.raw", "wb");
+        if (ntruPrivFile)
+            appData.rsa_test_result--;
+        ret = fwrite(private_key, private_key_len, 1, ntruPrivFile);
+        fclose(ntruPrivFile);
+        free(pem);
+        free(derCert);
+        FreeRsaKey(&caKey);
+    }
+#endif /* HAVE_NTRU */
+#endif /* WOLFSSL_CERT_GEN */
+
+    wc_FreeRsaKey(&key);
+#ifdef HAVE_CAVIUM
+    RsaFreeCavium(&key);
+#endif
+    free(tmp);
+}
+#endif /* !NO_RSA */
+
+#ifdef HAVE_ECC
+
+void ecc_test(void)
+{
+    CRYPT_RNG_CTX     rng;
+    byte    sharedA[1024];
+    byte    sharedB[1024];
+    byte    sig[1024];
+    byte    digest[20];
+    byte    exportBuf[1024];
+    word32  x, y;
+    int     i, verify, ret;
+    ecc_key userA, userB, pubKey;
+
+    appData.ecc_test_result = 12;
+    
+    ret = CRYPT_RNG_Initialize(&rng);
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    wc_ecc_init(&userA);
+    wc_ecc_init(&userB);
+    wc_ecc_init(&pubKey);
+
+    ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userA);
+    ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userB);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    x = sizeof(sharedA);
+    ret = wc_ecc_shared_secret(&userA, &userB, sharedA, &x);
+
+    y = sizeof(sharedB);
+    ret = wc_ecc_shared_secret(&userB, &userA, sharedB, &y);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    if (y == x)
+        appData.ecc_test_result--;
+
+    if (!(memcmp(sharedA, sharedB, x)))
+        appData.ecc_test_result--;
+
+    x = sizeof(exportBuf);
+    ret = wc_ecc_export_x963(&userA, exportBuf, &x);
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    ret = wc_ecc_import_x963(exportBuf, x, &pubKey);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    y = sizeof(sharedB);
+    ret = wc_ecc_shared_secret(&userB, &pubKey, sharedB, &y);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    if (!(memcmp(sharedA, sharedB, y)))
+        appData.ecc_test_result--;
+
+    /* test DSA sign hash */
+    for (i = 0; i < (int)sizeof(digest); i++)
+        digest[i] = i;
+
+    x = sizeof(sig);
+    ret = wc_ecc_sign_hash(digest, sizeof(digest), sig, &x, (struct RNG *)&rng, &userA);
+
+    verify = 0;
+    ret = wc_ecc_verify_hash(sig, x, digest, sizeof(digest), &verify, &userA);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    if (verify == 1)
+        appData.ecc_test_result--;
+
+    x = sizeof(exportBuf);
+    ret = wc_ecc_export_private_only(&userA, exportBuf, &x);
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    wc_ecc_free(&pubKey);
+    wc_ecc_free(&userB);
+    wc_ecc_free(&userA);
+}
+#endif
+
+
+#ifdef HAVE_LIBZ
+
+const byte sample_text[] =
+    "Biodiesel cupidatat marfa, cliche aute put a bird on it incididunt elit\n"
+    "polaroid. Sunt tattooed bespoke reprehenderit. Sint twee organic id\n"
+    "marfa. Commodo veniam ad esse gastropub. 3 wolf moon sartorial vero,\n"
+    "plaid delectus biodiesel squid +1 vice. Post-ironic keffiyeh leggings\n"
+    "selfies cray fap hoodie, forage anim. Carles cupidatat shoreditch, VHS\n"
+    "small batch meggings kogi dolore food truck bespoke gastropub.\n"
+    "\n"
+    "Terry richardson adipisicing actually typewriter tumblr, twee whatever\n"
+    "four loko you probably haven't heard of them high life. Messenger bag\n"
+    "whatever tattooed deep v mlkshk. Brooklyn pinterest assumenda chillwave\n"
+    "et, banksy ullamco messenger bag umami pariatur direct trade forage.\n"
+    "Typewriter culpa try-hard, pariatur sint brooklyn meggings. Gentrify\n"
+    "food truck next level, tousled irony non semiotics PBR ethical anim cred\n"
+    "readymade. Mumblecore brunch lomo odd future, portland organic terry\n"
+    "richardson elit leggings adipisicing ennui raw denim banjo hella. Godard\n"
+    "mixtape polaroid, pork belly readymade organic cray typewriter helvetica\n"
+    "four loko whatever street art yr farm-to-table.\n"
+    "\n"
+    "Vinyl keytar vice tofu. Locavore you probably haven't heard of them pug\n"
+    "pickled, hella tonx labore truffaut DIY mlkshk elit cosby sweater sint\n"
+    "et mumblecore. Elit swag semiotics, reprehenderit DIY sartorial nisi ugh\n"
+    "nesciunt pug pork belly wayfarers selfies delectus. Ethical hoodie\n"
+    "seitan fingerstache kale chips. Terry richardson artisan williamsburg,\n"
+    "eiusmod fanny pack irony tonx ennui lo-fi incididunt tofu YOLO\n"
+    "readymade. 8-bit sed ethnic beard officia. Pour-over iphone DIY butcher,\n"
+    "ethnic art party qui letterpress nisi proident jean shorts mlkshk\n"
+    "locavore.\n"
+    "\n"
+    "Narwhal flexitarian letterpress, do gluten-free voluptate next level\n"
+    "banh mi tonx incididunt carles DIY. Odd future nulla 8-bit beard ut\n"
+    "cillum pickled velit, YOLO officia you probably haven't heard of them\n"
+    "trust fund gastropub. Nisi adipisicing tattooed, Austin mlkshk 90's\n"
+    "small batch american apparel. Put a bird on it cosby sweater before they\n"
+    "sold out pork belly kogi hella. Street art mollit sustainable polaroid,\n"
+    "DIY ethnic ea pug beard dreamcatcher cosby sweater magna scenester nisi.\n"
+    "Sed pork belly skateboard mollit, labore proident eiusmod. Sriracha\n"
+    "excepteur cosby sweater, anim deserunt laborum eu aliquip ethical et\n"
+    "neutra PBR selvage.\n"
+    "\n"
+    "Raw denim pork belly truffaut, irony plaid sustainable put a bird on it\n"
+    "next level jean shorts exercitation. Hashtag keytar whatever, nihil\n"
+    "authentic aliquip disrupt laborum. Tattooed selfies deserunt trust fund\n"
+    "wayfarers. 3 wolf moon synth church-key sartorial, gastropub leggings\n"
+    "tattooed. Labore high life commodo, meggings raw denim fingerstache pug\n"
+    "trust fund leggings seitan forage. Nostrud ullamco duis, reprehenderit\n"
+    "incididunt flannel sustainable helvetica pork belly pug banksy you\n"
+    "probably haven't heard of them nesciunt farm-to-table. Disrupt nostrud\n"
+    "mollit magna, sriracha sartorial helvetica.\n"
+    "\n"
+    "Nulla kogi reprehenderit, skateboard sustainable duis adipisicing viral\n"
+    "ad fanny pack salvia. Fanny pack trust fund you probably haven't heard\n"
+    "of them YOLO vice nihil. Keffiyeh cray lo-fi pinterest cardigan aliqua,\n"
+    "reprehenderit aute. Culpa tousled williamsburg, marfa lomo actually anim\n"
+    "skateboard. Iphone aliqua ugh, semiotics pariatur vero readymade\n"
+    "organic. Marfa squid nulla, in laborum disrupt laboris irure gastropub.\n"
+    "Veniam sunt food truck leggings, sint vinyl fap.\n"
+    "\n"
+    "Hella dolore pork belly, truffaut carles you probably haven't heard of\n"
+    "them PBR helvetica in sapiente. Fashion axe ugh bushwick american\n"
+    "apparel. Fingerstache sed iphone, jean shorts blue bottle nisi bushwick\n"
+    "flexitarian officia veniam plaid bespoke fap YOLO lo-fi. Blog\n"
+    "letterpress mumblecore, food truck id cray brooklyn cillum ad sed.\n"
+    "Assumenda chambray wayfarers vinyl mixtape sustainable. VHS vinyl\n"
+    "delectus, culpa williamsburg polaroid cliche swag church-key synth kogi\n"
+    "magna pop-up literally. Swag thundercats ennui shoreditch vegan\n"
+    "pitchfork neutra truffaut etsy, sed single-origin coffee craft beer.\n"
+    "\n"
+    "Odio letterpress brooklyn elit. Nulla single-origin coffee in occaecat\n"
+    "meggings. Irony meggings 8-bit, chillwave lo-fi adipisicing cred\n"
+    "dreamcatcher veniam. Put a bird on it irony umami, trust fund bushwick\n"
+    "locavore kale chips. Sriracha swag thundercats, chillwave disrupt\n"
+    "tousled beard mollit mustache leggings portland next level. Nihil esse\n"
+    "est, skateboard art party etsy thundercats sed dreamcatcher ut iphone\n"
+    "swag consectetur et. Irure skateboard banjo, nulla deserunt messenger\n"
+    "bag dolor terry richardson sapiente.\n";
+
+
+void compress_test(void)
+{
+    int ret = 0;
+    word32 dSz = sizeof(sample_text);
+    word32 cSz = (dSz + (word32)(dSz * 0.001) + 12);
+    byte *c = NULL;
+    byte *d = NULL;
+    int numSubTests = 4;
+    
+    c = calloc(cSz, sizeof(byte));
+    d = calloc(dSz, sizeof(byte));
+
+    appData.compress_test_result = numSubTests;
+    
+    if (c != NULL && d != NULL)
+    {
+        appData.compress_test_result--;
+    }    
+    if ((appData.compress_test_result == numSubTests-1) && 
+        (ret = wc_Compress(c, cSz, sample_text, dSz, 0)) >= 0)
+    {
+        appData.compress_test_result--;
+    }    
+    if (ret > 0) {
+        cSz = (word32)ret;
+        ret = 0;
+    }
+
+    if ((appData.compress_test_result == numSubTests-2) && 
+         wc_DeCompress(d, dSz, c, cSz) == (int)dSz)
+    {
+        appData.compress_test_result--;
+    }    
+    if ((appData.compress_test_result == numSubTests-3) && 
+         !(memcmp(d, sample_text, dSz)))
+    {
+        appData.compress_test_result--;
+    }
+    
+    if (c) free(c);
+    if (d) free(d);
+}
+
+#endif /* HAVE_LIBZ */
 
 // *****************************************************************************
 // *****************************************************************************
@@ -1026,196 +1847,264 @@ void APP_Initialize(void) {
 void APP_Tasks(void) {
 
     static int j;
-
+    
     /* Check the application's current state. */
     switch (appData.state) {
             /* Application's initial state. */
         case APP_STATE_INIT:
         {
             /* Show Hyperterminal is working using available output functions */
-            //            SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
-            //            SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
-            // SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
+//            SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
+//            SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
+//            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
 
             appData.state = APP_STATE_TEST_MD5;
             break;
         }
 
         case APP_STATE_TEST_MD5:
+#ifndef NO_MD5
             md5_test();
+#endif
             appData.state = APP_STATE_TEST_SHA;
             break;
 
          case APP_STATE_TEST_SHA:
+#ifndef NO_SHA
             sha_test();
+#endif
             appData.state = APP_STATE_TEST_SHA256;
             break;
 
          case APP_STATE_TEST_SHA256:
+#ifndef NO_SHA256
             sha256_test();
+#endif
             appData.state = APP_STATE_TEST_SHA384;
             break;
  
         case APP_STATE_TEST_SHA384:
+#ifdef WOLFSSL_SHA384
             sha384_test();
+#endif
             appData.state = APP_STATE_TEST_SHA512;
             break;
 
         case APP_STATE_TEST_SHA512:
+#ifdef WOLFSSL_SHA512
             sha512_test();
+#endif
             appData.state = APP_STATE_TEST_HMAC_MD5;
             break;
  
         case APP_STATE_TEST_HMAC_MD5:
+#if !defined(NO_HMAC) && !defined(NO_MD5)
             hmac_md5_test();
+#endif
             appData.state = APP_STATE_TEST_HMAC_SHA;
             break;
             
         case APP_STATE_TEST_HMAC_SHA:
+#if !defined(NO_HMAC) && !defined(NO_SHA)
             hmac_sha_test();
+#endif
             appData.state = APP_STATE_TEST_HMAC_SHA256;
             break;
              
         case APP_STATE_TEST_HMAC_SHA256:
+#if !defined(NO_HMAC) && !defined(NO_SHA256)
             hmac_sha256_test();
+#endif
             appData.state = APP_STATE_TEST_HMAC_SHA384;
             break;
               
         case APP_STATE_TEST_HMAC_SHA384:
+#if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
             hmac_sha384_test();
+#endif
             appData.state = APP_STATE_TEST_HMAC_SHA512;
             break;
               
         case APP_STATE_TEST_HMAC_SHA512:
+#if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
             hmac_sha512_test();
+#endif
             appData.state = APP_STATE_TEST_DES;
             break;
               
         case APP_STATE_TEST_DES:
-           des_test();
+#ifndef NO_DES3
+            des_test();
+#endif
             appData.state = APP_STATE_TEST_DES3;
             break;
                    
         case APP_STATE_TEST_DES3:
+#ifndef NO_DES3
             des3_test();
+#endif
             appData.state = APP_STATE_TEST_AES;
             break;
                           
         case APP_STATE_TEST_AES:
+#ifndef NO_AES
             aes_test();
+#endif
+            appData.state = APP_STATE_TEST_RSA;
+            break;
+ 
+        case APP_STATE_TEST_RSA:
+#ifndef NO_RSA
+            rsa_test();
+#endif
             appData.state = APP_STATE_TEST_RANDOM;
             break;
-   
+            
         case APP_STATE_TEST_RANDOM:
             random_test();
+            appData.state = APP_STATE_TEST_ECC;
+            break;
+              
+        case APP_STATE_TEST_ECC:
+#ifdef HAVE_ECC
+            ecc_test();
+#endif
+            appData.state = APP_STATE_TEST_COMPRESS;
+            break;
+                
+        case APP_STATE_TEST_COMPRESS:
+#ifdef HAVE_LIBZ
+            compress_test();
+#endif
             appData.state = APP_STATE_DISPLAY_RESULTS;
             break;
-          
+              
         case APP_STATE_DISPLAY_RESULTS:
             switch (j) {
                 case 0:
 #ifndef NO_MD5
-                    sprintf(printBuffer, "%s\n\rMD5 test:          %d", 
-                            printBuffer, appData.md5_test_result);
+                    sprintf(printBuffer, "%s\n\rMD5 test:          %s", 
+                            printBuffer, (appData.md5_test_result==MD5_Expected?"Pass":"Fail"));
 #endif
                     break;
                 
                 case 1:
 #ifndef NO_SHA
-                    sprintf(printBuffer, "%s\n\rSHA test:          %d", 
-                            printBuffer, appData.sha_test_result);
+                    sprintf(printBuffer, "%s\n\rSHA test:          %s", 
+                            printBuffer, (appData.sha_test_result==SHA_Expected?"Pass":"Fail"));
 #endif
                     break;
                     
                 case 2:
 #ifndef NO_SHA256
-                    sprintf(printBuffer, "%s\n\rSHA256 test:       %d", 
-                            printBuffer, appData.sha256_test_result);
+                    sprintf(printBuffer, "%s\n\rSHA256 test:       %s", 
+                            printBuffer, (appData.sha256_test_result==SHA256_Expected?"Pass":"Fail"));
 #endif
                     break;
 
                 case 3:
 #ifdef WOLFSSL_SHA384
-                    sprintf(printBuffer, "%s\n\rSHA384 test:       %d", 
-                            printBuffer, appData.sha384_test_result);
+                    sprintf(printBuffer, "%s\n\rSHA384 test:       %s", 
+                            printBuffer, (appData.sha384_test_result==SHA384_Expected?"Pass":"Fail"));
 #endif
                     break; 
 
                 case 4:
 #ifdef WOLFSSL_SHA512
-                    sprintf(printBuffer, "%s\n\rSHA512 test:       %d", 
-                            printBuffer, appData.sha512_test_result);
+                    sprintf(printBuffer, "%s\n\rSHA512 test:       %s", 
+                            printBuffer, (appData.sha512_test_result==SHA512_Expected?"Pass":"Fail"));
 #endif
                     break;
  
                 case 5:
 #if !defined(NO_HMAC) && !defined(NO_MD5)
-                    sprintf(printBuffer, "%s\n\rHMAC_MD5 test:     %d", 
-                            printBuffer, appData.hmac_md5_test_result);
+                    sprintf(printBuffer, "%s\n\rHMAC_MD5 test:     %s", 
+                            printBuffer, (appData.hmac_md5_test_result==HMAC_MD5_Expected?"Pass":"Fail"));
 #endif
                     break;
  
                 case 6:
 #if !defined(NO_HMAC) && !defined(NO_SHA)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA test:     %d", 
-                            printBuffer, appData.hmac_sha_test_result);
+                    sprintf(printBuffer, "%s\n\rHMAC_SHA test:     %s", 
+                            printBuffer, (appData.hmac_sha_test_result==HMAC_SHA_Expected?"Pass":"Fail"));
 #endif
                     break;            
   
                 case 7:
 #if !defined(NO_HMAC) && !defined(NO_SHA256)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA256 test:  %d", 
-                            printBuffer, appData.hmac_sha256_test_result);
+                    sprintf(printBuffer, "%s\n\rHMAC_SHA256 test:  %s", 
+                            printBuffer, (appData.hmac_sha256_test_result==HMAC_SHA256_Expected?"Pass":"Fail"));
 #endif
                     break; 
   
                 case 8:
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA384 test:  %d", 
-                            printBuffer, appData.hmac_sha384_test_result);
+                    sprintf(printBuffer, "%s\n\rHMAC_SHA384 test:  %s", 
+                            printBuffer, (appData.hmac_sha384_test_result==HMAC_SHA384_Expected?"Pass":"Fail"));
 #endif
                     break; 
    
                 case 9:
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA512 test:  %d", 
-                            printBuffer, appData.hmac_sha512_test_result);
+                    sprintf(printBuffer, "%s\n\rHMAC_SHA512 test:  %s", 
+                            printBuffer, (appData.hmac_sha512_test_result==HMAC_SHA512_Expected?"Pass":"Fail"));
 #endif
                     break;
                     
                 case 10:
 #ifndef NO_DES3
-                    sprintf(printBuffer, "%s\n\rDES test:          %d", 
-                            printBuffer, appData.des_test_result);
+                    sprintf(printBuffer, "%s\n\rDES test:          %s", 
+                            printBuffer, (appData.des_test_result==DES_Expected?"Pass":"Fail"));
 #endif
                     break;
                     
                 case 11:
 #ifndef NO_DES3
-                    sprintf(printBuffer, "%s\n\rDES3 test:         %d", 
-                            printBuffer, appData.des3_test_result);
+                    sprintf(printBuffer, "%s\n\rDES3 test:         %s", 
+                            printBuffer, (appData.des3_test_result==DES3_Expected?"Pass":"Fail"));
 #endif
                     break;
                     
                 case 12:
 #ifndef NO_AES
-                    sprintf(printBuffer, "%s\n\rAES CBC test:      %d", 
-                            printBuffer, appData.aes_cbc_test_result);
+                    sprintf(printBuffer, "%s\n\rAES CBC test:      %s", 
+                            printBuffer, (appData.aes_cbc_test_result==AES_CBC_Expected?"Pass":"Fail"));
 #ifdef WOLFSSL_AES_COUNTER
-                    sprintf(printBuffer, "%s\n\rAES CTR test:      %d", 
-                            printBuffer, appData.aes_ctr_test_result);
+                    sprintf(printBuffer, "%s\n\rAES CTR test:      %s", 
+                            printBuffer, (appData.aes_ctr_test_result==AES_CTR_Expected?"Pass":"Fail"));
 #endif                    
 #endif
                     break;                    
                      
                 case 13:
-                    sprintf(printBuffer, "%s\n\rRANDOM test:       %d", 
-                            printBuffer, appData.random_test_result);
+#ifndef NO_RSA
+                    sprintf(printBuffer, "%s\n\rRSA test:          %s", 
+                            printBuffer, (appData.rsa_test_result==RSA_Expected?"Pass":"Fail"));
+#endif
+                    break;
+                    
+                case 14:
+                    sprintf(printBuffer, "%s\n\rRANDOM test:       %s", 
+                            printBuffer, (appData.random_test_result==Random_Expected?"Pass":"Fail"));
+                    break;
+                    
+                case 15:
+#ifdef HAVE_ECC
+                    sprintf(printBuffer, "%s\n\rECC test:          %s", 
+                            printBuffer, (appData.ecc_test_result==ECC_Expected?"Pass":"Fail"));
+#endif
+                    break;
+                     
+                case 16:
+#ifdef HAVE_LIBZ
+                    sprintf(printBuffer, "%s\n\rCOMPRESS test:     %s", 
+                            printBuffer, (appData.compress_test_result==Compress_Expected?"Pass":"Fail"));
+#endif
                     break;
             }
             
             j++;
-            if (j > 13)
+            if (j > 16)
                 appData.state = APP_STATE_CHECK_RESULTS;
             else {
                 appData.state = APP_STATE_WAIT_FOR_CONSOLE;
@@ -1224,8 +2113,9 @@ void APP_Tasks(void) {
 
         case APP_STATE_CHECK_RESULTS:
             if (
+                Random_Expected != appData.random_test_result
 #ifndef NO_MD5
-                MD5_Expected != appData.md5_test_result 
+                || MD5_Expected != appData.md5_test_result 
 #endif
 #ifndef NO_SHA                    
                 || SHA_Expected != appData.sha_test_result
@@ -1266,7 +2156,15 @@ void APP_Tasks(void) {
                 || AES_CTR_Expected != appData.aes_ctr_test_result
 #endif
 #endif
-                || Random_Expected != appData.random_test_result
+#ifndef NO_RSA
+                || RSA_Expected != appData.rsa_test_result
+#endif
+#ifdef HAVE_ECC
+                || ECC_Expected != appData.ecc_test_result
+#endif
+#ifdef HAVE_LIBZ
+                || Compress_Expected != appData.compress_test_result
+#endif
                 ) 
             {    
                 // We had an error during comparisons

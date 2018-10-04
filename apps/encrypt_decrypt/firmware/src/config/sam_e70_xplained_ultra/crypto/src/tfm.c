@@ -8,7 +8,7 @@
     tfm.c
   
   Summary:
-    Crypto Framework Libarary source for cryptographic functions.
+    Crypto Framework Library source for cryptographic functions.
 
   Description:
     This source file contains functions that make up the Cryptographic 

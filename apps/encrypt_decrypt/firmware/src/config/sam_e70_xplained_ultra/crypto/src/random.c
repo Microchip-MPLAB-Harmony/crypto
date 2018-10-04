@@ -596,7 +596,7 @@ int wc_InitRng_ex(WC_RNG* rng, void* heap, int devId)
     else
         ret = DRBG_CONT_FAILURE;
 
-    if (ret == DRBG_SUCCESS) {
+     if (ret == DRBG_SUCCESS) {
         rng->status = DRBG_OK;
         ret = 0;
     }
@@ -1250,9 +1250,9 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
 
 int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
 {
-    extern int pic32c_GenerateSeed(byte* output, word32 sz);
+    extern int pic32c_RNG_GenerateSeed(byte* output, word32 sz);
 
-    return pic32c_GenerateSeed(output, sz);
+    return pic32c_RNG_GenerateSeed(output, sz);
 }
 
 

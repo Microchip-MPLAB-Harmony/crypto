@@ -99,22 +99,27 @@ SYS_DEBUG_INIT debugInit =
     .errorLevel = SYS_DEBUG_GLOBAL_ERROR_LEVEL
 };
 
+SYS_CMD_INIT sysCmdInit =
+{
+    .moduleInit = {0},
+    .consoleCmdIOParam = SYS_CMD_SINGLE_CHARACTER_READ_CONSOLE_IO_PARAM,
+};
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
 
 TIME_PLIB_API sysTimePlibAPI = {
-    .timerCallbackSet = (TIME_CallbackSet)TC0_CH0_TimerCallbackRegister,
-    .timerCounterGet = (TIME_CounterGet)TC0_CH0_TimerCounterGet,
-    .timerPeriodSet = (TIME_PeriodSet)TC0_CH0_TimerPeriodSet,
-    .timerStart = (TIME_Start)TC0_CH0_TimerStart,
-    .timerStop = (TIME_Stop)TC0_CH0_TimerStop
+    .timerCallbackSet = (TIME_CallbackSet)TC1_CH0_TimerCallbackRegister,
+    .timerCounterGet = (TIME_CounterGet)TC1_CH0_TimerCounterGet,
+    .timerPeriodSet = (TIME_PeriodSet)TC1_CH0_TimerPeriodSet,
+    .timerStart = (TIME_Start)TC1_CH0_TimerStart,
+    .timerStop = (TIME_Stop)TC1_CH0_TimerStop
 };
 
 SYS_TIME_INIT sysTimeInitData =
 {
     .timePlib = &sysTimePlibAPI,
-    .timeInterrupt = TC0_CH0_IRQn,
-    .timeFrequency = TC0_CH0_TimerFrequencyGet()
+    .timeInterrupt = TC1_CH0_IRQn,
+    .timeFrequency = TC1_CH0_TimerFrequencyGet()
 };
 
 // </editor-fold>
@@ -140,7 +145,7 @@ void SYS_Initialize ( void* data )
 	WDT_REGS->WDT_MR = WDT_MR_WDDIS_Msk; 		// Disable WDT 
 	BSP_Initialize();
  
-    TC0_CH0_TimerInitialize(); 
+    TC1_CH0_TimerInitialize(); 
      
     
 	USART1_Initialize();
@@ -148,6 +153,7 @@ void SYS_Initialize ( void* data )
 
     sysObj.sysConsole0 = SYS_CONSOLE_Initialize(SYS_CONSOLE_INDEX_0, (SYS_MODULE_INIT *)&consUsartInit0);
     sysObj.sysDebug = SYS_DEBUG_Initialize(SYS_DEBUG_INDEX_0, (SYS_MODULE_INIT*)&debugInit);
+    SYS_CMD_Initialize((SYS_MODULE_INIT*)&sysCmdInit);
 
     sysObj.sysTime = SYS_TIME_Initialize(SYS_TIME_INDEX_0, (SYS_MODULE_INIT *)&sysTimeInitData);
 

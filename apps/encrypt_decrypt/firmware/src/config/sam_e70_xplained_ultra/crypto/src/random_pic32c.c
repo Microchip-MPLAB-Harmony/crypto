@@ -62,7 +62,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 int pic32c_InitRng(void)
 {
-    /* Enable Peripheral clock for TRNG in Power Management Contoller */
+    /* Enable Peripheral clock for TRNG in Power Management Controller */
     uint32_t PmcBit = 1u << (ID_TRNG - 32);
     if ((PMC_REGS->PMC_PCSR1 & PmcBit) != PmcBit)
     {

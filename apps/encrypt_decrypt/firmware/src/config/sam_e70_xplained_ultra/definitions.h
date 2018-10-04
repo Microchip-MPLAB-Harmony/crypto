@@ -57,8 +57,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "osal/osal.h"
 #include "system/console/sys_console.h"
 #include "system/console/sys_debug.h"
+#include "system/console/sys_command.h"
 #include "system/time/sys_time.h"
-#include "peripheral/tc/plib_tc0.h"
+#include "peripheral/tc/plib_tc1.h"
 #include "peripheral/usart/plib_usart1.h"
 #include "app.h"
 

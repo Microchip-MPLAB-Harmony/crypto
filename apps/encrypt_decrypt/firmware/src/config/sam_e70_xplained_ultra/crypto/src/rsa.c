@@ -56,6 +56,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #ifndef NO_RSA
 
 #include "crypto/src/rsa.h"
+#include "crypto/crypto.h"
 
 /*
 Possible RSA enable options:
@@ -652,7 +653,8 @@ static int RsaPad_OAEP(const byte* input, word32 inputLen, byte* pkcsBlock,
     XMEMCPY(pkcsBlock + idx, lHash, hLen);
 
     /* generate random seed */
-    if ((ret = wc_RNG_GenerateBlock(rng, seed, hLen)) != 0) {
+//    if ((ret = wc_RNG_GenerateBlock(rng, seed, hLen)) != 0) {
+    if ((ret = CRYPT_RNG_BlockGenerate((CRYPT_RNG_CTX*)rng, seed, hLen)) != 0) {    
         #ifdef WOLFSSL_SMALL_STACK
             XFREE(lHash, heap, DYNAMIC_TYPE_RSA_BUFFER);
             XFREE(seed,  heap, DYNAMIC_TYPE_RSA_BUFFER);
@@ -801,7 +803,8 @@ static int RsaPad(const byte* input, word32 inputLen, byte* pkcsBlock,
         }
 
         padLen = pkcsBlockLen - inputLen - 1;
-        ret    = wc_RNG_GenerateBlock(rng, &pkcsBlock[1], padLen);
+//        ret    = wc_RNG_GenerateBlock(rng, &pkcsBlock[1], padLen);
+        ret = CRYPT_RNG_BlockGenerate((CRYPT_RNG_CTX*)rng, &pkcsBlock[1], padLen);
         if (ret != 0) {
             return ret;
         }

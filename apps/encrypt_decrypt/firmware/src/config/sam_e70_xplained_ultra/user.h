@@ -32,12 +32,7 @@ extern "C" {
 // Section: User Configuration macros
 // *****************************************************************************
 // *****************************************************************************
-#define HEARTBEAT_DELAY 1000  // milliseconds
 
-#if defined( SYS_ASSERT )
-  #undef SYS_ASSERT
-#endif
-#define SYS_ASSERT(test,message) assert(test)
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
