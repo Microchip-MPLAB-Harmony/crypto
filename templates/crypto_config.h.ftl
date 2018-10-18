@@ -45,12 +45,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define NO_DSA
 #define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
-<#if maskFamily == "PIC32C">
-  <#lt>#define MICROCHIP_PIC32C
+<#if maskFamily == "SAME70">
+  <#lt>#define MICROCHIP_SAME70
   <#if cryptoHW == true>
-    <#lt>#define WOLFSSL_MICROCHIP_PIC32C
+    <#lt>#define WOLFSSL_MICROCHIP_SAME70
     <#if cryptoHashMD5 || cryptoHashSHA1 || cryptoHashSHA256 || cryptoHashSHA384 || cryptoHashSHA512 || cryptoRandom>
-      <#lt>#define WOLFSSL_PIC32C_HASH
+      <#lt>#define WOLFSSL_SAME70_HASH
     </#if>
   </#if>
 <#else>

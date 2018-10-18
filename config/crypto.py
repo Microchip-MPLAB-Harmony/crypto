@@ -15,7 +15,7 @@ def instantiateComponent(cryptoComponent):
     if "PIC32M" in Variables.get("__PROCESSOR"):
         maskFamily.setDefaultValue("PIC32M")
     else:
-        maskFamily.setDefaultValue("PIC32C")
+        maskFamily.setDefaultValue("SAME70")
 
     cryptoMenu = cryptoComponent.createMenuSymbol("crypto_menu", None)
     cryptoMenu.setLabel("Crypto Settings")
@@ -163,8 +163,8 @@ def instantiateComponent(cryptoComponent):
 						  'deflate.c','inflate.c','trees.c','gzguts.h','zutil.c','inftrees.c','inffast.c'
                           #,'compress.c','uncompr.c','gzclose.c','gzlib.c','gzread.c','gzwrite.c'						  
 						 ]
-    fileList_pic32c =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'random_pic32c.c']
-    fileList_pic32c_HW = ['aes_pic32c.c', 'pic32c-hash.h', 'sha_pic32c.c', 'sha256_pic32c.c', 'random_pic32c.c']
+    fileList_same70 =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'random_same70.c']
+    fileList_same70_HW = ['aes_same70.c', 'same70-hash.h', 'sha_same70.c', 'sha256_same70.c', 'random_same70.c']
     fileList_pic32m =    ['aes.c', 'sha.c', 'sha256.c', 'random.c', 'pic32mz-crypt.c', 'pic32mz-crypt.h']
 
     # add all common files as enabled and no callback
@@ -176,12 +176,12 @@ def instantiateComponent(cryptoComponent):
         addFileName(filename, cryptoComponent, "src/zlib-1.2.7/", "crypto/src/zlib-1.2.7/", True, None)
 
     # add acceleration files if needed
-    if maskFamily.getValue() == "PIC32C":
+    if maskFamily.getValue() == "SAME70":
         # These files are used for HW - notice the 'True' and 'Add' for enabled
-        for filename in fileList_pic32c_HW:
+        for filename in fileList_same70_HW:
             addFileName(filename, cryptoComponent, "src/", "crypto/src/", True, onHWChangedAdd)
         # These files are disabled initially when the 'HW' is the default condition
-        for filename in fileList_pic32c:
+        for filename in fileList_same70:
             addFileName(filename, cryptoComponent, "src/", "crypto/src/", False, onHWChangedSub)
     else:
         for filename in fileList_pic32m:

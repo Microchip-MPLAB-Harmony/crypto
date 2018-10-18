@@ -1,5 +1,5 @@
-#ifndef _PIC32C_HASH_
-#define _PIC32C_HASH_
+#ifndef _SAME70_HASH_
+#define _SAME70_HASH_
 
 #include "definitions.h"
 
