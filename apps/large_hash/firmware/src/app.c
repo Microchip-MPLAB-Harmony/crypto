@@ -570,7 +570,7 @@ void APP_Tasks(void) {
                     memcmp(SHA256Expected, appData.sha256_feed_result, CRYPT_SHA256_DIGEST_SIZE) ||
                     memcmp(SHA384Expected, appData.sha384_feed_result, CRYPT_SHA384_DIGEST_SIZE) ||
                     memcmp(SHA512Expected, appData.sha512_feed_result, CRYPT_SHA512_DIGEST_SIZE)) {
-                // We had an error during comparions
+                // We had an error during comparisons
                 sprintf(printBuffer, "%s\n\rA test failed.", printBuffer);
                 //BSP_LEDOn(BSP_LED_1);
             } else {

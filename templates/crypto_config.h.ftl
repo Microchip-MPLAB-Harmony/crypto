@@ -102,6 +102,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#if cryptoHashHMAC == false && cryptoCipherECC == false>
         <#lt>#define NO_HMAC
     </#if>
+	<#if cryptoCipher3DES == false>
+	    <#lt>#define NO_DES3
+    </#if>		
 </#if>
 <#if cryptoCipherAES_CTR == true>
 #define WOLFSSL_AES_COUNTER
@@ -112,7 +115,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 <#if cryptoRandom == false && cryptoCipherECC == false && cryptoCipherRSA == false>
 #define NO_RNG
 </#if>
-
+<#if cryptoRandom == false>
+#define NO_RNG_TEST
+</#if>
 <#--
 /*******************************************************************************
  End of File
