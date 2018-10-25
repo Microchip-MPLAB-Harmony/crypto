@@ -28,24 +28,27 @@
 // *****************************************************************************
 
 #include "app.h"
-#include <stdio.h>
-#include "configuration.h"
-#include "crypto/src/settings.h"
 #include "crypto/src/md5.h"
 #include "crypto/src/sha.h"
 #include "crypto/src/sha256.h"
 #include "crypto/src/sha512.h"
 #include "crypto/src/random.h"
-#include "crypto/src/rsa.h"
-#include "crypto/src/certs_test.h"
-#include "crypto/src/des3.h"
-#include "crypto/src/aes.h"
 #include "crypto/src/hmac.h"
+#ifndef NO_AES
+#include "crypto/src/aes.h"
+#endif
 #ifdef HAVE_ECC
 #include "crypto/src/ecc.h"
 #endif
 #ifdef HAVE_LIBZ
 #include "crypto/src/compress.h"
+#endif
+#ifndef NO_DES3
+#include "crypto/src/des3.h"
+#endif
+#ifndef NO_RSA
+#include "crypto/src/rsa.h"
+#include "crypto/src/certs_test.h"
 #endif
 
 // *****************************************************************************
@@ -61,6 +64,9 @@ typedef struct testVector {
     size_t outLen;
 } testVector;
 
+static const int expectedResult = 0;
+static const int dummy_test_result = 0;
+static int testCount = 0;
 // *****************************************************************************
 /* Application Data
 
@@ -100,18 +106,25 @@ void hmac_sha_test(void);
 void hmac_sha256_test(void);
 void hmac_sha384_test(void);
 void hmac_sha512_test(void);
-void des_test(void);
-void des3_test(void);
-void aes_test(void);
-void rsa_test(void);
 void random_test(void);
+#ifndef NO_AES
+    void aes_test(void);
+#endif
 #ifdef HAVE_ECC
     void  ecc_test(void);
 #endif
 #ifdef HAVE_LIBZ
     void compress_test(void);
 #endif
-    
+#ifndef NO_DES3
+void des_test(void);
+void des3_test(void);
+#endif
+#ifndef NO_RSA
+void rsa_test(void);
+#endif
+
+
 /*****************************************************
  * Initialize the application data structure. All
  * application related variables are stored in this
@@ -124,77 +137,14 @@ APP_DATA appData ={
     .rdComplete = true
 };
 
-#if !defined(NO_MD5)
-static const int MD5_Expected = 0;
-#endif
-#ifndef NO_SHA
-static const int SHA_Expected = 0;
-#endif
-#ifndef NO_SHA256
-static const int SHA256_Expected = 0;
-#endif
-#ifdef WOLFSSL_SHA384
-static const int SHA384_Expected = 0;
-#endif
-#ifdef WOLFSSL_SHA512
-static const int SHA512_Expected = 0;
-#endif
-#if !defined(NO_HMAC) && !defined(NO_MD5)
-static const int HMAC_MD5_Expected = 0;
-#endif
-#if !defined(NO_HMAC) && !defined(NO_SHA)
-static const int HMAC_SHA_Expected = 0;
-#endif
-#if !defined(NO_HMAC) && !defined(NO_SHA256)
-static const int HMAC_SHA256_Expected = 0;
-#endif
-#if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
-static const int HMAC_SHA384_Expected = 0;
-#endif
-#if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
-static const int HMAC_SHA512_Expected = 0;
-#endif
-#ifndef NO_DES3
-static const int DES_Expected = 0;
-static const int DES3_Expected = 0;
-#endif
-#ifndef NO_AES
-static const int AES_CBC_Expected = 0;
-#ifdef WOLFSSL_AES_COUNTER
-static const int AES_CTR_Expected = 0;
-#endif
-#endif
-#ifndef NO_RSA
-static const int RSA_Expected = 0;
-#endif
-static const int Random_Expected = 0;
-#ifdef HAVE_ECC
-static const int ECC_Expected = 0;
-#endif
-#ifdef HAVE_LIBZ
-static const int Compress_Expected = 0;
-#endif
+
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Local Routines
 // *****************************************************************************
 // *****************************************************************************
-uint32_t APP_getTicks(void) {
-    return SYS_TIME_CounterGet();
-}
-
 char printBuffer[50 * 1024] = {0};
-
-void APP_DisplayHash(uint8_t *hash, uint32_t hashSz) {
-    while (hashSz--) {
-        sprintf(printBuffer, "%s%02X", printBuffer, *hash++);
-    }
-}
-
-
-//uint8_t __attribute__((aligned(64))) myBuf[1024];
-
 
 #ifndef NO_MD5
 void md5_test(void)
@@ -758,120 +708,113 @@ void hmac_sha512_test(void)
 }
 #endif /* NO_HMAC && WOLFSSL_SHA512 */
 
-#ifndef NO_DES3
-void des_test(void)
+#ifdef HAVE_ECC
+
+void ecc_test(void)
 {
-    const byte exp_pt[] = { /* "now is the time for all " w/o trailing 0 */
-        0x6e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
-        0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20,
-        0x66,0x6f,0x72,0x20,0x61,0x6c,0x6c,0x20
-    };
+    CRYPT_RNG_CTX     rng;
+    byte    sharedA[1024];
+    byte    sharedB[1024];
+    byte    sig[1024];
+    byte    digest[20];
+    byte    exportBuf[1024];
+    word32  x, y;
+    int     i, verify, ret;
+    ecc_key userA, userB, pubKey;
 
-    byte gen_pt[24];
-    byte gen_ct[24];
-
-    Des enc;
-    Des dec;
-
-    const byte key[] =
-    {
-        0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef
-    };
-
-    const byte iv[] =
-    {
-        0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef
-    };
-
-    const byte exp_ct[] =
-    {
-        0x8b,0x7c,0x52,0xb0,0x01,0x2b,0x6c,0xb8,
-        0x4f,0x0f,0xeb,0xf3,0xfb,0x5f,0x86,0x73,
-        0x15,0x85,0xb3,0x22,0x4b,0x86,0x2b,0x4b
-    };
-
-    int numSubTests = 2;
+    appData.ecc_test_result = 12;
     
-    /* The above const allocates in RAM, but does not flush out of cache. Copy
-       it back out so it is in physical memory. */
-#if defined(WOLFSSL_MICROCHIP_PIC32MZ)
- //   SYS_DEVCON_DataCacheFlush();
-#endif
+    ret = CRYPT_RNG_Initialize(&rng);
+    if (ret == 0)
+        appData.ecc_test_result--;
 
+    wc_ecc_init(&userA);
+    wc_ecc_init(&userB);
+    wc_ecc_init(&pubKey);
 
-    appData.des_test_result = numSubTests;
+    ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userA);
+    ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userB);
 
-    wc_Des_SetKey(&enc, key, iv, DES_ENCRYPTION);
-    wc_Des_CbcEncrypt(&enc, gen_ct, exp_pt, sizeof(exp_pt));
-    wc_Des_SetKey(&dec, key, iv, DES_DECRYPTION);
-    wc_Des_CbcDecrypt(&dec, gen_pt, exp_ct, sizeof(exp_ct));
+    if (ret == 0)
+        appData.ecc_test_result--;
 
-    if (!(memcmp(gen_pt, exp_pt, sizeof(gen_pt))))
-        appData.des_test_result--;
-    
-    if (!(memcmp(gen_ct, exp_ct, sizeof(gen_ct))))
-        appData.des_test_result--;
+    x = sizeof(sharedA);
+    ret = wc_ecc_shared_secret(&userA, &userB, sharedA, &x);
+
+    y = sizeof(sharedB);
+    ret = wc_ecc_shared_secret(&userB, &userA, sharedB, &y);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    if (y == x)
+        appData.ecc_test_result--;
+
+    if (!(memcmp(sharedA, sharedB, x)))
+        appData.ecc_test_result--;
+
+    x = sizeof(exportBuf);
+    ret = wc_ecc_export_x963(&userA, exportBuf, &x);
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    ret = wc_ecc_import_x963(exportBuf, x, &pubKey);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    y = sizeof(sharedB);
+    ret = wc_ecc_shared_secret(&userB, &pubKey, sharedB, &y);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    if (!(memcmp(sharedA, sharedB, y)))
+        appData.ecc_test_result--;
+
+    /* test DSA sign hash */
+    for (i = 0; i < (int)sizeof(digest); i++)
+        digest[i] = i;
+
+    x = sizeof(sig);
+    ret = wc_ecc_sign_hash(digest, sizeof(digest), sig, &x, (struct RNG *)&rng, &userA);
+
+    verify = 0;
+    ret = wc_ecc_verify_hash(sig, x, digest, sizeof(digest), &verify, &userA);
+
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    if (verify == 1)
+        appData.ecc_test_result--;
+
+    x = sizeof(exportBuf);
+    ret = wc_ecc_export_private_only(&userA, exportBuf, &x);
+    if (ret == 0)
+        appData.ecc_test_result--;
+
+    wc_ecc_free(&pubKey);
+    wc_ecc_free(&userB);
+    wc_ecc_free(&userA);
 }
-#endif /* NO_DES3 */
+#endif  /* HAVE_ECC */
 
-
-#ifndef NO_DES3
-void des3_test(void)
+void random_test(void)
 {
-    const byte vector[] = { /* "Now is the time for all " w/o trailing 0 */
-        0x4e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
-        0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20,
-        0x66,0x6f,0x72,0x20,0x61,0x6c,0x6c,0x20
-    };
+    CRYPT_RNG_CTX  rng;
+    byte block[32];
+    int ret;
 
-    byte plain[24];
-    byte cipher[24];
+    appData.random_test_result = 1;
 
-    CRYPT_TDES_CTX enc;
-    CRYPT_TDES_CTX dec;
-
-    const byte key3[] =
+    ret = CRYPT_RNG_Initialize(&rng);
+    if (ret == 0) 
     {
-        0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef,
-        0xfe,0xde,0xba,0x98,0x76,0x54,0x32,0x10,
-        0x89,0xab,0xcd,0xef,0x01,0x23,0x45,0x67
-    };
-    const byte iv3[] =
-    {
-        0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef,
-        0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
-        0x11,0x21,0x31,0x41,0x51,0x61,0x71,0x81
-
-    };
-
-    const byte verify3[] =
-    {
-        0x43,0xa0,0x29,0x7e,0xd1,0x84,0xf8,0x0e,
-        0x89,0x64,0x84,0x32,0x12,0xd5,0x08,0x98,
-        0x18,0x94,0x15,0x74,0x87,0x12,0x7d,0xb0
-    };
-    
-    int numSubTests = 2;
-    
-    appData.des3_test_result = numSubTests;
-    
-    /* The above const allocates in RAM, but does not flush out of cache. Copy
-       it back out so it is in physical memory. */
-#if defined(HW_CRYPTO)
-    SYS_DEVCON_DataCacheFlush();
-#endif
-    CRYPT_TDES_KeySet(&enc, key3, iv3, DES_ENCRYPTION);
-    CRYPT_TDES_KeySet(&dec, key3, iv3, DES_DECRYPTION);
-    CRYPT_TDES_CBC_Encrypt(&enc, cipher, vector, sizeof(vector));
-    CRYPT_TDES_CBC_Decrypt(&dec, plain, verify3, sizeof(verify3));
-
-    if (!(memcmp(plain, vector, sizeof(plain))))
-        appData.des3_test_result--;
-
-    if (!(memcmp(cipher, verify3, sizeof(cipher))))
-        appData.des3_test_result--;
+        ret = CRYPT_RNG_BlockGenerate(&rng, block, sizeof(block));   
+        if (ret == 0) 
+            appData.random_test_result--;
+    }
 }
-#endif /* NO_DES3 */
 
 #ifndef NO_AES
 void aes_test(void)
@@ -978,24 +921,247 @@ void aes_test(void)
 #endif /* WOLFSSL_AES_COUNTER */
 }
 
-#endif // NO_AES
+#endif /* NO_AES */
 
-void random_test(void)
+#ifdef HAVE_LIBZ
+
+const byte sample_text[] =
+    "Biodiesel cupidatat marfa, cliche aute put a bird on it incididunt elit\n"
+    "polaroid. Sunt tattooed bespoke reprehenderit. Sint twee organic id\n"
+    "marfa. Commodo veniam ad esse gastropub. 3 wolf moon sartorial vero,\n"
+    "plaid delectus biodiesel squid +1 vice. Post-ironic keffiyeh leggings\n"
+    "selfies cray fap hoodie, forage anim. Carles cupidatat shoreditch, VHS\n"
+    "small batch meggings kogi dolore food truck bespoke gastropub.\n"
+    "\n"
+    "Terry richardson adipisicing actually typewriter tumblr, twee whatever\n"
+    "four loko you probably haven't heard of them high life. Messenger bag\n"
+    "whatever tattooed deep v mlkshk. Brooklyn pinterest assumenda chillwave\n"
+    "et, banksy ullamco messenger bag umami pariatur direct trade forage.\n"
+    "Typewriter culpa try-hard, pariatur sint brooklyn meggings. Gentrify\n"
+    "food truck next level, tousled irony non semiotics PBR ethical anim cred\n"
+    "readymade. Mumblecore brunch lomo odd future, portland organic terry\n"
+    "richardson elit leggings adipisicing ennui raw denim banjo hella. Godard\n"
+    "mixtape polaroid, pork belly readymade organic cray typewriter helvetica\n"
+    "four loko whatever street art yr farm-to-table.\n"
+    "\n"
+    "Vinyl keytar vice tofu. Locavore you probably haven't heard of them pug\n"
+    "pickled, hella tonx labore truffaut DIY mlkshk elit cosby sweater sint\n"
+    "et mumblecore. Elit swag semiotics, reprehenderit DIY sartorial nisi ugh\n"
+    "nesciunt pug pork belly wayfarers selfies delectus. Ethical hoodie\n"
+    "seitan fingerstache kale chips. Terry richardson artisan williamsburg,\n"
+    "eiusmod fanny pack irony tonx ennui lo-fi incididunt tofu YOLO\n"
+    "readymade. 8-bit sed ethnic beard officia. Pour-over iphone DIY butcher,\n"
+    "ethnic art party qui letterpress nisi proident jean shorts mlkshk\n"
+    "locavore.\n"
+    "\n"
+    "Narwhal flexitarian letterpress, do gluten-free voluptate next level\n"
+    "banh mi tonx incididunt carles DIY. Odd future nulla 8-bit beard ut\n"
+    "cillum pickled velit, YOLO officia you probably haven't heard of them\n"
+    "trust fund gastropub. Nisi adipisicing tattooed, Austin mlkshk 90's\n"
+    "small batch american apparel. Put a bird on it cosby sweater before they\n"
+    "sold out pork belly kogi hella. Street art mollit sustainable polaroid,\n"
+    "DIY ethnic ea pug beard dreamcatcher cosby sweater magna scenester nisi.\n"
+    "Sed pork belly skateboard mollit, labore proident eiusmod. Sriracha\n"
+    "excepteur cosby sweater, anim deserunt laborum eu aliquip ethical et\n"
+    "neutra PBR selvage.\n"
+    "\n"
+    "Raw denim pork belly truffaut, irony plaid sustainable put a bird on it\n"
+    "next level jean shorts exercitation. Hashtag keytar whatever, nihil\n"
+    "authentic aliquip disrupt laborum. Tattooed selfies deserunt trust fund\n"
+    "wayfarers. 3 wolf moon synth church-key sartorial, gastropub leggings\n"
+    "tattooed. Labore high life commodo, meggings raw denim fingerstache pug\n"
+    "trust fund leggings seitan forage. Nostrud ullamco duis, reprehenderit\n"
+    "incididunt flannel sustainable helvetica pork belly pug banksy you\n"
+    "probably haven't heard of them nesciunt farm-to-table. Disrupt nostrud\n"
+    "mollit magna, sriracha sartorial helvetica.\n"
+    "\n"
+    "Nulla kogi reprehenderit, skateboard sustainable duis adipisicing viral\n"
+    "ad fanny pack salvia. Fanny pack trust fund you probably haven't heard\n"
+    "of them YOLO vice nihil. Keffiyeh cray lo-fi pinterest cardigan aliqua,\n"
+    "reprehenderit aute. Culpa tousled williamsburg, marfa lomo actually anim\n"
+    "skateboard. Iphone aliqua ugh, semiotics pariatur vero readymade\n"
+    "organic. Marfa squid nulla, in laborum disrupt laboris irure gastropub.\n"
+    "Veniam sunt food truck leggings, sint vinyl fap.\n"
+    "\n"
+    "Hella dolore pork belly, truffaut carles you probably haven't heard of\n"
+    "them PBR helvetica in sapiente. Fashion axe ugh bushwick american\n"
+    "apparel. Fingerstache sed iphone, jean shorts blue bottle nisi bushwick\n"
+    "flexitarian officia veniam plaid bespoke fap YOLO lo-fi. Blog\n"
+    "letterpress mumblecore, food truck id cray brooklyn cillum ad sed.\n"
+    "Assumenda chambray wayfarers vinyl mixtape sustainable. VHS vinyl\n"
+    "delectus, culpa williamsburg polaroid cliche swag church-key synth kogi\n"
+    "magna pop-up literally. Swag thundercats ennui shoreditch vegan\n"
+    "pitchfork neutra truffaut etsy, sed single-origin coffee craft beer.\n"
+    "\n"
+    "Odio letterpress brooklyn elit. Nulla single-origin coffee in occaecat\n"
+    "meggings. Irony meggings 8-bit, chillwave lo-fi adipisicing cred\n"
+    "dreamcatcher veniam. Put a bird on it irony umami, trust fund bushwick\n"
+    "locavore kale chips. Sriracha swag thundercats, chillwave disrupt\n"
+    "tousled beard mollit mustache leggings portland next level. Nihil esse\n"
+    "est, skateboard art party etsy thundercats sed dreamcatcher ut iphone\n"
+    "swag consectetur et. Irure skateboard banjo, nulla deserunt messenger\n"
+    "bag dolor terry richardson sapiente.\n";
+
+
+void compress_test(void)
 {
-    CRYPT_RNG_CTX  rng;
-    byte block[32];
-    int ret;
+    int ret = 0;
+    word32 dSz = sizeof(sample_text);
+    word32 cSz = (dSz + (word32)(dSz * 0.001) + 12);
+    byte *c = NULL;
+    byte *d = NULL;
+    int numSubTests = 4;
+    
+    c = calloc(cSz, sizeof(byte));
+    d = calloc(dSz, sizeof(byte));
 
-    appData.random_test_result = 1;
-
-    ret = CRYPT_RNG_Initialize(&rng);
-    if (ret == 0) 
+    appData.compress_test_result = numSubTests;
+    
+    if (c != NULL && d != NULL)
     {
-        ret = CRYPT_RNG_BlockGenerate(&rng, block, sizeof(block));   
-        if (ret == 0) 
-            appData.random_test_result--;
+        appData.compress_test_result--;
+    }    
+    if ((appData.compress_test_result == numSubTests-1) && 
+        (ret = wc_Compress(c, cSz, sample_text, dSz, 0)) >= 0)
+    {
+        appData.compress_test_result--;
+    }    
+    if (ret > 0) {
+        cSz = (word32)ret;
+        ret = 0;
     }
+
+    if ((appData.compress_test_result == numSubTests-2) && 
+         wc_DeCompress(d, dSz, c, cSz) == (int)dSz)
+    {
+        appData.compress_test_result--;
+    }    
+    if ((appData.compress_test_result == numSubTests-3) && 
+         !(memcmp(d, sample_text, dSz)))
+    {
+        appData.compress_test_result--;
+    }
+    
+    if (c) free(c);
+    if (d) free(d);
 }
+
+#endif /* HAVE_LIBZ */
+
+#ifndef NO_DES3
+void des_test(void)
+{
+    const byte exp_pt[] = { /* "now is the time for all " w/o trailing 0 */
+        0x6e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
+        0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20,
+        0x66,0x6f,0x72,0x20,0x61,0x6c,0x6c,0x20
+    };
+
+    byte gen_pt[24];
+    byte gen_ct[24];
+
+    Des enc;
+    Des dec;
+
+    const byte key[] =
+    {
+        0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef
+    };
+
+    const byte iv[] =
+    {
+        0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef
+    };
+
+    const byte exp_ct[] =
+    {
+        0x8b,0x7c,0x52,0xb0,0x01,0x2b,0x6c,0xb8,
+        0x4f,0x0f,0xeb,0xf3,0xfb,0x5f,0x86,0x73,
+        0x15,0x85,0xb3,0x22,0x4b,0x86,0x2b,0x4b
+    };
+
+    int numSubTests = 2;
+    
+    /* The above const allocates in RAM, but does not flush out of cache. Copy
+       it back out so it is in physical memory. */
+#if defined(WOLFSSL_MICROCHIP_PIC32MZ)
+ //   SYS_DEVCON_DataCacheFlush();
+#endif
+
+
+    appData.des_test_result = numSubTests;
+
+    wc_Des_SetKey(&enc, key, iv, DES_ENCRYPTION);
+    wc_Des_CbcEncrypt(&enc, gen_ct, exp_pt, sizeof(exp_pt));
+    wc_Des_SetKey(&dec, key, iv, DES_DECRYPTION);
+    wc_Des_CbcDecrypt(&dec, gen_pt, exp_ct, sizeof(exp_ct));
+
+    if (!(memcmp(gen_pt, exp_pt, sizeof(gen_pt))))
+        appData.des_test_result--;
+    
+    if (!(memcmp(gen_ct, exp_ct, sizeof(gen_ct))))
+        appData.des_test_result--;
+}
+#endif /* !NO_DES3 */
+
+
+#ifndef NO_DES3
+void des3_test(void)
+{
+    const byte vector[] = { /* "Now is the time for all " w/o trailing 0 */
+        0x4e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
+        0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20,
+        0x66,0x6f,0x72,0x20,0x61,0x6c,0x6c,0x20
+    };
+
+    byte plain[24];
+    byte cipher[24];
+
+    CRYPT_TDES_CTX enc;
+    CRYPT_TDES_CTX dec;
+
+    const byte key3[] =
+    {
+        0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef,
+        0xfe,0xde,0xba,0x98,0x76,0x54,0x32,0x10,
+        0x89,0xab,0xcd,0xef,0x01,0x23,0x45,0x67
+    };
+    const byte iv3[] =
+    {
+        0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef,
+        0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
+        0x11,0x21,0x31,0x41,0x51,0x61,0x71,0x81
+
+    };
+
+    const byte verify3[] =
+    {
+        0x43,0xa0,0x29,0x7e,0xd1,0x84,0xf8,0x0e,
+        0x89,0x64,0x84,0x32,0x12,0xd5,0x08,0x98,
+        0x18,0x94,0x15,0x74,0x87,0x12,0x7d,0xb0
+    };
+    
+    int numSubTests = 2;
+    
+    appData.des3_test_result = numSubTests;
+    
+    /* The above const allocates in RAM, but does not flush out of cache. Copy
+       it back out so it is in physical memory. */
+#if defined(HW_CRYPTO)
+    SYS_DEVCON_DataCacheFlush();
+#endif
+    CRYPT_TDES_KeySet(&enc, key3, iv3, DES_ENCRYPTION);
+    CRYPT_TDES_KeySet(&dec, key3, iv3, DES_DECRYPTION);
+    CRYPT_TDES_CBC_Encrypt(&enc, cipher, vector, sizeof(vector));
+    CRYPT_TDES_CBC_Decrypt(&dec, plain, verify3, sizeof(verify3));
+
+    if (!(memcmp(plain, vector, sizeof(plain))))
+        appData.des3_test_result--;
+
+    if (!(memcmp(cipher, verify3, sizeof(cipher))))
+        appData.des3_test_result--;
+}
+#endif /* !NO_DES3 */
 
 #ifndef NO_RSA
 
@@ -1076,7 +1242,7 @@ void rsa_test(void)
 #else
     appData.rsa_test_result++;
     file = fopen(clientKey, "rb");
-    if (file2)
+    if (file)
         appData.rsa_test_result--;
     
     bytes = fread(tmp, 1, FOURK_BUF, file);
@@ -1578,223 +1744,6 @@ void rsa_test(void)
 }
 #endif /* !NO_RSA */
 
-#ifdef HAVE_ECC
-
-void ecc_test(void)
-{
-    CRYPT_RNG_CTX     rng;
-    byte    sharedA[1024];
-    byte    sharedB[1024];
-    byte    sig[1024];
-    byte    digest[20];
-    byte    exportBuf[1024];
-    word32  x, y;
-    int     i, verify, ret;
-    ecc_key userA, userB, pubKey;
-
-    appData.ecc_test_result = 12;
-    
-    ret = CRYPT_RNG_Initialize(&rng);
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    wc_ecc_init(&userA);
-    wc_ecc_init(&userB);
-    wc_ecc_init(&pubKey);
-
-    ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userA);
-    ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userB);
-
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    x = sizeof(sharedA);
-    ret = wc_ecc_shared_secret(&userA, &userB, sharedA, &x);
-
-    y = sizeof(sharedB);
-    ret = wc_ecc_shared_secret(&userB, &userA, sharedB, &y);
-
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    if (y == x)
-        appData.ecc_test_result--;
-
-    if (!(memcmp(sharedA, sharedB, x)))
-        appData.ecc_test_result--;
-
-    x = sizeof(exportBuf);
-    ret = wc_ecc_export_x963(&userA, exportBuf, &x);
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    ret = wc_ecc_import_x963(exportBuf, x, &pubKey);
-
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    y = sizeof(sharedB);
-    ret = wc_ecc_shared_secret(&userB, &pubKey, sharedB, &y);
-
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    if (!(memcmp(sharedA, sharedB, y)))
-        appData.ecc_test_result--;
-
-    /* test DSA sign hash */
-    for (i = 0; i < (int)sizeof(digest); i++)
-        digest[i] = i;
-
-    x = sizeof(sig);
-    ret = wc_ecc_sign_hash(digest, sizeof(digest), sig, &x, (struct RNG *)&rng, &userA);
-
-    verify = 0;
-    ret = wc_ecc_verify_hash(sig, x, digest, sizeof(digest), &verify, &userA);
-
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    if (verify == 1)
-        appData.ecc_test_result--;
-
-    x = sizeof(exportBuf);
-    ret = wc_ecc_export_private_only(&userA, exportBuf, &x);
-    if (ret == 0)
-        appData.ecc_test_result--;
-
-    wc_ecc_free(&pubKey);
-    wc_ecc_free(&userB);
-    wc_ecc_free(&userA);
-}
-#endif
-
-
-#ifdef HAVE_LIBZ
-
-const byte sample_text[] =
-    "Biodiesel cupidatat marfa, cliche aute put a bird on it incididunt elit\n"
-    "polaroid. Sunt tattooed bespoke reprehenderit. Sint twee organic id\n"
-    "marfa. Commodo veniam ad esse gastropub. 3 wolf moon sartorial vero,\n"
-    "plaid delectus biodiesel squid +1 vice. Post-ironic keffiyeh leggings\n"
-    "selfies cray fap hoodie, forage anim. Carles cupidatat shoreditch, VHS\n"
-    "small batch meggings kogi dolore food truck bespoke gastropub.\n"
-    "\n"
-    "Terry richardson adipisicing actually typewriter tumblr, twee whatever\n"
-    "four loko you probably haven't heard of them high life. Messenger bag\n"
-    "whatever tattooed deep v mlkshk. Brooklyn pinterest assumenda chillwave\n"
-    "et, banksy ullamco messenger bag umami pariatur direct trade forage.\n"
-    "Typewriter culpa try-hard, pariatur sint brooklyn meggings. Gentrify\n"
-    "food truck next level, tousled irony non semiotics PBR ethical anim cred\n"
-    "readymade. Mumblecore brunch lomo odd future, portland organic terry\n"
-    "richardson elit leggings adipisicing ennui raw denim banjo hella. Godard\n"
-    "mixtape polaroid, pork belly readymade organic cray typewriter helvetica\n"
-    "four loko whatever street art yr farm-to-table.\n"
-    "\n"
-    "Vinyl keytar vice tofu. Locavore you probably haven't heard of them pug\n"
-    "pickled, hella tonx labore truffaut DIY mlkshk elit cosby sweater sint\n"
-    "et mumblecore. Elit swag semiotics, reprehenderit DIY sartorial nisi ugh\n"
-    "nesciunt pug pork belly wayfarers selfies delectus. Ethical hoodie\n"
-    "seitan fingerstache kale chips. Terry richardson artisan williamsburg,\n"
-    "eiusmod fanny pack irony tonx ennui lo-fi incididunt tofu YOLO\n"
-    "readymade. 8-bit sed ethnic beard officia. Pour-over iphone DIY butcher,\n"
-    "ethnic art party qui letterpress nisi proident jean shorts mlkshk\n"
-    "locavore.\n"
-    "\n"
-    "Narwhal flexitarian letterpress, do gluten-free voluptate next level\n"
-    "banh mi tonx incididunt carles DIY. Odd future nulla 8-bit beard ut\n"
-    "cillum pickled velit, YOLO officia you probably haven't heard of them\n"
-    "trust fund gastropub. Nisi adipisicing tattooed, Austin mlkshk 90's\n"
-    "small batch american apparel. Put a bird on it cosby sweater before they\n"
-    "sold out pork belly kogi hella. Street art mollit sustainable polaroid,\n"
-    "DIY ethnic ea pug beard dreamcatcher cosby sweater magna scenester nisi.\n"
-    "Sed pork belly skateboard mollit, labore proident eiusmod. Sriracha\n"
-    "excepteur cosby sweater, anim deserunt laborum eu aliquip ethical et\n"
-    "neutra PBR selvage.\n"
-    "\n"
-    "Raw denim pork belly truffaut, irony plaid sustainable put a bird on it\n"
-    "next level jean shorts exercitation. Hashtag keytar whatever, nihil\n"
-    "authentic aliquip disrupt laborum. Tattooed selfies deserunt trust fund\n"
-    "wayfarers. 3 wolf moon synth church-key sartorial, gastropub leggings\n"
-    "tattooed. Labore high life commodo, meggings raw denim fingerstache pug\n"
-    "trust fund leggings seitan forage. Nostrud ullamco duis, reprehenderit\n"
-    "incididunt flannel sustainable helvetica pork belly pug banksy you\n"
-    "probably haven't heard of them nesciunt farm-to-table. Disrupt nostrud\n"
-    "mollit magna, sriracha sartorial helvetica.\n"
-    "\n"
-    "Nulla kogi reprehenderit, skateboard sustainable duis adipisicing viral\n"
-    "ad fanny pack salvia. Fanny pack trust fund you probably haven't heard\n"
-    "of them YOLO vice nihil. Keffiyeh cray lo-fi pinterest cardigan aliqua,\n"
-    "reprehenderit aute. Culpa tousled williamsburg, marfa lomo actually anim\n"
-    "skateboard. Iphone aliqua ugh, semiotics pariatur vero readymade\n"
-    "organic. Marfa squid nulla, in laborum disrupt laboris irure gastropub.\n"
-    "Veniam sunt food truck leggings, sint vinyl fap.\n"
-    "\n"
-    "Hella dolore pork belly, truffaut carles you probably haven't heard of\n"
-    "them PBR helvetica in sapiente. Fashion axe ugh bushwick american\n"
-    "apparel. Fingerstache sed iphone, jean shorts blue bottle nisi bushwick\n"
-    "flexitarian officia veniam plaid bespoke fap YOLO lo-fi. Blog\n"
-    "letterpress mumblecore, food truck id cray brooklyn cillum ad sed.\n"
-    "Assumenda chambray wayfarers vinyl mixtape sustainable. VHS vinyl\n"
-    "delectus, culpa williamsburg polaroid cliche swag church-key synth kogi\n"
-    "magna pop-up literally. Swag thundercats ennui shoreditch vegan\n"
-    "pitchfork neutra truffaut etsy, sed single-origin coffee craft beer.\n"
-    "\n"
-    "Odio letterpress brooklyn elit. Nulla single-origin coffee in occaecat\n"
-    "meggings. Irony meggings 8-bit, chillwave lo-fi adipisicing cred\n"
-    "dreamcatcher veniam. Put a bird on it irony umami, trust fund bushwick\n"
-    "locavore kale chips. Sriracha swag thundercats, chillwave disrupt\n"
-    "tousled beard mollit mustache leggings portland next level. Nihil esse\n"
-    "est, skateboard art party etsy thundercats sed dreamcatcher ut iphone\n"
-    "swag consectetur et. Irure skateboard banjo, nulla deserunt messenger\n"
-    "bag dolor terry richardson sapiente.\n";
-
-
-void compress_test(void)
-{
-    int ret = 0;
-    word32 dSz = sizeof(sample_text);
-    word32 cSz = (dSz + (word32)(dSz * 0.001) + 12);
-    byte *c = NULL;
-    byte *d = NULL;
-    int numSubTests = 4;
-    
-    c = calloc(cSz, sizeof(byte));
-    d = calloc(dSz, sizeof(byte));
-
-    appData.compress_test_result = numSubTests;
-    
-    if (c != NULL && d != NULL)
-    {
-        appData.compress_test_result--;
-    }    
-    if ((appData.compress_test_result == numSubTests-1) && 
-        (ret = wc_Compress(c, cSz, sample_text, dSz, 0)) >= 0)
-    {
-        appData.compress_test_result--;
-    }    
-    if (ret > 0) {
-        cSz = (word32)ret;
-        ret = 0;
-    }
-
-    if ((appData.compress_test_result == numSubTests-2) && 
-         wc_DeCompress(d, dSz, c, cSz) == (int)dSz)
-    {
-        appData.compress_test_result--;
-    }    
-    if ((appData.compress_test_result == numSubTests-3) && 
-         !(memcmp(d, sample_text, dSz)))
-    {
-        appData.compress_test_result--;
-    }
-    
-    if (c) free(c);
-    if (d) free(d);
-}
-
-#endif /* HAVE_LIBZ */
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -1846,17 +1795,15 @@ void APP_Initialize(void) {
 
 void APP_Tasks(void) {
 
-    static int j;
-    
     /* Check the application's current state. */
     switch (appData.state) {
-            /* Application's initial state. */
+        /* Application's initial state. */
         case APP_STATE_INIT:
         {
             /* Show Hyperterminal is working using available output functions */
-//            SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
-//            SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
-//            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
+            // SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
+            // SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
+            // SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
 
             appData.state = APP_STATE_TEST_MD5;
             break;
@@ -1864,13 +1811,16 @@ void APP_Tasks(void) {
 
         case APP_STATE_TEST_MD5:
 #ifndef NO_MD5
+            testCount++;
             md5_test();
 #endif
             appData.state = APP_STATE_TEST_SHA;
             break;
 
+
          case APP_STATE_TEST_SHA:
 #ifndef NO_SHA
+            testCount++;
             sha_test();
 #endif
             appData.state = APP_STATE_TEST_SHA256;
@@ -1878,11 +1828,12 @@ void APP_Tasks(void) {
 
          case APP_STATE_TEST_SHA256:
 #ifndef NO_SHA256
+            testCount++;
             sha256_test();
 #endif
             appData.state = APP_STATE_TEST_SHA384;
             break;
- 
+            
         case APP_STATE_TEST_SHA384:
 #ifdef WOLFSSL_SHA384
             sha384_test();
@@ -1892,13 +1843,15 @@ void APP_Tasks(void) {
 
         case APP_STATE_TEST_SHA512:
 #ifdef WOLFSSL_SHA512
+            testCount++;
             sha512_test();
 #endif
             appData.state = APP_STATE_TEST_HMAC_MD5;
             break;
- 
+  
         case APP_STATE_TEST_HMAC_MD5:
 #if !defined(NO_HMAC) && !defined(NO_MD5)
+            testCount++;
             hmac_md5_test();
 #endif
             appData.state = APP_STATE_TEST_HMAC_SHA;
@@ -1906,6 +1859,7 @@ void APP_Tasks(void) {
             
         case APP_STATE_TEST_HMAC_SHA:
 #if !defined(NO_HMAC) && !defined(NO_SHA)
+            testCount++;
             hmac_sha_test();
 #endif
             appData.state = APP_STATE_TEST_HMAC_SHA256;
@@ -1913,6 +1867,7 @@ void APP_Tasks(void) {
              
         case APP_STATE_TEST_HMAC_SHA256:
 #if !defined(NO_HMAC) && !defined(NO_SHA256)
+            testCount++;
             hmac_sha256_test();
 #endif
             appData.state = APP_STATE_TEST_HMAC_SHA384;
@@ -1920,6 +1875,7 @@ void APP_Tasks(void) {
               
         case APP_STATE_TEST_HMAC_SHA384:
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
+            testCount++;
             hmac_sha384_test();
 #endif
             appData.state = APP_STATE_TEST_HMAC_SHA512;
@@ -1927,264 +1883,231 @@ void APP_Tasks(void) {
               
         case APP_STATE_TEST_HMAC_SHA512:
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
+            testCount++;
             hmac_sha512_test();
 #endif
-            appData.state = APP_STATE_TEST_DES;
+            appData.state = APP_STATE_TEST_RANDOM;
             break;
-              
-        case APP_STATE_TEST_DES:
-#ifndef NO_DES3
-            des_test();
+            
+        case APP_STATE_TEST_RANDOM:
+#ifndef NO_RNG_TEST
+            testCount++;
+            random_test();
 #endif
-            appData.state = APP_STATE_TEST_DES3;
+            appData.state = APP_STATE_TEST_ECC;
             break;
-                   
-        case APP_STATE_TEST_DES3:
-#ifndef NO_DES3
-            des3_test();
+			
+        case APP_STATE_TEST_ECC:
+#ifdef HAVE_ECC
+            testCount++;
+            ecc_test();
 #endif
             appData.state = APP_STATE_TEST_AES;
             break;
                           
         case APP_STATE_TEST_AES:
 #ifndef NO_AES
+            testCount++;
             aes_test();
-#endif
-            appData.state = APP_STATE_TEST_RSA;
-            break;
- 
-        case APP_STATE_TEST_RSA:
-#ifndef NO_RSA
-            rsa_test();
-#endif
-            appData.state = APP_STATE_TEST_RANDOM;
-            break;
-            
-        case APP_STATE_TEST_RANDOM:
-            random_test();
-            appData.state = APP_STATE_TEST_ECC;
-            break;
-              
-        case APP_STATE_TEST_ECC:
-#ifdef HAVE_ECC
-            ecc_test();
 #endif
             appData.state = APP_STATE_TEST_COMPRESS;
             break;
                 
         case APP_STATE_TEST_COMPRESS:
 #ifdef HAVE_LIBZ
+            testCount++;
             compress_test();
+#endif
+            appData.state = APP_STATE_TEST_DES;
+            break;
+              
+        case APP_STATE_TEST_DES:
+#ifndef NO_DES3
+            testCount++;
+            des_test();
+#endif
+            appData.state = APP_STATE_TEST_DES3;
+            break;
+ 
+        case APP_STATE_TEST_DES3:
+#ifndef NO_DES3
+            testCount++;
+            des3_test();
+#endif
+            appData.state = APP_STATE_TEST_RSA;
+            break;
+        
+        case APP_STATE_TEST_RSA:
+#ifndef NO_RSA
+            testCount++;
+            rsa_test();
 #endif
             appData.state = APP_STATE_DISPLAY_RESULTS;
             break;
-              
+                      
         case APP_STATE_DISPLAY_RESULTS:
-            switch (j) {
-                case 0:
 #ifndef NO_MD5
-                    sprintf(printBuffer, "%s\n\rMD5 test:          %s", 
-                            printBuffer, (appData.md5_test_result==MD5_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rMD5 test:          %s", 
+                    printBuffer, (appData.md5_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
-                
-                case 1:
+
 #ifndef NO_SHA
-                    sprintf(printBuffer, "%s\n\rSHA test:          %s", 
-                            printBuffer, (appData.sha_test_result==SHA_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rSHA test:          %s", 
+                    printBuffer, (appData.sha_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
-                    
-                case 2:
+
 #ifndef NO_SHA256
-                    sprintf(printBuffer, "%s\n\rSHA256 test:       %s", 
-                            printBuffer, (appData.sha256_test_result==SHA256_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rSHA256 test:       %s", 
+                    printBuffer, (appData.sha256_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
 
-                case 3:
 #ifdef WOLFSSL_SHA384
-                    sprintf(printBuffer, "%s\n\rSHA384 test:       %s", 
-                            printBuffer, (appData.sha384_test_result==SHA384_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rSHA384 test:       %s", 
+                    printBuffer, (appData.sha384_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break; 
 
-                case 4:
 #ifdef WOLFSSL_SHA512
-                    sprintf(printBuffer, "%s\n\rSHA512 test:       %s", 
-                            printBuffer, (appData.sha512_test_result==SHA512_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rSHA512 test:       %s", 
+                    printBuffer, (appData.sha512_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
- 
-                case 5:
+
 #if !defined(NO_HMAC) && !defined(NO_MD5)
-                    sprintf(printBuffer, "%s\n\rHMAC_MD5 test:     %s", 
-                            printBuffer, (appData.hmac_md5_test_result==HMAC_MD5_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rHMAC_MD5 test:     %s", 
+                    printBuffer, (appData.hmac_md5_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
- 
-                case 6:
+
 #if !defined(NO_HMAC) && !defined(NO_SHA)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA test:     %s", 
-                            printBuffer, (appData.hmac_sha_test_result==HMAC_SHA_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rHMAC_SHA test:     %s", 
+                    printBuffer, (appData.hmac_sha_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;            
-  
-                case 7:
+
 #if !defined(NO_HMAC) && !defined(NO_SHA256)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA256 test:  %s", 
-                            printBuffer, (appData.hmac_sha256_test_result==HMAC_SHA256_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rHMAC_SHA256 test:  %s", 
+                    printBuffer, (appData.hmac_sha256_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break; 
-  
-                case 8:
+
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA384 test:  %s", 
-                            printBuffer, (appData.hmac_sha384_test_result==HMAC_SHA384_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rHMAC_SHA384 test:  %s", 
+                    printBuffer, (appData.hmac_sha384_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break; 
-   
-                case 9:
+
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
-                    sprintf(printBuffer, "%s\n\rHMAC_SHA512 test:  %s", 
-                            printBuffer, (appData.hmac_sha512_test_result==HMAC_SHA512_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rHMAC_SHA512 test:  %s", 
+                    printBuffer, (appData.hmac_sha512_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
-                    
-                case 10:
-#ifndef NO_DES3
-                    sprintf(printBuffer, "%s\n\rDES test:          %s", 
-                            printBuffer, (appData.des_test_result==DES_Expected?"Pass":"Fail"));
+
+#ifdef HAVE_ECC
+            sprintf(printBuffer, "%s\n\rECC test:          %s", 
+                    printBuffer, (appData.ecc_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
-                    
-                case 11:
-#ifndef NO_DES3
-                    sprintf(printBuffer, "%s\n\rDES3 test:         %s", 
-                            printBuffer, (appData.des3_test_result==DES3_Expected?"Pass":"Fail"));
+#ifndef NO_RNG_TEST
+            sprintf(printBuffer, "%s\n\rRANDOM test:       %s", 
+                    printBuffer, (appData.random_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
-                    
-                case 12:
 #ifndef NO_AES
-                    sprintf(printBuffer, "%s\n\rAES CBC test:      %s", 
-                            printBuffer, (appData.aes_cbc_test_result==AES_CBC_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rAES CBC test:      %s", 
+                    printBuffer, (appData.aes_cbc_test_result==expectedResult?"Pass":"Fail"));
 #ifdef WOLFSSL_AES_COUNTER
-                    sprintf(printBuffer, "%s\n\rAES CTR test:      %s", 
-                            printBuffer, (appData.aes_ctr_test_result==AES_CTR_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rAES CTR test:      %s", 
+                     printBuffer, (appData.aes_ctr_test_result==expectedResult?"Pass":"Fail"));
 #endif                    
 #endif
-                    break;                    
-                     
-                case 13:
-#ifndef NO_RSA
-                    sprintf(printBuffer, "%s\n\rRSA test:          %s", 
-                            printBuffer, (appData.rsa_test_result==RSA_Expected?"Pass":"Fail"));
-#endif
-                    break;
-                    
-                case 14:
-                    sprintf(printBuffer, "%s\n\rRANDOM test:       %s", 
-                            printBuffer, (appData.random_test_result==Random_Expected?"Pass":"Fail"));
-                    break;
-                    
-                case 15:
-#ifdef HAVE_ECC
-                    sprintf(printBuffer, "%s\n\rECC test:          %s", 
-                            printBuffer, (appData.ecc_test_result==ECC_Expected?"Pass":"Fail"));
-#endif
-                    break;
-                     
-                case 16:
+
 #ifdef HAVE_LIBZ
-                    sprintf(printBuffer, "%s\n\rCOMPRESS test:     %s", 
-                            printBuffer, (appData.compress_test_result==Compress_Expected?"Pass":"Fail"));
+            sprintf(printBuffer, "%s\n\rCOMPRESS test:     %s", 
+                    printBuffer, (appData.compress_test_result==expectedResult?"Pass":"Fail"));
 #endif
-                    break;
-            }
-            
-            j++;
-            if (j > 16)
-                appData.state = APP_STATE_CHECK_RESULTS;
-            else {
-                appData.state = APP_STATE_WAIT_FOR_CONSOLE;
-            }
+
+#ifndef NO_DES3
+            sprintf(printBuffer, "%s\n\rDES test:          %s", 
+                    printBuffer, (appData.des_test_result==expectedResult?"Pass":"Fail"));
+#endif
+
+#ifndef NO_DES3
+            sprintf(printBuffer, "%s\n\rDES3 test:         %s", 
+                    printBuffer, (appData.des3_test_result==expectedResult?"Pass":"Fail"));
+#endif
+
+#ifndef NO_RSA
+            sprintf(printBuffer, "%s\n\rRSA test:          %s", 
+                    printBuffer, (appData.rsa_test_result==expectedResult?"Pass":"Fail"));
+#endif
+
+            appData.state = APP_STATE_CHECK_RESULTS;
+
             break;
 
         case APP_STATE_CHECK_RESULTS:
-            if (
-                Random_Expected != appData.random_test_result
+            if ( testCount == 0 ) {
+                sprintf(printBuffer, "%s\n\rNo tests executed\n\r", printBuffer);
+            }
+            else if (
+#ifndef NO_RNG_TEST
+			    expectedResult != appData.random_test_result ||
+#endif
 #ifndef NO_MD5
-                || MD5_Expected != appData.md5_test_result 
+                expectedResult != appData.md5_test_result || 
 #endif
 #ifndef NO_SHA                    
-                || SHA_Expected != appData.sha_test_result
+                expectedResult != appData.sha_test_result ||
 #endif
 #ifndef NO_SHA256                    
-                || SHA256_Expected != appData.sha256_test_result
+                expectedResult != appData.sha256_test_result ||
 #endif
 #ifdef WOLFSSL_SHA384                    
-                || SHA384_Expected != appData.sha384_test_result
+                expectedResult != appData.sha384_test_result ||
 #endif
 #ifdef WOLFSSL_SHA512                    
-                || SHA512_Expected != appData.sha512_test_result
+                expectedResult != appData.sha512_test_result ||
 #endif
 #if !defined(NO_HMAC) && !defined(NO_MD5)                    
-                || HMAC_MD5_Expected != appData.hmac_md5_test_result
+                expectedResult != appData.hmac_md5_test_result ||
 #endif
 #if !defined(NO_HMAC) && !defined(NO_SHA)                    
-                || HMAC_SHA_Expected != appData.hmac_sha_test_result
+                expectedResult != appData.hmac_sha_test_result ||
 #endif
 #if !defined(NO_HMAC) && !defined(NO_SHA256)                    
-                || HMAC_SHA256_Expected != appData.hmac_sha256_test_result
+                expectedResult != appData.hmac_sha256_test_result ||
 #endif
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)                    
-                || HMAC_SHA384_Expected != appData.hmac_sha384_test_result
+                expectedResult != appData.hmac_sha384_test_result ||
 #endif
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)                    
-                || HMAC_SHA512_Expected != appData.hmac_sha512_test_result
-#endif
-#ifndef NO_DES3                   
-                || DES_Expected != appData.des_test_result
-#endif
-#ifndef NO_DES3                   
-                || DES3_Expected != appData.des3_test_result
-#endif
-#ifndef NO_AES                   
-                || AES_CBC_Expected != appData.aes_cbc_test_result
-#ifdef WOLFSSL_AES_COUNTER                    
-                || AES_CTR_Expected != appData.aes_ctr_test_result
-#endif
-#endif
-#ifndef NO_RSA
-                || RSA_Expected != appData.rsa_test_result
+                expectedResult != appData.hmac_sha512_test_result ||
 #endif
 #ifdef HAVE_ECC
-                || ECC_Expected != appData.ecc_test_result
+                expectedResult != appData.ecc_test_result ||
+#endif
+#ifndef NO_AES                   
+                expectedResult != appData.aes_cbc_test_result ||
+#ifdef WOLFSSL_AES_COUNTER                    
+                expectedResult != appData.aes_ctr_test_result ||
+#endif
 #endif
 #ifdef HAVE_LIBZ
-                || Compress_Expected != appData.compress_test_result
+                expectedResult != appData.compress_test_result ||
 #endif
-                ) 
-            {    
-                // We had an error during comparisons
-                sprintf(printBuffer, "%s\n\rA test failed.\n", printBuffer);
+#ifndef NO_DES3                   
+                expectedResult != appData.des_test_result ||
+                expectedResult != appData.des3_test_result ||
+#endif
+#ifndef NO_RSA
+                expectedResult != appData.rsa_test_result ||
+#endif
+                expectedResult != dummy_test_result /* always false */
+            ) 
+            {
+                /* We had an error during comparisons */
+                sprintf(printBuffer, "%s\n\rOne or more tests failed\n\r", printBuffer);
             } else {
-                sprintf(printBuffer, "%s\n\rAll tests passed.\n", printBuffer);
+                sprintf(printBuffer, "%s\n\rAll tests passed\n\r", printBuffer);
             }
-            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, 
-                              strlen(printBuffer));
-            appData.state = APP_STATE_SPIN;
+            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
+            appData.state = APP_SPIN;
             break;
 
-        case APP_STATE_WAIT_FOR_CONSOLE:
-            //            if (appData.wrComplete)
-            if (appData.wallTime <= APP_getTicks())
-                appData.state = APP_STATE_DISPLAY_RESULTS;
-            break;
+        case APP_SPIN:
 
-        case APP_STATE_SPIN:
-            
             /* The default state should never be executed. */
         default:
         {

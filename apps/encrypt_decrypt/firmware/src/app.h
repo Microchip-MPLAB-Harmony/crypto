@@ -32,7 +32,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include "configuration.h"
 #include "definitions.h"
 #include "../../../../crypto.h"
@@ -51,12 +50,9 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 #ifndef NO_RSA
-
-
 #define FOURK_BUF 4096
-
 #endif /* NO_RSA */
-                
+    
 // *****************************************************************************
 /* Application states
 
@@ -71,8 +67,8 @@ extern "C" {
 typedef enum
 {
     /* Application's state machine's initial state. */
-	APP_STATE_INIT=0,
-    APP_STATE_TEST_MD5,
+    APP_STATE_INIT=0,
+	APP_STATE_TEST_MD5,
     APP_STATE_TEST_SHA,        
     APP_STATE_TEST_SHA256,
     APP_STATE_TEST_SHA384,
@@ -88,13 +84,11 @@ typedef enum
     APP_STATE_TEST_RSA,
     APP_STATE_TEST_RANDOM,
     APP_STATE_TEST_ECC,
-    APP_STATE_TEST_COMPRESS,
+    APP_STATE_TEST_COMPRESS,            
     APP_STATE_DISPLAY_RESULTS,
     APP_STATE_WAIT_FOR_CONSOLE,
     APP_STATE_CHECK_RESULTS,
-
-	/* Application spins at end */
-	APP_STATE_SPIN
+    APP_SPIN,
 } APP_STATES;
 
 
@@ -110,7 +104,6 @@ typedef enum
   Remarks:
     Application strings and buffers are be defined outside this structure.
  */
-#define TDES_SIZE   (24)
 
 typedef struct
 {
@@ -119,7 +112,7 @@ typedef struct
     bool wrComplete;
     bool rdComplete;
 
-    int md5_test_result;
+	int md5_test_result;
     int sha_test_result;
     int sha256_test_result;
     int sha384_test_result;
