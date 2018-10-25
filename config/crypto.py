@@ -106,7 +106,7 @@ def instantiateComponent(cryptoComponent):
     cryptoCipher3DES.setDescription("Enables (Triple) DES Cryptosystem")
     cryptoCipher3DES.setDefaultValue(False)
 
-    # generate the config info and add it to list in system_config.h
+    # generate the config info and add it to list in configuration.h
     cryptoConfigInfo = cryptoComponent.createFileSymbol("config_info", None)
     cryptoConfigInfo.setSourcePath("templates/crypto_config.h.ftl")
     cryptoConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
