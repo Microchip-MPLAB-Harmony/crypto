@@ -322,7 +322,7 @@
         <itemPath>../src/config/same70_sw/crypto/src/sha.c</itemPath>
         <itemPath>../src/config/same70_sw/crypto/src/sha256.c</itemPath>
         <itemPath>../src/config/same70_sw/crypto/src/random.c</itemPath>
-        <itemPath>../src/config/same70_sw/crypto/src/random_pic32c.c</itemPath>
+        <itemPath>../src/config/same70_sw/crypto/src/random_same70.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>

@@ -127,7 +127,7 @@
         <itemPath>../src/config/same70/crypto/src/zlib-1.2.7/zutil.h</itemPath>
         <itemPath>../src/config/same70/crypto/src/zlib-1.2.7/zlib.h</itemPath>
         <itemPath>../src/config/same70/crypto/src/zlib-1.2.7/gzguts.h</itemPath>
-        <itemPath>../src/config/same70/crypto/src/pic32c-hash.h</itemPath>
+        <itemPath>../src/config/same70/crypto/src/same70-hash.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="osal" projectFiles="true">
         <itemPath>../src/config/same70/osal/osal.h</itemPath>
@@ -319,10 +319,10 @@
         <itemPath>../src/config/same70/crypto/src/zlib-1.2.7/zutil.c</itemPath>
         <itemPath>../src/config/same70/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
         <itemPath>../src/config/same70/crypto/src/zlib-1.2.7/inffast.c</itemPath>
-        <itemPath>../src/config/same70/crypto/src/aes_pic32c.c</itemPath>
-        <itemPath>../src/config/same70/crypto/src/sha_pic32c.c</itemPath>
-        <itemPath>../src/config/same70/crypto/src/sha256_pic32c.c</itemPath>
-        <itemPath>../src/config/same70/crypto/src/random_pic32c.c</itemPath>
+        <itemPath>../src/config/same70/crypto/src/aes_same70.c</itemPath>
+        <itemPath>../src/config/same70/crypto/src/sha_same70.c</itemPath>
+        <itemPath>../src/config/same70/crypto/src/sha256_same70.c</itemPath>
+        <itemPath>../src/config/same70/crypto/src/random_same70.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>

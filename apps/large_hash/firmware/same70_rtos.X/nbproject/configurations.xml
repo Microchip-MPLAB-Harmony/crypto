@@ -128,7 +128,7 @@
         <itemPath>../src/config/same70_rtos/crypto/src/zlib-1.2.7/zutil.h</itemPath>
         <itemPath>../src/config/same70_rtos/crypto/src/zlib-1.2.7/zlib.h</itemPath>
         <itemPath>../src/config/same70_rtos/crypto/src/zlib-1.2.7/gzguts.h</itemPath>
-        <itemPath>../src/config/same70_rtos/crypto/src/pic32c-hash.h</itemPath>
+        <itemPath>../src/config/same70_rtos/crypto/src/same70-hash.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
@@ -352,10 +352,10 @@
         <itemPath>../src/config/same70_rtos/crypto/src/zlib-1.2.7/zutil.c</itemPath>
         <itemPath>../src/config/same70_rtos/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
         <itemPath>../src/config/same70_rtos/crypto/src/zlib-1.2.7/inffast.c</itemPath>
-        <itemPath>../src/config/same70_rtos/crypto/src/aes_pic32c.c</itemPath>
-        <itemPath>../src/config/same70_rtos/crypto/src/sha_pic32c.c</itemPath>
-        <itemPath>../src/config/same70_rtos/crypto/src/sha256_pic32c.c</itemPath>
-        <itemPath>../src/config/same70_rtos/crypto/src/random_pic32c.c</itemPath>
+        <itemPath>../src/config/same70_rtos/crypto/src/aes_same70.c</itemPath>
+        <itemPath>../src/config/same70_rtos/crypto/src/sha_same70.c</itemPath>
+        <itemPath>../src/config/same70_rtos/crypto/src/sha256_same70.c</itemPath>
+        <itemPath>../src/config/same70_rtos/crypto/src/random_same70.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
