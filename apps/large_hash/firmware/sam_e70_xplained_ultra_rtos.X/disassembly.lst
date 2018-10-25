@@ -1,5 +1,5 @@
 
-dist\same70_rtos\production\same70_rtos.X.production.elf:     file format elf32-littlearm
+dist\sam_e70_xplained_ultra_rtos\production\sam_e70_xplained_ultra_rtos.X.production.elf:     file format elf32-littlearm
 
 
 Disassembly of section .vectors:
@@ -17144,8 +17144,8 @@ Disassembly of section .rodata%77:
   40886c:	32207463 	.word	0x32207463
   408870:	30322035 	.word	0x30322035
   408874:	31203831 	.word	0x31203831
-  408878:	39303a34 	.word	0x39303a34
-  40887c:	2031303a 	.word	0x2031303a
+  408878:	34303a35 	.word	0x34303a35
+  40887c:	2039313a 	.word	0x2039313a
   408880:	74696e69 	.word	0x74696e69
   408884:	696c6169 	.word	0x696c6169
   408888:	2164657a 	.word	0x2164657a
