@@ -11,6 +11,80 @@
           <logicalFolder name="f2" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_rtos/bsp/bsp.h</itemPath>
           </logicalFolder>
+          <logicalFolder name="f5" displayName="crypto" projectFiles="true">
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/crypto.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/aes.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/arc4.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asn.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asn_public.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/async.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/certs_test.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha20_poly1305.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/cmac.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/coding.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/compress.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/curve25519.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/des3.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dh.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dsa.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ecc.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ed25519.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/error-crypt.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fe_operations.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fips_test.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ge_operations.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hash.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hc128.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hmac.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/idea.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/integer.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/logging.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md2.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md4.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md5.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/memory.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/mem_track.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/misc.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/mpi_class.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/mpi_superclass.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs12.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs7.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/poly1305.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pwdbased.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rabbit.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/random.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ripemd.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rsa.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/settings.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha256.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha3.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha512.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/signature.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/srp.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ssl.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/tfm.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/types.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/version.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/visibility.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_encrypt.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_port.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfevent.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfmath.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/crc32.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/deflate.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inffast.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inffixed.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inflate.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inftrees.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/trees.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zconf.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zutil.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zlib.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/gzguts.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/same70-hash.h</itemPath>
+          </logicalFolder>
           <logicalFolder name="f3" displayName="driver" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_rtos/driver/driver.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_rtos/driver/driver_common.h</itemPath>
@@ -57,80 +131,6 @@
           <itemPath>../src/config/sam_e70_xplained_ultra_rtos/user.h</itemPath>
           <itemPath>../src/config/sam_e70_xplained_ultra_rtos/configuration.h</itemPath>
         </logicalFolder>
-      </logicalFolder>
-      <logicalFolder name="f5" displayName="crypto" projectFiles="true">
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/crypto.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/aes.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/arc4.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asn.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asn_public.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/async.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/certs_test.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha20_poly1305.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/cmac.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/coding.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/compress.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/curve25519.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/des3.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dh.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dsa.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ecc.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ed25519.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/error-crypt.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fe_operations.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fips_test.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ge_operations.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hash.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hc128.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hmac.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/idea.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/integer.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/logging.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md2.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md4.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md5.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/memory.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/mem_track.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/misc.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/mpi_class.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/mpi_superclass.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs12.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs7.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/poly1305.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pwdbased.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rabbit.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/random.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ripemd.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rsa.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/settings.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha256.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha3.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha512.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/signature.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/srp.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ssl.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/tfm.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/types.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/version.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/visibility.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_encrypt.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_port.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfevent.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfmath.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/crc32.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/deflate.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inffast.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inffixed.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inflate.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inftrees.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/trees.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zconf.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zutil.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zlib.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/gzguts.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/same70-hash.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
@@ -252,6 +252,69 @@
           <logicalFolder name="f3" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_rtos/bsp/bsp.c</itemPath>
           </logicalFolder>
+          <logicalFolder name="f5" displayName="crypto" projectFiles="true">
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/arc4.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asm.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asn.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/async.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha20_poly1305.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/cmac.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/coding.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/compress.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/crypto.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/curve25519.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/des3.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dh.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dsa.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ecc.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ecc_fp.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ed25519.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/error.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fe_low_mem.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fe_operations.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ge_low_mem.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ge_operations.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hash.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hc128.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hmac.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/idea.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/integer.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/logging.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md2.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md4.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md5.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/memory.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/misc.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs12.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs7.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/poly1305.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pwdbased.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rabbit.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ripemd.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rsa.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha3.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha512.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/signature.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/srp.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/tfm.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_encrypt.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_port.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfevent.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfmath.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/adler32.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/crc32.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/deflate.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inflate.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/trees.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zutil.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inffast.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/aes_same70.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha_same70.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha256_same70.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/random_same70.c</itemPath>
+          </logicalFolder>
           <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_rtos/peripheral/clk/plib_clk.c</itemPath>
@@ -297,69 +360,6 @@
           <itemPath>../src/config/sam_e70_xplained_ultra_rtos/freertos_hooks.c</itemPath>
           <itemPath>../src/config/sam_e70_xplained_ultra_rtos/tasks.c</itemPath>
         </logicalFolder>
-      </logicalFolder>
-      <logicalFolder name="f4" displayName="crypto" projectFiles="true">
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/arc4.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asm.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/asn.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/async.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/chacha20_poly1305.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/cmac.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/coding.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/compress.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/crypto.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/curve25519.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/des3.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dh.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/dsa.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ecc.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ecc_fp.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ed25519.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/error.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fe_low_mem.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/fe_operations.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ge_low_mem.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ge_operations.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hash.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hc128.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/hmac.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/idea.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/integer.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/logging.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md2.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md4.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/md5.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/memory.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/misc.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs12.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pkcs7.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/poly1305.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/pwdbased.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rabbit.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/ripemd.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/rsa.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha3.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha512.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/signature.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/srp.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/tfm.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_encrypt.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wc_port.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfevent.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/wolfmath.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/adler32.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/crc32.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/deflate.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inflate.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/trees.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/zutil.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/zlib-1.2.7/inffast.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/aes_same70.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha_same70.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/sha256_same70.c</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra_rtos/crypto/src/random_same70.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
@@ -449,7 +449,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/sam_e70_xplained_ultra_rtos;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS;../src;../src/config/sam_e70_xplained_ultra_rtos;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/CM7;../src/third_party/rtos/FreeRTOS/Source/Include"/>
+                  value="../src;../src/config/sam_e70_xplained_ultra_rtos;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS;../src;../src/config/sam_e70_xplained_ultra_rtos;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/CM7;../src/third_party/rtos/FreeRTOS/Source/Include;"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

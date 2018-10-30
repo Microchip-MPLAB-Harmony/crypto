@@ -115,7 +115,7 @@ def instantiateComponent(cryptoComponent):
 
     # add the crypto.h to the crypto directory (not in src)
     includeFilename = cryptoComponent.createFileSymbol("include_filename", None)
-    includeFilename.setProjectPath("crypto/")
+    includeFilename.setProjectPath("config/" + Variables.get("__CONFIGURATION_NAME") + "/crypto")
     includeFilename.setSourcePath("crypto.h")
     includeFilename.setDestPath("crypto/")
     includeFilename.setOutputName("crypto.h")
@@ -230,7 +230,7 @@ def onDependentComponentRemoved(cryptoComponent, id, trngComponent):
 # all files go into or under src/
 def addFileName(fileName, component, srcPath, destPath, enabled, callback):
     filename = component.createFileSymbol(None, None)
-    filename.setProjectPath("crypto/")
+    filename.setProjectPath("config/" + Variables.get("__CONFIGURATION_NAME") + "/crypto")
     filename.setSourcePath(srcPath + fileName)
     filename.setOutputName(fileName)
 
