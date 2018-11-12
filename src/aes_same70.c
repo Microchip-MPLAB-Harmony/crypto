@@ -494,3 +494,4 @@ int wc_AesCtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 
 #endif /* NO_AES */
 
+

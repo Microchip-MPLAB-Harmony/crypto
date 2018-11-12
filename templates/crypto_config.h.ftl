@@ -23,6 +23,9 @@ ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 ----------------------------------------------------------------------------->
 
+-->
+<#if cryptoMicrochip == true>
+
 /*** Crypto Library Configuration ***/
 #define WC_NO_HARDEN
 #define NO_DSA
@@ -45,7 +48,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
   </#if>
 </#if>
-<#if CONFIG_USE_3RDPARTY_WOLFSSL!false == false>
+<#if CONFIG_USE_3RDPARTY_WOLFSSL?? && CONFIG_USE_3RDPARTY_WOLFSSL == true>
+<#-- Don't output anything if WOLFSSL is present and enabled -->
+<#else>
     <#lt>#define NO_CERTS
     <#lt>#define NO_PWDBASED
     <#lt>#define NO_OLD_TLS
@@ -100,6 +105,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if cryptoRandom == false>
 #define NO_RNG_TEST
+</#if>
 </#if>
 <#--
 /*******************************************************************************
