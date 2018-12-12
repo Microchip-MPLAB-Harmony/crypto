@@ -71,8 +71,7 @@
 void SYS_Tasks ( void )
 {
     /* Maintain system services */
-    SYS_CONSOLE_Tasks(sysObj.sysConsole0);
-
+    
 
 
     /* Maintain Device Drivers */

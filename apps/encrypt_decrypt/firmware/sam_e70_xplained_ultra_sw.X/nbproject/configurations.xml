@@ -4,14 +4,17 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f2" displayName="arm" projectFiles="true">
+        <itemPath>../src/arm/toolchain_specifics.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="config" projectFiles="true">
         <logicalFolder name="f1"
                        displayName="sam_e70_xplained_ultra_sw"
                        projectFiles="true">
-          <logicalFolder name="f2" displayName="bsp" projectFiles="true">
+          <logicalFolder name="f1" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/bsp/bsp.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f5" displayName="crypto" projectFiles="true">
+          <logicalFolder name="f4" displayName="crypto" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/crypto.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/aes.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/arc4.h</itemPath>
@@ -84,11 +87,11 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/zlib.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/gzguts.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f3" displayName="driver" projectFiles="true">
+          <logicalFolder name="f5" displayName="driver" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/driver/driver.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/driver/driver_common.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
+          <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
@@ -107,12 +110,11 @@
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/usart/plib_usart1.h</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <logicalFolder name="f4" displayName="system" projectFiles="true">
-            <logicalFolder name="f2" displayName="console" projectFiles="true">
+          <logicalFolder name="f3" displayName="system" projectFiles="true">
+            <logicalFolder name="f1" displayName="console" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/sys_console.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/sys_debug.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="int" projectFiles="true">
+            <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/sys_int_mapping.h</itemPath>
             </logicalFolder>
@@ -130,13 +132,13 @@
           <itemPath>../src/config/sam_e70_xplained_ultra_sw/configuration.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f2" displayName="osal" projectFiles="true">
+      <logicalFolder name="f4" displayName="osal" projectFiles="true">
         <itemPath>../src/config/sam_e70_xplained_ultra_sw/osal/osal.h</itemPath>
         <itemPath>../src/config/sam_e70_xplained_ultra_sw/osal/osal_definitions.h</itemPath>
         <itemPath>../src/config/sam_e70_xplained_ultra_sw/osal/osal_impl_basic.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="packs" projectFiles="true">
-        <logicalFolder name="f2" displayName="ATSAME70Q21B_DFP" projectFiles="true">
+        <logicalFolder name="f1" displayName="ATSAME70Q21B_DFP" projectFiles="true">
           <logicalFolder name="f1" displayName="component" projectFiles="true">
             <itemPath>../src/packs/ATSAME70Q21B_DFP/component/acc.h</itemPath>
             <itemPath>../src/packs/ATSAME70Q21B_DFP/component/aes.h</itemPath>
@@ -181,7 +183,7 @@
           <itemPath>../src/packs/ATSAME70Q21B_DFP/device.h</itemPath>
           <itemPath>../src/packs/ATSAME70Q21B_DFP/atsame70q21b.h</itemPath>
         </logicalFolder>
-        <logicalFolder name="f1" displayName="CMSIS" projectFiles="true">
+        <logicalFolder name="f2" displayName="CMSIS" projectFiles="true">
           <logicalFolder name="f1" displayName="CMSIS" projectFiles="true">
             <logicalFolder name="f1" displayName="Core" projectFiles="true">
               <logicalFolder name="f1" displayName="Include" projectFiles="true">
@@ -216,10 +218,11 @@
         <logicalFolder name="f1"
                        displayName="sam_e70_xplained_ultra_sw"
                        projectFiles="true">
-          <logicalFolder name="f3" displayName="bsp" projectFiles="true">
+          <logicalFolder name="f1" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/bsp/bsp.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f5" displayName="crypto" projectFiles="true">
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypto.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/arc4.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/asm.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/asn.c</itemPath>
@@ -229,7 +232,6 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/cmac.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/coding.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/compress.c</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypto.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/curve25519.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/des3.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/dh.c</itemPath>
@@ -277,13 +279,13 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/zutil.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/inffast.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/random_same70.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/aes.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha256.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/random.c</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/random_same70.c</itemPath>
           </logicalFolder>
-          <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
+          <logicalFolder name="f3" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/clk/plib_clk.c</itemPath>
             </logicalFolder>
@@ -300,19 +302,18 @@
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/usart/plib_usart1.c</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="stdio" projectFiles="true">
+          <logicalFolder name="f2" displayName="stdio" projectFiles="true">
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/stdio/xc32_monitor.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f4" displayName="system" projectFiles="true">
-            <logicalFolder name="f2" displayName="console" projectFiles="true">
+            <logicalFolder name="f1" displayName="console" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_local.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console.c</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_uart.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_uart_definitions.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_uart.c</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_debug_local.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_debug.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="int" projectFiles="true">
+            <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/src/sys_int.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="time" projectFiles="true">
@@ -350,11 +351,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD4Tool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>2.10</languageToolchainVersion>
+        <languageToolchainVersion>2.15</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="SAME70_DFP" vendor="Atmel" version="2.3.117"/>
+        <pack name="SAME70_DFP" vendor="Atmel" version="2.4.147"/>
         <pack name="CMSIS" vendor="ARM" version="5.0.1"/>
       </packs>
       <compileType>
@@ -390,7 +391,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/sam_e70_xplained_ultra_sw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS;../src;../src/config/sam_e70_xplained_ultra_sw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/CM7;../src/third_party/rtos/FreeRTOS/Source/Include;"/>
+                  value="../src;../src/config/sam_e70_xplained_ultra_sw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS;../src;../src/config/sam_e70_xplained_ultra_sw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/CM7;../src/third_party/rtos/FreeRTOS/Source/Include;../src/arm"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

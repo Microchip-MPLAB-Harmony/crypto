@@ -86,7 +86,7 @@ def instantiateComponent(cryptoComponent):
 
 	# use Microchip crypto lib until notified otherwise by wolfSSL
 	useMicrochipCrypto = True
-			
+	
 	#is wolfSSL enabled?
 	res = Database.sendMessage("lib_wolfssl", "isWolfsslEnabled", {})
 	
@@ -257,31 +257,35 @@ def instantiateComponent(cryptoComponent):
 	
 	fileList_zlib =			['crc32.h','deflate.h','inffast.h','inffixed.h','inflate.h','inftrees.h',
 							'trees.h','adler32.c','crc32.c','deflate.c','zconf.h','zutil.h','zlib.h',
-							'deflate.c','inflate.c','trees.c','gzguts.h','zutil.c','inftrees.c','inffast.c'
+							'inflate.c','trees.c','gzguts.h','zutil.c','inftrees.c','inffast.c'
 							]
-	fileList_same70 =		['aes.c', 'sha.c', 'sha256.c', 'random.c', 'random_same70.c']
-	fileList_same70_HW =	['aes_same70.c', 'same70-hash.h', 'sha_same70.c', 'sha256_same70.c', 'random_same70.c']
+	fileList_same70_common =	['random_same70.c']
+	fileList_same70_SW =	['aes.c', 'sha.c', 'sha256.c', 'random.c']
+	fileList_same70_HW =	['aes_same70.c', 'same70-hash.h', 'sha_same70.c', 'sha256_same70.c']
 	fileList_pic32m =		['aes.c', 'sha.c', 'sha256.c', 'random.c', 'pic32mz-crypt.c', 'pic32mz-crypt.h']
 
+	
 	# add all common files 
 	for filename in fileList_common:
-		addFileName(filename, cryptoComponent, "src/", "crypto/src/", useMicrochipCrypto, fileEnableHandler)
+		addFileName(filename, cryptoComponent, "src/", "crypto/src/", useMicrochipCrypto, fileMchpCryptoEnableHandler)
 
 	# add all zlib files  
 	for filename in fileList_zlib:
-		addFileName(filename, cryptoComponent, "src/zlib-1.2.7/", "crypto/src/zlib-1.2.7/", useMicrochipCrypto, fileEnableHandler)
+		addFileName(filename, cryptoComponent, "src/zlib-1.2.7/", "crypto/src/zlib-1.2.7/", useMicrochipCrypto, fileMchpCryptoEnableHandler)
 
 	# add acceleration files if needed
 	if maskFamily.getValue() == "SAME70":
-		# These files are used for HW - notice the 'True' and 'Add' for enabled
+		for filename in fileList_same70_common:
+			addFileName(filename, cryptoComponent, "src/", "crypto/src/", useMicrochipCrypto, fileMchpCryptoEnableHandler)
+		# These files are used for HW - note that useMicrochipCrypto == 'True' for enabled
 		for filename in fileList_same70_HW:
 			addFileName(filename, cryptoComponent, "src/", "crypto/src/", useMicrochipCrypto, fileEnableHandler)
 		# These files are disabled initially when the 'HW' is the default condition
-		for filename in fileList_same70:
+		for filename in fileList_same70_SW:
 			addFileName(filename, cryptoComponent, "src/", "crypto/src/", False, fileEnableSame70SwHandler)
-	else:
-		for filename in fileList_pic32m:
-			addFileName(filename, cryptoComponent, "src/", "crypto/src/", useMicrochipCrypto, fileEnableHandler)
+#	else:
+#		for filename in fileList_pic32m:
+#			addFileName(filename, cryptoComponent, "src/", "crypto/src/", useMicrochipCrypto, fileEnableHandler)
 
 
 # message handler
@@ -329,6 +333,15 @@ def onWolfsslChangedCryptoStatus(symbol, isWolfsslEnabled):
 	else:
 		symbol.setValue(True,1)
 
+# callback for when wolfSSL is toggled.
+# Enables/disables fileList_common and fileList_zlib files.
+# If event is "cryptoHW" then do nothing. These files should
+# always be enabled regardless of crypto HW or SW as long as
+# Microchip Crypto is enabled.
+def fileMchpCryptoEnableHandler(symbol, event):
+	if event["id"] == "cryptoIsWolfsslEnabled":
+		onWolfsslChangedAdd(symbol, event)
+
 def fileEnableHandler(symbol, event):
 	if event["id"] == "cryptoHW":
 		onHWChangedAdd(symbol, event)
@@ -372,7 +385,7 @@ def onDependentComponentRemoved(cryptoComponent, id, trngComponent):
 
 # all files go into or under src/
 def addFileName(fileName, component, srcPath, destPath, enabled, callback):
-	filename = component.createFileSymbol(None, None)
+	filename = component.createFileSymbol(fileName.replace('.', '_'), None)
 	filename.setProjectPath("config/" + Variables.get("__CONFIGURATION_NAME") + "/crypto")
 	filename.setSourcePath(srcPath + fileName)
 	filename.setOutputName(fileName)
@@ -386,7 +399,7 @@ def addFileName(fileName, component, srcPath, destPath, enabled, callback):
 
 	filename.setEnabled(enabled)
 	if callback != None:
-		filename.setDependencies(callback, ["CryptoHW","cryptoIsWolfsslEnabled"])
+		filename.setDependencies(callback, ["cryptoHW","cryptoIsWolfsslEnabled"])
 		
 
 			
