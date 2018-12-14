@@ -1,5 +1,3 @@
-IDH_HTML_Release_Information_for_Crypto=00129.html
-IDH_HTML_Release_Notes=00130.html
 IDH_HTML_Applications=00004.html
 IDH_HTML_CRYPTO_large_hash_DRV_Usage_Model_2=00111.html
 IDH_HTML_Building_the_Application=00005.html
@@ -93,3 +91,5 @@ IDH_HTML_CRYPT_TDES_CTX=00083.html
 IDH_HTML_MC_CRYPTO_API_H=00128.html
 IDH_HTML_CRYPTO_Files=00094.html
 IDH_HTML_crypto_h=00109.html
+IDH_HTML_Release_Information_for_Crypto=00129.html
+IDH_HTML_Release_Notes=00130.html
