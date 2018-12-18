@@ -1,15 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>CRYPT_ECC_PublicImport Function</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="Doc-O-Matic" />
+    <meta name="save" content="history" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <link rel="STYLESHEET" href="default.css" type="text/css" />
 
 <script type="text/javascript" src="scripts.js"></script>
 </head>
-<body class="Element700" onload="onBodyLoadEx('frames.html', 'topic', '00029.html');" onmousedown="onBodyMouseDown();">
+<body class="Element700" onload="onBodyLoad();" onmousedown="onBodyMouseDown();">
+<div id="persistenceDiv" style="display:none; behavior:url(#default#userData);"></div>
 
 <!-- Begin Popups -->
 
@@ -18,7 +20,7 @@
 <!-- Begin Page Header -->
 <div class="Element710" id="areafixed">
 <div class="Element94">
-<a href="00112.html" target="topic">Crypto Library Help</a> &gt; <a href="00098.html" target="topic">Library Interface</a> &gt; f) ECC Encryption/Decryption Functions &gt; <a href="00029.html" target="topic">CRYPT_ECC_PublicImport Function</a></div>
+<a href="00112.html">Crypto Library Help</a> &gt; <a href="00098.html">Library Interface</a> &gt; f) ECC Encryption/Decryption Functions &gt; <a href="00029.html">CRYPT_ECC_PublicImport Function</a></div>
 <div class="Element92">
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td width="25%">
@@ -29,10 +31,10 @@ MPLAB Harmony Crypto Module Help</div>
 <a href="contents.html" target="tocidx">Contents</a> | <a href="00004.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element90">
-<a href="00028.html" target="topic">Previous</a> | <a href="00098.html" target="topic">Up</a> | <a href="00030.html" target="topic">Next</a></div>
+<a href="00028.html">Previous</a> | <a href="00098.html">Up</a> | <a href="00030.html">Next</a></div>
 </td><td width="25%">
 <div class="Element96">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: CRYPT_ECC_PublicImport@CRYPT_ECC_CTX*@unsigned char*@unsigned int Topic Title: CRYPT_ECC_PublicImport Function)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: CRYPT_ECC_PublicImport@CRYPT_ECC_CTX*@unsigned char*@unsigned int Topic Title: CRYPT_ECC_PublicImport Function)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com">Microchip Support</a></div>
 </td></tr></table><div class="Element5">
 CRYPT_ECC_PublicImport Function</div>
 </div>
@@ -45,25 +47,27 @@ CRYPT_ECC_PublicImport Function</div>
 <div class="Element721">
 
 <!-- Begin Page Content -->
-<a name="PageContent"></a><div class="Element58">
-<a name="4465736372697074696F6E"></a><div class="Element11">
+<div class="Element58">
+<a name="43"></a><div class="Element99">
+C</div>
+<div class="Element101"><div class="Element100"><pre class="Element100"><strong><span style="color: #000080">int</span></strong> <strong><span style="color: #000000">CRYPT_ECC_PublicImport</span></strong>(
+    <a href="00018.html">CRYPT_ECC_CTX</a>*, 
+    <strong><span style="color: #000080">const</span></strong> <strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">char</span></strong>*, 
+    <strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">int</span></strong>
+);</pre></div></div>
+<a name="4465736372697074696F6E"></a><div class="Element14">
+Description</div>
+<div class="Element11">
 <div class="Element10">
 <p class="Element10">
 This function imports a public key in ANSI X9.63 format into the ECC context.</p></div>
 </div>
-<a name="43"></a><div class="Element99">
-C</div>
-<div class="Element101"><div class="Element100"><pre class="Element100"><strong><span style="color: #000080">int</span></strong> <strong><span style="color: #000000">CRYPT_ECC_PublicImport</span></strong>(
-    <a href="00018.html" target="topic">CRYPT_ECC_CTX</a>*, 
-    <strong><span style="color: #000080">const</span></strong> <strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">char</span></strong>*, 
-    <strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">int</span></strong>
-);</pre></div></div>
 <a name="507265636F6E646974696F6E73"></a><div class="Element14">
 Preconditions</div>
 <div class="Element11">
 <div class="Element10">
 <p class="Element10">
-The ECC context must have previously been initialized with a call to <a href="00025.html" target="topic">CRYPT_ECC_Initialize</a>.</p></div>
+The ECC context must have previously been initialized with a call to <a href="00025.html">CRYPT_ECC_Initialize</a>.</p></div>
 </div>
 <a name="506172616D6574657273"></a><div class="Element14">
 Parameters</div>
@@ -112,29 +116,33 @@ Returns</div>
 Example</div>
 <div class="Element11">
 <div class="Element10">
-<div class="Element13"><div class="Element12"><pre class="Element12"><a href="00018.html" target="topic">CRYPT_ECC_CTX</a> userB; 
+<div class="Element170">
+<a href="#" onclick="CopyElementToClipboard('code00027');">Copy Code</a></div>
+<div class="Element13"><div class="Element12" id="code00027"><pre class="Element12"><a href="00018.html">CRYPT_ECC_CTX</a> userB; 
 <strong><span style="color: #000080">int</span></strong>           ret;
 byte          sharedA[100];
 <strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">int</span></strong>  aSz = (<strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">int</span></strong>)<strong><span style="color: #000080">sizeof</span></strong>(sharedA);
 <strong><span style="color: #000080">unsigned</span></strong> <strong><span style="color: #000080">int</span></strong>  usedA;
 
-ret = <a href="00025.html" target="topic">CRYPT_ECC_Initialize</a>(&amp;userB);
+ret = <a href="00025.html">CRYPT_ECC_Initialize</a>(&amp;userB);
 ...
 ret = CRYPT_ECC_PublicImport(&amp;userB, sharedA, usedA);</pre></div></div>
 </div>
 </div>
+<div class="Element62">
+Created with a commercial version of <a href="#" onclick="openExternalLink('http://www.doc-o-matic.com');"><img src="indicator_external_link.gif" border="0" alt="" title="">Doc-O-Matic</a>. In order to make this message disappear you need to register this software. If you have problems registering this software please contact us at <a href="#" onclick="openExternalLink('mailto:support@toolsfactory.com');"><img src="indicator_external_link.gif" border="0" alt="" title="">support@toolsfactory.com</a>.</div>
 </div>
 <!-- End Page Content -->
 
 <!-- Begin Page Footer -->
 <div class="Element95">
-<a href="00112.html" target="topic">Crypto Library Help</a> &gt; <a href="00098.html" target="topic">Library Interface</a> &gt; f) ECC Encryption/Decryption Functions &gt; <a href="00029.html" target="topic">CRYPT_ECC_PublicImport Function</a></div>
+<a href="00112.html">Crypto Library Help</a> &gt; <a href="00098.html">Library Interface</a> &gt; f) ECC Encryption/Decryption Functions &gt; <a href="00029.html">CRYPT_ECC_PublicImport Function</a></div>
 <div class="Element93">
 <table width="100%" cellspacing="0" cellpadding="0">
-<tr><td width="25%">
+<tr><td width="100%">
 <div class="Element3">
-MPLAB Harmony Crypto Module Help</div>
-</td><td width="25%">
+ MPLAB Harmony Crypto Module Help</div>
+</td></tr><tr><td width="100%">
 <div class="Element4">
 <a href="contents.html" target="tocidx">Contents</a> | <a href="00004.html" target="topic">Home</a></div>
 </td><td width="25%">
@@ -142,7 +150,7 @@ MPLAB Harmony Crypto Module Help</div>
 <a href="00028.html" target="topic">Previous</a> | <a href="00098.html" target="topic">Up</a> | <a href="00030.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element97">
-<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: CRYPT_ECC_PublicImport@CRYPT_ECC_CTX*@unsigned char*@unsigned int Topic Title: CRYPT_ECC_PublicImport Function)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
+<a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: CRYPT_ECC_PublicImport@CRYPT_ECC_CTX*@unsigned char*@unsigned int Topic Title: CRYPT_ECC_PublicImport Function)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com">Microchip Support</a></div>
 </td></tr></table></div>
 
 <!-- End Page Footer -->
