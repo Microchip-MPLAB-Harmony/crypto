@@ -1,5 +1,5 @@
 <#----------------------------------------------------------------------------
- Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
+ Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
 
 Microchip Technology Inc. and its subsidiaries.
 
@@ -30,6 +30,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define NO_DSA
 #define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
 <#if maskFamily == "SAME70">
   <#lt>#define MICROCHIP_SAME70
   <#if cryptoHW == true>
