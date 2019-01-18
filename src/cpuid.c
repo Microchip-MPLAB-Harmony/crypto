@@ -43,7 +43,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 //DOM-IGNORE-END
 
-
 #ifdef HAVE_CONFIG_H
     #include <config.h>
 #endif

@@ -43,6 +43,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 //DOM-IGNORE-END
 
+
 /* This framework provides a central place for crypto hardware integration
    using the devId scheme. If not supported return `NOT_COMPILED_IN`. */
 
