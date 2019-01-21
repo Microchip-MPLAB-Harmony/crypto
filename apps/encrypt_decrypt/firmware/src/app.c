@@ -27,6 +27,10 @@
 // *****************************************************************************
 // *****************************************************************************
 
+#include <stdio.h>
+#include <string.h>
+
+#include "crypto/src/logging.h"
 #include "app.h"
 #include "crypto/src/md5.h"
 #include "crypto/src/sha.h"
@@ -144,6 +148,10 @@ APP_DATA appData ={
 // Section: Application Local Routines
 // *****************************************************************************
 // *****************************************************************************
+uint32_t APP_getTicks(void) {
+    return SYS_TIME_CounterGet();
+}
+
 char printBuffer[50 * 1024] = {0};
 
 #ifndef NO_MD5
@@ -155,6 +163,8 @@ void md5_test(void)
     testVector a, b, c, d, e;
     testVector test_md5[5];
     int times = sizeof(test_md5) / sizeof(testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "abc";
     a.output = "\x90\x01\x50\x98\x3c\xd2\x4f\xb0\xd6\x96\x3f\x7d\x28\xe1\x7f"
@@ -197,7 +207,8 @@ void md5_test(void)
     CRYPT_MD5_Initialize(&md5);
 
     appData.md5_test_result = times;
-        
+
+    hashStart = APP_getTicks();	
     for (i = 0; i < times; ++i) {
         CRYPT_MD5_DataAdd(&md5, (byte*)test_md5[i].input, (word32)test_md5[i].inLen);
         CRYPT_MD5_Finalize(&md5, hash);
@@ -207,6 +218,8 @@ void md5_test(void)
             appData.md5_test_result--;
         }
     }
+    hashStop = APP_getTicks();
+    appData.md5_timing = hashStop - hashStart;
 }
 #endif /* NO_MD5 */
 
@@ -219,6 +232,8 @@ void sha_test(void)
     testVector a, b, c, d;
     testVector test_sha[4];
     int times = sizeof(test_sha) / sizeof(struct testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "abc";
     a.output = "\xA9\x99\x3E\x36\x47\x06\x81\x6A\xBA\x3E\x25\x71\x78\x50\xC2"
@@ -256,6 +271,7 @@ void sha_test(void)
 
     appData.sha_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         CRYPT_SHA_DataAdd(&sha, (byte*)test_sha[i].input, (word32)test_sha[i].inLen);
         CRYPT_SHA_Finalize(&sha, hash);
@@ -263,6 +279,8 @@ void sha_test(void)
         if (memcmp(hash, test_sha[i].output, SHA_DIGEST_SIZE) == 0)
             appData.sha_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.sha_timing = hashStop - hashStart;
 }
 #endif /* NO_SHA */
 
@@ -275,6 +293,8 @@ void sha256_test(void)
     testVector a, b;
     testVector test_sha[2];
     int times = sizeof(test_sha) / sizeof(struct testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "abc";
     a.output = "\xBA\x78\x16\xBF\x8F\x01\xCF\xEA\x41\x41\x40\xDE\x5D\xAE\x22"
@@ -297,6 +317,7 @@ void sha256_test(void)
 
     appData.sha256_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         CRYPT_SHA256_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA256_Finalize(&sha, hash);
@@ -304,6 +325,8 @@ void sha256_test(void)
         if (memcmp(hash, test_sha[i].output, SHA256_DIGEST_SIZE) == 0)
             appData.sha256_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.sha256_timing = hashStop - hashStart;
 }
 #endif /* NO_SHA256 */
 
@@ -316,6 +339,8 @@ void sha384_test(void)
     testVector a, b;
     testVector test_sha[2];
     int times = sizeof(test_sha) / sizeof(struct testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "abc";
     a.output = "\xcb\x00\x75\x3f\x45\xa3\x5e\x8b\xb5\xa0\x3d\x69\x9a\xc6\x50"
@@ -341,6 +366,7 @@ void sha384_test(void)
 
     appData.sha384_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         CRYPT_SHA384_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA384_Finalize(&sha, hash);
@@ -348,6 +374,8 @@ void sha384_test(void)
         if (memcmp(hash, test_sha[i].output, SHA384_DIGEST_SIZE) == 0)
             appData.sha384_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.sha384_timing = hashStop - hashStart;
 }
 #endif /* WOLFSSL_SHA384 */
 
@@ -360,6 +388,8 @@ void sha512_test(void)
     testVector a, b;
     testVector test_sha[2];
     int times = sizeof(test_sha) / sizeof(struct testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "abc";
     a.output = "\xdd\xaf\x35\xa1\x93\x61\x7a\xba\xcc\x41\x73\x49\xae\x20\x41"
@@ -387,6 +417,7 @@ void sha512_test(void)
 
     appData.sha512_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         CRYPT_SHA512_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA512_Finalize(&sha, hash);
@@ -394,6 +425,8 @@ void sha512_test(void)
         if (memcmp(hash, test_sha[i].output, SHA512_DIGEST_SIZE) == 0)
             appData.sha512_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.sha512_timing = hashStop - hashStart;
 }
 #endif /* WOLFSSL_SHA512 */
 
@@ -414,6 +447,8 @@ void hmac_md5_test(void)
     testVector test_hmac[3];
 
     int times = sizeof(test_hmac) / sizeof(testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "Hi There";
     a.output = "\x92\x94\x72\x7a\x36\x38\xbb\x1c\x13\xf4\x8e\xf8\x15\x8b\xfc"
@@ -442,6 +477,7 @@ void hmac_md5_test(void)
 
     appData.hmac_md5_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, MD5, (byte*)keys[i], (word32)strlen(keys[i]));
         wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
@@ -451,6 +487,8 @@ void hmac_md5_test(void)
         if (memcmp(hash, test_hmac[i].output, MD5_DIGEST_SIZE) == 0)
             appData.hmac_md5_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.hmac_md5_timing = hashStop - hashStart;
 }
 #endif /* NO_HMAC && NO_MD5 */
 
@@ -473,6 +511,8 @@ void hmac_sha_test(void)
     testVector test_hmac[3];
 
     int times = sizeof(test_hmac) / sizeof(testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "Hi There";
     a.output = "\xb6\x17\x31\x86\x55\x05\x72\x64\xe2\x8b\xc0\xb6\xfb\x37\x8c"
@@ -501,6 +541,7 @@ void hmac_sha_test(void)
 
     appData.hmac_sha_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA, (byte*)keys[i], (word32)strlen(keys[i]));
         wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
@@ -510,6 +551,8 @@ void hmac_sha_test(void)
         if (memcmp(hash, test_hmac[i].output, SHA_DIGEST_SIZE) == 0)
             appData.hmac_sha_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.hmac_sha_timing = hashStop - hashStart;
 }
 #endif /* NO_HMAC && NO_SHA */
 
@@ -532,6 +575,8 @@ void hmac_sha256_test(void)
     testVector test_hmac[3];
 
     int times = sizeof(test_hmac) / sizeof(testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "Hi There";
     a.output = "\xb0\x34\x4c\x61\xd8\xdb\x38\x53\x5c\xa8\xaf\xce\xaf\x0b\xf1"
@@ -563,6 +608,7 @@ void hmac_sha256_test(void)
 
     appData.hmac_sha256_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA256, (byte*)keys[i], (word32)strlen(keys[i]));
         wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
@@ -572,6 +618,8 @@ void hmac_sha256_test(void)
         if (memcmp(hash, test_hmac[i].output, SHA256_DIGEST_SIZE) == 0)
             appData.hmac_sha256_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.hmac_sha256_timing = hashStop - hashStart;
 }
 #endif /* NO_HMAC && NO_SHA256 */
 
@@ -594,6 +642,8 @@ void hmac_sha384_test(void)
     testVector test_hmac[3];
 
     int times = sizeof(test_hmac) / sizeof(testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "Hi There";
     a.output = "\xaf\xd0\x39\x44\xd8\x48\x95\x62\x6b\x08\x25\xf4\xab\x46\x90"
@@ -628,6 +678,7 @@ void hmac_sha384_test(void)
 
     appData.hmac_sha384_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA384, (byte*)keys[i], (word32)strlen(keys[i]));
         wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
@@ -637,6 +688,8 @@ void hmac_sha384_test(void)
         if (memcmp(hash, test_hmac[i].output, SHA384_DIGEST_SIZE) == 0)
             appData.hmac_sha384_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.hmac_sha384_timing = hashStop - hashStart;
 }
 #endif /* NO_HMAC && WOLFSSL_SHA384 */
 
@@ -659,6 +712,8 @@ void hmac_sha512_test(void)
     testVector test_hmac[3];
 
     int times = sizeof(test_hmac) / sizeof(testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     a.input  = "Hi There";
     a.output = "\x87\xaa\x7c\xde\xa5\xef\x61\x9d\x4f\xf0\xb4\x24\x1a\x1d\x6c"
@@ -696,6 +751,7 @@ void hmac_sha512_test(void)
 
     appData.hmac_sha512_test_result = times;
     
+    hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
         wc_HmacSetKey(&hmac, SHA512, (byte*)keys[i], (word32)strlen(keys[i]));
         wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
@@ -705,6 +761,8 @@ void hmac_sha512_test(void)
         if (memcmp(hash, test_hmac[i].output, SHA512_DIGEST_SIZE) == 0)
             appData.hmac_sha512_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.hmac_sha512_timing = hashStop - hashStart;
 }
 #endif /* NO_HMAC && WOLFSSL_SHA512 */
 
@@ -723,8 +781,11 @@ void ecc_test(void)
     ecc_key userA, userB, pubKey;
 
     appData.ecc_test_result = 12;
+    uint32_t hashStart;
+    uint32_t hashStop;
     
     ret = CRYPT_RNG_Initialize(&rng);
+    hashStart = APP_getTicks();
     if (ret == 0)
         appData.ecc_test_result--;
 
@@ -796,6 +857,8 @@ void ecc_test(void)
     wc_ecc_free(&pubKey);
     wc_ecc_free(&userB);
     wc_ecc_free(&userA);
+    hashStop = APP_getTicks();
+    appData.ecc_timing = hashStop - hashStart;
 }
 #endif  /* HAVE_ECC */
 
@@ -804,9 +867,12 @@ void random_test(void)
     CRYPT_RNG_CTX  rng;
     byte block[32];
     int ret;
+    uint32_t hashStart;
+    uint32_t hashStop;
 
     appData.random_test_result = 1;
 
+    hashStart = APP_getTicks();
     ret = CRYPT_RNG_Initialize(&rng);
     if (ret == 0) 
     {
@@ -814,6 +880,8 @@ void random_test(void)
         if (ret == 0) 
             appData.random_test_result--;
     }
+    hashStop = APP_getTicks();
+    appData.random_timing = hashStop - hashStart;
 }
 
 #ifndef NO_AES
@@ -838,10 +906,15 @@ void aes_test(void)
 
     byte cipher[AES_BLOCK_SIZE * 4];
     byte plain [AES_BLOCK_SIZE * 4];
+    int numCbcSubTests = 2;
+    uint32_t hashStart;
+    uint32_t hashStop;
+
+    hashStart = APP_getTicks();
 
     /* The above const allocates in RAM, but does not flush out of cache. Copy
        it back out so it is in physical memory. */
-#if defined(HW_CRYPTO)
+   #if defined(HW_CRYPTO)
     SYS_DEVCON_DataCacheFlush();
 #endif
     CRYPT_AES_KeySet(&enc, key, AES_BLOCK_SIZE, iv, AES_ENCRYPTION);
@@ -850,7 +923,6 @@ void aes_test(void)
     CRYPT_AES_CBC_Encrypt(&enc, cipher, msg,   AES_BLOCK_SIZE);
     CRYPT_AES_CBC_Decrypt(&dec, plain, verify, AES_BLOCK_SIZE);
 
-    int numCbcSubTests = 2;
     appData.aes_cbc_test_result = numCbcSubTests;
 
     if (!(memcmp(plain, msg, AES_BLOCK_SIZE)))
@@ -858,6 +930,8 @@ void aes_test(void)
 
     if (!(memcmp(cipher, verify, AES_BLOCK_SIZE)))
         appData.aes_cbc_test_result--;
+    hashStop = APP_getTicks();
+    appData.aes_cbc_timing = hashStop - hashStart;
 
 #ifdef WOLFSSL_AES_COUNTER
     {
@@ -897,6 +971,7 @@ void aes_test(void)
             0x79,0x21,0x70,0xa0,0xf3,0x00,0x9c,0xee
         };
 
+        hashStart = APP_getTicks();
         CRYPT_AES_KeySet(&enc, ctrKey, AES_BLOCK_SIZE, ctrIv, AES_ENCRYPTION);
         /* Ctr only uses encrypt, even on key setup */
         CRYPT_AES_KeySet(&dec, ctrKey, AES_BLOCK_SIZE, ctrIv, AES_ENCRYPTION);
@@ -917,6 +992,9 @@ void aes_test(void)
 
         if (!(memcmp(cipher, ctrCipher, AES_BLOCK_SIZE*4)))
             appData.aes_ctr_test_result--;
+    
+        hashStop = APP_getTicks();
+        appData.aes_ctr_timing = hashStop - hashStart;
     }
 #endif /* WOLFSSL_AES_COUNTER */
 }
@@ -1014,7 +1092,10 @@ void compress_test(void)
     
     c = calloc(cSz, sizeof(byte));
     d = calloc(dSz, sizeof(byte));
+    uint32_t hashStart;
+    uint32_t hashStop;
 
+    hashStart = APP_getTicks();
     appData.compress_test_result = numSubTests;
     
     if (c != NULL && d != NULL)
@@ -1044,6 +1125,8 @@ void compress_test(void)
     
     if (c) free(c);
     if (d) free(d);
+    hashStop = APP_getTicks();
+    appData.compress_timing = hashStop - hashStart;
 }
 
 #endif /* HAVE_LIBZ */
@@ -1080,6 +1163,8 @@ void des_test(void)
         0x15,0x85,0xb3,0x22,0x4b,0x86,0x2b,0x4b
     };
 
+    uint32_t hashStart;
+    uint32_t hashStop;
     int numSubTests = 2;
     
     /* The above const allocates in RAM, but does not flush out of cache. Copy
@@ -1089,6 +1174,7 @@ void des_test(void)
 #endif
 
 
+    hashStart = APP_getTicks();
     appData.des_test_result = numSubTests;
 
     wc_Des_SetKey(&enc, key, iv, DES_ENCRYPTION);
@@ -1101,6 +1187,9 @@ void des_test(void)
     
     if (!(memcmp(gen_ct, exp_ct, sizeof(gen_ct))))
         appData.des_test_result--;
+    
+    hashStop = APP_getTicks();
+    appData.des_timing = hashStop - hashStart;
 }
 #endif /* !NO_DES3 */
 
@@ -1142,9 +1231,12 @@ void des3_test(void)
     };
     
     int numSubTests = 2;
+    uint32_t hashStart;
+    uint32_t hashStop;
     
     appData.des3_test_result = numSubTests;
     
+    hashStart = APP_getTicks();
     /* The above const allocates in RAM, but does not flush out of cache. Copy
        it back out so it is in physical memory. */
 #if defined(HW_CRYPTO)
@@ -1160,6 +1252,9 @@ void des3_test(void)
 
     if (!(memcmp(cipher, verify3, sizeof(cipher))))
         appData.des3_test_result--;
+
+    hashStop = APP_getTicks();
+    appData.des3_timing = hashStop - hashStart;
 }
 #endif /* !NO_DES3 */
 
@@ -1228,7 +1323,10 @@ void rsa_test(void)
 #endif
     
     appData.rsa_test_result = 9;
+    uint32_t hashStart;
+    uint32_t hashStop;
         
+    hashStart = APP_getTicks();
     tmp = (byte*)malloc(FOURK_BUF);
     if (tmp != NULL)
         appData.rsa_test_result--;
@@ -1371,8 +1469,7 @@ void rsa_test(void)
 #endif /* WOLFSSL_KEY_GEN */
 
 
-#ifdef WOLFSSL_CERT_GEN
-    /* self signed */
+#ifdef WOLFSSL_CERT_GEN    /* self signed */
     {
         Cert        myCert;
         byte*       derCert;
@@ -1447,7 +1544,7 @@ void rsa_test(void)
         int         pemSz;
         size_t      bytes3;
         word32      idx3 = 0;
-			  FILE* file3 ;
+        FILE*       file3 ;
 #ifdef WOLFSSL_TEST_CERT
         DecodedCert decode;
 #endif
@@ -1536,7 +1633,7 @@ void rsa_test(void)
         int         pemSz;
         size_t      bytes3;
         word32      idx3 = 0;
-			  FILE* file3 ;
+        FILE*       file3 ;
 #ifdef WOLFSSL_TEST_CERT
         DecodedCert decode;
 #endif
@@ -1741,6 +1838,9 @@ void rsa_test(void)
     RsaFreeCavium(&key);
 #endif
     free(tmp);
+
+    hashStop = (uint32_t) APP_getTicks();
+    appData.rsa_timing = hashStop - hashStart;
 }
 #endif /* !NO_RSA */
 
@@ -1782,7 +1882,6 @@ char *msgBuffer = "\r\n Application created " __DATE__ " " __TIME__ " initialize
 void APP_Initialize(void) {
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
-
 }
 
 /******************************************************************************
@@ -1804,7 +1903,6 @@ void APP_Tasks(void) {
             // SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
             // SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
             // SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
-
             appData.state = APP_STATE_TEST_MD5;
             break;
         }
@@ -1948,89 +2046,107 @@ void APP_Tasks(void) {
         case APP_STATE_DISPLAY_RESULTS:
 #ifndef NO_MD5
             sprintf(printBuffer, "%s\n\rMD5 test:          %s", 
-                    printBuffer, (appData.md5_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.md5_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.md5_timing);
 #endif
 
 #ifndef NO_SHA
             sprintf(printBuffer, "%s\n\rSHA test:          %s", 
-                    printBuffer, (appData.sha_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.sha_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha_timing);
 #endif
 
 #ifndef NO_SHA256
             sprintf(printBuffer, "%s\n\rSHA256 test:       %s", 
-                    printBuffer, (appData.sha256_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.sha256_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha256_timing);
 #endif
 
 #ifdef WOLFSSL_SHA384
             sprintf(printBuffer, "%s\n\rSHA384 test:       %s", 
-                    printBuffer, (appData.sha384_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.sha384_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha384_timing);
 #endif
 
 #ifdef WOLFSSL_SHA512
             sprintf(printBuffer, "%s\n\rSHA512 test:       %s", 
-                    printBuffer, (appData.sha512_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.sha512_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha512_timing);
 #endif
 
 #if !defined(NO_HMAC) && !defined(NO_MD5)
             sprintf(printBuffer, "%s\n\rHMAC_MD5 test:     %s", 
-                    printBuffer, (appData.hmac_md5_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.hmac_md5_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_md5_timing);
 #endif
 
 #if !defined(NO_HMAC) && !defined(NO_SHA)
             sprintf(printBuffer, "%s\n\rHMAC_SHA test:     %s", 
-                    printBuffer, (appData.hmac_sha_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.hmac_sha_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha_timing);
 #endif
 
 #if !defined(NO_HMAC) && !defined(NO_SHA256)
             sprintf(printBuffer, "%s\n\rHMAC_SHA256 test:  %s", 
-                    printBuffer, (appData.hmac_sha256_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.hmac_sha256_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha256_timing);
 #endif
 
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
             sprintf(printBuffer, "%s\n\rHMAC_SHA384 test:  %s", 
-                    printBuffer, (appData.hmac_sha384_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.hmac_sha384_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha384_timing);
 #endif
 
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
             sprintf(printBuffer, "%s\n\rHMAC_SHA512 test:  %s", 
-                    printBuffer, (appData.hmac_sha512_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.hmac_sha512_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha512_timing);
 #endif
 
 #ifdef HAVE_ECC
             sprintf(printBuffer, "%s\n\rECC test:          %s", 
-                    printBuffer, (appData.ecc_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.ecc_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.ecc_timing);
 #endif
 #ifndef NO_RNG_TEST
             sprintf(printBuffer, "%s\n\rRANDOM test:       %s", 
-                    printBuffer, (appData.random_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.random_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.random_timing);
 #endif
 #ifndef NO_AES
             sprintf(printBuffer, "%s\n\rAES CBC test:      %s", 
-                    printBuffer, (appData.aes_cbc_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.aes_cbc_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_cbc_timing);
 #ifdef WOLFSSL_AES_COUNTER
             sprintf(printBuffer, "%s\n\rAES CTR test:      %s", 
-                     printBuffer, (appData.aes_ctr_test_result==expectedResult?"Pass":"Fail"));
+                     printBuffer, (appData.aes_ctr_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_ctr_timing);
 #endif                    
 #endif
 
 #ifdef HAVE_LIBZ
             sprintf(printBuffer, "%s\n\rCOMPRESS test:     %s", 
-                    printBuffer, (appData.compress_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.compress_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.compress_timing);
 #endif
 
 #ifndef NO_DES3
             sprintf(printBuffer, "%s\n\rDES test:          %s", 
-                    printBuffer, (appData.des_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.des_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.des_timing);
 #endif
 
 #ifndef NO_DES3
             sprintf(printBuffer, "%s\n\rDES3 test:         %s", 
-                    printBuffer, (appData.des3_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.des3_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.des3_timing);
 #endif
 
 #ifndef NO_RSA
             sprintf(printBuffer, "%s\n\rRSA test:          %s", 
-                    printBuffer, (appData.rsa_test_result==expectedResult?"Pass":"Fail"));
+                    printBuffer, (appData.rsa_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.rsa_timing);
 #endif
 
             appData.state = APP_STATE_CHECK_RESULTS;
@@ -2098,12 +2214,17 @@ void APP_Tasks(void) {
             ) 
             {
                 /* We had an error during comparisons */
-                sprintf(printBuffer, "%s\n\rOne or more tests failed\n\r", printBuffer);
+                sprintf(printBuffer, "%s\n\rOne or more tests FAILED\n\r", printBuffer);
             } else {
                 sprintf(printBuffer, "%s\n\rAll tests passed\n\r", printBuffer);
             }
             SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
             appData.state = APP_SPIN;
+            break;
+
+        case APP_STATE_WAIT_FOR_CONSOLE:
+            if (appData.wallTime <= APP_getTicks())
+                appData.state = APP_STATE_DISPLAY_RESULTS;
             break;
 
         case APP_SPIN:

@@ -68,7 +68,7 @@ typedef enum
 {
     /* Application's state machine's initial state. */
     APP_STATE_INIT=0,
-	APP_STATE_TEST_MD5,
+    APP_STATE_TEST_MD5,
     APP_STATE_TEST_SHA,        
     APP_STATE_TEST_SHA256,
     APP_STATE_TEST_SHA384,
@@ -84,7 +84,7 @@ typedef enum
     APP_STATE_TEST_RSA,
     APP_STATE_TEST_RANDOM,
     APP_STATE_TEST_ECC,
-    APP_STATE_TEST_COMPRESS,            
+    APP_STATE_TEST_COMPRESS,
     APP_STATE_DISPLAY_RESULTS,
     APP_STATE_WAIT_FOR_CONSOLE,
     APP_STATE_CHECK_RESULTS,
@@ -112,24 +112,59 @@ typedef struct
     bool wrComplete;
     bool rdComplete;
 
-	int md5_test_result;
+    int md5_test_result;
+    uint32_t md5_timing;
+
     int sha_test_result;
+    uint32_t sha_timing;
+
     int sha256_test_result;
+    uint32_t sha256_timing;
+
     int sha384_test_result;
+    uint32_t sha384_timing;
+
     int sha512_test_result; 
+    uint32_t sha512_timing;
+
     int hmac_md5_test_result;
+    uint32_t hmac_md5_timing;
+
     int hmac_sha_test_result;
+    uint32_t hmac_sha_timing;
+
     int hmac_sha256_test_result;
+    uint32_t hmac_sha256_timing;
+
     int hmac_sha384_test_result;
+    uint32_t hmac_sha384_timing;
+
     int hmac_sha512_test_result;
+    uint32_t hmac_sha512_timing;
+
     int des_test_result;
+    uint32_t des_timing;
+
     int des3_test_result;
+    uint32_t des3_timing;
+
     int aes_cbc_test_result;
+    uint32_t aes_cbc_timing;
+
     int aes_ctr_test_result;
+    uint32_t aes_ctr_timing;
+
     int rsa_test_result;
+    uint32_t rsa_timing;
+
     int random_test_result;
+    uint32_t random_timing;
+
     int ecc_test_result;
+    uint32_t ecc_timing;
+
     int compress_test_result;
+    uint32_t compress_timing;
 
     int32_t wallTime;
 } APP_DATA;
