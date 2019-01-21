@@ -30,7 +30,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "crypto/src/logging.h"
 #include "app.h"
 #include "crypto/src/md5.h"
 #include "crypto/src/sha.h"

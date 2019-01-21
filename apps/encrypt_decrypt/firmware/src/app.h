@@ -251,7 +251,6 @@ void APP_Initialize ( void );
 void APP_Tasks( void );
 
 
-
 #endif /* _APP_H */
 
 //DOM-IGNORE-BEGIN
