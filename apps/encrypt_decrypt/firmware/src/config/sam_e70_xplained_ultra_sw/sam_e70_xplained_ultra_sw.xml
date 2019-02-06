@@ -5,44 +5,46 @@
     <UniqueComponent dnOrder="1" id="cmsis"/>
     <UniqueComponent dnOrder="2" id="core">
       <Symbols dnOrder="0">
-        <Combo dnOrder="0" id="COMPONENT_PACKAGE">
+        <KeyValueSet dnOrder="0" id="COMPILER_CHOICE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <Combo dnOrder="1" id="COMPONENT_PACKAGE">
           <Values dnOrder="0">
             <User dnOrder="0" value="LQFP144"/>
           </Values>
         </Combo>
-        <KeyValueSet dnOrder="1" id="DEVICE_BOOT">
+        <KeyValueSet dnOrder="2" id="DEVICE_BOOT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="core" priority="1" value="1"/>
             </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="2" id="DEVICE_SECURITY">
+        <KeyValueSet dnOrder="3" id="DEVICE_SECURITY">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="core" priority="1" value="0"/>
             </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="3" id="DEVICE_TCM_SIZE">
+        <KeyValueSet dnOrder="4" id="DEVICE_TCM_SIZE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="core" priority="1" value="0"/>
             </Dynamic>
           </Values>
         </KeyValueSet>
-        <String dnOrder="4" id="EEFC_FMR_FWS">
+        <String dnOrder="5" id="EEFC_FMR_FWS">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="core" priority="1" value="6"/>
             </Dynamic>
           </Values>
         </String>
-        <Integer dnOrder="5" id="HEAP_SIZE">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="38000"/>
-          </Values>
-        </Integer>
         <Boolean dnOrder="6" id="NVIC_-1_0_ENABLE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
@@ -4450,7 +4452,14 @@
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="8" id="ENABLE_SYS_COMMON">
+        <Boolean dnOrder="8" id="ENABLE_SYS_CACHE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="HarmonyCore" priority="1" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="9" id="ENABLE_SYS_COMMON">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="sys_console" priority="2" value="true"/>
@@ -4458,105 +4467,105 @@
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="9" id="ENABLE_SYS_INT">
+        <Boolean dnOrder="10" id="ENABLE_SYS_INT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="HarmonyCore" priority="1" value="true"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Menu dnOrder="10" id="GEN_APP_TASK_MENU">
+        <Menu dnOrder="11" id="GEN_APP_TASK_MENU">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Menu>
-        <File dnOrder="11" id="INT_DEF">
+        <File dnOrder="12" id="INT_DEF">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="12" id="INT_HEADER">
+        <File dnOrder="13" id="INT_HEADER">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="13" id="INT_MAPPING">
+        <File dnOrder="14" id="INT_MAPPING">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="14" id="INT_SOURCE">
+        <File dnOrder="15" id="INT_SOURCE">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="15" id="OSAL_DEFINITIONS_H">
+        <File dnOrder="16" id="OSAL_DEFINITIONS_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="16" id="OSAL_H">
+        <File dnOrder="17" id="OSAL_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="17" id="OSAL_SYSDEF_H">
+        <File dnOrder="18" id="OSAL_SYSDEF_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <Combo dnOrder="18" id="SELECT_RTOS">
+        <Combo dnOrder="19" id="SELECT_RTOS">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="HarmonyCore" priority="2" value="BareMetal"/>
             </Dynamic>
           </Values>
         </Combo>
-        <File dnOrder="19" id="SYSTEM_COMMON">
+        <File dnOrder="20" id="SYSTEM_COMMON">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="20" id="SYSTEM_MODULE">
+        <File dnOrder="21" id="SYSTEM_MODULE">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="21" id="SYSTEM_ROOT">
+        <File dnOrder="22" id="SYSTEM_ROOT">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="22" id="TASKS_C">
+        <File dnOrder="23" id="TASKS_C">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="23" id="USER_H">
+        <File dnOrder="24" id="USER_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
@@ -4574,19 +4583,47 @@
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="1" id="aes_same70_c">
+        <File dnOrder="1" id="crypt_aes_sam6149_c">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <Boolean dnOrder="2" id="cryptoCipher3DES">
+        <File dnOrder="2" id="crypt_rng_sam6334_c">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="3" id="crypt_sha1_sam11105_c">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="4" id="crypt_sha256_sam11105_c">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="5" id="crypt_sha_hw_h">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <Boolean dnOrder="6" id="cryptoCipher3DES">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="3" id="cryptoCipherAES_CBC">
+        <Boolean dnOrder="7" id="cryptoCipherAES_CBC">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;CBC</Value>
@@ -4596,7 +4633,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="4" id="cryptoCipherAES_CTR">
+        <Boolean dnOrder="8" id="cryptoCipherAES_CTR">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;CTR</Value>
@@ -4606,7 +4643,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="5" id="cryptoCipherAES_ECB">
+        <Boolean dnOrder="9" id="cryptoCipherAES_ECB">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;ECB</Value>
@@ -4616,7 +4653,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="6" id="cryptoCipherAES_GCM">
+        <Boolean dnOrder="10" id="cryptoCipherAES_GCM">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;GCM</Value>
@@ -4626,37 +4663,32 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="7" id="cryptoCipherECC">
+        <Boolean dnOrder="11" id="cryptoCipherECC">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="8" id="cryptoCipherRSA">
+        <Boolean dnOrder="12" id="cryptoCipherRSA">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="9" id="cryptoHW">
+        <Boolean dnOrder="13" id="cryptoHW">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="10" id="cryptoHashHMAC">
+        <Boolean dnOrder="14" id="cryptoHashHMAC">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="11" id="cryptoHashMD5">
-          <Attributes dnOrder="0">
-            <String dnOrder="0" id="label">
-              <Value dnOrder="0">Hash&amp;#160;-&amp;#160;MD5</Value>
-            </String>
-          </Attributes>
-          <Values dnOrder="1">
+        <Boolean dnOrder="15" id="cryptoHashMD5">
+          <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="12" id="cryptoHashSHA1">
+        <Boolean dnOrder="16" id="cryptoHashSHA1">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-1</Value>
@@ -4666,7 +4698,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="13" id="cryptoHashSHA256">
+        <Boolean dnOrder="17" id="cryptoHashSHA256">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-256</Value>
@@ -4676,36 +4708,29 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="14" id="cryptoHashSHA384">
+        <Boolean dnOrder="18" id="cryptoHashSHA384">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="15" id="cryptoHashSHA512">
+        <Boolean dnOrder="19" id="cryptoHashSHA512">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="16" id="cryptoHuffman">
+        <Boolean dnOrder="20" id="cryptoHuffman">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="17" id="cryptoIsWolfsslEnabled">
+        <Boolean dnOrder="21" id="cryptoIsWolfsslEnabled">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="lib_crypto" priority="1" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="18" id="cryptoMicrochip">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0">
-              <Value dnOrder="0" id="lib_crypto" priority="1" value="true"/>
-            </Dynamic>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="19" id="cryptoRandom">
+        <Boolean dnOrder="22" id="cryptoRandom">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">TRNG</Value>
@@ -4715,48 +4740,6 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <File dnOrder="20" id="random_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="21" id="same70-hash_h">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="22" id="sha256_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="23" id="sha256_same70_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="24" id="sha_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="25" id="sha_same70_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
       </Symbols>
     </UniqueComponent>
     <UniqueComponent dnOrder="6" id="sys_console">
@@ -4913,111 +4896,111 @@
             </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="12" id="TC0_NVIC_ENABLE_COMMENT">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </Comment>
-        <Comment dnOrder="13" id="TC0_Resolution">
+        <Comment dnOrder="12" id="TC0_Resolution">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Clock&amp;#160;resolution&amp;#160;is&amp;#160;6.66666666667&amp;#160;nS****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Boolean dnOrder="14" id="TC0_SYS_TIME_CONNECTED">
+        <Boolean dnOrder="13" id="TC0_SYS_TIME_CONNECTED">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="true"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="15" id="TC0_TIMER_PERIOD_CMT">
+        <Comment dnOrder="14" id="TC0_TIMER_PERIOD_CMT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Period&amp;#160;Count&amp;#160;is&amp;#160;60000****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Integer dnOrder="16" id="TC0_TIMER_PERIOD_COUNT">
+        <Long dnOrder="15" id="TC0_TIMER_PERIOD_COUNT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="60000"/>
             </Dynamic>
           </Values>
-        </Integer>
-        <Float dnOrder="17" id="TC0_TIMER_PERIOD_MS">
+        </Long>
+        <Float dnOrder="16" id="TC0_TIMER_PERIOD_MS">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </Float>
-        <Boolean dnOrder="18" id="TC1_ENABLE">
+        <Boolean dnOrder="17" id="TC1_ENABLE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="19" id="TC1_SYS_TIME_CONNECTED">
+        <Boolean dnOrder="18" id="TC1_SYS_TIME_CONNECTED">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="20" id="TC1_TIMER_PERIOD_CMT">
+        <Comment dnOrder="19" id="TC1_TIMER_PERIOD_CMT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Period&amp;#160;Count&amp;#160;is&amp;#160;60000****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Integer dnOrder="21" id="TC1_TIMER_PERIOD_COUNT">
+        <Long dnOrder="20" id="TC1_TIMER_PERIOD_COUNT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="60000"/>
             </Dynamic>
           </Values>
-        </Integer>
-        <Boolean dnOrder="22" id="TC2_ENABLE">
+        </Long>
+        <Boolean dnOrder="21" id="TC2_ENABLE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="23" id="TC2_SYS_TIME_CONNECTED">
+        <Boolean dnOrder="22" id="TC2_SYS_TIME_CONNECTED">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="24" id="TC2_TIMER_PERIOD_CMT">
+        <Comment dnOrder="23" id="TC2_TIMER_PERIOD_CMT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Period&amp;#160;Count&amp;#160;is&amp;#160;60000****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Integer dnOrder="25" id="TC2_TIMER_PERIOD_COUNT">
+        <Long dnOrder="24" id="TC2_TIMER_PERIOD_COUNT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="60000"/>
             </Dynamic>
           </Values>
-        </Integer>
-        <Integer dnOrder="26" id="TC3_CLOCK_FREQ">
+        </Long>
+        <Integer dnOrder="25" id="TC3_CLOCK_FREQ">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="tc0" priority="2" value="32000"/>
             </Dynamic>
           </Values>
         </Integer>
+        <Boolean dnOrder="26" id="TC3_PCK7">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
         <String dnOrder="27" id="TIMER_START_API_NAME">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
@@ -5076,20 +5059,20 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="BSP_SAM_E70_Xplained_Ultra" x="488" y="41"/>
-        <ElementPosition dnOrder="1" id="HarmonyCore" x="121" y="128"/>
+        <ElementPosition dnOrder="0" id="BSP_SAM_E70_Xplained_Ultra" x="463" y="17"/>
+        <ElementPosition dnOrder="1" id="HarmonyCore" x="452" y="85"/>
         <ElementPosition dnOrder="2" id="cmsis" x="120" y="19"/>
         <ElementPosition dnOrder="3" id="core" x="20" y="22"/>
         <ElementPosition dnOrder="4" id="dfp" x="260" y="20"/>
-        <ElementPosition dnOrder="5" id="lib_crypto" x="68" y="321"/>
-        <ElementPosition dnOrder="6" id="sys_console" x="347" y="167"/>
-        <ElementPosition dnOrder="7" id="sys_time" x="593" y="167"/>
-        <ElementPosition dnOrder="8" id="tc0" x="720" y="20"/>
-        <ElementPosition dnOrder="9" id="usart1" x="881" y="18"/>
+        <ElementPosition dnOrder="5" id="lib_crypto" x="449" y="246"/>
+        <ElementPosition dnOrder="6" id="sys_console" x="239" y="62"/>
+        <ElementPosition dnOrder="7" id="sys_time" x="242" y="195"/>
+        <ElementPosition dnOrder="8" id="tc0" x="18" y="241"/>
+        <ElementPosition dnOrder="9" id="usart1" x="19" y="84"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

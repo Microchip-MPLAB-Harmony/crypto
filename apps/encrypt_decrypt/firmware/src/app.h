@@ -81,6 +81,7 @@ typedef enum
     APP_STATE_TEST_DES,
     APP_STATE_TEST_DES3,
     APP_STATE_TEST_AES,
+    APP_STATE_TEST_AES_GCM,        
     APP_STATE_TEST_RSA,
     APP_STATE_TEST_RANDOM,
     APP_STATE_TEST_ECC,
@@ -154,6 +155,9 @@ typedef struct
     int aes_ctr_test_result;
     uint32_t aes_ctr_timing;
 
+    int aes_gcm_test_result;
+    uint32_t aes_gcm_timing;
+    
     int rsa_test_result;
     uint32_t rsa_timing;
 

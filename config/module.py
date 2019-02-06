@@ -28,5 +28,4 @@ def loadModule():
                                              "/Libraries/", "config/crypto.py")
     cryptoComponent.addCapability("lib_crypto", "LIB_CRYPTO")
 
-    if Peripheral.moduleExists("TRNG"):
-        cryptoComponent.addDependency("LIB_CRYPTO_Dependency", "TRNG")
+    cryptoComponent.addDependency("LIB_CRYPTO_TIME_Dependency", "SYS_TIME", True, True)

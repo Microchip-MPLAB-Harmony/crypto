@@ -45,6 +45,8 @@
 // *****************************************************************************
 #include "configuration.h"
 #include "definitions.h"
+#include "device.h"
+
 
 
 // ****************************************************************************
@@ -83,6 +85,7 @@
 
 
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Driver Initialization Data
@@ -97,6 +100,7 @@
 // *****************************************************************************
 /* Structure to hold the object handles for the modules in the system. */
 SYSTEM_OBJECTS sysObj;
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Library/Stack Initialization Data
@@ -126,6 +130,16 @@ const SYS_CONSOLE_UART_PLIB_INTERFACE sysConsole0UARTPlibAPI =
     .errorGet = (SYS_CONSOLE_UART_PLIB_ERROR_GET)USART1_ErrorGet,
 };
 
+
+const SYS_CONSOLE_UART_INTERRUPT_SOURCES sysConsole0UARTInterruptSources =
+{
+    /* Peripheral has single interrupt vector */
+    .isSingleIntSrc                        = true,
+
+    /* Peripheral interrupt line */
+    .intSources.usartInterrupt             = USART1_IRQn,
+};
+
 const SYS_CONSOLE_UART_INIT_DATA sysConsole0UARTInitData =
 {
     .uartPLIB = &sysConsole0UARTPlibAPI,
@@ -133,7 +147,7 @@ const SYS_CONSOLE_UART_INIT_DATA sysConsole0UARTInitData =
     .writeQueueElementsArr = sysConsole0UARTWrQueueElements,
     .readQueueDepth = SYS_CONSOLE_UART_RD_QUEUE_DEPTH_IDX0,
     .writeQueueDepth = SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0,
-    .interruptSource = USART1_IRQn,
+    .interruptSources = &sysConsole0UARTInterruptSources,
 };
 
 const SYS_CONSOLE_INIT sysConsole0Init =
@@ -167,6 +181,7 @@ const SYS_TIME_INIT sysTimeInitData =
 // </editor-fold>
 
 
+
 /*******************************************************************************
   Function:
     void SYS_Initialize ( void *data )
@@ -179,12 +194,12 @@ const SYS_TIME_INIT sysTimeInitData =
 
 void SYS_Initialize ( void* data )
 {
+  
     CLK_Initialize();
 	PIO_Initialize();
 
 
 	BSP_Initialize();
-    NVIC_Initialize();
 	RSWDT_REGS->RSWDT_MR = RSWDT_MR_WDDIS_Msk;	// Disable RSWDT 
 
 	WDT_REGS->WDT_MR = WDT_MR_WDDIS_Msk; 		// Disable WDT 
@@ -205,10 +220,11 @@ void SYS_Initialize ( void* data )
     APP_Initialize();
 
 
+    NVIC_Initialize();
+
 }
 
 
 /*******************************************************************************
  End of File
 */
-

@@ -112,6 +112,9 @@ void hmac_sha512_test(void);
 void random_test(void);
 #ifndef NO_AES
     void aes_test(void);
+    #ifdef HAVE_AESGCM
+        int  aesgcm_default_test(void);
+    #endif
 #endif
 #ifdef HAVE_ECC
     void  ecc_test(void);
@@ -999,6 +1002,196 @@ void aes_test(void)
 }
 
 #endif /* NO_AES */
+
+#ifdef HAVE_AESGCM
+
+static int aesgcm_default_test_helper(const byte* key, int keySz, const byte* iv, int ivSz,
+		const byte* plain, int plainSz, const byte* cipher, int cipherSz,
+		const byte* aad, int aadSz, const byte* tag, int tagSz)
+{
+    CRYPT_AES_CTX enc;
+    CRYPT_AES_CTX dec;
+
+    byte resultT[AES_BLOCK_SIZE];
+    byte resultP[AES_BLOCK_SIZE * 3];
+    byte resultC[AES_BLOCK_SIZE * 3];
+    int  result;
+
+    memset(resultT, 0, sizeof(resultT));
+    memset(resultC, 0, sizeof(resultC));
+    memset(resultP, 0, sizeof(resultP));
+
+    result = CRYPT_AES_GCM_SetKey(&enc, key, keySz);
+
+    if (result != 0)
+        return -4701;
+
+    /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+    result = CRYPT_AES_GCM_Encrypt(&enc, resultC, plain, plainSz, iv, ivSz,
+                                        resultT, tagSz, aad, aadSz);
+    
+    if (result != 0)
+        return -4702;
+    if (cipher != NULL) {
+        if (memcmp(cipher, resultC, cipherSz))
+            return -4703;
+    }
+    if (memcmp(tag, resultT, tagSz))
+        return -4704;
+
+#ifdef HAVE_AES_DECRYPT
+    result = CRYPT_AES_GCM_SetKey(&dec, key, keySz);
+    if (result != 0)
+        return -4705;
+
+    result = CRYPT_AES_GCM_Decrypt(&dec, resultP, resultC, cipherSz,
+                      iv, ivSz, resultT, tagSz, aad, aadSz);
+#if defined(WOLFSSL_ASYNC_CRYPT)
+    result = wc_AsyncWait(result, &dec.asyncDev, WC_ASYNC_FLAG_NONE);
+#endif
+    if (result != 0)
+        return -4706;
+    if (plain != NULL) {
+        if (memcmp(plain, resultP, plainSz))
+        {
+            int x = 0;
+            uint8_t errorFound = 0;
+            for (x = 0; x < plainSz; x++)
+            {
+                if (plain[x] != resultP[x])
+                {
+                    sprintf(printBuffer, "GCM Failed at byte %x first byte %x second byte %x\r\n", x, plain[x], resultP[x]);
+                    SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
+                    errorFound = 1;
+                    break;
+                }
+            }
+            if (errorFound != 0)
+            {
+                return -4707;
+            }
+        }
+    }
+
+#endif /* HAVE_AES_DECRYPT */
+
+    return 0;
+}
+
+
+/* tests that only use 12 byte IV and 16 or less byte AAD
+ * test vectors are from NIST SP 800-38D
+ * https://csrc.nist.gov/Projects/Cryptographic-Algorithm-Validation-Program/CAVP-TESTING-BLOCK-CIPHER-MODES*/
+int aesgcm_default_test(void)
+{
+     byte key1[] = {
+        0x29, 0x8e, 0xfa, 0x1c, 0xcf, 0x29, 0xcf, 0x62,
+        0xae, 0x68, 0x24, 0xbf, 0xc1, 0x95, 0x57, 0xfc
+    };
+
+     byte iv1[] = {
+        0x6f, 0x58, 0xa9, 0x3f, 0xe1, 0xd2, 0x07, 0xfa,
+        0xe4, 0xed, 0x2f, 0x6d
+    };
+
+     byte plain1[] = {
+        0xcc, 0x38, 0xbc, 0xcd, 0x6b, 0xc5, 0x36, 0xad,
+        0x91, 0x9b, 0x13, 0x95, 0xf5, 0xd6, 0x38, 0x01,
+        0xf9, 0x9f, 0x80, 0x68, 0xd6, 0x5c, 0xa5, 0xac,
+        0x63, 0x87, 0x2d, 0xaf, 0x16, 0xb9, 0x39, 0x01
+    };
+
+     byte aad1[] = {
+        0x02, 0x1f, 0xaf, 0xd2, 0x38, 0x46, 0x39, 0x73,
+        0xff, 0xe8, 0x02, 0x56, 0xe5, 0xb1, 0xc6, 0xb1
+    };
+
+     byte cipher1[] = {
+        0xdf, 0xce, 0x4e, 0x9c, 0xd2, 0x91, 0x10, 0x3d,
+        0x7f, 0xe4, 0xe6, 0x33, 0x51, 0xd9, 0xe7, 0x9d,
+        0x3d, 0xfd, 0x39, 0x1e, 0x32, 0x67, 0x10, 0x46,
+        0x58, 0x21, 0x2d, 0xa9, 0x65, 0x21, 0xb7, 0xdb
+    };
+
+     byte tag1[] = {
+        0x54, 0x24, 0x65, 0xef, 0x59, 0x93, 0x16, 0xf7,
+        0x3a, 0x7a, 0x56, 0x05, 0x09, 0xa2, 0xd9, 0xf2
+    };
+
+
+     byte key2[] = {
+        0x01, 0x6d, 0xbb, 0x38, 0xda, 0xa7, 0x6d, 0xfe,
+        0x7d, 0xa3, 0x84, 0xeb, 0xf1, 0x24, 0x03, 0x64
+    };
+
+     byte iv2[] = {
+        0x07, 0x93, 0xef, 0x3a, 0xda, 0x78, 0x2f, 0x78,
+        0xc9, 0x8a, 0xff, 0xe3
+    };
+
+     byte plain2[] = {
+        0x4b, 0x34, 0xa9, 0xec, 0x57, 0x63, 0x52, 0x4b,
+        0x19, 0x1d, 0x56, 0x16, 0xc5, 0x47, 0xf6, 0xb7
+    };
+
+     byte cipher2[] = {
+        0x60, 0x9a, 0xa3, 0xf4, 0x54, 0x1b, 0xc0, 0xfe,
+        0x99, 0x31, 0xda, 0xad, 0x2e, 0xe1, 0x5d, 0x0c
+    };
+
+     byte tag2[] = {
+        0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
+        0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
+    };
+     byte key3[] = {
+        0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
+        0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
+    };
+
+     byte iv3[] = {
+        0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
+        0x6a, 0x4b, 0xd5, 0xe1
+    };
+
+     byte tag3[] = {
+        0x01, 0x42, 0x80, 0xf9, 0x44, 0xf5, 0x3c, 0x68,
+        0x11, 0x64, 0xb2, 0xff
+    };
+    uint32_t hashStart;
+    uint32_t hashStop;
+
+    hashStart = APP_getTicks();
+        int numGcmSubTests = 3;
+
+    int ret;
+	ret = aesgcm_default_test_helper(key1, sizeof(key1), iv1, sizeof(iv1),
+		plain1, sizeof(plain1), cipher1, sizeof(cipher1),
+		aad1, sizeof(aad1), tag1, sizeof(tag1));
+	if (ret == 0) {
+		numGcmSubTests--;
+	}
+
+	ret = aesgcm_default_test_helper(key2, sizeof(key2), iv2, sizeof(iv2),
+		plain2, sizeof(plain2), cipher2, sizeof(cipher2),
+		NULL, 0, tag2, sizeof(tag2));
+	if (ret == 0) {
+		numGcmSubTests--;
+	}
+	ret = aesgcm_default_test_helper(key3, sizeof(key3), iv3, sizeof(iv3),
+		NULL, 0, NULL, 0,
+		NULL, 0, tag3, sizeof(tag3));
+	if (ret == 0) {
+		numGcmSubTests--;
+	}
+    hashStop = APP_getTicks();
+
+    appData.aes_gcm_test_result = numGcmSubTests;
+    appData.aes_gcm_timing = hashStop - hashStart;
+    
+	return 0;
+}
+
+#endif
 
 #ifdef HAVE_LIBZ
 
@@ -2007,9 +2200,18 @@ void APP_Tasks(void) {
             testCount++;
             aes_test();
 #endif
+            appData.state = APP_STATE_TEST_AES_GCM;
+            break;
+
+        case APP_STATE_TEST_AES_GCM:
+#ifdef HAVE_AESGCM
+            testCount++;
+            aesgcm_default_test();
+#endif
             appData.state = APP_STATE_TEST_COMPRESS;
             break;
-                
+            
+            
         case APP_STATE_TEST_COMPRESS:
 #ifdef HAVE_LIBZ
             testCount++;
@@ -2117,6 +2319,11 @@ void APP_Tasks(void) {
             sprintf(printBuffer, "%s\n\rAES CBC test:      %s", 
                     printBuffer, (appData.aes_cbc_test_result==expectedResult?"Pass":"FAIL"));
             sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_cbc_timing);
+#ifdef HAVE_AESGCM
+            sprintf(printBuffer, "%s\n\rAES GCM test:      %s", 
+                    printBuffer, (appData.aes_gcm_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_gcm_timing);            
+#endif
 #ifdef WOLFSSL_AES_COUNTER
             sprintf(printBuffer, "%s\n\rAES CTR test:      %s", 
                      printBuffer, (appData.aes_ctr_test_result==expectedResult?"Pass":"FAIL"));
@@ -2198,6 +2405,9 @@ void APP_Tasks(void) {
 #ifdef WOLFSSL_AES_COUNTER                    
                 expectedResult != appData.aes_ctr_test_result ||
 #endif
+#ifdef HAVE_AESGCM
+                expectedResult != appData.aes_gcm_test_result ||
+#endif                    
 #endif
 #ifdef HAVE_LIBZ
                 expectedResult != appData.compress_test_result ||

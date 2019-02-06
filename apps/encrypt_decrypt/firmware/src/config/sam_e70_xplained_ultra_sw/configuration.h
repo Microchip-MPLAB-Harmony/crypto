@@ -71,9 +71,8 @@ extern "C" {
 // Section: System Configuration
 // *****************************************************************************
 // *****************************************************************************
-#define DCACHE_CLEAN_BY_ADDR(data, size)       SCB_CleanDCache_by_Addr((uint32_t *)data, size)
-#define DCACHE_INVALIDATE_BY_ADDR(data, size)  SCB_InvalidateDCache_by_Addr((uint32_t *)data, size)
-#define DATA_CACHE_ENABLED                     true
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -98,7 +97,7 @@ extern "C" {
 #define SYS_TIME_INDEX_0                     0
 #define SYS_TIME_MAX_TIMERS                  5
 #define SYS_TIME_HW_COUNTER_WIDTH            16
-#define SYS_TIME_HW_COUNTER_PERIOD           0xFFFF
+#define SYS_TIME_HW_COUNTER_PERIOD           65535U
 #define SYS_TIME_HW_COUNTER_HALF_PERIOD		 (SYS_TIME_HW_COUNTER_PERIOD>>1)
 #define SYS_TIME_CPU_CLOCK_FREQUENCY         300000000
 #define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES      (900)
@@ -124,10 +123,24 @@ extern "C" {
 #define NO_DSA
 #define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
-#define MICROCHIP_SAME70
-#define NO_CERTS
-#define NO_PWDBASED
-#define NO_OLD_TLS
+#define WOLFSSL_IGNORE_FILE_WARN
+
+#define MICROCHIP_MPLAB_HARMONY
+#define MICROCHIP_MPLAB_HARMONY_3
+
+#define SIZEOF_LONG_LONG 8
+#define SINGLE_THREADED
+#define WOLFSSL_USER_IO
+#define NO_WRITEV
+#define NO_DEV_RANDOM
+#define NO_FILESYSTEM
+#define USE_FAST_MATH
+#define TFM_TIMING_RESISTANT
+#define USE_CERT_BUFFERS_2048
+#define WOLFSSL_AES_COUNTER
+#define HAVE_AES_ECB
+#define HAVE_AES_CBC
+#define HAVE_AESGCM
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
 #define HAVE_ECC
