@@ -1,5 +1,5 @@
 #/*****************************************************************************
-# Copyright (C) 2013-2018 Microchip Technology Inc. and its subsidiaries.
+# Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
 #
 # Microchip Technology Inc. and its subsidiaries.
 #
@@ -36,30 +36,41 @@ cryptoHwMd5Support = [["CRYPTO", "00158", "1", [], set([])] #PIC32MZ EF
                      ]
                      
 cryptoHwSha1Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
-                       ["ICM", "11105", "H", ["crypt_sha1_sam11105.c", "crypt_sha_hw.h"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20B
+                       ["ICM", "11105", "H", ["crypt_sha1_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20B
                        #["ICM", "U2010", "1.2.0", ["sha_u2010.c"], set([])], #ATSAME54P20A
-                       ["SHA", "6156", "O", [], set([])] #ATSAMA5D28
+                       ["SHA", "6156", "O", ["crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D28
                       ]
 
 cryptoHwSha224Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
+                       ["SHA", "6156", "O",
+                           ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
+                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
                       
 cryptoHwSha256Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
-                       ["ICM", "11105", "H", ["crypt_sha256_sam11105.c", "crypt_sha_hw.h"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
+                       ["ICM", "11105", "H", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        #["ICM", "U2010", "1.2.0", ["sha_u2010.c"], set([])], #ATSAME54P20A
-                       ["SHA", "6156", "O", [], set([])] #ATSAMA5D28
+                       ["SHA", "6156", "O",
+                           ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
+                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
                       
 cryptoHwSha384Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
+                       ["SHA", "6156", "O",
+                           ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
+                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
                       
 cryptoHwSha512Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
+                       ["SHA", "6156", "O",
+                           ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
+                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
 
 cryptoHwAesSupport = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
                        ["AES", "6149", "W", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])], #ATSAMV70Q20B
                        #["AES", "U2238", "2.2.0", ["aes_U2238.c"], set([])], #ATSAME54P20A
-                       ["AES", "6149", "ZB", [], set([])] #ATSAMA5D28
+                       ["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])] #ATSAMA5D28
                       ]
 
 cryptoHwDesSupport = [
@@ -82,12 +93,12 @@ cryptoWolfCryptFiles = ["aes.h", "aes.c", "arc4.c", "arc4.h", "asm.c", "asn.c", 
                         "cmac.h", "coding.c", "coding.h", "compress.c",
                         "compress.h", "curve25519.c", "crypt_rng_hw.h",
                         "curve25519.h", "des3.h", "dh.c", "dh.h", "dsa.c", 
-                        "crypt_sha1_hw.h", "crypt_sha_sam11105.h",
-                        "crypt_sha256_hw.h", "crypt_aes_hw.h", "crypt_aes_sam6149.h",
+                        "crypt_sha_sam11105.h","crypt_sha_sam6156.h",
+                        "crypt_sha_hw.h", "crypt_aes_hw.h", "crypt_aes_sam6149.h",
                         "crypt_aes_hwInt.h",
                         "dsa.h", "ecc.h", "ed25519.c", "ed25519.h", "error.c", 
                         "error-crypt.h", "fe_low_mem.c", "fe_operations.c", 
-                        "cpuid.h", "fe_operations.h",
+                        "fe_operations.h",
                         #"fe_x25519_128.i", "fe_x25519_x64.i", 
                         "fips_test.h", 
                         #"fp_mont_small.i", "fp_mul_comba_12.i", "fp_mul_comba_17.i",
@@ -166,6 +177,7 @@ cryptoWolfCryptEnabledMenuComponentsList = []
 cryptoWolfCryptDisabledMenuComponentsList = []
 
 cryptoHwSupportFound = False
+
 cryptoHwAdditionalDefines = set([])
 cryptoAdditionalHwDefines = ""
 
@@ -265,7 +277,14 @@ def instantiateComponent(cryptoComponent):
     cryptoWolfCryptEnabledMenuComponentsList.append(cryptoHashSHA1)
     if cryptoCurrentHwSha1Support[0] != "SW":
         cryptoHwMenuComponentsList.append(cryptoHashSHA1)
-
+    
+    cryptoHashSHA224 = cryptoComponent.createBooleanSymbol("cryptoHashSHA224", cryptoMenu)
+    cryptoHashSHA224.setLabel("Hash - SHA-224")
+    cryptoHashSHA224.setDescription("Enables Hashing function SHA-224")
+    cryptoHashSHA224.setDefaultValue(False)
+    cryptoWolfCryptEnabledMenuComponentsList.append(cryptoHashSHA224)
+    if cryptoCurrentHwSha224Support[0] != "SW":
+        cryptoHwMenuComponentsList.append(cryptoHashSHA224)
     
     cryptoHashSHA256 = cryptoComponent.createBooleanSymbol("cryptoHashSHA256", cryptoMenu)
     cryptoHashSHA256.setLabel("Hash - SHA-256")
@@ -336,7 +355,6 @@ def instantiateComponent(cryptoComponent):
     cryptoConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
     cryptoConfigInfo.setMarkup(True)
     cryptoConfigInfo.setType("STRING")
-    
 
     setHwEnabledMenuItems(cryptoHW.value)
     createAllFileComponents(cryptoComponent)
@@ -347,7 +365,6 @@ def setupHwSupport(cryptoComponent):
     global cryptoHwSupportFound
     global cryptoCurrentHwRngSupport
     global cryptoCurrentHwMd5Support
-    global cryptoCurrentHwSha1Support
     global cryptoCurrentHwSha1Support
     global cryptoCurrentHwSha224Support
     global cryptoCurrentHwSha256Support
@@ -491,7 +508,7 @@ def setupHwSupport(cryptoComponent):
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(ecc[4])
     #print("PMWREMOVE: additional defines: " + ", ".join(cryptoHwAdditionalDefines))
     cryptoAdditionalHwDefines.setDefaultValue(", ".join(cryptoHwAdditionalDefines))
-    
+
 def addAlwaysOnFiles(cryptoComponent):
     # add crypto.h to the crypto directory (not in src)
     includeFilename = cryptoComponent.createFileSymbol("include_filename", None)
@@ -646,7 +663,6 @@ def setFilesForHwSupport(enable):
         fc.setEnabled(enable)
     for fc in cryptoSwFileComponentsDict.values():
         fc.setEnabled(not enable)
-    
     
 def setFilesForWolfSslEnabled(enable):
     if (enable):

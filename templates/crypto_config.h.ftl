@@ -55,7 +55,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
     <#if cryptoHashSHA1 == false && cryptoCipherECC == false>
         <#lt>#define NO_SHA
-    <#elseif cryptoHaveHwSha1 == true && cryptoHW == true>
+    <#elseif cryptoHashSHA1 == true && cryptoHW == true && cryptoHaveHwSha1 == true>
         <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA1
     </#if>
     <#if cryptoCipherAES_CTR == false && cryptoCipherAES_CBC == false && cryptoCipherAES_ECB == false && cryptoCipherAES_GCM == false>
@@ -80,19 +80,32 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#if cryptoHashSHA256 == false && cryptoRandom == false>
         <#lt>#define NO_SHA256
         <#lt>#define WC_NO_RNG
-    <#elseif cryptoHW == true>
-        <#if cryptoHaveHwSha256 == true>
-            <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA256
-        </#if>
-        <#if cryptoHaveHwRng == true>
-            <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_RNG
-        </#if>
+    <#elseif cryptoHashSHA256 == true && cryptoHW == true && cryptoHaveHwSha256 == true>
+        <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA256
+        <#lt>#define CONFIG_HAVE_XDMAC
     </#if>
-    <#if cryptoHashSHA384 == true>
-        <#lt>#define WOLFSSL_SHA384
+    <#if cryptoHaveHwRng == true && cryptoRandom == true && cryptoHW == true>
+        <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_RNG
+    </#if>
+    <#if cryptoHashSHA224 == true>
+        <#lt>#define WOLFSSL_SHA224
+        <#if cryptoHW == true && cryptoHaveHwSha224 == true>
+            <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA224
+        </#if>
     </#if>
     <#if cryptoHashSHA512 == true || cryptoHashSHA384 == true>
         <#lt>#define WOLFSSL_SHA512
+        <#if cryptoHashSHA384 == true>
+            <#lt>#define WOLFSSL_SHA384
+            <#if cryptoHW == true && cryptoHaveHwSha384 == true>
+                <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA384
+            </#if>
+        </#if>
+        <#if cryptoHashSHA512 == true>
+            <#if cryptoHW == true && cryptoHaveHwSha512 == true>
+                <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA512
+            </#if>
+        </#if>
     </#if>
     <#if cryptoCipherECC == true>
         <#lt>#define HAVE_ECC
@@ -109,6 +122,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define NO_RSA
     <#else>
         <#lt>#define WOLFSSL_STATIC_RSA
+        <#lt>#define USE_CERT_BUFFERS_2048
     </#if>
     <#if cryptoHashHMAC == false && cryptoCipherECC == false>
         <#lt>#define NO_HMAC
@@ -117,8 +131,14 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define NO_DES3
     </#if>
 </#if>
+<#if cryptoCipherAES_CBC == false>
+#define NO_AES_CBC
+</#if>
 <#if cryptoCipherAES_CTR == true>
 #define WOLFSSL_AES_COUNTER
+    <#if cryptoHW == true >
+        <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_AES
+    </#if>
 </#if>
 <#if cryptoRandom == true>
 #define WOLFSSL_AES_DIRECT
@@ -130,9 +150,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define NO_RNG_TEST
 </#if>
 <#if cryptoHW == true>
-    <#list cryptAdditionalHwDefines?split(", ") as val>
-        <#lt>#define ${val}
-    </#list>
+    <#if cryptAdditionalHwDefines?has_content>
+        <#list cryptAdditionalHwDefines?split(", ") as val>
+            <#lt>#define ${val}
+        </#list>
+    </#if>
 </#if>
 <#--
 /*******************************************************************************

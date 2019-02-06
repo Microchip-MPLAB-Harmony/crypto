@@ -3,7 +3,7 @@
   <Configurator>
     <Name dnOrder="0" value="sam_e70_xplained_ultra"/>
     <Processor dnOrder="1" value="ATSAME70Q21B"/>
-    <Harmony dnOrder="2" path="../../../../Harmony3"/>
+    <Harmony dnOrder="2" path="C:\microchip\harmony\h3"/>
     <Manifest dnOrder="3">
       <Files dnOrder="0">
         <File dnOrder="0">
@@ -2060,7 +2060,7 @@
       <Setting dnOrder="0" key="CMSISPath" value=".\dev_packs\arm\CMSIS\5.4.0"/>
       <Setting dnOrder="1" key="DFPPath" value=".\dev_packs\Microchip\SAME70_DFP\3.0.3\same70b\atdf\ATSAME70Q21B.atdf"/>
       <Setting dnOrder="2" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="3" key="PackageFilter" value="bsp;core;crypto;csp;"/>
+      <Setting dnOrder="3" key="PackageFilter" value="bsp;core;crypto;csp;dev_packs;"/>
     </Settings>
   </Configurator>
 </Configuration>

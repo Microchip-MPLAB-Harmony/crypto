@@ -220,7 +220,6 @@ static const uint8_t sha_padding[SHA256_BLOCK_SIZE * 2] = {
        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-
 int wc_Sha256Final(Sha256* sha256, byte* hash)
 {
     uint32_t last;
@@ -251,8 +250,6 @@ int wc_Sha256Final(Sha256* sha256, byte* hash)
 
     return wc_InitSha256(sha256);
 }
-
-
 
 void wc_Sha256Free(Sha256* sha256)
 {

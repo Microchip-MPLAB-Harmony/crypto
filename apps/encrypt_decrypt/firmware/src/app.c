@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <inttypes.h>
 
 #include "app.h"
 #include "crypto/src/md5.h"
@@ -278,8 +279,11 @@ void sha_test(void)
         CRYPT_SHA_DataAdd(&sha, (uint8_t*)test_sha[i].input, (word32)test_sha[i].inLen);
         CRYPT_SHA_Finalize(&sha, hash);
 
-        if (memcmp(hash, test_sha[i].output, SHA_DIGEST_SIZE) == 0)
+        if (memcmp(hash, test_sha[i].output, SHA_DIGEST_SIZE) == 0) {
+            printf("\ntest_sha[%d] passed", i);
             appData.sha_test_result--;
+        }
+
     }
     hashStop = APP_getTicks();
     appData.sha_timing = hashStop - hashStart;
@@ -331,6 +335,60 @@ void sha256_test(void)
     appData.sha256_timing = hashStop - hashStart;
 }
 #endif /* NO_SHA256 */
+
+#ifdef WOLFSSL_SHA224
+void sha224_test(void)
+{
+    CRYPT_SHA256_CTX sha;
+    byte   hash[SHA224_DIGEST_SIZE];
+
+    testVector a, b;
+    testVector test_sha[2];
+    int times = sizeof(test_sha) / sizeof(struct testVector), i;
+    uint32_t hashStart;
+    uint32_t hashStop;
+
+    a.input  = "abc";
+    a.output = "\x23\x09\x7D\x22"
+               "\x34\x05\xD8\x22"
+               "\x86\x42\xA4\x77"
+               "\xBD\xA2\x55\xB3"
+               "\x2A\xAD\xBC\xE4"
+               "\xBD\xA0\xB3\xF7"
+               "\xE3\x6C\x9D\xA7";
+    a.inLen  = strlen(a.input);
+    a.outLen = SHA224_DIGEST_SIZE;
+
+    b.input  = "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
+    b.output = "\x75\x38\x8B\x16"
+               "\x51\x27\x76\xCC"
+               "\x5D\xBA\x5D\xA1"
+               "\xFD\x89\x01\x50"
+               "\xB0\xC6\x45\x5C"
+               "\xB4\xF5\x8B\x19"
+               "\x52\x52\x25\x25";
+    b.inLen  = strlen(b.input);
+    b.outLen = SHA224_DIGEST_SIZE;
+
+    test_sha[0] = a;
+    test_sha[1] = b;
+
+    CRYPT_SHA224_Initialize(&sha);
+
+    appData.sha224_test_result = times;
+    
+    hashStart = APP_getTicks();
+    for (i = 0; i < times; ++i) {
+        CRYPT_SHA224_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
+        CRYPT_SHA224_Finalize(&sha, hash);
+
+        if (memcmp(hash, test_sha[i].output, SHA224_DIGEST_SIZE) == 0)
+            appData.sha224_test_result--;
+    }
+    hashStop = APP_getTicks();
+    appData.sha224_timing = hashStop - hashStart;
+}
+#endif /* WOLFSSL_SHA224 */
 
 #ifdef WOLFSSL_SHA384
 void sha384_test(void)
@@ -504,6 +562,10 @@ void hmac_sha_test(void)
     {
         "\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b\x0b"
                                                                 "\x0b\x0b\x0b",
+//        "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
+//        "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
+//        "\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F"
+//        "\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x3A\x3B\x3C\x3D\x3E\x3F",
         "Jefe",
         "\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA\xAA"
                                                                 "\xAA\xAA\xAA"
@@ -519,6 +581,9 @@ void hmac_sha_test(void)
     a.input  = "Hi There";
     a.output = "\xb6\x17\x31\x86\x55\x05\x72\x64\xe2\x8b\xc0\xb6\xfb\x37\x8c"
                "\x8e\xf1\x46\xbe\x00";
+//    a.input  = "Sample message for keylen=blocklen";
+//    a.output = "\x5F\xD5\x96\xEE\x78\xD5\x55\x3C\x8F\xF4\xE7\x2D"
+//               "\x26\x6D\xFD\x19\x23\x66\xDA\x29";
     a.inLen  = strlen(a.input);
     a.outLen = SHA_DIGEST_SIZE;
 
@@ -778,9 +843,10 @@ void ecc_test(void)
     uint8_t    sig[1024];
     uint8_t    digest[20];
     uint8_t    exportBuf[1024];
+
     word32  x, y;
     int     i, verify, ret;
-    ecc_key userA, userB, pubKey;
+    static ecc_key userA, userB, pubKey;
 
     appData.ecc_test_result = 12;
     uint32_t hashStart;
@@ -892,6 +958,7 @@ void aes_test(void)
     CRYPT_AES_CTX enc;
     CRYPT_AES_CTX dec;
 
+#ifdef HAVE_AES_CBC
     const uint8_t msg[] = { /* "now is the time for all " w/o trailing 0 */
         0x6e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
         0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20
@@ -909,9 +976,12 @@ void aes_test(void)
     uint8_t cipher[AES_BLOCK_SIZE * 4];
     uint8_t plain [AES_BLOCK_SIZE * 4];
     int numCbcSubTests = 2;
+#endif /* HAVE_AES_CBC */
+
     uint32_t hashStart;
     uint32_t hashStop;
 
+#ifdef HAVE_AES_CBC
     hashStart = APP_getTicks();
 
     /* The above const allocates in RAM, but does not flush out of cache. Copy
@@ -934,7 +1004,8 @@ void aes_test(void)
         appData.aes_cbc_test_result--;
     hashStop = APP_getTicks();
     appData.aes_cbc_timing = hashStop - hashStart;
-
+#endif /* HAVE_AES_CBC */
+    
 #ifdef WOLFSSL_AES_COUNTER
     {
         const uint8_t ctrKey[] =
@@ -1871,10 +1942,12 @@ void des3_test(void)
 
 void rsa_test(void)
 {
+
     uint8_t*   tmp;
     size_t  uint8_ts;
     RsaKey  key;
     RNG     rng;
+
     word32 idx = 0;
     int    ret;
     uint8_t   in[] = "Everyone gets Friday off.";
@@ -2468,7 +2541,7 @@ void APP_Tasks(void) {
             /* Show Hyperterminal is working using available output functions */
             // SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
             // SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
-            // SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
+            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
             appData.state = APP_STATE_TEST_MD5;
             break;
         }
@@ -2490,10 +2563,19 @@ void APP_Tasks(void) {
             appData.state = APP_STATE_TEST_SHA256;
             break;
 
-         case APP_STATE_TEST_SHA256:
+         case APP_STATE_TEST_SHA256: 
+
 #ifndef NO_SHA256
             testCount++;
             sha256_test();
+#endif
+            appData.state = APP_STATE_TEST_SHA224;
+            break;
+
+         case APP_STATE_TEST_SHA224: 
+#ifdef WOLFSSL_SHA224
+            testCount++;
+            sha224_test();
 #endif
             appData.state = APP_STATE_TEST_SHA384;
             break;
@@ -2624,111 +2706,117 @@ void APP_Tasks(void) {
 #ifndef NO_MD5
             sprintf(printBuffer, "%s\n\rMD5 test:          %s", 
                     printBuffer, (appData.md5_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.md5_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.md5_timing);
 #endif
 
 #ifndef NO_SHA
             sprintf(printBuffer, "%s\n\rSHA test:          %s", 
                     printBuffer, (appData.sha_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.sha_timing);
 #endif
 
+#ifdef WOLFSSL_SHA224
+            sprintf(printBuffer, "%s\n\rSHA224 test:       %s", 
+                    printBuffer, (appData.sha224_test_result==expectedResult?"Pass":"FAIL"));
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.sha224_timing);
+#endif
+            
 #ifndef NO_SHA256
             sprintf(printBuffer, "%s\n\rSHA256 test:       %s", 
                     printBuffer, (appData.sha256_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha256_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.sha256_timing);
 #endif
 
 #ifdef WOLFSSL_SHA384
             sprintf(printBuffer, "%s\n\rSHA384 test:       %s", 
                     printBuffer, (appData.sha384_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha384_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.sha384_timing);
 #endif
 
 #ifdef WOLFSSL_SHA512
             sprintf(printBuffer, "%s\n\rSHA512 test:       %s", 
                     printBuffer, (appData.sha512_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.sha512_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.sha512_timing);
 #endif
 
 #if !defined(NO_HMAC) && !defined(NO_MD5)
             sprintf(printBuffer, "%s\n\rHMAC_MD5 test:     %s", 
                     printBuffer, (appData.hmac_md5_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_md5_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.hmac_md5_timing);
 #endif
 
 #if !defined(NO_HMAC) && !defined(NO_SHA)
             sprintf(printBuffer, "%s\n\rHMAC_SHA test:     %s", 
                     printBuffer, (appData.hmac_sha_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.hmac_sha_timing);
 #endif
 
 #if !defined(NO_HMAC) && !defined(NO_SHA256)
             sprintf(printBuffer, "%s\n\rHMAC_SHA256 test:  %s", 
                     printBuffer, (appData.hmac_sha256_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha256_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.hmac_sha256_timing);
 #endif
 
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA384)
             sprintf(printBuffer, "%s\n\rHMAC_SHA384 test:  %s", 
                     printBuffer, (appData.hmac_sha384_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha384_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.hmac_sha384_timing);
 #endif
 
 #if !defined(NO_HMAC) && defined(WOLFSSL_SHA512)
             sprintf(printBuffer, "%s\n\rHMAC_SHA512 test:  %s", 
                     printBuffer, (appData.hmac_sha512_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.hmac_sha512_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.hmac_sha512_timing);
 #endif
 
 #ifdef HAVE_ECC
             sprintf(printBuffer, "%s\n\rECC test:          %s", 
                     printBuffer, (appData.ecc_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.ecc_timing);
+            sprintf(printBuffer, "%s\t %10"PRIu64" clock cycles", printBuffer, appData.ecc_timing);
 #endif
 #ifndef NO_RNG_TEST
             sprintf(printBuffer, "%s\n\rRANDOM test:       %s", 
                     printBuffer, (appData.random_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.random_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.random_timing);
 #endif
 #ifndef NO_AES
             sprintf(printBuffer, "%s\n\rAES CBC test:      %s", 
                     printBuffer, (appData.aes_cbc_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_cbc_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.aes_cbc_timing);
 #ifdef HAVE_AESGCM
             sprintf(printBuffer, "%s\n\rAES GCM test:      %s", 
                     printBuffer, (appData.aes_gcm_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_gcm_timing);            
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.aes_gcm_timing);            
 #endif
 #ifdef WOLFSSL_AES_COUNTER
             sprintf(printBuffer, "%s\n\rAES CTR test:      %s", 
                      printBuffer, (appData.aes_ctr_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.aes_ctr_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.aes_ctr_timing);
 #endif                    
 #endif
 
 #ifdef HAVE_LIBZ
             sprintf(printBuffer, "%s\n\rCOMPRESS test:     %s", 
                     printBuffer, (appData.compress_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.compress_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.compress_timing);
 #endif
 
 #ifndef NO_DES3
             sprintf(printBuffer, "%s\n\rDES test:          %s", 
                     printBuffer, (appData.des_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.des_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.des_timing);
 #endif
 
 #ifndef NO_DES3
             sprintf(printBuffer, "%s\n\rDES3 test:         %s", 
                     printBuffer, (appData.des3_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.des3_timing);
+            sprintf(printBuffer, "%s\t %10d clock cycles", printBuffer, (int) appData.des3_timing);
 #endif
 
 #ifndef NO_RSA
             sprintf(printBuffer, "%s\n\rRSA test:          %s", 
                     printBuffer, (appData.rsa_test_result==expectedResult?"Pass":"FAIL"));
-            sprintf(printBuffer, "%s\t %8d clock cycles", printBuffer, (int) appData.rsa_timing);
+            sprintf(printBuffer, "%s\t %10"PRIu64" clock cycles", printBuffer, appData.rsa_timing);
 #endif
 
             appData.state = APP_STATE_CHECK_RESULTS;
@@ -2741,13 +2829,16 @@ void APP_Tasks(void) {
             }
             else if (
 #ifndef NO_RNG_TEST
-			    expectedResult != appData.random_test_result ||
+                expectedResult != appData.random_test_result ||
 #endif
 #ifndef NO_MD5
                 expectedResult != appData.md5_test_result || 
 #endif
 #ifndef NO_SHA                    
                 expectedResult != appData.sha_test_result ||
+#endif
+#ifdef WOLFSSL_SHA224                    
+                expectedResult != appData.sha224_test_result ||
 #endif
 #ifndef NO_SHA256                    
                 expectedResult != appData.sha256_test_result ||
@@ -2776,8 +2867,10 @@ void APP_Tasks(void) {
 #ifdef HAVE_ECC
                 expectedResult != appData.ecc_test_result ||
 #endif
-#ifndef NO_AES                   
+#ifndef NO_AES 
+#ifndef NO_AES_CBC                  
                 expectedResult != appData.aes_cbc_test_result ||
+#endif
 #ifdef WOLFSSL_AES_COUNTER                    
                 expectedResult != appData.aes_ctr_test_result ||
 #endif

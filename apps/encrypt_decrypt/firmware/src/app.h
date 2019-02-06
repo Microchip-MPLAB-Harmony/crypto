@@ -71,11 +71,13 @@ typedef enum
     APP_STATE_TEST_MD5,
     APP_STATE_TEST_SHA,        
     APP_STATE_TEST_SHA256,
+    APP_STATE_TEST_SHA224,
     APP_STATE_TEST_SHA384,
     APP_STATE_TEST_SHA512,
     APP_STATE_TEST_HMAC_MD5,
     APP_STATE_TEST_HMAC_SHA,
     APP_STATE_TEST_HMAC_SHA256,
+    APP_STATE_TEST_HMAC_SHA224,
     APP_STATE_TEST_HMAC_SHA384,
     APP_STATE_TEST_HMAC_SHA512,
     APP_STATE_TEST_DES,
@@ -122,6 +124,9 @@ typedef struct
     int sha256_test_result;
     uint32_t sha256_timing;
 
+    int sha224_test_result;
+    uint32_t sha224_timing;
+
     int sha384_test_result;
     uint32_t sha384_timing;
 
@@ -137,6 +142,9 @@ typedef struct
     int hmac_sha256_test_result;
     uint32_t hmac_sha256_timing;
 
+    int hmac_sha224_test_result;
+    uint32_t hmac_sha224_timing;
+	
     int hmac_sha384_test_result;
     uint32_t hmac_sha384_timing;
 
@@ -159,13 +167,13 @@ typedef struct
     uint32_t aes_gcm_timing;
     
     int rsa_test_result;
-    uint32_t rsa_timing;
+    uint64_t rsa_timing;
 
     int random_test_result;
     uint32_t random_timing;
 
     int ecc_test_result;
-    uint32_t ecc_timing;
+    uint64_t ecc_timing;
 
     int compress_test_result;
     uint32_t compress_timing;
