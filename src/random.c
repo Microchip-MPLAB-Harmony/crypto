@@ -162,7 +162,7 @@ int wc_RNG_GenerateByte(WC_RNG* rng, byte* b)
     #include "fsl_rnga.h"
 
 #elif defined(HAVE_MICROCHIP_HARMONY3_HW_RNG)
-#include "crypto\src\crypt_rng_hw.h"
+#include "crypt_rng_hw.h"
 #elif defined(NO_DEV_RANDOM)
 #elif defined(CUSTOM_RAND_GENERATE)
 #elif defined(CUSTOM_RAND_GENERATE_BLOCK)
