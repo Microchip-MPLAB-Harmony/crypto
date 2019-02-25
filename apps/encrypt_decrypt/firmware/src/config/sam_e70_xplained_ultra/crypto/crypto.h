@@ -1654,6 +1654,10 @@ int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                                    const unsigned char* iv, unsigned int ivSz,
                                    const unsigned char* authTag, unsigned int authTagSz,
                                    const unsigned char* authIn, unsigned int authInSz);
+int  CRYPT_AES_GCM_SetIV(CRYPT_AES_CTX* aes, uint32_t ivSz,
+                                   const uint8_t* ivFixed, uint32_t ivFixedSz,
+                                   CRYPT_RNG_CTX* rng);
+
 //******************************************************************************
 /* Function:
     int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,

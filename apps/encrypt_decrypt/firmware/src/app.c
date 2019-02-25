@@ -160,7 +160,7 @@ char printBuffer[50 * 1024] = {0};
 void md5_test(void)
 {
     CRYPT_MD5_CTX  md5;
-    byte hash[MD5_DIGEST_SIZE];
+    uint8_t hash[MD5_DIGEST_SIZE];
 
     testVector a, b, c, d, e;
     testVector test_md5[5];
@@ -212,7 +212,7 @@ void md5_test(void)
 
     hashStart = APP_getTicks();	
     for (i = 0; i < times; ++i) {
-        CRYPT_MD5_DataAdd(&md5, (byte*)test_md5[i].input, (word32)test_md5[i].inLen);
+        CRYPT_MD5_DataAdd(&md5, (uint8_t*)test_md5[i].input, (word32)test_md5[i].inLen);
         CRYPT_MD5_Finalize(&md5, hash);
 
         if (memcmp(hash, test_md5[i].output, MD5_DIGEST_SIZE) == 0)
@@ -229,7 +229,7 @@ void md5_test(void)
 void sha_test(void)
 {
     CRYPT_SHA_CTX  sha;
-    byte hash[SHA_DIGEST_SIZE];
+    uint8_t hash[SHA_DIGEST_SIZE];
 
     testVector a, b, c, d;
     testVector test_sha[4];
@@ -275,7 +275,7 @@ void sha_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        CRYPT_SHA_DataAdd(&sha, (byte*)test_sha[i].input, (word32)test_sha[i].inLen);
+        CRYPT_SHA_DataAdd(&sha, (uint8_t*)test_sha[i].input, (word32)test_sha[i].inLen);
         CRYPT_SHA_Finalize(&sha, hash);
 
         if (memcmp(hash, test_sha[i].output, SHA_DIGEST_SIZE) == 0)
@@ -290,7 +290,7 @@ void sha_test(void)
 void sha256_test(void)
 {
     CRYPT_SHA256_CTX sha;
-    byte   hash[SHA256_DIGEST_SIZE];
+    uint8_t   hash[SHA256_DIGEST_SIZE];
 
     testVector a, b;
     testVector test_sha[2];
@@ -321,7 +321,7 @@ void sha256_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        CRYPT_SHA256_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
+        CRYPT_SHA256_DataAdd(&sha, (uint8_t*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA256_Finalize(&sha, hash);
 
         if (memcmp(hash, test_sha[i].output, SHA256_DIGEST_SIZE) == 0)
@@ -336,7 +336,7 @@ void sha256_test(void)
 void sha384_test(void)
 {
     CRYPT_SHA384_CTX sha;
-    byte   hash[SHA384_DIGEST_SIZE];
+    uint8_t   hash[SHA384_DIGEST_SIZE];
 
     testVector a, b;
     testVector test_sha[2];
@@ -370,7 +370,7 @@ void sha384_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        CRYPT_SHA384_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
+        CRYPT_SHA384_DataAdd(&sha, (uint8_t*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA384_Finalize(&sha, hash);
 
         if (memcmp(hash, test_sha[i].output, SHA384_DIGEST_SIZE) == 0)
@@ -385,7 +385,7 @@ void sha384_test(void)
 void sha512_test(void)
 {
     CRYPT_SHA512_CTX sha;
-    byte   hash[SHA512_DIGEST_SIZE];
+    uint8_t   hash[SHA512_DIGEST_SIZE];
 
     testVector a, b;
     testVector test_sha[2];
@@ -421,7 +421,7 @@ void sha512_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        CRYPT_SHA512_DataAdd(&sha, (byte*)test_sha[i].input,(word32)test_sha[i].inLen);
+        CRYPT_SHA512_DataAdd(&sha, (uint8_t*)test_sha[i].input,(word32)test_sha[i].inLen);
         CRYPT_SHA512_Finalize(&sha, hash);
 
         if (memcmp(hash, test_sha[i].output, SHA512_DIGEST_SIZE) == 0)
@@ -436,7 +436,7 @@ void sha512_test(void)
 void hmac_md5_test(void)
 {
     Hmac hmac;
-    byte hash[MD5_DIGEST_SIZE];
+    uint8_t hash[MD5_DIGEST_SIZE];
 
     const char* keys[]=
     {
@@ -481,8 +481,8 @@ void hmac_md5_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        wc_HmacSetKey(&hmac, MD5, (byte*)keys[i], (word32)strlen(keys[i]));
-        wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
+        wc_HmacSetKey(&hmac, MD5, (uint8_t*)keys[i], (word32)strlen(keys[i]));
+        wc_HmacUpdate(&hmac, (uint8_t*)test_hmac[i].input,
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
@@ -498,7 +498,7 @@ void hmac_md5_test(void)
 void hmac_sha_test(void)
 {
     Hmac hmac;
-    byte hash[SHA_DIGEST_SIZE];
+    uint8_t hash[SHA_DIGEST_SIZE];
 
     const char* keys[]=
     {
@@ -545,8 +545,8 @@ void hmac_sha_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        wc_HmacSetKey(&hmac, SHA, (byte*)keys[i], (word32)strlen(keys[i]));
-        wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
+        wc_HmacSetKey(&hmac, SHA, (uint8_t*)keys[i], (word32)strlen(keys[i]));
+        wc_HmacUpdate(&hmac, (uint8_t*)test_hmac[i].input,
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
@@ -562,7 +562,7 @@ void hmac_sha_test(void)
 void hmac_sha256_test(void)
 {
     Hmac hmac;
-    byte hash[SHA256_DIGEST_SIZE];
+    uint8_t hash[SHA256_DIGEST_SIZE];
 
     const char* keys[]=
     {
@@ -612,8 +612,8 @@ void hmac_sha256_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        wc_HmacSetKey(&hmac, SHA256, (byte*)keys[i], (word32)strlen(keys[i]));
-        wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
+        wc_HmacSetKey(&hmac, SHA256, (uint8_t*)keys[i], (word32)strlen(keys[i]));
+        wc_HmacUpdate(&hmac, (uint8_t*)test_hmac[i].input,
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
@@ -629,7 +629,7 @@ void hmac_sha256_test(void)
 void hmac_sha384_test(void)
 {
     Hmac hmac;
-    byte hash[SHA384_DIGEST_SIZE];
+    uint8_t hash[SHA384_DIGEST_SIZE];
 
     const char* keys[]=
     {
@@ -682,8 +682,8 @@ void hmac_sha384_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        wc_HmacSetKey(&hmac, SHA384, (byte*)keys[i], (word32)strlen(keys[i]));
-        wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
+        wc_HmacSetKey(&hmac, SHA384, (uint8_t*)keys[i], (word32)strlen(keys[i]));
+        wc_HmacUpdate(&hmac, (uint8_t*)test_hmac[i].input,
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
@@ -699,7 +699,7 @@ void hmac_sha384_test(void)
 void hmac_sha512_test(void)
 {
     Hmac hmac;
-    byte hash[SHA512_DIGEST_SIZE];
+    uint8_t hash[SHA512_DIGEST_SIZE];
 
     const char* keys[]=
     {
@@ -755,8 +755,8 @@ void hmac_sha512_test(void)
     
     hashStart = APP_getTicks();
     for (i = 0; i < times; ++i) {
-        wc_HmacSetKey(&hmac, SHA512, (byte*)keys[i], (word32)strlen(keys[i]));
-        wc_HmacUpdate(&hmac, (byte*)test_hmac[i].input,
+        wc_HmacSetKey(&hmac, SHA512, (uint8_t*)keys[i], (word32)strlen(keys[i]));
+        wc_HmacUpdate(&hmac, (uint8_t*)test_hmac[i].input,
                    (word32)test_hmac[i].inLen);
         wc_HmacFinal(&hmac, hash);
 
@@ -773,11 +773,11 @@ void hmac_sha512_test(void)
 void ecc_test(void)
 {
     CRYPT_RNG_CTX     rng;
-    byte    sharedA[1024];
-    byte    sharedB[1024];
-    byte    sig[1024];
-    byte    digest[20];
-    byte    exportBuf[1024];
+    uint8_t    sharedA[1024];
+    uint8_t    sharedB[1024];
+    uint8_t    sig[1024];
+    uint8_t    digest[20];
+    uint8_t    exportBuf[1024];
     word32  x, y;
     int     i, verify, ret;
     ecc_key userA, userB, pubKey;
@@ -867,7 +867,7 @@ void ecc_test(void)
 void random_test(void)
 {
     CRYPT_RNG_CTX  rng;
-    byte block[32];
+    uint8_t block[32];
     int ret;
     uint32_t hashStart;
     uint32_t hashStop;
@@ -892,22 +892,22 @@ void aes_test(void)
     CRYPT_AES_CTX enc;
     CRYPT_AES_CTX dec;
 
-    const byte msg[] = { /* "now is the time for all " w/o trailing 0 */
+    const uint8_t msg[] = { /* "now is the time for all " w/o trailing 0 */
         0x6e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
         0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20
     };
 
-    const byte verify[] =
+    const uint8_t verify[] =
     {
         0x95,0x94,0x92,0x57,0x5f,0x42,0x81,0x53,
         0x2c,0xcc,0x9d,0x46,0x77,0xa2,0x33,0xcb
     };
 
-    byte key[] = "0123456789abcdef   ";  /* align */
-    byte iv[]  = "1234567890abcdef   ";  /* align */
+    uint8_t key[] = "0123456789abcdef   ";  /* align */
+    uint8_t iv[]  = "1234567890abcdef   ";  /* align */
 
-    byte cipher[AES_BLOCK_SIZE * 4];
-    byte plain [AES_BLOCK_SIZE * 4];
+    uint8_t cipher[AES_BLOCK_SIZE * 4];
+    uint8_t plain [AES_BLOCK_SIZE * 4];
     int numCbcSubTests = 2;
     uint32_t hashStart;
     uint32_t hashStop;
@@ -937,19 +937,19 @@ void aes_test(void)
 
 #ifdef WOLFSSL_AES_COUNTER
     {
-        const byte ctrKey[] =
+        const uint8_t ctrKey[] =
         {
             0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
             0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c
         };
 
-        const byte ctrIv[] =
+        const uint8_t ctrIv[] =
         {
             0xf0,0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,
             0xf8,0xf9,0xfa,0xfb,0xfc,0xfd,0xfe,0xff
         };
 
-        const byte ctrPlain[] =
+        const uint8_t ctrPlain[] =
         {
             0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,
             0xe9,0x3d,0x7e,0x11,0x73,0x93,0x17,0x2a,
@@ -961,7 +961,7 @@ void aes_test(void)
             0xad,0x2b,0x41,0x7b,0xe6,0x6c,0x37,0x10
         };
 
-        const byte ctrCipher[] =
+        const uint8_t ctrCipher[] =
         {
             0x87,0x4d,0x61,0x91,0xb6,0x20,0xe3,0x26,
             0x1b,0xef,0x68,0x64,0x99,0x0d,0xb6,0xce,
@@ -1005,16 +1005,16 @@ void aes_test(void)
 
 #ifdef HAVE_AESGCM
 
-static int aesgcm_default_test_helper(const byte* key, int keySz, const byte* iv, int ivSz,
-		const byte* plain, int plainSz, const byte* cipher, int cipherSz,
-		const byte* aad, int aadSz, const byte* tag, int tagSz)
+static int aesgcm_default_test_helper(const uint8_t* key, int keySz, const uint8_t* iv, int ivSz,
+		const uint8_t* plain, int plainSz, const uint8_t* cipher, int cipherSz,
+		const uint8_t* aad, int aadSz, const uint8_t* tag, int tagSz)
 {
     CRYPT_AES_CTX enc;
     CRYPT_AES_CTX dec;
 
-    byte resultT[AES_BLOCK_SIZE];
-    byte resultP[AES_BLOCK_SIZE * 3];
-    byte resultC[AES_BLOCK_SIZE * 3];
+    uint8_t resultT[AES_BLOCK_SIZE];
+    uint8_t resultP[AES_BLOCK_SIZE * 3];
+    uint8_t resultC[AES_BLOCK_SIZE * 3];
     int  result;
 
     memset(resultT, 0, sizeof(resultT));
@@ -1046,9 +1046,6 @@ static int aesgcm_default_test_helper(const byte* key, int keySz, const byte* iv
 
     result = CRYPT_AES_GCM_Decrypt(&dec, resultP, resultC, cipherSz,
                       iv, ivSz, resultT, tagSz, aad, aadSz);
-#if defined(WOLFSSL_ASYNC_CRYPT)
-    result = wc_AsyncWait(result, &dec.asyncDev, WC_ASYNC_FLAG_NONE);
-#endif
     if (result != 0)
         return -4706;
     if (plain != NULL) {
@@ -1060,7 +1057,7 @@ static int aesgcm_default_test_helper(const byte* key, int keySz, const byte* iv
             {
                 if (plain[x] != resultP[x])
                 {
-                    sprintf(printBuffer, "GCM Failed at byte %x first byte %x second byte %x\r\n", x, plain[x], resultP[x]);
+                    sprintf(printBuffer, "GCM Failed at uint8_t %x first uint8_t %x second uint8_t %x\r\n", x, plain[x], resultP[x]);
                     SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
                     errorFound = 1;
                     break;
@@ -1079,81 +1076,81 @@ static int aesgcm_default_test_helper(const byte* key, int keySz, const byte* iv
 }
 
 
-/* tests that only use 12 byte IV and 16 or less byte AAD
+/* tests that only use 12 uint8_t IV and 16 or less uint8_t AAD
  * test vectors are from NIST SP 800-38D
  * https://csrc.nist.gov/Projects/Cryptographic-Algorithm-Validation-Program/CAVP-TESTING-BLOCK-CIPHER-MODES*/
 int aesgcm_default_test(void)
 {
-     byte key1[] = {
+     uint8_t key1[] = {
         0x29, 0x8e, 0xfa, 0x1c, 0xcf, 0x29, 0xcf, 0x62,
         0xae, 0x68, 0x24, 0xbf, 0xc1, 0x95, 0x57, 0xfc
     };
 
-     byte iv1[] = {
+     uint8_t iv1[] = {
         0x6f, 0x58, 0xa9, 0x3f, 0xe1, 0xd2, 0x07, 0xfa,
         0xe4, 0xed, 0x2f, 0x6d
     };
 
-     byte plain1[] = {
+     uint8_t plain1[] = {
         0xcc, 0x38, 0xbc, 0xcd, 0x6b, 0xc5, 0x36, 0xad,
         0x91, 0x9b, 0x13, 0x95, 0xf5, 0xd6, 0x38, 0x01,
         0xf9, 0x9f, 0x80, 0x68, 0xd6, 0x5c, 0xa5, 0xac,
         0x63, 0x87, 0x2d, 0xaf, 0x16, 0xb9, 0x39, 0x01
     };
 
-     byte aad1[] = {
+     uint8_t aad1[] = {
         0x02, 0x1f, 0xaf, 0xd2, 0x38, 0x46, 0x39, 0x73,
         0xff, 0xe8, 0x02, 0x56, 0xe5, 0xb1, 0xc6, 0xb1
     };
 
-     byte cipher1[] = {
+     uint8_t cipher1[] = {
         0xdf, 0xce, 0x4e, 0x9c, 0xd2, 0x91, 0x10, 0x3d,
         0x7f, 0xe4, 0xe6, 0x33, 0x51, 0xd9, 0xe7, 0x9d,
         0x3d, 0xfd, 0x39, 0x1e, 0x32, 0x67, 0x10, 0x46,
         0x58, 0x21, 0x2d, 0xa9, 0x65, 0x21, 0xb7, 0xdb
     };
 
-     byte tag1[] = {
+     uint8_t tag1[] = {
         0x54, 0x24, 0x65, 0xef, 0x59, 0x93, 0x16, 0xf7,
         0x3a, 0x7a, 0x56, 0x05, 0x09, 0xa2, 0xd9, 0xf2
     };
 
 
-     byte key2[] = {
+     uint8_t key2[] = {
         0x01, 0x6d, 0xbb, 0x38, 0xda, 0xa7, 0x6d, 0xfe,
         0x7d, 0xa3, 0x84, 0xeb, 0xf1, 0x24, 0x03, 0x64
     };
 
-     byte iv2[] = {
+     uint8_t iv2[] = {
         0x07, 0x93, 0xef, 0x3a, 0xda, 0x78, 0x2f, 0x78,
         0xc9, 0x8a, 0xff, 0xe3
     };
 
-     byte plain2[] = {
+     uint8_t plain2[] = {
         0x4b, 0x34, 0xa9, 0xec, 0x57, 0x63, 0x52, 0x4b,
         0x19, 0x1d, 0x56, 0x16, 0xc5, 0x47, 0xf6, 0xb7
     };
 
-     byte cipher2[] = {
+     uint8_t cipher2[] = {
         0x60, 0x9a, 0xa3, 0xf4, 0x54, 0x1b, 0xc0, 0xfe,
         0x99, 0x31, 0xda, 0xad, 0x2e, 0xe1, 0x5d, 0x0c
     };
 
-     byte tag2[] = {
+     uint8_t tag2[] = {
         0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
         0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
     };
-     byte key3[] = {
+     uint8_t key3[] = {
         0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
         0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
     };
 
-     byte iv3[] = {
+     uint8_t iv3[] = {
         0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
         0x6a, 0x4b, 0xd5, 0xe1
     };
 
-     byte tag3[] = {
+     uint8_t tag3[] = {
         0x01, 0x42, 0x80, 0xf9, 0x44, 0xf5, 0x3c, 0x68,
         0x11, 0x64, 0xb2, 0xff
     };
@@ -1191,11 +1188,388 @@ int aesgcm_default_test(void)
 	return 0;
 }
 
+int aesgcm_test(void)
+{
+    CRYPT_AES_CTX enc;
+
+    /*
+     * This is Test Case 16 from the document Galois/
+     * Counter Mode of Operation (GCM) by McGrew and
+     * Viega.
+     */
+    const uint8_t p[] =
+    {
+        0xd9, 0x31, 0x32, 0x25, 0xf8, 0x84, 0x06, 0xe5,
+        0xa5, 0x59, 0x09, 0xc5, 0xaf, 0xf5, 0x26, 0x9a,
+        0x86, 0xa7, 0xa9, 0x53, 0x15, 0x34, 0xf7, 0xda,
+        0x2e, 0x4c, 0x30, 0x3d, 0x8a, 0x31, 0x8a, 0x72,
+        0x1c, 0x3c, 0x0c, 0x95, 0x95, 0x68, 0x09, 0x53,
+        0x2f, 0xcf, 0x0e, 0x24, 0x49, 0xa6, 0xb5, 0x25,
+        0xb1, 0x6a, 0xed, 0xf5, 0xaa, 0x0d, 0xe6, 0x57,
+        0xba, 0x63, 0x7b, 0x39
+    };
+
+    const uint8_t a[] =
+    {
+        0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef,
+        0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef,
+        0xab, 0xad, 0xda, 0xd2
+    };
+
+#ifdef WOLFSSL_AES_256
+    const uint8_t k1[] =
+    {
+        0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c,
+        0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08,
+        0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c,
+        0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08
+    };
+
+    const uint8_t iv1[] =
+    {
+        0xca, 0xfe, 0xba, 0xbe, 0xfa, 0xce, 0xdb, 0xad,
+        0xde, 0xca, 0xf8, 0x88
+    };
+
+    const uint8_t c1[] =
+    {
+        0x52, 0x2d, 0xc1, 0xf0, 0x99, 0x56, 0x7d, 0x07,
+        0xf4, 0x7f, 0x37, 0xa3, 0x2a, 0x84, 0x42, 0x7d,
+        0x64, 0x3a, 0x8c, 0xdc, 0xbf, 0xe5, 0xc0, 0xc9,
+        0x75, 0x98, 0xa2, 0xbd, 0x25, 0x55, 0xd1, 0xaa,
+        0x8c, 0xb0, 0x8e, 0x48, 0x59, 0x0d, 0xbb, 0x3d,
+        0xa7, 0xb0, 0x8b, 0x10, 0x56, 0x82, 0x88, 0x38,
+        0xc5, 0xf6, 0x1e, 0x63, 0x93, 0xba, 0x7a, 0x0a,
+        0xbc, 0xc9, 0xf6, 0x62
+    };
+#endif /* WOLFSSL_AES_256 */
+
+    const uint8_t t1[] =
+    {
+        0x76, 0xfc, 0x6e, 0xce, 0x0f, 0x4e, 0x17, 0x68,
+        0xcd, 0xdf, 0x88, 0x53, 0xbb, 0x2d, 0x55, 0x1b
+    };
+
+    /* FIPS, QAT and STM32F2/4 HW Crypto only support 12-uint8_t IV */
+#if !defined(HAVE_FIPS) && \
+        !defined(STM32_CRYPTO) && !defined(WOLFSSL_PIC32MZ_CRYPT) && \
+        !defined(FREESCALE_LTC) && !defined(FREESCALE_MMCAU) && \
+        !defined(WOLFSSL_XILINX_CRYPT)
+
+    #define ENABLE_NON_12BYTE_IV_TEST
+#ifdef WOLFSSL_AES_192
+    /* Test Case 12, uses same plaintext and AAD data. */
+    const uint8_t k2[] =
+    {
+        0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c,
+        0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08,
+        0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c
+    };
+
+    const uint8_t iv2[] =
+    {
+        0x93, 0x13, 0x22, 0x5d, 0xf8, 0x84, 0x06, 0xe5,
+        0x55, 0x90, 0x9c, 0x5a, 0xff, 0x52, 0x69, 0xaa,
+        0x6a, 0x7a, 0x95, 0x38, 0x53, 0x4f, 0x7d, 0xa1,
+        0xe4, 0xc3, 0x03, 0xd2, 0xa3, 0x18, 0xa7, 0x28,
+        0xc3, 0xc0, 0xc9, 0x51, 0x56, 0x80, 0x95, 0x39,
+        0xfc, 0xf0, 0xe2, 0x42, 0x9a, 0x6b, 0x52, 0x54,
+        0x16, 0xae, 0xdb, 0xf5, 0xa0, 0xde, 0x6a, 0x57,
+        0xa6, 0x37, 0xb3, 0x9b
+    };
+
+    const uint8_t c2[] =
+    {
+        0xd2, 0x7e, 0x88, 0x68, 0x1c, 0xe3, 0x24, 0x3c,
+        0x48, 0x30, 0x16, 0x5a, 0x8f, 0xdc, 0xf9, 0xff,
+        0x1d, 0xe9, 0xa1, 0xd8, 0xe6, 0xb4, 0x47, 0xef,
+        0x6e, 0xf7, 0xb7, 0x98, 0x28, 0x66, 0x6e, 0x45,
+        0x81, 0xe7, 0x90, 0x12, 0xaf, 0x34, 0xdd, 0xd9,
+        0xe2, 0xf0, 0x37, 0x58, 0x9b, 0x29, 0x2d, 0xb3,
+        0xe6, 0x7c, 0x03, 0x67, 0x45, 0xfa, 0x22, 0xe7,
+        0xe9, 0xb7, 0x37, 0x3b
+    };
+
+    const uint8_t t2[] =
+    {
+        0xdc, 0xf5, 0x66, 0xff, 0x29, 0x1c, 0x25, 0xbb,
+        0xb8, 0x56, 0x8f, 0xc3, 0xd3, 0x76, 0xa6, 0xd9
+    };
+#endif /* WOLFSSL_AES_192 */
+#ifdef WOLFSSL_AES_128
+    /* The following is an interesting test case from the example
+     * FIPS test vectors for AES-GCM. IVlen = 1 uint8_t */
+    const uint8_t p3[] =
+    {
+        0x57, 0xce, 0x45, 0x1f, 0xa5, 0xe2, 0x35, 0xa5,
+        0x8e, 0x1a, 0xa2, 0x3b, 0x77, 0xcb, 0xaf, 0xe2
+    };
+
+    const uint8_t k3[] =
+    {
+        0xbb, 0x01, 0xd7, 0x03, 0x81, 0x1c, 0x10, 0x1a,
+        0x35, 0xe0, 0xff, 0xd2, 0x91, 0xba, 0xf2, 0x4b
+    };
+
+    const uint8_t iv3[] =
+    {
+        0xca
+    };
+
+    const uint8_t c3[] =
+    {
+        0x6b, 0x5f, 0xb3, 0x9d, 0xc1, 0xc5, 0x7a, 0x4f,
+        0xf3, 0x51, 0x4d, 0xc2, 0xd5, 0xf0, 0xd0, 0x07
+    };
+
+    const uint8_t a3[] =
+    {
+        0x40, 0xfc, 0xdc, 0xd7, 0x4a, 0xd7, 0x8b, 0xf1,
+        0x3e, 0x7c, 0x60, 0x55, 0x50, 0x51, 0xdd, 0x54
+    };
+
+    const uint8_t t3[] =
+    {
+        0x06, 0x90, 0xed, 0x01, 0x34, 0xdd, 0xc6, 0x95,
+        0x31, 0x2e, 0x2a, 0xf9, 0x57, 0x7a, 0x1e, 0xa6
+    };
+#endif /* WOLFSSL_AES_128 */
+#ifdef WOLFSSL_AES_256
+    int ivlen;
+#endif
+#endif
+
+    uint8_t resultT[sizeof(t1)];
+    uint8_t resultP[sizeof(p)];
+    uint8_t resultC[sizeof(p)];
+    int  result;
+#ifdef WOLFSSL_AES_256
+    int  alen, plen;
+#endif
+
+#if !defined(BENCH_EMBEDDED)
+    #ifndef BENCH_AESGCM_LARGE
+        #define BENCH_AESGCM_LARGE 1024
+    #endif
+    uint8_t large_input[BENCH_AESGCM_LARGE];
+    uint8_t large_output[BENCH_AESGCM_LARGE];
+    uint8_t large_outdec[BENCH_AESGCM_LARGE];
+
+    memset(large_input, 0, sizeof(large_input));
+    memset(large_output, 0, sizeof(large_output));
+    memset(large_outdec, 0, sizeof(large_outdec));
+#endif
+
+    memset(resultT, 0, sizeof(resultT));
+    memset(resultC, 0, sizeof(resultC));
+    memset(resultP, 0, sizeof(resultP));
+
+#ifdef WOLFSSL_AES_256
+    result = CRYPT_AES_GCM_SetKey(&enc, k1, sizeof(k1));
+    if (result != 0)
+        return -5701;
+
+    /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+    result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p, sizeof(p), iv1, sizeof(iv1),
+                                        resultT, sizeof(resultT), a, sizeof(a));
+    if (result != 0)
+        return -5702;
+    if (memcmp(c1, resultC, sizeof(resultC)))
+        return -5703;
+    if (memcmp(t1, resultT, sizeof(resultT)))
+        return -5704;
+
+#ifdef HAVE_AES_DECRYPT
+    result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, sizeof(resultC),
+                      iv1, sizeof(iv1), resultT, sizeof(resultT), a, sizeof(a));
+    if (result != 0)
+        return -5705;
+    if (memcmp(p, resultP, sizeof(resultP)))
+        return -5706;
+#endif /* HAVE_AES_DECRYPT */
+
+    /* Large buffer test */
+#ifdef BENCH_AESGCM_LARGE
+    /* setup test buffer */
+    for (alen=0; alen<BENCH_AESGCM_LARGE; alen++)
+        large_input[alen] = (uint8_t)alen;
+
+    /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+    result = CRYPT_AES_GCM_Encrypt(&enc, large_output, large_input,
+                              BENCH_AESGCM_LARGE, iv1, sizeof(iv1),
+                              resultT, sizeof(resultT), a, sizeof(a));
+    if (result != 0)
+        return -5707;
+
+#ifdef HAVE_AES_DECRYPT
+    result = CRYPT_AES_GCM_Decrypt(&enc, large_outdec, large_output,
+                              BENCH_AESGCM_LARGE, iv1, sizeof(iv1), resultT,
+                              sizeof(resultT), a, sizeof(a));
+    if (result != 0)
+        return -5708;
+    if (memcmp(large_input, large_outdec, BENCH_AESGCM_LARGE))
+        return -5709;
+#endif /* HAVE_AES_DECRYPT */
+#endif /* BENCH_AESGCM_LARGE */
+#if defined(ENABLE_NON_12BYTE_IV_TEST) && defined(WOLFSSL_AES_256)
+    /* Variable IV length test */
+    for (ivlen=0; ivlen<(int)sizeof(k1); ivlen++) {
+         /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+         result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p, sizeof(p), k1,
+                         (word32)ivlen, resultT, sizeof(resultT), a, sizeof(a));
+        if (result != 0)
+            return -5710;
+#ifdef HAVE_AES_DECRYPT
+        result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, sizeof(resultC), k1,
+                         (word32)ivlen, resultT, sizeof(resultT), a, sizeof(a));
+        if (result != 0)
+            return -5711;
+#endif /* HAVE_AES_DECRYPT */
+    }
+#endif
+
+    /* Variable authenticated data length test */
+    for (alen=0; alen<(int)sizeof(p); alen++) {
+         /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+         result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p, sizeof(p), iv1,
+                        sizeof(iv1), resultT, sizeof(resultT), p, (word32)alen);
+        if (result != 0)
+            return -5712;
+#ifdef HAVE_AES_DECRYPT
+        result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, sizeof(resultC), iv1,
+                        sizeof(iv1), resultT, sizeof(resultT), p, (word32)alen);
+        if (result != 0)
+            return -5713;
+#endif /* HAVE_AES_DECRYPT */
+    }
+
+#ifdef BENCH_AESGCM_LARGE
+    /* Variable plain text length test */
+    for (plen=1; plen<BENCH_AESGCM_LARGE; plen++) {
+        /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+        result = CRYPT_AES_GCM_Encrypt(&enc, large_output, large_input,
+                                  plen, iv1, sizeof(iv1), resultT,
+                                  sizeof(resultT), a, sizeof(a));
+        if (result != 0)
+            return -5714;
+
+#ifdef HAVE_AES_DECRYPT
+        result = CRYPT_AES_GCM_Decrypt(&enc, large_outdec, large_output,
+                                  plen, iv1, sizeof(iv1), resultT,
+                                  sizeof(resultT), a, sizeof(a));
+        if (result != 0)
+            return -5715;
+#endif /* HAVE_AES_DECRYPT */
+    }
+#else
+    /* Variable plain text length test */
+    for (plen=1; plen<(int)sizeof(p); plen++) {
+         /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+         result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p, (word32)plen, iv1,
+                           sizeof(iv1), resultT, sizeof(resultT), a, sizeof(a));
+        if (result != 0)
+            return -5716;
+#ifdef HAVE_AES_DECRYPT
+        result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, (word32)plen, iv1,
+                           sizeof(iv1), resultT, sizeof(resultT), a, sizeof(a));
+        if (result != 0)
+            return -5717;
+#endif /* HAVE_AES_DECRYPT */
+    }
+#endif /* BENCH_AESGCM_LARGE */
+#endif /* WOLFSSL_AES_256 */
+
+    /* test with IV != 12 uint8_ts */
+#ifdef ENABLE_NON_12BYTE_IV_TEST
+    memset(resultT, 0, sizeof(resultT));
+    memset(resultC, 0, sizeof(resultC));
+    memset(resultP, 0, sizeof(resultP));
+
+#ifdef WOLFSSL_AES_192
+    CRYPT_AES_GCM_SetKey(&enc, k2, sizeof(k2));
+    /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+    result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p, sizeof(p), iv2, sizeof(iv2),
+                                        resultT, sizeof(resultT), a, sizeof(a));
+    if (result != 0)
+        return -5718;
+    if (memcmp(c2, resultC, sizeof(resultC)))
+        return -5719;
+    if (memcmp(t2, resultT, sizeof(resultT)))
+        return -5720;
+
+#ifdef HAVE_AES_DECRYPT
+    result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, sizeof(resultC),
+                      iv2, sizeof(iv2), resultT, sizeof(resultT), a, sizeof(a));
+    if (result != 0)
+        return -5721;
+    if (memcmp(p, resultP, sizeof(resultP)))
+        return -5722;
+#endif /* HAVE_AES_DECRYPT */
+
+    memset(resultT, 0, sizeof(resultT));
+    memset(resultC, 0, sizeof(resultC));
+    memset(resultP, 0, sizeof(resultP));
+#endif /* WOLFSSL_AES_192 */
+#ifdef WOLFSSL_AES_128
+    CRYPT_AES_GCM_SetKey(&enc, k3, sizeof(k3));
+    /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+    result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p3, sizeof(p3), iv3, sizeof(iv3),
+                                        resultT, sizeof(t3), a3, sizeof(a3));
+    if (result != 0)
+        return -5723;
+    if (memcmp(c3, resultC, sizeof(c3)))
+        return -5724;
+    if (memcmp(t3, resultT, sizeof(t3)))
+        return -5725;
+
+#ifdef HAVE_AES_DECRYPT
+    result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, sizeof(c3),
+                      iv3, sizeof(iv3), resultT, sizeof(t3), a3, sizeof(a3));
+    if (result != 0)
+        return -5726;
+    if (memcmp(p3, resultP, sizeof(p3)))
+        return -5727;
+#endif /* HAVE_AES_DECRYPT */
+#endif /* WOLFSSL_AES_128 */
+#endif /* ENABLE_NON_12BYTE_IV_TEST */
+
+#ifdef WOLFSSL_AES_256
+    memset(resultT, 0, sizeof(resultT));
+    memset(resultC, 0, sizeof(resultC));
+    memset(resultP, 0, sizeof(resultP));
+
+    CRYPT_AES_GCM_SetKey(&enc, k1, sizeof(k1));
+    /* AES-GCM encrypt and decrypt both use AES encrypt internally */
+    result = CRYPT_AES_GCM_Encrypt(&enc, resultC, p, sizeof(p), iv1, sizeof(iv1),
+                                resultT + 1, sizeof(resultT) - 1, a, sizeof(a));
+    if (result != 0)
+        return -5728;
+    if (memcmp(c1, resultC, sizeof(resultC)))
+        return -5729;
+    if (memcmp(t1, resultT + 1, sizeof(resultT) - 1))
+        return -5730;
+
+#ifdef HAVE_AES_DECRYPT
+    result = CRYPT_AES_GCM_Decrypt(&enc, resultP, resultC, sizeof(resultC),
+              iv1, sizeof(iv1), resultT + 1, sizeof(resultT) - 1, a, sizeof(a));
+    if (result != 0)
+        return -5731;
+    if (memcmp(p, resultP, sizeof(resultP)))
+        return -5732;
+#endif /* HAVE_AES_DECRYPT */
+#endif /* WOLFSSL_AES_256 */
+
+
+    return 0;
+}
+
+
+
 #endif
 
 #ifdef HAVE_LIBZ
 
-const byte sample_text[] =
+const uint8_t sample_text[] =
     "Biodiesel cupidatat marfa, cliche aute put a bird on it incididunt elit\n"
     "polaroid. Sunt tattooed bespoke reprehenderit. Sint twee organic id\n"
     "marfa. Commodo veniam ad esse gastropub. 3 wolf moon sartorial vero,\n"
@@ -1278,12 +1652,12 @@ void compress_test(void)
     int ret = 0;
     word32 dSz = sizeof(sample_text);
     word32 cSz = (dSz + (word32)(dSz * 0.001) + 12);
-    byte *c = NULL;
-    byte *d = NULL;
+    uint8_t *c = NULL;
+    uint8_t *d = NULL;
     int numSubTests = 4;
     
-    c = calloc(cSz, sizeof(byte));
-    d = calloc(dSz, sizeof(byte));
+    c = calloc(cSz, sizeof(uint8_t));
+    d = calloc(dSz, sizeof(uint8_t));
     uint32_t hashStart;
     uint32_t hashStop;
 
@@ -1326,29 +1700,29 @@ void compress_test(void)
 #ifndef NO_DES3
 void des_test(void)
 {
-    const byte exp_pt[] = { /* "now is the time for all " w/o trailing 0 */
+    const uint8_t exp_pt[] = { /* "now is the time for all " w/o trailing 0 */
         0x6e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
         0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20,
         0x66,0x6f,0x72,0x20,0x61,0x6c,0x6c,0x20
     };
 
-    byte gen_pt[24];
-    byte gen_ct[24];
+    uint8_t gen_pt[24];
+    uint8_t gen_ct[24];
 
     Des enc;
     Des dec;
 
-    const byte key[] =
+    const uint8_t key[] =
     {
         0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef
     };
 
-    const byte iv[] =
+    const uint8_t iv[] =
     {
         0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef
     };
 
-    const byte exp_ct[] =
+    const uint8_t exp_ct[] =
     {
         0x8b,0x7c,0x52,0xb0,0x01,0x2b,0x6c,0xb8,
         0x4f,0x0f,0xeb,0xf3,0xfb,0x5f,0x86,0x73,
@@ -1389,25 +1763,25 @@ void des_test(void)
 #ifndef NO_DES3
 void des3_test(void)
 {
-    const byte vector[] = { /* "Now is the time for all " w/o trailing 0 */
+    const uint8_t vector[] = { /* "Now is the time for all " w/o trailing 0 */
         0x4e,0x6f,0x77,0x20,0x69,0x73,0x20,0x74,
         0x68,0x65,0x20,0x74,0x69,0x6d,0x65,0x20,
         0x66,0x6f,0x72,0x20,0x61,0x6c,0x6c,0x20
     };
 
-    byte plain[24];
-    byte cipher[24];
+    uint8_t plain[24];
+    uint8_t cipher[24];
 
     CRYPT_TDES_CTX enc;
     CRYPT_TDES_CTX dec;
 
-    const byte key3[] =
+    const uint8_t key3[] =
     {
         0x01,0x23,0x45,0x67,0x89,0xab,0xcd,0xef,
         0xfe,0xde,0xba,0x98,0x76,0x54,0x32,0x10,
         0x89,0xab,0xcd,0xef,0x01,0x23,0x45,0x67
     };
-    const byte iv3[] =
+    const uint8_t iv3[] =
     {
         0x12,0x34,0x56,0x78,0x90,0xab,0xcd,0xef,
         0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
@@ -1415,7 +1789,7 @@ void des3_test(void)
 
     };
 
-    const byte verify3[] =
+    const uint8_t verify3[] =
     {
         0x43,0xa0,0x29,0x7e,0xd1,0x84,0xf8,0x0e,
         0x89,0x64,0x84,0x32,0x12,0xd5,0x08,0x98,
@@ -1497,16 +1871,16 @@ void des3_test(void)
 
 void rsa_test(void)
 {
-    byte*   tmp;
-    size_t  bytes;
+    uint8_t*   tmp;
+    size_t  uint8_ts;
     RsaKey  key;
     RNG     rng;
     word32 idx = 0;
     int    ret;
-    byte   in[] = "Everyone gets Friday off.";
+    uint8_t   in[] = "Everyone gets Friday off.";
     word32 inLen = (word32)strlen((char*)in);
-    byte   out[256];
-    byte   plain[256];
+    uint8_t   out[256];
+    uint8_t   plain[256];
 #if !defined(USE_CERT_BUFFERS_1024) && !defined(USE_CERT_BUFFERS_2048)
     FILE*  file, * file2;
 #endif
@@ -1519,23 +1893,23 @@ void rsa_test(void)
     uint32_t hashStop;
         
     hashStart = APP_getTicks();
-    tmp = (byte*)malloc(FOURK_BUF);
+    tmp = (uint8_t*)malloc(FOURK_BUF);
     if (tmp != NULL)
         appData.rsa_test_result--;
 
 #ifdef USE_CERT_BUFFERS_1024
     XMEMCPY(tmp, client_key_der_1024, sizeof_client_key_der_1024);
-    bytes = sizeof_client_key_der_1024;
+    uint8_ts = sizeof_client_key_der_1024;
 #elif defined(USE_CERT_BUFFERS_2048)
     XMEMCPY(tmp, client_key_der_2048, sizeof_client_key_der_2048);
-    bytes = sizeof_client_key_der_2048;
+    uint8_ts = sizeof_client_key_der_2048;
 #else
     appData.rsa_test_result++;
     file = fopen(clientKey, "rb");
     if (file)
         appData.rsa_test_result--;
     
-    bytes = fread(tmp, 1, FOURK_BUF, file);
+    uint8_ts = fread(tmp, 1, FOURK_BUF, file);
     fclose(file);
 #endif /* USE_CERT_BUFFERS */
 
@@ -1543,7 +1917,7 @@ void rsa_test(void)
     RsaInitCavium(&key, CAVIUM_DEV_ID);
 #endif
     wc_InitRsaKey(&key, 0);
-    ret = wc_RsaPrivateKeyDecode(tmp, &idx, &key, (word32)bytes);
+    ret = wc_RsaPrivateKeyDecode(tmp, &idx, &key, (word32)uint8_ts);
     if (ret == 0) appData.rsa_test_result--;
 
     ret = CRYPT_RNG_Initialize((CRYPT_RNG_CTX*)&rng);
@@ -1572,17 +1946,17 @@ void rsa_test(void)
 
 #ifdef USE_CERT_BUFFERS_1024
     XMEMCPY(tmp, client_cert_der_1024, sizeof_client_cert_der_1024);
-    bytes = sizeof_client_cert_der_1024;
+    uint8_ts = sizeof_client_cert_der_1024;
 #elif defined(USE_CERT_BUFFERS_2048)
     XMEMCPY(tmp, client_cert_der_2048, sizeof_client_cert_der_2048);
-    bytes = sizeof_client_cert_der_2048;
+    uint8_ts = sizeof_client_cert_der_2048;
 #else
     appData.rsa_test_result++;
     file2 = fopen(clientCert, "rb");
     if (file2)
         appData.rsa_test_result--;
 
-    bytes = fread(tmp, 1, FOURK_BUF, file2);
+    uint8_ts = fread(tmp, 1, FOURK_BUF, file2);
     fclose(file2);
 #endif
 
@@ -1592,21 +1966,21 @@ void rsa_test(void)
 
 #ifdef WOLFSSL_TEST_CERT
     appData.rsa_test_result++;
-    InitDecodedCert(&cert, tmp, (word32)bytes, 0);
+    InitDecodedCert(&cert, tmp, (word32)uint8_ts, 0);
 
     ret = ParseCert(&cert, CERT_TYPE, NO_VERIFY, 0);
     if (ret == 0) appData.rsa_test_result--;
 
     FreeDecodedCert(&cert);
 #else
-    (void)bytes;
+    (void)uint8_ts;
 #endif
 
 
 #ifdef WOLFSSL_KEY_GEN
     {
-        byte*  der;
-        byte*  pem;
+        uint8_t*  der;
+        uint8_t*  pem;
         int    derSz = 0;
         int    pemSz = 0;
         RsaKey derIn;
@@ -1620,10 +1994,10 @@ void rsa_test(void)
         if (ret == 0)
             appData.rsa_test_result--;
 
-        der = (byte*)malloc(FOURK_BUF);
+        der = (uint8_t*)malloc(FOURK_BUF);
         if (der != NULL)
             appData.rsa_test_result--;
-        pem = (byte*)malloc(FOURK_BUF);
+        pem = (uint8_t*)malloc(FOURK_BUF);
         if (pem != NULL)
             appData.rsa_test_result--;
 
@@ -1664,8 +2038,8 @@ void rsa_test(void)
 #ifdef WOLFSSL_CERT_GEN    /* self signed */
     {
         Cert        myCert;
-        byte*       derCert;
-        byte*       pem;
+        uint8_t*       derCert;
+        uint8_t*       pem;
         FILE*       derFile;
         FILE*       pemFile;
         int         certSz;
@@ -1675,10 +2049,10 @@ void rsa_test(void)
 #endif
         appData.rsa_test_result += 16;
         
-        derCert = (byte*)malloc(FOURK_BUF);
+        derCert = (uint8_t*)malloc(FOURK_BUF);
         if (derCert != NULL)
             appData.rsa_test_result--;
-        pem = (byte*)malloc(FOURK_BUF);
+        pem = (uint8_t*)malloc(FOURK_BUF);
         if (pem != NULL)
             appData.rsa_test_result--;
 
@@ -1728,23 +2102,23 @@ void rsa_test(void)
     {
         RsaKey      caKey;
         Cert        myCert;
-        byte*       derCert;
-        byte*       pem;
+        uint8_t*       derCert;
+        uint8_t*       pem;
         FILE*       derFile;
         FILE*       pemFile;
         int         certSz;
         int         pemSz;
-        size_t      bytes3;
+        size_t      uint8_ts3;
         word32      idx3 = 0;
         FILE*       file3 ;
 #ifdef WOLFSSL_TEST_CERT
         DecodedCert decode;
 #endif
 
-        derCert = (byte*)malloc(FOURK_BUF);
+        derCert = (uint8_t*)malloc(FOURK_BUF);
         if (derCert != NULL)
             appData.rsa_test_result--;
-        pem = (byte*)malloc(FOURK_BUF);
+        pem = (uint8_t*)malloc(FOURK_BUF);
         if (pem != NULL)
             appData.rsa_test_result--;
 
@@ -1753,11 +2127,11 @@ void rsa_test(void)
         if (file3)
             appData.rsa_test_result--;
 
-        bytes3 = fread(tmp, 1, FOURK_BUF, file3);
+        uint8_ts3 = fread(tmp, 1, FOURK_BUF, file3);
         fclose(file3);
 
         InitRsaKey(&caKey, 0);
-        ret = RsaPrivateKeyDecode(tmp, &idx3, &caKey, (word32)bytes3);
+        ret = RsaPrivateKeyDecode(tmp, &idx3, &caKey, (word32)uint8_ts3);
         if (ret == 0) appData.rsa_test_result--;
 
         InitCert(&myCert);
@@ -1817,23 +2191,23 @@ void rsa_test(void)
     {
         ecc_key     caKey;
         Cert        myCert;
-        byte*       derCert;
-        byte*       pem;
+        uint8_t*       derCert;
+        uint8_t*       pem;
         FILE*       derFile;
         FILE*       pemFile;
         int         certSz;
         int         pemSz;
-        size_t      bytes3;
+        size_t      uint8_ts3;
         word32      idx3 = 0;
         FILE*       file3 ;
 #ifdef WOLFSSL_TEST_CERT
         DecodedCert decode;
 #endif
         appData.rsa_test_result += 10;
-        derCert = (byte*)malloc(FOURK_BUF);
+        derCert = (uint8_t*)malloc(FOURK_BUF);
         if (derCert != NULL)
             appData.rsa_test_result--;
-        pem = (byte*)malloc(FOURK_BUF);
+        pem = (uint8_t*)malloc(FOURK_BUF);
         if (pem != NULL)
             appData.rsa_test_result--;
 
@@ -1842,11 +2216,11 @@ void rsa_test(void)
         if (file3)
             appData.rsa_test_result--;
 
-        bytes3 = fread(tmp, 1, FOURK_BUF, file3);
+        uint8_ts3 = fread(tmp, 1, FOURK_BUF, file3);
         fclose(file3);
 
         ecc_init(&caKey);
-        ret = EccPrivateKeyDecode(tmp, &idx3, &caKey, (word32)bytes3);
+        ret = EccPrivateKeyDecode(tmp, &idx3, &caKey, (word32)uint8_ts3);
         if (ret == 0) appData.rsa_test_result--;
 
         InitCert(&myCert);
@@ -1906,30 +2280,30 @@ void rsa_test(void)
     {
         RsaKey      caKey;
         Cert        myCert;
-        byte*       derCert;
-        byte*       pem;
+        uint8_t*       derCert;
+        uint8_t*       pem;
         FILE*       derFile;
         FILE*       pemFile;
         FILE*       caFile;
         FILE*       ntruPrivFile;
         int         certSz;
         int         pemSz;
-        size_t      bytes;
+        size_t      uint8_ts;
         word32      idx = 0;
 #ifdef WOLFSSL_TEST_CERT
         DecodedCert decode;
 #endif
         appData.rsa_test_result += 14;
-        derCert = (byte*)malloc(FOURK_BUF);
+        derCert = (uint8_t*)malloc(FOURK_BUF);
         if (derCert != NULL)
             appData.rsa_test_result--;
-        pem = (byte*)malloc(FOURK_BUF);
+        pem = (uint8_t*)malloc(FOURK_BUF);
         if (pem != NULL)
             appData.rsa_test_result--;
 
-        byte   public_key[557];          /* sized for EES401EP2 */
+        uint8_t   public_key[557];          /* sized for EES401EP2 */
         word16 public_key_len;           /* no. of octets in public key */
-        byte   private_key[607];         /* sized for EES401EP2 */
+        uint8_t   private_key[607];         /* sized for EES401EP2 */
         word16 private_key_len;          /* no. of octets in private key */
         DRBG_HANDLE drbg;
         static uint8_t const pers_str[] = {
@@ -1957,11 +2331,11 @@ void rsa_test(void)
         if (caFile)
             appData.rsa_test_result--;
 
-        bytes = fread(tmp, 1, FOURK_BUF, caFile);
+        uint8_ts = fread(tmp, 1, FOURK_BUF, caFile);
         fclose(caFile);
 
         InitRsaKey(&caKey, 0);
-        ret = RsaPrivateKeyDecode(tmp, &idx, &caKey, (word32)bytes);
+        ret = RsaPrivateKeyDecode(tmp, &idx, &caKey, (word32)uint8_ts);
         if (ret == 0) appData.rsa_test_result--;
 
         InitCert(&myCert);
@@ -2207,6 +2581,8 @@ void APP_Tasks(void) {
 #ifdef HAVE_AESGCM
             testCount++;
             aesgcm_default_test();
+            int result = aesgcm_test();
+            result = result;
 #endif
             appData.state = APP_STATE_TEST_COMPRESS;
             break;

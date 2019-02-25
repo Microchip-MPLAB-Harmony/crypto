@@ -107,6 +107,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
     <#if cryptoCipherRSA == false>
         <#lt>#define NO_RSA
+    <#else>
+        <#lt>#define WOLFSSL_STATIC_RSA
     </#if>
     <#if cryptoHashHMAC == false && cryptoCipherECC == false>
         <#lt>#define NO_HMAC
