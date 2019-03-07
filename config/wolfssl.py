@@ -229,9 +229,9 @@ def instantiateComponent(wolfsslComponent):
     for filename in fileList_wolfssl_headers:
         addFileName(filename, 'header', wolfsslComponent, "../wolfssl/wolfssl/", "../../third_party/wolfssl/wolfssl/", True)
     for filename in fileList_wolfcrypt_support:
-        addFileName(filename, 'support', wolfsslComponent, "../wolfssl/support/", "../../third_party/wolfcrypt_support/wolfssl/wolfcrypt/", True)
+        addFileName(filename, 'support', wolfsslComponent, "support/", "../../third_party/wolfcrypt_support/wolfssl/wolfcrypt/", True)
     for filename in fileList_misc:
-        addFileName(filename, 'misc', wolfsslComponent, "../wolfssl/support/", "../../third_party/wolfcrypt_support/wolfcrypt/src/", True)
+        addFileName(filename, 'misc', wolfsslComponent, "support/", "../../third_party/wolfcrypt_support/wolfcrypt/src/", True)
     #for filename in fileList_common_imp:
     #    addFileName(filename, 'imp', wolfsslComponent, "../wolfssl/src/", "../../third_party/wolfssl/src/", True)    
     
