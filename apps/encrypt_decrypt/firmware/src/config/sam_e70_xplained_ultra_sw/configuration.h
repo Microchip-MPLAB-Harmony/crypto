@@ -146,6 +146,7 @@ extern "C" {
 #define HAVE_ECC
 #define USE_FAST_MATH
 #define HAVE_LIBZ
+#define WOLFSSL_STATIC_RSA
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
 

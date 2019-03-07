@@ -145,7 +145,6 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/system_common.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/system_module.h</itemPath>
           </logicalFolder>
-          <itemPath>../src/config/sam_e70_xplained_ultra_sw/my_assert.h</itemPath>
           <itemPath>../src/config/sam_e70_xplained_ultra_sw/device_cache.h</itemPath>
           <itemPath>../src/config/sam_e70_xplained_ultra_sw/toolchain_specifics.h</itemPath>
           <itemPath>../src/config/sam_e70_xplained_ultra_sw/definitions.h</itemPath>
@@ -377,7 +376,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="SAME70_DFP" vendor="Microchip" version="3.0.7"/>
+        <pack name="SAME70_DFP" vendor="Microchip" version="3.0.11"/>
         <pack name="CMSIS" vendor="ARM" version="5.0.1"/>
       </packs>
       <compileType>
