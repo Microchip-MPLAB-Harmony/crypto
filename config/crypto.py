@@ -274,7 +274,7 @@ def instantiateComponent(cryptoComponent):
     cryptoHashSHA224.setLabel("Hash - SHA-224")
     cryptoHashSHA224.setDescription("Enables Hashing function SHA-224")
     cryptoHashSHA224.setDefaultValue(False)
-	cryptoHashSHA224.setVisible(False)
+    cryptoHashSHA224.setVisible(False)
     #cryptoWolfCryptEnabledMenuComponentsList.append(cryptoHashSHA224)
     #if cryptoCurrentHwSha224Support[0] != "SW":
     #    cryptoHwMenuComponentsList.append(cryptoHashSHA224)
