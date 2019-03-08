@@ -5352,32 +5352,62 @@
           </Attributes>
         </Boolean>
         <String dnOrder="5" id="NET_PRES_BLOB_SERVER_CERT_FILENAME">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="wolfssl/certs_test.h"/>
           </Values>
         </String>
         <String dnOrder="6" id="NET_PRES_BLOB_SERVER_CERT_LEN_VARIABLE">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="sizeof_server_cert_der_2048"/>
           </Values>
         </String>
         <String dnOrder="7" id="NET_PRES_BLOB_SERVER_CERT_VARIABLE">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="server_cert_der_2048"/>
           </Values>
         </String>
         <String dnOrder="8" id="NET_PRES_BLOB_SERVER_KEY_FILENAME">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="wolfssl/certs_test.h"/>
           </Values>
         </String>
         <String dnOrder="9" id="NET_PRES_BLOB_SERVER_KEY_LEN_VARIABLE">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="sizeof_server_key_der_2048"/>
           </Values>
         </String>
         <String dnOrder="10" id="NET_PRES_BLOB_SERVER_KEY_VARIABLE">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="server_key_der_2048"/>
           </Values>
         </String>
@@ -5398,14 +5428,7 @@
             </Boolean>
           </Attributes>
         </Boolean>
-        <File dnOrder="13" id="NET_PRES_SYS_RTOS_TASK">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="14" id="__FILESYMBOL_16">
+        <File dnOrder="13" id="__FILESYMBOL_16">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
@@ -5503,18 +5526,6 @@
               </Values>
             </Boolean>
           </Symbols>
-          <Attachments dnOrder="1">
-            <DirectDependency dnOrder="0" id="NetPres_Crypto_Dependency">
-              <Attributes dnOrder="0">
-                <String dnOrder="0" id="targetComponentID">
-                  <Value dnOrder="0">lib_crypto</Value>
-                </String>
-                <String dnOrder="1" id="targetAttachmentID">
-                  <Value dnOrder="0">lib_crypto</Value>
-                </String>
-              </Attributes>
-            </DirectDependency>
-          </Attachments>
         </InstanceComponent>
       </Instances>
     </GeneratorComponent>

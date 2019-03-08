@@ -606,7 +606,6 @@
                 <itemPath>../src/config/sam_e70_xplained_ultra/net_pres/pres/src/net_pres.c</itemPath>
               </logicalFolder>
               <itemPath>../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_enc_glue.c</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_cert_store.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
@@ -670,6 +669,7 @@
         <itemPath>../src/third_party/wolfssl/src/wolfio.c</itemPath>
       </logicalFolder>
       <itemPath>../src/app_commands.c</itemPath>
+      <itemPath>../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_cert_store.c</itemPath>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>
     </logicalFolder>
