@@ -77,7 +77,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     #endif
 
     /* for fips @wc_fips */
-//    #include "crypto/src/sha256.h"
+    #include "crypto/src/sha256.h"
 #endif
 
 #ifdef FREESCALE_LTC_SHA
@@ -147,8 +147,8 @@ enum {
 #elif defined(WOLFSSL_AFALG_HASH)
     #include "wolfssl/wolfcrypt/port/af_alg/afalg_hash.h"
 #elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256) || defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
-    #include "crypto/src/crypt_sha_hw.h"
-    #define wc_Sha256 crypt_sha_hw_descriptor
+    #include "crypto/src/crypt_sha256_hw.h"
+    #define wc_Sha256 crypt_sha256_hw_descriptor
 #else
 /* wc_Sha256 digest */
 typedef struct wc_Sha256 {

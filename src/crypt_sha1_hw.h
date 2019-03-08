@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    crypto_sha_hw.h
+    crypto_sha1_hw.h
 
   Summary:
     Crypto Framework Libarary interface file for hardware RNG
@@ -41,12 +41,11 @@ ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *****************************************************************************/
 
-#ifndef _CRYPT_SHA_HW_H_
-#define _CRYPT_SHA_HW_H_
+#ifndef _CRYPTO_SHA1_HW_H_
+#define _CRYPTO_SHA1_HW_H_
 
 #include "configuration.h"
 #include "sha.h"
-#include "sha256.h"
 
 #if defined(CRYPTO_SHA_HW_11105)
 #include "crypt_sha_sam11105.h"
@@ -56,5 +55,22 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "crypt_sha_sam6156.h"
 #endif
 
+typedef struct 
+{
+#if defined(CRYPTO_SHA_HW_11105)
+    struct icm_descriptor icm_descriptor __attribute__((aligned (64)));
+    uint8_t  buffer[SHA_BLOCK_SIZE]   __attribute__((aligned (64)));
+    uint32_t digest[SHA_DIGEST_SIZE/4] __attribute__((aligned (128)));
+    uint64_t total_len;   /* number of bytes to be processed  */
+#endif
+#if defined(CRYPTO_SHA_HW_6156)
+    struct sha_descriptor sha_descriptor;
+#endif
+}crypt_sha_hw_descriptor;
 
-#endif /* _CRYPT_SHA_HW_H_ */
+int CRYPT_SHA1_InitSha(crypt_sha_hw_descriptor* sha, void* heap, int devId);
+int CRYPT_SHA1_Update(crypt_sha_hw_descriptor* sha, const byte* data, word32 len);
+int CRYPT_SHA1_Final(crypt_sha_hw_descriptor* sha, byte* hash);
+int CRYPT_SHA1_FinalRaw(crypt_sha_hw_descriptor* sha, byte* hash);
+
+#endif

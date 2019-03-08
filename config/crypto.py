@@ -29,7 +29,7 @@
 cryptoHwTrngSupport = [["RNG", "00159", "", [], set([])],  #PIC32MZ EF
                       ["TRNG", "6334", "G", ["crypt_rng_sam6334.c"], set([])],  #ATSAMV70Q20B
                       #["TRNG", "U2242", "1.1.0", ["random_u2242.c"], set([])], #ATSAME54P20A
-                      ["TRNG", "6334", "K", [], set([])],  #ATSAMA5D28
+                      #["TRNG", "6334", "K", [], set([])],  #ATSAMA5D28
                      ]
 
 cryptoHwMd5Support = [["CRYPTO", "00158", "1", [], set([])] #PIC32MZ EF
@@ -38,43 +38,35 @@ cryptoHwMd5Support = [["CRYPTO", "00158", "1", [], set([])] #PIC32MZ EF
 cryptoHwSha1Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
                        ["ICM", "11105", "H", ["crypt_sha1_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20B
                        #["ICM", "U2010", "1.2.0", ["sha_u2010.c"], set([])], #ATSAME54P20A
-                       ["SHA", "6156", "O", ["crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D28
+                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D28
                       ]
 
 cryptoHwSha224Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
-                       ["SHA", "6156", "O",
-                           ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
-                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
                       
 cryptoHwSha256Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
-                       ["ICM", "11105", "H", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
+                       ["ICM", "11105", "H", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])] #ATSAMV70Q20
                        #["ICM", "U2010", "1.2.0", ["sha_u2010.c"], set([])], #ATSAME54P20A
-                       ["SHA", "6156", "O",
-                           ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
-                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
                       
 cryptoHwSha384Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
-                       ["SHA", "6156", "O",
-                           ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
-                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
                       
-cryptoHwSha512Support = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
-                       ["SHA", "6156", "O",
-                           ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], 
-                           set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+cryptoHwSha512Support = [["CRYPTO", "00158", "1", [], set([])] #PIC32MZ EF
+                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
 
 cryptoHwAesSupport = [["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
                        ["AES", "6149", "W", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])], #ATSAMV70Q20B
                        #["AES", "U2238", "2.2.0", ["aes_U2238.c"], set([])], #ATSAME54P20A
-                       ["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])] #ATSAMA5D28
+                       #["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])] #ATSAMA5D28
                       ]
 
 cryptoHwDesSupport = [
-                      ["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
+                      #["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
                      ]
 
 cryptoHwRsaSupport = [
@@ -95,7 +87,7 @@ cryptoWolfCryptFiles = ["aes.h", "aes.c", "arc4.c", "arc4.h", "asm.c", "asn.c", 
                         "curve25519.h", "des3.h", "dh.c", "dh.h", "dsa.c", 
                         "crypt_sha_sam11105.h","crypt_sha_sam6156.h",
                         "crypt_sha_hw.h", "crypt_aes_hw.h", "crypt_aes_sam6149.h",
-                        "crypt_aes_hwInt.h",
+                        "crypt_aes_hwInt.h", "crypt_sha1_hw.h", "crypt_sha256_hw.h",
                         "dsa.h", "ecc.h", "ed25519.c", "ed25519.h", "error.c", 
                         "error-crypt.h", "fe_low_mem.c", "fe_operations.c", 
                         "fe_operations.h",
@@ -282,9 +274,10 @@ def instantiateComponent(cryptoComponent):
     cryptoHashSHA224.setLabel("Hash - SHA-224")
     cryptoHashSHA224.setDescription("Enables Hashing function SHA-224")
     cryptoHashSHA224.setDefaultValue(False)
-    cryptoWolfCryptEnabledMenuComponentsList.append(cryptoHashSHA224)
-    if cryptoCurrentHwSha224Support[0] != "SW":
-        cryptoHwMenuComponentsList.append(cryptoHashSHA224)
+	cryptoHashSHA224.setVisible(False)
+    #cryptoWolfCryptEnabledMenuComponentsList.append(cryptoHashSHA224)
+    #if cryptoCurrentHwSha224Support[0] != "SW":
+    #    cryptoHwMenuComponentsList.append(cryptoHashSHA224)
     
     cryptoHashSHA256 = cryptoComponent.createBooleanSymbol("cryptoHashSHA256", cryptoMenu)
     cryptoHashSHA256.setLabel("Hash - SHA-256")
