@@ -4569,44 +4569,84 @@
     </UniqueComponent>
     <UniqueComponent dnOrder="5" id="lib_crypto">
       <Symbols dnOrder="0">
-        <Boolean dnOrder="0" id="cryptoHashHMAC">
+        <Boolean dnOrder="0" id="cryptoCipher3DES">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="1" id="cryptoHashMD5">
+        <Boolean dnOrder="1" id="cryptoCipherAES_CBC">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="2" id="cryptoHashSHA1">
+        <Boolean dnOrder="2" id="cryptoCipherAES_CTR">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="3" id="cryptoHashSHA256">
+        <Boolean dnOrder="3" id="cryptoCipherAES_ECB">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="4" id="cryptoHashSHA384">
+        <Boolean dnOrder="4" id="cryptoCipherAES_GCM">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="5" id="cryptoHashSHA512">
+        <Boolean dnOrder="5" id="cryptoCipherECC">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="6" id="cryptoIsWolfsslEnabled">
+        <Boolean dnOrder="6" id="cryptoCipherRSA">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="7" id="cryptoHashHMAC">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="8" id="cryptoHashMD5">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="9" id="cryptoHashSHA1">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="10" id="cryptoHashSHA256">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="11" id="cryptoHashSHA384">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="12" id="cryptoHashSHA512">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="13" id="cryptoHuffman">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="14" id="cryptoIsWolfsslEnabled">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="lib_crypto" priority="1" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="7" id="cryptoRandom">
+        <Boolean dnOrder="15" id="cryptoRandom">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
@@ -4938,7 +4978,7 @@
         <ElementPosition dnOrder="2" id="cmsis" x="120" y="20"/>
         <ElementPosition dnOrder="3" id="core" x="20" y="20"/>
         <ElementPosition dnOrder="4" id="dfp" x="260" y="20"/>
-        <ElementPosition dnOrder="5" id="lib_crypto" x="458" y="233"/>
+        <ElementPosition dnOrder="5" id="lib_crypto" x="465" y="247"/>
         <ElementPosition dnOrder="6" id="sys_console" x="247" y="78"/>
         <ElementPosition dnOrder="7" id="sys_time" x="241" y="209"/>
         <ElementPosition dnOrder="8" id="tc0" x="32" y="255"/>

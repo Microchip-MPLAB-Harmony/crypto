@@ -110,13 +110,13 @@ int NET_PRES_EncGlue_StreamClientSendCb0(void *sslin, char *buf, int sz, void *c
 
 void NET_PRES_EncProviderStreamClientLog0(int level, const char * message)
 {
-	static char buffer[80][240];
+	static char buffer[80][120];
 	static int bufNum = 0;
-//	if (level > 2)
-//	{
-//		return;
-//	}
-	snprintf(buffer[bufNum], 240, "wolfSSL (%d): %s\r\n", level, message);
+	if (level > 2)
+	{
+		return;
+	}
+	snprintf(buffer[bufNum], 120, "wolfSSL (%d): %s\r\n", level, message);
 	SYS_CONSOLE_MESSAGE(buffer[bufNum]);
 	bufNum ++;
 	if (bufNum == 80)

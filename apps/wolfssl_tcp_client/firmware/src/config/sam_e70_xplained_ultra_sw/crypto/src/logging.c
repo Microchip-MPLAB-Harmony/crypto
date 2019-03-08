@@ -381,10 +381,6 @@ void WOLFSSL_ERROR_LINE(int error, const char* func, unsigned int line,
 void WOLFSSL_ERROR(int error)
 #endif
 {
-    if (error == -323 || error == -327)
-    {
-        return;
-    }
 #ifdef WOLFSSL_ASYNC_CRYPT
     if (error != WC_PENDING_E)
 #endif

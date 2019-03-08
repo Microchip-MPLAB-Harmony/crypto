@@ -173,7 +173,7 @@ extern "C" {
 /******************************************************************************/
 
 #define NDEBUG
-//#define DEBUG_WOLFSSL
+#define DEBUG_WOLFSSL
 #define HAVE_AES_DECRYPT
 #define HAVE_AES_ECB
 #define WOLFSSL_ALT_NAMES
@@ -198,7 +198,7 @@ extern "C" {
 #define MICROCHIP_TCPIP
 #define USER_TICKS
 #define WOLFSSL_DTLS
-#define DEBUG_WOLFSSL_VERBOSE
+
 
 #define TFM_TIMING_RESISTANT
 #define ECC_TIMING_RESISTANT
@@ -514,10 +514,10 @@ extern "C" {
 #define HAVE_AES_CBC
 #define HAVE_AESGCM
 #define USE_FAST_MATH
+#define WOLFSSL_STATIC_RSA
+#define USE_CERT_BUFFERS_2048
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
-#define WOLFSSL_STATIC_RSA
-#define HAVE_ECC
 
 
 

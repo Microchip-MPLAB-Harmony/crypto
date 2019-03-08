@@ -75,6 +75,7 @@ struct icm_descriptor actIcmDescriptor __attribute__((aligned (64)));
 uint8_t  actBuffer[SHA256_BLOCK_SIZE] __attribute__((aligned (64)));  /* 64 bytes = 512 bits */
 uint32_t actDigest[SHA256_DIGEST_SIZE/4] __attribute__((aligned (128)));
 
+
 int CRYPT_SHA256_InitSha(crypt_sha256_hw_descriptor* sha256, void* heap, int devId)
 {
     /* Enable ICM */
@@ -111,10 +112,11 @@ int CRYPT_SHA256_InitSha(crypt_sha256_hw_descriptor* sha256, void* heap, int dev
 }
 
 
+
 /* length is in bytes */
 static int32_t CRYPT_SHA256_Process(crypt_sha256_hw_descriptor* sha256, const uint8_t *input, word32 length)
 {
-    //logHwDesc(sha256, length);
+
     ICM_REGS->ICM_CTRL = ICM_CTRL_SWRST(1);
     sha256->icm_descriptor.start_addr = (uint32_t)input;
 
@@ -165,10 +167,12 @@ static int32_t CRYPT_SHA256_Process(crypt_sha256_hw_descriptor* sha256, const ui
 
     SCB_CleanInvalidateDCache_by_Addr((uint32_t*) (&actDigest), SHA256_DIGEST_SIZE);
     memcpy(sha256->digest, &actDigest, sizeof(sha256->digest));
-    //logHwDesc(sha256, 0);
-
+    
     return 0;
 }
+
+
+
 
 /* len is number of bytes - multiple of 64 only */
 int CRYPT_SHA256_Update(crypt_sha256_hw_descriptor* sha256, const byte* data, word32 len)
@@ -177,7 +181,6 @@ int CRYPT_SHA256_Update(crypt_sha256_hw_descriptor* sha256, const byte* data, wo
     uint32_t left;
     int result = 0;
 
-    
     left = sha256->total_len & 0x3F;
     fill = SHA256_BLOCK_SIZE - left;
 
@@ -198,9 +201,23 @@ int CRYPT_SHA256_Update(crypt_sha256_hw_descriptor* sha256, const byte* data, wo
     /* process a full 64 bytes = 512 bits */
     if (len >= SHA256_BLOCK_SIZE)
     {
-        result = CRYPT_SHA256_Process(sha256, data, len & 0xFFFFFFC0);
-        data += (len & 0xFFFFFFC0);
-        len &= 0x3F;
+        if ((((uint32_t)data) & 63) != 0)
+        {
+            // Data is not aligned!
+            while (len > SHA256_BLOCK_SIZE)
+            {
+                memcpy(&actBuffer, data, SHA256_BLOCK_SIZE);
+                result = CRYPT_SHA256_Process(sha256, actBuffer, SHA256_BLOCK_SIZE);
+                data+=64;
+                len -=64;                
+            }
+        }
+        else {
+        
+            result = CRYPT_SHA256_Process(sha256, data, len & 0xFFFFFFC0);
+            data += (len & 0xFFFFFFC0);
+            len &= 0x3F;
+        }
     }
 
     /* fill in a partial buffer */
@@ -208,7 +225,7 @@ int CRYPT_SHA256_Update(crypt_sha256_hw_descriptor* sha256, const byte* data, wo
     {
         memcpy((void *)(sha256->buffer + left), data, len);
     }
-    
+
     return result;
 }
 
@@ -232,7 +249,6 @@ int CRYPT_SHA256_Final(crypt_sha256_hw_descriptor* sha256, byte* hash)
     uint8_t  padn;
     uint8_t  msg_len[8];
 
-    
     /* Get the number of bits */
     /* create the message bit length block */
     uint64_t total_bits = sha256->total_len << 3;
@@ -254,6 +270,7 @@ int CRYPT_SHA256_Final(crypt_sha256_hw_descriptor* sha256, byte* hash)
     CRYPT_SHA256_Update(sha256, msg_len, 8);
 
     memcpy(hash, (void *)sha256->digest, SHA256_DIGEST_SIZE);
+
     return CRYPT_SHA256_InitSha(sha256, NULL, 0);
 }
 

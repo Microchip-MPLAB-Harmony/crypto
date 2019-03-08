@@ -74,7 +74,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 
 #include "crypto/src/random.h"
-#include "crypto/src/cpuid.h"
+//#include "crypto/src/cpuid.h"
 
 
 
@@ -162,7 +162,7 @@ int wc_RNG_GenerateByte(WC_RNG* rng, byte* b)
     #include "fsl_rnga.h"
 
 #elif defined(HAVE_MICROCHIP_HARMONY3_HW_RNG)
-#include "crypto\src\crypt_rng_hw.h"
+#include "crypt_rng_hw.h"
 #elif defined(NO_DEV_RANDOM)
 #elif defined(CUSTOM_RAND_GENERATE)
 #elif defined(CUSTOM_RAND_GENERATE_BLOCK)
@@ -1560,6 +1560,22 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
     {
         return CRYPT_RNG_GenerateSeed(output, sz);
     }
+#elif defined(MICROCHIP_MPLAB_HARMONY_3)
+    #include "system/time/sys_time.h"
+    #define PIC32_SEED_COUNT SYS_TIME_CounterGet
+    int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
+    {
+        int i;
+        srand(PIC32_SEED_COUNT() * 25);
+
+        for (i = 0; i < sz; i++ ) {
+            output[i] = rand() % 256;
+            if ( (i % 8) == 7)
+                srand(PIC32_SEED_COUNT() * 25);
+        }
+        return 0;
+    }
+
 #elif defined(MICROCHIP_PIC32)
 
     #ifdef MICROCHIP_MPLAB_HARMONY

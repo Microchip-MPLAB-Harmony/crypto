@@ -156,7 +156,7 @@ static void CRYPT_AES_sam6149SaveDesc(Aes * aesCfg)
 #define MAX(x,y) (x>y)?x:y
 
 /* Start actions */
-int crypt_aes_SetKey(Aes* aes, const byte* userKey, word32 keylen, const byte* iv, int dir)
+int CRYPT_AES_SetKey(Aes* aes, const byte* userKey, word32 keylen, const byte* iv, int dir)
 {
     memset(aes, 0, sizeof(Aes));
     aes->hwDesc.aesMr.s.CKEY = 0xE;  // Must be set on first program
@@ -202,7 +202,7 @@ int crypt_aes_SetKey(Aes* aes, const byte* userKey, word32 keylen, const byte* i
 #ifdef HAVE_AES_CBC
 
 
-int crypt_aes_CbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
+int CRYPT_AES_CbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 {
     /* set all the fields needed to set-up the AES engine */
     aes->hwDesc.aesMr.s.LOD = 0;
@@ -248,7 +248,7 @@ int crypt_aes_CbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 
 
 #ifdef HAVE_AES_DECRYPT
-int crypt_aes_CbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
+int CRYPT_AES_CbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 {
     aes->hwDesc.aesMr.s.LOD = 0;
     aes->hwDesc.aesMr.s.GTAGEN = 0;
@@ -299,7 +299,7 @@ int crypt_aes_CbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 /* AES-CTR */
 #ifdef WOLFSSL_AES_COUNTER
 
-int crypt_aes_CtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
+int CRYPT_AES_CtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 {
     aes->hwDesc.aesMr.s.LOD = 0;
     aes->hwDesc.aesMr.s.GTAGEN = 0;
@@ -343,7 +343,15 @@ int crypt_aes_CtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 #endif /* WOLFSSL_AES_COUNTER */
 
 
-
+void CRYPT_AES_Free(Aes* aes)
+{
+    
+}
+int  CRYPT_AES_Init(Aes* aes, void* heap, int devId)
+{
+    memset(aes, 0, sizeof(Aes));
+    return 0;
+}
 #ifdef HAVE_AESCCM
 
 #ifdef WOLFSSL_PIC32MZ_CRYPT
@@ -354,7 +362,7 @@ int crypt_aes_CtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
 
 #ifdef HAVE_AESGCM
 
-int crypt_aes_GcmJ0Generation(Aes* aes, const unsigned char* iv, unsigned int ivSz)
+int CRYPT_AES_GcmJ0Generation(Aes* aes, const unsigned char* iv, unsigned int ivSz)
 {
     if (iv == NULL)
     {
@@ -455,7 +463,7 @@ int crypt_aes_GcmJ0Generation(Aes* aes, const unsigned char* iv, unsigned int iv
     return 0;
 }
 
-int crypt_aes_GcmResetCtx(Aes * aes)
+int CRYPT_AES_GcmResetCtx(Aes * aes)
 {
     memset(aes->hwDesc.aesIv, 0, sizeof(aes->hwDesc.aesIv));    
     aes->hwDesc.aesAddlenr = 0;
@@ -465,7 +473,7 @@ int crypt_aes_GcmResetCtx(Aes * aes)
     return 0;
 }
 
-int crypt_aes_GsmWriteIv(Aes * aes)
+int CRYPT_AES_GsmWriteIv(Aes * aes)
 {
 
     int x = 0;
@@ -479,7 +487,7 @@ int crypt_aes_GsmWriteIv(Aes * aes)
     
 }
 
-int crypt_aes_GsmRunBlocks(Aes * aes, const unsigned int* blockIn, unsigned int blockInSz, unsigned int* out)
+int CRYPT_AES_GsmRunBlocks(Aes * aes, const unsigned int* blockIn, unsigned int blockInSz, unsigned int* out)
 {
     if (blockInSz == 0)
     {
@@ -558,7 +566,7 @@ int crypt_aes_GsmRunBlocks(Aes * aes, const unsigned int* blockIn, unsigned int 
     return 0;
 }
 
-int crypt_aes_GcmCmpMsgWithTag(Aes * aes, unsigned char* out,
+int CRYPT_AES_GcmCmpMsgWithTag(Aes * aes, unsigned char* out,
                                    const unsigned char* in, unsigned int sz,
                                    const unsigned char* iv, unsigned int ivSz,
                                    unsigned char* authTag, unsigned int authTagSz,
@@ -566,7 +574,7 @@ int crypt_aes_GcmCmpMsgWithTag(Aes * aes, unsigned char* out,
 {
     //3. Calculate the J0 value
     aes->hwDesc.aesCtr = 0x02000000;
-    crypt_aes_GcmJ0Generation(aes, iv, ivSz);
+    CRYPT_AES_GcmJ0Generation(aes, iv, ivSz);
     enableAesModule();
 
     //1. Set AES_MR.OPMOD to GCM and AES_MR.GTAGEN to ?1?.
@@ -578,13 +586,13 @@ int crypt_aes_GcmCmpMsgWithTag(Aes * aes, unsigned char* out,
     while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 
     //4. Set AES_IVRx.IV with inc32(J0) (J0 + 1 on 32 bits).
-    crypt_aes_GsmWriteIv(aes);
+    CRYPT_AES_GsmWriteIv(aes);
     
     AES_REGS->AES_AADLENR = authInSz;
     AES_REGS->AES_CLENR = sz;
     
-    crypt_aes_GsmRunBlocks(aes, (const unsigned int*)authIn, authInSz, NULL);
-    crypt_aes_GsmRunBlocks(aes, (const unsigned int*)in, sz, (unsigned int*)out);
+    CRYPT_AES_GsmRunBlocks(aes, (const unsigned int*)authIn, authInSz, NULL);
+    CRYPT_AES_GsmRunBlocks(aes, (const unsigned int*)in, sz, (unsigned int*)out);
     
     if (authInSz != 0 || sz != 0)
     {
@@ -608,7 +616,7 @@ int crypt_aesGcm1stMsgFrag(Aes* aes, unsigned char* out,
 {
     //3. Calculate the J0 value
     aes->hwDesc.aesCtr = 0x02000000;
-    crypt_aes_GcmJ0Generation(aes, iv, ivSz);
+    CRYPT_AES_GcmJ0Generation(aes, iv, ivSz);
     enableAesModule();
 
     //1. Set AES_MR.OPMOD to GCM and AES_MR.GTAGEN to ?1?.
@@ -620,13 +628,13 @@ int crypt_aesGcm1stMsgFrag(Aes* aes, unsigned char* out,
     while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 
     //4. Set AES_IVRx.IV with inc32(J0) (J0 + 1 on 32 bits).
-    crypt_aes_GsmWriteIv(aes);
+    CRYPT_AES_GsmWriteIv(aes);
     
     AES_REGS->AES_AADLENR = authInSz;
     AES_REGS->AES_CLENR = sz;
     
-    crypt_aes_GsmRunBlocks(aes, (const unsigned int*)authIn, authInSz, NULL);
-    crypt_aes_GsmRunBlocks(aes, (const unsigned int*)in, sz, (unsigned int*)out);
+    CRYPT_AES_GsmRunBlocks(aes, (const unsigned int*)authIn, authInSz, NULL);
+    CRYPT_AES_GsmRunBlocks(aes, (const unsigned int*)in, sz, (unsigned int*)out);
     
     CRYPT_AES_sam6149SaveDesc(aes);
     
@@ -649,12 +657,12 @@ int crypt_aesGcmMoreMsgFrag(Aes* aes, unsigned char* out,
     while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 
     //4. Set AES_IVRx.IV with inc32(J0) (J0 + 1 on 32 bits).
-    crypt_aes_GsmWriteIv(aes);
+    CRYPT_AES_GsmWriteIv(aes);
     
     AES_REGS->AES_AADLENR = 0;
     AES_REGS->AES_CLENR = sz;
     CRYPT_AES_sam6149LoadGHash(aes);    
-    crypt_aes_GsmRunBlocks(aes, (const unsigned int*)in, sz, (unsigned int*)out);
+    CRYPT_AES_GsmRunBlocks(aes, (const unsigned int*)in, sz, (unsigned int*)out);
     
     CRYPT_AES_sam6149SaveDesc(aes);
     
@@ -737,7 +745,7 @@ int crypt_aesGcmGenerateTag(Aes* aes, unsigned int sz, unsigned char* authTag, u
 }
 
 
-int crypt_aes_GcmEncrypt(Aes* aes, unsigned char* out,
+int CRYPT_AES_GcmEncrypt(Aes* aes, unsigned char* out,
                                    const unsigned char* in, unsigned int sz,
                                    const unsigned char* iv, unsigned int ivSz,
                                    unsigned char* authTag, unsigned int authTagSz,
@@ -752,8 +760,8 @@ int crypt_aes_GcmEncrypt(Aes* aes, unsigned char* out,
         {
             if (authTag != NULL)
             {
-                ret = crypt_aes_GcmCmpMsgWithTag(aes, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
-                crypt_aes_GcmResetCtx(aes);
+                ret = CRYPT_AES_GcmCmpMsgWithTag(aes, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
+                CRYPT_AES_GcmResetCtx(aes);
                 return ret;
             }
             else
@@ -767,16 +775,16 @@ int crypt_aes_GcmEncrypt(Aes* aes, unsigned char* out,
     {
         if (aes->hwDesc.aesCtr == 0)
         {
-            crypt_aes_GcmJ0Generation(aes, iv, ivSz);
+            CRYPT_AES_GcmJ0Generation(aes, iv, ivSz);
         }
         ret = crypt_aesGcmGenerateTag(aes, sz, authTag, authTagSz, authInSz);
-        crypt_aes_GcmResetCtx(aes);
+        CRYPT_AES_GcmResetCtx(aes);
     }
     
     return ret;
 }
 
-int crypt_aes_GcmDecrypt(Aes* aes, unsigned char* out,
+int CRYPT_AES_GcmDecrypt(Aes* aes, unsigned char* out,
                                    const unsigned char* in, unsigned int sz,
                                    const unsigned char* iv, unsigned int ivSz,
                                    const unsigned char* authTag, unsigned int authTagSz,
@@ -792,8 +800,8 @@ int crypt_aes_GcmDecrypt(Aes* aes, unsigned char* out,
             if (authTag != NULL)
             {
                 unsigned char cmpAuthTag[16] =  {0};
-                ret = crypt_aes_GcmCmpMsgWithTag(aes, out, in, sz, iv, ivSz, cmpAuthTag, sizeof(cmpAuthTag), authIn, authInSz);
-                crypt_aes_GcmResetCtx(aes);
+                ret = CRYPT_AES_GcmCmpMsgWithTag(aes, out, in, sz, iv, ivSz, cmpAuthTag, sizeof(cmpAuthTag), authIn, authInSz);
+                CRYPT_AES_GcmResetCtx(aes);
 
                 if (memcmp(authTag, cmpAuthTag, authTagSz))
                 {
@@ -812,11 +820,11 @@ int crypt_aes_GcmDecrypt(Aes* aes, unsigned char* out,
     {
         if (aes->hwDesc.aesCtr == 0)
         {
-            crypt_aes_GcmJ0Generation(aes, iv, ivSz);
+            CRYPT_AES_GcmJ0Generation(aes, iv, ivSz);
         }
         unsigned char cmpAuthTag[16] =  {0};
         ret = crypt_aesGcmGenerateTag(aes, sz, cmpAuthTag, sizeof(cmpAuthTag), authInSz);
-        crypt_aes_GcmResetCtx(aes);
+        CRYPT_AES_GcmResetCtx(aes);
         if (memcmp(authTag, cmpAuthTag, authTagSz))
         {
             return AES_GCM_AUTH_E;

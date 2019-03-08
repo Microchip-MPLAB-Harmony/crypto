@@ -425,14 +425,12 @@ def setupHwSupport(cryptoComponent):
                 cryptoCurrentHwRngSupport = rng
                 cryptoHwSupportFound = True
                 cryptoHaveHwRng.setDefaultValue(True)
-                print("PMWDELETE found rng module" + str(rng[4]))
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(rng[4])
         for md5 in cryptoHwMd5Support:
             if module.getAttribute("name") == md5[0] and module.getAttribute("id") == md5[1] and module.getAttribute("version") == md5[2]:
                 cryptoCurrentHwMd5Support = md5
                 cryptoHwSupportFound = True
                 cryptoHaveHwMd5.setDefaultValue(True)
-                print("PMWDELETE found md5 module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(md5[4])
         for sha1 in cryptoHwSha1Support:
             #print("Against: '" + sha1[0] + "' '" + sha1[1] + "' '" + sha1[2] + "'")
@@ -440,42 +438,35 @@ def setupHwSupport(cryptoComponent):
                 cryptoCurrentHwSha1Support = sha1
                 cryptoHwSupportFound = True
                 cryptoHaveHwSha1.setDefaultValue(True)
-                print("PMWDELETE found sha1 module: " + ", ".join(sha1[4]))
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(sha1[4])
-                print("PMWDELETE list: " + ", ".join(cryptoHwAdditionalDefines))
         for sha224 in cryptoHwSha224Support:
             if module.getAttribute("name") == sha224[0] and module.getAttribute("id") == sha224[1] and module.getAttribute("version") == sha224[2]:
                 cryptoCurrentHwSha224Support = sha224
                 cryptoHwSupportFound = True
                 cryptoHaveHwSha224.setDefaultValue(True)
-                print("PMWDELETE found sha-224 module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(sha224[4])
         for sha256 in cryptoHwSha256Support:
             if module.getAttribute("name") == sha256[0] and module.getAttribute("id") == sha256[1] and module.getAttribute("version") == sha256[2]:
                 cryptoCurrentHwSha256Support = sha256
                 cryptoHwSupportFound = True
                 cryptoHaveHwSha256.setDefaultValue(True)
-                print("PMWDELETE found sha-256 module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(sha256[4])
         for sha384 in cryptoHwSha384Support:
             if module.getAttribute("name") == sha384[0] and module.getAttribute("id") == sha384[1] and module.getAttribute("version") == sha384[2]:
                 cryptoCurrentHwSha384Support = sha384
                 cryptoHwSupportFound = True
                 cryptoHaveHwSha384.setDefaultValue(True)
-                print("PMWDELETE found sha-384 module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(sha384[4])
         for sha512 in cryptoHwSha512Support:
             if module.getAttribute("name") == sha512[0] and module.getAttribute("id") == sha512[1] and module.getAttribute("version") == sha512[2]:
                 cryptoCurrentHwSha512Support = sha512
                 cryptoHwSupportFound = True
-                print("PMWDELETE found sha-512 module")
                 cryptoHaveHwSha512.setDefaultValue(True)
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(sha512[4])
         for aes in cryptoHwAesSupport:
             if module.getAttribute("name") == aes[0] and module.getAttribute("id") == aes[1] and module.getAttribute("version") == aes[2]:
                 cryptoCurrentHwAesSupport = aes
                 cryptoHwSupportFound = True
-                print("PMWDELETE found Aes module")
                 cryptoHaveHwAes.setDefaultValue(True)
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(aes[4])
         for des in cryptoHwDesSupport:
@@ -483,23 +474,19 @@ def setupHwSupport(cryptoComponent):
                 cryptoCurrentHwDesSupport = des
                 cryptoHwSupportFound = True
                 cryptoHaveHwDes.setDefaultValue(True)
-                print("PMWDELETE found Des module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(des[4])
         for rsa in cryptoHwRsaSupport:
             if module.getAttribute("name") == rsa[0] and module.getAttribute("id") == rsa[1] and module.getAttribute("version") == rsa[2]:
                 cryptoCurrentHwRsaSupport = rsa
                 cryptoHwSupportFound = True
                 cryptoHaveHwRsa.setDefaultValue(True)
-                print("PMWDELETE found Rsa module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(rsa[4])
         for ecc in cryptoHwEccSupport:
             if module.getAttribute("name") == ecc[0] and module.getAttribute("id") == ecc[1] and module.getAttribute("version") == ecc[2]:
                 cryptoCurrentHwEccSupport = ecc
                 cryptoHwSupportFound = True
                 cryptoHaveHwEcc.setDefaultValue(True)
-                print("PMWDELETE found Ecc module")
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(ecc[4])
-    #print("PMWREMOVE: additional defines: " + ", ".join(cryptoHwAdditionalDefines))
     cryptoAdditionalHwDefines.setDefaultValue(", ".join(cryptoHwAdditionalDefines))
 
 def addAlwaysOnFiles(cryptoComponent):
@@ -526,11 +513,9 @@ def addAlwaysOnFiles(cryptoComponent):
     headerList.addValue('#include "crypto/crypto.h"')
 
 def setHwEnabledMenuItems(enable):
-    #print("PMWREMOVE SetHwEnable: " + str(enable))
     for symbol in cryptoHwMenuComponentsList:
         if enable:
             if symbol.getLabel()[-2:] != "HW":
-                #print("PMWREMOVE setting: " + symbol.getLabel() + " to have -HW")
                 symbol.setLabel(symbol.getLabel() + " - HW")
         else:
             if symbol.getLabel()[-2:] == "HW":
@@ -651,7 +636,6 @@ def createAllFileComponents(baseComponent):
         createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
 
 def setFilesForHwSupport(enable):
-    #print("PMWREMOVE: HW Support for Files Enable: " + str(enable))
     for fc in cryptoHwFileComponentsDict.values():
         fc.setEnabled(enable)
     for fc in cryptoSwFileComponentsDict.values():

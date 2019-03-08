@@ -29,17 +29,17 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/curve25519.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/des3.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/dh.h</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha1_hw.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha_sam11105.h</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha256_hw.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha_sam6156.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_hw.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_sam6149.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_hwInt.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha1_hw.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha256_hw.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/dsa.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ecc.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ed25519.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/error-crypt.h</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/cpuid.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/fe_operations.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/fips_test.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ge_operations.h</itemPath>
@@ -149,8 +149,8 @@
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/ipv4_private.h</itemPath>
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/ipv6_manager.h</itemPath>
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/ipv6_private.h</itemPath>
-                <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/icmpv6_manager.h</itemPath>
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/icmp_manager.h</itemPath>
+                <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/icmpv6_manager.h</itemPath>
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/arp_manager.h</itemPath>
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/arp_private.h</itemPath>
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/library/tcpip/src/udp_manager.h</itemPath>
@@ -313,8 +313,8 @@
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/time/sys_time_definitions.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/time/src/sys_time_local.h</itemPath>
             </logicalFolder>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/sys_time_h2_adapter.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/sys_clk_h2_adapter.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/sys_time_h2_adapter.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/sys_random_h2_adapter.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/sys_reset_h2_adapter.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/system.h</itemPath>
@@ -694,7 +694,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="SAME70_DFP" vendor="Microchip" version="3.0.7"/>
+        <pack name="SAME70_DFP" vendor="Microchip" version="3.0.11"/>
         <pack name="CMSIS" vendor="ARM" version="5.0.1"/>
       </packs>
       <compileType>

@@ -51,6 +51,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "crypt_sha_sam11105.h"
 #endif
 
+#if defined(CRYPTO_SHA_HW_6156)
+#include "crypt_sha_sam6156.h"
+#endif
+
 typedef struct 
 {
 #if defined(CRYPTO_SHA_HW_11105)
@@ -59,10 +63,14 @@ typedef struct
     uint32_t digest[SHA_DIGEST_SIZE/4] __attribute__((aligned (128)));
     uint64_t total_len;   /* number of bytes to be processed  */
 #endif
+#if defined(CRYPTO_SHA_HW_6156)
+    struct sha_descriptor sha_descriptor;
+#endif
 }crypt_sha_hw_descriptor;
 
 int CRYPT_SHA1_InitSha(crypt_sha_hw_descriptor* sha, void* heap, int devId);
 int CRYPT_SHA1_Update(crypt_sha_hw_descriptor* sha, const byte* data, word32 len);
 int CRYPT_SHA1_Final(crypt_sha_hw_descriptor* sha, byte* hash);
+int CRYPT_SHA1_FinalRaw(crypt_sha_hw_descriptor* sha, byte* hash);
 
 #endif
