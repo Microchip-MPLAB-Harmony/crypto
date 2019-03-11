@@ -1,5 +1,5 @@
 # Microchip MPLAB® Harmony 3 Release Notes
-## Core Release v3.2.0
+## Crypto Release v3.2.0
 ### New Features
 - **New part support** - This release introduces initial support for [SAM E54](https://www.microchip.com/design-centers/32-bit/sam-32-bit-mcus/sam-e-mcus), families of 32-bit microcontrollers and the [SAM A5D2](https://www.microchip.com/design-centers/32-bit-mpus/microprocessors/sama5/sama5d2-series) family of 32-bit microprocessors.
 
