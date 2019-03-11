@@ -240,56 +240,36 @@ int _InitHmac(Hmac* hmac, int type, void* heap)
 
     #ifndef NO_SHA
         case WC_SHA:
-        #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA1)
-            ret = wc_InitHmacSha(&hmac->hash.sha);
-        #else
             ret = wc_InitSha(&hmac->hash.sha);
-        #endif
             break;
     #endif /* !NO_SHA */
 
     #ifdef WOLFSSL_SHA224
         case WC_SHA224:
-        #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
-            ret = wc_InitHmacSha224(&hmac->hash.sha224);
-        #else
             ret = wc_InitSha224(&hmac->hash.sha224);
-        #endif
             break;
     #endif /* WOLFSSL_SHA224 */
 
     #ifndef NO_SHA256
         case WC_SHA256:
-        #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256)
-            ret = wc_InitHmacSha256(&hmac->hash.sha256);
-        #else
             ret = wc_InitSha256(&hmac->hash.sha256);
-        #endif
             break;
     #endif /* !NO_SHA256 */
 
     #ifdef WOLFSSL_SHA384
         case WC_SHA384:
-        #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA384)
-            ret = wc_InitHmacSha384(&hmac->hash.sha384);
-        #else
             ret = wc_InitSha384(&hmac->hash.sha384);
-        #endif
             break;
     #endif /* WOLFSSL_SHA384 */
     #ifdef WOLFSSL_SHA512
         case WC_SHA512:
-        #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA512)
-            ret = wc_InitHmacSha512(&hmac->hash.sha512);
-        #else
             ret = wc_InitSha512(&hmac->hash.sha512);
-        #endif
             break;
     #endif /* WOLFSSL_SHA512 */
 
     #ifdef HAVE_BLAKE2
         case BLAKE2B_ID:
-            ret = wc_InitHmacBlake2b(&hmac->hash.blake2b, BLAKE2B_256);
+            ret = wc_InitBlake2b(&hmac->hash.blake2b, BLAKE2B_256);
             break;
     #endif /* HAVE_BLAKE2 */
 

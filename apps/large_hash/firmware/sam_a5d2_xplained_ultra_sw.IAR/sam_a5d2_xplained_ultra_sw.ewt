@@ -2485,6 +2485,12 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_rng_hw.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha1_hw.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha256_hw.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha_hw.h</name>
             </file>
             <file>

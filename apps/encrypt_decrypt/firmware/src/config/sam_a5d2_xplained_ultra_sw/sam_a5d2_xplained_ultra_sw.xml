@@ -329,7 +329,7 @@
         </KeyValueSet>
         <Integer dnOrder="46" id="IAR_HEAP_SIZE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="32768"/>
+            <User dnOrder="0" value="65536"/>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="47" id="ICM_INTERRUPT_PRIORITY">
@@ -2093,47 +2093,12 @@
     </UniqueComponent>
     <UniqueComponent dnOrder="5" id="lib_crypto">
       <Symbols dnOrder="0">
-        <File dnOrder="0" id="barriers_h">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="1" id="callback_h">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="2" id="cpuidle_h">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="3" id="crypt_aes_sam6149_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <File dnOrder="4" id="crypt_sha_sam6156_c">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
-        <Boolean dnOrder="5" id="cryptoCipher3DES">
+        <Boolean dnOrder="0" id="cryptoCipher3DES">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="6" id="cryptoCipherAES_CBC">
+        <Boolean dnOrder="1" id="cryptoCipherAES_CBC">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;CBC</Value>
@@ -2143,7 +2108,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="7" id="cryptoCipherAES_CTR">
+        <Boolean dnOrder="2" id="cryptoCipherAES_CTR">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;CTR</Value>
@@ -2153,7 +2118,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="8" id="cryptoCipherAES_ECB">
+        <Boolean dnOrder="3" id="cryptoCipherAES_ECB">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;ECB</Value>
@@ -2163,7 +2128,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="9" id="cryptoCipherAES_GCM">
+        <Boolean dnOrder="4" id="cryptoCipherAES_GCM">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">AES&amp;#160;-&amp;#160;GCM</Value>
@@ -2173,32 +2138,32 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="10" id="cryptoCipherECC">
+        <Boolean dnOrder="5" id="cryptoCipherECC">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="11" id="cryptoCipherRSA">
+        <Boolean dnOrder="6" id="cryptoCipherRSA">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="12" id="cryptoHW">
+        <Boolean dnOrder="7" id="cryptoHW">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="13" id="cryptoHashHMAC">
+        <Boolean dnOrder="8" id="cryptoHashHMAC">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="14" id="cryptoHashMD5">
+        <Boolean dnOrder="9" id="cryptoHashMD5">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="15" id="cryptoHashSHA1">
+        <Boolean dnOrder="10" id="cryptoHashSHA1">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-1</Value>
@@ -2208,7 +2173,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="16" id="cryptoHashSHA224">
+        <Boolean dnOrder="11" id="cryptoHashSHA224">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-224</Value>
@@ -2218,7 +2183,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="17" id="cryptoHashSHA256">
+        <Boolean dnOrder="12" id="cryptoHashSHA256">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-256</Value>
@@ -2228,7 +2193,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="18" id="cryptoHashSHA384">
+        <Boolean dnOrder="13" id="cryptoHashSHA384">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-384</Value>
@@ -2238,7 +2203,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="19" id="cryptoHashSHA512">
+        <Boolean dnOrder="14" id="cryptoHashSHA512">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">Hash&amp;#160;-&amp;#160;SHA-512</Value>
@@ -2248,19 +2213,19 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="20" id="cryptoHuffman">
+        <Boolean dnOrder="15" id="cryptoHuffman">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="21" id="cryptoIsWolfsslEnabled">
+        <Boolean dnOrder="16" id="cryptoIsWolfsslEnabled">
           <Values dnOrder="0">
             <Dynamic dnOrder="0">
               <Value dnOrder="0" id="lib_crypto" priority="1" value="false"/>
             </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="22" id="cryptoRandom">
+        <Boolean dnOrder="17" id="cryptoRandom">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="label">
               <Value dnOrder="0">TRNG</Value>
@@ -2270,13 +2235,6 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <File dnOrder="23" id="swab_h">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="enabled">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </File>
       </Symbols>
     </UniqueComponent>
     <UniqueComponent dnOrder="6" id="sys_console">
@@ -2664,13 +2622,12 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="BSP_SAM_A5D2_Xplained_Ultra" x="461" y="51"/>
         <ElementPosition dnOrder="1" id="HarmonyCore" x="732" y="138"/>
         <ElementPosition dnOrder="2" id="cmsis" x="340" y="20"/>
-        <ElementPosition dnOrder="3" id="core" x="242" y="20"/>
+        <ElementPosition dnOrder="3" id="core" x="244" y="18"/>
         <ElementPosition dnOrder="4" id="dfp" x="20" y="20"/>
         <ElementPosition dnOrder="5" id="lib_crypto" x="704" y="272"/>
         <ElementPosition dnOrder="6" id="sys_console" x="445" y="134"/>
@@ -2679,5 +2636,6 @@
         <ElementPosition dnOrder="9" id="uart1" x="700" y="20"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

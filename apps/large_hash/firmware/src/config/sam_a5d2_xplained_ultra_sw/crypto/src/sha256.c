@@ -113,63 +113,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         /* Not supported in FIPS */
     }
 
-#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256) || defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
-#include "crypt_sha_hw.h"
-
-#if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256)
-WOLFSSL_API int wc_InitSha256(wc_Sha256* sha)
-{
-    return CRYPT_SHA256_InitSha(sha, NULL, 0);
-}
-
-WOLFSSL_API int wc_Sha256Update(wc_Sha256* sha, const byte* data, word32 len)
-{
-    return CRYPT_SHA_Update(sha, data, len);
-}
-
-WOLFSSL_API int wc_Sha256Final(Sha256* sha, unsigned char* digest)
-{
-    return CRYPT_SHA_Final(sha, (byte*)digest);
-}
-
-WOLFSSL_API void wc_Sha256Free(Sha256* sha)
-{
-    CRYPT_SHA_Free(sha);
-}
-
-WOLFSSL_API int wc_InitHmacSha256(wc_Sha256* sha)
-{
-    return CRYPT_HMAC_SHA256_InitSha(sha, NULL, 0);
-}
-#endif
-
-#if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
-    int wc_InitSha224(Sha256* sha)
-    {
-        return CRYPT_SHA224_InitSha(sha, NULL, 0);
-    }
-
-    int wc_Sha224Update(Sha256* sha, const byte* data, word32 len)
-    {
-        return CRYPT_SHA_Update(sha, data, len);
-    }
-
-    int wc_Sha224Final(Sha256* sha, unsigned char* digest)
-    {
-        return CRYPT_SHA_Final(sha, (byte*)digest);
-    }
-
-    void wc_Sha224Free(Sha256* sha)
-    {
-        CRYPT_SHA_Free(sha);
-    }
-	
-    int wc_InitHmacSha224(wc_Sha256* sha)
-    {
-        return CRYPT_HMAC_SHA224_InitSha(sha, NULL, 0);
-    }
-#endif
-
 #else /* else build without fips, or for FIPS v2 */
 
 
@@ -470,7 +413,7 @@ static int InitSha256(wc_Sha256* sha256)
     #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
 
 #elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256) || defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
-#include "crypt_sha_hw.h"
+#include "crypt_sha256_hw.h"
 
 #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256)
     int wc_InitSha256_ex(wc_Sha256* sha, void* heap, int devId)
@@ -480,12 +423,12 @@ static int InitSha256(wc_Sha256* sha256)
     
     int wc_Sha256Update(wc_Sha256* sha, const byte* data, word32 len)
     {
-        return CRYPT_SHA_Update(sha, data, len);
+        return CRYPT_SHA256_Update(sha, data, len);
     }
     
     int wc_Sha256Final(wc_Sha256* sha, byte* hash)
     {
-        return CRYPT_SHA_Final(sha, hash);
+        return CRYPT_SHA256_Final(sha, hash);
     }
 
     int wc_Sha256FinalRaw(wc_Sha256* sha, byte* hash)
@@ -493,10 +436,6 @@ static int InitSha256(wc_Sha256* sha256)
         return CRYPT_SHA256_FinalRaw(sha, hash);
     }
 
-    int wc_InitHmacSha256(wc_Sha256* sha)
-    {
-        return CRYPT_HMAC_SHA256_InitSha(sha, NULL, 0);
-    }
 #endif
     
 #if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)

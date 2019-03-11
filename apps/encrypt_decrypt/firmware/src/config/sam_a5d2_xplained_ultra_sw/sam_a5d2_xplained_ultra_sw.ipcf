@@ -124,6 +124,8 @@
             <path>\crypto\src\crypt_aes_hw.h</path>
             <path>\crypto\src\crypt_aes_sam6149.h</path>
             <path>\crypto\src\crypt_aes_hwInt.h</path>
+            <path>\crypto\src\crypt_sha1_hw.h</path>
+            <path>\crypto\src\crypt_sha256_hw.h</path>
             <path>\crypto\src\dsa.h</path>
             <path>\crypto\src\ecc.h</path>
             <path>\crypto\src\ed25519.h</path>

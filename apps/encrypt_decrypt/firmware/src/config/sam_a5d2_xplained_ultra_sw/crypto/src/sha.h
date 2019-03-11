@@ -68,6 +68,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define WC_SHA_PAD_SIZE    SHA_PAD_SIZE
 
 /* for fips @wc_fips */
+#include "crypto/src/sha.h"
 #endif
 
 #ifdef FREESCALE_LTC_SHA
@@ -126,7 +127,7 @@ enum {
     #include "crypto/src/port/caam/wolfcaam_sha.h"
 
 #elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA1)
-    #include "crypto/src/crypt_sha_hw.h"
+    #include "crypto/src/crypt_sha1_hw.h"
     #define wc_Sha crypt_sha_hw_descriptor
     
 #else

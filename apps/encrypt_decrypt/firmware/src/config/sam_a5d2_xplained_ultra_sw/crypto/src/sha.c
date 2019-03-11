@@ -142,7 +142,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #if defined(WOLFSSL_PIC32MZ_HASH)
     #include "crypto/src/pic32mz-crypt.h"
 #elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA1)
-    #include "crypto/src/crypt_sha_hw.h"
+    #include "crypto/src/crypt_sha1_hw.h"
 
     int wc_InitSha_ex(wc_Sha* sha, void* heap, int devId)
     {
@@ -151,19 +151,14 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     
     int wc_ShaUpdate(wc_Sha* sha, const byte* data, word32 len)
     {
-        return CRYPT_SHA_Update(sha, data, len);
+        return CRYPT_SHA1_Update(sha, data, len);
     }
     
     int wc_ShaFinal(wc_Sha* sha, byte* hash)
     {
-        return CRYPT_SHA_Final(sha, hash);
+        return CRYPT_SHA1_Final(sha, hash);
     }
 
-    int wc_InitHmacSha(wc_Sha* sha)
-    {
-        return CRYPT_HMAC_SHA1_InitSha(sha, NULL, 0);
-    }
-    
     int wc_ShaFinalRaw(wc_Sha* sha, byte* hash)
     {
         return CRYPT_SHA1_FinalRaw(sha, hash);
