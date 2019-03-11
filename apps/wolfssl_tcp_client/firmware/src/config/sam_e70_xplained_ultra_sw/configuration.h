@@ -172,8 +172,6 @@ extern "C" {
 /*wolfSSL TLS Layer Configuration*/
 /******************************************************************************/
 
-#define NDEBUG
-#define DEBUG_WOLFSSL
 #define HAVE_AES_DECRYPT
 #define HAVE_AES_ECB
 #define WOLFSSL_ALT_NAMES
