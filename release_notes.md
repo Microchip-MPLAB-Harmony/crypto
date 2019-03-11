@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | [ATSAMA5D2C-XULT](https://www.microchip.com/Developmenttools/ProductDetails/ATSAMA5D2C-XULT) | 2 |
 | [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/ATSAME54-XPRO) | 2 |
-| [SAM E70 Xplained Ultra Evaluation Kit][https://www.microchip.com/developmenttools/ProductDetails/atsamv71-xult] | 10 |
+| [SAM E70 Xplained Ultra Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/atsamv71-xult) | 10 |
 
 
 ### Known Issues
@@ -23,6 +23,9 @@ The current known issues are as follows:
 - Interactive help using the Show User Manual Entry in the Right-click menu for configuration options provided by this module is not yet available from within the MPLAB Harmony Configurator (MHC).  Please see the &quot;Configuring the Library&quot; section in the help documentation in the doc folder for this module instead.  Help is available in both CHM and PDF formats.
 
 - ATSAMA5D2C demo applications build with a warning message: ```Warning[Pe111]: statement is unreachable for return ( EXIT_FAILURE ); statement of main() in IAR```
+
+- ECC and RSA software calculations take upwards of 32 kBytes of stack, when using these algorithms with an RTOS plan accordingly.
+
 
 ### Development Tools
 
