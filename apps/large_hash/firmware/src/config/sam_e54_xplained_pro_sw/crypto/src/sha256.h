@@ -233,9 +233,13 @@ enum {
     WC_SHA224_DIGEST_SIZE  =   28,
     WC_SHA224_PAD_SIZE     =   WC_SHA256_PAD_SIZE
 };
-
-
+#if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
+    #include "crypto/src/crypt_sha224_hw.h"
+    #define wc_Sha224 crypt_sha224_hw_descriptor
+#else
 typedef wc_Sha256 wc_Sha224;
+#endif
+
 #endif /* HAVE_FIPS */
 
 WOLFSSL_API int wc_InitSha224(wc_Sha224*);

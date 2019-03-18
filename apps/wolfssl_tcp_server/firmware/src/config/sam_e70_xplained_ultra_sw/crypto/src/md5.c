@@ -40,18 +40,7 @@ FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
 THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *****************************************************************************/
-
-
-
-
-
-
-
-
-
 //DOM-IGNORE-END
-
-
 
 
 #ifdef HAVE_CONFIG_H
@@ -155,7 +144,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     }
 
 #elif defined(WOLFSSL_PIC32MZ_HASH)
-    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include "crypto/src/pic32mz-crypt.h"
     #define HAVE_MD5_CUST_API
 
 #elif defined(WOLFSSL_IMX6_CAAM) && !defined(NO_IMX6_CAAM_HASH)

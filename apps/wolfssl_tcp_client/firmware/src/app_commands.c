@@ -44,7 +44,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include <wolfssl/ssl.h>
 
 #if defined(TCPIP_STACK_COMMAND_ENABLE)
-char wolfSSLLog[240*1024] = {0};
+char wolfSSLLog[1024] = {0};
 int wolfSSLLogSize = 0;
 
 extern APP_DATA appData;

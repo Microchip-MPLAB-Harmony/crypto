@@ -36,11 +36,14 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_hwInt.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha1_hw.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha256_hw.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha224_hw.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_u2238.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/dsa.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ecc.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ed25519.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/error-crypt.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/fe_operations.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/pic32mz-crypt.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/fips_test.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ge_operations.h</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/hash.h</itemPath>
@@ -302,7 +305,9 @@
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_local.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_uart.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_console_uart_definitions.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/src/sys_debug_local.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/sys_command.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/console/sys_debug.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/sys_int.h</itemPath>
@@ -519,6 +524,7 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/random.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ripemd.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha256.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha3.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/signature.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/srp.c</itemPath>
@@ -528,6 +534,8 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/wc_port.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/wolfevent.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/wolfmath.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/des3.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/md5.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/adler32.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/crc32.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/deflate.c</itemPath>
@@ -536,10 +544,7 @@
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/zutil.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/zlib-1.2.7/inffast.c</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/md5.c</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha256.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/sha512.c</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/des3.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/rsa.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ecc.c</itemPath>
             <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/ecc_fp.c</itemPath>
@@ -601,6 +606,7 @@
                 <itemPath>../src/config/sam_e70_xplained_ultra_sw/net_pres/pres/src/net_pres.c</itemPath>
               </logicalFolder>
               <itemPath>../src/config/sam_e70_xplained_ultra_sw/net_pres/pres/net_pres_enc_glue.c</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/net_pres/pres/net_pres_cert_store.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
@@ -666,7 +672,6 @@
       <itemPath>../src/app_commands.c</itemPath>
       <itemPath>../src/app.c</itemPath>
       <itemPath>../src/main.c</itemPath>
-      <itemPath>../src/config/sam_e70_xplained_ultra_sw/net_pres/pres/net_pres_cert_store.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

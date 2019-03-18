@@ -41,13 +41,6 @@ FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
 ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
 THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *****************************************************************************/
-
-
-
-
-
-
-
 //DOM-IGNORE-END
 
 
@@ -159,7 +152,7 @@ enum {
 #endif
 
 typedef struct Aes {
-#if defined(HAVE_MICROCHIP_HARMONY3_HW_AES)
+#if defined(HAVE_MICROCHIP_HARMONY3_HW_AES)  && !defined(WOLFSSL_MICROCHIP_PIC32MZ)
     crypt_aes_hw_descriptor hwDesc;
 #else
     /* AESNI needs key first, rounds 2nd, not sure why yet */
@@ -199,7 +192,8 @@ typedef struct Aes {
 #if defined(WOLFSSL_AES_COUNTER) || defined(WOLFSSL_AES_CFB)
     word32  left;            /* unused bytes left from last call */
 #endif
-#if defined( WOLFSSL_PIC32MZ_CRYPT ) || defined (WOLFSSL_SAME70_CRYPT)
+#if defined( WOLFSSL_PIC32MZ_CRYPT ) || defined (WOLFSSL_SAME70_CRYPT) || \
+    defined (HAVE_MICROCHIP_HARMONY3_HW_AES)
     word32 key_ce[AES_BLOCK_SIZE*2/sizeof(word32)];
     word32 iv_ce [AES_BLOCK_SIZE  /sizeof(word32)];
 #endif

@@ -126,7 +126,7 @@ enum {
 #elif defined(WOLFSSL_IMX6_CAAM)
     #include "crypto/src/port/caam/wolfcaam_sha.h"
 
-#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA1)
+#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA1) && !defined(WOLFSSL_PIC32MZ_HASH)
     #include "crypto/src/crypt_sha1_hw.h"
     #define wc_Sha crypt_sha_hw_descriptor
     
@@ -172,6 +172,7 @@ typedef struct wc_Sha {
 #endif /* HAVE_FIPS */
 
 WOLFSSL_API int wc_InitSha(wc_Sha*);
+WOLFSSL_API int wc_InitHmacSha(wc_Sha*);
 WOLFSSL_API int wc_InitSha_ex(wc_Sha* sha, void* heap, int devId);
 WOLFSSL_API int wc_ShaUpdate(wc_Sha*, const byte*, word32);
 WOLFSSL_API int wc_ShaFinalRaw(wc_Sha*, byte*);

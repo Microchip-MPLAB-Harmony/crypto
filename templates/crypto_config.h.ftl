@@ -27,7 +27,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 /*** Crypto Library Configuration ***/
 #define WC_NO_HARDEN
 #define NO_DSA
-#define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
 #define WOLFSSL_IGNORE_FILE_WARN
 
@@ -37,6 +36,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#if CONFIG_USE_3RDPARTY_WOLFSSL?? && CONFIG_USE_3RDPARTY_WOLFSSL == true>
 <#-- Don't output anything if WOLFSSL is present and enabled -->
 <#else>
+    <#if cryptoCoreSeries?starts_with("PIC32M")>
+        <#lt>#define MICROCHIP_PIC32
+    </#if>
     <#lt>#define SIZEOF_LONG_LONG 8
     <#lt>#define SINGLE_THREADED
     <#lt>#define WOLFSSL_USER_IO
@@ -122,7 +124,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define NO_RSA
     <#else>
         <#lt>#define WOLFSSL_STATIC_RSA
-        <#lt>#define USE_CERT_BUFFERS_2048
     </#if>
     <#if cryptoHashHMAC == false && cryptoCipherECC == false>
         <#lt>#define NO_HMAC
@@ -136,9 +137,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if cryptoCipherAES_CTR == true>
 #define WOLFSSL_AES_COUNTER
-    <#if cryptoHW == true >
-        <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_AES
-    </#if>
 </#if>
 <#if cryptoRandom == true>
 #define WOLFSSL_AES_DIRECT

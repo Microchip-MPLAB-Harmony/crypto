@@ -37,6 +37,8 @@
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/crypt_aes_hwInt.h</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/crypt_sha1_hw.h</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/crypt_sha256_hw.h</itemPath>
+            <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/crypt_sha224_hw.h</itemPath>
+            <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/crypt_aes_u2238.h</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/dsa.h</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/ecc.h</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/ed25519.h</itemPath>
@@ -108,6 +110,9 @@
             <logicalFolder name="f4" displayName="clock" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/clock/plib_clock.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="f6" displayName="cmcc" projectFiles="true">
+              <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/cmcc/plib_cmcc.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="f2" displayName="evsys" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/evsys/plib_evsys.h</itemPath>
             </logicalFolder>
@@ -123,7 +128,7 @@
                 <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/sercom/usart/plib_sercom_usart_common.h</itemPath>
               </logicalFolder>
             </logicalFolder>
-            <logicalFolder name="f6" displayName="tc" projectFiles="true">
+            <logicalFolder name="f7" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/tc/plib_tc_common.h</itemPath>
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/tc/plib_tc0.h</itemPath>
             </logicalFolder>
@@ -288,6 +293,7 @@
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/random.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/ripemd.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/sha.c</itemPath>
+            <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/sha256.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/sha3.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/signature.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/srp.c</itemPath>
@@ -306,7 +312,6 @@
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/zlib-1.2.7/inftrees.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/zlib-1.2.7/inffast.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/md5.c</itemPath>
-            <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/sha256.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/sha512.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/des3.c</itemPath>
             <itemPath>../src/config/sam_e54_xplained_pro_sw/crypto/src/rsa.c</itemPath>
@@ -316,6 +321,9 @@
           <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f4" displayName="clock" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/clock/plib_clock.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f6" displayName="cmcc" projectFiles="true">
+              <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/cmcc/plib_cmcc.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="evsys" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/evsys/plib_evsys.c</itemPath>
@@ -331,7 +339,7 @@
                 <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/sercom/usart/plib_sercom2_usart.c</itemPath>
               </logicalFolder>
             </logicalFolder>
-            <logicalFolder name="f6" displayName="tc" projectFiles="true">
+            <logicalFolder name="f7" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_sw/peripheral/tc/plib_tc0.c</itemPath>
             </logicalFolder>
           </logicalFolder>

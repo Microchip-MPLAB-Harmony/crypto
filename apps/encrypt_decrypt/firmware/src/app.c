@@ -973,8 +973,8 @@ void aes_test(void)
     uint8_t key[] = "0123456789abcdef   ";  /* align */
     uint8_t iv[]  = "1234567890abcdef   ";  /* align */
 
-    uint8_t cipher[AES_BLOCK_SIZE * 4];
-    uint8_t plain [AES_BLOCK_SIZE * 4];
+    uint8_t cipher[AES_BLOCK_SIZE * 4] = {0};
+    uint8_t plain [AES_BLOCK_SIZE * 4] = {0};
     int numCbcSubTests = 2;
 #endif /* HAVE_AES_CBC */
 

@@ -238,7 +238,7 @@ void APP_Md5Run_Feed(void) {
     memset(myBuf, 'a', 1024);
 #if defined(WOLFSSL_MICROCHIP_PIC32MZ)
     // Write out the cache if we're running the hardware engine.
-    SYS_DEVCON_DataCacheClean((uint32_t) myBuf, 1024);
+    //SYS_DEVCON_DataCacheClean((uint32_t) myBuf, 1024);
 #endif
     CRYPT_MD5_DataSizeSet(&md5, 512 * 1024);
     hashStart = APP_getTicks();
@@ -260,7 +260,7 @@ void APP_ShaRun_Feed(void) {
     memset(myBuf, 'a', sizeof (myBuf));
 #if defined(WOLFSSL_MICROCHIP_PIC32MZ)
     // Write out the cache if we're running the hardware engine.
-    SYS_DEVCON_DataCacheClean((uint32_t) myBuf, 1024);
+    //SYS_DEVCON_DataCacheClean((uint32_t) myBuf, 1024);
 #endif
     CRYPT_SHA_DataSizeSet(&sha, 512 * 1024);
     hashStart = APP_getTicks();
@@ -290,7 +290,7 @@ void APP_Sha256Run_Feed(void) {
     memset(myBuf, 'a', sizeof (myBuf));
 #if defined(WOLFSSL_MICROCHIP_PIC32MZ)
     // Write out the cache if we're running the hardware engine.
-    SYS_DEVCON_DataCacheClean((uint32_t) myBuf, 1024);
+    //SYS_DEVCON_DataCacheClean((uint32_t) myBuf, 1024);
 #endif
     CRYPT_SHA256_DataSizeSet(&sha256, 512 * 1024);
     hashStart = APP_getTicks();

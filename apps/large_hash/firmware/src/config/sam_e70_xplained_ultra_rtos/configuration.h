@@ -121,7 +121,6 @@ extern "C" {
 /*** Crypto Library Configuration ***/
 #define WC_NO_HARDEN
 #define NO_DSA
-#define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
 #define WOLFSSL_IGNORE_FILE_WARN
 
@@ -142,6 +141,8 @@ extern "C" {
 #define HAVE_MICROCHIP_HARMONY3_HW_SHA256
 #define CONFIG_HAVE_XDMAC
 #define HAVE_MICROCHIP_HARMONY3_HW_RNG
+#define WOLFSSL_SHA224
+#define HAVE_MICROCHIP_HARMONY3_HW_SHA224
 #define WOLFSSL_SHA512
 #define WOLFSSL_SHA384
 #define NO_ASN

@@ -426,6 +426,7 @@ extern "C" {
                                                     0
 
 #define TCPIP_INTMAC_MODULE_ID		    			GMAC_BASE_ADDRESS
+#define TCPIP_INTMAC_PERIPHERAL_CLK  				150000000
 
 #define DRV_GMAC_INSTANCES_NUMBER				1
 #define DRV_GMAC_NUMBER_OF_QUEUES				6
@@ -472,7 +473,7 @@ extern "C" {
 
 #define TCPIP_INTMAC_PHY_CONFIG_FLAGS     			\
                                                     DRV_ETHPHY_CFG_RMII | \
-                                                    0                                                    
+													0                                                    
 
 #define TCPIP_INTMAC_PHY_LINK_INIT_DELAY  			500
 #define TCPIP_INTMAC_PHY_ADDRESS		    			0
@@ -491,7 +492,6 @@ extern "C" {
 /*** Crypto Library Configuration ***/
 #define WC_NO_HARDEN
 #define NO_DSA
-#define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
 #define WOLFSSL_IGNORE_FILE_WARN
 
@@ -511,9 +511,9 @@ extern "C" {
 #define HAVE_AES_ECB
 #define HAVE_AES_CBC
 #define HAVE_AESGCM
+#define WOLFSSL_SHA224
 #define USE_FAST_MATH
 #define WOLFSSL_STATIC_RSA
-#define USE_CERT_BUFFERS_2048
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
 

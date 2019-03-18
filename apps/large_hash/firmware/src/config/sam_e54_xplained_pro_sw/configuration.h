@@ -141,6 +141,7 @@ extern "C" {
 #define HAVE_AES_ECB
 #define HAVE_AES_CBC
 #define HAVE_AESGCM
+#define WOLFSSL_SHA224
 #define WOLFSSL_SHA512
 #define WOLFSSL_SHA384
 #define HAVE_ECC
@@ -149,6 +150,7 @@ extern "C" {
 #define WOLFSSL_STATIC_RSA
 #define USE_CERT_BUFFERS_2048
 #define WOLFSSL_AES_COUNTER
+#define HAVE_MICROCHIP_HARMONY3_HW_AES
 #define WOLFSSL_AES_DIRECT
 
 
