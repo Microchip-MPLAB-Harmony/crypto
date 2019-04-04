@@ -130,6 +130,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
     <#if cryptoCipher3DES == false>
         <#lt>#define NO_DES3
+    <#else>
+        <#if cryptoHW == true && cryptoHaveHwDes == true>
+            <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_TDES
+        </#if>
     </#if>
 </#if>
 <#if cryptoCipherAES_CBC == false>

@@ -29,7 +29,7 @@
 cryptoHwTrngSupport = [["RNG", "00159", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_RNG"])],  #PIC32MZ EF
                       ["TRNG", "6334", "G", ["crypt_rng_sam6334.c"], set([])],  #ATSAMV70Q20B
                       ["TRNG", "U2242", "1.1.0", ["crypt_rng_u2242.c"], set([])], #ATSAME54P20A
-                      #["TRNG", "6334", "K", [], set([])],  #ATSAMA5D28
+                      ["TRNG", "6334", "K", ["crypt_rng_sam6334.c"], set([])],  #ATSAMA5D27
                      ]
 
 cryptoHwMd5Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])] #PIC32MZ EF
@@ -38,37 +38,37 @@ cryptoHwMd5Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL
 cryptoHwSha1Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
                        ["ICM", "11105", "H", ["crypt_sha1_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20B
                        ["ICM", "U2010", "1.2.0", ["crypt_sha1_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
-                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D28
+                       ["SHA", "6156", "O", ["crypt_sha1_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
                       ]
 
 cryptoHwSha224Support = [
                        ["ICM", "11105", "H", ["crypt_sha224_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        ["ICM", "U2010", "1.2.0", ["crypt_sha224_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
-                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       ["SHA", "6156", "O", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27                       
                       ]
                       
 cryptoHwSha256Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
                        ["ICM", "11105", "H", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        ["ICM", "U2010", "1.2.0", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
-                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha256.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       ["SHA", "6156", "O", ["crypt_sha256_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27                       
                       ]
                       
 cryptoHwSha384Support = [
-                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       ["SHA", "6156", "O", ["crypt_sha384_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27                       
                       ]
                       
 cryptoHwSha512Support = [
-                       #["SHA", "6156", "O", ["crypt_sha_sam6156.c","sha512.c","callback.h","barriers.h","cpuidle.h","swab.h"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27
+                       ["SHA", "6156", "O", ["crypt_sha512_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])] #ATSAMA5D27                       
                       ]
 
 cryptoHwAesSupport = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
                        ["AES", "6149", "W", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])], #ATSAMV70Q20B
                        ["AES", "U2238", "2.2.0", ["crypt_aes_u2238.c"], set(["CRYPTO_AES_HW_U2238"])], #ATSAME54P20A
-                       #["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])] #ATSAMA5D28
+                       ["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149", "CRYPTO_AES_HW_6149_ZB"])] #ATSAMA5D28
                       ]
 
 cryptoHwDesSupport = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
-                      #["CRYPTO", "00158", "1", [], set([])], #PIC32MZ EF
+                      ["TDES", "6150", "N", ["crypt_tdes_sam6150.c"], set(["CRYPTO_TDES_HW_6150"])] #ATSAMA5D27 
                      ]
 
 cryptoHwRsaSupport = [
@@ -90,7 +90,8 @@ cryptoWolfCryptFiles = ["aes.h", "aes.c", "arc4.c", "arc4.h", "asm.c", "asn.c", 
                         "crypt_sha_sam11105.h","crypt_sha_sam6156.h",
                         "crypt_sha_hw.h", "crypt_aes_hw.h", "crypt_aes_sam6149.h",
                         "crypt_aes_hwInt.h", "crypt_sha1_hw.h", "crypt_sha256_hw.h",
-                        "crypt_sha224_hw.h", "crypt_aes_u2238.h",
+                        "crypt_sha224_hw.h", "crypt_aes_u2238.h", "crypt_sha384_hw.h", "crypt_sha512_hw.h",
+                        "crypt_tdes_hw.h", "crypt_tdes_sam6150.h", "crypt_tdes_hwInt.h",
                         "dsa.h", "ecc.h", "ed25519.c", "ed25519.h", "error.c", 
                         "error-crypt.h", "fe_low_mem.c", "fe_operations.c", 
                         "fe_operations.h", "pic32mz-crypt.h",
@@ -118,7 +119,7 @@ cryptoWolfCryptFiles = ["aes.h", "aes.c", "arc4.c", "arc4.h", "asm.c", "asn.c", 
                         "pwdbased.h", "rabbit.c", "rabbit.h", "random.c", "random.h",
                         "ripemd.c", "ripemd.h", "rsa.h", 
                         "selftest.h", "settings.h", "sha.c", "sha.h","sha256.c", "sha256.h", 
-                        "sha3.c", "sha3.h", "sha512.h", "signature.c", 
+                        "sha3.c", "sha3.h", "sha512.h", "signature.c", "sha512.c",
                         "signature.h", "sniffer.h", "sniffer_error.h", 
                         #"sp.h", "sp_arm32.c", "sp_arm64.c",
                         #"sp_armthumb.c", "sp_c32.c", "sp_c64.c", "sp_int.c", 
@@ -139,24 +140,24 @@ cryptoZlibFiles = ['crc32.h','deflate.h','inffast.h','inffixed.h','inflate.h','i
 cryptoCurrentHwRngSupport = ["SW", "SW", "3.2", []]
 cryptoCurrentHwMd5Support = ["SW", "SW", "3.2", []]
 cryptoCurrentHwSha1Support = ["SW", "SW", "3.2", []]
-cryptoCurrentHwSha224Support = ["SW", "SW", "3.2", ["sha256.c"]]
-cryptoCurrentHwSha256Support = ["SW", "SW", "3.2", ["sha256.c"]]
-cryptoCurrentHwSha384Support = ["SW", "SW", "3.2", ["sha512.c"]]
-cryptoCurrentHwSha512Support = ["SW", "SW", "3.2", ["sha512.c"]]
+cryptoCurrentHwSha224Support = ["SW", "SW", "3.2", []]
+cryptoCurrentHwSha256Support = ["SW", "SW", "3.2", []]
+cryptoCurrentHwSha384Support = ["SW", "SW", "3.2", []]
+cryptoCurrentHwSha512Support = ["SW", "SW", "3.2", []]
 cryptoCurrentHwAesSupport = ["SW", "SW", "3.2", []]
 cryptoCurrentHwDesSupport = ["SW", "SW", "3.2", []]
 cryptoCurrentHwRsaSupport = ["SW", "SW", "3.2", ["rsa.c"]]
 cryptoCurrentHwEccSupport = ["SW", "SW", "3.2", ["ecc.c", "ecc_fp.c"]]
 
 cryptoCurrentSwRngSupport = ["SW", "SW", "3.2", []]
-cryptoCurrentSwMd5Support = ["SW", "SW", "3.2", ["md5.c"]]
+cryptoCurrentSwMd5Support = ["SW", "SW", "3.2", []]
 cryptoCurrentSwSha1Support = ["SW", "SW", "3.2", []]
-cryptoCurrentSwSha224Support = ["SW", "SW", "3.2", ["sha256.c"]]
-cryptoCurrentSwSha256Support = ["SW", "SW", "3.2", ["sha256.c"]]
-cryptoCurrentSwSha384Support = ["SW", "SW", "3.2", ["sha512.c"]]
-cryptoCurrentSwSha512Support = ["SW", "SW", "3.2", ["sha512.c"]]
+cryptoCurrentSwSha224Support = ["SW", "SW", "3.2", []]
+cryptoCurrentSwSha256Support = ["SW", "SW", "3.2", []]
+cryptoCurrentSwSha384Support = ["SW", "SW", "3.2", []]
+cryptoCurrentSwSha512Support = ["SW", "SW", "3.2", []]
 cryptoCurrentSwAesSupport = ["SW", "SW", "3.2", []]
-cryptoCurrentSwDesSupport = ["SW", "SW", "3.2", ["des3.c"]]
+cryptoCurrentSwDesSupport = ["SW", "SW", "3.2", []]
 cryptoCurrentSwRsaSupport = ["SW", "SW", "3.2", ["rsa.c"]]
 cryptoCurrentSwEccSupport = ["SW", "SW", "3.2", ["ecc.c", "ecc_fp.c"]]
 
