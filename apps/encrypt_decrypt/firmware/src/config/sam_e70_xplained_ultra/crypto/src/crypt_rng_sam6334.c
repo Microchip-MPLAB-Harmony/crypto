@@ -73,12 +73,15 @@ int CRYPT_RNG_HwInit(void)
         /* turn on */
         PMC_REGS->PMC_PCER1 = PmcBit;
 
-        /* enable */
-        TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD | TRNG_CR_ENABLE_Msk;
-
         /* memory barrier */
         __DMB();
     }
+        /* enable */
+#if defined(TRNG_CR_WAKEY_PASSWD)
+    TRNG_REGS->TRNG_CR = TRNG_CR_WAKEY_PASSWD | TRNG_CR_ENABLE_Msk;        
+#else
+    TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD | TRNG_CR_ENABLE_Msk;
+#endif
 
     return 0;
 }
@@ -125,7 +128,11 @@ int CRYPT_RNG_GenerateBlock(byte* output, word32 sz)
 int CRYPT_RNG_FreeRng(void)
 {
     /* disable */
-    TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD;
+#if defined(TRNG_CR_WAKEY_PASSWD)
+        TRNG_REGS->TRNG_CR = TRNG_CR_WAKEY_PASSWD | TRNG_CR_ENABLE_Msk;        
+#else
+        TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD | TRNG_CR_ENABLE_Msk;
+#endif
 
     /* Disable Peripheral Clock to TRNG by writing 1 to bit position */
     /* TRNG >=32 use PCDR1 not PCDR0 and remove 32 bit positions */

@@ -2482,13 +2482,25 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_aes_sam6149.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_aes_u2238.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_rng_hw.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha1_hw.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha224_hw.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha256_hw.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha384_hw.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha512_hw.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha_hw.h</name>
@@ -2498,6 +2510,15 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_sha_sam6156.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_tdes_hw.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_tdes_hwInt.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\crypt_tdes_sam6150.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\crypto.h</name>
@@ -2648,6 +2669,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\packs\ATSAMA5D27_DFP\component\pdmic.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\pic32mz-crypt.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\packs\ATSAMA5D27_DFP\component\pio.h</name>

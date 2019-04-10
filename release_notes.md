@@ -1,4 +1,21 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.2.1
+### New Features
+- **New part support** - This release indruduces initial support for [PIC32MZEF](https://www.microchip.com/design-centers/32-bit), families of 32-bit microcontrollers.
+- **Hardware Cryptographic Accelerator Support** - This release adds support for the Cryptographic Accelerators in the SAME54, PIC32MZEF and SAMA5D2
+
+- **Development kit and demo application support** - The following table provides number of demo application available for different development kits newly added in this release.
+
+| Development kits | Applications |
+| --- | --- | --- |
+| [ATSAMA5D2C-XULT](https://www.microchip.com/Developmenttools/ProductDetails/ATSAMA5D2C-XULT) | 6 |
+| [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/ATSAME54-XPRO) | 6 |
+| [SAM E70 Xplained Ultra Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/atsamv71-xult) | 10 |
+| [PIC32MZ Embedded Connectivity with FPU (EF) Starter Kit (Crypto)](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM320007-C) | 6 |
+
+### Known Issues
+- **PUKCC Is Unsupported** - The PUKCC peripheral for the SAME54 family, used for public key cryptography is not support yet.  This peripheral will be supported in future versions.
+
 ## Crypto Release v3.2.0
 ### New Features
 - **New part support** - This release introduces initial support for [SAM E54](https://www.microchip.com/design-centers/32-bit/sam-32-bit-mcus/sam-e-mcus), families of 32-bit microcontrollers and the [SAM A5D2](https://www.microchip.com/design-centers/32-bit-mpus/microprocessors/sama5/sama5d2-series) family of 32-bit microprocessors.

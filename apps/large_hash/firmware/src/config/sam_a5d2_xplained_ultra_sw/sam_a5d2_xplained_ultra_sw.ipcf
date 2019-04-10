@@ -126,11 +126,19 @@
             <path>\crypto\src\crypt_aes_hwInt.h</path>
             <path>\crypto\src\crypt_sha1_hw.h</path>
             <path>\crypto\src\crypt_sha256_hw.h</path>
+            <path>\crypto\src\crypt_sha224_hw.h</path>
+            <path>\crypto\src\crypt_aes_u2238.h</path>
+            <path>\crypto\src\crypt_sha384_hw.h</path>
+            <path>\crypto\src\crypt_sha512_hw.h</path>
+            <path>\crypto\src\crypt_tdes_hw.h</path>
+            <path>\crypto\src\crypt_tdes_sam6150.h</path>
+            <path>\crypto\src\crypt_tdes_hwInt.h</path>
             <path>\crypto\src\dsa.h</path>
             <path>\crypto\src\ecc.h</path>
             <path>\crypto\src\ed25519.h</path>
             <path>\crypto\src\error-crypt.h</path>
             <path>\crypto\src\fe_operations.h</path>
+            <path>\crypto\src\pic32mz-crypt.h</path>
             <path>\crypto\src\fips_test.h</path>
             <path>\crypto\src\ge_operations.h</path>
             <path>\crypto\src\hash.h</path>
@@ -264,8 +272,10 @@
             <path>\crypto\src\random.c</path>
             <path>\crypto\src\ripemd.c</path>
             <path>\crypto\src\sha.c</path>
+            <path>\crypto\src\sha256.c</path>
             <path>\crypto\src\sha3.c</path>
             <path>\crypto\src\signature.c</path>
+            <path>\crypto\src\sha512.c</path>
             <path>\crypto\src\srp.c</path>
             <path>\crypto\src\tfm.c</path>
             <path>\crypto\src\wc_encrypt.c</path>
@@ -273,6 +283,8 @@
             <path>\crypto\src\wc_port.c</path>
             <path>\crypto\src\wolfevent.c</path>
             <path>\crypto\src\wolfmath.c</path>
+            <path>\crypto\src\des3.c</path>
+            <path>\crypto\src\md5.c</path>
             <path>\crypto\src\zlib-1.2.7\adler32.c</path>
             <path>\crypto\src\zlib-1.2.7\crc32.c</path>
             <path>\crypto\src\zlib-1.2.7\deflate.c</path>
@@ -281,10 +293,6 @@
             <path>\crypto\src\zlib-1.2.7\zutil.c</path>
             <path>\crypto\src\zlib-1.2.7\inftrees.c</path>
             <path>\crypto\src\zlib-1.2.7\inffast.c</path>
-            <path>\crypto\src\md5.c</path>
-            <path>\crypto\src\sha256.c</path>
-            <path>\crypto\src\sha512.c</path>
-            <path>\crypto\src\des3.c</path>
             <path>\crypto\src\rsa.c</path>
             <path>\crypto\src\ecc.c</path>
             <path>\crypto\src\ecc_fp.c</path>

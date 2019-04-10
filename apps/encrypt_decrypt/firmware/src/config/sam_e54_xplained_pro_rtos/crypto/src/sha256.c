@@ -410,12 +410,12 @@ static int InitSha256(wc_Sha256* sha256)
     }
 
 #elif defined(WOLFSSL_PIC32MZ_HASH)
-    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <crypto/src/pic32mz-crypt.h>
 
-#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256) || defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
+#elif (defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256) || defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)) && !defined(WOLFSSL_PIC32MZ_HASH)
 #include "crypt_sha256_hw.h"
 
-#if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256)
+#if defined(HAVE_MICROCHIP_HARMONY3_HW_SHA256) && !defined(WOLFSSL_PIC32MZ_HASH)
     int wc_InitSha256_ex(wc_Sha256* sha, void* heap, int devId)
     {
         return CRYPT_SHA256_InitSha(sha, heap, devId);
@@ -2641,7 +2641,7 @@ SHA256_NOINLINE static int Transform_Sha256_AVX2_RORX_Len(wc_Sha256* sha256,
 #elif defined(WOLFSSL_DEVCRYPTO_HASH)
     /* implemented in wolfcrypt/src/port/devcrypto/devcrypt_hash.c */
 
-#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)
+#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA224)  && !defined(WOLFSSL_PIC32MZ_HASH)
 #include "crypt_sha224_hw.h"
 
     int wc_InitSha224_ex(Sha224* sha, void* u1, int u2)

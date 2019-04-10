@@ -99,7 +99,7 @@ extern "C" {
 #define SYS_TIME_HW_COUNTER_WIDTH            16
 #define SYS_TIME_HW_COUNTER_PERIOD           0xFFFFU
 #define SYS_TIME_HW_COUNTER_HALF_PERIOD		 (SYS_TIME_HW_COUNTER_PERIOD>>1)
-#define SYS_TIME_CPU_CLOCK_FREQUENCY         48000000
+#define SYS_TIME_CPU_CLOCK_FREQUENCY         120000000
 #define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES      (188)
 
 
@@ -121,7 +121,6 @@ extern "C" {
 /*** Crypto Library Configuration ***/
 #define WC_NO_HARDEN
 #define NO_DSA
-#define MICROCHIP_MPLAB_HARMONY
 #define HAVE_MCAPI
 #define WOLFSSL_IGNORE_FILE_WARN
 
@@ -148,7 +147,6 @@ extern "C" {
 #define USE_FAST_MATH
 #define HAVE_LIBZ
 #define WOLFSSL_STATIC_RSA
-#define USE_CERT_BUFFERS_2048
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
 

@@ -107,7 +107,7 @@ enum {
 };
 #endif
 
-#if defined(HAVE_MICROCHIP_HARMONY3_HW_TDES)
+#if defined(HAVE_MICROCHIP_HARMONY3_HW_TDES) && !defined(WOLFSSL_PIC32MZ_CRYPT)
     #include "crypto/src/crypt_tdes_hw.h"
     #define Des crypt_tdes_hw_descriptor
     #define Des3 crypt_tdes_hw_descriptor
