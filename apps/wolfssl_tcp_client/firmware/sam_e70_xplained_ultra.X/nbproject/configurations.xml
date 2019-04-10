@@ -617,7 +617,6 @@
                 <itemPath ex="false">../src/config/sam_e70_xplained_ultra/net_pres/pres/src/net_pres.c</itemPath>
               </logicalFolder>
               <itemPath ex="false">../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_enc_glue.c</itemPath>
-              <itemPath ex="false">../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_cert_store.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="peripheral" projectFiles="true">

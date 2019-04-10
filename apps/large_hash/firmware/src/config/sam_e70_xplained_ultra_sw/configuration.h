@@ -136,13 +136,18 @@ extern "C" {
 #define USE_FAST_MATH
 #define TFM_TIMING_RESISTANT
 #define USE_CERT_BUFFERS_2048
-#define NO_AES
+#define WOLFSSL_AES_COUNTER
+#define HAVE_AES_ECB
+#define HAVE_AES_CBC
+#define HAVE_AESGCM
+#define WOLFSSL_SHA224
 #define WOLFSSL_SHA512
 #define WOLFSSL_SHA384
-#define NO_ASN
-#define NO_RSA
-#define NO_DES3
-#define NO_AES_CBC
+#define HAVE_ECC
+#define USE_FAST_MATH
+#define HAVE_LIBZ
+#define WOLFSSL_STATIC_RSA
+#define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
 
 

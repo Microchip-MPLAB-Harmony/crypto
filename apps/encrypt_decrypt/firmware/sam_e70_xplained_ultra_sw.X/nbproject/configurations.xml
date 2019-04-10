@@ -31,6 +31,7 @@
             <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/dh.h</itemPath>
             <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha_sam11105.h</itemPath>
             <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha_sam6156.h</itemPath>
+            <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_sha_hw.h</itemPath>
             <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_hw.h</itemPath>
             <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_sam6149.h</itemPath>
             <itemPath ex="false">../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypt_aes_hwInt.h</itemPath>

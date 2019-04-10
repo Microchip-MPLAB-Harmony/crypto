@@ -140,6 +140,7 @@ extern "C" {
 #define HAVE_AES_ECB
 #define HAVE_AES_CBC
 #define HAVE_AESGCM
+#define WOLFSSL_SHA224
 #define WOLFSSL_SHA512
 #define WOLFSSL_SHA384
 #define HAVE_ECC
