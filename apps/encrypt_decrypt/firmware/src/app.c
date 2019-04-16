@@ -155,7 +155,7 @@ uint32_t APP_getTicks(void) {
     return SYS_TIME_CounterGet();
 }
 
-char printBuffer[50 * 1024] = {0};
+char printBuffer[10 * 1024] = {0};
 
 #ifndef NO_MD5
 void md5_test(void)
