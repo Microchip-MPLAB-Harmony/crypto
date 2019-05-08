@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    crypt_sha512_sam6156.c
+    crypt_sha1_sam6156.c
 
   Summary:
     Crypto Framework Library source for cryptographic functions.
@@ -51,8 +51,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  * according to FIPS180-2 specification. The first block of the
  * message must be indicated to the module by a specific command. The
  * SHA module produces a N-bit message digest each time a block is
- * written and processing period ends. N is 160 for SHA1, 512 for
- * SHA512, 512 for SHA512, 512 for SHA512, 512 for SHA512.
+ * written and processing period ends. N is 160 for SHA1, 224 for
+ * SHA224, 256 for SHA256, 384 for SHA384, 512 for SHA512.
  *
  * To Enable a SHA encryption and decrypt,the user has to follow these
  * few steps:
@@ -83,46 +83,37 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  *
  */
 
-#define SHA512_BLOCK_SIZE 128
-#define SHA512_DIGEST_SIZE 64
-#define SHA512_PAD_SIZE 112   
+#define SHA_BLOCK_SIZE 64
+#define SHA_DIGEST_SIZE 20
+#define SHA_PAD_SIZE 56   
 #include "configuration.h"
-#include "crypt_sha512_hw.h"
+#include "crypt_sha1_hw.h"
 #include "definitions.h"
 
-#if !defined(NO_SHA512)
+#if !defined(NO_SHA)
 
-int CRYPT_SHA512_InitSha(crypt_sha512_hw_descriptor* sha512, void* heap, int devId)
+int CRYPT_SHA1_InitSha(crypt_sha1_hw_descriptor* sha, void* heap, int devId)
 {
-  memset(sha512, 0, sizeof(crypt_sha512_hw_descriptor));
-  sha512->sha_descriptor.ALGO = SHA_HW_SHA512;
-
-#if 0  
-  sha512->digest[0] = 0x67e6096a; //0x6a09e667;
-  sha512->digest[1] = 0x08c9bcf3; //0xf3bcc908;
-  sha512->digest[2] = 0x85ae67bb; //0xbb67ae85;
-  sha512->digest[3] = 0x3ba7ca84; //0x84caa73b;
-  sha512->digest[4] = 0x72f36e3c; //0x3c6ef372;
-  sha512->digest[5] = 0x2bf894fe; //0xfe94f82b;
-  sha512->digest[6] = 0x3af54f54; //0xa54ff53a;
-  sha512->digest[7] = 0xf1361d5f; //0x5f1d36f1;
-  sha512->digest[8] = 0x7f520e51; //0x510e527f;
-  sha512->digest[9] = 0xd182e6ad; //0xade682d1;
-  sha512->digest[10] = 0x8c68059b;//0x9b05688c;
-  sha512->digest[11] = 0x1f6c3e2b; //0x2b3e6c1f;
-  sha512->digest[12] = 0xabd9831f; //0x1f83d9ab;
-  sha512->digest[13] = 0x6bbd41fb; //0xfb41bd6b;
-  sha512->digest[14] = 0x19cde05b; //0x5be0cd19;
-  sha512->digest[15] = 0x79217e13; //0x137e2179;
-#endif
+  memset(sha, 0, sizeof(crypt_sha1_hw_descriptor));
+  sha->sha_descriptor.ALGO = SHA_HW_SHA1;
   
-
-  sha512->total_len = 0;
+  sha->digest[0] = 0x01234567;
+  //sha->digest[0] = 0x67452301;
+  sha->digest[1] = 0x89ABCDEF;
+  //sha->digest[1] = 0xefcdab89;
+  sha->digest[2] = 0xFEDCBA98;
+  //sha->digest[2] = 0x98badcfe;
+  sha->digest[3] = 0x76543210;
+  //sha->digest[3] = 0x10325476;
+  sha->digest[4] = 0xF0E1D2C3;
+  //sha->digest[4] = 0xc3d2e1f0;
+  
+  sha->total_len = 0;
   
   return 0;
 }
 
-static int CRYPT_SHA512_Process(crypt_sha512_hw_descriptor* sha512, const byte* data, word32 len)
+static int CRYPT_SHA1_Process(crypt_sha1_hw_descriptor* sha, const byte* data, word32 len)
 {
   //volatile CRYPT_SHA_SAM6156_SHA_CR * shaCr = (CRYPT_SHA_SAM6156_SHA_CR *)(&(SHA_REGS->SHA_CR));
   //volatile CRYPT_SHA_SAM6156_SHA_MR * shaMr = (CRYPT_SHA_SAM6156_SHA_MR *)(&(SHA_REGS->SHA_MR));
@@ -139,29 +130,23 @@ static int CRYPT_SHA512_Process(crypt_sha512_hw_descriptor* sha512, const byte* 
 
   shaMr.s.SMOD = SHA_HW_AUTO_START;
   shaMr.s.PROCDLY = 0;
-  if (sha512->digest[0] != 0)
-  {
-	  shaMr.s.UIHV = 1;  //IV is coming from IR0
-  }
-  shaMr.s.ALGO = sha512->sha_descriptor.ALGO;
+  shaMr.s.UIHV = 1;  //IV is coming from IR0
+  shaMr.s.ALGO = sha->sha_descriptor.ALGO;
   shaMr.s.DUALBUFF = 0;
   shaMr.s.CHECK = 0;
 
   SHA_REGS->SHA_MR = shaMr.v;
   
-  if (sha512->digest[0] != 0)
-  {
   shaCr.s.WUIHV = 1; //Load into IR0
   SHA_REGS->SHA_CR = shaCr.v;
   
   // Load in the IV
-  for (uint32_t x = 0; x < (SHA512_DIGEST_SIZE >> 2); x++)
+  for (uint32_t x = 0; x < (SHA_DIGEST_SIZE >> 2); x++)
   {
-    SHA_REGS->SHA_IDATAR[x] = sha512->digest[x];      
+    SHA_REGS->SHA_IDATAR[x] = sha->digest[x];      
   }
 
   shaCr.s.WUIHV = 0; //Load into Data registers
-  }
   shaCr.s.FIRST = 1; //First message, assume this will load the user IV
   SHA_REGS->SHA_CR = shaCr.v;
   shaCr.s.FIRST = 0; //First message, assume this will load the user IV
@@ -169,9 +154,9 @@ static int CRYPT_SHA512_Process(crypt_sha512_hw_descriptor* sha512, const byte* 
 
   uint32_t *ptr = (uint32_t *)(data);
   
-  for (uint32_t x = 0; x < len; x+=SHA512_BLOCK_SIZE)
+  for (uint32_t x = 0; x < len; x+=SHA_BLOCK_SIZE)
   {
-      for (uint8_t y = 0; y < (SHA512_BLOCK_SIZE >> 2); y++)
+      for (uint8_t y = 0; y < (SHA_BLOCK_SIZE >> 2); y++)
       {
           SHA_REGS->SHA_IDATAR[y] = *ptr++;
       }
@@ -179,94 +164,90 @@ static int CRYPT_SHA512_Process(crypt_sha512_hw_descriptor* sha512, const byte* 
       //SHA_REGS->SHA_CR = shaCr.v;
       while (shaIsr->s.DATRDY == 0); // Block until processing is done
   }
-  for (uint32_t x = 0; x < (SHA512_DIGEST_SIZE >> 2); x++)
+  for (uint32_t x = 0; x < (SHA_DIGEST_SIZE >> 2); x++)
   {
-    sha512->digest[x] = SHA_REGS->SHA_IODATAR[x]; // Save the current digest
+    sha->digest[x] = SHA_REGS->SHA_IODATAR[x]; // Save the current digest
   }
   return 0;
   
 }
 
 
-int CRYPT_SHA512_Update(crypt_sha512_hw_descriptor* sha512, const byte* data, word32 len)
+int CRYPT_SHA1_Update(crypt_sha1_hw_descriptor* sha, const byte* data, word32 len)
 {
     uint32_t fill;
     uint32_t left;
     uint32_t result = 0;
 
-    left = sha512->total_len & 0x7F;
-    fill = SHA512_BLOCK_SIZE - left;
-    sha512->total_len += len;
+    left = sha->total_len & 0x3F;
+    fill = SHA_BLOCK_SIZE - left;
+    sha->total_len += len;
 
     if (left && len >= fill)
     {
-        memcpy((void *)(sha512->buffer + left), data, fill);
-        result = CRYPT_SHA512_Process(sha512, sha512->buffer, SHA512_BLOCK_SIZE);
+        memcpy((void *)(sha->buffer + left), data, fill);
+        result = CRYPT_SHA1_Process(sha, sha->buffer, SHA_BLOCK_SIZE);
         data += fill;
         len -= fill;
         left = 0;
     }
 
-    if (len >= SHA512_BLOCK_SIZE)
+    if (len >= SHA_BLOCK_SIZE)
     {
-        result = CRYPT_SHA512_Process(sha512, data, len & 0xFFFFFF80);
-        data += (len & 0xFFFFFF80);
-        len &= 0x7F;
+        result = CRYPT_SHA1_Process(sha, data, len & 0xFFFFFFC0);
+        data += (len & 0xFFFFFFC0);
+        len &= 0x3F;
     }
 
     if( len > 0 )
     {
-        memcpy((void *)(sha512->buffer + left), data, len);
+        memcpy((void *)(sha->buffer + left), data, len);
     }
 
     return result; 
   
 }
 
-static const uint8_t sha512_padding[SHA512_BLOCK_SIZE] = {
+static const uint8_t sha_padding[SHA_BLOCK_SIZE] = {
     0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 
 
-int CRYPT_SHA512_Final(crypt_sha512_hw_descriptor* sha512, byte* hash)
+int CRYPT_SHA1_Final(crypt_sha1_hw_descriptor* sha, byte* hash)
 {
     uint32_t last;
     uint8_t  padn;
-    uint8_t  msg_len[16] = {0};
+    uint8_t  msg_len[8];
 
     /* Get the number of bits */
     /* create the message bit length block */
-    uint64_t total_bits = sha512->total_len << 3;
-    msg_len[8] = (uint8_t)(total_bits >> 56);
-    msg_len[9] = (uint8_t)(total_bits >> 48);
-    msg_len[10] = (uint8_t)(total_bits >> 40);
-    msg_len[11] = (uint8_t)(total_bits >> 32);
-    msg_len[12] = (uint8_t)(total_bits >> 24);
-    msg_len[13] = (uint8_t)(total_bits >> 16);
-    msg_len[14] = (uint8_t)(total_bits >>  8);
-    msg_len[15] = (uint8_t)(total_bits);
+    uint64_t total_bits = sha->total_len << 3;
+    msg_len[0] = (uint8_t)(total_bits >> 56);
+    msg_len[1] = (uint8_t)(total_bits >> 48);
+    msg_len[2] = (uint8_t)(total_bits >> 40);
+    msg_len[3] = (uint8_t)(total_bits >> 32);
+    msg_len[4] = (uint8_t)(total_bits >> 24);
+    msg_len[5] = (uint8_t)(total_bits >> 16);
+    msg_len[6] = (uint8_t)(total_bits >>  8);
+    msg_len[7] = (uint8_t)(total_bits);
 
-    last = sha512->total_len & 0x7F;
-    padn = (last < SHA512_PAD_SIZE) ? (SHA512_PAD_SIZE - last) : (240 - last);
+    last = sha->total_len & 0x3F;
+    padn = (last < SHA_PAD_SIZE) ? (SHA_PAD_SIZE - last) : (120 - last);
 
-    CRYPT_SHA512_Update(sha512, sha512_padding, padn);
+    CRYPT_SHA1_Update(sha, sha_padding, padn);
 
-    CRYPT_SHA512_Update(sha512, msg_len, 16);
+    CRYPT_SHA1_Update(sha, msg_len, 8);
 
-    memcpy(hash, sha512->digest, SHA512_DIGEST_SIZE);
+    memcpy(hash, sha->digest, SHA_DIGEST_SIZE);
 
-    return CRYPT_SHA512_InitSha(sha512, NULL, 0);
+    return CRYPT_SHA1_InitSha(sha, NULL, 0);
 }
-int CRYPT_SHA512_FinalRaw(crypt_sha512_hw_descriptor* sha512, byte* hash)
+int CRYPT_SHA1_FinalRaw(crypt_sha1_hw_descriptor* sha, byte* hash)
 {
-    return CRYPT_SHA512_Final(sha512, hash);
+    return CRYPT_SHA1_Final(sha, hash);
 }
 
 
