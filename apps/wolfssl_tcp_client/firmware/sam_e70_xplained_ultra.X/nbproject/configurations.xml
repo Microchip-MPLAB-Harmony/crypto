@@ -617,6 +617,7 @@
                 <itemPath ex="false">../src/config/sam_e70_xplained_ultra/net_pres/pres/src/net_pres.c</itemPath>
               </logicalFolder>
               <itemPath ex="false">../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_enc_glue.c</itemPath>
+              <itemPath ex="false">../src/config/sam_e70_xplained_ultra/net_pres/pres/net_pres_cert_store.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
@@ -703,13 +704,13 @@
         <targetDevice>ATSAME70Q21B</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD4Tool</platformTool>
+        <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
         <languageToolchainVersion>2.15</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="SAME70_DFP" vendor="Microchip" version="4.0.26"/>
+        <pack name="SAME70_DFP" vendor="Microchip" version="4.0.29"/>
         <pack name="CMSIS" vendor="ARM" version="5.0.1"/>
       </packs>
       <compileType>

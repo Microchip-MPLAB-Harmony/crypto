@@ -746,7 +746,6 @@
                    projectFiles="false">
       <logicalFolder name="f1" displayName="wolfSSL" projectFiles="true">
         <itemPath ex="false">../src/third_party/wolfcrypt_support/wolfcrypt/src/misc.c</itemPath>
-        <itemPath ex="false">../src/third_party/wolfcrypt_support/wolfcrypt/src/misc.c</itemPath>
       </logicalFolder>
       <itemPath ex="false">Makefile</itemPath>
     </logicalFolder>
@@ -889,7 +888,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="122400"/>
+        <property key="heap-size" value="102400"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>

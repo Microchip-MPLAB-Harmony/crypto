@@ -619,8 +619,8 @@
           <Name dnOrder="1">net_pres_enc_glue.c</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/net_pres/pres/</LogicalPath>
           <PhysicalPath dnOrder="3">/net_pres/pres/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6744208AD8092C4BF6EFAEDA2B478B0C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6744208AD8092C4BF6EFAEDA2B478B0C</UserChecksum>
+          <GeneratedChecksum dnOrder="4">7C12DE8F95CC3D0CF7827E516CBF30B7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7C12DE8F95CC3D0CF7827E516CBF30B7</UserChecksum>
         </File>
         <File dnOrder="77">
           <Type dnOrder="0">SOURCE</Type>
@@ -931,8 +931,8 @@
           <Name dnOrder="1">tasks.c</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">28879EEFFCC05D12D1F43C173D2577FE</GeneratedChecksum>
-          <UserChecksum dnOrder="5">28879EEFFCC05D12D1F43C173D2577FE</UserChecksum>
+          <GeneratedChecksum dnOrder="4">8BB24614D66BB0E83656995172A86D7F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8BB24614D66BB0E83656995172A86D7F</UserChecksum>
         </File>
         <File dnOrder="116">
           <Type dnOrder="0">SOURCE</Type>
@@ -1475,8 +1475,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7724C5195151AF101E317444AE9FFE49</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7724C5195151AF101E317444AE9FFE49</UserChecksum>
+          <GeneratedChecksum dnOrder="4">AC60EC22BF7BE8103F8CC36716D14F65</GeneratedChecksum>
+          <UserChecksum dnOrder="5">AC60EC22BF7BE8103F8CC36716D14F65</UserChecksum>
         </File>
         <File dnOrder="184">
           <Type dnOrder="0">HEADER</Type>

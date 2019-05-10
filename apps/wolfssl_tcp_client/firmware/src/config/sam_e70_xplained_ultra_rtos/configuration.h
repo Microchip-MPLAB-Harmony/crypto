@@ -224,9 +224,9 @@ extern "C" {
 
 
 /*** TCP Configuration ***/
-#define TCPIP_TCP_MAX_SEG_SIZE_TX		        	1460
-#define TCPIP_TCP_SOCKET_DEFAULT_TX_SIZE			512
-#define TCPIP_TCP_SOCKET_DEFAULT_RX_SIZE			512
+#define TCPIP_TCP_MAX_SEG_SIZE_TX		        	14600
+#define TCPIP_TCP_SOCKET_DEFAULT_TX_SIZE			1500
+#define TCPIP_TCP_SOCKET_DEFAULT_RX_SIZE			1500
 #define TCPIP_TCP_DYNAMIC_OPTIONS             			true
 #define TCPIP_TCP_START_TIMEOUT_VAL		        	1000
 #define TCPIP_TCP_DELAYED_ACK_TIMEOUT		    		100
@@ -310,7 +310,7 @@ extern "C" {
 #define NET_PRES_NUM_SOCKETS 10
 
 /* Net Pres RTOS Configurations*/
-#define NET_PRES_RTOS_STACK_SIZE           6144
+#define NET_PRES_RTOS_STACK_SIZE           8192
 #define NET_PRES_RTOS_TASK_PRIORITY             1
 
 
