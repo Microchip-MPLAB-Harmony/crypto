@@ -587,8 +587,8 @@
           <Name dnOrder="1">random.c</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">756A21E8FE09C2EB8391BB625ECFC723</GeneratedChecksum>
-          <UserChecksum dnOrder="5">756A21E8FE09C2EB8391BB625ECFC723</UserChecksum>
+          <GeneratedChecksum dnOrder="4">7BC4291576325CBA7AFC886369FBAA9E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7BC4291576325CBA7AFC886369FBAA9E</UserChecksum>
         </File>
         <File dnOrder="73">
           <Type dnOrder="0">SOURCE</Type>
@@ -715,8 +715,8 @@
           <Name dnOrder="1">tasks.c</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">9EA641AF565668249CCC4F38EB2377A2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9EA641AF565668249CCC4F38EB2377A2</UserChecksum>
+          <GeneratedChecksum dnOrder="4">07F048CF1441D627040F25A9F5E1D1EA</GeneratedChecksum>
+          <UserChecksum dnOrder="5">07F048CF1441D627040F25A9F5E1D1EA</UserChecksum>
         </File>
         <File dnOrder="89">
           <Type dnOrder="0">SOURCE</Type>
@@ -811,8 +811,8 @@
           <Name dnOrder="1">FreeRTOSConfig.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6BB3D3FAA5A213165985829C90F31D0F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6BB3D3FAA5A213165985829C90F31D0F</UserChecksum>
+          <GeneratedChecksum dnOrder="4">C885CD3F272D322130B9E73CFF1CA83E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C885CD3F272D322130B9E73CFF1CA83E</UserChecksum>
         </File>
         <File dnOrder="101">
           <Type dnOrder="0">HEADER</Type>
@@ -2354,7 +2354,7 @@
       <Settings dnOrder="1">
         <Setting append="true" category="C32" delimiter=";" dnOrder="0" key="extra-include-directories" value="../src/third_party/rtos/FreeRTOS/Source/portable/GCC/SAM/CM7;../src/third_party/rtos/FreeRTOS/Source/include;"/>
         <Setting append="true" category="C32" delimiter=";" dnOrder="1" key="extra-include-directories" value="../src;../src/config/sam_e70_xplained_ultra_rtos;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm"/>
-        <Setting category="C32-LD" dnOrder="2" key="heap-size" value="65536"/>
+        <Setting category="C32-LD" dnOrder="2" key="heap-size" value="102400"/>
         <Setting category="C32-LD" dnOrder="3" key="no-device-startup-code" value="true"/>
         <Setting category="C32Global" dnOrder="4" key="mdtcm" value=""/>
         <Setting category="C32Global" dnOrder="5" key="mitcm" value=""/>
