@@ -310,7 +310,7 @@ extern "C" {
 #define NET_PRES_NUM_SOCKETS 10
 
 /* Net Pres RTOS Configurations*/
-#define NET_PRES_RTOS_STACK_SIZE           6144
+#define NET_PRES_RTOS_STACK_SIZE           8192
 #define NET_PRES_RTOS_TASK_PRIORITY             1
 
 

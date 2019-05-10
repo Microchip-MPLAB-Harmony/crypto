@@ -931,8 +931,8 @@
           <Name dnOrder="1">tasks.c</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8BB24614D66BB0E83656995172A86D7F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8BB24614D66BB0E83656995172A86D7F</UserChecksum>
+          <GeneratedChecksum dnOrder="4">BB15DA0B90818EE94E50A5AC5F72940C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BB15DA0B90818EE94E50A5AC5F72940C</UserChecksum>
         </File>
         <File dnOrder="116">
           <Type dnOrder="0">SOURCE</Type>
@@ -1475,8 +1475,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7724C5195151AF101E317444AE9FFE49</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7724C5195151AF101E317444AE9FFE49</UserChecksum>
+          <GeneratedChecksum dnOrder="4">A99C987B9174054861EA5B124F84BF47</GeneratedChecksum>
+          <UserChecksum dnOrder="5">A99C987B9174054861EA5B124F84BF47</UserChecksum>
         </File>
         <File dnOrder="184">
           <Type dnOrder="0">HEADER</Type>
