@@ -108,7 +108,7 @@ extern "C" {
 
 #define SYS_CMD_ENABLE
 #define SYS_CMD_DEVICE_MAX_INSTANCES       SYS_CONSOLE_DEVICE_MAX_INSTANCES
-#define SYS_CMD_PRINT_BUFFER_SIZE          1024
+#define SYS_CMD_PRINT_BUFFER_SIZE          2560
 #define SYS_CMD_BUFFER_DMA_READY
 #define SYS_CMD_REMAP_SYS_CONSOLE_MESSAGE
 
@@ -218,7 +218,7 @@ extern "C" {
 
 
 /*** TCP Configuration ***/
-#define TCPIP_TCP_MAX_SEG_SIZE_TX		        	1460
+#define TCPIP_TCP_MAX_SEG_SIZE_TX		        	14600
 #define TCPIP_TCP_SOCKET_DEFAULT_TX_SIZE			1500
 #define TCPIP_TCP_SOCKET_DEFAULT_RX_SIZE			1500
 #define TCPIP_TCP_DYNAMIC_OPTIONS             			true
@@ -313,7 +313,7 @@ extern "C" {
 /*** TCPIP Heap Configuration ***/
 
 #define TCPIP_STACK_USE_INTERNAL_HEAP
-#define TCPIP_STACK_DRAM_SIZE                       39250
+#define TCPIP_STACK_DRAM_SIZE                       64960
 #define TCPIP_STACK_DRAM_RUN_LIMIT                  2048
 
 #define TCPIP_STACK_MALLOC_FUNC                     malloc
@@ -520,6 +520,7 @@ extern "C" {
 #define HAVE_MICROCHIP_HARMONY3_HW_SHA224
 #define WOLFSSL_SHA512
 #define WOLFSSL_SHA384
+#define HAVE_ECC
 #define USE_FAST_MATH
 #define WOLFSSL_STATIC_RSA
 #define WOLFSSL_AES_COUNTER
