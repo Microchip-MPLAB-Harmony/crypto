@@ -146,6 +146,8 @@
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_console_local.h</itemPath>
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_console_uart.h</itemPath>
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_console_uart_definitions.h</itemPath>
+              <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_debug_local.h</itemPath>
+              <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/sys_debug.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/int/sys_int.h</itemPath>
@@ -363,6 +365,7 @@
             <logicalFolder name="f1" displayName="console" projectFiles="true">
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_console.c</itemPath>
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_console_uart.c</itemPath>
+              <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/console/src/sys_debug.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath ex="false">../src/config/sam_e54_xplained_pro/system/int/src/sys_int.c</itemPath>
@@ -399,9 +402,9 @@
         <targetDevice>ATSAME54P20A</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD4Tool</platformTool>
+        <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>2.15</languageToolchainVersion>
+        <languageToolchainVersion>2.20</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -527,7 +530,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="65536"/>
+        <property key="heap-size" value="64960"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
@@ -592,6 +595,9 @@
         <property key="communication.interface" value="swd"/>
         <property key="communication.speed" value="2.000"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.path"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="firmware.update.action" value="firmware.update.use.latest"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
         <property key="memories.configurationmemory" value="true"/>
@@ -605,13 +611,18 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-fffff"/>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preservedataflash.ranges"
+                  value="${memories.dataflash.default}"/>
         <property key="programoptions.preserveeeprom" value="false"/>
         <property key="programoptions.preserveeeprom.ranges" value=""/>
         <property key="programoptions.preserveprogram.ranges" value=""/>
         <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveuserid" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
+        <property key="voltagevalue" value=""/>
       </EdbgTool>
       <ICD4Tool>
         <property key="AutoSelectMemRanges" value="auto"/>
