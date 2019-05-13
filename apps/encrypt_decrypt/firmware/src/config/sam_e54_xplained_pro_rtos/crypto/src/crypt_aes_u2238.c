@@ -168,22 +168,42 @@ static void CRYPT_AES_u2238InOutBlock(const uint8_t * in, uint8_t * out)
 {
     //volatile CRYPT_AES_U2238_AES_INTFLAG * intFlag = (CRYPT_AES_U2238_AES_INTFLAG *)(&AES_REGS->AES_INTFLAG);
     CRYPT_AES_U2238_AES_CTRLB * volatile ctrlb = (CRYPT_AES_U2238_AES_CTRLB  *)(&AES_REGS->AES_CTRLB);
-    
-    uint32_t * ptr = (uint32_t *)in;
-    AES_REGS->AES_INDATA = ptr[0];
-    AES_REGS->AES_INDATA = ptr[1];
-    AES_REGS->AES_INDATA = ptr[2];
-    AES_REGS->AES_INDATA = ptr[3];
+    uint32_t * ptr = NULL;
+    if (in == NULL)
+    {
+        AES_REGS->AES_INDATA = 0;
+        AES_REGS->AES_INDATA = 0;
+        AES_REGS->AES_INDATA = 0;
+        AES_REGS->AES_INDATA = 0;
+    }
+    else
+    {
+        ptr = (uint32_t *)in;
+        AES_REGS->AES_INDATA = ptr[0];
+        AES_REGS->AES_INDATA = ptr[1];
+        AES_REGS->AES_INDATA = ptr[2];
+        AES_REGS->AES_INDATA = ptr[3];
+    }
     
     ctrlb->s.START = 1;
     while ((AES_REGS->AES_INTFLAG & 0x1) == 0);
 
-    ptr = (uint32_t *)out;
-    ptr[0] = AES_REGS->AES_INDATA;
-    ptr[1] = AES_REGS->AES_INDATA;
-    ptr[2] = AES_REGS->AES_INDATA;
-    ptr[3] = AES_REGS->AES_INDATA;
-        
+    if (out == NULL)
+    {
+        uint32_t tmp = AES_REGS->AES_INDATA;
+        tmp = AES_REGS->AES_INDATA;
+        tmp = AES_REGS->AES_INDATA;
+        tmp = AES_REGS->AES_INDATA;
+        tmp = tmp;
+    }
+    else
+    {
+        ptr = (uint32_t *)out;
+        ptr[0] = AES_REGS->AES_INDATA;
+        ptr[1] = AES_REGS->AES_INDATA;
+        ptr[2] = AES_REGS->AES_INDATA;
+        ptr[3] = AES_REGS->AES_INDATA;
+    }   
 }
 
 
@@ -585,19 +605,30 @@ void CRYPT_AES_GCMRunBlocks(Aes* aes, const uint8_t * in, uint8_t * out, uint32_
             ctrlb->s.EOM = 1;
         }
         CRYPT_AES_u2238InOutBlock((const uint8_t*)inPtr, (uint8_t*)outPtr);
-        inPtr+=4;
-        outPtr+=4;
+        if (inPtr != NULL)
+        {
+            inPtr+=4;
+        }
+        if (outPtr != NULL)
+        {
+            outPtr+=4;
+        }
     }
     
     if ((len & 0xf) != 0)
     {
-        memcpy(workBuf, inPtr, (len & 0xf));
+        if (inPtr != NULL)
+        {
+            memcpy(workBuf, inPtr, (len & 0xf));
+        }
         ctrlb->s.EOM = 1;
         CRYPT_AES_u2238InOutBlock((const uint8_t*)workBuf, (uint8_t*)workBuf);
-        memcpy(outPtr, workBuf, (len & 0xf));
+        if (outPtr != NULL)
+        {
+            memcpy(outPtr, workBuf, (len & 0xf));
+        }
     }
     
-    memset(workBuf, 0, sizeof(workBuf));  
 }
 
 void CRYPT_AES_GCMGenerateFinalGHash(Aes* aes, uint32_t len)
