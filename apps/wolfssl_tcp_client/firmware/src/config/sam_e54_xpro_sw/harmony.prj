@@ -395,8 +395,8 @@
           <Name dnOrder="1">initialization.c</Name>
           <LogicalPath dnOrder="2">config/sam_e54_xpro_sw/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">146415D14E3AECD5C44057DB0EF280BC</GeneratedChecksum>
-          <UserChecksum dnOrder="5">146415D14E3AECD5C44057DB0EF280BC</UserChecksum>
+          <GeneratedChecksum dnOrder="4">4A80A538C2D3A8A23241E3456CB05BB0</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4A80A538C2D3A8A23241E3456CB05BB0</UserChecksum>
         </File>
         <File dnOrder="49">
           <Type dnOrder="0">SOURCE</Type>
@@ -515,16 +515,16 @@
           <Name dnOrder="1">net_pres_cert_store.c</Name>
           <LogicalPath dnOrder="2">config/sam_e54_xpro_sw/net_pres/pres/</LogicalPath>
           <PhysicalPath dnOrder="3">/net_pres/pres/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">FE680FAA0E849D0FC1AFDB1F542CC1EB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">FE680FAA0E849D0FC1AFDB1F542CC1EB</UserChecksum>
+          <GeneratedChecksum dnOrder="4">98FBCDAE8D08055A4805E0C0DB104767</GeneratedChecksum>
+          <UserChecksum dnOrder="5">98FBCDAE8D08055A4805E0C0DB104767</UserChecksum>
         </File>
         <File dnOrder="64">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">net_pres_enc_glue.c</Name>
           <LogicalPath dnOrder="2">config/sam_e54_xpro_sw/net_pres/pres/</LogicalPath>
           <PhysicalPath dnOrder="3">/net_pres/pres/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">49CF82710580609D5A505A5D04557D43</GeneratedChecksum>
-          <UserChecksum dnOrder="5">49CF82710580609D5A505A5D04557D43</UserChecksum>
+          <GeneratedChecksum dnOrder="4">7C12DE8F95CC3D0CF7827E516CBF30B7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7C12DE8F95CC3D0CF7827E516CBF30B7</UserChecksum>
         </File>
         <File dnOrder="65">
           <Type dnOrder="0">SOURCE</Type>
@@ -2579,8 +2579,8 @@
           <Name dnOrder="1">net_pres_enc_glue.h</Name>
           <LogicalPath dnOrder="2">config/sam_e54_xpro_sw/net_pres/pres/</LogicalPath>
           <PhysicalPath dnOrder="3">/net_pres/pres/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">62E11462EFDA8161E2107ABA84775C3D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">62E11462EFDA8161E2107ABA84775C3D</UserChecksum>
+          <GeneratedChecksum dnOrder="4">D055F16A6D26E34B57898A603CDC0282</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D055F16A6D26E34B57898A603CDC0282</UserChecksum>
         </File>
         <File dnOrder="322">
           <Type dnOrder="0">HEADER</Type>

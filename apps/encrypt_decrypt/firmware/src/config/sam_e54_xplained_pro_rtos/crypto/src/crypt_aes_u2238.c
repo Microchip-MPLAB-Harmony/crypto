@@ -523,17 +523,19 @@ void CRYPT_AES_GcmLoadKeyCalculateJ0(Aes* aes, const uint8_t * iv, uint32_t iv_l
     }
     
     memset(workBuf, 0, sizeof(workBuf));
-    workBuf[12] = ((iv_len << 3) >> 24) & 0xFF;
-    workBuf[13] = ((iv_len << 3) >> 16) & 0xFF;
-    workBuf[14] = ((iv_len << 3) >> 8) & 0xFF;
-    workBuf[15] = (iv_len << 3) & 0xFF;
+    uint32_t tmpIvLen = iv_len << 3;
+    
+    ((uint8_t*)workBuf)[12] = ((tmpIvLen) >> 24) & 0xFF;
+    ((uint8_t*)workBuf)[13] = ((tmpIvLen) >> 16) & 0xFF;
+    ((uint8_t*)workBuf)[14] = ((tmpIvLen) >> 8) & 0xFF;
+    ((uint8_t*)workBuf)[15] = (tmpIvLen) & 0xFF;
 
     CRYPT_AES_u2238LoadDataBlock((uint8_t*)workBuf, 1);
             
     // Grab the GHASH
     for (int x = 0; x < 4; x++)
     {
-        aes->hwDesc.aesIv[x] = AES_REGS->AES_GHASH[x];
+        ((uint32_t*)(aes->hwDesc.aesIv))[x] = AES_REGS->AES_GHASH[x];
         AES_REGS->AES_GHASH[x] = 0;
     }    
 }
