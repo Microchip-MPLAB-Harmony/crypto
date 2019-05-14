@@ -44,6 +44,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "wolfssl/wolfcrypt/logging.h"
 #include "wolfssl/wolfcrypt/random.h"
 
+#include "system/console/sys_command.h"
 
 
 static uint8_t _net_pres_wolfsslUsers = 0;
@@ -150,6 +151,22 @@ int NET_PRES_EncGlue_StreamClientSendCb0(void *sslin, char *buf, int sz, void *c
 }
 	
 
+void NET_PRES_EncProviderStreamServerLog0(int level, const char * message)
+{
+	static char buffer[80][120];
+	static int bufNum = 0;
+	if (level > 2)
+	{
+		return;
+	}
+	snprintf(buffer[bufNum], 120, "wolfSSL (%d): %s\r\n", level, message);
+	SYS_CONSOLE_MESSAGE(buffer[bufNum]);
+	bufNum ++;
+	if (bufNum == 80)
+	{
+		bufNum = 0;
+	}
+}
 		
 bool NET_PRES_EncProviderStreamServerInit0(NET_PRES_TransportObject * transObject)
 {
@@ -162,6 +179,8 @@ bool NET_PRES_EncProviderStreamServerInit0(NET_PRES_TransportObject * transObjec
     if (_net_pres_wolfsslUsers == 0)
     {
         wolfSSL_Init();
+		wolfSSL_SetLoggingCb(NET_PRES_EncProviderStreamServerLog0);
+		wolfSSL_Debugging_ON();
         _net_pres_wolfsslUsers++;
     }
     net_pres_wolfSSLInfoStreamServer0.transObject = transObject;
@@ -218,6 +237,22 @@ bool NET_PRES_EncProviderStreamServerIsInited0()
     return net_pres_wolfSSLInfoStreamServer0.isInited;
 }
 
+void NET_PRES_EncProviderStreamClientLog0(int level, const char * message)
+{
+	static char buffer[80][120];
+	static int bufNum = 0;
+	if (level > 2)
+	{
+		return;
+	}
+	snprintf(buffer[bufNum], 120, "wolfSSL (%d): %s\r\n", level, message);
+	SYS_CONSOLE_MESSAGE(buffer[bufNum]);
+	bufNum ++;
+	if (bufNum == 80)
+	{
+		bufNum = 0;
+	}
+}
 		
 bool NET_PRES_EncProviderStreamClientInit0(NET_PRES_TransportObject * transObject)
 {
@@ -230,6 +265,8 @@ bool NET_PRES_EncProviderStreamClientInit0(NET_PRES_TransportObject * transObjec
     if (_net_pres_wolfsslUsers == 0)
     {
         wolfSSL_Init();
+		wolfSSL_SetLoggingCb(NET_PRES_EncProviderStreamClientLog0);
+		wolfSSL_Debugging_ON();
         _net_pres_wolfsslUsers++;
     }
     net_pres_wolfSSLInfoStreamClient0.transObject = transObject;

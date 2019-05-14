@@ -587,8 +587,8 @@
           <Name dnOrder="1">net_pres_enc_glue.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk_rtos/net_pres/pres/</LogicalPath>
           <PhysicalPath dnOrder="3">/net_pres/pres/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7C12DE8F95CC3D0CF7827E516CBF30B7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7C12DE8F95CC3D0CF7827E516CBF30B7</UserChecksum>
+          <GeneratedChecksum dnOrder="4">6744208AD8092C4BF6EFAEDA2B478B0C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6744208AD8092C4BF6EFAEDA2B478B0C</UserChecksum>
         </File>
         <File dnOrder="73">
           <Type dnOrder="0">SOURCE</Type>
@@ -891,8 +891,8 @@
           <Name dnOrder="1">tasks.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">28879EEFFCC05D12D1F43C173D2577FE</GeneratedChecksum>
-          <UserChecksum dnOrder="5">28879EEFFCC05D12D1F43C173D2577FE</UserChecksum>
+          <GeneratedChecksum dnOrder="4">8BB24614D66BB0E83656995172A86D7F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8BB24614D66BB0E83656995172A86D7F</UserChecksum>
         </File>
         <File dnOrder="111">
           <Type dnOrder="0">SOURCE</Type>
@@ -1355,8 +1355,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk_rtos/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D400936BEFA1D6539A15C535F1536C17</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D400936BEFA1D6539A15C535F1536C17</UserChecksum>
+          <GeneratedChecksum dnOrder="4">94BAF411AC046F1B3586E2BC64E285E4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">94BAF411AC046F1B3586E2BC64E285E4</UserChecksum>
         </File>
         <File dnOrder="169">
           <Type dnOrder="0">HEADER</Type>
