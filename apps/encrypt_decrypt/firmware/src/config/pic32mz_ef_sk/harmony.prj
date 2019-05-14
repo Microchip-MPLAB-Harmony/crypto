@@ -435,8 +435,8 @@
           <Name dnOrder="1">plib_gpio.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/gpio/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/gpio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1ED05A89BE18C0D21367457E34967AAD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1ED05A89BE18C0D21367457E34967AAD</UserChecksum>
+          <GeneratedChecksum dnOrder="4">4234FCD602ABE604A56F9F4554CC9ACF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4234FCD602ABE604A56F9F4554CC9ACF</UserChecksum>
         </File>
         <File dnOrder="54">
           <Type dnOrder="0">SOURCE</Type>
@@ -475,8 +475,8 @@
           <Name dnOrder="1">random.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">756A21E8FE09C2EB8391BB625ECFC723</GeneratedChecksum>
-          <UserChecksum dnOrder="5">756A21E8FE09C2EB8391BB625ECFC723</UserChecksum>
+          <GeneratedChecksum dnOrder="4">7BC4291576325CBA7AFC886369FBAA9E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7BC4291576325CBA7AFC886369FBAA9E</UserChecksum>
         </File>
         <File dnOrder="59">
           <Type dnOrder="0">SOURCE</Type>

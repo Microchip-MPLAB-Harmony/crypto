@@ -72,7 +72,6 @@ void GPIO_Initialize ( void )
     /* PORTF Initialization */
 
     /* PORTG Initialization */
-    ANSELGCLR = 0x40; /* Digital Mode Enable */
 
     /* PORTH Initialization */
     TRISHCLR = 0x7; /* Direction Control */
