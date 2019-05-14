@@ -44,6 +44,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "wolfssl/wolfcrypt/logging.h"
 #include "wolfssl/wolfcrypt/random.h"
 
+#include "system/console/sys_command.h"
 
 
 static uint8_t _net_pres_wolfsslUsers = 0;
@@ -77,8 +78,25 @@ NET_PRES_EncProviderObject net_pres_EncProviderStreamServer0 =
     .fpMaxOutputSize = NET_PRES_EncProviderMaxOutputSize0,
 
 };
+NET_PRES_EncProviderObject net_pres_EncProviderStreamClient0 = 
+{
+    .fpInit =    NET_PRES_EncProviderStreamClientInit0,
+    .fpDeinit =  NET_PRES_EncProviderStreamClientDeinit0,
+    .fpOpen =    NET_PRES_EncProviderStreamClientOpen0,
+    .fpConnect = NET_PRES_EncProviderClientConnect0,
+    .fpClose =   NET_PRES_EncProviderConnectionClose0,
+    .fpWrite =   NET_PRES_EncProviderWrite0,
+    .fpWriteReady =   NET_PRES_EncProviderWriteReady0,
+    .fpRead =    NET_PRES_EncProviderRead0,
+    .fpReadReady = NET_PRES_EncProviderReadReady0,
+    .fpPeek =    NET_PRES_EncProviderPeek0,
+    .fpIsInited = NET_PRES_EncProviderStreamClientIsInited0,
+    .fpOutputSize = NET_PRES_EncProviderOutputSize0,
+    .fpMaxOutputSize = NET_PRES_EncProviderMaxOutputSize0,
+};
 	
 net_pres_wolfsslInfo net_pres_wolfSSLInfoStreamServer0;
+net_pres_wolfsslInfo net_pres_wolfSSLInfoStreamClient0;
 	
 		
 int NET_PRES_EncGlue_StreamServerReceiveCb0(void *sslin, char *buf, int sz, void *ctx)
@@ -106,8 +124,49 @@ int NET_PRES_EncGlue_StreamServerSendCb0(void *sslin, char *buf, int sz, void *c
     bufferSize =  (*net_pres_wolfSSLInfoStreamServer0.transObject->fpWrite)((uintptr_t)fd, (uint8_t*)buf, (uint16_t)sz);
     return bufferSize;
 }
+int NET_PRES_EncGlue_StreamClientReceiveCb0(void *sslin, char *buf, int sz, void *ctx)
+{
+    int fd = *(int *)ctx;
+    uint16_t bufferSize;
+    bufferSize = (*net_pres_wolfSSLInfoStreamClient0.transObject->fpReadyToRead)((uintptr_t)fd);
+    if (bufferSize == 0)
+    {
+        return WOLFSSL_CBIO_ERR_WANT_READ;
+    }
+    bufferSize = (*net_pres_wolfSSLInfoStreamClient0.transObject->fpRead)((uintptr_t)fd, (uint8_t*)buf, sz);
+    return bufferSize;
+}
+int NET_PRES_EncGlue_StreamClientSendCb0(void *sslin, char *buf, int sz, void *ctx)
+{
+    int fd = *(int *)ctx;
+    uint16_t bufferSize;
+    bufferSize = (*net_pres_wolfSSLInfoStreamClient0.transObject->fpReadyToWrite)((uintptr_t)fd);
+    if (bufferSize == 0)
+    {
+        return WOLFSSL_CBIO_ERR_WANT_WRITE;
+    }
+
+    bufferSize =  (*net_pres_wolfSSLInfoStreamClient0.transObject->fpWrite)((uintptr_t)fd, (uint8_t*)buf, (uint16_t)sz);
+    return bufferSize;
+}
 	
 
+void NET_PRES_EncProviderStreamServerLog0(int level, const char * message)
+{
+	static char buffer[80][120];
+	static int bufNum = 0;
+	if (level > 2)
+	{
+		return;
+	}
+	snprintf(buffer[bufNum], 120, "wolfSSL (%d): %s\r\n", level, message);
+	SYS_CONSOLE_MESSAGE(buffer[bufNum]);
+	bufNum ++;
+	if (bufNum == 80)
+	{
+		bufNum = 0;
+	}
+}
 		
 bool NET_PRES_EncProviderStreamServerInit0(NET_PRES_TransportObject * transObject)
 {
@@ -120,6 +179,8 @@ bool NET_PRES_EncProviderStreamServerInit0(NET_PRES_TransportObject * transObjec
     if (_net_pres_wolfsslUsers == 0)
     {
         wolfSSL_Init();
+		wolfSSL_SetLoggingCb(NET_PRES_EncProviderStreamServerLog0);
+		wolfSSL_Debugging_ON();
         _net_pres_wolfsslUsers++;
     }
     net_pres_wolfSSLInfoStreamServer0.transObject = transObject;
@@ -175,6 +236,89 @@ bool NET_PRES_EncProviderStreamServerIsInited0()
 {
     return net_pres_wolfSSLInfoStreamServer0.isInited;
 }
+
+void NET_PRES_EncProviderStreamClientLog0(int level, const char * message)
+{
+	static char buffer[80][120];
+	static int bufNum = 0;
+	if (level > 2)
+	{
+		return;
+	}
+	snprintf(buffer[bufNum], 120, "wolfSSL (%d): %s\r\n", level, message);
+	SYS_CONSOLE_MESSAGE(buffer[bufNum]);
+	bufNum ++;
+	if (bufNum == 80)
+	{
+		bufNum = 0;
+	}
+}
+		
+bool NET_PRES_EncProviderStreamClientInit0(NET_PRES_TransportObject * transObject)
+{
+    const uint8_t * caCertsPtr;
+    int32_t caCertsLen;
+    if (!NET_PRES_CertStoreGetCACerts(&caCertsPtr, &caCertsLen, 0))
+    {
+        return false;
+    }
+    if (_net_pres_wolfsslUsers == 0)
+    {
+        wolfSSL_Init();
+		wolfSSL_SetLoggingCb(NET_PRES_EncProviderStreamClientLog0);
+		wolfSSL_Debugging_ON();
+        _net_pres_wolfsslUsers++;
+    }
+    net_pres_wolfSSLInfoStreamClient0.transObject = transObject;
+    net_pres_wolfSSLInfoStreamClient0.context = wolfSSL_CTX_new(wolfSSLv23_client_method());
+    if (net_pres_wolfSSLInfoStreamClient0.context == 0)
+    {
+        return false;
+    }
+    wolfSSL_SetIORecv(net_pres_wolfSSLInfoStreamClient0.context, (CallbackIORecv)&NET_PRES_EncGlue_StreamClientReceiveCb0);
+    wolfSSL_SetIOSend(net_pres_wolfSSLInfoStreamClient0.context, (CallbackIOSend)&NET_PRES_EncGlue_StreamClientSendCb0);
+    if (wolfSSL_CTX_load_verify_buffer(net_pres_wolfSSLInfoStreamClient0.context, caCertsPtr, caCertsLen, SSL_FILETYPE_ASN1) != SSL_SUCCESS)
+    {
+        // Couldn't load the certificates
+        //SYS_CONSOLE_MESSAGE("Something went wrong loading the certificates\r\n");
+        wolfSSL_CTX_free(net_pres_wolfSSLInfoStreamClient0.context);
+        return false;
+    }
+    // Turn off verification, because SNTP is usually blocked by a firewall
+    wolfSSL_CTX_set_verify(net_pres_wolfSSLInfoStreamClient0.context, SSL_VERIFY_NONE, 0);
+    net_pres_wolfSSLInfoStreamClient0.isInited = true;
+    return true;
+}
+bool NET_PRES_EncProviderStreamClientDeinit0()
+{
+    wolfSSL_CTX_free(net_pres_wolfSSLInfoStreamClient0.context);
+    net_pres_wolfSSLInfoStreamClient0.isInited = false;
+    _net_pres_wolfsslUsers--;
+    if (_net_pres_wolfsslUsers == 0)
+    {
+        wolfSSL_Cleanup();
+    }
+    return true;
+}
+bool NET_PRES_EncProviderStreamClientOpen0(uintptr_t transHandle, void * providerData)
+{
+        WOLFSSL* ssl = wolfSSL_new(net_pres_wolfSSLInfoStreamClient0.context);
+        if (ssl == NULL)
+        {
+            return false;
+        }
+        if (wolfSSL_set_fd(ssl, transHandle) != SSL_SUCCESS)
+        {
+            wolfSSL_free(ssl);
+            return false;
+        }
+        memcpy(providerData, &ssl, sizeof(WOLFSSL*));
+        return true;
+}
+bool NET_PRES_EncProviderStreamClientIsInited0()
+{
+    return net_pres_wolfSSLInfoStreamClient0.isInited;
+}
 NET_PRES_EncSessionStatus NET_PRES_EncProviderServerAccept0(void * providerData)
 {
     WOLFSSL* ssl;
@@ -192,6 +336,29 @@ NET_PRES_EncSessionStatus NET_PRES_EncProviderServerAccept0(void * providerData)
                 case SSL_ERROR_WANT_READ:
                 case SSL_ERROR_WANT_WRITE:
                     return NET_PRES_ENC_SS_SERVER_NEGOTIATING;
+                default:
+                    return NET_PRES_ENC_SS_FAILED;
+            }
+        }
+    }
+}
+NET_PRES_EncSessionStatus NET_PRES_EncProviderClientConnect0(void * providerData)
+{
+    WOLFSSL* ssl;
+    memcpy(&ssl, providerData, sizeof(WOLFSSL*));
+    int result = wolfSSL_connect(ssl);
+    switch (result)
+    {
+        case SSL_SUCCESS:
+            return NET_PRES_ENC_SS_OPEN;
+        default:
+        {
+            int error = wolfSSL_get_error(ssl, result);
+            switch (error)
+            {
+                case SSL_ERROR_WANT_READ:
+                case SSL_ERROR_WANT_WRITE:
+                    return NET_PRES_ENC_SS_CLIENT_NEGOTIATING;
                 default:
                     return NET_PRES_ENC_SS_FAILED;
             }

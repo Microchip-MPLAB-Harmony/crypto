@@ -650,7 +650,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src/config/pic32mz_ef_sk_sw/library;../src/config/pic32mz_ef_sk_sw/library/tcpip/src;../src/config/pic32mz_ef_sk_sw/library/tcpip/src/common;../src;../src/config/pic32mz_ef_sk_sw;../src/packs/PIC32MZ2048EFH144_DFP;../src/mips;../src/third_party/wolfcrypt_support;../src/third_party/wolfssl;../src/packs/PIC32MZ2048EFM144_DFP"/>
+                  value="../src/config/pic32mz_ef_sk_sw/library;../src/config/pic32mz_ef_sk_sw/library/tcpip/src;../src/config/pic32mz_ef_sk_sw/library/tcpip/src/common;../src;../src/config/pic32mz_ef_sk_sw;../src/packs/PIC32MZ2048EFH144_DFP;../src/mips;../src/third_party/wolfcrypt_support;../src/third_party/wolfssl;../src/packs/PIC32MZ2048EFM144_DFP;"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
