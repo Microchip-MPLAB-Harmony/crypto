@@ -210,9 +210,9 @@ int CRYPT_SHA384_Update(crypt_sha384_hw_descriptor* sha384, const byte* data, wo
 
     if (len >= SHA384_BLOCK_SIZE)
     {
-        result = CRYPT_SHA384_Process(sha384, data, len & 0xFFFFFFC0);
-        data += (len & 0xFFFFFFC0);
-        len &= 0x3F;
+        result = CRYPT_SHA384_Process(sha384, data, len & 0xFFFFFF80);
+        data += (len & 0xFFFFFF80);
+        len &= 0x7F;
     }
 
     if( len > 0 )

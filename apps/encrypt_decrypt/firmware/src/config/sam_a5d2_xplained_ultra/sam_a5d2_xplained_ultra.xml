@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Configuration>
   <Components>
-    <UniqueComponent bsp="true" dnOrder="0" id="BSP_SAM_A5D2_Xplained_Ultra"/>
-    <UniqueComponent dnOrder="1" id="cmsis"/>
-    <UniqueComponent dnOrder="2" id="core">
+    <UniqueComponent dnOrder="0" id="cmsis"/>
+    <UniqueComponent dnOrder="1" id="core">
       <Symbols dnOrder="0">
         <KeyValueSet dnOrder="0" id="ACC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="1" id="ACC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="2" id="ADC_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="3" id="ADC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="4" id="ADC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="5" id="AESB_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="6" id="AESB_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Boolean dnOrder="7" id="AES_CLOCK_ENABLE">
@@ -47,407 +60,567 @@
         </Boolean>
         <KeyValueSet dnOrder="8" id="AES_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="9" id="AES_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Combo dnOrder="10" id="AIC_CODE_GENERATION">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="AIC"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="255" value="AIC"/>
+            </Dynamic>
           </Values>
         </Combo>
         <KeyValueSet dnOrder="11" id="AIC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="12" id="AIC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="13" id="CLASSD_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="14" id="CLASSD_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="15" id="CLASSD_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="16" id="COMPILER_CHOICE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="1"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="1"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="17" id="DDR_CLK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="166000000"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="166000000"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="18" id="FLEXCOM0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="19" id="FLEXCOM0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="20" id="FLEXCOM0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="21" id="FLEXCOM1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="22" id="FLEXCOM1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="23" id="FLEXCOM1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="24" id="FLEXCOM2_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="25" id="FLEXCOM2_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="26" id="FLEXCOM2_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="27" id="FLEXCOM3_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="28" id="FLEXCOM3_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="29" id="FLEXCOM3_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="30" id="FLEXCOM4_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="31" id="FLEXCOM4_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="32" id="FLEXCOM4_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="33" id="GMAC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="34" id="GMAC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="35" id="GMAC_Q1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="36" id="GMAC_Q1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="37" id="GMAC_Q2_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="38" id="GMAC_Q2_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="39" id="HSMC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="40" id="HSMC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="41" id="I2SC0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="42" id="I2SC0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="43" id="I2SC0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="44" id="I2SC1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="45" id="I2SC1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="46" id="I2SC1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="47" id="IAR_HEAP_SIZE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="65536"/>
+            <User dnOrder="0" value="165536"/>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="48" id="ICM_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="49" id="ICM_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="50" id="ISC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="51" id="ISC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="52" id="L2CC_ACR_FWA">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="53" id="L2CC_ECFGR0_EIGEN">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="54" id="L2CC_ECFGR0_ESRC">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="14"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="14"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="55" id="L2CC_ECFGR1_EIGEN">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="56" id="L2CC_ECFGR1_ESRC">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="14"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="14"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="57" id="L2CC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="58" id="L2CC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="59" id="LCDC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="60" id="LCDC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <String dnOrder="61" id="MATRIX0_INTERRUPT_MAP_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="62" id="MATRIX0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="63" id="MATRIX0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <String dnOrder="64" id="MATRIX1_INTERRUPT_MAP_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="65" id="MATRIX1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="66" id="MATRIX1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="67" id="MCAN0_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="68" id="MCAN0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="69" id="MCAN0_INT0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="70" id="MCAN0_INT0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="71" id="MCAN0_INT1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="72" id="MCAN0_INT1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="73" id="MCAN1_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="74" id="MCAN1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="75" id="MCAN1_INT0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="76" id="MCAN1_INT0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="77" id="MCAN1_INT1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="78" id="MCAN1_INT1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Boolean dnOrder="79" id="MPDDRC_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <KeyValueSet dnOrder="80" id="MPDDRC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="81" id="MPDDRC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Integer dnOrder="82" id="NUM_SHARED_VECTORS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="1"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="1"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="83" id="PCK0_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="84" id="PCK1_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="85" id="PCK2_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Integer dnOrder="86" id="PDMIC_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
         <KeyValueSet dnOrder="87" id="PDMIC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="88" id="PDMIC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <String dnOrder="89" id="PIN_111_FUNCTION_TYPE">
@@ -532,895 +705,1162 @@
         </String>
         <Boolean dnOrder="105" id="PIOA_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <String dnOrder="106" id="PIOA_INTERRUPT_MAP_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="107" id="PIOA_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="108" id="PIOA_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <String dnOrder="109" id="PIOB_INTERRUPT_MAP_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="110" id="PIOB_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="111" id="PIOB_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <String dnOrder="112" id="PIOC_INTERRUPT_MAP_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="113" id="PIOC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="114" id="PIOC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <String dnOrder="115" id="PIOD_INTERRUPT_MAP_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="116" id="PIOD_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <KeyValueSet dnOrder="117" id="PIOD_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="118" id="PIT_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="119" id="PIT_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <Hex dnOrder="120" id="PMC_PCER0">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="33831424"/>
-          </Values>
-        </Hex>
-        <Hex dnOrder="121" id="PMC_PCER1">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="32776"/>
-          </Values>
-        </Hex>
-        <KeyValueSet dnOrder="122" id="PMC_PCR_PID19_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="123" id="PMC_PCR_PID20_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="124" id="PMC_PCR_PID21_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="125" id="PMC_PCR_PID22_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="126" id="PMC_PCR_PID23_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="127" id="PMC_PCR_PID24_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="128" id="PMC_PCR_PID25_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="129" id="PMC_PCR_PID26_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="130" id="PMC_PCR_PID27_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="131" id="PMC_PCR_PID28_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="132" id="PMC_PCR_PID29_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="133" id="PMC_PCR_PID30_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="134" id="PMC_PCR_PID31_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="135" id="PMC_PCR_PID32_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="136" id="PMC_PCR_PID33_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="137" id="PMC_PCR_PID34_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="138" id="PMC_PCR_PID35_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="139" id="PMC_PCR_PID36_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="140" id="PMC_PCR_PID40_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="141" id="PMC_PCR_PID48_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="142" id="PMC_PCR_PID54_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="143" id="PMC_PCR_PID55_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="144" id="PMC_PCR_PID56_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="145" id="PMC_PCR_PID57_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="146" id="PMC_PCR_PID59_GCKCSS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="147" id="PMU_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="148" id="PMU_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <String dnOrder="149" id="PORT_B_CFGR_Value0">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x100"/>
-          </Values>
-        </String>
-        <String dnOrder="150" id="PORT_B_CFGR_Value5">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x100"/>
-          </Values>
-        </String>
-        <String dnOrder="151" id="PORT_B_CFGR_Value6">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x100"/>
-          </Values>
-        </String>
-        <String dnOrder="152" id="PORT_B_CFGR_Value9">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x200"/>
-          </Values>
-        </String>
-        <String dnOrder="153" id="PORT_B_LATCH">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x61"/>
-          </Values>
-        </String>
-        <String dnOrder="154" id="PORT_B_MSKR_ValueA">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="155" id="PORT_B_MSKR_ValueB">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="156" id="PORT_B_MSKR_ValueC">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="157" id="PORT_B_MSKR_ValueD">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="158" id="PORT_B_MSKR_ValueE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="159" id="PORT_B_MSKR_ValueF">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="160" id="PORT_B_MSKR_ValueG">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="161" id="PORT_D_MSKR_ValueA">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x3c00c"/>
-          </Values>
-        </String>
-        <String dnOrder="162" id="PORT_D_MSKR_ValueB">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="163" id="PORT_D_MSKR_ValueC">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="164" id="PORT_D_MSKR_ValueD">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="165" id="PORT_D_MSKR_ValueE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="166" id="PORT_D_MSKR_ValueF">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <String dnOrder="167" id="PORT_D_MSKR_ValueG">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0x0"/>
-          </Values>
-        </String>
-        <KeyValueSet dnOrder="168" id="PTC_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="169" id="PTC_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="170" id="PWM_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="171" id="PWM_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="172" id="QSPI0_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="173" id="QSPI0_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="174" id="QSPI1_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="175" id="QSPI1_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="176" id="RXLP_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="177" id="RXLP_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <String dnOrder="178" id="SAIC_INTERRUPT_MAP_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
-          </Values>
-        </String>
-        <KeyValueSet dnOrder="179" id="SAIC_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="180" id="SAIC_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <Integer dnOrder="181" id="SDMMC0_CLOCK_FREQUENCY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </Integer>
-        <Integer dnOrder="182" id="SDMMC0_GENERIC_CLOCK_FREQUENCY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </Integer>
-        <KeyValueSet dnOrder="183" id="SDMMC0_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="184" id="SDMMC0_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="185" id="SDMMC0_TIMER_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="186" id="SDMMC0_TIMER_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <Integer dnOrder="187" id="SDMMC1_CLOCK_FREQUENCY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </Integer>
-        <Integer dnOrder="188" id="SDMMC1_GENERIC_CLOCK_FREQUENCY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </Integer>
-        <KeyValueSet dnOrder="189" id="SDMMC1_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="190" id="SDMMC1_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="191" id="SDMMC1_TIMER_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="192" id="SDMMC1_TIMER_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <String dnOrder="193" id="SECUMOD_INTERRUPT_MAP_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
-          </Values>
-        </String>
-        <KeyValueSet dnOrder="194" id="SECUMOD_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="195" id="SECUMOD_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <String dnOrder="196" id="SECURAM_INTERRUPT_MAP_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="RedirectedToNonSecure"/>
-          </Values>
-        </String>
-        <KeyValueSet dnOrder="197" id="SECURAM_INTERRUPT_PRIORITY">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="7"/>
-          </Values>
-        </KeyValueSet>
-        <KeyValueSet dnOrder="198" id="SECURAM_INTERRUPT_SRC_TYPE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
-          </Values>
-        </KeyValueSet>
-        <Boolean dnOrder="199" id="SECURE_TO_NONSECURE_REDIRECTION">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="true"/>
+        <Boolean dnOrder="118" id="PIT_INTERRUPT_ENABLE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="200" id="SFC_INTERRUPT_PRIORITY">
+        <String dnOrder="119" id="PIT_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="2" value="PIT_InterruptHandler"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <KeyValueSet dnOrder="120" id="PIT_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="201" id="SFC_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="121" id="PIT_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Boolean dnOrder="202" id="SHA_CLOCK_ENABLE">
+        <Hex dnOrder="122" id="PMC_PCER0">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="33831424"/>
+            </Dynamic>
+          </Values>
+        </Hex>
+        <Hex dnOrder="123" id="PMC_PCER1">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="32776"/>
+            </Dynamic>
+          </Values>
+        </Hex>
+        <KeyValueSet dnOrder="124" id="PMC_PCR_PID19_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="125" id="PMC_PCR_PID20_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="126" id="PMC_PCR_PID21_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="127" id="PMC_PCR_PID22_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="128" id="PMC_PCR_PID23_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="129" id="PMC_PCR_PID24_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="130" id="PMC_PCR_PID25_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="131" id="PMC_PCR_PID26_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="132" id="PMC_PCR_PID27_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="133" id="PMC_PCR_PID28_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="134" id="PMC_PCR_PID29_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="135" id="PMC_PCR_PID30_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="136" id="PMC_PCR_PID31_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="137" id="PMC_PCR_PID32_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="138" id="PMC_PCR_PID33_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="139" id="PMC_PCR_PID34_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="140" id="PMC_PCR_PID35_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="141" id="PMC_PCR_PID36_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="142" id="PMC_PCR_PID40_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="143" id="PMC_PCR_PID48_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="144" id="PMC_PCR_PID54_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="145" id="PMC_PCR_PID55_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="146" id="PMC_PCR_PID56_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="147" id="PMC_PCR_PID57_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="148" id="PMC_PCR_PID59_GCKCSS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="149" id="PMU_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="150" id="PMU_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <String dnOrder="151" id="PORT_D_MSKR_ValueA">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x3c00c"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="152" id="PORT_D_MSKR_ValueB">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x0"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="153" id="PORT_D_MSKR_ValueC">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x0"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="154" id="PORT_D_MSKR_ValueD">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x0"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="155" id="PORT_D_MSKR_ValueE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x0"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="156" id="PORT_D_MSKR_ValueF">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x0"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="157" id="PORT_D_MSKR_ValueG">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0x0"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <KeyValueSet dnOrder="158" id="PTC_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="159" id="PTC_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="160" id="PWM_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="161" id="PWM_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="162" id="QSPI0_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="163" id="QSPI0_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="164" id="QSPI1_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="165" id="QSPI1_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="166" id="RXLP_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="167" id="RXLP_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <String dnOrder="168" id="SAIC_INTERRUPT_MAP_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <KeyValueSet dnOrder="169" id="SAIC_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="170" id="SAIC_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <Integer dnOrder="171" id="SDMMC0_CLOCK_FREQUENCY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
+          </Values>
+        </Integer>
+        <Integer dnOrder="172" id="SDMMC0_GENERIC_CLOCK_FREQUENCY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
+          </Values>
+        </Integer>
+        <KeyValueSet dnOrder="173" id="SDMMC0_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="174" id="SDMMC0_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="175" id="SDMMC0_TIMER_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="176" id="SDMMC0_TIMER_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <Integer dnOrder="177" id="SDMMC1_CLOCK_FREQUENCY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
+          </Values>
+        </Integer>
+        <Integer dnOrder="178" id="SDMMC1_GENERIC_CLOCK_FREQUENCY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
+          </Values>
+        </Integer>
+        <KeyValueSet dnOrder="179" id="SDMMC1_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="180" id="SDMMC1_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="181" id="SDMMC1_TIMER_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="182" id="SDMMC1_TIMER_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <String dnOrder="183" id="SECUMOD_INTERRUPT_MAP_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <KeyValueSet dnOrder="184" id="SECUMOD_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="185" id="SECUMOD_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <String dnOrder="186" id="SECURAM_INTERRUPT_MAP_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="RedirectedToNonSecure"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <KeyValueSet dnOrder="187" id="SECURAM_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="7"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="188" id="SECURAM_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <Boolean dnOrder="189" id="SECURE_TO_NONSECURE_REDIRECTION">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <KeyValueSet dnOrder="190" id="SFC_INTERRUPT_PRIORITY">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <KeyValueSet dnOrder="191" id="SFC_INTERRUPT_SRC_TYPE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
+          </Values>
+        </KeyValueSet>
+        <Boolean dnOrder="192" id="SHA_CLOCK_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="203" id="SHA_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="193" id="SHA_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="204" id="SHA_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="194" id="SHA_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="205" id="SLOW_CLK_FREQUENCY">
+        <Integer dnOrder="195" id="SLOW_CLK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="32768"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="32768"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Integer dnOrder="206" id="SPI0_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="196" id="SPI0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="207" id="SPI0_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="197" id="SPI0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="208" id="SPI0_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="198" id="SPI0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="209" id="SPI1_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="199" id="SPI1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="210" id="SPI1_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="200" id="SPI1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="211" id="SPI1_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="201" id="SPI1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="212" id="SSC0_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="202" id="SSC0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="213" id="SSC0_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="203" id="SSC0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="214" id="SSC1_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="204" id="SSC1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="215" id="SSC1_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="205" id="SSC1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <String dnOrder="216" id="SYSC_INTERRUPT_HANDLER">
+        <String dnOrder="206" id="SYSC_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="SYSC_SharedHandler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="SYSC_SharedHandler"/>
+            </Dynamic>
           </Values>
         </String>
-        <KeyValueSet dnOrder="217" id="SYSC_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="207" id="SYSC_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="218" id="SYSC_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="208" id="SYSC_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="219" id="SYSC_NUM_SHARES">
+        <Integer dnOrder="209" id="SYSC_NUM_SHARES">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="3"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="3"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Integer dnOrder="220" id="TC0_CH0_CLOCK_FREQUENCY">
+        <Integer dnOrder="210" id="TC0_CH0_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="83000000"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="83000000"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Integer dnOrder="221" id="TC0_CH3_CLOCK_FREQUENCY">
+        <Integer dnOrder="211" id="TC0_CH3_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="83000000"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="83000000"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Boolean dnOrder="222" id="TC0_CHANNEL0_CLOCK_ENABLE">
+        <Boolean dnOrder="212" id="TC0_CHANNEL0_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="223" id="TC0_CHANNEL1_CLOCK_ENABLE">
+        <Boolean dnOrder="213" id="TC0_CHANNEL1_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="224" id="TC0_CHANNEL2_CLOCK_ENABLE">
+        <Boolean dnOrder="214" id="TC0_CHANNEL2_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="225" id="TC0_CLOCK_ENABLE">
+        <Boolean dnOrder="215" id="TC0_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Integer dnOrder="226" id="TC0_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="216" id="TC0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Boolean dnOrder="227" id="TC0_INTERRUPT_ENABLE">
+        <Boolean dnOrder="217" id="TC0_INTERRUPT_ENABLE">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="readOnly">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="core" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="true"/>
+              <Value dnOrder="1" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <String dnOrder="228" id="TC0_INTERRUPT_HANDLER">
+        <String dnOrder="218" id="TC0_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_InterruptHandler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_InterruptHandler"/>
+            </Dynamic>
           </Values>
         </String>
-        <Boolean dnOrder="229" id="TC0_INTERRUPT_HANDLER_LOCK">
+        <Boolean dnOrder="219" id="TC0_INTERRUPT_HANDLER_LOCK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="230" id="TC0_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="220" id="TC0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="231" id="TC0_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="221" id="TC0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="232" id="TC1_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="222" id="TC1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="233" id="TC1_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="223" id="TC1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="234" id="TC1_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="224" id="TC1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Boolean dnOrder="235" id="TDES_CLOCK_ENABLE">
+        <Boolean dnOrder="225" id="TDES_CLOCK_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="236" id="TDES_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="226" id="TDES_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="237" id="TDES_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="227" id="TDES_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Boolean dnOrder="238" id="TRNG_CLOCK_ENABLE">
+        <Boolean dnOrder="228" id="TRNG_CLOCK_ENABLE">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="239" id="TRNG_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="229" id="TRNG_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="240" id="TRNG_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="230" id="TRNG_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="241" id="TWIHS0_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="231" id="TWIHS0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="242" id="TWIHS0_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="232" id="TWIHS0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="243" id="TWIHS0_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="233" id="TWIHS0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="244" id="TWIHS1_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="234" id="TWIHS1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="245" id="TWIHS1_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="235" id="TWIHS1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="246" id="TWIHS1_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="236" id="TWIHS1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="247" id="UART0_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="237" id="UART0_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="248" id="UART0_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="238" id="UART0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="249" id="UART0_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="239" id="UART0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Boolean dnOrder="250" id="UART1_CLOCK_ENABLE">
+        <Boolean dnOrder="240" id="UART1_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="uart1" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="uart1" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Integer dnOrder="251" id="UART1_CLOCK_FREQUENCY">
+        <Integer dnOrder="241" id="UART1_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="83000000"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="83000000"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Integer dnOrder="252" id="UART1_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="242" id="UART1_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Boolean dnOrder="253" id="UART1_INTERRUPT_ENABLE">
+        <Boolean dnOrder="243" id="UART1_INTERRUPT_ENABLE">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="readOnly">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <Dynamic dnOrder="0" id="core" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="1" value="true"/>
+              <Value dnOrder="1" id="uart1" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <String dnOrder="254" id="UART1_INTERRUPT_HANDLER">
+        <String dnOrder="244" id="UART1_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="uart1" value="UART1_InterruptHandler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="uart1" priority="2" value="UART1_InterruptHandler"/>
+            </Dynamic>
           </Values>
         </String>
-        <Boolean dnOrder="255" id="UART1_INTERRUPT_HANDLER_LOCK">
+        <Boolean dnOrder="245" id="UART1_INTERRUPT_HANDLER_LOCK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="uart1" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="uart1" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="256" id="UART1_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="246" id="UART1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="257" id="UART1_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="247" id="UART1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="258" id="UART2_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="248" id="UART2_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="259" id="UART2_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="249" id="UART2_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="260" id="UART2_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="250" id="UART2_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="261" id="UART3_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="251" id="UART3_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="262" id="UART3_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="252" id="UART3_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="263" id="UART3_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="253" id="UART3_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Integer dnOrder="264" id="UART4_GENERIC_CLOCK_FREQUENCY">
+        <Integer dnOrder="254" id="UART4_GENERIC_CLOCK_FREQUENCY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="0"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <KeyValueSet dnOrder="265" id="UART4_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="255" id="UART4_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="266" id="UART4_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="256" id="UART4_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="267" id="UDPHS_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="257" id="UDPHS_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="268" id="UDPHS_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="258" id="UDPHS_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="269" id="UHPHS_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="259" id="UHPHS_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="270" id="UHPHS_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="260" id="UHPHS_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <Boolean dnOrder="271" id="WDT_INTERRUPT_ENABLE">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="readOnly">
-              <Value dnOrder="0">false</Value>
-            </Boolean>
-          </Attributes>
-        </Boolean>
-        <String dnOrder="272" id="WDT_INTERRUPT_HANDLER">
+        <String dnOrder="261" id="WDT_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="WDT_Handler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="WDT_Handler"/>
+            </Dynamic>
           </Values>
         </String>
-        <Boolean dnOrder="273" id="WDT_INTERRUPT_HANDLER_LOCK">
+        <Boolean dnOrder="262" id="WDT_INTERRUPT_HANDLER_LOCK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <KeyValueSet dnOrder="274" id="WDT_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="263" id="WDT_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="275" id="WDT_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="264" id="WDT_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="276" id="XDMAC0_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="265" id="XDMAC0_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="277" id="XDMAC0_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="266" id="XDMAC0_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="278" id="XDMAC1_INTERRUPT_PRIORITY">
+        <KeyValueSet dnOrder="267" id="XDMAC1_INTERRUPT_PRIORITY">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
-        <KeyValueSet dnOrder="279" id="XDMAC1_INTERRUPT_SRC_TYPE">
+        <KeyValueSet dnOrder="268" id="XDMAC1_INTERRUPT_SRC_TYPE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="core" value="0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="core" priority="0" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="3" id="dfp"/>
-    <UniqueComponent dnOrder="4" id="HarmonyCore">
+    <UniqueComponent dnOrder="2" id="dfp"/>
+    <UniqueComponent dnOrder="3" id="HarmonyCore">
       <Symbols dnOrder="0">
         <File dnOrder="0" id="APP0_C">
           <Attributes dnOrder="0">
@@ -1436,51 +1876,237 @@
             </Boolean>
           </Attributes>
         </File>
-        <Boolean dnOrder="2" id="ENABLE_APP_FILE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="3" id="ENABLE_DRV_COMMON">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_console" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="4" id="ENABLE_OSAL">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="5" id="ENABLE_SYS_CACHE">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="6" id="ENABLE_SYS_COMMON">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_console" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="7" id="ENABLE_SYS_INT">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="HarmonyCore" value="true"/>
-          </Values>
-        </Boolean>
-        <File dnOrder="8" id="SYS_CACHE_DEF">
+        <File dnOrder="2" id="CONFIGURATION_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="9" id="SYS_CACHE_HEADER">
+        <File dnOrder="3" id="DRIVER_COMMON">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="10" id="SYS_CACHE_SOURCE">
+        <File dnOrder="4" id="DRIVER_ROOT">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <Boolean dnOrder="5" id="ENABLE_APP_FILE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="HarmonyCore" priority="1" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="6" id="ENABLE_DRV_COMMON">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="sys_console" priority="2" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="7" id="ENABLE_OSAL">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="HarmonyCore" priority="1" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="8" id="ENABLE_SYS_CACHE">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="HarmonyCore" priority="1" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="9" id="ENABLE_SYS_COMMON">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="sys_console" priority="2" value="true"/>
+              <Value dnOrder="1" id="sys_time" priority="2" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="10" id="ENABLE_SYS_INT">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="HarmonyCore" priority="1" value="true"/>
+            </Dynamic>
+          </Values>
+        </Boolean>
+        <Integer dnOrder="11" id="GEN_APP_RTOS_TASK_0_SIZE">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="8192"/>
+          </Values>
+        </Integer>
+        <Menu dnOrder="12" id="GEN_APP_RTOS_TASK_CONF_MENU0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </Menu>
+        <File dnOrder="13" id="GEN_APP_TASKS">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <Menu dnOrder="14" id="GEN_APP_TASK_MENU">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Menu>
+        <File dnOrder="15" id="GEN_RTOS_APP_TASKS">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="16" id="GEN_RTOS_APP_TASKS_DEF">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="17" id="INT_DEF">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="18" id="INT_HEADER">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="19" id="INT_MAPPING">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="20" id="INT_SOURCE">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="21" id="OSAL_DEFINITIONS_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="22" id="OSAL_FREERTOS_C">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="23" id="OSAL_FREERTOS_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="24" id="OSAL_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="25" id="OSAL_IMPL_BASIC_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="26" id="OSAL_SYSDEF_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <Combo dnOrder="27" id="SELECT_RTOS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="HarmonyCore" priority="1" value="BareMetal"/>
+            </Dynamic>
+          </Values>
+        </Combo>
+        <File dnOrder="28" id="SYSTEM_COMMON">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="29" id="SYSTEM_MODULE">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="30" id="SYSTEM_ROOT">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="31" id="SYS_CACHE_DEF">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="32" id="SYS_CACHE_HEADER">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="33" id="SYS_CACHE_SOURCE">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="34" id="TASKS_C">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="35" id="USER_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
@@ -1489,7 +2115,7 @@
         </File>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="5" id="lib_crypto">
+    <UniqueComponent dnOrder="4" id="lib_crypto">
       <Symbols dnOrder="0">
         <Boolean dnOrder="0" id="cryptoCipher3DES">
           <Values dnOrder="0">
@@ -1568,7 +2194,9 @@
         </Boolean>
         <Boolean dnOrder="15" id="cryptoIsWolfsslEnabled">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="lib_crypto" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="lib_crypto" priority="1" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <Boolean dnOrder="16" id="cryptoRandom">
@@ -1578,16 +2206,80 @@
         </Boolean>
       </Symbols>
     </UniqueComponent>
+    <UniqueComponent dnOrder="5" id="pit">
+      <Symbols dnOrder="0">
+        <String dnOrder="0" id="CALLBACK_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerCallbackSet"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="1" id="COMPARE_SET_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerCompareSet"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="2" id="COUNTER_GET_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerCounterGet"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="3" id="FREQUENCY_GET_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerFrequencyGet"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="4" id="IRQ_ENUM_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_IRQn"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="5" id="PERIOD_SET_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerPeriodSet"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="6" id="TIMER_START_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerStart"/>
+            </Dynamic>
+          </Values>
+        </String>
+        <String dnOrder="7" id="TIMER_STOP_API_NAME">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="pit" priority="1" value="PIT_TimerStop "/>
+            </Dynamic>
+          </Values>
+        </String>
+      </Symbols>
+    </UniqueComponent>
     <UniqueComponent dnOrder="6" id="sys_console">
       <Symbols dnOrder="0">
         <String dnOrder="0" id="SYS_CONSOLE_DEVICE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_console" value="UART1"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="sys_console" priority="2" value="UART1"/>
+            </Dynamic>
           </Values>
         </String>
         <String dnOrder="1" id="SYS_CONSOLE_DEVICE_SET">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_console" value="UART"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="sys_console" priority="2" value="UART"/>
+            </Dynamic>
           </Values>
         </String>
       </Symbols>
@@ -1608,7 +2300,9 @@
       <Symbols dnOrder="0">
         <String dnOrder="0" id="SYS_TIME_PLIB">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="sys_time" value="TC0"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="sys_time" priority="2" value="TC0"/>
+            </Dynamic>
           </Values>
         </String>
       </Symbols>
@@ -1629,209 +2323,295 @@
       <Symbols dnOrder="0">
         <String dnOrder="0" id="CALLBACK_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerCallbackRegister"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerCallbackRegister"/>
+            </Dynamic>
           </Values>
         </String>
         <String dnOrder="1" id="COMPARE_SET_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerCompareSet"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerCompareSet"/>
+            </Dynamic>
           </Values>
         </String>
         <String dnOrder="2" id="COUNTER_GET_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerCounterGet"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerCounterGet"/>
+            </Dynamic>
           </Values>
         </String>
         <String dnOrder="3" id="FREQUENCY_GET_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerFrequencyGet"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerFrequencyGet"/>
+            </Dynamic>
           </Values>
         </String>
         <String dnOrder="4" id="IRQ_ENUM_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_IRQn"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_IRQn"/>
+            </Dynamic>
           </Values>
         </String>
         <String dnOrder="5" id="PERIOD_SET_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerPeriodSet"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerPeriodSet"/>
+            </Dynamic>
           </Values>
         </String>
         <KeyValueSet dnOrder="6" id="SYS_TIME_TC_CHANNEL">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="0"/>
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="1" value="0"/>
+            </Dynamic>
           </Values>
         </KeyValueSet>
         <Boolean dnOrder="7" id="TC0_CH0_INTERRUPT_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <String dnOrder="8" id="TC0_CH0_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_InterruptHandler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_InterruptHandler"/>
+            </Dynamic>
           </Values>
         </String>
         <Boolean dnOrder="9" id="TC0_CH0_INTERRUPT_HANDLER_LOCK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <Boolean dnOrder="10" id="TC0_CH1_INTERRUPT_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <String dnOrder="11" id="TC0_CH1_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH1_Handler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH1_Handler"/>
+            </Dynamic>
           </Values>
         </String>
         <Boolean dnOrder="12" id="TC0_CH1_INTERRUPT_HANDLER_LOCK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <Boolean dnOrder="13" id="TC0_CH2_INTERRUPT_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
         <String dnOrder="14" id="TC0_CH2_INTERRUPT_HANDLER">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH2_Handler"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH2_Handler"/>
+            </Dynamic>
           </Values>
         </String>
         <Boolean dnOrder="15" id="TC0_CH2_INTERRUPT_HANDLER_LOCK">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Integer dnOrder="16" id="TC0_CLOCK_FREQ">
+        <Comment dnOrder="16" id="TC0_CLK_ENABLE_COMMENT">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </Comment>
+        <Integer dnOrder="17" id="TC0_CLOCK_FREQ">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="83000000"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="83000000"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Boolean dnOrder="17" id="TC0_ENABLE">
+        <Boolean dnOrder="18" id="TC0_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="18" id="TC0_IER_CPAS">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+        <Boolean dnOrder="19" id="TC0_IER_CPAS">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="19" id="TC0_IER_CPCS">
+        <Boolean dnOrder="20" id="TC0_IER_CPCS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="20" id="TC0_Resolution">
+        <Comment dnOrder="21" id="TC0_Resolution">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Clock&amp;#160;resolution&amp;#160;is&amp;#160;12.0481927711&amp;#160;nS****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Boolean dnOrder="21" id="TC0_SYS_TIME_CONNECTED">
+        <Boolean dnOrder="22" id="TC0_SYS_TIME_CONNECTED">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="22" id="TC0_TIMER_PERIOD_CMT">
+        <Comment dnOrder="23" id="TC0_TIMER_PERIOD_CMT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Period&amp;#160;Count&amp;#160;is&amp;#160;33200****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Long dnOrder="23" id="TC0_TIMER_PERIOD_COUNT">
+        <Long dnOrder="24" id="TC0_TIMER_PERIOD_COUNT">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="33200"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="33200"/>
+            </Dynamic>
           </Values>
         </Long>
-        <Float dnOrder="24" id="TC0_TIMER_PERIOD_MS">
+        <Float dnOrder="25" id="TC0_TIMER_PERIOD_MS">
           <Attributes dnOrder="0">
             <Float dnOrder="0" id="max">
               <Value dnOrder="0">51746.594</Value>
             </Float>
+            <Boolean dnOrder="1" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
           </Attributes>
         </Float>
-        <Boolean dnOrder="25" id="TC1_ENABLE">
+        <Boolean dnOrder="26" id="TC1_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="26" id="TC1_SYS_TIME_CONNECTED">
+        <Boolean dnOrder="27" id="TC1_SYS_TIME_CONNECTED">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="27" id="TC1_TIMER_PERIOD_CMT">
+        <Comment dnOrder="28" id="TC1_TIMER_PERIOD_CMT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Period&amp;#160;Count&amp;#160;is&amp;#160;33200****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Long dnOrder="28" id="TC1_TIMER_PERIOD_COUNT">
+        <Long dnOrder="29" id="TC1_TIMER_PERIOD_COUNT">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="33200"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="33200"/>
+            </Dynamic>
           </Values>
         </Long>
-        <Boolean dnOrder="29" id="TC2_ENABLE">
+        <Boolean dnOrder="30" id="TC2_ENABLE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="30" id="TC2_SYS_TIME_CONNECTED">
+        <Boolean dnOrder="31" id="TC2_SYS_TIME_CONNECTED">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="31" id="TC2_TIMER_PERIOD_CMT">
+        <Comment dnOrder="32" id="TC2_TIMER_PERIOD_CMT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Period&amp;#160;Count&amp;#160;is&amp;#160;33200****</Value>
             </String>
           </Attributes>
         </Comment>
-        <Long dnOrder="32" id="TC2_TIMER_PERIOD_COUNT">
+        <Long dnOrder="33" id="TC2_TIMER_PERIOD_COUNT">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="33200"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="33200"/>
+            </Dynamic>
           </Values>
         </Long>
-        <Integer dnOrder="33" id="TC3_CLOCK_FREQ">
+        <Integer dnOrder="34" id="TC3_CLOCK_FREQ">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="83000000"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="83000000"/>
+            </Dynamic>
           </Values>
         </Integer>
-        <Boolean dnOrder="34" id="TC3_PCK7">
+        <Boolean dnOrder="35" id="TC3_PCK7">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="false"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="false"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Boolean dnOrder="35" id="TC_COMMON_INTERRUPT_STATUS">
+        <Boolean dnOrder="36" id="TC_COMMON_INTERRUPT_STATUS">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="true"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="true"/>
+            </Dynamic>
           </Values>
         </Boolean>
-        <Comment dnOrder="36" id="TC_QEI_PERIOD_COMMENT">
+        <Comment dnOrder="37" id="TC_QEI_PERIOD_COMMENT">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="text">
               <Value dnOrder="0">****Time&amp;#160;Base&amp;#160;is&amp;#160;180.903614458&amp;#160;uS****</Value>
             </String>
           </Attributes>
         </Comment>
-        <String dnOrder="37" id="TIMER_START_API_NAME">
+        <String dnOrder="38" id="TIMER_START_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerStart"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerStart"/>
+            </Dynamic>
           </Values>
         </String>
-        <String dnOrder="38" id="TIMER_STOP_API_NAME">
+        <String dnOrder="39" id="TIMER_STOP_API_NAME">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="tc0" value="TC0_CH0_TimerStop "/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="tc0" priority="2" value="TC0_CH0_TimerStop "/>
+            </Dynamic>
           </Values>
         </String>
       </Symbols>
@@ -1857,7 +2637,9 @@
         </Integer>
         <Integer dnOrder="1" id="BRG_VALUE">
           <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="uart1" value="45"/>
+            <Dynamic dnOrder="0">
+              <Value dnOrder="0" id="uart1" priority="2" value="45"/>
+            </Dynamic>
           </Values>
         </Integer>
         <Comment dnOrder="2" id="UART_CLK_ENABLE_COMMENT">
@@ -1867,11 +2649,6 @@
             </Boolean>
           </Attributes>
         </Comment>
-        <Integer dnOrder="3" id="UART_CLOCK_FREQ">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="uart1" value="83000000"/>
-          </Values>
-        </Integer>
       </Symbols>
       <Attachments dnOrder="1">
         <DirectCapability dnOrder="0" id="UART1_UART">
@@ -1890,12 +2667,12 @@
   <UserData>
     <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="BSP_SAM_A5D2_Xplained_Ultra" x="460" y="20"/>
-        <ElementPosition dnOrder="1" id="HarmonyCore" x="439" y="132"/>
-        <ElementPosition dnOrder="2" id="cmsis" x="340" y="20"/>
-        <ElementPosition dnOrder="3" id="core" x="244" y="17"/>
-        <ElementPosition dnOrder="4" id="dfp" x="20" y="20"/>
-        <ElementPosition dnOrder="5" id="lib_crypto" x="36" y="406"/>
+        <ElementPosition dnOrder="0" id="HarmonyCore" x="439" y="132"/>
+        <ElementPosition dnOrder="1" id="cmsis" x="340" y="20"/>
+        <ElementPosition dnOrder="2" id="core" x="244" y="17"/>
+        <ElementPosition dnOrder="3" id="dfp" x="20" y="20"/>
+        <ElementPosition dnOrder="4" id="lib_crypto" x="36" y="406"/>
+        <ElementPosition dnOrder="5" id="pit" x="480" y="20"/>
         <ElementPosition dnOrder="6" id="sys_console" x="233" y="119"/>
         <ElementPosition dnOrder="7" id="sys_time" x="250" y="250"/>
         <ElementPosition dnOrder="8" id="tc0" x="28" y="296"/>

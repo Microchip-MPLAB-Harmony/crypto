@@ -170,8 +170,9 @@ void SYS_Initialize ( void* data )
 	PIO_Initialize();
 
 
-	BSP_Initialize();
 	UART1_Initialize();
+
+	PIT_TimerInitialize();
 
     MMU_Initialize();
     Matrix_Initialize();

@@ -26,9 +26,9 @@
     </linkerFile>
     <files relRoot="$PROJ_DIR$\..\..\firmware\src\config\sam_a5d2_xplained_ultra">
         <group name="Header Files" relRoot="$PROJ_DIR$\..\..\firmware\src\config\sam_a5d2_xplained_ultra">
-            <path>\bsp\bsp.h</path>
             <path>\peripheral\uart\plib_uart_common.h</path>
             <path>\peripheral\uart\plib_uart1.h</path>
+            <path>\peripheral\pit\plib_pit.h</path>
             <path>\device_cache.h</path>
             <path>\toolchain_specifics.h</path>
             <path>\definitions.h</path>
@@ -217,8 +217,8 @@
             <path>\system\time\src\sys_time_local.h</path>
         </group>
         <group name="Source Files" relRoot="$PROJ_DIR$\..\..\firmware\src\config\sam_a5d2_xplained_ultra">
-            <path>\bsp\bsp.c</path>
             <path>\peripheral\uart\plib_uart1.c</path>
+            <path>\peripheral\pit\plib_pit.c</path>
             <path>\..\..\main.c</path>
             <path>\initialization.c</path>
             <path>\interrupts.c</path>
