@@ -118,6 +118,10 @@ void PIO_Initialize ( void )
  /* Port B Latch configuration */
 	PIOB_REGS->PIO_SODR = 0x61;
 	
+ /* Port D Peripheral function A configuration */
+	PIOD_REGS->PIO_MSKR = 0x7c00c;
+	PIOD_REGS->PIO_CFGR = 0x1;
+	
  /* Port D Pin 2 configuration */
 	PIOD_REGS->PIO_MSKR = 0x4;
 	PIOD_REGS->PIO_CFGR |= 0x200;
