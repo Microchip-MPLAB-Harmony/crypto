@@ -152,7 +152,7 @@ void PMC_Handler( void )                 __attribute__((weak, alias("DefaultInte
 void RSTC_Handler( void )                __attribute__((weak, alias("DefaultInterruptHandler")));
 void RTC_Handler( void )                 __attribute__((weak, alias("DefaultInterruptHandler")));
 
-void PIT_InterruptHandler(               void );
+void FreeRTOS_Tick_Handler(              void );
 void UART1_InterruptHandler(             void );
 void TC0_InterruptHandler(               void );
 
@@ -163,7 +163,7 @@ void SYSC_SharedHandler( void )
 
 /* data for irq register initialization */
 IrqData irqData[] = {
-    { 3,   (uint32_t) AIC_REGS,    PIT_InterruptHandler,       AIC_SMR_SRCTYPE_INT_LEVEL_SENSITIVE_Val,  AIC_SMR_PRIORITY_MINIMUM_Val   },
+    { 3,   (uint32_t) AIC_REGS,    FreeRTOS_Tick_Handler,      AIC_SMR_SRCTYPE_INT_LEVEL_SENSITIVE_Val,  AIC_SMR_PRIORITY_MINIMUM_Val   },
     { 25,  (uint32_t) AIC_REGS,    UART1_InterruptHandler,     AIC_SMR_SRCTYPE_INT_LEVEL_SENSITIVE_Val,  AIC_SMR_PRIORITY_MINIMUM_Val   },
     { 35,  (uint32_t) AIC_REGS,    TC0_InterruptHandler,       AIC_SMR_SRCTYPE_INT_LEVEL_SENSITIVE_Val,  AIC_SMR_PRIORITY_MINIMUM_Val   },
 };

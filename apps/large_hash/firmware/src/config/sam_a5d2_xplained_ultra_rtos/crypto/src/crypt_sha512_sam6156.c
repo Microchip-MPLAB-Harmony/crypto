@@ -209,9 +209,9 @@ int CRYPT_SHA512_Update(crypt_sha512_hw_descriptor* sha512, const byte* data, wo
 
     if (len >= SHA512_BLOCK_SIZE)
     {
-        result = CRYPT_SHA512_Process(sha512, data, len & 0xFFFFFFC0);
-        data += (len & 0xFFFFFFC0);
-        len &= 0x3F;
+        result = CRYPT_SHA512_Process(sha512, data, len & 0xFFFFFF80);
+        data += (len & 0xFFFFFF80);
+        len &= 0x7F;
     }
 
     if( len > 0 )

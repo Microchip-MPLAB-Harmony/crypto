@@ -2422,9 +2422,6 @@
                 <name>$PROJ_DIR$\..\src\packs\ATSAMA5D27_DFP\component\aximx.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\bsp\bsp.h</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\camellia.h</name>
             </file>
             <file>
@@ -3023,9 +3020,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\async.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\bsp\bsp.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\camellia.c</name>
