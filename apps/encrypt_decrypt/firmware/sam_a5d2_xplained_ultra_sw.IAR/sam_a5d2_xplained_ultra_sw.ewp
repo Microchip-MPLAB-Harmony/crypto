@@ -2144,9 +2144,6 @@
                 <name>$PROJ_DIR$\..\src\packs\ATSAMA5D27_DFP\component\aximx.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\bsp\bsp.h</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\camellia.h</name>
             </file>
             <file>
@@ -2429,6 +2426,9 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\peripheral\pio\plib_pio.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\peripheral\pit\plib_pit.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\peripheral\tc\plib_tc0.h</name>
             </file>
             <file>
@@ -2687,9 +2687,6 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\async.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\bsp\bsp.c</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\camellia.c</name>
             </file>
             <file>
@@ -2832,6 +2829,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\peripheral\pio\plib_pio.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\peripheral\pit\plib_pit.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\peripheral\tc\plib_tc0.c</name>
