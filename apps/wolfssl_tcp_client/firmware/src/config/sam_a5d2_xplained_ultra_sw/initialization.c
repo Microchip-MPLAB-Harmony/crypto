@@ -188,7 +188,7 @@ static const NET_PRES_INST_DATA netPresCfgs[] =
         .pTransObject_sc = &netPresTransObject0SC,
         .pTransObject_ds = &netPresTransObject0DS,
         .pTransObject_dc = &netPresTransObject0DC,
-        .pProvObject_ss = NULL,
+        .pProvObject_ss = &net_pres_EncProviderStreamServer0,
         .pProvObject_sc = &net_pres_EncProviderStreamClient0,
         .pProvObject_ds = NULL,
         .pProvObject_dc = NULL,
@@ -572,7 +572,6 @@ void SYS_Initialize ( void* data )
   
     CLK_Initialize();
 	PIO_Initialize();
-
 
  
     TC0_CH0_TimerInitialize(); 
