@@ -49,8 +49,8 @@ static void CLK_PeripheralClockInitialize(void)
      * certain clocks turn off all clocks not expressly enabled */
    	PMC_REGS->PMC_PCER0=0x2043a00;
     PMC_REGS->PMC_PCDR0=~0x2043a00;
-    PMC_REGS->PMC_PCER1=0x8;
-    PMC_REGS->PMC_PCDR1=~0x8;
+    PMC_REGS->PMC_PCER1=0x8008;
+    PMC_REGS->PMC_PCDR1=~0x8008;
 }
 
 

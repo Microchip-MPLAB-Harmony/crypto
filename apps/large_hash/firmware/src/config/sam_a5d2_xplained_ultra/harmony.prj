@@ -56,21 +56,13 @@
         </File>
         <File dnOrder="6">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">bsp.c</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/bsp/</LogicalPath>
-          <PhysicalPath dnOrder="3">/bsp/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A3BA2DB10FD6CC611A79BDCBD193EE7B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A3BA2DB10FD6CC611A79BDCBD193EE7B</UserChecksum>
-        </File>
-        <File dnOrder="7">
-          <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">camellia.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">251C8E09A83F2F5B88852D6E40ADD0BA</GeneratedChecksum>
           <UserChecksum dnOrder="5">251C8E09A83F2F5B88852D6E40ADD0BA</UserChecksum>
         </File>
-        <File dnOrder="8">
+        <File dnOrder="7">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">chacha.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -78,7 +70,7 @@
           <GeneratedChecksum dnOrder="4">2BE9066D0C61843B898AFA572340365C</GeneratedChecksum>
           <UserChecksum dnOrder="5">2BE9066D0C61843B898AFA572340365C</UserChecksum>
         </File>
-        <File dnOrder="9">
+        <File dnOrder="8">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">chacha20_poly1305.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -86,7 +78,7 @@
           <GeneratedChecksum dnOrder="4">29A01E9B896D9C30B674E18FB0B482A2</GeneratedChecksum>
           <UserChecksum dnOrder="5">29A01E9B896D9C30B674E18FB0B482A2</UserChecksum>
         </File>
-        <File dnOrder="10">
+        <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">cmac.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -94,7 +86,7 @@
           <GeneratedChecksum dnOrder="4">15BD3320BCDA0A2DD508131B28178789</GeneratedChecksum>
           <UserChecksum dnOrder="5">15BD3320BCDA0A2DD508131B28178789</UserChecksum>
         </File>
-        <File dnOrder="11">
+        <File dnOrder="10">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">coding.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -102,7 +94,7 @@
           <GeneratedChecksum dnOrder="4">D3831ADA2BF0A858C2AED74FA42294CB</GeneratedChecksum>
           <UserChecksum dnOrder="5">D3831ADA2BF0A858C2AED74FA42294CB</UserChecksum>
         </File>
-        <File dnOrder="12">
+        <File dnOrder="11">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">compress.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -110,7 +102,7 @@
           <GeneratedChecksum dnOrder="4">035545E9504F5CD9E85A4778DCB66A8C</GeneratedChecksum>
           <UserChecksum dnOrder="5">035545E9504F5CD9E85A4778DCB66A8C</UserChecksum>
         </File>
-        <File dnOrder="13">
+        <File dnOrder="12">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crc32.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -118,7 +110,7 @@
           <GeneratedChecksum dnOrder="4">A56B399B9141DA952FB8A56F3D5F971A</GeneratedChecksum>
           <UserChecksum dnOrder="5">A56B399B9141DA952FB8A56F3D5F971A</UserChecksum>
         </File>
-        <File dnOrder="14">
+        <File dnOrder="13">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_aes_sam6149.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -126,7 +118,7 @@
           <GeneratedChecksum dnOrder="4">BCD7D7B38EA86CE3BC9C85D587A7A54C</GeneratedChecksum>
           <UserChecksum dnOrder="5">BCD7D7B38EA86CE3BC9C85D587A7A54C</UserChecksum>
         </File>
-        <File dnOrder="15">
+        <File dnOrder="14">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_rng_sam6334.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -134,7 +126,7 @@
           <GeneratedChecksum dnOrder="4">15310F4FBA98D2BB8375634E36119089</GeneratedChecksum>
           <UserChecksum dnOrder="5">15310F4FBA98D2BB8375634E36119089</UserChecksum>
         </File>
-        <File dnOrder="16">
+        <File dnOrder="15">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha1_sam6156.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -142,7 +134,7 @@
           <GeneratedChecksum dnOrder="4">FA1166DEFD21B4B68A8A7CBF4672D107</GeneratedChecksum>
           <UserChecksum dnOrder="5">FA1166DEFD21B4B68A8A7CBF4672D107</UserChecksum>
         </File>
-        <File dnOrder="17">
+        <File dnOrder="16">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha224_sam6156.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -150,7 +142,7 @@
           <GeneratedChecksum dnOrder="4">091E075FE82D976ED0D42C9C3FD329A0</GeneratedChecksum>
           <UserChecksum dnOrder="5">091E075FE82D976ED0D42C9C3FD329A0</UserChecksum>
         </File>
-        <File dnOrder="18">
+        <File dnOrder="17">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha256_sam6156.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -158,23 +150,23 @@
           <GeneratedChecksum dnOrder="4">15BC4467CF03D3AD1F538FF87614EFCC</GeneratedChecksum>
           <UserChecksum dnOrder="5">15BC4467CF03D3AD1F538FF87614EFCC</UserChecksum>
         </File>
-        <File dnOrder="19">
+        <File dnOrder="18">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha384_sam6156.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">374F51D8D34BE7D38FE910326966B318</GeneratedChecksum>
-          <UserChecksum dnOrder="5">374F51D8D34BE7D38FE910326966B318</UserChecksum>
+          <GeneratedChecksum dnOrder="4">B6B0061A83D2CD2035BF754E6EF1151A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B6B0061A83D2CD2035BF754E6EF1151A</UserChecksum>
         </File>
-        <File dnOrder="20">
+        <File dnOrder="19">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha512_sam6156.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6EE20AE7EF2F92572B90F10EFC611E22</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6EE20AE7EF2F92572B90F10EFC611E22</UserChecksum>
+          <GeneratedChecksum dnOrder="4">A3BDE4AADBAD150C19F64FAB77023B2A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">A3BDE4AADBAD150C19F64FAB77023B2A</UserChecksum>
         </File>
-        <File dnOrder="21">
+        <File dnOrder="20">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha_sam6156.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -182,7 +174,7 @@
           <GeneratedChecksum dnOrder="4">E13F7E0C7EF07B564B648AD1D2FE1505</GeneratedChecksum>
           <UserChecksum dnOrder="5">E13F7E0C7EF07B564B648AD1D2FE1505</UserChecksum>
         </File>
-        <File dnOrder="22">
+        <File dnOrder="21">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_tdes_sam6150.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -190,7 +182,7 @@
           <GeneratedChecksum dnOrder="4">CA5D391C4CE78457E882C387FC2DAE16</GeneratedChecksum>
           <UserChecksum dnOrder="5">CA5D391C4CE78457E882C387FC2DAE16</UserChecksum>
         </File>
-        <File dnOrder="23">
+        <File dnOrder="22">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypto.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -198,7 +190,7 @@
           <GeneratedChecksum dnOrder="4">542896DF52102CEBEE146DE6469FAC89</GeneratedChecksum>
           <UserChecksum dnOrder="5">542896DF52102CEBEE146DE6469FAC89</UserChecksum>
         </File>
-        <File dnOrder="24">
+        <File dnOrder="23">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">cstartup.s</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -206,7 +198,7 @@
           <GeneratedChecksum dnOrder="4">89EBAC3608B58C7F2A73BFB09D6933CE</GeneratedChecksum>
           <UserChecksum dnOrder="5">89EBAC3608B58C7F2A73BFB09D6933CE</UserChecksum>
         </File>
-        <File dnOrder="25">
+        <File dnOrder="24">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">curve25519.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -214,7 +206,7 @@
           <GeneratedChecksum dnOrder="4">7B897ACA40F60B9F34A7AD1B0D07F84C</GeneratedChecksum>
           <UserChecksum dnOrder="5">7B897ACA40F60B9F34A7AD1B0D07F84C</UserChecksum>
         </File>
-        <File dnOrder="26">
+        <File dnOrder="25">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">deflate.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -222,7 +214,7 @@
           <GeneratedChecksum dnOrder="4">1D9326409CCB9045DF9278BB53C80AA3</GeneratedChecksum>
           <UserChecksum dnOrder="5">1D9326409CCB9045DF9278BB53C80AA3</UserChecksum>
         </File>
-        <File dnOrder="27">
+        <File dnOrder="26">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">des3.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -230,7 +222,7 @@
           <GeneratedChecksum dnOrder="4">59DC5C45BB6F7A0C18554C15F4A4E0CF</GeneratedChecksum>
           <UserChecksum dnOrder="5">59DC5C45BB6F7A0C18554C15F4A4E0CF</UserChecksum>
         </File>
-        <File dnOrder="28">
+        <File dnOrder="27">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">dh.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -238,7 +230,7 @@
           <GeneratedChecksum dnOrder="4">E145F3749D31FAE4C14A3EEAE54C0124</GeneratedChecksum>
           <UserChecksum dnOrder="5">E145F3749D31FAE4C14A3EEAE54C0124</UserChecksum>
         </File>
-        <File dnOrder="29">
+        <File dnOrder="28">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">dsa.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -246,7 +238,7 @@
           <GeneratedChecksum dnOrder="4">27D2396B13DF1EB9725AAD836EE1ADE6</GeneratedChecksum>
           <UserChecksum dnOrder="5">27D2396B13DF1EB9725AAD836EE1ADE6</UserChecksum>
         </File>
-        <File dnOrder="30">
+        <File dnOrder="29">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ecc.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -254,7 +246,7 @@
           <GeneratedChecksum dnOrder="4">1DE254498FB506EA6EC0B2956A0A3420</GeneratedChecksum>
           <UserChecksum dnOrder="5">1DE254498FB506EA6EC0B2956A0A3420</UserChecksum>
         </File>
-        <File dnOrder="31">
+        <File dnOrder="30">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ecc_fp.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -262,7 +254,7 @@
           <GeneratedChecksum dnOrder="4">0779EC1007A2856DBC6452F681DB64A4</GeneratedChecksum>
           <UserChecksum dnOrder="5">0779EC1007A2856DBC6452F681DB64A4</UserChecksum>
         </File>
-        <File dnOrder="32">
+        <File dnOrder="31">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ed25519.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -270,7 +262,7 @@
           <GeneratedChecksum dnOrder="4">BEEF652C024DBF057C5DD23CDC77F4AB</GeneratedChecksum>
           <UserChecksum dnOrder="5">BEEF652C024DBF057C5DD23CDC77F4AB</UserChecksum>
         </File>
-        <File dnOrder="33">
+        <File dnOrder="32">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">error.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -278,7 +270,7 @@
           <GeneratedChecksum dnOrder="4">A24FCB80D7BC2D72B8E77840261C37C0</GeneratedChecksum>
           <UserChecksum dnOrder="5">A24FCB80D7BC2D72B8E77840261C37C0</UserChecksum>
         </File>
-        <File dnOrder="34">
+        <File dnOrder="33">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">exceptions.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -286,7 +278,7 @@
           <GeneratedChecksum dnOrder="4">AC89AA0F2AF07C0733678D30AE1A5E02</GeneratedChecksum>
           <UserChecksum dnOrder="5">AC89AA0F2AF07C0733678D30AE1A5E02</UserChecksum>
         </File>
-        <File dnOrder="35">
+        <File dnOrder="34">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fe_low_mem.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -294,7 +286,7 @@
           <GeneratedChecksum dnOrder="4">1F8F2ADB0001CBFE956F924D6AC1E0F4</GeneratedChecksum>
           <UserChecksum dnOrder="5">1F8F2ADB0001CBFE956F924D6AC1E0F4</UserChecksum>
         </File>
-        <File dnOrder="36">
+        <File dnOrder="35">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fe_operations.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -302,7 +294,7 @@
           <GeneratedChecksum dnOrder="4">D797E193302BACCDAFA03759F34CF2F0</GeneratedChecksum>
           <UserChecksum dnOrder="5">D797E193302BACCDAFA03759F34CF2F0</UserChecksum>
         </File>
-        <File dnOrder="37">
+        <File dnOrder="36">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ge_low_mem.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -310,7 +302,7 @@
           <GeneratedChecksum dnOrder="4">51517254828B4CA245C5621208EDED4E</GeneratedChecksum>
           <UserChecksum dnOrder="5">51517254828B4CA245C5621208EDED4E</UserChecksum>
         </File>
-        <File dnOrder="38">
+        <File dnOrder="37">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ge_operations.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -318,7 +310,7 @@
           <GeneratedChecksum dnOrder="4">8F110D024A36E797FAD6B4199191D05F</GeneratedChecksum>
           <UserChecksum dnOrder="5">8F110D024A36E797FAD6B4199191D05F</UserChecksum>
         </File>
-        <File dnOrder="39">
+        <File dnOrder="38">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hash.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -326,7 +318,7 @@
           <GeneratedChecksum dnOrder="4">802D9EDD3FCEC94641CDC3FF127D3F1F</GeneratedChecksum>
           <UserChecksum dnOrder="5">802D9EDD3FCEC94641CDC3FF127D3F1F</UserChecksum>
         </File>
-        <File dnOrder="40">
+        <File dnOrder="39">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hc128.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -334,7 +326,7 @@
           <GeneratedChecksum dnOrder="4">E36FBBBE176232DF6E2874AB40FAD939</GeneratedChecksum>
           <UserChecksum dnOrder="5">E36FBBBE176232DF6E2874AB40FAD939</UserChecksum>
         </File>
-        <File dnOrder="41">
+        <File dnOrder="40">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hmac.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -342,7 +334,7 @@
           <GeneratedChecksum dnOrder="4">B41044A5E1791C1F14BC3313EF46F842</GeneratedChecksum>
           <UserChecksum dnOrder="5">B41044A5E1791C1F14BC3313EF46F842</UserChecksum>
         </File>
-        <File dnOrder="42">
+        <File dnOrder="41">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">iar_monitor.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/stdio/</LogicalPath>
@@ -350,7 +342,7 @@
           <GeneratedChecksum dnOrder="4">51D19E2818A4282EE571C71E4EF288FB</GeneratedChecksum>
           <UserChecksum dnOrder="5">51D19E2818A4282EE571C71E4EF288FB</UserChecksum>
         </File>
-        <File dnOrder="43">
+        <File dnOrder="42">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">idea.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -358,7 +350,7 @@
           <GeneratedChecksum dnOrder="4">5C6969CB566515D163EBEB1611C5C4A8</GeneratedChecksum>
           <UserChecksum dnOrder="5">5C6969CB566515D163EBEB1611C5C4A8</UserChecksum>
         </File>
-        <File dnOrder="44">
+        <File dnOrder="43">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">inffast.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -366,7 +358,7 @@
           <GeneratedChecksum dnOrder="4">66AD8B0995044095A2D557C7FA1FF1F2</GeneratedChecksum>
           <UserChecksum dnOrder="5">66AD8B0995044095A2D557C7FA1FF1F2</UserChecksum>
         </File>
-        <File dnOrder="45">
+        <File dnOrder="44">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">inflate.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -374,7 +366,7 @@
           <GeneratedChecksum dnOrder="4">729DF5AB333A7300240405BD65DED9DE</GeneratedChecksum>
           <UserChecksum dnOrder="5">729DF5AB333A7300240405BD65DED9DE</UserChecksum>
         </File>
-        <File dnOrder="46">
+        <File dnOrder="45">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">inftrees.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -382,15 +374,15 @@
           <GeneratedChecksum dnOrder="4">64578AA8B88B73F1E1A4FF3D2EA2967C</GeneratedChecksum>
           <UserChecksum dnOrder="5">64578AA8B88B73F1E1A4FF3D2EA2967C</UserChecksum>
         </File>
-        <File dnOrder="47">
+        <File dnOrder="46">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">initialization.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">9129AC50204E2549F82AB7239E3B3820</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9129AC50204E2549F82AB7239E3B3820</UserChecksum>
+          <GeneratedChecksum dnOrder="4">2D374D5161462DC2887BB996C79D3A96</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2D374D5161462DC2887BB996C79D3A96</UserChecksum>
         </File>
-        <File dnOrder="48">
+        <File dnOrder="47">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">integer.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -398,15 +390,15 @@
           <GeneratedChecksum dnOrder="4">0668C8119549BF81DD826D2BED10D1D9</GeneratedChecksum>
           <UserChecksum dnOrder="5">0668C8119549BF81DD826D2BED10D1D9</UserChecksum>
         </File>
-        <File dnOrder="49">
+        <File dnOrder="48">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">interrupts.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0F72084B0AD1D050453E5CFD79D98CF4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0F72084B0AD1D050453E5CFD79D98CF4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">4B72C3F7E8F751B6554A4FAB1B87495D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4B72C3F7E8F751B6554A4FAB1B87495D</UserChecksum>
         </File>
-        <File dnOrder="50">
+        <File dnOrder="49">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">logging.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -414,7 +406,7 @@
           <GeneratedChecksum dnOrder="4">F411FDDD90AEDF78709B4B8452FB02CA</GeneratedChecksum>
           <UserChecksum dnOrder="5">F411FDDD90AEDF78709B4B8452FB02CA</UserChecksum>
         </File>
-        <File dnOrder="51">
+        <File dnOrder="50">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md2.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -422,7 +414,7 @@
           <GeneratedChecksum dnOrder="4">B0887E4628A46DADB0ADC23302BCC5C5</GeneratedChecksum>
           <UserChecksum dnOrder="5">B0887E4628A46DADB0ADC23302BCC5C5</UserChecksum>
         </File>
-        <File dnOrder="52">
+        <File dnOrder="51">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md4.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -430,7 +422,7 @@
           <GeneratedChecksum dnOrder="4">5BEB6187F03AE7BBD6E2ADC4A8AB59CF</GeneratedChecksum>
           <UserChecksum dnOrder="5">5BEB6187F03AE7BBD6E2ADC4A8AB59CF</UserChecksum>
         </File>
-        <File dnOrder="53">
+        <File dnOrder="52">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md5.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -438,7 +430,7 @@
           <GeneratedChecksum dnOrder="4">62A4985107047D9E329BC7F3D2D3FD44</GeneratedChecksum>
           <UserChecksum dnOrder="5">62A4985107047D9E329BC7F3D2D3FD44</UserChecksum>
         </File>
-        <File dnOrder="54">
+        <File dnOrder="53">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">memory.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -446,7 +438,7 @@
           <GeneratedChecksum dnOrder="4">955DEBE899CD60A1A365482ABE720642</GeneratedChecksum>
           <UserChecksum dnOrder="5">955DEBE899CD60A1A365482ABE720642</UserChecksum>
         </File>
-        <File dnOrder="55">
+        <File dnOrder="54">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">misc.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -454,7 +446,7 @@
           <GeneratedChecksum dnOrder="4">32223E89E3757EFAF76B505F67E991DF</GeneratedChecksum>
           <UserChecksum dnOrder="5">32223E89E3757EFAF76B505F67E991DF</UserChecksum>
         </File>
-        <File dnOrder="56">
+        <File dnOrder="55">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pkcs12.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -462,7 +454,7 @@
           <GeneratedChecksum dnOrder="4">57FD2A4F1D2679817750C9F28E835261</GeneratedChecksum>
           <UserChecksum dnOrder="5">57FD2A4F1D2679817750C9F28E835261</UserChecksum>
         </File>
-        <File dnOrder="57">
+        <File dnOrder="56">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pkcs7.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -470,7 +462,7 @@
           <GeneratedChecksum dnOrder="4">DE54B738EC55C75411D196D40DEE63AD</GeneratedChecksum>
           <UserChecksum dnOrder="5">DE54B738EC55C75411D196D40DEE63AD</UserChecksum>
         </File>
-        <File dnOrder="58">
+        <File dnOrder="57">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_aic.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/aic/</LogicalPath>
@@ -478,15 +470,15 @@
           <GeneratedChecksum dnOrder="4">F435E5331751479374E94DE518D0420F</GeneratedChecksum>
           <UserChecksum dnOrder="5">F435E5331751479374E94DE518D0420F</UserChecksum>
         </File>
-        <File dnOrder="59">
+        <File dnOrder="58">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_clk.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4132B91AB280E8F09098FFDEA2488813</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4132B91AB280E8F09098FFDEA2488813</UserChecksum>
+          <GeneratedChecksum dnOrder="4">31350E6AA743D8667DA4C4D3DE82E2B4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">31350E6AA743D8667DA4C4D3DE82E2B4</UserChecksum>
         </File>
-        <File dnOrder="60">
+        <File dnOrder="59">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_matrix.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/matrix/</LogicalPath>
@@ -494,7 +486,7 @@
           <GeneratedChecksum dnOrder="4">A1D44A4F1F0E0FFA06D8BF524BA8088D</GeneratedChecksum>
           <UserChecksum dnOrder="5">A1D44A4F1F0E0FFA06D8BF524BA8088D</UserChecksum>
         </File>
-        <File dnOrder="61">
+        <File dnOrder="60">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_mmu.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/mmu/</LogicalPath>
@@ -502,13 +494,21 @@
           <GeneratedChecksum dnOrder="4">8ED352943056112DC11932692C60A630</GeneratedChecksum>
           <UserChecksum dnOrder="5">8ED352943056112DC11932692C60A630</UserChecksum>
         </File>
-        <File dnOrder="62">
+        <File dnOrder="61">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_pio.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/pio/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/pio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C0B487913F52F187B0466F4869F20E01</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C0B487913F52F187B0466F4869F20E01</UserChecksum>
+          <GeneratedChecksum dnOrder="4">6E5CAD7C492AEB2671977046BBACE6A0</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6E5CAD7C492AEB2671977046BBACE6A0</UserChecksum>
+        </File>
+        <File dnOrder="62">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">plib_pit.c</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/pit/</LogicalPath>
+          <PhysicalPath dnOrder="3">/peripheral/pit/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">A53B13E5B0F88F780EB52569F71995B7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">A53B13E5B0F88F780EB52569F71995B7</UserChecksum>
         </File>
         <File dnOrder="63">
           <Type dnOrder="0">SOURCE</Type>
@@ -555,8 +555,8 @@
           <Name dnOrder="1">random.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">756A21E8FE09C2EB8391BB625ECFC723</GeneratedChecksum>
-          <UserChecksum dnOrder="5">756A21E8FE09C2EB8391BB625ECFC723</UserChecksum>
+          <GeneratedChecksum dnOrder="4">7BC4291576325CBA7AFC886369FBAA9E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7BC4291576325CBA7AFC886369FBAA9E</UserChecksum>
         </File>
         <File dnOrder="69">
           <Type dnOrder="0">SOURCE</Type>
@@ -864,21 +864,13 @@
         </File>
         <File dnOrder="107">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">bsp.h</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/bsp/</LogicalPath>
-          <PhysicalPath dnOrder="3">/bsp/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">106C5A418879DE49192B6D208C23A9E7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">106C5A418879DE49192B6D208C23A9E7</UserChecksum>
-        </File>
-        <File dnOrder="108">
-          <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">camellia.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">AD6EF206491D68E8A96EFC700BE98EA3</GeneratedChecksum>
           <UserChecksum dnOrder="5">AD6EF206491D68E8A96EFC700BE98EA3</UserChecksum>
         </File>
-        <File dnOrder="109">
+        <File dnOrder="108">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">certs_test.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -886,7 +878,7 @@
           <GeneratedChecksum dnOrder="4">062904EF8ADA86BE4C43E2D4D9002D20</GeneratedChecksum>
           <UserChecksum dnOrder="5">062904EF8ADA86BE4C43E2D4D9002D20</UserChecksum>
         </File>
-        <File dnOrder="110">
+        <File dnOrder="109">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chacha.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -894,7 +886,7 @@
           <GeneratedChecksum dnOrder="4">761A763E35477B7CEBAC36D33CD63675</GeneratedChecksum>
           <UserChecksum dnOrder="5">761A763E35477B7CEBAC36D33CD63675</UserChecksum>
         </File>
-        <File dnOrder="111">
+        <File dnOrder="110">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chacha20_poly1305.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -902,7 +894,7 @@
           <GeneratedChecksum dnOrder="4">4E89B08C2339D7ED4E5706EDF9CDC05A</GeneratedChecksum>
           <UserChecksum dnOrder="5">4E89B08C2339D7ED4E5706EDF9CDC05A</UserChecksum>
         </File>
-        <File dnOrder="112">
+        <File dnOrder="111">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chipid.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -910,7 +902,7 @@
           <GeneratedChecksum dnOrder="4">7011A943E7DA1307B01B73141EB330E3</GeneratedChecksum>
           <UserChecksum dnOrder="5">7011A943E7DA1307B01B73141EB330E3</UserChecksum>
         </File>
-        <File dnOrder="113">
+        <File dnOrder="112">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">classd.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -918,7 +910,7 @@
           <GeneratedChecksum dnOrder="4">63DD23391A280476C15C9763A882D7AA</GeneratedChecksum>
           <UserChecksum dnOrder="5">63DD23391A280476C15C9763A882D7AA</UserChecksum>
         </File>
-        <File dnOrder="114">
+        <File dnOrder="113">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmac.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -926,7 +918,7 @@
           <GeneratedChecksum dnOrder="4">D850D46D25AED1816AD8E98BE6962F2C</GeneratedChecksum>
           <UserChecksum dnOrder="5">D850D46D25AED1816AD8E98BE6962F2C</UserChecksum>
         </File>
-        <File dnOrder="115">
+        <File dnOrder="114">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_compiler.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -934,7 +926,7 @@
           <GeneratedChecksum dnOrder="4">1A60177F0720FF6F1D979B798DF018C0</GeneratedChecksum>
           <UserChecksum dnOrder="5">1A60177F0720FF6F1D979B798DF018C0</UserChecksum>
         </File>
-        <File dnOrder="116">
+        <File dnOrder="115">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_cp15.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -942,7 +934,7 @@
           <GeneratedChecksum dnOrder="4">0A327C3031D097409B602CA5B79B1358</GeneratedChecksum>
           <UserChecksum dnOrder="5">0A327C3031D097409B602CA5B79B1358</UserChecksum>
         </File>
-        <File dnOrder="117">
+        <File dnOrder="116">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_gcc.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -950,7 +942,7 @@
           <GeneratedChecksum dnOrder="4">91C03FE6A482084EEC44B1D75FE4D00E</GeneratedChecksum>
           <UserChecksum dnOrder="5">91C03FE6A482084EEC44B1D75FE4D00E</UserChecksum>
         </File>
-        <File dnOrder="118">
+        <File dnOrder="117">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_iccarm.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -958,7 +950,7 @@
           <GeneratedChecksum dnOrder="4">44699E7D9F67414CAC0914AB865D0FF6</GeneratedChecksum>
           <UserChecksum dnOrder="5">44699E7D9F67414CAC0914AB865D0FF6</UserChecksum>
         </File>
-        <File dnOrder="119">
+        <File dnOrder="118">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">coding.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -966,7 +958,7 @@
           <GeneratedChecksum dnOrder="4">C97958062F87770AB0561E6463DB1045</GeneratedChecksum>
           <UserChecksum dnOrder="5">C97958062F87770AB0561E6463DB1045</UserChecksum>
         </File>
-        <File dnOrder="120">
+        <File dnOrder="119">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">compress.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -974,7 +966,7 @@
           <GeneratedChecksum dnOrder="4">666583F2C03AC3CC620032DE6031D360</GeneratedChecksum>
           <UserChecksum dnOrder="5">666583F2C03AC3CC620032DE6031D360</UserChecksum>
         </File>
-        <File dnOrder="121">
+        <File dnOrder="120">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -982,7 +974,7 @@
           <GeneratedChecksum dnOrder="4">9538C1101B5E89FF1AB5CC061782B2D6</GeneratedChecksum>
           <UserChecksum dnOrder="5">9538C1101B5E89FF1AB5CC061782B2D6</UserChecksum>
         </File>
-        <File dnOrder="122">
+        <File dnOrder="121">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">core_ca.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -990,7 +982,7 @@
           <GeneratedChecksum dnOrder="4">31692AF12C3323852C7051974B2CA56E</GeneratedChecksum>
           <UserChecksum dnOrder="5">31692AF12C3323852C7051974B2CA56E</UserChecksum>
         </File>
-        <File dnOrder="123">
+        <File dnOrder="122">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crc32.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -998,7 +990,7 @@
           <GeneratedChecksum dnOrder="4">F8E8369C029D0E4FFF1A4319D082AD0B</GeneratedChecksum>
           <UserChecksum dnOrder="5">F8E8369C029D0E4FFF1A4319D082AD0B</UserChecksum>
         </File>
-        <File dnOrder="124">
+        <File dnOrder="123">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1006,7 +998,7 @@
           <GeneratedChecksum dnOrder="4">EC21E3E20ED805F29C921CAEA1EDAE9C</GeneratedChecksum>
           <UserChecksum dnOrder="5">EC21E3E20ED805F29C921CAEA1EDAE9C</UserChecksum>
         </File>
-        <File dnOrder="125">
+        <File dnOrder="124">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_hwInt.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1014,7 +1006,7 @@
           <GeneratedChecksum dnOrder="4">86CA9C646BBBC4434B27137C8358518E</GeneratedChecksum>
           <UserChecksum dnOrder="5">86CA9C646BBBC4434B27137C8358518E</UserChecksum>
         </File>
-        <File dnOrder="126">
+        <File dnOrder="125">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_sam6149.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1022,7 +1014,7 @@
           <GeneratedChecksum dnOrder="4">0A254EF94C2F9440F7526E0AB24BFE5E</GeneratedChecksum>
           <UserChecksum dnOrder="5">0A254EF94C2F9440F7526E0AB24BFE5E</UserChecksum>
         </File>
-        <File dnOrder="127">
+        <File dnOrder="126">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_u2238.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1030,7 +1022,7 @@
           <GeneratedChecksum dnOrder="4">F6AC7AC9DE3824D3169B7300128284F5</GeneratedChecksum>
           <UserChecksum dnOrder="5">F6AC7AC9DE3824D3169B7300128284F5</UserChecksum>
         </File>
-        <File dnOrder="128">
+        <File dnOrder="127">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_rng_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1038,7 +1030,7 @@
           <GeneratedChecksum dnOrder="4">FCC4C8CF0814D837F00009BB915E5E16</GeneratedChecksum>
           <UserChecksum dnOrder="5">FCC4C8CF0814D837F00009BB915E5E16</UserChecksum>
         </File>
-        <File dnOrder="129">
+        <File dnOrder="128">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha1_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1046,7 +1038,7 @@
           <GeneratedChecksum dnOrder="4">DC148B0B383084C7D5FD363665917344</GeneratedChecksum>
           <UserChecksum dnOrder="5">DC148B0B383084C7D5FD363665917344</UserChecksum>
         </File>
-        <File dnOrder="130">
+        <File dnOrder="129">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha224_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1054,7 +1046,7 @@
           <GeneratedChecksum dnOrder="4">41B204C7D22102F32B9A7D87A0BEB17C</GeneratedChecksum>
           <UserChecksum dnOrder="5">41B204C7D22102F32B9A7D87A0BEB17C</UserChecksum>
         </File>
-        <File dnOrder="131">
+        <File dnOrder="130">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha256_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1062,7 +1054,7 @@
           <GeneratedChecksum dnOrder="4">40BAE4110C087D0901E670C284BF1679</GeneratedChecksum>
           <UserChecksum dnOrder="5">40BAE4110C087D0901E670C284BF1679</UserChecksum>
         </File>
-        <File dnOrder="132">
+        <File dnOrder="131">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha384_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1070,7 +1062,7 @@
           <GeneratedChecksum dnOrder="4">3C59E69D7AF5D31DD21B11C04D7C5F89</GeneratedChecksum>
           <UserChecksum dnOrder="5">3C59E69D7AF5D31DD21B11C04D7C5F89</UserChecksum>
         </File>
-        <File dnOrder="133">
+        <File dnOrder="132">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha512_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1078,7 +1070,7 @@
           <GeneratedChecksum dnOrder="4">C023BECC000310E0DB52B33C0CA09C83</GeneratedChecksum>
           <UserChecksum dnOrder="5">C023BECC000310E0DB52B33C0CA09C83</UserChecksum>
         </File>
-        <File dnOrder="134">
+        <File dnOrder="133">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1086,7 +1078,7 @@
           <GeneratedChecksum dnOrder="4">9EB434500C04122BEC743AE92B2FBC91</GeneratedChecksum>
           <UserChecksum dnOrder="5">9EB434500C04122BEC743AE92B2FBC91</UserChecksum>
         </File>
-        <File dnOrder="135">
+        <File dnOrder="134">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_sam11105.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1094,7 +1086,7 @@
           <GeneratedChecksum dnOrder="4">0D31F2199561A3A80CE8CDE16C3B6C22</GeneratedChecksum>
           <UserChecksum dnOrder="5">0D31F2199561A3A80CE8CDE16C3B6C22</UserChecksum>
         </File>
-        <File dnOrder="136">
+        <File dnOrder="135">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_sam6156.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1102,7 +1094,7 @@
           <GeneratedChecksum dnOrder="4">39551E68D91629BEDFC2585B12EA7F6A</GeneratedChecksum>
           <UserChecksum dnOrder="5">39551E68D91629BEDFC2585B12EA7F6A</UserChecksum>
         </File>
-        <File dnOrder="137">
+        <File dnOrder="136">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_hw.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1110,7 +1102,7 @@
           <GeneratedChecksum dnOrder="4">D039922A28221C2ADB2F210C6C12B38E</GeneratedChecksum>
           <UserChecksum dnOrder="5">D039922A28221C2ADB2F210C6C12B38E</UserChecksum>
         </File>
-        <File dnOrder="138">
+        <File dnOrder="137">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_hwInt.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1118,7 +1110,7 @@
           <GeneratedChecksum dnOrder="4">EB09F45A1C19CCEE2382C8177AD377D8</GeneratedChecksum>
           <UserChecksum dnOrder="5">EB09F45A1C19CCEE2382C8177AD377D8</UserChecksum>
         </File>
-        <File dnOrder="139">
+        <File dnOrder="138">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_sam6150.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1126,7 +1118,7 @@
           <GeneratedChecksum dnOrder="4">FEBE52B5B54BE41111C025EDD9D30D6C</GeneratedChecksum>
           <UserChecksum dnOrder="5">FEBE52B5B54BE41111C025EDD9D30D6C</UserChecksum>
         </File>
-        <File dnOrder="140">
+        <File dnOrder="139">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypto.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1134,7 +1126,7 @@
           <GeneratedChecksum dnOrder="4">78218E04D905F1591A76A8EE5F48238F</GeneratedChecksum>
           <UserChecksum dnOrder="5">78218E04D905F1591A76A8EE5F48238F</UserChecksum>
         </File>
-        <File dnOrder="141">
+        <File dnOrder="140">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">curve25519.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1142,15 +1134,15 @@
           <GeneratedChecksum dnOrder="4">A6C8ADFE0584F47BB97408350DD716F7</GeneratedChecksum>
           <UserChecksum dnOrder="5">A6C8ADFE0584F47BB97408350DD716F7</UserChecksum>
         </File>
-        <File dnOrder="142">
+        <File dnOrder="141">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">definitions.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6D918396D3E596090F0E2A97074EABCC</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6D918396D3E596090F0E2A97074EABCC</UserChecksum>
+          <GeneratedChecksum dnOrder="4">DFF3168827AFA883CA0528941FE1326A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DFF3168827AFA883CA0528941FE1326A</UserChecksum>
         </File>
-        <File dnOrder="143">
+        <File dnOrder="142">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">deflate.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1158,7 +1150,7 @@
           <GeneratedChecksum dnOrder="4">2DAD999D4F762C2556CD557C1751FB82</GeneratedChecksum>
           <UserChecksum dnOrder="5">2DAD999D4F762C2556CD557C1751FB82</UserChecksum>
         </File>
-        <File dnOrder="144">
+        <File dnOrder="143">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">des3.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1166,7 +1158,7 @@
           <GeneratedChecksum dnOrder="4">4DF91D18604EC5C803A880B9505B2765</GeneratedChecksum>
           <UserChecksum dnOrder="5">4DF91D18604EC5C803A880B9505B2765</UserChecksum>
         </File>
-        <File dnOrder="145">
+        <File dnOrder="144">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">device.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/</LogicalPath>
@@ -1174,7 +1166,7 @@
           <GeneratedChecksum dnOrder="4">FAA04921E75A13B8730954676182E8F1</GeneratedChecksum>
           <UserChecksum dnOrder="5">FAA04921E75A13B8730954676182E8F1</UserChecksum>
         </File>
-        <File dnOrder="146">
+        <File dnOrder="145">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">device_cache.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -1182,7 +1174,7 @@
           <GeneratedChecksum dnOrder="4">18669A3AEE1115DA27AACDFADB1416ED</GeneratedChecksum>
           <UserChecksum dnOrder="5">18669A3AEE1115DA27AACDFADB1416ED</UserChecksum>
         </File>
-        <File dnOrder="147">
+        <File dnOrder="146">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">dh.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1190,7 +1182,7 @@
           <GeneratedChecksum dnOrder="4">61D7F55C8363BEAAAA3C091ED6D6E404</GeneratedChecksum>
           <UserChecksum dnOrder="5">61D7F55C8363BEAAAA3C091ED6D6E404</UserChecksum>
         </File>
-        <File dnOrder="148">
+        <File dnOrder="147">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">driver.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/</LogicalPath>
@@ -1198,7 +1190,7 @@
           <GeneratedChecksum dnOrder="4">1D2094DFA60F847FFD4E8153B6E78027</GeneratedChecksum>
           <UserChecksum dnOrder="5">1D2094DFA60F847FFD4E8153B6E78027</UserChecksum>
         </File>
-        <File dnOrder="149">
+        <File dnOrder="148">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">driver_common.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/</LogicalPath>
@@ -1206,7 +1198,7 @@
           <GeneratedChecksum dnOrder="4">CC7DFCC51CD25171A3E400E18969354F</GeneratedChecksum>
           <UserChecksum dnOrder="5">CC7DFCC51CD25171A3E400E18969354F</UserChecksum>
         </File>
-        <File dnOrder="150">
+        <File dnOrder="149">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">dsa.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1214,7 +1206,7 @@
           <GeneratedChecksum dnOrder="4">042AC0814C02DB458DEF1159F1EFC257</GeneratedChecksum>
           <UserChecksum dnOrder="5">042AC0814C02DB458DEF1159F1EFC257</UserChecksum>
         </File>
-        <File dnOrder="151">
+        <File dnOrder="150">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">ecc.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1222,7 +1214,7 @@
           <GeneratedChecksum dnOrder="4">7F470CDEE22678DE9480C67FEFAE1E2E</GeneratedChecksum>
           <UserChecksum dnOrder="5">7F470CDEE22678DE9480C67FEFAE1E2E</UserChecksum>
         </File>
-        <File dnOrder="152">
+        <File dnOrder="151">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">ed25519.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1230,7 +1222,7 @@
           <GeneratedChecksum dnOrder="4">1B2D86A57382CF65B6A70B74DFACBD1E</GeneratedChecksum>
           <UserChecksum dnOrder="5">1B2D86A57382CF65B6A70B74DFACBD1E</UserChecksum>
         </File>
-        <File dnOrder="153">
+        <File dnOrder="152">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">error-crypt.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1238,7 +1230,7 @@
           <GeneratedChecksum dnOrder="4">01FBA0E552FAD5091F22FAA3B3C6502E</GeneratedChecksum>
           <UserChecksum dnOrder="5">01FBA0E552FAD5091F22FAA3B3C6502E</UserChecksum>
         </File>
-        <File dnOrder="154">
+        <File dnOrder="153">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">fe_operations.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1246,7 +1238,7 @@
           <GeneratedChecksum dnOrder="4">F6D5B76D93DAAF45FEAFB50E4BF9249D</GeneratedChecksum>
           <UserChecksum dnOrder="5">F6D5B76D93DAAF45FEAFB50E4BF9249D</UserChecksum>
         </File>
-        <File dnOrder="155">
+        <File dnOrder="154">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">fips_test.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1254,7 +1246,7 @@
           <GeneratedChecksum dnOrder="4">F75016A0FF9AF7CD7C702D5FA26235C0</GeneratedChecksum>
           <UserChecksum dnOrder="5">F75016A0FF9AF7CD7C702D5FA26235C0</UserChecksum>
         </File>
-        <File dnOrder="156">
+        <File dnOrder="155">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">flexcom.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1262,7 +1254,7 @@
           <GeneratedChecksum dnOrder="4">649BFF69B644FA086C283EBFADA65C27</GeneratedChecksum>
           <UserChecksum dnOrder="5">649BFF69B644FA086C283EBFADA65C27</UserChecksum>
         </File>
-        <File dnOrder="157">
+        <File dnOrder="156">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">ge_operations.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1270,7 +1262,7 @@
           <GeneratedChecksum dnOrder="4">6ADEFFC521C97891B70D2833FDFEF527</GeneratedChecksum>
           <UserChecksum dnOrder="5">6ADEFFC521C97891B70D2833FDFEF527</UserChecksum>
         </File>
-        <File dnOrder="158">
+        <File dnOrder="157">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">gmac.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1278,7 +1270,7 @@
           <GeneratedChecksum dnOrder="4">F1C85F28A9AB35C46D0293EA86513AA3</GeneratedChecksum>
           <UserChecksum dnOrder="5">F1C85F28A9AB35C46D0293EA86513AA3</UserChecksum>
         </File>
-        <File dnOrder="159">
+        <File dnOrder="158">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">gzguts.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1286,7 +1278,7 @@
           <GeneratedChecksum dnOrder="4">683C96BD1C7D1E9039151634F14B7D79</GeneratedChecksum>
           <UserChecksum dnOrder="5">683C96BD1C7D1E9039151634F14B7D79</UserChecksum>
         </File>
-        <File dnOrder="160">
+        <File dnOrder="159">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">hash.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1294,7 +1286,7 @@
           <GeneratedChecksum dnOrder="4">E6B616195519A29BFAC206E4CC98E5BE</GeneratedChecksum>
           <UserChecksum dnOrder="5">E6B616195519A29BFAC206E4CC98E5BE</UserChecksum>
         </File>
-        <File dnOrder="161">
+        <File dnOrder="160">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">hc128.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1302,7 +1294,7 @@
           <GeneratedChecksum dnOrder="4">DA30F4EA1669EF87B0C49727C55A82E0</GeneratedChecksum>
           <UserChecksum dnOrder="5">DA30F4EA1669EF87B0C49727C55A82E0</UserChecksum>
         </File>
-        <File dnOrder="162">
+        <File dnOrder="161">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">hmac.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1310,7 +1302,7 @@
           <GeneratedChecksum dnOrder="4">E4510EADACB1C4571F6993A243CA83E8</GeneratedChecksum>
           <UserChecksum dnOrder="5">E4510EADACB1C4571F6993A243CA83E8</UserChecksum>
         </File>
-        <File dnOrder="163">
+        <File dnOrder="162">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">i2sc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1318,7 +1310,7 @@
           <GeneratedChecksum dnOrder="4">1C522A7A340B65E84FF8F04BE1158274</GeneratedChecksum>
           <UserChecksum dnOrder="5">1C522A7A340B65E84FF8F04BE1158274</UserChecksum>
         </File>
-        <File dnOrder="164">
+        <File dnOrder="163">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">icm.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1326,7 +1318,7 @@
           <GeneratedChecksum dnOrder="4">CD7F54D301FD3F56248711899CC6D22A</GeneratedChecksum>
           <UserChecksum dnOrder="5">CD7F54D301FD3F56248711899CC6D22A</UserChecksum>
         </File>
-        <File dnOrder="165">
+        <File dnOrder="164">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">idea.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1334,7 +1326,7 @@
           <GeneratedChecksum dnOrder="4">B7C3B144C4ADC2BAA9A672BE136FF110</GeneratedChecksum>
           <UserChecksum dnOrder="5">B7C3B144C4ADC2BAA9A672BE136FF110</UserChecksum>
         </File>
-        <File dnOrder="166">
+        <File dnOrder="165">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">inffast.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1342,7 +1334,7 @@
           <GeneratedChecksum dnOrder="4">29F652423B766560C26EC8B784F995E2</GeneratedChecksum>
           <UserChecksum dnOrder="5">29F652423B766560C26EC8B784F995E2</UserChecksum>
         </File>
-        <File dnOrder="167">
+        <File dnOrder="166">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">inffixed.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1350,7 +1342,7 @@
           <GeneratedChecksum dnOrder="4">BFAD0DE7201F1E06AE1FABE62BCE806C</GeneratedChecksum>
           <UserChecksum dnOrder="5">BFAD0DE7201F1E06AE1FABE62BCE806C</UserChecksum>
         </File>
-        <File dnOrder="168">
+        <File dnOrder="167">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">inflate.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1358,7 +1350,7 @@
           <GeneratedChecksum dnOrder="4">8C004E5965269A6B845DE1EA55BE326F</GeneratedChecksum>
           <UserChecksum dnOrder="5">8C004E5965269A6B845DE1EA55BE326F</UserChecksum>
         </File>
-        <File dnOrder="169">
+        <File dnOrder="168">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">inftrees.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1366,7 +1358,7 @@
           <GeneratedChecksum dnOrder="4">BFA6AA1B45F8DE69185DBAE2A51BF0CD</GeneratedChecksum>
           <UserChecksum dnOrder="5">BFA6AA1B45F8DE69185DBAE2A51BF0CD</UserChecksum>
         </File>
-        <File dnOrder="170">
+        <File dnOrder="169">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">integer.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1374,7 +1366,7 @@
           <GeneratedChecksum dnOrder="4">FEF59E6ABD57AA448AEB59D7A3235250</GeneratedChecksum>
           <UserChecksum dnOrder="5">FEF59E6ABD57AA448AEB59D7A3235250</UserChecksum>
         </File>
-        <File dnOrder="171">
+        <File dnOrder="170">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">isc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1382,7 +1374,7 @@
           <GeneratedChecksum dnOrder="4">DFF1E68F144EA6AC1C63CC263C8F5799</GeneratedChecksum>
           <UserChecksum dnOrder="5">DFF1E68F144EA6AC1C63CC263C8F5799</UserChecksum>
         </File>
-        <File dnOrder="172">
+        <File dnOrder="171">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">l2cc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1390,7 +1382,7 @@
           <GeneratedChecksum dnOrder="4">E45C5FA4D5DC00FE1718F24B21530BAE</GeneratedChecksum>
           <UserChecksum dnOrder="5">E45C5FA4D5DC00FE1718F24B21530BAE</UserChecksum>
         </File>
-        <File dnOrder="173">
+        <File dnOrder="172">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">lcdc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1398,7 +1390,7 @@
           <GeneratedChecksum dnOrder="4">05B66C27B01B8CCCDEF8E153DEE4489D</GeneratedChecksum>
           <UserChecksum dnOrder="5">05B66C27B01B8CCCDEF8E153DEE4489D</UserChecksum>
         </File>
-        <File dnOrder="174">
+        <File dnOrder="173">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">logging.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1406,7 +1398,7 @@
           <GeneratedChecksum dnOrder="4">2C938EEE14C5BD03FDC272938D039BE4</GeneratedChecksum>
           <UserChecksum dnOrder="5">2C938EEE14C5BD03FDC272938D039BE4</UserChecksum>
         </File>
-        <File dnOrder="175">
+        <File dnOrder="174">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">matrix.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1414,7 +1406,7 @@
           <GeneratedChecksum dnOrder="4">ECBF5FAC551F0766F6F38623F655C4B3</GeneratedChecksum>
           <UserChecksum dnOrder="5">ECBF5FAC551F0766F6F38623F655C4B3</UserChecksum>
         </File>
-        <File dnOrder="176">
+        <File dnOrder="175">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">mcan.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1422,7 +1414,7 @@
           <GeneratedChecksum dnOrder="4">31B5C870E272DA27E433DBE5A934F0BF</GeneratedChecksum>
           <UserChecksum dnOrder="5">31B5C870E272DA27E433DBE5A934F0BF</UserChecksum>
         </File>
-        <File dnOrder="177">
+        <File dnOrder="176">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">md2.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1430,7 +1422,7 @@
           <GeneratedChecksum dnOrder="4">6B6F70B8305DA40141D63C30968895C3</GeneratedChecksum>
           <UserChecksum dnOrder="5">6B6F70B8305DA40141D63C30968895C3</UserChecksum>
         </File>
-        <File dnOrder="178">
+        <File dnOrder="177">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">md4.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1438,7 +1430,7 @@
           <GeneratedChecksum dnOrder="4">89D865517E4966C3FB4B72A2753D76E2</GeneratedChecksum>
           <UserChecksum dnOrder="5">89D865517E4966C3FB4B72A2753D76E2</UserChecksum>
         </File>
-        <File dnOrder="179">
+        <File dnOrder="178">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">md5.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1446,7 +1438,7 @@
           <GeneratedChecksum dnOrder="4">7892522A9DB81A0D3EC35A8927874EEF</GeneratedChecksum>
           <UserChecksum dnOrder="5">7892522A9DB81A0D3EC35A8927874EEF</UserChecksum>
         </File>
-        <File dnOrder="180">
+        <File dnOrder="179">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">mem_track.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1454,7 +1446,7 @@
           <GeneratedChecksum dnOrder="4">9AC105B1524527E8996E411BA95805FC</GeneratedChecksum>
           <UserChecksum dnOrder="5">9AC105B1524527E8996E411BA95805FC</UserChecksum>
         </File>
-        <File dnOrder="181">
+        <File dnOrder="180">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">memory.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1462,7 +1454,7 @@
           <GeneratedChecksum dnOrder="4">20DA439036D1053B3493BDB46393495E</GeneratedChecksum>
           <UserChecksum dnOrder="5">20DA439036D1053B3493BDB46393495E</UserChecksum>
         </File>
-        <File dnOrder="182">
+        <File dnOrder="181">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">misc.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1470,7 +1462,7 @@
           <GeneratedChecksum dnOrder="4">453C757D4B7C94ABC32FB5A04ED07AF3</GeneratedChecksum>
           <UserChecksum dnOrder="5">453C757D4B7C94ABC32FB5A04ED07AF3</UserChecksum>
         </File>
-        <File dnOrder="183">
+        <File dnOrder="182">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">mpddrc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1478,7 +1470,7 @@
           <GeneratedChecksum dnOrder="4">3A822444E897D7689DBB07FA015A5C77</GeneratedChecksum>
           <UserChecksum dnOrder="5">3A822444E897D7689DBB07FA015A5C77</UserChecksum>
         </File>
-        <File dnOrder="184">
+        <File dnOrder="183">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">mpi_class.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1486,7 +1478,7 @@
           <GeneratedChecksum dnOrder="4">AA0FD1B6C8052F2B0985D814648C5D76</GeneratedChecksum>
           <UserChecksum dnOrder="5">AA0FD1B6C8052F2B0985D814648C5D76</UserChecksum>
         </File>
-        <File dnOrder="185">
+        <File dnOrder="184">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">mpi_superclass.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1494,7 +1486,7 @@
           <GeneratedChecksum dnOrder="4">DAF7E4A7A82551EB2B6E33D3861B46BD</GeneratedChecksum>
           <UserChecksum dnOrder="5">DAF7E4A7A82551EB2B6E33D3861B46BD</UserChecksum>
         </File>
-        <File dnOrder="186">
+        <File dnOrder="185">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">osal.h</Name>
           <LogicalPath dnOrder="2">/osal/</LogicalPath>
@@ -1502,7 +1494,7 @@
           <GeneratedChecksum dnOrder="4">F0AD88762263B7CB89B02AB4F5876059</GeneratedChecksum>
           <UserChecksum dnOrder="5">F0AD88762263B7CB89B02AB4F5876059</UserChecksum>
         </File>
-        <File dnOrder="187">
+        <File dnOrder="186">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">osal_definitions.h</Name>
           <LogicalPath dnOrder="2">/osal/</LogicalPath>
@@ -1510,7 +1502,7 @@
           <GeneratedChecksum dnOrder="4">0AC88C49E4585B606FD5AC6804F0C340</GeneratedChecksum>
           <UserChecksum dnOrder="5">0AC88C49E4585B606FD5AC6804F0C340</UserChecksum>
         </File>
-        <File dnOrder="188">
+        <File dnOrder="187">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">osal_impl_basic.h</Name>
           <LogicalPath dnOrder="2">/osal/</LogicalPath>
@@ -1518,7 +1510,7 @@
           <GeneratedChecksum dnOrder="4">AA54D5F27CBE04A817F6DD2B18F207A1</GeneratedChecksum>
           <UserChecksum dnOrder="5">AA54D5F27CBE04A817F6DD2B18F207A1</UserChecksum>
         </File>
-        <File dnOrder="189">
+        <File dnOrder="188">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pdmic.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1526,7 +1518,7 @@
           <GeneratedChecksum dnOrder="4">294B7D49B81ADBD772D44595CFFB7181</GeneratedChecksum>
           <UserChecksum dnOrder="5">294B7D49B81ADBD772D44595CFFB7181</UserChecksum>
         </File>
-        <File dnOrder="190">
+        <File dnOrder="189">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pic32mz-crypt.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1534,7 +1526,7 @@
           <GeneratedChecksum dnOrder="4">2C67B03E4B0E472A60A58281D4C3A812</GeneratedChecksum>
           <UserChecksum dnOrder="5">2C67B03E4B0E472A60A58281D4C3A812</UserChecksum>
         </File>
-        <File dnOrder="191">
+        <File dnOrder="190">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pio.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1542,7 +1534,7 @@
           <GeneratedChecksum dnOrder="4">70B29331C91790E53AC713961F23492D</GeneratedChecksum>
           <UserChecksum dnOrder="5">70B29331C91790E53AC713961F23492D</UserChecksum>
         </File>
-        <File dnOrder="192">
+        <File dnOrder="191">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pio_ctrl.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1550,7 +1542,7 @@
           <GeneratedChecksum dnOrder="4">401CDF92C3BABE0743D9A6ACBC946180</GeneratedChecksum>
           <UserChecksum dnOrder="5">401CDF92C3BABE0743D9A6ACBC946180</UserChecksum>
         </File>
-        <File dnOrder="193">
+        <File dnOrder="192">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pit.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
@@ -1558,7 +1550,7 @@
           <GeneratedChecksum dnOrder="4">FEBA93DA48A41A808461B8B319101D01</GeneratedChecksum>
           <UserChecksum dnOrder="5">FEBA93DA48A41A808461B8B319101D01</UserChecksum>
         </File>
-        <File dnOrder="194">
+        <File dnOrder="193">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pkcs11.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1566,7 +1558,7 @@
           <GeneratedChecksum dnOrder="4">9724A2ADE8E556CA0630F213E59E4B48</GeneratedChecksum>
           <UserChecksum dnOrder="5">9724A2ADE8E556CA0630F213E59E4B48</UserChecksum>
         </File>
-        <File dnOrder="195">
+        <File dnOrder="194">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pkcs12.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1574,7 +1566,7 @@
           <GeneratedChecksum dnOrder="4">C5BAD3CAF2D6C87C60CB7C53526B3741</GeneratedChecksum>
           <UserChecksum dnOrder="5">C5BAD3CAF2D6C87C60CB7C53526B3741</UserChecksum>
         </File>
-        <File dnOrder="196">
+        <File dnOrder="195">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pkcs7.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
@@ -1582,7 +1574,7 @@
           <GeneratedChecksum dnOrder="4">2800FC564114119F73FAE9BF5541836F</GeneratedChecksum>
           <UserChecksum dnOrder="5">2800FC564114119F73FAE9BF5541836F</UserChecksum>
         </File>
-        <File dnOrder="197">
+        <File dnOrder="196">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_aic.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/aic/</LogicalPath>
@@ -1590,7 +1582,7 @@
           <GeneratedChecksum dnOrder="4">7A8398DAB4C77A530FAFB842EFE6D1A2</GeneratedChecksum>
           <UserChecksum dnOrder="5">7A8398DAB4C77A530FAFB842EFE6D1A2</UserChecksum>
         </File>
-        <File dnOrder="198">
+        <File dnOrder="197">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_clk.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/clk/</LogicalPath>
@@ -1598,7 +1590,7 @@
           <GeneratedChecksum dnOrder="4">3176DF5386ABD348A93A3A6169F52E8B</GeneratedChecksum>
           <UserChecksum dnOrder="5">3176DF5386ABD348A93A3A6169F52E8B</UserChecksum>
         </File>
-        <File dnOrder="199">
+        <File dnOrder="198">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_matrix.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/matrix/</LogicalPath>
@@ -1606,7 +1598,7 @@
           <GeneratedChecksum dnOrder="4">E8167D30D019275C8F2EEA14CD0EBC42</GeneratedChecksum>
           <UserChecksum dnOrder="5">E8167D30D019275C8F2EEA14CD0EBC42</UserChecksum>
         </File>
-        <File dnOrder="200">
+        <File dnOrder="199">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_mmu.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/mmu/</LogicalPath>
@@ -1614,13 +1606,21 @@
           <GeneratedChecksum dnOrder="4">8187CF043E15265A5292B4AB63AB26CA</GeneratedChecksum>
           <UserChecksum dnOrder="5">8187CF043E15265A5292B4AB63AB26CA</UserChecksum>
         </File>
-        <File dnOrder="201">
+        <File dnOrder="200">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_pio.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/pio/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/pio/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">57F9092DAF6E90C6FEA3914D8C1FA226</GeneratedChecksum>
           <UserChecksum dnOrder="5">57F9092DAF6E90C6FEA3914D8C1FA226</UserChecksum>
+        </File>
+        <File dnOrder="201">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">plib_pit.h</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/pit/</LogicalPath>
+          <PhysicalPath dnOrder="3">/peripheral/pit/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">958D2D5AF7C7C7F653820661493A353D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">958D2D5AF7C7C7F653820661493A353D</UserChecksum>
         </File>
         <File dnOrder="202">
           <Type dnOrder="0">HEADER</Type>
@@ -2243,8 +2243,8 @@
           <Name dnOrder="1">ddr.icf</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8949A42E1402BBC1BF69AA8E4BD762B3</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8949A42E1402BBC1BF69AA8E4BD762B3</UserChecksum>
+          <GeneratedChecksum dnOrder="4">26125207F96349C9B2D9BABD3E18BDC7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">26125207F96349C9B2D9BABD3E18BDC7</UserChecksum>
         </File>
       </Files>
     </Manifest>
@@ -2253,7 +2253,7 @@
       <Setting dnOrder="1" key="DFPPath" value=".\dev_packs\Microchip\SAMA5D2_DFP\0.1.6\atdf\ATSAMA5D27.atdf"/>
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
-      <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
+      <Setting dnOrder="4" key="MERGE_STRATEGY" value="OVERWRITE"/>
       <Setting dnOrder="5" key="PackageFilter" value="bsp;bt;core;crypto;csp;gfx;net;"/>
     </Settings>
   </Configurator>
