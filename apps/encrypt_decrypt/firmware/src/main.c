@@ -37,10 +37,6 @@
 int main ( void )
 {
     /* Initialize all modules */
-#if 0
-    uint8_t stupidIar = 1;
-    while(stupidIar);
-#endif
     SYS_Initialize ( NULL );
     
     while ( true )
