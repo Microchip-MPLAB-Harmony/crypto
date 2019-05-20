@@ -573,7 +573,6 @@ void SYS_Initialize ( void* data )
     CLK_Initialize();
 	PIO_Initialize();
 
-
  
     TC0_CH0_TimerInitialize(); 
      
