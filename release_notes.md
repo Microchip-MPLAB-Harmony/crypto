@@ -27,6 +27,8 @@
 
 - This release requires Harmony 3 Core Version 3.2.1 to regenerate the demonstrations.
 
+- Often when regenerating the wolfSSL demonstrations the flash based key storage files will no be added to the project successfully by the MHC.  To work around this issue delete the network presentation layer from the project, readd it and reconfigure.  The flash based key storage file will be generated correctly after the component has been readded to the project.
+
 
 ## Crypto Release v3.2.1
 ### New Features
