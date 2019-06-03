@@ -132,7 +132,6 @@ const SYS_CONSOLE_INIT sysConsole0Init =
     .deviceIndex = 0,
 };
 
-
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
@@ -172,7 +171,6 @@ void SYS_Initialize ( void* data )
   
     CLK_Initialize();
 	PIO_Initialize();
-
 
 	BSP_Initialize();
 	RSWDT_REGS->RSWDT_MR = RSWDT_MR_WDDIS_Msk;	// Disable RSWDT 

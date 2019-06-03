@@ -310,6 +310,7 @@
             <path>\driver\gmac\src\drv_gmac_local.h</path>
             <path>\driver\gmac\src\dynamic\_gmac_dcpt_lists.h</path>
             <path>\driver\gmac\src\dynamic\drv_gmac_lib.h</path>
+            <path>\system\command\sys_command.h</path>
             <path>\device_cache.h</path>
             <path>\toolchain_specifics.h</path>
             <path>\definitions.h</path>
@@ -323,25 +324,12 @@
             <path>\driver\miim\config\drv_miim_config.h</path>
             <path>\driver\miim\src\drv_miim_local.h</path>
             <path>\driver\miim\src\dynamic\drv_miim_mapping.h</path>
+            <path>\system\debug\sys_debug.h</path>
             <path>\driver\ethphy\drv_ethphy.h</path>
             <path>\driver\ethphy\src\drv_ethphy_local.h</path>
             <path>\driver\ethphy\src\dynamic\drv_extphy_regs.h</path>
             <path>\driver\ethphy\src\dynamic\drv_extphy_ksz8081.h</path>
             <path>\system\console\sys_console.h</path>
-            <path>\system\console\src\sys_console_local.h</path>
-            <path>\system\console\src\sys_console_uart.h</path>
-            <path>\system\console\src\sys_console_uart_definitions.h</path>
-            <path>\system\console\src\sys_debug_local.h</path>
-            <path>\system\console\sys_command.h</path>
-            <path>\system\console\sys_debug.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_compiler.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_gcc.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_iccarm.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_cp15.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\core_ca.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\DSP\Include\arm_common_tables.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\DSP\Include\arm_const_structs.h</path>
-            <path>\..\..\packs\CMSIS\CMSIS\DSP\Include\arm_math.h</path>
             <path>\crypto\crypto.h</path>
             <path>\crypto\src\aes.h</path>
             <path>\crypto\src\arc4.h</path>
@@ -479,6 +467,7 @@
             <path>\tasks.c</path>
             <path>\driver\gmac\src\dynamic\drv_gmac.c</path>
             <path>\driver\gmac\src\dynamic\drv_gmac_lib_samA5D2.c</path>
+            <path>\system\command\src\sys_command.c</path>
             <path>\..\..\main.c</path>
             <path>\initialization.c</path>
             <path>\interrupts.c</path>
@@ -496,12 +485,15 @@
             <path>\library\tcpip\src\tcpip_announce.c</path>
             <path>\library\tcpip\src\udp.c</path>
             <path>\driver\miim\src\dynamic\drv_miim.c</path>
+            <path>\system\debug\src\sys_debug_local.h</path>
+            <path>\system\debug\src\sys_debug.c</path>
             <path>\driver\ethphy\src\dynamic\drv_ethphy.c</path>
             <path>\driver\ethphy\src\dynamic\drv_extphy_ksz8081.c</path>
+            <path>\system\console\src\sys_console_local.h</path>
             <path>\system\console\src\sys_console.c</path>
+            <path>\system\console\src\sys_console_uart.h</path>
+            <path>\system\console\src\sys_console_uart_definitions.h</path>
             <path>\system\console\src\sys_console_uart.c</path>
-            <path>\system\console\src\sys_debug.c</path>
-            <path>\system\console\src\sys_command.c</path>
             <path>\crypto\src\crypto.c</path>
             <path>\crypto\src\aes.c</path>
             <path>\crypto\src\arc4.c</path>

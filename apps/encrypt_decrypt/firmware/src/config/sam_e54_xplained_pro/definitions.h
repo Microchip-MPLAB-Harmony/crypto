@@ -56,7 +56,6 @@
 #include "peripheral/nvic/plib_nvic.h"
 #include "system/console/sys_console.h"
 #include "system/console/src/sys_console_uart_definitions.h"
-#include "system/console/sys_debug.h"
 #include "peripheral/tc/plib_tc0.h"
 #include "system/int/sys_int.h"
 #include "system/cache/sys_cache.h"
@@ -185,7 +184,6 @@ void SYS_Tasks ( void );
 typedef struct
 {
     SYS_MODULE_OBJ  sysConsole0;
-    SYS_MODULE_OBJ  sysDebug;
 
     SYS_MODULE_OBJ  sysTime;
 

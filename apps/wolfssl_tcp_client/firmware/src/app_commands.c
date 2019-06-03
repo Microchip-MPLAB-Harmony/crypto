@@ -49,11 +49,11 @@ int wolfSSLLogSize = 0;
 
 extern APP_DATA appData;
 
-static int _APP_Commands_OpenURL(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
-static int _APP_Commands_IPMode(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
-static int _APP_Commands_Stats(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
-static int _APP_Commands_GetUnixTime(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
-static int _APP_Commands_WolfSSLLog(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
+static void _APP_Commands_OpenURL(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
+static void _APP_Commands_IPMode(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
+static void _APP_Commands_Stats(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
+static void _APP_Commands_GetUnixTime(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
+static void _APP_Commands_WolfSSLLog(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv);
 
 
 static const SYS_CMD_DESCRIPTOR    appCmdTbl[]=
@@ -76,7 +76,7 @@ bool APP_Commands_Init()
     return true;
 }
 
-int _APP_Commands_OpenURL(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
+void _APP_Commands_OpenURL(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
 {
     const void* cmdIoParam = pCmdIO->cmdIoParam;
     wolfSSLLog[0] = 0;
@@ -86,35 +86,32 @@ int _APP_Commands_OpenURL(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
     {
         (*pCmdIO->pCmdApi->msg)(cmdIoParam, "Usage: openurl <url>\r\n");
         (*pCmdIO->pCmdApi->msg)(cmdIoParam, "Ex: openurl http://www.google.com/\r\n");
-        return true;
     }
     if (appData.state != APP_TCPIP_WAITING_FOR_COMMAND)
     {
         (*pCmdIO->pCmdApi->msg)(cmdIoParam, "Demo is in the wrong state to take this command");
-        return true;
     }
     appData.state = APP_TCPIP_PROCESS_COMMAND;
     strncpy(appData.urlBuffer, argv[1], sizeof(appData.urlBuffer));
-    return false;
 }
 
 extern APP_DATA appData;
 
-int _APP_Commands_IPMode(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
+void _APP_Commands_IPMode(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
 {
     const void* cmdIoParam = pCmdIO->cmdIoParam;
     if (argc != 2)
     {
         (*pCmdIO->pCmdApi->msg)(cmdIoParam, "Usage: ipmode <ANY|4|6>\r\n");
         (*pCmdIO->pCmdApi->msg)(cmdIoParam, "Ex: ipmode 6\r\n");
-        return true;
+        return;
 
     }
     appData.ipMode = atoi(argv[1]);
-    return true;
+    
 }
 
-int _APP_Commands_Stats(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
+void _APP_Commands_Stats(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
 {
     const void* cmdIoParam = pCmdIO->cmdIoParam;
 
@@ -146,23 +143,23 @@ int _APP_Commands_Stats(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
 
     time = ((appData.lastRxDataPacket - appData.firstRxDataPacket) * 1000ull) / freq;
     (*pCmdIO->pCmdApi->print)(cmdIoParam, "Time for last packet from server: %d ms\r\n", time);
-    return true;
+    
 }
 
-int _APP_Commands_GetUnixTime(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
+void _APP_Commands_GetUnixTime(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
 {
     const void* cmdIoParam = pCmdIO->cmdIoParam;
     uint32_t sec = TCPIP_SNTP_UTCSecondsGet();
     (*pCmdIO->pCmdApi->print)(cmdIoParam, "Time from SNTP: %d\r\n", sec);
     (*pCmdIO->pCmdApi->print)(cmdIoParam, "Low Rez Timer: %d\r\n", SYS_TIME_CounterGet() /
                              SYS_TIME_FrequencyGet());
-    return true;
+    
 }
 
-static int _APP_Commands_WolfSSLLog(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
+static void _APP_Commands_WolfSSLLog(SYS_CMD_DEVICE_NODE* pCmdIO, int argc, char** argv)
 {
     SYS_CONSOLE_MESSAGE(wolfSSLLog);
-    return true;
+    
 }
 
 

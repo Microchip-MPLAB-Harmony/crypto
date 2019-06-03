@@ -188,7 +188,6 @@ const SYS_CONSOLE_INIT sysConsole0Init =
     .deviceIndex = 0,
 };
 
-
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
@@ -234,7 +233,6 @@ void SYS_Initialize ( void* data )
     PRECONbits.PREFEN = 3;
     PRECONbits.PFMWS = 2;
     CFGCONbits.ECCCON = 3;
-
 
 
     CORETIMER_Initialize();

@@ -145,11 +145,6 @@
             </logicalFolder>
             <logicalFolder name="f1" displayName="console" projectFiles="true">
               <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/sys_console.h</itemPath>
-              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_local.h</itemPath>
-              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_uart.h</itemPath>
-              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_uart_definitions.h</itemPath>
-              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_debug_local.h</itemPath>
-              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/sys_debug.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/int/sys_int.h</itemPath>
@@ -224,28 +219,6 @@
           </logicalFolder>
           <itemPath ex="false">../src/packs/ATSAME54P20A_DFP/device.h</itemPath>
           <itemPath ex="false">../src/packs/ATSAME54P20A_DFP/atsame54p20a.h</itemPath>
-        </logicalFolder>
-        <logicalFolder name="f2" displayName="CMSIS" projectFiles="true">
-          <logicalFolder name="f1" displayName="CMSIS" projectFiles="true">
-            <logicalFolder name="f1" displayName="Core" projectFiles="true">
-              <logicalFolder name="f1" displayName="Include" projectFiles="true">
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/cmsis_compiler.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/cmsis_iccarm.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/cmsis_gcc.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/tz_context.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/core_cm4.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/mpu_armv7.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/Core/Include/cmsis_version.h</itemPath>
-              </logicalFolder>
-            </logicalFolder>
-            <logicalFolder name="f2" displayName="DSP" projectFiles="true">
-              <logicalFolder name="f1" displayName="Include" projectFiles="true">
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/DSP/Include/arm_common_tables.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/DSP/Include/arm_const_structs.h</itemPath>
-                <itemPath ex="false">../src/packs/CMSIS/CMSIS/DSP/Include/arm_math.h</itemPath>
-              </logicalFolder>
-            </logicalFolder>
-          </logicalFolder>
         </logicalFolder>
       </logicalFolder>
       <itemPath ex="false">../src/app.h</itemPath>
@@ -362,9 +335,11 @@
               <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/cache/sys_cache.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="console" projectFiles="true">
+              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_local.h</itemPath>
               <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console.c</itemPath>
+              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_uart.h</itemPath>
+              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_uart_definitions.h</itemPath>
               <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_console_uart.c</itemPath>
-              <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/console/src/sys_debug.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath ex="false">../src/config/sam_e54_xplained_pro_sw/system/int/src/sys_int.c</itemPath>

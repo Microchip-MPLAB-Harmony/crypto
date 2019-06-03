@@ -81,8 +81,8 @@ extern "C" {
 // *****************************************************************************
 /* Console System Service Configuration Options */
 #define SYS_CONSOLE_DEVICE_MAX_INSTANCES   1
-#define SYS_CONSOLE_INSTANCES_NUMBER       1
 #define SYS_CONSOLE_UART_MAX_INSTANCES     1
+
 
 /* RX queue size has one additional element for the empty spot needed in circular queue */
 #define SYS_CONSOLE_UART_RD_QUEUE_DEPTH_IDX0    11
@@ -90,8 +90,6 @@ extern "C" {
 /* TX queue size has one additional element for the empty spot needed in circular queue */
 #define SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0    65
 #define SYS_CONSOLE_BUFFER_DMA_READY
-
-
 
 /* TIME System Service Configuration Options */
 #define SYS_TIME_INDEX_0                     0

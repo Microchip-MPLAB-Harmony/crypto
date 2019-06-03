@@ -295,14 +295,14 @@
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="system" projectFiles="true">
-            <logicalFolder name="f3" displayName="console" projectFiles="true">
+            <logicalFolder name="f3" displayName="command" projectFiles="true">
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/command/sys_command.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f5" displayName="console" projectFiles="true">
               <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/sys_console.h</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_local.h</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_uart.h</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_uart_definitions.h</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_debug_local.h</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/sys_command.h</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/sys_debug.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f4" displayName="debug" projectFiles="true">
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/debug/sys_debug.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/int/sys_int.h</itemPath>
@@ -563,11 +563,19 @@
             <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/stdio/xc32_monitor.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f3" displayName="system" projectFiles="true">
-            <logicalFolder name="f3" displayName="console" projectFiles="true">
+            <logicalFolder name="f3" displayName="command" projectFiles="true">
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/command/src/sys_command.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f5" displayName="console" projectFiles="true">
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_local.h</itemPath>
               <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console.c</itemPath>
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_uart.h</itemPath>
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_uart_definitions.h</itemPath>
               <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_console_uart.c</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_debug.c</itemPath>
-              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/console/src/sys_command.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f4" displayName="debug" projectFiles="true">
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/debug/src/sys_debug_local.h</itemPath>
+              <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/debug/src/sys_debug.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath ex="false">../src/config/pic32mz_ef_sk_sw/system/int/src/sys_int.c</itemPath>
