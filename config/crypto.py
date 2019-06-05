@@ -29,6 +29,7 @@
 cryptoHwTrngSupport = [["RNG", "00159", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_RNG"])],  #PIC32MZ EF
                       ["TRNG", "6334", "G", ["crypt_rng_sam6334.c"], set([])],  #ATSAMV70Q20B
                       ["TRNG", "U2242", "1.1.0", ["crypt_rng_u2242.c"], set([])], #ATSAME54P20A
+                      ["TRNG", "U2242", "1.0.0", ["crypt_rng_u2242.c"], set([])], #ATSAML21J18B
                       ["TRNG", "6334", "K", ["crypt_rng_sam6334.c"], set([])],  #ATSAMA5D27
                      ]
 
@@ -64,6 +65,7 @@ cryptoHwSha512Support = [
 cryptoHwAesSupport = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
                        ["AES", "6149", "W", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149"])], #ATSAMV70Q20B
                        ["AES", "U2238", "2.2.0", ["crypt_aes_u2238.c"], set(["CRYPTO_AES_HW_U2238"])], #ATSAME54P20A
+                       ["AES", "U2238", "2.0.0", ["crypt_aes_u2238.c"], set(["CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149", "CRYPTO_AES_HW_6149_ZB"])] #ATSAMA5D28
                       ]
 
