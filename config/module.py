@@ -31,7 +31,7 @@ def loadModule():
     cryptoComponent.addDependency("LIB_CRYPTO_TIME_Dependency", "SYS_TIME", True, True)
     
     ############################### Third Party wolfSSL Module #####################################
-	tlsComponent = Module.CreateComponent("lib_wolfssl", "wolfSSL Library", "/Third Party Libraries/wolfSSL/", "config/wolfssl.py")
+    tlsComponent = Module.CreateComponent("lib_wolfssl", "wolfSSL Library", "/Third Party Libraries/wolfSSL/", "config/wolfssl.py")
     tlsComponent.addCapability("lib_wolfssl","TLS Provider",None, False)    
     tlsComponent.addDependency("WolfSSL_Crypto_Dependency", "LIB_CRYPTO", None, True, False)
     
