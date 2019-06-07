@@ -31,7 +31,7 @@ cryptoHwTrngSupport = [["RNG", "00159", "", ["pic32mz-crypt.c"], set(["WOLFSSL_M
                       ["TRNG", "U2242", "1.1.0", ["crypt_rng_u2242.c"], set([])], #ATSAME54P20A
                       ["TRNG", "U2242", "1.0.0", ["crypt_rng_u2242.c"], set([])], #ATSAML21J18B
                       ["TRNG", "6334", "K", ["crypt_rng_sam6334.c"], set([])],  #ATSAMA5D27
-                      ["TRNG", "6334", "O", ["crypt_rng_sam6334.c"], set([CRYPT_TRNG_HW_6334])],  #ATSAM9X60
+                      ["TRNG", "6334", "O", ["crypt_rng_sam6334.c"], set(["CRYPT_TRNG_HW_6334"])],  #ATSAM9X60
                      ]
 
 cryptoHwMd5Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])] #PIC32MZ EF
@@ -48,7 +48,7 @@ cryptoHwSha224Support = [
                        ["ICM", "11105", "H", ["crypt_sha224_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        ["ICM", "U2010", "1.2.0", ["crypt_sha224_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
-                       ["SHA", "6156", "R", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
+                       ["SHA", "6156", "R", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156", "CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60                       
                       ]
                       
 cryptoHwSha256Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
