@@ -55,6 +55,7 @@
 #include "peripheral/nvic/plib_nvic.h"
 #include "system/console/sys_console.h"
 #include "system/console/src/sys_console_uart_definitions.h"
+#include "peripheral/efc/plib_efc.h"
 #include "peripheral/tc/plib_tc0.h"
 #include "peripheral/usart/plib_usart1.h"
 #include "system/int/sys_int.h"
