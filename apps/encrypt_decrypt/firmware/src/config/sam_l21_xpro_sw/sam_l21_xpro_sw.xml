@@ -380,13 +380,13 @@
         <Setting dnOrder="73" id="XC32_HEAP">
           <Attributes dnOrder="0">
             <String dnOrder="0" id="value">
-              <Value dnOrder="0">0</Value>
+              <Value dnOrder="0">10240</Value>
             </String>
           </Attributes>
         </Setting>
         <Integer dnOrder="74" id="XC32_HEAP_SIZE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="0"/>
+            <User dnOrder="0" value="10240"/>
           </Values>
         </Integer>
       </Symbols>
@@ -472,79 +472,135 @@
             </Boolean>
           </Attributes>
         </File>
-        <Boolean dnOrder="2" id="ENABLE_APP_FILE">
+        <File dnOrder="2" id="CONFIGURATION_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <Boolean dnOrder="3" id="ENABLE_APP_FILE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="HarmonyCore" value="false"/>
             <User dnOrder="1" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="3" id="ENABLE_OSAL">
+        <Boolean dnOrder="4" id="ENABLE_OSAL">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="HarmonyCore" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="4" id="ENABLE_SYS_CACHE">
+        <Boolean dnOrder="5" id="ENABLE_SYS_CACHE">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="HarmonyCore" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="5" id="ENABLE_SYS_COMMON">
+        <Boolean dnOrder="6" id="ENABLE_SYS_COMMON">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="HarmonyCore" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="6" id="ENABLE_SYS_INT">
+        <Boolean dnOrder="7" id="ENABLE_SYS_INT">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="HarmonyCore" value="false"/>
             <User dnOrder="1" value="true"/>
           </Values>
         </Boolean>
-        <File dnOrder="7" id="OSAL_DEFINITIONS_H">
+        <Menu dnOrder="8" id="GEN_APP_TASK_MENU">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Menu>
+        <File dnOrder="9" id="INT_DEF">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="10" id="INT_HEADER">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="11" id="INT_MAPPING">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="12" id="INT_SOURCE">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="13" id="OSAL_DEFINITIONS_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="8" id="OSAL_H">
+        <File dnOrder="14" id="OSAL_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="9" id="OSAL_IMPL_BASIC_H">
+        <File dnOrder="15" id="OSAL_IMPL_BASIC_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="10" id="OSAL_SYSDEF_H">
+        <File dnOrder="16" id="OSAL_SYSDEF_H">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="11" id="SYSTEM_COMMON">
+        <File dnOrder="17" id="SYSTEM_COMMON">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="12" id="SYSTEM_MODULE">
+        <File dnOrder="18" id="SYSTEM_MODULE">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </File>
-        <File dnOrder="13" id="SYSTEM_ROOT">
+        <File dnOrder="19" id="SYSTEM_ROOT">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="20" id="TASKS_C">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="21" id="USER_H">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </File>
@@ -552,88 +608,132 @@
     </UniqueComponent>
     <UniqueComponent dnOrder="6" id="lib_crypto">
       <Symbols dnOrder="0">
-        <Boolean dnOrder="0" id="cryptoCipher3DES">
+        <File dnOrder="0" id="crypt_aes_u2238_c">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <File dnOrder="1" id="crypt_rng_u2242_c">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="enabled">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </File>
+        <Boolean dnOrder="2" id="cryptoCipher3DES">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="1" id="cryptoCipherAES_CBC">
-          <Values dnOrder="0">
+        <Boolean dnOrder="3" id="cryptoCipherAES_CBC">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="label">
+              <Value dnOrder="0">AES&amp;#160;-&amp;#160;CBC</Value>
+            </String>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="2" id="cryptoCipherAES_CTR">
-          <Values dnOrder="0">
+        <Boolean dnOrder="4" id="cryptoCipherAES_CTR">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="label">
+              <Value dnOrder="0">AES&amp;#160;-&amp;#160;CTR</Value>
+            </String>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="3" id="cryptoCipherAES_ECB">
-          <Values dnOrder="0">
+        <Boolean dnOrder="5" id="cryptoCipherAES_ECB">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="label">
+              <Value dnOrder="0">AES&amp;#160;-&amp;#160;ECB</Value>
+            </String>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="4" id="cryptoCipherAES_GCM">
-          <Values dnOrder="0">
+        <Boolean dnOrder="6" id="cryptoCipherAES_GCM">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="label">
+              <Value dnOrder="0">AES&amp;#160;-&amp;#160;GCM</Value>
+            </String>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="5" id="cryptoCipherECC">
+        <Boolean dnOrder="7" id="cryptoCipherECC">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="6" id="cryptoCipherRSA">
+        <Boolean dnOrder="8" id="cryptoCipherRSA">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="7" id="cryptoHashHMAC">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="8" id="cryptoHashMD5">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="9" id="cryptoHashSHA1">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="10" id="cryptoHashSHA224">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="11" id="cryptoHashSHA256">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="12" id="cryptoHashSHA384">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="13" id="cryptoHashSHA512">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="14" id="cryptoHuffman">
+        <Boolean dnOrder="9" id="cryptoHW">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="15" id="cryptoIsWolfsslEnabled">
+        <Boolean dnOrder="10" id="cryptoHashHMAC">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="11" id="cryptoHashMD5">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="12" id="cryptoHashSHA1">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="13" id="cryptoHashSHA224">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="14" id="cryptoHashSHA256">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="15" id="cryptoHashSHA384">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="16" id="cryptoHashSHA512">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="17" id="cryptoHuffman">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="false"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="18" id="cryptoIsWolfsslEnabled">
           <Values dnOrder="0">
             <Dynamic dnOrder="0" id="lib_crypto" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="16" id="cryptoRandom">
-          <Values dnOrder="0">
+        <Boolean dnOrder="19" id="cryptoRandom">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="label">
+              <Value dnOrder="0">TRNG</Value>
+            </String>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
@@ -670,12 +770,7 @@
           </Values>
         </String>
         <KeyValueSet dnOrder="2" id="SERCOM_MODE">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="readOnly">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-          <Values dnOrder="1">
+          <Values dnOrder="0">
             <Dynamic dnOrder="0" id="sercom3" value="0"/>
           </Values>
         </KeyValueSet>
@@ -834,7 +929,12 @@
           </Values>
         </Boolean>
         <Boolean dnOrder="2" id="TC_TIMER_INTENSET_MC1">
-          <Values dnOrder="0">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <Dynamic dnOrder="0" id="tc0" value="true"/>
           </Values>
         </Boolean>
@@ -848,6 +948,13 @@
             <Dynamic dnOrder="0" id="tc0" value="48000"/>
           </Values>
         </Long>
+        <Float dnOrder="5" id="TC_TIMER_TIME_MS">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </Float>
       </Symbols>
       <Attachments dnOrder="1">
         <DirectCapability dnOrder="0" id="TC0_TMR">
