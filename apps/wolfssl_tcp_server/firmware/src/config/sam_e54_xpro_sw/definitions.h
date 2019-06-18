@@ -49,6 +49,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "crypto/crypto.h"
+#include "peripheral/nvmctrl/plib_nvmctrl.h"
 #include "peripheral/tc/plib_tc0.h"
 #include "system/time/sys_time.h"
 #include "net_pres/pres/net_pres.h"
