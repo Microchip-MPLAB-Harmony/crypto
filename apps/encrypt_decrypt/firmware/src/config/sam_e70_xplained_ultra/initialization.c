@@ -168,6 +168,8 @@ const SYS_TIME_INIT sysTimeInitData =
 
 void SYS_Initialize ( void* data )
 {
+
+    EFC_Initialize();
   
     CLK_Initialize();
 	PIO_Initialize();
@@ -176,6 +178,8 @@ void SYS_Initialize ( void* data )
 	RSWDT_REGS->RSWDT_MR = RSWDT_MR_WDDIS_Msk;	// Disable RSWDT 
 
 	WDT_REGS->WDT_MR = WDT_MR_WDDIS_Msk; 		// Disable WDT 
+
+  
 
  
     TC0_CH0_TimerInitialize(); 
