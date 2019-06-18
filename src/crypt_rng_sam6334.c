@@ -66,8 +66,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 int CRYPT_RNG_HwInit(void)
 {
-    /* Enable Peripheral clock for TRNG in Power Management Controller */
-    uint32_t PmcBit = 1u << (ID_TRNG - 32);
         /* enable */
 #if defined(TRNG_CR_WAKEY_PASSWD)
     TRNG_REGS->TRNG_CR = TRNG_CR_WAKEY_PASSWD | TRNG_CR_ENABLE_Msk;        
