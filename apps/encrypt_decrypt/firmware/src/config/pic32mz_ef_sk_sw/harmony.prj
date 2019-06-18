@@ -803,8 +803,8 @@
           <Name dnOrder="1">crypt_aes_hw.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk_sw/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">EC21E3E20ED805F29C921CAEA1EDAE9C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">EC21E3E20ED805F29C921CAEA1EDAE9C</UserChecksum>
+          <GeneratedChecksum dnOrder="4">0588DC32E165E43538F56FBDC9CDC1BF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0588DC32E165E43538F56FBDC9CDC1BF</UserChecksum>
         </File>
         <File dnOrder="100">
           <Type dnOrder="0">HEADER</Type>
@@ -899,8 +899,8 @@
           <Name dnOrder="1">crypt_sha_sam6156.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk_sw/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">39551E68D91629BEDFC2585B12EA7F6A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">39551E68D91629BEDFC2585B12EA7F6A</UserChecksum>
+          <GeneratedChecksum dnOrder="4">5A0F3110C877F96C5FD10F71995E3DC6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5A0F3110C877F96C5FD10F71995E3DC6</UserChecksum>
         </File>
         <File dnOrder="112">
           <Type dnOrder="0">HEADER</Type>
@@ -1656,7 +1656,7 @@
     </Manifest>
     <Settings dnOrder="4">
       <Setting dnOrder="0" key="CMSISPath" value=".\dev_packs\arm\CMSIS\5.5.1"/>
-      <Setting dnOrder="1" key="DFPPath" value=".\dev_packs\Microchip\PIC32MZ_EF_DFP\1.0.28\atdf\PIC32MZ2048EFM144.atdf"/>
+      <Setting dnOrder="1" key="DFPPath" value=".\dev_packs\Microchip\PIC32MZ_EF_DFP\1.0.29\atdf\PIC32MZ2048EFM144.atdf"/>
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
