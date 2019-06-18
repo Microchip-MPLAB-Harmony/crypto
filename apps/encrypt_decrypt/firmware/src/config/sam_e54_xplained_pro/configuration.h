@@ -79,6 +79,15 @@ extern "C" {
 // Section: System Service Configuration
 // *****************************************************************************
 // *****************************************************************************
+/* TIME System Service Configuration Options */
+#define SYS_TIME_INDEX_0                     0
+#define SYS_TIME_MAX_TIMERS                  5
+#define SYS_TIME_HW_COUNTER_WIDTH            16
+#define SYS_TIME_HW_COUNTER_PERIOD           0xFFFFU
+#define SYS_TIME_HW_COUNTER_HALF_PERIOD		 (SYS_TIME_HW_COUNTER_PERIOD>>1)
+#define SYS_TIME_CPU_CLOCK_FREQUENCY         120000000
+#define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES      (188)
+
 /* Console System Service Configuration Options */
 #define SYS_CONSOLE_DEVICE_MAX_INSTANCES   1
 #define SYS_CONSOLE_UART_MAX_INSTANCES     1
@@ -90,15 +99,6 @@ extern "C" {
 /* TX queue size has one additional element for the empty spot needed in circular queue */
 #define SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0    65
 #define SYS_CONSOLE_BUFFER_DMA_READY
-
-/* TIME System Service Configuration Options */
-#define SYS_TIME_INDEX_0                     0
-#define SYS_TIME_MAX_TIMERS                  5
-#define SYS_TIME_HW_COUNTER_WIDTH            32
-#define SYS_TIME_HW_COUNTER_PERIOD           4294967295U
-#define SYS_TIME_HW_COUNTER_HALF_PERIOD		 (SYS_TIME_HW_COUNTER_PERIOD>>1)
-#define SYS_TIME_CPU_CLOCK_FREQUENCY         120000000
-#define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES      (188)
 
 
 
@@ -149,6 +149,7 @@ extern "C" {
 #define WOLFSSL_SHA384
 #define HAVE_ECC
 #define USE_FAST_MATH
+#define HAVE_LIBZ
 #define WOLFSSL_STATIC_RSA
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_DIRECT
