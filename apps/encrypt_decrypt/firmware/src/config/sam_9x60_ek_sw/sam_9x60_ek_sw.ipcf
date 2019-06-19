@@ -86,8 +86,6 @@
             <path>\system\console\sys_console.h</path>
             <path>\peripheral\dbgu\plib_dbgu_common.h</path>
             <path>\peripheral\dbgu\plib_dbgu.h</path>
-            <path>\peripheral\tc\plib_tc0.h</path>
-            <path>\peripheral\tc\plib_tc_common.h</path>
             <path>\crypto\crypto.h</path>
             <path>\crypto\src\aes.h</path>
             <path>\crypto\src\arc4.h</path>
@@ -183,6 +181,8 @@
             <path>\crypto\src\zlib-1.2.7\zutil.h</path>
             <path>\crypto\src\zlib-1.2.7\zlib.h</path>
             <path>\crypto\src\zlib-1.2.7\gzguts.h</path>
+            <path>\peripheral\tc\plib_tc0.h</path>
+            <path>\peripheral\tc\plib_tc_common.h</path>
             <path>\driver\driver.h</path>
             <path>\driver\driver_common.h</path>
             <path>\system\system.h</path>
@@ -220,7 +220,6 @@
             <path>\system\console\src\sys_console_uart_definitions.h</path>
             <path>\system\console\src\sys_console_uart.c</path>
             <path>\peripheral\dbgu\plib_dbgu.c</path>
-            <path>\peripheral\tc\plib_tc0.c</path>
             <path>\crypto\src\crypto.c</path>
             <path>\crypto\src\aes.c</path>
             <path>\crypto\src\arc4.c</path>
@@ -284,6 +283,7 @@
             <path>\crypto\src\rsa.c</path>
             <path>\crypto\src\ecc.c</path>
             <path>\crypto\src\ecc_fp.c</path>
+            <path>\peripheral\tc\plib_tc0.c</path>
             <path>\system\int\src\sys_int.c</path>
             <path>\system\cache\sys_cache.c</path>
             <path>\..\..\app.c</path>

@@ -963,8 +963,8 @@
           <Name dnOrder="1">crypt_sha_sam6156.h</Name>
           <LogicalPath dnOrder="2">config/sam_9x60_ek_sw/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">39551E68D91629BEDFC2585B12EA7F6A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">39551E68D91629BEDFC2585B12EA7F6A</UserChecksum>
+          <GeneratedChecksum dnOrder="4">5A0F3110C877F96C5FD10F71995E3DC6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5A0F3110C877F96C5FD10F71995E3DC6</UserChecksum>
         </File>
         <File dnOrder="120">
           <Type dnOrder="0">HEADER</Type>
