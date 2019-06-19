@@ -3304,25 +3304,13 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\sys_clk_h2_adapter.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\sys_command.h</name>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\command\sys_command.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\sys_console.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_local.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart_definitions.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\sys_debug.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_debug_local.h</name>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\debug\sys_debug.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\library\tcpip\src\common\sys_fs_wrapper.h</name>
@@ -3742,6 +3730,9 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\exceptions.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\fault_handlers.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\fe_low_mem.c</name>
             </file>
             <file>
@@ -3955,16 +3946,28 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\cache\sys_cache.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_command.c</name>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\command\src\sys_command.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_local.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_debug.c</name>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart_definitions.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\debug\src\sys_debug.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\debug\src\sys_debug_local.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\int\src\sys_int.c</name>
@@ -4022,9 +4025,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\library\tcpip\src\udp.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\vectortrap.s</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\wc_encrypt.c</name>
