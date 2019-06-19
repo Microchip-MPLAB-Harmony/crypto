@@ -155,8 +155,8 @@
           <Name dnOrder="1">crypt_rng_sam6334.c</Name>
           <LogicalPath dnOrder="2">config/sam_9x60_ek_rtos/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8A98F467891EA1283DD8BE75FABF4271</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8A98F467891EA1283DD8BE75FABF4271</UserChecksum>
+          <GeneratedChecksum dnOrder="4">50CDCE0F5319DED8CED760D1DC4CF123</GeneratedChecksum>
+          <UserChecksum dnOrder="5">50CDCE0F5319DED8CED760D1DC4CF123</UserChecksum>
         </File>
         <File dnOrder="19">
           <Type dnOrder="0">SOURCE</Type>
@@ -579,8 +579,8 @@
           <Name dnOrder="1">plib_pit.c</Name>
           <LogicalPath dnOrder="2">config/sam_9x60_ek_rtos/peripheral/pit/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/pit/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">037195C4AA684ADC5C55DE2303AA742F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">037195C4AA684ADC5C55DE2303AA742F</UserChecksum>
+          <GeneratedChecksum dnOrder="4">21FCEA40BF0881BC509440DCD60D98CF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">21FCEA40BF0881BC509440DCD60D98CF</UserChecksum>
         </File>
         <File dnOrder="72">
           <Type dnOrder="0">SOURCE</Type>
