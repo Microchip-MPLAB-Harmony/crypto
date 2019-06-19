@@ -69,6 +69,7 @@ int CRYPT_RNG_HwInit(void)
         /* enable */
 #if defined(TRNG_CR_WAKEY_PASSWD)
         /* Enable Peripheral clock for TRNG in Power Management Controller */
+#ifdef CRYPT_TRNG_HW_6334_A5D2
     uint32_t PmcBit = 1u << (ID_TRNG - 32);
     if ((PMC_REGS->PMC_PCSR1 & PmcBit) != PmcBit)
     {
@@ -78,7 +79,7 @@ int CRYPT_RNG_HwInit(void)
         /* memory barrier */
         __DMB();
     }
-    
+#endif
     TRNG_REGS->TRNG_CR = TRNG_CR_WAKEY_PASSWD | TRNG_CR_ENABLE_Msk;        
 #else
     TRNG_REGS->TRNG_CR = TRNG_CR_KEY_PASSWD | TRNG_CR_ENABLE_Msk;

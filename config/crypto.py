@@ -30,7 +30,7 @@ cryptoHwTrngSupport = [["RNG", "00159", "", ["pic32mz-crypt.c"], set(["WOLFSSL_M
                       ["TRNG", "6334", "G", ["crypt_rng_sam6334.c"], set([])],  #ATSAMV70Q20B
                       ["TRNG", "U2242", "1.1.0", ["crypt_rng_u2242.c"], set([])], #ATSAME54P20A
                       ["TRNG", "U2242", "1.0.0", ["crypt_rng_u2242.c"], set([])], #ATSAML21J18B
-                      ["TRNG", "6334", "K", ["crypt_rng_sam6334.c"], set([])],  #ATSAMA5D27
+                      ["TRNG", "6334", "K", ["crypt_rng_sam6334.c"], set(["CRYPT_TRNG_HW_6334_A5D2"])],  #ATSAMA5D27
                       ["TRNG", "6334", "O", ["crypt_rng_sam6334.c"], set(["CRYPT_TRNG_HW_6334"])],  #ATSAM9X60
                      ]
 
