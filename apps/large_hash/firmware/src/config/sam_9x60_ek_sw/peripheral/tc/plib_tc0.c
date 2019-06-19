@@ -53,7 +53,12 @@
 */
 #include "device.h"
 #include "plib_tc0.h"
+
  
+ 
+
+ 
+
 
 /* Callback object for channel 0 */
 TC_TIMER_CALLBACK_OBJECT TC0_CH0_CallbackObj;
@@ -133,11 +138,16 @@ void TC0_CH0_InterruptHandler(void)
         TC0_CH0_CallbackObj.callback_fn(timer_status, TC0_CH0_CallbackObj.context);
     }
 }
+
  
  
  
  
  
+
+ 
+ 
+
  
 
 /* Interrupt handler for TC0 */
