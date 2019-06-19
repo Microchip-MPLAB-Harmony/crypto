@@ -42,6 +42,7 @@
         <defines>F</defines>
         <defines>I</defines>
         <defines>G</defines>
+        <defines>__FPU_PRESENT=1</defines>
     </defines>
     <linkerFile>
         <override>true</override>
@@ -330,6 +331,14 @@
             <path>\driver\ethphy\src\dynamic\drv_extphy_regs.h</path>
             <path>\driver\ethphy\src\dynamic\drv_extphy_ksz8081.h</path>
             <path>\system\console\sys_console.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_compiler.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_gcc.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_iccarm.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\cmsis_cp15.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\Core_A\Include\core_ca.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\DSP\Include\arm_common_tables.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\DSP\Include\arm_const_structs.h</path>
+            <path>\..\..\packs\CMSIS\CMSIS\DSP\Include\arm_math.h</path>
             <path>\crypto\crypto.h</path>
             <path>\crypto\src\aes.h</path>
             <path>\crypto\src\arc4.h</path>
@@ -480,7 +489,7 @@
             <path>\peripheral\pio\plib_pio.c</path>
             <path>\peripheral\aic\plib_aic.c</path>
             <path>\cstartup.s</path>
-            <path>\vectortrap.s</path>
+            <path>\fault_handlers.c</path>
             <path>\library\tcpip\src\sntp.c</path>
             <path>\library\tcpip\src\tcpip_announce.c</path>
             <path>\library\tcpip\src\udp.c</path>

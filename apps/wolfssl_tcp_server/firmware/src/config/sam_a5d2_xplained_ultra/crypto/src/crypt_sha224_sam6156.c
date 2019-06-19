@@ -151,13 +151,18 @@ static int CRYPT_SHA224_Process(crypt_sha224_hw_descriptor* sha224, const byte* 
   shaCr.s.FIRST = 0; //First message, assume this will load the user IV
   
 
-  uint32_t *ptr = (uint32_t *)(data);
+  uint8_t *ptr = (uint8_t *)(data);
   
   for (uint32_t x = 0; x < len; x+=SHA224_BLOCK_SIZE)
   {
       for (uint8_t y = 0; y < (SHA224_BLOCK_SIZE >> 2); y++)
       {
-          SHA_REGS->SHA_IDATAR[y] = *ptr++;
+          uint32_t data = ((ptr[0] & 0xff)) |
+                          ((ptr[1] & 0xff) << 8) |
+                          ((ptr[2] & 0xff) << 16) |
+                          ((ptr[3] & 0xff) << 24);
+          SHA_REGS->SHA_IDATAR[y] = data;
+          ptr+=4;
       }
       //shaCr.s.START = 1;
       //SHA_REGS->SHA_CR = shaCr.v;
