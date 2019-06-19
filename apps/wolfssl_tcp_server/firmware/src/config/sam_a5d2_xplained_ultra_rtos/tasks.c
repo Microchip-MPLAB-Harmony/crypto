@@ -90,21 +90,22 @@ void _APP_Tasks(  void *pvParameters  )
     }
 }
 
+void _SYS_CMD_Tasks(  void *pvParameters  )
+{
+    while(1)
+    {
+        SYS_CMD_Tasks();
+        vTaskDelay(10 / portTICK_PERIOD_MS);
+    }
+}
+
+
 
 void _DRV_MIIM_Task(  void *pvParameters  )
 {
     while(1)
     {
         DRV_MIIM_Tasks(sysObj.drvMiim);
-        vTaskDelay(1 / portTICK_PERIOD_MS);
-    }
-}
-
-void _SYS_CMD_Tasks(  void *pvParameters  )
-{
-    while(1)
-    {
-        SYS_CMD_Tasks();
         vTaskDelay(1 / portTICK_PERIOD_MS);
     }
 }
@@ -135,6 +136,7 @@ void SYS_Tasks ( void )
         SYS_CMD_RTOS_TASK_PRIORITY,
         (TaskHandle_t*)NULL
     );
+
 
 
 
