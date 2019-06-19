@@ -2407,6 +2407,15 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfcrypt_support\wolfssl\wolfcrypt\arc4.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\DSP\Include\arm_common_tables.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\DSP\Include\arm_const_structs.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\DSP\Include\arm_math.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\library\tcpip\arp.h</name>
             </file>
             <file>
@@ -2479,6 +2488,18 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\cmac.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\Core_A\Include\cmsis_compiler.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\Core_A\Include\cmsis_cp15.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\Core_A\Include\cmsis_gcc.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\Core_A\Include\cmsis_iccarm.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\coding.h</name>
             </file>
             <file>
@@ -2495,6 +2516,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\configuration.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\packs\CMSIS\CMSIS\Core_A\Include\core_ca.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfcrypt_support\wolfssl\wolfcrypt\cpuid.h</name>
@@ -3613,6 +3637,9 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\exceptions.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\fault_handlers.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\fe_low_mem.c</name>
             </file>
             <file>
@@ -3869,9 +3896,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\library\tcpip\src\udp.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\vectortrap.s</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_sw\crypto\src\wc_encrypt.c</name>
