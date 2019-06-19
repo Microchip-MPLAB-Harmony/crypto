@@ -2884,15 +2884,6 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\sys_console.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_local.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart_definitions.h</name>
-            </file>
-            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\int\sys_int.h</name>
             </file>
             <file>
@@ -3112,6 +3103,9 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\exceptions.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\fault_handlers.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\fe_low_mem.c</name>
             </file>
             <file>
@@ -3280,7 +3274,16 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_local.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\console\src\sys_console_uart_definitions.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\system\int\src\sys_int.c</name>
@@ -3299,9 +3302,6 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\zlib-1.2.7\trees.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\vectortrap.s</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra_rtos\crypto\src\wc_encrypt.c</name>
