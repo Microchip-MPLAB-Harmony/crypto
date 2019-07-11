@@ -1,61 +1,44 @@
-/**************************************************************************
-  Crypto Framework Library Header
+/* random.h
+ *
+ * Copyright (C) 2006-2019 wolfSSL Inc.
+ *
+ * This file is part of wolfSSL.
+ *
+ * wolfSSL is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * wolfSSL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
+ */
 
-  Company:
-    Microchip Technology Inc.
+/*!
+    \file wolfssl/wolfcrypt/random.h
+*/
 
-  File Name:
-    random.h
 
-  Summary:
-    Crypto Framework Library header for cryptographic functions.
-
-  Description:
-    This header file contains function prototypes and definitions of
-    the data types and constants that make up the Cryptographic Framework
-    Library for PIC32 families of Microchip microcontrollers.
-**************************************************************************/
-
-//DOM-IGNORE-BEGIN
-/*****************************************************************************
- Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
-
-Microchip Technology Inc. and its subsidiaries.
-
-Subject to your compliance with these terms, you may use Microchip software 
-and any derivatives exclusively with Microchip products. It is your 
-responsibility to comply with third party license terms applicable to your 
-use of third party software (including open source software) that may 
-accompany Microchip software.
-
-THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
-EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
-WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
-PURPOSE.
-
-IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
-INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
-WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
-BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
-FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
-ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
-THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*****************************************************************************/
 
 #ifndef WOLF_CRYPT_RANDOM_H
 #define WOLF_CRYPT_RANDOM_H
 
-#include "crypto/src/types.h"
+#include <wolfssl/wolfcrypt/types.h>
 
 #if defined(HAVE_FIPS) && \
     defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include "crypto/src/fips.h"
+    #include <wolfssl/wolfcrypt/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
 /* included for fips @wc_fips */
 #if defined(HAVE_FIPS) && \
         (!defined(HAVE_FIPS_VERSION) || (HAVE_FIPS_VERSION < 2))
-#include "crypto/src/random.h"
+#include <cyassl/ctaocrypt/random.h>
 #endif
 
 #ifdef __cplusplus
@@ -65,9 +48,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  /* Maximum generate block length */
 #ifndef RNG_MAX_BLOCK_LEN
     #ifdef HAVE_INTEL_QA
-        #define RNG_MAX_BLOCK_LEN (0xFFFF)
+        #define RNG_MAX_BLOCK_LEN (0xFFFFl)
     #else
-        #define RNG_MAX_BLOCK_LEN (0x10000)
+        #define RNG_MAX_BLOCK_LEN (0x10000l)
     #endif
 #endif
 
@@ -105,25 +88,22 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  *     seeded via wc_GenerateSeed. This is the default source.
  */
 
- /* Seed source can be overriden by defining one of these:
+ /* Seed source can be overridden by defining one of these:
       CUSTOM_RAND_GENERATE_SEED
       CUSTOM_RAND_GENERATE_SEED_OS
       CUSTOM_RAND_GENERATE */
 
 
 #if defined(CUSTOM_RAND_GENERATE_BLOCK)
-    extern int same70_RNG_GenerateBlock(byte* output, word32 sz);
-    extern int same70_GenerateSeed(byte* output, word32 sz);
-    extern int same70_InitRng(void);
-    /* To use define the following: 
-     * # define CUSTOM_RAND_GENERATE_BLOCK myRngFunc
+    /* To use define the following:
+     * #define CUSTOM_RAND_GENERATE_BLOCK myRngFunc
      * extern int myRngFunc(byte* output, word32 sz);
      */
 #elif defined(HAVE_HASHDRBG)
     #ifdef NO_SHA256
         #error "Hash DRBG requires SHA-256."
     #endif /* NO_SHA256 */
-    #include "crypto/src/sha256.h"
+    #include <wolfssl/wolfcrypt/sha256.h>
 #elif defined(HAVE_WNR)
      /* allow whitewood as direct RNG source using wc_GenerateSeed directly */
 #elif defined(HAVE_INTEL_RDRAND)
@@ -132,16 +112,12 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     #error No RNG source defined!
 #endif
 
-#ifdef MICROCHIP_SAME70
-extern int same70_RNG_GenerateSeed(byte* output, word32 sz);
-#endif
-
 #ifdef HAVE_WNR
     #include <wnr.h>
 #endif
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include "crypto/src/async.h"
+    #include <wolfssl/wolfcrypt/async.h>
 #endif
 
 
@@ -162,6 +138,9 @@ typedef struct OS_Seed {
     #else
         int fd;
     #endif
+    #if defined(WOLF_CRYPTO_CB)
+        int devId;
+    #endif
 } OS_Seed;
 
 
@@ -177,10 +156,26 @@ struct WC_RNG {
 #ifdef HAVE_HASHDRBG
     /* Hash-based Deterministic Random Bit Generator */
     struct DRBG* drbg;
+#if defined(WOLFSSL_NO_MALLOC) && !defined(WOLFSSL_STATIC_MEMORY)
+    #define DRBG_STRUCT_SZ ((sizeof(word32)*3) + (DRBG_SEED_LEN*2))
+    #ifdef WOLFSSL_SMALL_STACK_CACHE
+        #define DRBG_STRUCT_SZ_SHA256 (sizeof(wc_Sha256))
+    #else
+        #define DRBG_STRUCT_SZ_SHA256 0
+    #endif
+    #if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLF_CRYPTO_CB)
+        #define DRBG_STRUCT_SZ_ASYNC (sizeof(void*) + sizeof(int))
+    #else
+        #define DRBG_STRUCT_SZ_ASYNC 0
+    #endif
+    byte drbg_data[DRBG_STRUCT_SZ + DRBG_STRUCT_SZ_SHA256 + DRBG_STRUCT_SZ_ASYNC];
+#endif
     byte status;
 #endif
 #ifdef WOLFSSL_ASYNC_CRYPT
     WC_ASYNC_DEV asyncDev;
+#endif
+#if defined(WOLFSSL_ASYNC_CRYPT) || defined(WOLF_CRYPTO_CB)
     int devId;
 #endif
 };
@@ -214,7 +209,7 @@ WOLFSSL_API int  wc_RNG_GenerateBlock(WC_RNG*, byte*, word32 sz);
 WOLFSSL_API int  wc_RNG_GenerateByte(WC_RNG*, byte*);
 WOLFSSL_API int  wc_FreeRng(WC_RNG*);
 #else
-#include <crypto/src/error-crypt.h>
+#include <wolfssl/wolfcrypt/error-crypt.h>
 #define wc_InitRng(rng) NOT_COMPILED_IN
 #define wc_InitRng_ex(rng, h, d) NOT_COMPILED_IN
 #define wc_InitRngNonce(rng, n, s) NOT_COMPILED_IN

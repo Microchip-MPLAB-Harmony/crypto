@@ -8,21 +8,13 @@
       <Files dnOrder="0">
         <File dnOrder="0">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">adler32.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8014C52B487ECD6ECD97A0BAC3C0537F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8014C52B487ECD6ECD97A0BAC3C0537F</UserChecksum>
+          <Name dnOrder="1">aes.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">6A99CABCA30A34B41695119C48B2D0E8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6A99CABCA30A34B41695119C48B2D0E8</UserChecksum>
         </File>
         <File dnOrder="1">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">aes.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D27AB1B3248009C426B7483D507F29F7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D27AB1B3248009C426B7483D507F29F7</UserChecksum>
-        </File>
-        <File dnOrder="2">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">app.c</Name>
           <LogicalPath dnOrder="2"/>
@@ -30,39 +22,39 @@
           <GeneratedChecksum dnOrder="4"/>
           <UserChecksum dnOrder="5"/>
         </File>
-        <File dnOrder="3">
+        <File dnOrder="2">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">arc4.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7455533F0849A0658F452145BBABEE60</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7455533F0849A0658F452145BBABEE60</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C719ADA0F2D7EE0D388C843C42A203C9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C719ADA0F2D7EE0D388C843C42A203C9</UserChecksum>
+        </File>
+        <File dnOrder="3">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">asm.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">68DA424BFA0F5CAEBA5484C0CC9A4790</GeneratedChecksum>
+          <UserChecksum dnOrder="5">68DA424BFA0F5CAEBA5484C0CC9A4790</UserChecksum>
         </File>
         <File dnOrder="4">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">asm.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F56C01C8793B58D145D24CAD72CE259D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F56C01C8793B58D145D24CAD72CE259D</UserChecksum>
+          <Name dnOrder="1">asn.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F97BB17C7A593DC8594B1E77A27074D5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F97BB17C7A593DC8594B1E77A27074D5</UserChecksum>
         </File>
         <File dnOrder="5">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">asn.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">9C7904D526920ED95F342AC107440684</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9C7904D526920ED95F342AC107440684</UserChecksum>
+          <Name dnOrder="1">blake2b.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">CA6A0505D20A1ECAB9341B61435F9F26</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CA6A0505D20A1ECAB9341B61435F9F26</UserChecksum>
         </File>
         <File dnOrder="6">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">async.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D41D8CD98F00B204E9800998ECF8427E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D41D8CD98F00B204E9800998ECF8427E</UserChecksum>
-        </File>
-        <File dnOrder="7">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">bsp.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/bsp/</LogicalPath>
@@ -70,143 +62,247 @@
           <GeneratedChecksum dnOrder="4">64D0F9C57F1452BD074A574237B811D7</GeneratedChecksum>
           <UserChecksum dnOrder="5">64D0F9C57F1452BD074A574237B811D7</UserChecksum>
         </File>
-        <File dnOrder="8">
+        <File dnOrder="7">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">camellia.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">251C8E09A83F2F5B88852D6E40ADD0BA</GeneratedChecksum>
-          <UserChecksum dnOrder="5">251C8E09A83F2F5B88852D6E40ADD0BA</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">B946E0A1A9EDC35F18028D28DA4471CF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B946E0A1A9EDC35F18028D28DA4471CF</UserChecksum>
+        </File>
+        <File dnOrder="8">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">chacha.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C369CA6D1B2403FFCE17E11BC435C582</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C369CA6D1B2403FFCE17E11BC435C582</UserChecksum>
         </File>
         <File dnOrder="9">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">chacha.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2BE9066D0C61843B898AFA572340365C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2BE9066D0C61843B898AFA572340365C</UserChecksum>
+          <Name dnOrder="1">chacha20_poly1305.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">BB589460229200D80FB8BAA829622367</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BB589460229200D80FB8BAA829622367</UserChecksum>
         </File>
         <File dnOrder="10">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">chacha20_poly1305.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">29A01E9B896D9C30B674E18FB0B482A2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">29A01E9B896D9C30B674E18FB0B482A2</UserChecksum>
+          <Name dnOrder="1">cmac.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">4104DB7080EAA4496D243FB4F9E5737B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4104DB7080EAA4496D243FB4F9E5737B</UserChecksum>
         </File>
         <File dnOrder="11">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">cmac.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">15BD3320BCDA0A2DD508131B28178789</GeneratedChecksum>
-          <UserChecksum dnOrder="5">15BD3320BCDA0A2DD508131B28178789</UserChecksum>
+          <Name dnOrder="1">coding.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E24FC849A700203E6588D88ED75AE6F0</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E24FC849A700203E6588D88ED75AE6F0</UserChecksum>
         </File>
         <File dnOrder="12">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">coding.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D3831ADA2BF0A858C2AED74FA42294CB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D3831ADA2BF0A858C2AED74FA42294CB</UserChecksum>
+          <Name dnOrder="1">compress.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">4E537A17351D43A598C5F794A64AF1E5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4E537A17351D43A598C5F794A64AF1E5</UserChecksum>
         </File>
         <File dnOrder="13">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">compress.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">035545E9504F5CD9E85A4778DCB66A8C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">035545E9504F5CD9E85A4778DCB66A8C</UserChecksum>
+          <Name dnOrder="1">cpuid.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">37F5F50460A5291888AFB5D7E3FE805D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">37F5F50460A5291888AFB5D7E3FE805D</UserChecksum>
         </File>
         <File dnOrder="14">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">crc32.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A56B399B9141DA952FB8A56F3D5F971A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A56B399B9141DA952FB8A56F3D5F971A</UserChecksum>
+          <Name dnOrder="1">crypt_aes_sam6149.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F4651870D74059AF1EA1CADDDB5CE392</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F4651870D74059AF1EA1CADDDB5CE392</UserChecksum>
         </File>
         <File dnOrder="15">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_aes_u2238.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">B7187A8B8A57EB8BFE5F1F40065F3790</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B7187A8B8A57EB8BFE5F1F40065F3790</UserChecksum>
+        </File>
+        <File dnOrder="16">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_rng_sam6334.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9C6451C51A5BFAB1408BBD6631C9D897</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9C6451C51A5BFAB1408BBD6631C9D897</UserChecksum>
+        </File>
+        <File dnOrder="17">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_rng_u2242.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F332DCB8E7A6501AE8466EB2CDD3BC6B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F332DCB8E7A6501AE8466EB2CDD3BC6B</UserChecksum>
+        </File>
+        <File dnOrder="18">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha1_sam11105.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">748250B47411134F7E2C7B1C05585504</GeneratedChecksum>
+          <UserChecksum dnOrder="5">748250B47411134F7E2C7B1C05585504</UserChecksum>
+        </File>
+        <File dnOrder="19">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha1_sam6156.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">926E1E03312125A66919FEFF8D0A40DD</GeneratedChecksum>
+          <UserChecksum dnOrder="5">926E1E03312125A66919FEFF8D0A40DD</UserChecksum>
+        </File>
+        <File dnOrder="20">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha224_sam11105.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">DD64E4F955C5CF7AD639734A9622BB71</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DD64E4F955C5CF7AD639734A9622BB71</UserChecksum>
+        </File>
+        <File dnOrder="21">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha224_sam6156.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">B41A68A44C10B1BB0F37E75516B41B03</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B41A68A44C10B1BB0F37E75516B41B03</UserChecksum>
+        </File>
+        <File dnOrder="22">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha256_sam11105.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9A275641A515196E4FEA5F9CEDB5EDE3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9A275641A515196E4FEA5F9CEDB5EDE3</UserChecksum>
+        </File>
+        <File dnOrder="23">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha256_sam6156.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">8DAE315393D33A32F10FC73C97868E85</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8DAE315393D33A32F10FC73C97868E85</UserChecksum>
+        </File>
+        <File dnOrder="24">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha384_sam6156.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">6FF5F7A283B8B1B4BCCA9E055D3F19A8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6FF5F7A283B8B1B4BCCA9E055D3F19A8</UserChecksum>
+        </File>
+        <File dnOrder="25">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_sha512_sam6156.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">BF2582BACBEAF4327F62B2824E77FD4C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BF2582BACBEAF4327F62B2824E77FD4C</UserChecksum>
+        </File>
+        <File dnOrder="26">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">crypt_tdes_sam6150.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1ECD6A1D203A3F974316B98906D2C907</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1ECD6A1D203A3F974316B98906D2C907</UserChecksum>
+        </File>
+        <File dnOrder="27">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypto.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">542896DF52102CEBEE146DE6469FAC89</GeneratedChecksum>
-          <UserChecksum dnOrder="5">542896DF52102CEBEE146DE6469FAC89</UserChecksum>
+          <GeneratedChecksum dnOrder="4">5898EA1FF8486CBA89234AF45C24FEB4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5898EA1FF8486CBA89234AF45C24FEB4</UserChecksum>
         </File>
-        <File dnOrder="16">
+        <File dnOrder="28">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">cryptocb.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">CDA6F0295F5967CD15FD1AA3D5BF6454</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CDA6F0295F5967CD15FD1AA3D5BF6454</UserChecksum>
+        </File>
+        <File dnOrder="29">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">curve25519.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7B897ACA40F60B9F34A7AD1B0D07F84C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7B897ACA40F60B9F34A7AD1B0D07F84C</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">8102181F46BB275C7C3347D6FE3B28C3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8102181F46BB275C7C3347D6FE3B28C3</UserChecksum>
         </File>
-        <File dnOrder="17">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">deflate.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1D9326409CCB9045DF9278BB53C80AA3</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1D9326409CCB9045DF9278BB53C80AA3</UserChecksum>
-        </File>
-        <File dnOrder="18">
+        <File dnOrder="30">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">des3.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">59DC5C45BB6F7A0C18554C15F4A4E0CF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">59DC5C45BB6F7A0C18554C15F4A4E0CF</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">04EA84994D0103C9B823CD6CA296C828</GeneratedChecksum>
+          <UserChecksum dnOrder="5">04EA84994D0103C9B823CD6CA296C828</UserChecksum>
         </File>
-        <File dnOrder="19">
+        <File dnOrder="31">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">dh.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E145F3749D31FAE4C14A3EEAE54C0124</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E145F3749D31FAE4C14A3EEAE54C0124</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">14EA7B6B346B2F07BB8A538EDE439813</GeneratedChecksum>
+          <UserChecksum dnOrder="5">14EA7B6B346B2F07BB8A538EDE439813</UserChecksum>
         </File>
-        <File dnOrder="20">
+        <File dnOrder="32">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">dsa.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">27D2396B13DF1EB9725AAD836EE1ADE6</GeneratedChecksum>
-          <UserChecksum dnOrder="5">27D2396B13DF1EB9725AAD836EE1ADE6</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9951EA41E6BF3CC1EBF89CC55B27280C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9951EA41E6BF3CC1EBF89CC55B27280C</UserChecksum>
         </File>
-        <File dnOrder="21">
+        <File dnOrder="33">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ecc.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1DE254498FB506EA6EC0B2956A0A3420</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1DE254498FB506EA6EC0B2956A0A3420</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">3AFBED9D93E28AB7B27B254045D35819</GeneratedChecksum>
+          <UserChecksum dnOrder="5">3AFBED9D93E28AB7B27B254045D35819</UserChecksum>
         </File>
-        <File dnOrder="22">
+        <File dnOrder="34">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ecc_fp.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0779EC1007A2856DBC6452F681DB64A4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0779EC1007A2856DBC6452F681DB64A4</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">5308B82A0AA0A9BB91151DC9112DA0C2</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5308B82A0AA0A9BB91151DC9112DA0C2</UserChecksum>
         </File>
-        <File dnOrder="23">
+        <File dnOrder="35">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ed25519.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">BEEF652C024DBF057C5DD23CDC77F4AB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">BEEF652C024DBF057C5DD23CDC77F4AB</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">86F6A1A2C807EB09649A995AF483112C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">86F6A1A2C807EB09649A995AF483112C</UserChecksum>
         </File>
-        <File dnOrder="24">
+        <File dnOrder="36">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">error.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A24FCB80D7BC2D72B8E77840261C37C0</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A24FCB80D7BC2D72B8E77840261C37C0</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E77D8EAC5C594F7154293AFA877C398E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E77D8EAC5C594F7154293AFA877C398E</UserChecksum>
         </File>
-        <File dnOrder="25">
+        <File dnOrder="37">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">exceptions.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -214,95 +310,71 @@
           <GeneratedChecksum dnOrder="4">322976BB28859B437B0D6D3B8E2AFE42</GeneratedChecksum>
           <UserChecksum dnOrder="5">322976BB28859B437B0D6D3B8E2AFE42</UserChecksum>
         </File>
-        <File dnOrder="26">
+        <File dnOrder="38">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fe_low_mem.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1F8F2ADB0001CBFE956F924D6AC1E0F4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1F8F2ADB0001CBFE956F924D6AC1E0F4</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">241FF2B44C0A9E91D13A486D5A72FEAA</GeneratedChecksum>
+          <UserChecksum dnOrder="5">241FF2B44C0A9E91D13A486D5A72FEAA</UserChecksum>
         </File>
-        <File dnOrder="27">
+        <File dnOrder="39">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fe_operations.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D797E193302BACCDAFA03759F34CF2F0</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D797E193302BACCDAFA03759F34CF2F0</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E9BD502AE1D170A5383E46E3D9F927BB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E9BD502AE1D170A5383E46E3D9F927BB</UserChecksum>
         </File>
-        <File dnOrder="28">
+        <File dnOrder="40">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ge_low_mem.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">51517254828B4CA245C5621208EDED4E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">51517254828B4CA245C5621208EDED4E</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F9633F8C1902FB0C82DB8918B4734579</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F9633F8C1902FB0C82DB8918B4734579</UserChecksum>
         </File>
-        <File dnOrder="29">
+        <File dnOrder="41">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ge_operations.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8F110D024A36E797FAD6B4199191D05F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8F110D024A36E797FAD6B4199191D05F</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">087E9BD797C351579F480ACFD26EBE62</GeneratedChecksum>
+          <UserChecksum dnOrder="5">087E9BD797C351579F480ACFD26EBE62</UserChecksum>
         </File>
-        <File dnOrder="30">
+        <File dnOrder="42">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hash.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">802D9EDD3FCEC94641CDC3FF127D3F1F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">802D9EDD3FCEC94641CDC3FF127D3F1F</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1E9B20B4ADC4494C588631C4CC112093</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1E9B20B4ADC4494C588631C4CC112093</UserChecksum>
         </File>
-        <File dnOrder="31">
+        <File dnOrder="43">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hc128.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E36FBBBE176232DF6E2874AB40FAD939</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E36FBBBE176232DF6E2874AB40FAD939</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">5BC00868F0BBBFE5B5A95D5597590CE3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5BC00868F0BBBFE5B5A95D5597590CE3</UserChecksum>
         </File>
-        <File dnOrder="32">
+        <File dnOrder="44">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hmac.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B41044A5E1791C1F14BC3313EF46F842</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B41044A5E1791C1F14BC3313EF46F842</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2667AE242297ECF98C38C6203335689F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2667AE242297ECF98C38C6203335689F</UserChecksum>
         </File>
-        <File dnOrder="33">
+        <File dnOrder="45">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">idea.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5C6969CB566515D163EBEB1611C5C4A8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5C6969CB566515D163EBEB1611C5C4A8</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9EF6E822154AA294F033974ADD363F28</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9EF6E822154AA294F033974ADD363F28</UserChecksum>
         </File>
-        <File dnOrder="34">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">inffast.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">66AD8B0995044095A2D557C7FA1FF1F2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">66AD8B0995044095A2D557C7FA1FF1F2</UserChecksum>
-        </File>
-        <File dnOrder="35">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">inflate.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">729DF5AB333A7300240405BD65DED9DE</GeneratedChecksum>
-          <UserChecksum dnOrder="5">729DF5AB333A7300240405BD65DED9DE</UserChecksum>
-        </File>
-        <File dnOrder="36">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">inftrees.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">64578AA8B88B73F1E1A4FF3D2EA2967C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">64578AA8B88B73F1E1A4FF3D2EA2967C</UserChecksum>
-        </File>
-        <File dnOrder="37">
+        <File dnOrder="46">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">initialization.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -310,15 +382,15 @@
           <GeneratedChecksum dnOrder="4">67C1D3ABAFD3D284CF088B62A986ADC9</GeneratedChecksum>
           <UserChecksum dnOrder="5">67C1D3ABAFD3D284CF088B62A986ADC9</UserChecksum>
         </File>
-        <File dnOrder="38">
+        <File dnOrder="47">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">integer.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0668C8119549BF81DD826D2BED10D1D9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0668C8119549BF81DD826D2BED10D1D9</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">8FEAA200081AE0D49F29101F75C65053</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8FEAA200081AE0D49F29101F75C65053</UserChecksum>
         </File>
-        <File dnOrder="39">
+        <File dnOrder="48">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">interrupts.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -326,15 +398,15 @@
           <GeneratedChecksum dnOrder="4">CFEC17D66B8C9B31C4B461C9C445C847</GeneratedChecksum>
           <UserChecksum dnOrder="5">CFEC17D66B8C9B31C4B461C9C445C847</UserChecksum>
         </File>
-        <File dnOrder="40">
+        <File dnOrder="49">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">logging.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F411FDDD90AEDF78709B4B8452FB02CA</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F411FDDD90AEDF78709B4B8452FB02CA</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1FC7E8390CE125E005E390077D3953B4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1FC7E8390CE125E005E390077D3953B4</UserChecksum>
         </File>
-        <File dnOrder="41">
+        <File dnOrder="50">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">main.c</Name>
           <LogicalPath dnOrder="2"/>
@@ -342,71 +414,63 @@
           <GeneratedChecksum dnOrder="4"/>
           <UserChecksum dnOrder="5"/>
         </File>
-        <File dnOrder="42">
+        <File dnOrder="51">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md2.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B0887E4628A46DADB0ADC23302BCC5C5</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B0887E4628A46DADB0ADC23302BCC5C5</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9F05CCA2FC5A0C0C2B0BAF5084B1E0C0</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9F05CCA2FC5A0C0C2B0BAF5084B1E0C0</UserChecksum>
         </File>
-        <File dnOrder="43">
+        <File dnOrder="52">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md4.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5BEB6187F03AE7BBD6E2ADC4A8AB59CF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5BEB6187F03AE7BBD6E2ADC4A8AB59CF</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">75BCD67ED360BC008D80477027475209</GeneratedChecksum>
+          <UserChecksum dnOrder="5">75BCD67ED360BC008D80477027475209</UserChecksum>
         </File>
-        <File dnOrder="44">
+        <File dnOrder="53">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md5.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">62A4985107047D9E329BC7F3D2D3FD44</GeneratedChecksum>
-          <UserChecksum dnOrder="5">62A4985107047D9E329BC7F3D2D3FD44</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">356BFB00C65245D24EE5855D26AD94A6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">356BFB00C65245D24EE5855D26AD94A6</UserChecksum>
         </File>
-        <File dnOrder="45">
+        <File dnOrder="54">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">memory.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">955DEBE899CD60A1A365482ABE720642</GeneratedChecksum>
-          <UserChecksum dnOrder="5">955DEBE899CD60A1A365482ABE720642</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1D0764A90CC29EF4DAECA784F39E45D9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1D0764A90CC29EF4DAECA784F39E45D9</UserChecksum>
         </File>
-        <File dnOrder="46">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">misc.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">32223E89E3757EFAF76B505F67E991DF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">32223E89E3757EFAF76B505F67E991DF</UserChecksum>
-        </File>
-        <File dnOrder="47">
+        <File dnOrder="55">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pic32mz-crypt.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2E35F0502FAD14AAEE219FE1828A212D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2E35F0502FAD14AAEE219FE1828A212D</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">90CD9F212363B62399563A070E6E8CDA</GeneratedChecksum>
+          <UserChecksum dnOrder="5">90CD9F212363B62399563A070E6E8CDA</UserChecksum>
         </File>
-        <File dnOrder="48">
+        <File dnOrder="56">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pkcs12.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">57FD2A4F1D2679817750C9F28E835261</GeneratedChecksum>
-          <UserChecksum dnOrder="5">57FD2A4F1D2679817750C9F28E835261</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9614F34E6EA9431B4FF14B9841BA0EB8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9614F34E6EA9431B4FF14B9841BA0EB8</UserChecksum>
         </File>
-        <File dnOrder="49">
+        <File dnOrder="57">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pkcs7.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DE54B738EC55C75411D196D40DEE63AD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DE54B738EC55C75411D196D40DEE63AD</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">120658E2E4CFED04400BBD2DA32411E7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">120658E2E4CFED04400BBD2DA32411E7</UserChecksum>
         </File>
-        <File dnOrder="50">
+        <File dnOrder="58">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_clk.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/clk/</LogicalPath>
@@ -414,7 +478,7 @@
           <GeneratedChecksum dnOrder="4">13E2FA5DCC44F2CFB62513E766CA5345</GeneratedChecksum>
           <UserChecksum dnOrder="5">13E2FA5DCC44F2CFB62513E766CA5345</UserChecksum>
         </File>
-        <File dnOrder="51">
+        <File dnOrder="59">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_coretimer.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/coretimer/</LogicalPath>
@@ -422,7 +486,7 @@
           <GeneratedChecksum dnOrder="4">2FEFEA0D4E94F5A5F3D76BAEC3D602E5</GeneratedChecksum>
           <UserChecksum dnOrder="5">2FEFEA0D4E94F5A5F3D76BAEC3D602E5</UserChecksum>
         </File>
-        <File dnOrder="52">
+        <File dnOrder="60">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_evic.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/evic/</LogicalPath>
@@ -430,7 +494,7 @@
           <GeneratedChecksum dnOrder="4">C82EDACE50AFCEAF7061980C254D0C99</GeneratedChecksum>
           <UserChecksum dnOrder="5">C82EDACE50AFCEAF7061980C254D0C99</UserChecksum>
         </File>
-        <File dnOrder="53">
+        <File dnOrder="61">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_gpio.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/gpio/</LogicalPath>
@@ -438,7 +502,7 @@
           <GeneratedChecksum dnOrder="4">FCA376D898EFE3AE4B7F1C2414FB5E1F</GeneratedChecksum>
           <UserChecksum dnOrder="5">FCA376D898EFE3AE4B7F1C2414FB5E1F</UserChecksum>
         </File>
-        <File dnOrder="54">
+        <File dnOrder="62">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_uart2.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/uart/</LogicalPath>
@@ -446,103 +510,167 @@
           <GeneratedChecksum dnOrder="4">0396180F5A2E255930D8E24938896632</GeneratedChecksum>
           <UserChecksum dnOrder="5">0396180F5A2E255930D8E24938896632</UserChecksum>
         </File>
-        <File dnOrder="55">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">poly1305.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DDED49CC895EAA3496724FF93A72EE98</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DDED49CC895EAA3496724FF93A72EE98</UserChecksum>
-        </File>
-        <File dnOrder="56">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">pwdbased.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">19F2CC8ED79833F83BE91AF36A689191</GeneratedChecksum>
-          <UserChecksum dnOrder="5">19F2CC8ED79833F83BE91AF36A689191</UserChecksum>
-        </File>
-        <File dnOrder="57">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">rabbit.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">80D451AE033E2D1AB5D76D2D7114A813</GeneratedChecksum>
-          <UserChecksum dnOrder="5">80D451AE033E2D1AB5D76D2D7114A813</UserChecksum>
-        </File>
-        <File dnOrder="58">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">random.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7BC4291576325CBA7AFC886369FBAA9E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7BC4291576325CBA7AFC886369FBAA9E</UserChecksum>
-        </File>
-        <File dnOrder="59">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">ripemd.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">FF26F057EC23457440CFB3A503F7D731</GeneratedChecksum>
-          <UserChecksum dnOrder="5">FF26F057EC23457440CFB3A503F7D731</UserChecksum>
-        </File>
-        <File dnOrder="60">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">rsa.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">15178B80D137062347161429AC1E36C4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">15178B80D137062347161429AC1E36C4</UserChecksum>
-        </File>
-        <File dnOrder="61">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sha.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C4489DB28E670A1E6490FD40E3AE7C9A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C4489DB28E670A1E6490FD40E3AE7C9A</UserChecksum>
-        </File>
-        <File dnOrder="62">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sha256.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2C626BAB3F523DCAC1580D6A9EEE302F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2C626BAB3F523DCAC1580D6A9EEE302F</UserChecksum>
-        </File>
         <File dnOrder="63">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sha3.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DCF368B6893D5D1B33A6ABD2C5A43040</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DCF368B6893D5D1B33A6ABD2C5A43040</UserChecksum>
+          <Name dnOrder="1">poly1305.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C840429A6B3F83A53CEB6614A9D629A1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C840429A6B3F83A53CEB6614A9D629A1</UserChecksum>
         </File>
         <File dnOrder="64">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sha512.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C5E6868E153C2597E8D04B67C23E09B9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C5E6868E153C2597E8D04B67C23E09B9</UserChecksum>
+          <Name dnOrder="1">pwdbased.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">46A1E2FAB750222D3E7487006050F2C3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">46A1E2FAB750222D3E7487006050F2C3</UserChecksum>
         </File>
         <File dnOrder="65">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">signature.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B00781F985238EBD0BA7E15E6F2FF0F7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B00781F985238EBD0BA7E15E6F2FF0F7</UserChecksum>
+          <Name dnOrder="1">rabbit.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">73BDE873BA99835BCBEE28B4F6371781</GeneratedChecksum>
+          <UserChecksum dnOrder="5">73BDE873BA99835BCBEE28B4F6371781</UserChecksum>
         </File>
         <File dnOrder="66">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">srp.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B0CE793E3B42CDF7CC3A9934BB130FC6</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B0CE793E3B42CDF7CC3A9934BB130FC6</UserChecksum>
+          <Name dnOrder="1">random.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">11B9D6F49D2D36C6EC240F288C8D8C40</GeneratedChecksum>
+          <UserChecksum dnOrder="5">11B9D6F49D2D36C6EC240F288C8D8C40</UserChecksum>
         </File>
         <File dnOrder="67">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">ripemd.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F935DA8383E455664BA80F5D80893060</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F935DA8383E455664BA80F5D80893060</UserChecksum>
+        </File>
+        <File dnOrder="68">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">rsa.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F3EF7EEE8B3E6EAC6F42E1C4F70D973A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F3EF7EEE8B3E6EAC6F42E1C4F70D973A</UserChecksum>
+        </File>
+        <File dnOrder="69">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sha.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">4388B833903D784A6ECAC2D0A109657E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4388B833903D784A6ECAC2D0A109657E</UserChecksum>
+        </File>
+        <File dnOrder="70">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sha256.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">D7820DF82A1FBC850077E9CBA51417E6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D7820DF82A1FBC850077E9CBA51417E6</UserChecksum>
+        </File>
+        <File dnOrder="71">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sha3.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1E788ECDC8C8F42D88F6F1B1048A9014</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1E788ECDC8C8F42D88F6F1B1048A9014</UserChecksum>
+        </File>
+        <File dnOrder="72">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sha512.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F24070F601A32BF98F38C190A54EA98C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1D24A846E459B2D747B91AF37C85732E</UserChecksum>
+        </File>
+        <File dnOrder="73">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">signature.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">5D7B6B6C84ECD6231380B5633F89333E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5D7B6B6C84ECD6231380B5633F89333E</UserChecksum>
+        </File>
+        <File dnOrder="74">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_arm32.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">70ECE60C6A6F53443BA2F6F604941D12</GeneratedChecksum>
+          <UserChecksum dnOrder="5">70ECE60C6A6F53443BA2F6F604941D12</UserChecksum>
+        </File>
+        <File dnOrder="75">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_arm64.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">16173EE1A6CD42914387C4BF5CAA3AD7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">16173EE1A6CD42914387C4BF5CAA3AD7</UserChecksum>
+        </File>
+        <File dnOrder="76">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_armthumb.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">36D1A575788CBBB92D51E05392B6FDDB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">36D1A575788CBBB92D51E05392B6FDDB</UserChecksum>
+        </File>
+        <File dnOrder="77">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_c32.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C6540F7B035CE36398181D3FED9887E3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C6540F7B035CE36398181D3FED9887E3</UserChecksum>
+        </File>
+        <File dnOrder="78">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_c64.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">AF505CB2B334B74B4BD1B4929E15473B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">AF505CB2B334B74B4BD1B4929E15473B</UserChecksum>
+        </File>
+        <File dnOrder="79">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_cortexm.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">0A7BB9D7AD99BFB6ECE1E5C11A83C44D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0A7BB9D7AD99BFB6ECE1E5C11A83C44D</UserChecksum>
+        </File>
+        <File dnOrder="80">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_int.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2FE3C3EFD3471E1F52A10572D33824CB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2FE3C3EFD3471E1F52A10572D33824CB</UserChecksum>
+        </File>
+        <File dnOrder="81">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">sp_x86_64.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C2DD4AC4E62E7F7844C25BDC749FF851</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C2DD4AC4E62E7F7844C25BDC749FF851</UserChecksum>
+        </File>
+        <File dnOrder="82">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">srp.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">0FD31EE935C90EF8392B1DD8EF0F084F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0FD31EE935C90EF8392B1DD8EF0F084F</UserChecksum>
+        </File>
+        <File dnOrder="83">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_console.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/console/</LogicalPath>
@@ -550,7 +678,7 @@
           <GeneratedChecksum dnOrder="4">11DBED3EBA5848386C91E11BD79A720A</GeneratedChecksum>
           <UserChecksum dnOrder="5">11DBED3EBA5848386C91E11BD79A720A</UserChecksum>
         </File>
-        <File dnOrder="68">
+        <File dnOrder="84">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_console_local.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/console/</LogicalPath>
@@ -558,7 +686,7 @@
           <GeneratedChecksum dnOrder="4">5BA0902794A8669B3FE37E8A8BEE9D65</GeneratedChecksum>
           <UserChecksum dnOrder="5">5BA0902794A8669B3FE37E8A8BEE9D65</UserChecksum>
         </File>
-        <File dnOrder="69">
+        <File dnOrder="85">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_console_uart.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/console/</LogicalPath>
@@ -566,7 +694,7 @@
           <GeneratedChecksum dnOrder="4">635C7CC6CC208FC8B7FAC29E4809C3E8</GeneratedChecksum>
           <UserChecksum dnOrder="5">635C7CC6CC208FC8B7FAC29E4809C3E8</UserChecksum>
         </File>
-        <File dnOrder="70">
+        <File dnOrder="86">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_console_uart.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/console/</LogicalPath>
@@ -574,7 +702,7 @@
           <GeneratedChecksum dnOrder="4">C514492B43B820E1241D77EA36A5A68D</GeneratedChecksum>
           <UserChecksum dnOrder="5">C514492B43B820E1241D77EA36A5A68D</UserChecksum>
         </File>
-        <File dnOrder="71">
+        <File dnOrder="87">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_console_uart_definitions.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/console/</LogicalPath>
@@ -582,7 +710,7 @@
           <GeneratedChecksum dnOrder="4">4AA93FD1E4FEEF15802C414B8519EC36</GeneratedChecksum>
           <UserChecksum dnOrder="5">4AA93FD1E4FEEF15802C414B8519EC36</UserChecksum>
         </File>
-        <File dnOrder="72">
+        <File dnOrder="88">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_int.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/int/</LogicalPath>
@@ -590,7 +718,7 @@
           <GeneratedChecksum dnOrder="4">640A4B35B8CDB53BD8EA5077D81386BE</GeneratedChecksum>
           <UserChecksum dnOrder="5">640A4B35B8CDB53BD8EA5077D81386BE</UserChecksum>
         </File>
-        <File dnOrder="73">
+        <File dnOrder="89">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_time.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/time/</LogicalPath>
@@ -598,7 +726,7 @@
           <GeneratedChecksum dnOrder="4">70DAE413C209782D51F61D7C896593FB</GeneratedChecksum>
           <UserChecksum dnOrder="5">70DAE413C209782D51F61D7C896593FB</UserChecksum>
         </File>
-        <File dnOrder="74">
+        <File dnOrder="90">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">tasks.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -606,63 +734,55 @@
           <GeneratedChecksum dnOrder="4">DE51BB8F6FDBC39FB049CB2A14E56B25</GeneratedChecksum>
           <UserChecksum dnOrder="5">DE51BB8F6FDBC39FB049CB2A14E56B25</UserChecksum>
         </File>
-        <File dnOrder="75">
+        <File dnOrder="91">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">tfm.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">07A3DBC2B9EC38259912C9DB21800B46</GeneratedChecksum>
-          <UserChecksum dnOrder="5">07A3DBC2B9EC38259912C9DB21800B46</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">70DA3A53B6E15B0B5A3E64DF77FA82B5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">70DA3A53B6E15B0B5A3E64DF77FA82B5</UserChecksum>
         </File>
-        <File dnOrder="76">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">trees.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D8202BF3FF33EA255961EF62AFC520C2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D8202BF3FF33EA255961EF62AFC520C2</UserChecksum>
-        </File>
-        <File dnOrder="77">
+        <File dnOrder="92">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wc_encrypt.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AB74401C4B162118CABE557F9DED1480</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AB74401C4B162118CABE557F9DED1480</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">39E1CC1A21BA664FB5F5CC85D651DA16</GeneratedChecksum>
+          <UserChecksum dnOrder="5">39E1CC1A21BA664FB5F5CC85D651DA16</UserChecksum>
         </File>
-        <File dnOrder="78">
+        <File dnOrder="93">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wc_pkcs11.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">EC62EDAF349EE7092F6BF1FC25085266</GeneratedChecksum>
-          <UserChecksum dnOrder="5">EC62EDAF349EE7092F6BF1FC25085266</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2D2AABED1C03837F3A35471989B65878</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2D2AABED1C03837F3A35471989B65878</UserChecksum>
         </File>
-        <File dnOrder="79">
+        <File dnOrder="94">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wc_port.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3969204946C180077F22BF931EB18B04</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3969204946C180077F22BF931EB18B04</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">80393A69051A3A80B7C735B3E3286C2C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">80393A69051A3A80B7C735B3E3286C2C</UserChecksum>
         </File>
-        <File dnOrder="80">
+        <File dnOrder="95">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wolfevent.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A1D6840DB97E9AC43E921627B3750F4E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A1D6840DB97E9AC43E921627B3750F4E</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9D115E4AE50757918BA106A868D31634</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9D115E4AE50757918BA106A868D31634</UserChecksum>
         </File>
-        <File dnOrder="81">
+        <File dnOrder="96">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wolfmath.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B8238D1EE4E210D48D8540B4E284DDB8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B8238D1EE4E210D48D8540B4E284DDB8</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">623B428CDCEF17408755CB5B8E57061C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">623B428CDCEF17408755CB5B8E57061C</UserChecksum>
         </File>
-        <File dnOrder="82">
+        <File dnOrder="97">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">xc32_monitor.c</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/stdio/</LogicalPath>
@@ -670,23 +790,15 @@
           <GeneratedChecksum dnOrder="4">0CDCE9B6891797FCD2AEA243F841353F</GeneratedChecksum>
           <UserChecksum dnOrder="5">0CDCE9B6891797FCD2AEA243F841353F</UserChecksum>
         </File>
-        <File dnOrder="83">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">zutil.c</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3E3C02EB1AF2E940562CF17AB9904657</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3E3C02EB1AF2E940562CF17AB9904657</UserChecksum>
-        </File>
-        <File dnOrder="84">
+        <File dnOrder="98">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">aes.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">12044DBA4C68AB05A1C762CF182B6A49</GeneratedChecksum>
-          <UserChecksum dnOrder="5">12044DBA4C68AB05A1C762CF182B6A49</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">CF7F0BA3FC8CFC342F532EDF46D66C77</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CF7F0BA3FC8CFC342F532EDF46D66C77</UserChecksum>
         </File>
-        <File dnOrder="85">
+        <File dnOrder="99">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">app.h</Name>
           <LogicalPath dnOrder="2"/>
@@ -694,39 +806,55 @@
           <GeneratedChecksum dnOrder="4"/>
           <UserChecksum dnOrder="5"/>
         </File>
-        <File dnOrder="86">
+        <File dnOrder="100">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">arc4.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0FA948BA5F3A06A809FE937C895D363A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0FA948BA5F3A06A809FE937C895D363A</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E175C74682BE105D84AB00D8F8DB70A4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E175C74682BE105D84AB00D8F8DB70A4</UserChecksum>
         </File>
-        <File dnOrder="87">
+        <File dnOrder="101">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">asn.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B4B8199B08D3D6CBA347EFBBCEC32104</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B4B8199B08D3D6CBA347EFBBCEC32104</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">57A1D5D217B637DF2DF3683BB0D793E3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">57A1D5D217B637DF2DF3683BB0D793E3</UserChecksum>
         </File>
-        <File dnOrder="88">
+        <File dnOrder="102">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">asn_public.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D263BE2312939CA76E3CC6C6B6CAC105</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D263BE2312939CA76E3CC6C6B6CAC105</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">DE58DDEB3A495CDC6C74452F4336B1F4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DE58DDEB3A495CDC6C74452F4336B1F4</UserChecksum>
         </File>
-        <File dnOrder="89">
+        <File dnOrder="103">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">async.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D41D8CD98F00B204E9800998ECF8427E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D41D8CD98F00B204E9800998ECF8427E</UserChecksum>
+          <Name dnOrder="1">blake2-impl.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F909AC0C7F7B7A5AD499C02D6307403C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F909AC0C7F7B7A5AD499C02D6307403C</UserChecksum>
         </File>
-        <File dnOrder="90">
+        <File dnOrder="104">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">blake2-int.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C6869BA6D5772C969D534655F00C124B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C6869BA6D5772C969D534655F00C124B</UserChecksum>
+        </File>
+        <File dnOrder="105">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">blake2.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">DC4924484C570B7E676FB9220D1DF378</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DC4924484C570B7E676FB9220D1DF378</UserChecksum>
+        </File>
+        <File dnOrder="106">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">bsp.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/bsp/</LogicalPath>
@@ -734,207 +862,215 @@
           <GeneratedChecksum dnOrder="4">A9C595E0E5A92D2B85C18D2A27597B84</GeneratedChecksum>
           <UserChecksum dnOrder="5">A9C595E0E5A92D2B85C18D2A27597B84</UserChecksum>
         </File>
-        <File dnOrder="91">
+        <File dnOrder="107">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">camellia.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AD6EF206491D68E8A96EFC700BE98EA3</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AD6EF206491D68E8A96EFC700BE98EA3</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">365E46FB55F9FB6C2D9ACF465C6CA8D4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">365E46FB55F9FB6C2D9ACF465C6CA8D4</UserChecksum>
         </File>
-        <File dnOrder="92">
+        <File dnOrder="108">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">certs_test.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">062904EF8ADA86BE4C43E2D4D9002D20</GeneratedChecksum>
-          <UserChecksum dnOrder="5">062904EF8ADA86BE4C43E2D4D9002D20</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9FB401FE77EFF8EEA8F8FE7993D2AFB4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9FB401FE77EFF8EEA8F8FE7993D2AFB4</UserChecksum>
         </File>
-        <File dnOrder="93">
+        <File dnOrder="109">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chacha.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">761A763E35477B7CEBAC36D33CD63675</GeneratedChecksum>
-          <UserChecksum dnOrder="5">761A763E35477B7CEBAC36D33CD63675</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2F689847E88D745EBE15321338C4FD57</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2F689847E88D745EBE15321338C4FD57</UserChecksum>
         </File>
-        <File dnOrder="94">
+        <File dnOrder="110">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chacha20_poly1305.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4E89B08C2339D7ED4E5706EDF9CDC05A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4E89B08C2339D7ED4E5706EDF9CDC05A</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">FDEC947F981DBDAE93A901D504AD483C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">FDEC947F981DBDAE93A901D504AD483C</UserChecksum>
         </File>
-        <File dnOrder="95">
+        <File dnOrder="111">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmac.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D850D46D25AED1816AD8E98BE6962F2C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D850D46D25AED1816AD8E98BE6962F2C</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">92D9C73209E7A1C3E07D13D493AE492B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">92D9C73209E7A1C3E07D13D493AE492B</UserChecksum>
         </File>
-        <File dnOrder="96">
+        <File dnOrder="112">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">coding.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C97958062F87770AB0561E6463DB1045</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C97958062F87770AB0561E6463DB1045</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C90E20A48057BB796970126A7E624A7A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C90E20A48057BB796970126A7E624A7A</UserChecksum>
         </File>
-        <File dnOrder="97">
+        <File dnOrder="113">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">compress.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">666583F2C03AC3CC620032DE6031D360</GeneratedChecksum>
-          <UserChecksum dnOrder="5">666583F2C03AC3CC620032DE6031D360</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">5566A02E142784821EF1BF111FD89315</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5566A02E142784821EF1BF111FD89315</UserChecksum>
         </File>
-        <File dnOrder="98">
+        <File dnOrder="114">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">config.h</Name>
+          <LogicalPath dnOrder="2">config/pic32mz_ef_sk</LogicalPath>
+          <PhysicalPath dnOrder="3">/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9537C1E41F14DFF1B50CF8AE3880105C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9537C1E41F14DFF1B50CF8AE3880105C</UserChecksum>
+        </File>
+        <File dnOrder="115">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C549A9072F7D0C7CAE898A823A5853FC</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C549A9072F7D0C7CAE898A823A5853FC</UserChecksum>
+          <GeneratedChecksum dnOrder="4">55700F515609A306CE71DA9AD3F96BC6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">55700F515609A306CE71DA9AD3F96BC6</UserChecksum>
         </File>
-        <File dnOrder="99">
+        <File dnOrder="116">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">crc32.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F8E8369C029D0E4FFF1A4319D082AD0B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F8E8369C029D0E4FFF1A4319D082AD0B</UserChecksum>
+          <Name dnOrder="1">cpuid.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E3E64EC1ACF10AAFFD81B112FCFE922A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E3E64EC1ACF10AAFFD81B112FCFE922A</UserChecksum>
         </File>
-        <File dnOrder="100">
+        <File dnOrder="117">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0588DC32E165E43538F56FBDC9CDC1BF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0588DC32E165E43538F56FBDC9CDC1BF</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">EED7C2556CAD34AFF5D564A1EC0BDB39</GeneratedChecksum>
+          <UserChecksum dnOrder="5">EED7C2556CAD34AFF5D564A1EC0BDB39</UserChecksum>
         </File>
-        <File dnOrder="101">
+        <File dnOrder="118">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_hwInt.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">86CA9C646BBBC4434B27137C8358518E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">86CA9C646BBBC4434B27137C8358518E</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">24A0F9072EB565469E9D0EA6A50AA9B6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">24A0F9072EB565469E9D0EA6A50AA9B6</UserChecksum>
         </File>
-        <File dnOrder="102">
+        <File dnOrder="119">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_sam6149.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0A254EF94C2F9440F7526E0AB24BFE5E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0A254EF94C2F9440F7526E0AB24BFE5E</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">0586DB4F768CE4E459F407E80E6F47CD</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0586DB4F768CE4E459F407E80E6F47CD</UserChecksum>
         </File>
-        <File dnOrder="103">
+        <File dnOrder="120">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_u2238.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F6AC7AC9DE3824D3169B7300128284F5</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F6AC7AC9DE3824D3169B7300128284F5</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">28C1907C94F4949424B4AF00BF3D943C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">28C1907C94F4949424B4AF00BF3D943C</UserChecksum>
         </File>
-        <File dnOrder="104">
+        <File dnOrder="121">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_rng_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">FCC4C8CF0814D837F00009BB915E5E16</GeneratedChecksum>
           <UserChecksum dnOrder="5">FCC4C8CF0814D837F00009BB915E5E16</UserChecksum>
         </File>
-        <File dnOrder="105">
+        <File dnOrder="122">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha1_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DC148B0B383084C7D5FD363665917344</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DC148B0B383084C7D5FD363665917344</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2251CC438A15C07821078817D595A0EB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2251CC438A15C07821078817D595A0EB</UserChecksum>
         </File>
-        <File dnOrder="106">
+        <File dnOrder="123">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha224_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">41B204C7D22102F32B9A7D87A0BEB17C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">41B204C7D22102F32B9A7D87A0BEB17C</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E35293EB0980D228390604912872DE89</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E35293EB0980D228390604912872DE89</UserChecksum>
         </File>
-        <File dnOrder="107">
+        <File dnOrder="124">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha256_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">40BAE4110C087D0901E670C284BF1679</GeneratedChecksum>
-          <UserChecksum dnOrder="5">40BAE4110C087D0901E670C284BF1679</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">CA6966F921CF44D84FA480C167002EDD</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CA6966F921CF44D84FA480C167002EDD</UserChecksum>
         </File>
-        <File dnOrder="108">
+        <File dnOrder="125">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha384_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3C59E69D7AF5D31DD21B11C04D7C5F89</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3C59E69D7AF5D31DD21B11C04D7C5F89</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7EC940C5C90594801D1B41AE3ADB0186</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7EC940C5C90594801D1B41AE3ADB0186</UserChecksum>
         </File>
-        <File dnOrder="109">
+        <File dnOrder="126">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha512_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C023BECC000310E0DB52B33C0CA09C83</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C023BECC000310E0DB52B33C0CA09C83</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C183A81404928BB16B18154BF44A731D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C183A81404928BB16B18154BF44A731D</UserChecksum>
         </File>
-        <File dnOrder="110">
+        <File dnOrder="127">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">9EB434500C04122BEC743AE92B2FBC91</GeneratedChecksum>
           <UserChecksum dnOrder="5">9EB434500C04122BEC743AE92B2FBC91</UserChecksum>
         </File>
-        <File dnOrder="111">
+        <File dnOrder="128">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_sam11105.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">0D31F2199561A3A80CE8CDE16C3B6C22</GeneratedChecksum>
           <UserChecksum dnOrder="5">0D31F2199561A3A80CE8CDE16C3B6C22</UserChecksum>
         </File>
-        <File dnOrder="112">
+        <File dnOrder="129">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_sam6156.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">5A0F3110C877F96C5FD10F71995E3DC6</GeneratedChecksum>
           <UserChecksum dnOrder="5">5A0F3110C877F96C5FD10F71995E3DC6</UserChecksum>
         </File>
-        <File dnOrder="113">
+        <File dnOrder="130">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_hw.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">D039922A28221C2ADB2F210C6C12B38E</GeneratedChecksum>
           <UserChecksum dnOrder="5">D039922A28221C2ADB2F210C6C12B38E</UserChecksum>
         </File>
-        <File dnOrder="114">
+        <File dnOrder="131">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_hwInt.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">EB09F45A1C19CCEE2382C8177AD377D8</GeneratedChecksum>
           <UserChecksum dnOrder="5">EB09F45A1C19CCEE2382C8177AD377D8</UserChecksum>
         </File>
-        <File dnOrder="115">
+        <File dnOrder="132">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_sam6150.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">FEBE52B5B54BE41111C025EDD9D30D6C</GeneratedChecksum>
           <UserChecksum dnOrder="5">FEBE52B5B54BE41111C025EDD9D30D6C</UserChecksum>
         </File>
-        <File dnOrder="116">
+        <File dnOrder="133">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypto.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
@@ -942,15 +1078,23 @@
           <GeneratedChecksum dnOrder="4">78218E04D905F1591A76A8EE5F48238F</GeneratedChecksum>
           <UserChecksum dnOrder="5">78218E04D905F1591A76A8EE5F48238F</UserChecksum>
         </File>
-        <File dnOrder="117">
+        <File dnOrder="134">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">cryptocb.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">92B26817E2399152FFE5D3C2134EF64D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">92B26817E2399152FFE5D3C2134EF64D</UserChecksum>
+        </File>
+        <File dnOrder="135">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">curve25519.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A6C8ADFE0584F47BB97408350DD716F7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A6C8ADFE0584F47BB97408350DD716F7</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">3F1E7DFD55D18C0F302A4A3BB385DB80</GeneratedChecksum>
+          <UserChecksum dnOrder="5">3F1E7DFD55D18C0F302A4A3BB385DB80</UserChecksum>
         </File>
-        <File dnOrder="118">
+        <File dnOrder="136">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">definitions.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -958,23 +1102,15 @@
           <GeneratedChecksum dnOrder="4">7CCD80837C0B07AAF4B1CE79D5E16814</GeneratedChecksum>
           <UserChecksum dnOrder="5">7CCD80837C0B07AAF4B1CE79D5E16814</UserChecksum>
         </File>
-        <File dnOrder="119">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">deflate.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2DAD999D4F762C2556CD557C1751FB82</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2DAD999D4F762C2556CD557C1751FB82</UserChecksum>
-        </File>
-        <File dnOrder="120">
+        <File dnOrder="137">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">des3.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4DF91D18604EC5C803A880B9505B2765</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4DF91D18604EC5C803A880B9505B2765</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">0DE307651EA0A26262281C0483FA8467</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0DE307651EA0A26262281C0483FA8467</UserChecksum>
         </File>
-        <File dnOrder="121">
+        <File dnOrder="138">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">device.h</Name>
           <LogicalPath dnOrder="2">packs/PIC32MZ2048EFM144_DFP/</LogicalPath>
@@ -982,15 +1118,15 @@
           <GeneratedChecksum dnOrder="4">5D5C52527AB1435153DB9B50ADE6B79D</GeneratedChecksum>
           <UserChecksum dnOrder="5">5D5C52527AB1435153DB9B50ADE6B79D</UserChecksum>
         </File>
-        <File dnOrder="122">
+        <File dnOrder="139">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">dh.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">61D7F55C8363BEAAAA3C091ED6D6E404</GeneratedChecksum>
-          <UserChecksum dnOrder="5">61D7F55C8363BEAAAA3C091ED6D6E404</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1E569FD92E1873A92523AD3A94BE47FF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1E569FD92E1873A92523AD3A94BE47FF</UserChecksum>
         </File>
-        <File dnOrder="123">
+        <File dnOrder="140">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">driver.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/driver/</LogicalPath>
@@ -998,7 +1134,7 @@
           <GeneratedChecksum dnOrder="4">1D2094DFA60F847FFD4E8153B6E78027</GeneratedChecksum>
           <UserChecksum dnOrder="5">1D2094DFA60F847FFD4E8153B6E78027</UserChecksum>
         </File>
-        <File dnOrder="124">
+        <File dnOrder="141">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">driver_common.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/driver/</LogicalPath>
@@ -1006,215 +1142,175 @@
           <GeneratedChecksum dnOrder="4">CC7DFCC51CD25171A3E400E18969354F</GeneratedChecksum>
           <UserChecksum dnOrder="5">CC7DFCC51CD25171A3E400E18969354F</UserChecksum>
         </File>
-        <File dnOrder="125">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">dsa.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">042AC0814C02DB458DEF1159F1EFC257</GeneratedChecksum>
-          <UserChecksum dnOrder="5">042AC0814C02DB458DEF1159F1EFC257</UserChecksum>
-        </File>
-        <File dnOrder="126">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">ecc.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7F470CDEE22678DE9480C67FEFAE1E2E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7F470CDEE22678DE9480C67FEFAE1E2E</UserChecksum>
-        </File>
-        <File dnOrder="127">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">ed25519.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1B2D86A57382CF65B6A70B74DFACBD1E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1B2D86A57382CF65B6A70B74DFACBD1E</UserChecksum>
-        </File>
-        <File dnOrder="128">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">error-crypt.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">01FBA0E552FAD5091F22FAA3B3C6502E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">01FBA0E552FAD5091F22FAA3B3C6502E</UserChecksum>
-        </File>
-        <File dnOrder="129">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">fe_operations.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F6D5B76D93DAAF45FEAFB50E4BF9249D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F6D5B76D93DAAF45FEAFB50E4BF9249D</UserChecksum>
-        </File>
-        <File dnOrder="130">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">fips_test.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F75016A0FF9AF7CD7C702D5FA26235C0</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F75016A0FF9AF7CD7C702D5FA26235C0</UserChecksum>
-        </File>
-        <File dnOrder="131">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">ge_operations.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6ADEFFC521C97891B70D2833FDFEF527</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6ADEFFC521C97891B70D2833FDFEF527</UserChecksum>
-        </File>
-        <File dnOrder="132">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">gzguts.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">683C96BD1C7D1E9039151634F14B7D79</GeneratedChecksum>
-          <UserChecksum dnOrder="5">683C96BD1C7D1E9039151634F14B7D79</UserChecksum>
-        </File>
-        <File dnOrder="133">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">hash.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E6B616195519A29BFAC206E4CC98E5BE</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E6B616195519A29BFAC206E4CC98E5BE</UserChecksum>
-        </File>
-        <File dnOrder="134">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">hc128.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DA30F4EA1669EF87B0C49727C55A82E0</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DA30F4EA1669EF87B0C49727C55A82E0</UserChecksum>
-        </File>
-        <File dnOrder="135">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">hmac.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E4510EADACB1C4571F6993A243CA83E8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E4510EADACB1C4571F6993A243CA83E8</UserChecksum>
-        </File>
-        <File dnOrder="136">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">idea.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B7C3B144C4ADC2BAA9A672BE136FF110</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B7C3B144C4ADC2BAA9A672BE136FF110</UserChecksum>
-        </File>
-        <File dnOrder="137">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">inffast.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">29F652423B766560C26EC8B784F995E2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">29F652423B766560C26EC8B784F995E2</UserChecksum>
-        </File>
-        <File dnOrder="138">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">inffixed.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">BFAD0DE7201F1E06AE1FABE62BCE806C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">BFAD0DE7201F1E06AE1FABE62BCE806C</UserChecksum>
-        </File>
-        <File dnOrder="139">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">inflate.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8C004E5965269A6B845DE1EA55BE326F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8C004E5965269A6B845DE1EA55BE326F</UserChecksum>
-        </File>
-        <File dnOrder="140">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">inftrees.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">BFA6AA1B45F8DE69185DBAE2A51BF0CD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">BFA6AA1B45F8DE69185DBAE2A51BF0CD</UserChecksum>
-        </File>
-        <File dnOrder="141">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">integer.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">FEF59E6ABD57AA448AEB59D7A3235250</GeneratedChecksum>
-          <UserChecksum dnOrder="5">FEF59E6ABD57AA448AEB59D7A3235250</UserChecksum>
-        </File>
         <File dnOrder="142">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">logging.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2C938EEE14C5BD03FDC272938D039BE4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2C938EEE14C5BD03FDC272938D039BE4</UserChecksum>
+          <Name dnOrder="1">dsa.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">93B8C48A67FCC4BBE948D6A08BF318F7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">93B8C48A67FCC4BBE948D6A08BF318F7</UserChecksum>
         </File>
         <File dnOrder="143">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">md2.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6B6F70B8305DA40141D63C30968895C3</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6B6F70B8305DA40141D63C30968895C3</UserChecksum>
+          <Name dnOrder="1">ecc.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">9B05CF8B91185972C060DA8ED6A7FE28</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9B05CF8B91185972C060DA8ED6A7FE28</UserChecksum>
         </File>
         <File dnOrder="144">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">md4.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">89D865517E4966C3FB4B72A2753D76E2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">89D865517E4966C3FB4B72A2753D76E2</UserChecksum>
+          <Name dnOrder="1">ed25519.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C5C169564901FA2A697DC09B6A66F113</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C5C169564901FA2A697DC09B6A66F113</UserChecksum>
         </File>
         <File dnOrder="145">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">md5.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7892522A9DB81A0D3EC35A8927874EEF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7892522A9DB81A0D3EC35A8927874EEF</UserChecksum>
+          <Name dnOrder="1">error-crypt.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">DDA9DB45BFB3F5CCF135CF79DE1CA604</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DDA9DB45BFB3F5CCF135CF79DE1CA604</UserChecksum>
         </File>
         <File dnOrder="146">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">mem_track.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">9AC105B1524527E8996E411BA95805FC</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9AC105B1524527E8996E411BA95805FC</UserChecksum>
+          <Name dnOrder="1">fe_operations.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7E3EE0CBD1373573B49A730733AB0E64</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7E3EE0CBD1373573B49A730733AB0E64</UserChecksum>
         </File>
         <File dnOrder="147">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">memory.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">20DA439036D1053B3493BDB46393495E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">20DA439036D1053B3493BDB46393495E</UserChecksum>
+          <Name dnOrder="1">fips_test.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F77F543EF15AFD4791B7C36DC4569FD9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F77F543EF15AFD4791B7C36DC4569FD9</UserChecksum>
         </File>
         <File dnOrder="148">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">misc.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">453C757D4B7C94ABC32FB5A04ED07AF3</GeneratedChecksum>
-          <UserChecksum dnOrder="5">453C757D4B7C94ABC32FB5A04ED07AF3</UserChecksum>
+          <Name dnOrder="1">ge_operations.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">95A8E992D97955529F424A35FCFA7029</GeneratedChecksum>
+          <UserChecksum dnOrder="5">95A8E992D97955529F424A35FCFA7029</UserChecksum>
         </File>
         <File dnOrder="149">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">mpi_class.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AA0FD1B6C8052F2B0985D814648C5D76</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AA0FD1B6C8052F2B0985D814648C5D76</UserChecksum>
+          <Name dnOrder="1">hash.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">FC0E6551663E23A33A3B4364169F35AB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">FC0E6551663E23A33A3B4364169F35AB</UserChecksum>
         </File>
         <File dnOrder="150">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">mpi_superclass.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DAF7E4A7A82551EB2B6E33D3861B46BD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DAF7E4A7A82551EB2B6E33D3861B46BD</UserChecksum>
+          <Name dnOrder="1">hc128.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">D808E20F112B38FCA50AE82302F50FE9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D808E20F112B38FCA50AE82302F50FE9</UserChecksum>
         </File>
         <File dnOrder="151">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">hmac.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">893731AF6CDE7A245F10AA1381F78BFD</GeneratedChecksum>
+          <UserChecksum dnOrder="5">893731AF6CDE7A245F10AA1381F78BFD</UserChecksum>
+        </File>
+        <File dnOrder="152">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">idea.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">38CBD2DD9445140C34F636183A282373</GeneratedChecksum>
+          <UserChecksum dnOrder="5">38CBD2DD9445140C34F636183A282373</UserChecksum>
+        </File>
+        <File dnOrder="153">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">integer.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">F6DF3DEB2E9D6DE8807389337CE66FD6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F6DF3DEB2E9D6DE8807389337CE66FD6</UserChecksum>
+        </File>
+        <File dnOrder="154">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">logging.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">D62E8E9916DB89CA4EEA0650B018C2EA</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D62E8E9916DB89CA4EEA0650B018C2EA</UserChecksum>
+        </File>
+        <File dnOrder="155">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">md2.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7E91BA27A5A0B2704A24506E52B3BA08</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7E91BA27A5A0B2704A24506E52B3BA08</UserChecksum>
+        </File>
+        <File dnOrder="156">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">md4.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">4E39797AEA73167BE21CE1F3DF3B3F18</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4E39797AEA73167BE21CE1F3DF3B3F18</UserChecksum>
+        </File>
+        <File dnOrder="157">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">md5.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">038A1ABF83A35AC3371F372879D6BBD6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">038A1ABF83A35AC3371F372879D6BBD6</UserChecksum>
+        </File>
+        <File dnOrder="158">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">mem_track.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">B174BEF2F942DF998A5609C42B028285</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B174BEF2F942DF998A5609C42B028285</UserChecksum>
+        </File>
+        <File dnOrder="159">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">memory.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C5F310851E6933A46DFC8F0579E36A5B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C5F310851E6933A46DFC8F0579E36A5B</UserChecksum>
+        </File>
+        <File dnOrder="160">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">misc.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">BAFAC3D500D189B7E06BA338BAA4F8C9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BAFAC3D500D189B7E06BA338BAA4F8C9</UserChecksum>
+        </File>
+        <File dnOrder="161">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">mpi_class.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C607A6D9B82095D49DFD1683C4C72AD6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C607A6D9B82095D49DFD1683C4C72AD6</UserChecksum>
+        </File>
+        <File dnOrder="162">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">mpi_superclass.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">AFA00F4EEF01104C078B9D423C19EADB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">AFA00F4EEF01104C078B9D423C19EADB</UserChecksum>
+        </File>
+        <File dnOrder="163">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">osal.h</Name>
           <LogicalPath dnOrder="2">/osal/</LogicalPath>
@@ -1222,7 +1318,7 @@
           <GeneratedChecksum dnOrder="4">F0AD88762263B7CB89B02AB4F5876059</GeneratedChecksum>
           <UserChecksum dnOrder="5">F0AD88762263B7CB89B02AB4F5876059</UserChecksum>
         </File>
-        <File dnOrder="152">
+        <File dnOrder="164">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">osal_definitions.h</Name>
           <LogicalPath dnOrder="2">/osal/</LogicalPath>
@@ -1230,7 +1326,7 @@
           <GeneratedChecksum dnOrder="4">0AC88C49E4585B606FD5AC6804F0C340</GeneratedChecksum>
           <UserChecksum dnOrder="5">0AC88C49E4585B606FD5AC6804F0C340</UserChecksum>
         </File>
-        <File dnOrder="153">
+        <File dnOrder="165">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">osal_impl_basic.h</Name>
           <LogicalPath dnOrder="2">/osal/</LogicalPath>
@@ -1238,39 +1334,39 @@
           <GeneratedChecksum dnOrder="4">63FBE37825657165B9EA584BF05DBA43</GeneratedChecksum>
           <UserChecksum dnOrder="5">63FBE37825657165B9EA584BF05DBA43</UserChecksum>
         </File>
-        <File dnOrder="154">
+        <File dnOrder="166">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pic32mz-crypt.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2C67B03E4B0E472A60A58281D4C3A812</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2C67B03E4B0E472A60A58281D4C3A812</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">CBAD8A98A772454B6025F07EF45087E8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CBAD8A98A772454B6025F07EF45087E8</UserChecksum>
         </File>
-        <File dnOrder="155">
+        <File dnOrder="167">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pkcs11.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">9724A2ADE8E556CA0630F213E59E4B48</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9724A2ADE8E556CA0630F213E59E4B48</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">8E008526CE9DB0C2F21497E5F8C16E0D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8E008526CE9DB0C2F21497E5F8C16E0D</UserChecksum>
         </File>
-        <File dnOrder="156">
+        <File dnOrder="168">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pkcs12.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C5BAD3CAF2D6C87C60CB7C53526B3741</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C5BAD3CAF2D6C87C60CB7C53526B3741</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">5F0CA77F2B72D817F15EC13F2AEF5F0B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5F0CA77F2B72D817F15EC13F2AEF5F0B</UserChecksum>
         </File>
-        <File dnOrder="157">
+        <File dnOrder="169">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pkcs7.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2800FC564114119F73FAE9BF5541836F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2800FC564114119F73FAE9BF5541836F</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">1EBED8ACEED0AE869F3FA6AB4358B3AC</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1EBED8ACEED0AE869F3FA6AB4358B3AC</UserChecksum>
         </File>
-        <File dnOrder="158">
+        <File dnOrder="170">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_clk.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/clk/</LogicalPath>
@@ -1278,7 +1374,7 @@
           <GeneratedChecksum dnOrder="4">7066CC390335CF75126E2A50C46E3BDD</GeneratedChecksum>
           <UserChecksum dnOrder="5">7066CC390335CF75126E2A50C46E3BDD</UserChecksum>
         </File>
-        <File dnOrder="159">
+        <File dnOrder="171">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_coretimer.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/coretimer/</LogicalPath>
@@ -1286,7 +1382,7 @@
           <GeneratedChecksum dnOrder="4">B56E73929AA8C9899F0BA761F7053A87</GeneratedChecksum>
           <UserChecksum dnOrder="5">B56E73929AA8C9899F0BA761F7053A87</UserChecksum>
         </File>
-        <File dnOrder="160">
+        <File dnOrder="172">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_evic.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/evic/</LogicalPath>
@@ -1294,7 +1390,7 @@
           <GeneratedChecksum dnOrder="4">B38028A617FDD4D90B80660771629645</GeneratedChecksum>
           <UserChecksum dnOrder="5">B38028A617FDD4D90B80660771629645</UserChecksum>
         </File>
-        <File dnOrder="161">
+        <File dnOrder="173">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_gpio.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/gpio/</LogicalPath>
@@ -1302,7 +1398,7 @@
           <GeneratedChecksum dnOrder="4">C3EB5D6856249F16760FC8D1DA99FE36</GeneratedChecksum>
           <UserChecksum dnOrder="5">C3EB5D6856249F16760FC8D1DA99FE36</UserChecksum>
         </File>
-        <File dnOrder="162">
+        <File dnOrder="174">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_uart2.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/uart/</LogicalPath>
@@ -1310,7 +1406,7 @@
           <GeneratedChecksum dnOrder="4">2581ECE1B0699573C2B4A4A32E52BE34</GeneratedChecksum>
           <UserChecksum dnOrder="5">2581ECE1B0699573C2B4A4A32E52BE34</UserChecksum>
         </File>
-        <File dnOrder="163">
+        <File dnOrder="175">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">plib_uart_common.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/peripheral/uart/</LogicalPath>
@@ -1318,143 +1414,135 @@
           <GeneratedChecksum dnOrder="4">A5B40F859F555A11C166EBEE10E8B5CD</GeneratedChecksum>
           <UserChecksum dnOrder="5">A5B40F859F555A11C166EBEE10E8B5CD</UserChecksum>
         </File>
-        <File dnOrder="164">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">poly1305.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F6664E437B9E0AEE8F357AFF37D2030D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F6664E437B9E0AEE8F357AFF37D2030D</UserChecksum>
-        </File>
-        <File dnOrder="165">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">pwdbased.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">959FBBAC507C2671BB20F1EDD03E611A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">959FBBAC507C2671BB20F1EDD03E611A</UserChecksum>
-        </File>
-        <File dnOrder="166">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">rabbit.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">32974E224EF43F9E3D873F629933C753</GeneratedChecksum>
-          <UserChecksum dnOrder="5">32974E224EF43F9E3D873F629933C753</UserChecksum>
-        </File>
-        <File dnOrder="167">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">random.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">825E411FDC1F5AB8FB407399721D5D60</GeneratedChecksum>
-          <UserChecksum dnOrder="5">825E411FDC1F5AB8FB407399721D5D60</UserChecksum>
-        </File>
-        <File dnOrder="168">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">ripemd.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3D266928B3BE8625B41138DD67B156C9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3D266928B3BE8625B41138DD67B156C9</UserChecksum>
-        </File>
-        <File dnOrder="169">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">rsa.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1394D8CBD2DD5FDB2FCFD822081F1A82</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1394D8CBD2DD5FDB2FCFD822081F1A82</UserChecksum>
-        </File>
-        <File dnOrder="170">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">selftest.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">654B4DF3F9190F1EC8002E469E770619</GeneratedChecksum>
-          <UserChecksum dnOrder="5">654B4DF3F9190F1EC8002E469E770619</UserChecksum>
-        </File>
-        <File dnOrder="171">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">settings.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8C8FDA46B8647049EBDDCAB51B66C86B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8C8FDA46B8647049EBDDCAB51B66C86B</UserChecksum>
-        </File>
-        <File dnOrder="172">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sha.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">251D206E3B713D5041FBEEC30073C10F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">251D206E3B713D5041FBEEC30073C10F</UserChecksum>
-        </File>
-        <File dnOrder="173">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sha256.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F233E9003DD286A1655AB0FE444FB819</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F233E9003DD286A1655AB0FE444FB819</UserChecksum>
-        </File>
-        <File dnOrder="174">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sha3.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">58A04B1141311CCE2862E8464D00B0A2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">58A04B1141311CCE2862E8464D00B0A2</UserChecksum>
-        </File>
-        <File dnOrder="175">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sha512.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">55343EE3349CDAD1E73D08E89378F773</GeneratedChecksum>
-          <UserChecksum dnOrder="5">55343EE3349CDAD1E73D08E89378F773</UserChecksum>
-        </File>
         <File dnOrder="176">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">signature.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4969AEDD30BED27636BAF184EA5B46A9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4969AEDD30BED27636BAF184EA5B46A9</UserChecksum>
+          <Name dnOrder="1">poly1305.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">D54937D3DF14F361EA5E3284279F51D7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D54937D3DF14F361EA5E3284279F51D7</UserChecksum>
         </File>
         <File dnOrder="177">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sniffer.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4B7BA7E14D1466F5A3ECF26B158E9FC7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4B7BA7E14D1466F5A3ECF26B158E9FC7</UserChecksum>
+          <Name dnOrder="1">pwdbased.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">AEE9FB6EEE9582236D5035FC35F3DDAE</GeneratedChecksum>
+          <UserChecksum dnOrder="5">AEE9FB6EEE9582236D5035FC35F3DDAE</UserChecksum>
         </File>
         <File dnOrder="178">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sniffer_error.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3715E1DA28DE538820CC3A3B855722B8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3715E1DA28DE538820CC3A3B855722B8</UserChecksum>
+          <Name dnOrder="1">rabbit.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7C0EC4BE2ABFA151C0F2EA466B1BFF50</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7C0EC4BE2ABFA151C0F2EA466B1BFF50</UserChecksum>
         </File>
         <File dnOrder="179">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">srp.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3D1A4A33275FB8578C7EF9C14CC12AF2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3D1A4A33275FB8578C7EF9C14CC12AF2</UserChecksum>
+          <Name dnOrder="1">random.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">4D4C3A6B5B9F07A88D8E6EF2C3132EC8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4D4C3A6B5B9F07A88D8E6EF2C3132EC8</UserChecksum>
         </File>
         <File dnOrder="180">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">ssl.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">76021AD0E1654ED0B29D27B11CFFF637</GeneratedChecksum>
-          <UserChecksum dnOrder="5">76021AD0E1654ED0B29D27B11CFFF637</UserChecksum>
+          <Name dnOrder="1">ripemd.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">CFA3982E1A4602FE808D8448E976BFFF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CFA3982E1A4602FE808D8448E976BFFF</UserChecksum>
         </File>
         <File dnOrder="181">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">rsa.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2A315299D28CC8C4CDE52BC0EDB141F7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2A315299D28CC8C4CDE52BC0EDB141F7</UserChecksum>
+        </File>
+        <File dnOrder="182">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">selftest.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2A1E31C6F31AD8E7F26A8AE3BCA44CA8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2A1E31C6F31AD8E7F26A8AE3BCA44CA8</UserChecksum>
+        </File>
+        <File dnOrder="183">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">settings.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">C85F330058248ADDA4940340C55A0BE5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C85F330058248ADDA4940340C55A0BE5</UserChecksum>
+        </File>
+        <File dnOrder="184">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sha.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">0D606B4D84D79E8A42DE270CDB8DE6C4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0D606B4D84D79E8A42DE270CDB8DE6C4</UserChecksum>
+        </File>
+        <File dnOrder="185">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sha256.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">FADE5A4CFE6055CB94D476CCB19F2DB9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">FADE5A4CFE6055CB94D476CCB19F2DB9</UserChecksum>
+        </File>
+        <File dnOrder="186">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sha3.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7CBB502BF15A9169EB4D92ABB6CB9288</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7CBB502BF15A9169EB4D92ABB6CB9288</UserChecksum>
+        </File>
+        <File dnOrder="187">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sha512.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">95FB711910B04A8C03D41610A4BC5678</GeneratedChecksum>
+          <UserChecksum dnOrder="5">95FB711910B04A8C03D41610A4BC5678</UserChecksum>
+        </File>
+        <File dnOrder="188">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">signature.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">D82A631B8DA5A993629150A808295A60</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D82A631B8DA5A993629150A808295A60</UserChecksum>
+        </File>
+        <File dnOrder="189">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sp.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">8DFE10FA4D1BD8EBB980CB8CB448EFB2</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8DFE10FA4D1BD8EBB980CB8CB448EFB2</UserChecksum>
+        </File>
+        <File dnOrder="190">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sp_int.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">BE9A4D0722DCB20434A8399F925E0EA6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BE9A4D0722DCB20434A8399F925E0EA6</UserChecksum>
+        </File>
+        <File dnOrder="191">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">srp.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">5CB3ED903C1B41CA221430C7DDBDAA9F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5CB3ED903C1B41CA221430C7DDBDAA9F</UserChecksum>
+        </File>
+        <File dnOrder="192">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_console.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/console/</LogicalPath>
@@ -1462,7 +1550,7 @@
           <GeneratedChecksum dnOrder="4">133B4854322EF5DEAFDAD339FD7B1F40</GeneratedChecksum>
           <UserChecksum dnOrder="5">133B4854322EF5DEAFDAD339FD7B1F40</UserChecksum>
         </File>
-        <File dnOrder="182">
+        <File dnOrder="193">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_int.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/int/</LogicalPath>
@@ -1470,7 +1558,7 @@
           <GeneratedChecksum dnOrder="4">47330C2D8F204B2B69F8A86240A564B6</GeneratedChecksum>
           <UserChecksum dnOrder="5">47330C2D8F204B2B69F8A86240A564B6</UserChecksum>
         </File>
-        <File dnOrder="183">
+        <File dnOrder="194">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_int_mapping.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/int/</LogicalPath>
@@ -1478,7 +1566,7 @@
           <GeneratedChecksum dnOrder="4">FC7B55936A09E0CA1395AE4DFB1A188F</GeneratedChecksum>
           <UserChecksum dnOrder="5">FC7B55936A09E0CA1395AE4DFB1A188F</UserChecksum>
         </File>
-        <File dnOrder="184">
+        <File dnOrder="195">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_time.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/time/</LogicalPath>
@@ -1486,7 +1574,7 @@
           <GeneratedChecksum dnOrder="4">5B1C0201624F17531B457421E59F38CD</GeneratedChecksum>
           <UserChecksum dnOrder="5">5B1C0201624F17531B457421E59F38CD</UserChecksum>
         </File>
-        <File dnOrder="185">
+        <File dnOrder="196">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_time_definitions.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/time/</LogicalPath>
@@ -1494,7 +1582,7 @@
           <GeneratedChecksum dnOrder="4">F8165EAB8A02643100386E92CD7EB3C6</GeneratedChecksum>
           <UserChecksum dnOrder="5">F8165EAB8A02643100386E92CD7EB3C6</UserChecksum>
         </File>
-        <File dnOrder="186">
+        <File dnOrder="197">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_time_local.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/time/</LogicalPath>
@@ -1502,7 +1590,7 @@
           <GeneratedChecksum dnOrder="4">62F39464265EC34979649F761FB4FE57</GeneratedChecksum>
           <UserChecksum dnOrder="5">62F39464265EC34979649F761FB4FE57</UserChecksum>
         </File>
-        <File dnOrder="187">
+        <File dnOrder="198">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">system.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/</LogicalPath>
@@ -1510,7 +1598,7 @@
           <GeneratedChecksum dnOrder="4">BE95B4F134C5C929787B9DA6FDBF3501</GeneratedChecksum>
           <UserChecksum dnOrder="5">BE95B4F134C5C929787B9DA6FDBF3501</UserChecksum>
         </File>
-        <File dnOrder="188">
+        <File dnOrder="199">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">system_common.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/</LogicalPath>
@@ -1518,7 +1606,7 @@
           <GeneratedChecksum dnOrder="4">C3F5136D520DAC4416512EBFCCA023C3</GeneratedChecksum>
           <UserChecksum dnOrder="5">C3F5136D520DAC4416512EBFCCA023C3</UserChecksum>
         </File>
-        <File dnOrder="189">
+        <File dnOrder="200">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">system_module.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/system/</LogicalPath>
@@ -1526,15 +1614,15 @@
           <GeneratedChecksum dnOrder="4">1C75A8A6B60598A2FD0D533F57839B72</GeneratedChecksum>
           <UserChecksum dnOrder="5">1C75A8A6B60598A2FD0D533F57839B72</UserChecksum>
         </File>
-        <File dnOrder="190">
+        <File dnOrder="201">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">tfm.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5E105A7096BD0732A4A49FA668854407</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5E105A7096BD0732A4A49FA668854407</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">27999E323EEAC2F9AF7963B2C24B8C8A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">27999E323EEAC2F9AF7963B2C24B8C8A</UserChecksum>
         </File>
-        <File dnOrder="191">
+        <File dnOrder="202">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">toolchain_specifics.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -1542,23 +1630,15 @@
           <GeneratedChecksum dnOrder="4">F7924D60AC5CC08996AB2DAEC62D3C54</GeneratedChecksum>
           <UserChecksum dnOrder="5">F7924D60AC5CC08996AB2DAEC62D3C54</UserChecksum>
         </File>
-        <File dnOrder="192">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">trees.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8680E7EC08055823E55C5D71151E1776</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8680E7EC08055823E55C5D71151E1776</UserChecksum>
-        </File>
-        <File dnOrder="193">
+        <File dnOrder="203">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">types.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">92184E36486FBDD4F448923C7BD9F3FD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">92184E36486FBDD4F448923C7BD9F3FD</UserChecksum>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">620CFA9C27B0EE368F5800C0D53643C2</GeneratedChecksum>
+          <UserChecksum dnOrder="5">620CFA9C27B0EE368F5800C0D53643C2</UserChecksum>
         </File>
-        <File dnOrder="194">
+        <File dnOrder="204">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">user.h</Name>
           <LogicalPath dnOrder="2">config/pic32mz_ef_sk/</LogicalPath>
@@ -1566,100 +1646,71 @@
           <GeneratedChecksum dnOrder="4"/>
           <UserChecksum dnOrder="5"/>
         </File>
-        <File dnOrder="195">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">version.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">240889AED0DE72AEE2F0BE38E05CE5CF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">240889AED0DE72AEE2F0BE38E05CE5CF</UserChecksum>
-        </File>
-        <File dnOrder="196">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">visibility.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D94E51EB9B5EF115647908856AFC4732</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D94E51EB9B5EF115647908856AFC4732</UserChecksum>
-        </File>
-        <File dnOrder="197">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">wc_encrypt.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0ED365D30DEE381BA9E107B0F3249555</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0ED365D30DEE381BA9E107B0F3249555</UserChecksum>
-        </File>
-        <File dnOrder="198">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">wc_pkcs11.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">01E34E926A6574FD5E09B8D408DB46CB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">01E34E926A6574FD5E09B8D408DB46CB</UserChecksum>
-        </File>
-        <File dnOrder="199">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">wc_port.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AEE6DB44A1199F803985251182AA0D01</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AEE6DB44A1199F803985251182AA0D01</UserChecksum>
-        </File>
-        <File dnOrder="200">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">wolfevent.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4719AD093397EA3B93D1AEF084B215FD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4719AD093397EA3B93D1AEF084B215FD</UserChecksum>
-        </File>
-        <File dnOrder="201">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">wolfio.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">232994CF10548094CFF83076F8885720</GeneratedChecksum>
-          <UserChecksum dnOrder="5">232994CF10548094CFF83076F8885720</UserChecksum>
-        </File>
-        <File dnOrder="202">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">wolfmath.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5B9E5201D23FD2021F1B31E56F18A3A7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5B9E5201D23FD2021F1B31E56F18A3A7</UserChecksum>
-        </File>
-        <File dnOrder="203">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">zconf.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B66312869894BEC1C8C47A22EC125294</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B66312869894BEC1C8C47A22EC125294</UserChecksum>
-        </File>
-        <File dnOrder="204">
-          <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">zlib.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">DED7DEA8A49DBCDC9D992B3D866BA979</GeneratedChecksum>
-          <UserChecksum dnOrder="5">DED7DEA8A49DBCDC9D992B3D866BA979</UserChecksum>
-        </File>
         <File dnOrder="205">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">zutil.h</Name>
-          <LogicalPath dnOrder="2">config/pic32mz_ef_sk/crypto</LogicalPath>
-          <PhysicalPath dnOrder="3">/crypto/src/zlib-1.2.7/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D963CDCA661EAE509C2D6DAAC46CF30A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D963CDCA661EAE509C2D6DAAC46CF30A</UserChecksum>
+          <Name dnOrder="1">visibility.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">82F55C1E1908BEC889F0973ED20AA1AE</GeneratedChecksum>
+          <UserChecksum dnOrder="5">82F55C1E1908BEC889F0973ED20AA1AE</UserChecksum>
+        </File>
+        <File dnOrder="206">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">wc_encrypt.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">2860069374A5C36F82FD48A85657BDFD</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2860069374A5C36F82FD48A85657BDFD</UserChecksum>
+        </File>
+        <File dnOrder="207">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">wc_pkcs11.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">81F93B633CF713318CF6B7C164CC4B79</GeneratedChecksum>
+          <UserChecksum dnOrder="5">81F93B633CF713318CF6B7C164CC4B79</UserChecksum>
+        </File>
+        <File dnOrder="208">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">wc_port.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7C2A3547502FDF19A61989159E459679</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7C2A3547502FDF19A61989159E459679</UserChecksum>
+        </File>
+        <File dnOrder="209">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">wolfevent.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">B316CBF721F3EEB2A7315822A9ACAF08</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B316CBF721F3EEB2A7315822A9ACAF08</UserChecksum>
+        </File>
+        <File dnOrder="210">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">wolfmath.h</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E95E8BE67D63E5B0491A3131F6214E7C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E95E8BE67D63E5B0491A3131F6214E7C</UserChecksum>
+        </File>
+        <File dnOrder="211">
+          <Type dnOrder="0">IMPORTANT</Type>
+          <Name dnOrder="1">misc.c</Name>
+          <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
+          <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">7A514C9D5CE9ED2B1F1F31D162F65AD4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7A514C9D5CE9ED2B1F1F31D162F65AD4</UserChecksum>
         </File>
       </Files>
       <Settings dnOrder="1">
-        <Setting append="true" category="C32" delimiter=";" dnOrder="0" key="extra-include-directories" value="../src;../src/config/pic32mz_ef_sk;../src/packs/PIC32MZ2048EFM144_DFP;;../src/mips"/>
-        <Setting category="C32-LD" dnOrder="1" key="heap-size" value="65536"/>
-        <Setting category="C32-LD" dnOrder="2" key="no-device-startup-code" value="true"/>
-        <Setting category="C32-LD" dnOrder="3" key="preprocessor-macros" value=""/>
+        <Setting append="true" category="C32" delimiter=";" dnOrder="0" key="extra-include-directories" value="../src/third_party/wolfssl"/>
+        <Setting append="true" category="C32" delimiter=";" dnOrder="1" key="extra-include-directories" value="../src/third_party/wolfssl/wolfssl"/>
+        <Setting append="true" category="C32" delimiter=";" dnOrder="2" key="extra-include-directories" value="../src;../src/config/pic32mz_ef_sk;../src/packs/PIC32MZ2048EFM144_DFP;;../src/mips"/>
+        <Setting category="C32" dnOrder="3" key="preprocessor-macros" value="HAVE_CONFIG_H"/>
+        <Setting category="C32-LD" dnOrder="4" key="heap-size" value="65536"/>
+        <Setting category="C32-LD" dnOrder="5" key="no-device-startup-code" value="true"/>
+        <Setting category="C32-LD" dnOrder="6" key="preprocessor-macros" value=""/>
       </Settings>
     </Manifest>
     <Settings dnOrder="4">

@@ -38,18 +38,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 //DOM-IGNORE-END
 
 -->
-<#if wolfssl>
-
     <#lt>/******************************************************************************/
     <#lt>/*wolfSSL TLS Layer Configuration*/
     <#lt>/******************************************************************************/
 
-    <#if wolfssl_debug>
-        <#lt>#define NDEBUG
-        <#lt>#define DEBUG_WOLFSSL
-    </#if>
-    <#lt>#define HAVE_AES_DECRYPT
-    <#lt>#define HAVE_AES_ECB
     <#lt>#define WOLFSSL_ALT_NAMES
     <#lt>#define WOLFSSL_DER_LOAD
     <#lt>#define KEEP_OUR_CERT
@@ -63,14 +55,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define HAVE_FFDHE_8192
     <#lt>#define TFM_NO_ASM
     <#lt>#define WOLFSSL_NO_ASM
-    <#lt>#define SINGLE_THREADED
     <#lt>#define SIZEOF_LONG_LONG 8
     <#lt>#define WOLFSSL_USER_IO
     <#lt>#define NO_WRITEV
-    <#lt>#define NO_DEV_RANDOM
-    <#lt>#define NO_FILESYSTEM
     <#lt>#define MICROCHIP_TCPIP
-    <#lt>#define USER_TICKS
     <#if wolfsslDTLS>
         <#lt>#define WOLFSSL_DTLS
     </#if>
@@ -82,14 +70,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#if wolfsslPostHandshakeAuth>
             <#lt>#define WOLFSSL_POST_HANDSHAKE_AUTH
         </#if>
-    </#if>
-
-    <#if wolfsslHarden>
-        <#lt>#define TFM_TIMING_RESISTANT
-        <#lt>#define ECC_TIMING_RESISTANT
-        <#lt>#define WC_RSA_BLINDING
-    <#else>
-        <#lt>#define WC_NO_HARDEN
     </#if>
 
     <#if wolfSslSessionCache=="Small">
@@ -141,9 +121,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     </#if>
     
     
-    
-</#if>
-
+   
 <#-- 
 /*******************************************************************************
  End of File

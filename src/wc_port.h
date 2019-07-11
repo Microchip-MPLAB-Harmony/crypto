@@ -1,63 +1,33 @@
-/**************************************************************************
-  Crypto Framework Library Header
+/* wc_port.h
+ *
+ * Copyright (C) 2006-2019 wolfSSL Inc.
+ *
+ * This file is part of wolfSSL.
+ *
+ * wolfSSL is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * wolfSSL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
+ */
 
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    wc_port.h
-  
-  Summary:
-    Crypto Framework Library header for cryptographic functions.
-
-  Description:
-    This header file contains function prototypes and definitions of
-    the data types and constants that make up the Cryptographic Framework
-    Library for PIC32 families of Microchip microcontrollers.
-**************************************************************************/
-
-//DOM-IGNORE-BEGIN
-/*****************************************************************************
- Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
-
-Microchip Technology Inc. and its subsidiaries.
-
-Subject to your compliance with these terms, you may use Microchip software 
-and any derivatives exclusively with Microchip products. It is your 
-responsibility to comply with third party license terms applicable to your 
-use of third party software (including open source software) that may 
-accompany Microchip software.
-
-THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
-EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
-WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
-PURPOSE.
-
-IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
-INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
-WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
-BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
-FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
-ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
-THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*****************************************************************************/
-
-
-
-
-
-
-
-
-
-//DOM-IGNORE-END
-
+/*!
+    \file wolfssl/wolfcrypt/wc_port.h
+*/
 
 #ifndef WOLF_CRYPT_PORT_H
 #define WOLF_CRYPT_PORT_H
 
-#include "crypto/src/settings.h"
-#include "crypto/src/visibility.h"
+#include <wolfssl/wolfcrypt/settings.h>
+#include <wolfssl/wolfcrypt/visibility.h>
 
 #ifdef __cplusplus
     extern "C" {
@@ -94,6 +64,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         #endif
         #include <tx_api.h>
     #endif
+#elif defined(WOLFSSL_DEOS)
+    #include "mutexapi.h"
 #elif defined(MICRIUM)
     /* do nothing, just don't pick Unix */
 #elif defined(FREERTOS) || defined(FREERTOS_TCP) || defined(WOLFSSL_SAFERTOS)
@@ -113,6 +85,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     #include "tk/tkernel.h"
 #elif defined(WOLFSSL_CMSIS_RTOS)
     #include "cmsis_os.h"
+#elif defined(WOLFSSL_CMSIS_RTOSv2)
+    #include "cmsis_os2.h"
 #elif defined(WOLFSSL_MDK_ARM)
     #if defined(WOLFSSL_MDK5)
         #include "cmsis_os.h"
@@ -136,6 +110,36 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     #include "nucleus.h"
 #elif defined(WOLFSSL_APACHE_MYNEWT)
     /* do nothing */
+#elif defined(WOLFSSL_ZEPHYR)
+    #ifndef SINGLE_THREADED
+        #include <kernel.h>
+    #endif
+#elif defined(WOLFSSL_TELIT_M2MB)
+
+    /* Telit SDK uses C++ compile option (--cpp), which causes link issue
+        to API's if wrapped in extern "C" */
+    #ifdef __cplusplus
+        }  /* extern "C" */
+    #endif
+
+    #include "m2mb_types.h"
+    #include "m2mb_os_types.h"
+    #include "m2mb_os_api.h"
+    #include "m2mb_os.h"
+    #include "m2mb_os_mtx.h"
+    #ifndef NO_ASN_TIME
+    #include "m2mb_rtc.h"
+    #endif
+    #ifndef NO_FILESYSTEM
+    #include "m2mb_fs_posix.h"
+    #endif
+
+    #undef kB /* eliminate conflict in asn.h */
+
+    #ifdef __cplusplus
+        extern "C" {
+    #endif
+
 #else
     #ifndef SINGLE_THREADED
         #define WOLFSSL_PTHREADS
@@ -175,6 +179,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         typedef pthread_mutex_t wolfSSL_Mutex;
     #elif defined(THREADX)
         typedef TX_MUTEX wolfSSL_Mutex;
+    #elif defined(WOLFSSL_DEOS)
+        typedef mutex_handle_t wolfSSL_Mutex;
     #elif defined(MICRIUM)
         typedef OS_MUTEX wolfSSL_Mutex;
     #elif defined(EBSNET)
@@ -203,6 +209,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         #endif
     #elif defined(WOLFSSL_CMSIS_RTOS)
         typedef osMutexId wolfSSL_Mutex;
+    #elif defined(WOLFSSL_CMSIS_RTOSv2)
+        typedef osMutexId_t wolfSSL_Mutex;
     #elif defined(WOLFSSL_TIRTOS)
         typedef ti_sysbios_knl_Semaphore_Handle wolfSSL_Mutex;
     #elif defined(WOLFSSL_FROSTED)
@@ -211,6 +219,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         typedef RTHANDLE wolfSSL_Mutex;
     #elif defined(WOLFSSL_NUCLEUS_1_2)
         typedef NU_SEMAPHORE wolfSSL_Mutex;
+    #elif defined(WOLFSSL_ZEPHYR)
+        typedef struct k_mutex wolfSSL_Mutex;
+    #elif defined(WOLFSSL_TELIT_M2MB)
+        typedef M2MB_OS_MTX_HANDLE wolfSSL_Mutex;
     #else
         #error Need a mutex type in multithreaded mode
     #endif /* USE_WINDOWS_API */
@@ -303,6 +315,11 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END               IO_SEEK_END
     #define XBADFILE                NULL
     #define XFGETS                  fgets
+#elif defined(WOLFSSL_DEOS)
+    #define NO_FILESYSTEM
+    #warning "TODO - DDC-I Certifiable Fast File System for Deos is not integrated"
+    //#define XFILE      bfd *
+
 #elif defined(MICRIUM)
     #include <fs_api.h>
     #define XFILE      FS_FILE*
@@ -342,6 +359,40 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END  2
     #define XBADFILE   NULL
     #define XFGETS(b,s,f) -2 /* Not ported yet */
+#elif defined(WOLFSSL_ZEPHYR)
+    #include <fs.h>
+
+    #define XFILE      struct fs_file_t*
+    #define STAT       struct fs_dirent
+
+    XFILE z_fs_open(const char* filename, const char* perm);
+    int z_fs_close(XFILE file);
+
+    #define XFOPEN              z_fs_open
+    #define XFCLOSE             z_fs_close
+    #define XFSEEK              fs_seek
+    #define XFTELL              fs_tell
+    #define XFREWIND            fs_rewind
+    #define XREWIND(F)          fs_seek(F, 0, FS_SEEK_SET)
+    #define XFREAD(P,S,N,F)     fs_read(F, P, S*N)
+    #define XFWRITE(P,S,N,F)    fs_write(F, P, S*N)
+    #define XSEEK_END           FS_SEEK_END
+    #define XBADFILE            NULL
+    #define XFGETS(b,s,f)       -2 /* Not ported yet */
+
+#elif defined(WOLFSSL_TELIT_M2MB)
+    #define XFILE                    INT32
+    #define XFOPEN(NAME, MODE)       m2mb_fs_open((NAME), 0, (MODE))
+    #define XFSEEK(F, O, W)          m2mb_fs_lseek((F), (O), (W))
+    #define XFTELL(F)                m2mb_fs_lseek((F), 0, M2MB_SEEK_END)
+    #define XREWIND(F)               (void)F
+    #define XFREAD(BUF, SZ, AMT, F)  m2mb_fs_read((F), (BUF), (SZ)*(AMT))
+    #define XFWRITE(BUF, SZ, AMT, F) m2mb_fs_write((F), (BUF), (SZ)*(AMT))
+    #define XFCLOSE                  m2mb_fs_close
+    #define XSEEK_END                M2MB_SEEK_END
+    #define XBADFILE                 -1
+    #define XFGETS(b,s,f)            -2 /* Not ported yet */
+
 #elif defined(WOLFSSL_USER_FILESYSTEM)
     /* To be defined in user_settings.h */
 #else
@@ -385,6 +436,16 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #ifdef USE_WINDOWS_API
         WIN32_FIND_DATAA FindFileData;
         HANDLE hFind;
+    #elif defined(WOLFSSL_ZEPHYR)
+        struct fs_dirent entry;
+        struct fs_dir_t  dir;
+        struct fs_dirent s;
+        struct fs_dir_t* dirp;
+
+    #elif defined(WOLFSSL_TELIT_M2MB)
+        M2MB_DIR_T* dir;
+        struct M2MB_DIRENT* entry;
+        struct M2MB_STAT s;
     #else
         struct dirent* entry;
         DIR*   dir;
@@ -420,8 +481,12 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
        time_t XTIME(time_t * timer) {}
     */
     #define WOLFSSL_GMTIME
-    #define USE_WOLF_TM
-    #define USE_WOLF_TIME_T
+    #ifndef HAVE_TM_TYPE
+        #define USE_WOLF_TM
+    #endif
+    #ifndef HAVE_TIME_T_TYPE
+        #define USE_WOLF_TIME_T
+    #endif
 
 #elif defined(TIME_OVERRIDES)
     /* Override XTIME() and XGMTIME() functionality.
@@ -437,6 +502,10 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #endif
     #define NEED_TMP_TIME
 
+#elif defined(WOLFSSL_XILINX) && defined(FREERTOS)
+    #define USER_TIME
+    #include <time.h>
+
 #elif defined(HAVE_RTP_SYS)
     #include "os.h"           /* dc_rtc_api needs    */
     #include "dc_rtc_api.h"   /* to get current time */
@@ -444,6 +513,12 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     /* uses parital <time.h> structures */
     #define XTIME(tl)       (0)
     #define XGMTIME(c, t)   rtpsys_gmtime((c))
+
+#elif defined(WOLFSSL_DEOS)
+    #define XTIME(t1)       deos_time((t1))
+    #define WOLFSSL_GMTIME
+    #define USE_WOLF_TM
+    #define USE_WOLF_TIME_T
 
 #elif defined(MICRIUM)
     #include <clk.h>
@@ -480,6 +555,12 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define USE_WOLF_TM
     #define USE_WOLF_TIME_T
 
+#elif defined(WOLFSSL_WICED)
+    #include <time.h>
+    time_t wiced_pseudo_unix_epoch_time(time_t * timer);
+    #define XTIME(t1)       wiced_pseudo_unix_epoch_time((t1))
+    #define HAVE_GMTIME_R
+
 #elif defined(IDIRECT_DEV_TIME)
     /*Gets the timestamp from cloak software owned by VT iDirect
     in place of time() from <time.h> */
@@ -498,6 +579,40 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define WOLFSSL_GMTIME
     #define USE_WOLF_TM
     #define USE_WOLF_TIME_T
+
+#elif defined(WOLFSSL_ZEPHYR)
+    #ifndef _POSIX_C_SOURCE
+        #include <posix/time.h>
+    #else
+        #include <sys/time.h>
+    #endif
+
+    typedef signed int time_t;
+
+    time_t z_time(time_t *timer);
+
+    #define XTIME(tl)       z_time((tl))
+    #define XGMTIME(c, t)   gmtime((c))
+    #define WOLFSSL_GMTIME
+
+    #define USE_WOLF_TM
+
+#elif defined(WOLFSSL_TELIT_M2MB)
+    typedef long time_t;
+    extern time_t m2mb_xtime(time_t * timer);
+    #define XTIME(tl)       m2mb_xtime((tl))
+    #ifdef WOLFSSL_TLS13
+        extern time_t m2mb_xtime_ms(time_t * timer);
+        #define XTIME_MS(tl)    m2mb_xtime_ms((tl))
+    #endif
+    #ifndef NO_CRYPT_BENCHMARK
+        extern double m2mb_xtime_bench(int reset);
+        #define WOLFSSL_CURRTIME_REMAP m2mb_xtime_bench
+    #endif
+    #define XGMTIME(c, t)   gmtime((c))
+    #define WOLFSSL_GMTIME
+    #define USE_WOLF_TM
+
 #else
     /* default */
     /* uses complete <time.h> facility */
@@ -522,7 +637,7 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
 #ifdef TIME_T_NOT_LONG
     /* one old reference to TIME_T_NOT_LONG in GCC-ARM example README
      * this keeps support for the old macro name */
-    #undef TIME_T_NOT_64BIT
+    #undef  TIME_T_NOT_64BIT
     #define TIME_T_NOT_64BIT
 #endif
 

@@ -1,56 +1,33 @@
-/**************************************************************************
-  Crypto Framework Library Header
+/* sha.h
+ *
+ * Copyright (C) 2006-2019 wolfSSL Inc.
+ *
+ * This file is part of wolfSSL.
+ *
+ * wolfSSL is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * wolfSSL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
+ */
 
-  Company:
-    Microchip Technology Inc.
+/*!
+    \file wolfssl/wolfcrypt/sha.h
+*/
 
-  File Name:
-    sha.h
-
-  Summary:
-    Crypto Framework Library header for cryptographic functions.
-
-  Description:
-    This header file contains function prototypes and definitions of
-    the data types and constants that make up the Cryptographic Framework
-    Library for PIC32 families of Microchip microcontrollers.
-**************************************************************************/
-
-//DOM-IGNORE-BEGIN
-/*****************************************************************************
- Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
-
-Microchip Technology Inc. and its subsidiaries.
-
-Subject to your compliance with these terms, you may use Microchip software 
-and any derivatives exclusively with Microchip products. It is your 
-responsibility to comply with third party license terms applicable to your 
-use of third party software (including open source software) that may 
-accompany Microchip software.
-
-THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
-EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
-WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
-PURPOSE.
-
-IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
-INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
-WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
-BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
-FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
-ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
-THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*****************************************************************************/
-
-
-//DOM-IGNORE-END
 
 #ifndef WOLF_CRYPT_SHA_H
 #define WOLF_CRYPT_SHA_H
 
-#include "configuration.h"
-#include "crypto/src/types.h"
-
+#include <wolfssl/wolfcrypt/types.h>
 
 #ifndef NO_SHA
 
@@ -68,15 +45,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define WC_SHA_PAD_SIZE    SHA_PAD_SIZE
 
 /* for fips @wc_fips */
-#include "crypto/src/sha.h"
+#include <cyassl/ctaocrypt/sha.h>
 #endif
 
 #ifdef FREESCALE_LTC_SHA
     #include "fsl_ltc.h"
-#endif
-
-#if defined(WOLFSSL_SAME70_HASH)
-#include "crypto/src/same70-hash.h"
 #endif
 
 #ifdef __cplusplus
@@ -88,16 +61,16 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
 
 #ifdef WOLFSSL_MICROCHIP_PIC32MZ
-    #include "crypto/src/pic32mz-crypt.h"
+    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
 #endif
 #ifdef STM32_HASH
-    #include "crypto/src/port/st/stm32.h"
+    #include <wolfssl/wolfcrypt/port/st/stm32.h>
 #endif
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include "crypto/src/async.h"
+    #include <wolfssl/wolfcrypt/async.h>
 #endif
 #ifdef WOLFSSL_ESP32WROOM32_CRYPT
-    #include "crypto/src/port/Espressif/esp32-crypt.h"
+    #include <wolfssl/wolfcrypt/port/Espressif/esp32-crypt.h>
 #endif
 
 #if !defined(NO_OLD_SHA_NAMES)
@@ -121,15 +94,12 @@ enum {
 
 
 #if defined(WOLFSSL_TI_HASH)
-    #include "crypto/src/port/ti/ti-hash.h"
+    #include "wolfssl/wolfcrypt/port/ti/ti-hash.h"
 
 #elif defined(WOLFSSL_IMX6_CAAM)
-    #include "crypto/src/port/caam/wolfcaam_sha.h"
-
-#elif defined(HAVE_MICROCHIP_HARMONY3_HW_SHA1) && !defined(WOLFSSL_PIC32MZ_HASH)
-    #include "crypto/src/crypt_sha1_hw.h"
-    #define wc_Sha crypt_sha1_hw_descriptor
-    
+    #include "wolfssl/wolfcrypt/port/caam/wolfcaam_sha.h"
+#elif defined(WOLFSSL_HAVE_MCHP_HW_SHA1)
+    #include "port/pic32/crypt_sha1_hw.h"
 #else
 /* Sha digest */
 typedef struct wc_Sha {
@@ -137,11 +107,6 @@ typedef struct wc_Sha {
         ltc_hash_ctx_t ctx;
 #elif defined(STM32_HASH)
         STM32_HASH_Context stmCtx;
-#elif defined(WOLFSSL_SAME70_HASH)
-    struct icm_descriptor icm_descriptor __attribute__((aligned (64)));
-    uint8_t  buffer[SHA_BLOCK_SIZE]   __attribute__((aligned (64)));
-    uint32_t digest[SHA_DIGEST_SIZE/4] __attribute__((aligned (128)));
-    uint64_t total_len;   /* number of bytes to be processed  */
 #else
         word32  buffLen;   /* in bytes          */
         word32  loLen;     /* length in bytes   */
@@ -159,10 +124,17 @@ typedef struct wc_Sha {
     #ifdef WOLFSSL_ASYNC_CRYPT
         WC_ASYNC_DEV asyncDev;
     #endif /* WOLFSSL_ASYNC_CRYPT */
+    #ifdef WOLF_CRYPTO_CB
+        int    devId;
+        void*  devCtx; /* generic crypto callback context */
+    #endif
 #endif
 #if defined(WOLFSSL_ESP32WROOM32_CRYPT) && \
    !defined(NO_WOLFSSL_ESP32WROOM32_CRYPT_HASH)
     WC_ESP32SHA ctx;
+#endif
+#if defined(WOLFSSL_HASH_FLAGS) || defined(WOLF_CRYPTO_CB)
+    word32 flags; /* enum wc_HashFlags in hash.h */
 #endif
 } wc_Sha;
 
@@ -172,7 +144,6 @@ typedef struct wc_Sha {
 #endif /* HAVE_FIPS */
 
 WOLFSSL_API int wc_InitSha(wc_Sha*);
-WOLFSSL_API int wc_InitHmacSha(wc_Sha*);
 WOLFSSL_API int wc_InitSha_ex(wc_Sha* sha, void* heap, int devId);
 WOLFSSL_API int wc_ShaUpdate(wc_Sha*, const byte*, word32);
 WOLFSSL_API int wc_ShaFinalRaw(wc_Sha*, byte*);
@@ -184,6 +155,11 @@ WOLFSSL_API int wc_ShaCopy(wc_Sha*, wc_Sha*);
 
 #ifdef WOLFSSL_PIC32MZ_HASH
 WOLFSSL_API void wc_ShaSizeSet(wc_Sha* sha, word32 len);
+#endif
+
+#if defined(WOLFSSL_HASH_FLAGS) || defined(WOLF_CRYPTO_CB)
+    WOLFSSL_LOCAL int wc_ShaSetFlags(wc_Sha* sha, word32 flags);
+    WOLFSSL_LOCAL int wc_ShaGetFlags(wc_Sha* sha, word32* flags);
 #endif
 
 #ifdef __cplusplus

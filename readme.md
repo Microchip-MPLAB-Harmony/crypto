@@ -10,13 +10,15 @@ and microprocessor devices.  Refer to the following links for more information.
  - [Microchip MPLAB Harmony Pages](https://microchip-mplab-harmony.github.io/)
 
 This repository contains the crypto module for the MPLAB® Harmony 3 Embedded
-Software Development Framework.  The core module components provide drivers
-and services with simple to use abstractions of peripherals and shared
-resources on Microchip 32-bit SAM and PIC devices on which MPLAB Harmony
-applications and middleware are based.  Drivers and services may also provide
-advanced capabilities like buffer queuing and peripheral sharing.  Refer to
-the following links for release notes, training materials, and interface
-reference information.
+Software Development Framework.  The crypto module contains the Harmony 3 API
+for cryptography, the Microchip 32-bit SAM drivers for hardware cryptographic
+acceleration, and the deltas/patch for the wolfCrypt/wolfSSL library to use
+the hardware accelerators.
+
+**Note:** Microchip Technology Inc. and wolfSSL Inc. have entered a ten year
+agreement in 2019 to allow the use of wolfCrypt (excluding FIPS) inside of 
+MPLAB Harmony 3 projects.
+
  - [Release Notes](./release_notes.md)
  - [MPLAB Harmony 3 Crypto Wiki](https://github.com/Microchip-MPLAB-Harmony/crypto/wiki)
  - [MPLAB Harmony 3 Crypto API Help](https://microchip-mplab-harmony.github.io/crypto)
@@ -30,3 +32,6 @@ reference information.
 | docs      | Crypto module library help documentation                     |
 | src       | MPLAB Harmony crypto library source code                   |
 | templates | Crypto file templates                                      |
+
+# Dependencies
+ - MPLAB Harmony 3 Crypto Module now requires wolfSSL version 4.

@@ -115,47 +115,52 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-
-/*** Crypto Library Configuration ***/
-#define WC_NO_HARDEN
-#define NO_DSA
-#define HAVE_MCAPI
-#define WOLFSSL_IGNORE_FILE_WARN
-
+/*** wolfCrypt Library Configuration ***/
+#define MICROCHIP_PIC32
 #define MICROCHIP_MPLAB_HARMONY
 #define MICROCHIP_MPLAB_HARMONY_3
-
-#define MICROCHIP_PIC32
+#define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
 #define SIZEOF_LONG_LONG 8
-#define SINGLE_THREADED
 #define WOLFSSL_USER_IO
 #define NO_WRITEV
-#define NO_DEV_RANDOM
 #define NO_FILESYSTEM
 #define USE_FAST_MATH
-#define TFM_TIMING_RESISTANT
-#define USE_CERT_BUFFERS_2048
-#define NO_BIG_INT
-#define HAVE_MICROCHIP_HARMONY3_HW_SHA1
-#define HAVE_MICROCHIP_HARMONY3_HW_AES
-#define WOLFSSL_AES_COUNTER
+#define NO_PWDBASED
+#define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
+#define WOLFCRYPT_ONLY
+#define WOLFSSL_MICROCHIP_PIC32MZ
+#define NO_MD4
+#define WOLFSSL_PIC32MZ_HASH
+#define WOLFSSL_PIC32MZ_HASH
+#define WOLFSSL_PIC32MZ_HASH
+#define WOLFSSL_SHA384
+#define WOLFSSL_SHA512
+#define WOLFSSL_AES_128
+#define WOLFSSL_AES_192
+#define WOLFSSL_AES_256
+#define WOLFSSL_AES_DIRECT
+#define HAVE_AES_DECRYPT
 #define HAVE_AES_ECB
 #define HAVE_AES_CBC
-#define HAVE_AESGCM
-#define HAVE_MICROCHIP_HARMONY3_HW_SHA256
-#define CONFIG_HAVE_XDMAC
-#define HAVE_MICROCHIP_HARMONY3_HW_RNG
-#define WOLFSSL_SHA512
-#define WOLFSSL_SHA384
-#define HAVE_ECC
-#define USE_FAST_MATH
-#define WOLFSSL_STATIC_RSA
-#define HAVE_MICROCHIP_HARMONY3_HW_TDES
 #define WOLFSSL_AES_COUNTER
-#define WOLFSSL_AES_DIRECT
-#define WOLFSSL_PIC32MZ_HASH
-#define WOLFSSL_MICROCHIP_PIC32MZ
+#define HAVE_AESGCM
+#define HAVE_AESCCM
+#define NO_RC4
+#define NO_HC128
+#define NO_RABBIT
+#define HAVE_ECC
+#define NO_DH
+#define NO_DSA
+#define USE_CERT_BUFFERS_2048
+#define NO_DEV_RANDOM
 #define WOLFSSL_PIC32MZ_RNG
+#define HAVE_HASHDRBG
+#define WC_NO_HARDEN
+#define SINGLE_THREADED
+#define NO_ERROR_STRINGS
+#define NO_WOLFSSL_MEMORY
 
 
 

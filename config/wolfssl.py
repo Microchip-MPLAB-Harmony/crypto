@@ -22,6 +22,15 @@
 # ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
 # THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #*****************************************************************************/
+import inspect
+import os
+import sys
+import glob
+import ntpath
+
+
+wolfsslOverridableSrcFiles = ["internal.c"]
+wolfsslOverridableHeaderFiles = []
 
 
 def instantiateComponent(wolfsslComponent):
@@ -172,76 +181,31 @@ def instantiateComponent(wolfsslComponent):
     wolfsslConfigInfo.setMarkup(True)
     wolfsslConfigInfo.setType("STRING")
     wolfsslConfigInfo.setEnabled(True)
+        
+    setupFiles(wolfsslComponent)
     
-    includeFilename = wolfsslComponent.createFileSymbol("include_filename", None)
-    includeFilename.setProjectPath("config/" + Variables.get("__CONFIGURATION_NAME"))
-    includeFilename.setSourcePath("config/config.h")
-    includeFilename.setDestPath("")
-    includeFilename.setOutputName("config.h")
-    includeFilename.setType("HEADER")
     
-    wolfsslConfigH = wolfsslComponent.createSettingSymbol("wolfsslConfigH", None)
-    wolfsslConfigH.setCategory("C32")
-    wolfsslConfigH.setKey("preprocessor-macros")
-    wolfsslConfigH.setValue("HAVE_CONFIG_H")
-    
-    wolfsslSupportSrcPath = wolfsslComponent.createSettingSymbol("wolfsslSupportSrcPath", None)
-    wolfsslSupportSrcPath.setValue("../src/third_party/wolfcrypt_support")
-    wolfsslSupportSrcPath.setCategory("C32")
-    wolfsslSupportSrcPath.setKey("extra-include-directories")
-    wolfsslSupportSrcPath.setAppend(True, ";")
+def get_script_dir(follow_symlinks=True):
+    if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
+        path = os.path.abspath(sys.executable)
+    else:
+        path = inspect.getabsfile(get_script_dir)
+    if follow_symlinks:
+        path = os.path.realpath(path)
+    return os.path.dirname(path)
 
-    wolfsslSrcPath = wolfsslComponent.createSettingSymbol("wolfsslSrcPath", None)
-    wolfsslSrcPath.setValue("../src/third_party/wolfssl")
-    wolfsslSrcPath.setCategory("C32")
-    wolfsslSrcPath.setKey("extra-include-directories")
-    wolfsslSrcPath.setAppend(True, ";")
+def trimFileNameList(rawList) :
+    newList = []
+    for file in rawList:
+        filename = ntpath.basename(file)
+        newList.append(filename)
+    return newList
     
-    # these files are in wolfssl/src/
-    fileList_common = [
-        'crl.c', 'internal.c', 'keys.c', 'ocsp.c', 'sniffer.c',
-        'ssl.c', 'tls.c', 'tls13.c', 'wolfio.c', 
-    ]
     
-    fileList_common_imp = [
-        'bio.c'
-    ]
-
-    # these header files are in wolfssl/wolfssl/
-    fileList_wolfssl_headers = [
-        'callbacks.h','certs_test.h','crl.h','error-ssl.h','internal.h','ocsp.h',
-        'sniffer.h','sniffer_error.h','ssl.h','test.h','version.h','wolfio.h'
-    ]
-    # these files are in wolfssl/support/
-    fileList_wolfcrypt_support = [
-        'aes.h','arc4.h','asn.h','asn_public.h','camellia.h','chacha.h','coding.h',
-        'compress.h','cpuid.h','des3.h','dh.h','dsa.h','ecc.h','error-crypt.h','hash.h',
-        'hc128.h','hmac.h','integer.h','logging.h','md2.h','md4.h','md5.h','memory.h','misc.h','pkcs7.h','pkcs12.h',
-        'mpi_class.h','mpi_superclass.h','pwdbased.h','rabbit.h','random.h','ripemd.h','rsa.h',
-        'settings.h','sha.h','sha256.h','sha512.h','tfm.h','types.h','visibility.h','wc_encrypt.h','wc_port.h','wolfmath.h'
-    ]
-    # these files are in wolfssl/support/
-    fileList_misc = [
-        'misc.c'
-    ]
-    for filename in fileList_common:
-        addFileName(filename, 'common', wolfsslComponent, "../wolfssl/src/", "../../third_party/wolfssl/src/", True)
-    for filename in fileList_wolfssl_headers:
-        addFileName(filename, 'header', wolfsslComponent, "../wolfssl/wolfssl/", "../../third_party/wolfssl/wolfssl/", True)
-    for filename in fileList_wolfcrypt_support:
-        addFileName(filename, 'support', wolfsslComponent, "support/", "../../third_party/wolfcrypt_support/wolfssl/wolfcrypt/", True)
-    for filename in fileList_misc:
-        addFileName(filename, 'misc', wolfsslComponent, "support/", "../../third_party/wolfcrypt_support/wolfcrypt/src/", True)
-    #for filename in fileList_common_imp:
-    #    addFileName(filename, 'imp', wolfsslComponent, "../wolfssl/src/", "../../third_party/wolfssl/src/", True)    
-    
-# all files go into or under src/
-# The relative root path for srcPath is the dir containing the app's module.xml
-# The relative root path for destPath is firmware/src/config/$ConfigName/
-def addFileName(fileName, prefix, component, srcPath, destPath, enabled):
+def addFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
     print("Adding file: " + prefix + fileName.replace('.', '_'))
     filename = component.createFileSymbol(prefix + fileName.replace('.', '_'), None)
-    filename.setProjectPath("wolfSSL")
+    filename.setProjectPath(projectPath)
     filename.setSourcePath(srcPath + fileName)
     filename.setOutputName(fileName)
 
@@ -256,3 +220,38 @@ def addFileName(fileName, prefix, component, srcPath, destPath, enabled):
         filename.setType("SOURCE")
 
     filename.setEnabled(enabled)
+    
+    
+def setupFiles(basecomponent) :
+    global wolfsslOverridableSrcFiles
+    global wolfsslOverridableHeaderFiles
+
+    wolfSslSourceFiles = get_script_dir() + "/../../wolfssl/src/*.c"
+    wolfSslHeaderFiles = get_script_dir() + "/../../wolfssl/wolfssl/*.h"
+    
+    wcsfrl = glob.glob(wolfSslSourceFiles)
+    wcsfl = []
+    for file in wcsfrl:
+        filename = ntpath.basename(file)
+        if ((not (filename in wolfsslOverridableSrcFiles)) and (filename != "bio.c") ):
+            wcsfl.append(filename)
+    
+    wchfl = []
+    for file in glob.glob(wolfSslHeaderFiles):
+        filename = ntpath.basename(file)
+        if ((not (filename in wolfsslOverridableHeaderFiles))):
+            wchfl.append(filename)
+            
+    for file in wcsfl:
+        addFileName(file, "wolfssl", basecomponent, "../wolfssl/src/", "../../third_party/wolfssl/src/", True, "wolfssl")
+        
+    for file in wchfl:
+        addFileName(file, "wolfssl", basecomponent, "../wolfssl/wolfssl/", "../../third_party/wolfssl/wolfssl/", True, "wolfssl")
+       
+
+    for file in wolfsslOverridableSrcFiles:
+        addFileName(file, "wolfssloverride", basecomponent, "src/", "../../third_party/wolfssl/src/", True, "wolfssl")
+
+    for file in wolfsslOverridableHeaderFiles:
+        addFileName(file, "wolfssloverride", basecomponent, "src/", "../../third_party/wolfssl/wolfssl/", True, "wolfssl")
+

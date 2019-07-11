@@ -1536,7 +1536,8 @@
         </Boolean>
         <Boolean dnOrder="306" id="ETH_CLOCK_ENABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
+            <Dynamic dnOrder="0" id="drvPic32mEthmac" value="true"/>
+            <User dnOrder="1" value="true"/>
           </Values>
         </Boolean>
         <Integer dnOrder="307" id="ETH_CLOCK_FREQUENCY">
@@ -2599,81 +2600,115 @@
         </File>
       </Symbols>
     </UniqueComponent>
-    <UniqueComponent dnOrder="6" id="lib_crypto">
+    <UniqueComponent dnOrder="6" id="lib_wolfcrypt">
       <Symbols dnOrder="0">
-        <Boolean dnOrder="0" id="cryptoCipher3DES">
+        <Combo dnOrder="0" id="wolfSslRTOSSupport">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="FreeRTOS"/>
+          </Values>
+        </Combo>
+        <Boolean dnOrder="1" id="wolfcrypt_aes_ecb_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="2" id="wolfcrypt_aes_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="3" id="wolfcrypt_hkdf">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="4" id="wolfcrypt_hmac">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Boolean dnOrder="5" id="wolfcrypt_hw">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="1" id="cryptoCipherAES_CBC">
+        <Boolean dnOrder="6" id="wolfcrypt_md5_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="7" id="wolfcrypt_random_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="8" id="wolfcrypt_sha1_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="9" id="wolfcrypt_sha264_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="10" id="wolfcrypt_sha384">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="2" id="cryptoCipherAES_CTR">
+        <Boolean dnOrder="11" id="wolfcrypt_sha512">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="3" id="cryptoCipherAES_ECB">
-          <Values dnOrder="0">
+        <Boolean dnOrder="12" id="wolfcrypt_tdes_hw">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">true</Value>
+            </Boolean>
+          </Attributes>
+          <Values dnOrder="1">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="4" id="cryptoCipherAES_GCM">
+        <Boolean dnOrder="13" id="wolfssl_included">
           <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="5" id="cryptoCipherECC">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="6" id="cryptoCipherRSA">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="7" id="cryptoHashHMAC">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="8" id="cryptoHashMD5">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="9" id="cryptoHashSHA1">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="10" id="cryptoHashSHA256">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="11" id="cryptoHashSHA384">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="12" id="cryptoHashSHA512">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="13" id="cryptoIsWolfsslEnabled">
-          <Values dnOrder="0">
-            <Dynamic dnOrder="0" id="lib_crypto" value="false"/>
-          </Values>
-        </Boolean>
-        <Boolean dnOrder="14" id="cryptoRandom">
-          <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
+            <Dynamic dnOrder="0" id="lib_wolfcrypt" value="true"/>
           </Values>
         </Boolean>
       </Symbols>
@@ -2686,98 +2721,147 @@
           </Values>
         </Boolean>
       </Symbols>
+      <Attachments dnOrder="1">
+        <DirectDependency dnOrder="0" id="WolfSSL_Crypto_Dependency">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="targetComponentID">
+              <Value dnOrder="0">lib_wolfcrypt</Value>
+            </String>
+            <String dnOrder="1" id="targetAttachmentID">
+              <Value dnOrder="0">lib_wolfcrypt</Value>
+            </String>
+          </Attributes>
+        </DirectDependency>
+        <DirectCapability dnOrder="1" id="lib_wolfssl">
+          <Attributes dnOrder="0">
+            <String dnOrder="0" id="targetComponentID">
+              <Value dnOrder="0">netPres_0</Value>
+            </String>
+            <String dnOrder="1" id="targetAttachmentID">
+              <Value dnOrder="0">NetPres_Crypto_Dependency</Value>
+            </String>
+          </Attributes>
+        </DirectCapability>
+      </Attachments>
     </UniqueComponent>
     <GeneratorComponent dnOrder="8" id="netPres">
       <Symbols dnOrder="0">
-        <Boolean dnOrder="0" id="NET_PRES_BLOB_CERT_REPO">
+        <KeyValueSet dnOrder="0" id="NET_PRES_BLOB_CERT">
           <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="0"/>
+          </Values>
+        </KeyValueSet>
+        <Boolean dnOrder="1" id="NET_PRES_BLOB_CERT_REPO">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="netPres" value="true"/>
+            <User dnOrder="1" value="true"/>
           </Values>
         </Boolean>
-        <String dnOrder="1" id="NET_PRES_BLOB_CLIENT_CERT_FILENAME">
+        <String dnOrder="2" id="NET_PRES_BLOB_CLIENT_CERT_FILENAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="wolfssl/certs_test.h"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="wolfssl/certs_test.h"/>
+            <User dnOrder="1" value="wolfssl/certs_test.h"/>
           </Values>
         </String>
-        <String dnOrder="2" id="NET_PRES_BLOB_CLIENT_CERT_LEN_VARIABLE">
+        <String dnOrder="3" id="NET_PRES_BLOB_CLIENT_CERT_LEN_VARIABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="sizeof_client_cert_der_2048"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="sizeof_client_cert_der_2048"/>
+            <User dnOrder="1" value="sizeof_client_cert_der_2048"/>
           </Values>
         </String>
-        <String dnOrder="3" id="NET_PRES_BLOB_CLIENT_CERT_VARIABLE">
+        <String dnOrder="4" id="NET_PRES_BLOB_CLIENT_CERT_VARIABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="client_cert_der_2048"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="client_cert_der_2048"/>
+            <User dnOrder="1" value="client_cert_der_2048"/>
           </Values>
         </String>
-        <Boolean dnOrder="4" id="NET_PRES_BLOB_CLIENT_SUPPORT">
+        <Boolean dnOrder="5" id="NET_PRES_BLOB_CLIENT_SUPPORT">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <String dnOrder="5" id="NET_PRES_BLOB_SERVER_CERT_FILENAME">
+        <String dnOrder="6" id="NET_PRES_BLOB_SERVER_CERT_FILENAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="wolfssl/certs_test.h"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="wolfssl/certs_test.h"/>
+            <User dnOrder="1" value="wolfssl/certs_test.h"/>
           </Values>
         </String>
-        <String dnOrder="6" id="NET_PRES_BLOB_SERVER_CERT_LEN_VARIABLE">
+        <String dnOrder="7" id="NET_PRES_BLOB_SERVER_CERT_LEN_VARIABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="sizeof_server_cert_der_2048"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="sizeof_server_cert_der_2048"/>
+            <User dnOrder="1" value="sizeof_server_cert_der_2048"/>
           </Values>
         </String>
-        <String dnOrder="7" id="NET_PRES_BLOB_SERVER_CERT_VARIABLE">
+        <String dnOrder="8" id="NET_PRES_BLOB_SERVER_CERT_VARIABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="server_cert_der_2048"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="server_cert_der_2048"/>
+            <User dnOrder="1" value="server_cert_der_2048"/>
           </Values>
         </String>
-        <String dnOrder="8" id="NET_PRES_BLOB_SERVER_KEY_FILENAME">
+        <String dnOrder="9" id="NET_PRES_BLOB_SERVER_KEY_FILENAME">
           <Values dnOrder="0">
-            <User dnOrder="0" value="wolfssl/certs_test.h"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="wolfssl/certs_test.h"/>
+            <User dnOrder="1" value="wolfssl/certs_test.h"/>
           </Values>
         </String>
-        <String dnOrder="9" id="NET_PRES_BLOB_SERVER_KEY_LEN_VARIABLE">
+        <String dnOrder="10" id="NET_PRES_BLOB_SERVER_KEY_LEN_VARIABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="sizeof_server_key_der_2048"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="sizeof_server_key_der_2048"/>
+            <User dnOrder="1" value="sizeof_server_key_der_2048"/>
           </Values>
         </String>
-        <String dnOrder="10" id="NET_PRES_BLOB_SERVER_KEY_VARIABLE">
+        <String dnOrder="11" id="NET_PRES_BLOB_SERVER_KEY_VARIABLE">
           <Values dnOrder="0">
-            <User dnOrder="0" value="server_key_der_2048"/>
+            <Dynamic dnOrder="0" id="netPres_0" value="server_key_der_2048"/>
+            <User dnOrder="1" value="server_key_der_2048"/>
           </Values>
         </String>
-        <Boolean dnOrder="11" id="NET_PRES_BLOB_SERVER_SUPPORT">
+        <Boolean dnOrder="12" id="NET_PRES_BLOB_SERVER_SUPPORT">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="12" id="NET_PRES_CERT_STORE_STUBS">
+        <Boolean dnOrder="13" id="NET_PRES_CERT_STORE_STUBS">
+          <Values dnOrder="0">
+            <Dynamic dnOrder="0" id="netPres" value="false"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="14" id="NET_PRES_CERT_STORE_STUBS_CLIENT">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Integer dnOrder="13" id="NET_PRES_RTOS_DELAY">
+        <Boolean dnOrder="15" id="NET_PRES_CERT_STORE_STUBS_SERVER">
+          <Attributes dnOrder="0">
+            <Boolean dnOrder="0" id="visible">
+              <Value dnOrder="0">false</Value>
+            </Boolean>
+          </Attributes>
+        </Boolean>
+        <Integer dnOrder="16" id="NET_PRES_RTOS_DELAY">
           <Values dnOrder="0">
             <User dnOrder="0" value="10"/>
           </Values>
         </Integer>
-        <Menu dnOrder="14" id="NET_PRES_RTOS_MENU">
+        <Menu dnOrder="17" id="NET_PRES_RTOS_MENU">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Menu>
-        <Integer dnOrder="15" id="NET_PRES_RTOS_STACK_SIZE">
+        <Integer dnOrder="18" id="NET_PRES_RTOS_STACK_SIZE">
           <Values dnOrder="0">
             <User dnOrder="0" value="8192"/>
           </Values>
         </Integer>
-        <File dnOrder="16" id="NET_PRES_SYS_RTOS_TASK">
+        <File dnOrder="19" id="NET_PRES_SYS_RTOS_TASK">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="enabled">
               <Value dnOrder="0">true</Value>
@@ -2860,6 +2944,18 @@
               </Values>
             </Boolean>
           </Symbols>
+          <Attachments dnOrder="1">
+            <DirectDependency dnOrder="0" id="NetPres_Crypto_Dependency">
+              <Attributes dnOrder="0">
+                <String dnOrder="0" id="targetComponentID">
+                  <Value dnOrder="0">lib_wolfssl</Value>
+                </String>
+                <String dnOrder="1" id="targetAttachmentID">
+                  <Value dnOrder="0">lib_wolfssl</Value>
+                </String>
+              </Attributes>
+            </DirectDependency>
+          </Attachments>
         </InstanceComponent>
       </Instances>
     </GeneratorComponent>
@@ -3119,9 +3215,9 @@
             </UniqueComponent>
           </Children>
           <Attachments dnOrder="1">
-            <Attachment dnOrder="0" id="Core_SysConsole_Dependency" namespace="tcpipStack"/>
+            <Attachment dnOrder="0" id="NETCONFIG_MAC_Dependency" namespace="tcpipNetConfig_0" targetAttachmentID="drvPic32mEthmac:libdrvPic32mEthmac" targetComponentID="DRIVER LAYER"/>
             <Attachment dnOrder="1" id="Core_SysConsole_Dependency" namespace="tcpipStack"/>
-            <Attachment dnOrder="2" id="NETCONFIG_MAC_Dependency" namespace="tcpipNetConfig_0" targetAttachmentID="drvPic32mEthmac:libdrvPic32mEthmac" targetComponentID="DRIVER LAYER"/>
+            <Attachment dnOrder="2" id="Core_SysConsole_Dependency" namespace="tcpipStack"/>
           </Attachments>
         </GroupComponent>
         <GroupComponent displayName="DRIVER LAYER" dnOrder="2" id="DRIVER LAYER">
@@ -3251,24 +3347,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <ComponentGraph dnOrder="0" id="NETWORK LAYER">
-      <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="tcpipArp" x="440" y="20"/>
-        <ElementPosition dnOrder="1" id="tcpipIPv4" x="300" y="20"/>
-        <ElementPosition dnOrder="2" id="tcpipIcmp" x="580" y="20"/>
-        <ElementPosition dnOrder="3" id="tcpip_network_config" x="20" y="20"/>
-      </ElementPositions>
-    </ComponentGraph>
-    <ComponentGraph dnOrder="1" id="TCP/IP STACK">
-      <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="APPLICATION LAYER" x="37" y="46"/>
-        <ElementPosition dnOrder="1" id="BASIC CONFIGURATION" x="204" y="187"/>
-        <ElementPosition dnOrder="2" id="DRIVER LAYER" x="37" y="187"/>
-        <ElementPosition dnOrder="3" id="NETWORK LAYER" x="40" y="140"/>
-        <ElementPosition dnOrder="4" id="TRANSPORT LAYER" x="38" y="95"/>
-      </ElementPositions>
-    </ComponentGraph>
-    <ComponentGraph dnOrder="2" id="BASIC CONFIGURATION">
+    <ComponentGraph dnOrder="0" id="BASIC CONFIGURATION">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="tcpipCmd" x="580" y="20"/>
         <ElementPosition dnOrder="1" id="tcpipNetConfig" x="420" y="20"/>
@@ -3276,24 +3355,14 @@
         <ElementPosition dnOrder="3" id="tcpip_basic_config" x="20" y="20"/>
       </ElementPositions>
     </ComponentGraph>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="3"/>
-    <ComponentGraph dnOrder="4" id="APPLICATION LAYER">
+    <ComponentGraph dnOrder="1" id="TRANSPORT LAYER">
       <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="tcpipDhcp" x="320" y="20"/>
-        <ElementPosition dnOrder="1" id="tcpipDns" x="460" y="20"/>
-        <ElementPosition dnOrder="2" id="tcpipSntp" x="600" y="20"/>
-        <ElementPosition dnOrder="3" id="tcpip_apps_config" x="20" y="20"/>
+        <ElementPosition dnOrder="0" id="tcpipTcp" x="440" y="20"/>
+        <ElementPosition dnOrder="1" id="tcpipUdp" x="300" y="20"/>
+        <ElementPosition dnOrder="2" id="tcpip_transport_config" x="20" y="20"/>
       </ElementPositions>
     </ComponentGraph>
-    <ComponentGraph dnOrder="5" id="DRIVER LAYER">
-      <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="drvExtPhyLan8740" x="400" y="20"/>
-        <ElementPosition dnOrder="1" id="drvMiim" x="520" y="20"/>
-        <ElementPosition dnOrder="2" id="drvPic32mEthmac" x="280" y="20"/>
-        <ElementPosition dnOrder="3" id="tcpip_driver_config" x="20" y="20"/>
-      </ElementPositions>
-    </ComponentGraph>
-    <ComponentGraph dnOrder="6" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="2" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="BSP_PIC32MZ_EF_Starter_Kit" x="22" y="69"/>
         <ElementPosition dnOrder="1" id="FreeRTOS" x="26" y="177"/>
@@ -3302,21 +3371,48 @@
         <ElementPosition dnOrder="4" id="core" x="240" y="20"/>
         <ElementPosition dnOrder="5" id="core_timer" x="182" y="179"/>
         <ElementPosition dnOrder="6" id="dfp" x="20" y="20"/>
-        <ElementPosition dnOrder="7" id="lib_crypto" x="53" y="480"/>
-        <ElementPosition dnOrder="8" id="lib_wolfssl" x="49" y="389"/>
+        <ElementPosition dnOrder="7" id="lib_wolfcrypt" x="25" y="402"/>
+        <ElementPosition dnOrder="8" id="lib_wolfssl" x="131" y="492"/>
         <ElementPosition dnOrder="9" id="netPres" x="304" y="476"/>
-        <ElementPosition dnOrder="10" id="sys_command" x="454" y="251"/>
+        <ElementPosition dnOrder="10" id="sys_command" x="455" y="246"/>
         <ElementPosition dnOrder="11" id="sys_console" x="211" y="284"/>
         <ElementPosition dnOrder="12" id="sys_debug" x="456" y="363"/>
         <ElementPosition dnOrder="13" id="sys_time" x="355" y="133"/>
         <ElementPosition dnOrder="14" id="uart2" x="49" y="306"/>
       </ElementPositions>
     </ComponentGraph>
-    <ComponentGraph dnOrder="7" id="TRANSPORT LAYER">
+    <ComponentGraph dnOrder="3" id="APPLICATION LAYER">
       <ElementPositions dnOrder="0">
-        <ElementPosition dnOrder="0" id="tcpipTcp" x="440" y="20"/>
-        <ElementPosition dnOrder="1" id="tcpipUdp" x="300" y="20"/>
-        <ElementPosition dnOrder="2" id="tcpip_transport_config" x="20" y="20"/>
+        <ElementPosition dnOrder="0" id="tcpipDhcp" x="320" y="20"/>
+        <ElementPosition dnOrder="1" id="tcpipDns" x="460" y="20"/>
+        <ElementPosition dnOrder="2" id="tcpipSntp" x="600" y="20"/>
+        <ElementPosition dnOrder="3" id="tcpip_apps_config" x="20" y="20"/>
+      </ElementPositions>
+    </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="4"/>
+    <ComponentGraph dnOrder="5" id="NETWORK LAYER">
+      <ElementPositions dnOrder="0">
+        <ElementPosition dnOrder="0" id="tcpipArp" x="440" y="20"/>
+        <ElementPosition dnOrder="1" id="tcpipIPv4" x="300" y="20"/>
+        <ElementPosition dnOrder="2" id="tcpipIcmp" x="580" y="20"/>
+        <ElementPosition dnOrder="3" id="tcpip_network_config" x="20" y="20"/>
+      </ElementPositions>
+    </ComponentGraph>
+    <ComponentGraph dnOrder="6" id="TCP/IP STACK">
+      <ElementPositions dnOrder="0">
+        <ElementPosition dnOrder="0" id="APPLICATION LAYER" x="37" y="46"/>
+        <ElementPosition dnOrder="1" id="BASIC CONFIGURATION" x="204" y="187"/>
+        <ElementPosition dnOrder="2" id="DRIVER LAYER" x="37" y="187"/>
+        <ElementPosition dnOrder="3" id="NETWORK LAYER" x="40" y="140"/>
+        <ElementPosition dnOrder="4" id="TRANSPORT LAYER" x="38" y="95"/>
+      </ElementPositions>
+    </ComponentGraph>
+    <ComponentGraph dnOrder="7" id="DRIVER LAYER">
+      <ElementPositions dnOrder="0">
+        <ElementPosition dnOrder="0" id="drvExtPhyLan8740" x="400" y="20"/>
+        <ElementPosition dnOrder="1" id="drvMiim" x="520" y="20"/>
+        <ElementPosition dnOrder="2" id="drvPic32mEthmac" x="280" y="20"/>
+        <ElementPosition dnOrder="3" id="tcpip_driver_config" x="20" y="20"/>
       </ElementPositions>
     </ComponentGraph>
   </UserData>

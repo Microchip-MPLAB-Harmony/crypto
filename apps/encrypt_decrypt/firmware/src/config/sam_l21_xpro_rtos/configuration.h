@@ -115,39 +115,58 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-
-/*** Crypto Library Configuration ***/
-#define WC_NO_HARDEN
-#define NO_DSA
-#define HAVE_MCAPI
-#define WOLFSSL_IGNORE_FILE_WARN
-
+/*** wolfCrypt Library Configuration ***/
+#define MICROCHIP_PIC32
 #define MICROCHIP_MPLAB_HARMONY
 #define MICROCHIP_MPLAB_HARMONY_3
-
+#define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
 #define SIZEOF_LONG_LONG 8
-#define SINGLE_THREADED
 #define WOLFSSL_USER_IO
 #define NO_WRITEV
-#define NO_DEV_RANDOM
 #define NO_FILESYSTEM
 #define USE_FAST_MATH
-#define TFM_TIMING_RESISTANT
-#define USE_CERT_BUFFERS_2048
-#define HAVE_MICROCHIP_HARMONY3_HW_AES
-#define WOLFSSL_AES_COUNTER
-#define HAVE_AES_ECB
-#define HAVE_AES_CBC
-#define HAVE_AESGCM
-#define HAVE_MICROCHIP_HARMONY3_HW_RNG
+#define NO_PWDBASED
+#define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
+#define WOLFCRYPT_ONLY
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242
+#define NO_MD4
 #define WOLFSSL_SHA224
-#define WOLFSSL_SHA512
 #define WOLFSSL_SHA384
-#define NO_ASN
-#define NO_RSA
-#define WOLFSSL_AES_COUNTER
+#define WOLFSSL_SHA512
+#define WOLFSSL_AES_128
+#define WOLFSSL_AES_192
+#define WOLFSSL_AES_256
 #define WOLFSSL_AES_DIRECT
-#define CRYPTO_AES_HW_U2238
+#define HAVE_AES_DECRYPT
+#define WOLFSSL_HAVE_MCHP_HW_AES_DIRECT
+#define HAVE_AES_ECB
+#define WOLFSSL_HAVE_MCHP_HW_AES_ECB
+#define HAVE_AES_CBC
+#define WOLFSSL_HAVE_MCHP_HW_AES_CBC
+#define WOLFSSL_AES_COUNTER
+#define WOLFSSL_HAVE_MCHP_HW_AES_CTR
+#define HAVE_AESGCM
+#define WOLFSSL_HAVE_MCHP_HW_AES_GCM
+#define HAVE_AESCCM
+#define NO_RC4
+#define NO_HC128
+#define NO_RABBIT
+#define NO_DH
+#define NO_DSA
+#define NO_RSA
+#define NO_DEV_RANDOM
+#define WOLFSSL_HAVE_MCHP_HW_RANDOM
+#define HAVE_HASHDRBG
+#define WC_NO_HARDEN
+#define FREERTOS
+#define NO_ASN
+#define NO_SIG_WRAPPER
+#define NO_ERROR_STRINGS
+#define NO_WOLFSSL_MEMORY
 
 
 

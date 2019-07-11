@@ -115,46 +115,47 @@ extern "C" {
 // *****************************************************************************
 // *****************************************************************************
 
-
-/*** Crypto Library Configuration ***/
-#define WC_NO_HARDEN
-#define NO_DSA
-#define HAVE_MCAPI
-#define WOLFSSL_IGNORE_FILE_WARN
-
+/*** wolfCrypt Library Configuration ***/
+#define MICROCHIP_PIC32
 #define MICROCHIP_MPLAB_HARMONY
 #define MICROCHIP_MPLAB_HARMONY_3
-
+#define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
 #define SIZEOF_LONG_LONG 8
-#define SINGLE_THREADED
 #define WOLFSSL_USER_IO
 #define NO_WRITEV
-#define NO_DEV_RANDOM
 #define NO_FILESYSTEM
 #define USE_FAST_MATH
-#define TFM_TIMING_RESISTANT
-#define USE_CERT_BUFFERS_2048
-#define HAVE_MICROCHIP_HARMONY3_HW_SHA1
-#define HAVE_MICROCHIP_HARMONY3_HW_AES
-#define WOLFSSL_AES_COUNTER
-#define HAVE_AES_ECB
-#define HAVE_AES_CBC
-#define HAVE_AESGCM
-#define HAVE_MICROCHIP_HARMONY3_HW_SHA256
-#define CONFIG_HAVE_XDMAC
-#define HAVE_MICROCHIP_HARMONY3_HW_RNG
+#define NO_PWDBASED
+#define HAVE_MCAPI
+#define WOLFSSL_IGNORE_FILE_WARN
+#define WOLFCRYPT_ONLY
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334
+#define NO_MD4
+#define WOLFSSL_HAVE_MCHP_HW_SHA1
 #define WOLFSSL_SHA224
-#define HAVE_MICROCHIP_HARMONY3_HW_SHA224
-#define WOLFSSL_SHA512
+#define WOLFSSL_HAVE_MCHP_HW_SHA264
 #define WOLFSSL_SHA384
-#define HAVE_ECC
-#define USE_FAST_MATH
-#define HAVE_LIBZ
-#define WOLFSSL_STATIC_RSA
-#define WOLFSSL_AES_COUNTER
-#define WOLFSSL_AES_DIRECT
-#define CRYPTO_AES_HW_6149
-#define CRYPTO_SHA_HW_11105
+#define WOLFSSL_SHA512
+#define NO_DES3
+#define NO_AES
+#define NO_RC4
+#define NO_HC128
+#define NO_RABBIT
+#define NO_DH
+#define NO_DSA
+#define NO_RSA
+#define NO_DEV_RANDOM
+#define HAVE_HASHDRBG
+#define WC_NO_HARDEN
+#define FREERTOS
+#define NO_ASN
+#define NO_SIG_WRAPPER
+#define NO_ERROR_STRINGS
+#define NO_WOLFSSL_MEMORY
 
 
 

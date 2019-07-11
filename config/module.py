@@ -27,11 +27,21 @@ def loadModule():
                                              "Cryptographic (Crypto) Library",
                                              "/Libraries/", "config/crypto.py")
     cryptoComponent.addCapability("lib_crypto", "LIB_CRYPTO", None, True)
-
-    cryptoComponent.addDependency("LIB_CRYPTO_TIME_Dependency", "SYS_TIME", True, True)
+    cryptoComponent.addDependency("LIB_CRYPTO_WOLFCRYPT_Dependency", "LIB_WOLFCRYPT", False, True)
     
     ############################### Third Party wolfSSL Module #####################################
     tlsComponent = Module.CreateComponent("lib_wolfssl", "wolfSSL Library", "/Third Party Libraries/wolfSSL/", "config/wolfssl.py")
     tlsComponent.addCapability("lib_wolfssl","TLS Provider",None, False)    
-    tlsComponent.addDependency("WolfSSL_Crypto_Dependency", "LIB_CRYPTO", None, True, False)
+    tlsComponent.addDependency("WolfSSL_Crypto_Dependency", "LIB_WOLFCRYPT", None, False, True)
+    
+    ############################### Third Party wolfCrypt Module ###################################
+    wolfCryptComponent = Module.CreateComponent("lib_wolfcrypt", "wolfCrypt Library", "/Third Party Libraries/wolfSSL/", "config/wolfcrypt.py")
+    wolfCryptComponent.addMultiCapability("lib_wolfcrypt", "LIB_WOLFCRYPT", "LIB_WOLFCRYPT")
+    wolfCryptComponent.addDependency("LIB_WOLFCRYPT_Dependency", "SYS_TIME", True, True)
+    wolfCryptComponent.addDependency("LIB_WOLFCRYPT_ZLIB_Dependency", "LIB_ZLIB", False, False)
+
+    ############################### Third Party zlib Module ###################################
+    wolfCryptComponent = Module.CreateComponent("lib_zlib", "zLib Library", "/Third Party Libraries", "config/zlib.py")
+    wolfCryptComponent.addMultiCapability("lib_zlib", "LIB_ZLIB", "LIB_ZLIB")
+    
     

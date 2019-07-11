@@ -32,28 +32,30 @@
 #include <inttypes.h>
 
 #include "app.h"
-#include "crypto/src/md5.h"
-#include "crypto/src/sha.h"
-#include "crypto/src/sha256.h"
-#include "crypto/src/sha512.h"
-#include "crypto/src/random.h"
-#include "crypto/src/hmac.h"
+#include "wolfssl/wolfcrypt/md5.h"
+#include "wolfssl/wolfcrypt/sha.h"
+#include "wolfssl/wolfcrypt/sha256.h"
+#include "wolfssl/wolfcrypt/sha512.h"
+#include "wolfssl/wolfcrypt/random.h"
+#include "wolfssl/wolfcrypt/hmac.h"
 #ifndef NO_AES
-#include "crypto/src/aes.h"
+#include "wolfssl/wolfcrypt/aes.h"
 #endif
 #ifdef HAVE_ECC
-#include "crypto/src/ecc.h"
+#include "wolfssl/wolfcrypt/ecc.h"
 #endif
 #ifdef HAVE_LIBZ
-#include "crypto/src/compress.h"
+#include "wolfssl/wolfcrypt/compress.h"
 #endif
 #ifndef NO_DES3
-#include "crypto/src/des3.h"
+#include "wolfssl/wolfcrypt/des3.h"
 #endif
 #ifndef NO_RSA
-#include "crypto/src/rsa.h"
-#include "crypto/src/certs_test.h"
+#include "wolfssl/wolfcrypt/rsa.h"
+#include "wolfssl/certs_test.h"
 #endif
+
+
 
 // *****************************************************************************
 // *****************************************************************************

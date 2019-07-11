@@ -1,54 +1,32 @@
-/**************************************************************************
-  Crypto Framework Library Header
+/* des3.h
+ *
+ * Copyright (C) 2006-2019 wolfSSL Inc.
+ *
+ * This file is part of wolfSSL.
+ *
+ * wolfSSL is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * wolfSSL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
+ */
 
-  Company:
-    Microchip Technology Inc.
-
-  File Name:
-    des3.h
-
-  Summary:
-    Crypto Framework Library header for cryptographic functions.
-
-  Description:
-    This header file contains function prototypes and definitions of
-    the data types and constants that make up the Cryptographic Framework
-    Library for PIC32 families of Microchip microcontrollers.
-**************************************************************************/
-
-//DOM-IGNORE-BEGIN
-/*****************************************************************************
- Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
-
-Microchip Technology Inc. and its subsidiaries.
-
-Subject to your compliance with these terms, you may use Microchip software 
-and any derivatives exclusively with Microchip products. It is your 
-responsibility to comply with third party license terms applicable to your 
-use of third party software (including open source software) that may 
-accompany Microchip software.
-
-THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
-EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
-WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
-PURPOSE.
-
-IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
-INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
-WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
-BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
-FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
-ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
-THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
-*****************************************************************************/
-
-//DOM-IGNORE-END
-
+/*!
+    \file wolfssl/wolfcrypt/des3.h
+*/
 
 #ifndef WOLF_CRYPT_DES3_H
 #define WOLF_CRYPT_DES3_H
 
-#include "crypto/src/types.h"
+#include <wolfssl/wolfcrypt/types.h>
 
 #ifndef NO_DES3
 
@@ -60,7 +38,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #if defined(HAVE_FIPS) && \
 	(!defined(HAVE_FIPS_VERSION) || (HAVE_FIPS_VERSION < 2))
 /* included for fips @wc_fips */
-#include "crypto/src/des3.h"
+#include <cyassl/ctaocrypt/des3.h>
 #endif
 
 #ifdef __cplusplus
@@ -107,11 +85,6 @@ enum {
 };
 #endif
 
-#if defined(HAVE_MICROCHIP_HARMONY3_HW_TDES) && !defined(WOLFSSL_PIC32MZ_CRYPT)
-    #include "crypto/src/crypt_tdes_hw.h"
-    #define Des crypt_tdes_hw_descriptor
-    #define Des3 crypt_tdes_hw_descriptor
-#else
 
 /* DES encryption and decryption */
 typedef struct Des {
@@ -119,7 +92,6 @@ typedef struct Des {
     word32 tmp[DES_BLOCK_SIZE / sizeof(word32)];      /* same         */
     word32 key[DES_KS_SIZE];
 } Des;
-
 
 
 /* DES3 encryption and decryption */
@@ -132,9 +104,12 @@ typedef struct Des3 {
     const byte* iv_raw;
     WC_ASYNC_DEV asyncDev;
 #endif
+#ifdef WOLF_CRYPTO_CB
+    int    devId;
+    void*  devCtx;
+#endif
     void* heap;
 } Des3;
-#endif /* HAVE_MICROCHIP_HARMONY3_HW_TDES */
 #endif /* HAVE_FIPS */
 
 
@@ -149,7 +124,6 @@ WOLFSSL_API int  wc_Des_EcbEncrypt(Des* des, byte* out,
                                    const byte* in, word32 sz);
 WOLFSSL_API int wc_Des3_EcbEncrypt(Des3* des, byte* out,
                                    const byte* in, word32 sz);
-
 
 /* ECB decrypt same process as encrypt but with decrypt key */
 #define wc_Des_EcbDecrypt  wc_Des_EcbEncrypt
