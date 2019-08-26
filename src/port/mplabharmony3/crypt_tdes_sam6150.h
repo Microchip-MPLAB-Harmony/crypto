@@ -53,7 +53,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "configuration.h"
 #include <stdint.h>
 
-#if defined(CRYPTO_TDES_HW_6150)
+#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150)
 
 typedef union {
   struct {

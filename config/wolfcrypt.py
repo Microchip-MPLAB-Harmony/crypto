@@ -186,8 +186,8 @@ cryptoHwAesCcmEnabledSymbol = None
 cryptoAesCcmEnabledSymbol = None
 
 cryptoHwDesSupport = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
-                      ["TDES", "6150", "N", [], set(["CRYPTO_TDES_HW_6150"])], #ATSAMA5D27 
-                      ["TDES", "6150", "P", [], set(["CRYPTO_TDES_HW_6150"])], #ATSAM9X60 
+                      ["TDES", "6150", "N", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150"])], #ATSAMA5D27 
+                      ["TDES", "6150", "P", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150"])], #ATSAM9X60 
                      ]
 cryptoHwDesSupported = False
 cryptoHwDesEnabledSymbol = None
@@ -212,7 +212,7 @@ cryptoDesOfbEnabledSymbol = None
 
 
 cryptoHwRsaSupport = [
-                      #["PUKCC", "U2009", "2.5.0", [], set([])], #ATSAME54P20A
+                      ["PUKCC", "U2009", "2.5.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_RSA_HW_PUKCC"])], #ATSAME54P20A
                      ]
 cryptoHwRsaSupported = False
 cryptoHwRsaEnabledSymbol = None
@@ -220,7 +220,7 @@ cryptoRsaEnabledSymbol = None
 
 
 cryptoHwEccSupport = [
-                      #["PUKCC", "U2009", "2.5.0", [], set([])], #ATSAME54P20A
+                      ["PUKCC", "U2009", "2.5.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
                       ]
 cryptoHwEccSupported = False
 cryptoHwEccEnabledSymbol = None
@@ -753,6 +753,16 @@ def instantiateComponent(wolfCryptComponent):
     cryptoEccEnableSymbol.setVisible(True)
     cryptoEccEnableSymbol.setDefaultValue(True)
     
+    cryptoHwEccEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_ecc_hw", cryptoEccEnableSymbol)
+    cryptoHwEccEnabledSymbol.setLabel("Enable Hardware Support?")
+    cryptoHwEccEnabledSymbol.setDescription("Enable Hardware Support for the ECC algorithm.")
+    if (cryptoHwEccSupported == True):
+        cryptoHwEccEnabledSymbol.setVisible(True)
+    else:
+        cryptoHwEccEnabledSymbol.setVisible(False)
+    cryptoHwEccEnabledSymbol.setDefaultValue(False)
+    
+    
     cryptoKdfEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_kdf", cryptoEccEnableSymbol)
     cryptoKdfEnableSymbol.setLabel("KDF Support?")
     cryptoKdfEnableSymbol.setDescription("Enable KDF Support.")
@@ -940,6 +950,15 @@ def instantiateComponent(wolfCryptComponent):
     cryptoRsaEnabledSymbol.setDescription("Enable RSA Support.")
     cryptoRsaEnabledSymbol.setDefaultValue(True)
     cryptoRsaEnabledSymbol.setVisible(True)
+
+    cryptoHwRsaEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_rsa_hw", cryptoRsaEnabledSymbol)
+    cryptoHwRsaEnabledSymbol.setLabel("Enable Hardware Support?")
+    cryptoHwRsaEnabledSymbol.setDescription("Enable Hardware Support for the RSA algorithm.")
+    if (cryptoHwRsaSupported == True):
+        cryptoHwRsaEnabledSymbol.setVisible(True)
+    else:
+        cryptoHwRsaEnabledSymbol.setVisible(False)
+    cryptoHwRsaEnabledSymbol.setDefaultValue(False)
     
     cryptoOaepEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_oaep", cryptoRsaEnabledSymbol)
     cryptoOaepEnabledSymbol.setLabel("Support OAEP?")
@@ -1012,6 +1031,19 @@ def instantiateComponent(wolfCryptComponent):
     wolfsslWolfcryptPath.setCategory("C32")
     wolfsslWolfcryptPath.setKey("extra-include-directories")
     wolfsslWolfcryptPath.setAppend(True, ";")
+
+    wolfsslSysInitSourceFtl = wolfCryptComponent.createFileSymbol(None, None)
+    wolfsslSysInitSourceFtl.setType("STRING")
+    wolfsslSysInitSourceFtl.setOutputName("core.LIST_SYSTEM_INIT_C_INITIALIZE_MIDDLEWARE")
+    wolfsslSysInitSourceFtl.setSourcePath("templates/system_initialize.c.ftl")
+    wolfsslSysInitSourceFtl.setMarkup(True)
+
+    wolfsslSystemDefFtl = wolfCryptComponent.createFileSymbol(None, None)
+    wolfsslSystemDefFtl.setType("STRING")
+    wolfsslSystemDefFtl.setOutputName("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
+    wolfsslSystemDefFtl.setSourcePath("templates/system_definitions.h.ftl")
+    wolfsslSystemDefFtl.setMarkup(True)
+
 
     
 def handleParentSymbolChange(symbol, event):

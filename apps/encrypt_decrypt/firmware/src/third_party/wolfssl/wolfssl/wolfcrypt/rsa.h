@@ -80,6 +80,10 @@
 #include "xsecure_rsa.h"
 #endif
 
+#if defined(WOLFSSL_CRYPTOCELL)
+    #include <wolfssl/wolfcrypt/port/arm/cryptoCell.h>
+#endif
+
 #ifdef __cplusplus
     extern "C" {
 #endif
@@ -182,6 +186,9 @@ struct RsaKey {
 #ifdef WOLFSSL_AFALG_XILINX_RSA
     int alFd;
     int rdFd;
+#endif
+#if defined(WOLFSSL_CRYPTOCELL)
+    rsa_context_t ctx;
 #endif
 };
 
@@ -313,7 +320,7 @@ WOLFSSL_API int wc_RsaDirect(byte* in, word32 inLen, byte* out, word32* outSz,
                    RsaKey* key, int type, WC_RNG* rng);
 #endif
 
-#endif /* HAVE_FIPS*/
+#endif /* HAVE_FIPS */
 
 WOLFSSL_API int  wc_RsaFlattenPublicKey(RsaKey*, byte*, word32*, byte*,
                                                                        word32*);

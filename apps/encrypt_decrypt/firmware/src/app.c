@@ -859,9 +859,9 @@ void ecc_test(void)
     if (ret == 0)
         appData.ecc_test_result--;
 
-    wc_ecc_init(&userA);
-    wc_ecc_init(&userB);
-    wc_ecc_init(&pubKey);
+    wc_ecc_init_ex(&userA, 0, 0);
+    wc_ecc_init_ex(&userB, 0, 0);
+    wc_ecc_init_ex(&pubKey, 0, 0);
 
     ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userA);
     ret = wc_ecc_make_key((struct RNG *)&rng, 32, &userB);
@@ -1991,7 +1991,7 @@ void rsa_test(void)
 #ifdef HAVE_CAVIUM
     RsaInitCavium(&key, CAVIUM_DEV_ID);
 #endif
-    wc_InitRsaKey(&key, 0);
+    wc_InitRsaKey_ex(&key, 0, 0);
     ret = wc_RsaPrivateKeyDecode(tmp, &idx, &key, (word32)uint8_ts);
     if (ret == 0) appData.rsa_test_result--;
 

@@ -52,6 +52,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 typedef struct 
 {
+    int devId;
+    word32 flags; /* enum wc_HashFlags in hash.h */
+
 #if defined(CRYPTO_TDES_HW_6150)
     uint32_t key[3][2];
     uint32_t iv[2];

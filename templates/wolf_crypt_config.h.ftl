@@ -35,6 +35,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
+#define WOLF_CRYPTO_CB
 <#if wolfssl_included?has_content == false && wolfssl_included == false>
     <#lt>#define WOLFCRYPT_ONLY
 </#if>
@@ -265,6 +266,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if wolfcrypt_ecc == true>
     <#lt>#define HAVE_ECC
+    <#if wolfcrypt_ecc_hw == true && wolfcrypt_hw == true>
+        <#lt>#define WOLFSSL_HAVE_MCHP_HW_ECC
+    </#if>
     <#if wolfcrypt_kdf == true>
         <#lt>#define HAVE_X963_KDF
     </#if>
@@ -305,6 +309,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#lt>#define NO_DSA
 </#if>
 <#if wolfcrypt_rsa == true>
+    <#if wolfcrypt_rsa_hw == true && wolfcrypt_hw == true>
+        <#lt>#define WOLFSSL_HAVE_MCHP_HW_RSA
+    </#if>
     <#lt>#define USE_CERT_BUFFERS_2048
     <#if wolfcrypt_oaep == false>
         <#lt>#define WC_NO_RSA_OAEP
