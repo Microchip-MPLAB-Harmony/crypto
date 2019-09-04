@@ -2,5 +2,6 @@
 <Package name="crypto">
     <Dependencies>
         <Dependency name="core" version="v3.3.0"/>
+        <Dependency name="wolfssl" version="v3.15.7-stable"/>
     </Dependencies>
 </Package>

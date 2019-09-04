@@ -1,4 +1,26 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.3.1
+### Changes
+- **License File** the license file has been updated
+- **wolfSSL Dependencies Updated** this release relies on wolfSSL 3.15.7-stable.  This dependency is now reflected in the configuration files.
+- **wolfSSL Demo Applications** these demonstrations are being moved to the net repository in the next release.  The demonstrations in this repository are now redundant and will be removed in the near future.  Please refer to the Net repository for these demonstrations from net version 3.5 onwards.
+
+### Known Issues
+- PUKCC Is Unsupported - The PUKCC peripheral for the SAME54 family, used for public key cryptography is not support yet.  This peripheral will be supported in future versions.
+
+- The ICD4 loads the reset line of the SAM V71 Xplained Ultra board. Do not press reset button on the Xplained Ultra board while ICD4 is connected to the board.
+
+- Interactive help using the Show User Manual Entry in the Right-click menu for configuration options provided by this module is not yet available from within the MPLAB Harmony Configurator (MHC).  Please see the &quot;Configuring the Library&quot; section in the help documentation in the doc folder for this module instead.  Help is available in both CHM and PDF formats.
+
+- ATSAMA5D2C demo applications build with a warning message: ```Warning[Pe111]: statement is unreachable for return ( EXIT_FAILURE ); statement of main() in IAR```
+
+- ECC and RSA software calculations take upwards of 32 kBytes of stack, when using these algorithms with an RTOS plan accordingly.
+
+- Demonstrations for using hardware cryptography and TLS are not included for the SAME54 platform.  The AES driver for the SAME54 is to be considered Alpha for this release.
+
+- This release requires Harmony 3 Core Version 3.4 to regenerate the demonstrations.  This release also requires Net 3.3.0 to regenerate the wolfSSL demonstrations.
+
+
 
 ## Crypto Release v3.3.0
 ### New Features
