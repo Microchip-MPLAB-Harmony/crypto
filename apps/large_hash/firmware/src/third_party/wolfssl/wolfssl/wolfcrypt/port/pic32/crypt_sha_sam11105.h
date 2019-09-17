@@ -1,3 +1,21 @@
+/**************************************************************************
+  Crypto Framework Library Source
+
+  Company:
+    Microchip Technology Inc.
+
+  File Name:
+    crypt_sha_sam11105.h
+
+  Summary:
+    Crypto Framework Libarary interface file for hardware Cryptography
+
+  Description:
+    This file is used to interfacing with the ICM hardware for conducting 
+    SHA hashing.
+**************************************************************************/
+
+//DOM-IGNORE-BEGIN
 /*****************************************************************************
  Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
 
@@ -23,6 +41,7 @@ ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *****************************************************************************/
 
+//DOM-IGNORE-END
 #ifndef _CRYPT_SHA_SAM11105_H_
 #define _CRYPT_SHA_SAM11105_H_
 

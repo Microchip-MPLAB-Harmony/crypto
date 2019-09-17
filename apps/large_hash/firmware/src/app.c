@@ -416,7 +416,7 @@ void APP_Tasks(void) {
             //            SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
             // SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
 
-
+            appData.usartHandle = DRV_USART_Open(DRV_USART_INDEX_0, DRV_IO_INTENT_READWRITE);
             appData.state = APP_STATE_RUN_MD5_FEED;
             break;
         }
@@ -578,7 +578,9 @@ void APP_Tasks(void) {
                 sprintf(printBuffer, "%s\n\rAll tests passed.", printBuffer);
                 //BSP_LEDOn(BSP_LED_3);
             }
-            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
+            
+            //SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
+            DRV_USART_WriteBuffer( appData.usartHandle, printBuffer, strlen(printBuffer));
             appData.state = APP_SPIN;
             break;
 

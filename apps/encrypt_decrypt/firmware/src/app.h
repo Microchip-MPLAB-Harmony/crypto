@@ -179,6 +179,7 @@ typedef struct
     uint32_t compress_timing;
 
     int32_t wallTime;
+    DRV_HANDLE              usartHandle;
 } APP_DATA;
 
 

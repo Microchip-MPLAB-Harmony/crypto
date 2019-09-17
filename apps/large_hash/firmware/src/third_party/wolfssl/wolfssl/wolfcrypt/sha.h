@@ -52,7 +52,6 @@
     #include "fsl_ltc.h"
 #endif
 
-
 #ifdef __cplusplus
     extern "C" {
 #endif
@@ -113,7 +112,7 @@ typedef struct wc_Sha {
         word32  loLen;     /* length in bytes   */
         word32  hiLen;     /* length in bytes   */
         word32  buffer[WC_SHA_BLOCK_SIZE  / sizeof(word32)];
-    #if defined(WOLFSSL_PIC32MZ_HASH)
+    #ifdef WOLFSSL_PIC32MZ_HASH
         word32  digest[PIC32_DIGEST_SIZE / sizeof(word32)];
     #else
         word32  digest[WC_SHA_DIGEST_SIZE / sizeof(word32)];

@@ -132,6 +132,14 @@ static int CRYPT_SHA256_Process(wc_Sha256* sha256, const byte* data, word32 len)
   CRYPT_SHA_SAM6156_SHA_MR shaMr = {0};
   
   volatile CRYPT_SHA_SAM6156_SHA_ISR * shaIsr = (CRYPT_SHA_SAM6156_SHA_ISR*)(&(SHA_REGS->SHA_ISR));
+#if defined(_SAMRH71_SHA_COMPONENT_H_)
+  volatile uint32_t * ioPtr = &(SHA_REGS->SHA_IODATAR0);
+  volatile uint32_t * iPtr = &(SHA_REGS->SHA_IDATAR0);
+#else
+  
+  volatile uint32_t * ioPtr = &(SHA_REGS->SHA_IODATAR[0]);
+  volatile uint32_t * iPtr = &(SHA_REGS->SHA_IDATAR[0]);
+#endif
 
   shaCr.s.SWRST = 1;
   SHA_REGS->SHA_CR = shaCr.v;
@@ -153,7 +161,7 @@ static int CRYPT_SHA256_Process(wc_Sha256* sha256, const byte* data, word32 len)
   // Load in the IV
   for (uint32_t x = 0; x < (SHA256_DIGEST_SIZE >> 2); x++)
   {
-    SHA_REGS->SHA_IDATAR[x] = sha256->digest[x];      
+    iPtr[x] = sha256->digest[x];      
   }
 
   shaCr.s.WUIHV = 0; //Load into Data registers
@@ -172,7 +180,7 @@ static int CRYPT_SHA256_Process(wc_Sha256* sha256, const byte* data, word32 len)
                           ((ptr[1] & 0xff) << 8) |
                           ((ptr[2] & 0xff) << 16) |
                           ((ptr[3] & 0xff) << 24);
-          SHA_REGS->SHA_IDATAR[y] = data;
+          iPtr[y] = data;
           ptr+=4;
       }
       //shaCr.s.START = 1;
@@ -181,7 +189,7 @@ static int CRYPT_SHA256_Process(wc_Sha256* sha256, const byte* data, word32 len)
   }
   for (uint32_t x = 0; x < (SHA256_DIGEST_SIZE >> 2); x++)
   {
-    sha256->digest[x] = SHA_REGS->SHA_IODATAR[x]; // Save the current digest
+    sha256->digest[x] = ioPtr[x]; // Save the current digest
   }
   return 0;
   

@@ -98,21 +98,23 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  *----------------------------------------------------------------------------*/
 
 #include "configuration.h"
-#if 0
-#include "crypto/src/crypt_tdes_hwInt.h"
-#include "crypt_tdes_sam6150.h"
+#if defined(WOLFSSL_HAVE_MCHP_3DES) && defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150) && defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO)
+#include "wolfssl/wolfcrypt/port/pic32/crypt_tdes_hwInt.h"
+#include "wolfssl/wolfcrypt/port/pic32/crypt_tdes_sam6150.h"
 
 #include "definitions.h"
 
-int  CRYPT_DES_SetKey(Des* des, const byte* key, const byte* iv, int dir)
+
+WOLFSSL_API int  wc_Des_SetKey(Des* des, const byte* key,
+                               const byte* iv, int dir)
 {
   memcpy(des->key, key, 8);
-  memcpy(des->iv, iv, 8);
+  memcpy(des->reg, iv, 8);
   return 0;
 }
 void CRYPT_DES_SetIV(Des* des, const byte* iv)
 {
-  memcpy(des->iv, iv, 8);  
+  memcpy(des->reg, iv, 8);  
 }
 
 static void CRYPT_DES_LoadKeyIv(uint32_t * key, uint32_t * iv)
@@ -141,7 +143,8 @@ static void CRYPT_DES_ProcessBlocks(uint32_t* out, const uint32_t* in, uint32_t 
     }
 }
 
-int  CRYPT_DES_CbcEncrypt(Des* des, byte* out, const byte* in, word32 sz)
+WOLFSSL_API int  wc_Des_CbcEncrypt(Des* des, byte* out,
+                                   const byte* in, word32 sz)
 {
   CRYPTO_TDES_SAM6150_CR cr = {0};
   cr.s.SWRST = 1;
@@ -157,15 +160,17 @@ int  CRYPT_DES_CbcEncrypt(Des* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES_LoadKeyIv(des->key[0], des->iv);
+  CRYPT_DES_LoadKeyIv((uint32_t*)(&(des->key[0])), (uint32_t*)(&(des->reg[0])));
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
-  memcpy(des->iv, &(out[sz-8]), 8);
+  memcpy(des->reg, &(out[sz-8]), 8);
   
   return 0;
 }
-int  CRYPT_DES_CbcDecrypt(Des* des, byte* out, const byte* in, word32 sz)
+
+WOLFSSL_API int  wc_Des_CbcDecrypt(Des* des, byte* out,
+                                   const byte* in, word32 sz)
 {
   CRYPTO_TDES_SAM6150_CR cr = {0};
   cr.s.SWRST = 1;
@@ -181,11 +186,11 @@ int  CRYPT_DES_CbcDecrypt(Des* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES_LoadKeyIv(des->key[0], des->iv);
+  CRYPT_DES_LoadKeyIv((uint32_t*)(&(des->key[0])), (uint32_t *)(&(des->reg[0])));
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
-  memcpy(des->iv, &(in[sz-8]), 8);
+  memcpy(des->reg, &(in[sz-8]), 8);
   return 0;
 }
 
@@ -205,7 +210,7 @@ int  CRYPT_DES_EcbEncrypt(Des* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES_LoadKeyIv(des->key[0], NULL);
+  CRYPT_DES_LoadKeyIv(&des->key[0], NULL);
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
@@ -213,6 +218,8 @@ int  CRYPT_DES_EcbEncrypt(Des* des, byte* out, const byte* in, word32 sz)
 
   return 0;
 }
+
+
 
 static void CRYPT_DES3_LoadKeyIv(uint32_t * key, uint32_t * iv)
 {
@@ -253,20 +260,22 @@ int  CRYPT_DES3_EcbEncrypt(Des3* des, byte* out, const byte* in, word32 sz)
   return 0;
 }
 
-int  CRYPT_DES3_SetKey(Des3* des, const byte* key, const byte* iv, int dir)
+WOLFSSL_API int  wc_Des3_SetKey(Des3* des, const byte* key,
+                                const byte* iv,int dir)
 {
   memcpy(des->key, key, 24);
-  memcpy(des->iv, iv, 8);  
+  memcpy(des->reg, iv, 8);  
   return 0;
 }
 
 int  CRYPT_DES3_SetIV(Des3* des, const byte* iv)
 {
-  memcpy(des->iv, iv, 8);    
+  memcpy(des->reg, iv, 8);    
   return 0;
 }
 
-int  CRYPT_DES3_CbcEncrypt(Des3* des, byte* out, const byte* in, word32 sz)
+WOLFSSL_API int  wc_Des3_CbcEncrypt(Des3* des, byte* out,
+                                    const byte* in,word32 sz)
 {
   CRYPTO_TDES_SAM6150_CR cr = {0};
   cr.s.SWRST = 1;
@@ -282,16 +291,17 @@ int  CRYPT_DES3_CbcEncrypt(Des3* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES3_LoadKeyIv(des->key[0], des->iv);
+  CRYPT_DES3_LoadKeyIv(des->key[0], des->reg);
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
-  memcpy(des->iv, &(out[sz-8]), 8);
+  memcpy(des->reg, &(out[sz-8]), 8);
   
   return 0;
 }
 
-int  CRYPT_DES3_CbcDecrypt(Des3* des, byte* out, const byte* in, word32 sz)
+WOLFSSL_API int  wc_Des3_CbcDecrypt(Des3* des, byte* out,
+                                    const byte* in,word32 sz)
 {
   CRYPTO_TDES_SAM6150_CR cr = {0};
   cr.s.SWRST = 1;
@@ -307,11 +317,11 @@ int  CRYPT_DES3_CbcDecrypt(Des3* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES3_LoadKeyIv(des->key[0], des->iv);
+  CRYPT_DES3_LoadKeyIv(des->key[0], des->reg);
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
-  memcpy(des->iv, &(in[sz-8]), 8);
+  memcpy(des->reg, &(in[sz-8]), 8);
   return 0;
 }
 

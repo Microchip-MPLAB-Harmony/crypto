@@ -1131,7 +1131,7 @@ static int aesgcm_default_test_helper(const uint8_t* key, int keySz, const uint8
                 if (plain[x] != resultP[x])
                 {
                     sprintf(printBuffer, "GCM Failed at uint8_t %x first uint8_t %x second uint8_t %x\r\n", x, plain[x], resultP[x]);
-                    SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
+                    DRV_USART_WriteBuffer( appData.usartHandle, printBuffer, strlen(printBuffer));
                     errorFound = 1;
                     break;
                 }
@@ -2543,7 +2543,8 @@ void APP_Tasks(void) {
             /* Show Hyperterminal is working using available output functions */
             // SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
             // SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
-            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
+            appData.usartHandle = DRV_USART_Open(DRV_USART_INDEX_0, DRV_IO_INTENT_READWRITE);
+            DRV_USART_WriteBuffer( appData.usartHandle, msgBuffer, strlen(msgBuffer));
             appData.state = APP_STATE_TEST_MD5;
             break;
         }
@@ -2898,7 +2899,7 @@ void APP_Tasks(void) {
             } else {
                 sprintf(printBuffer, "%s\n\rAll tests passed\n\r", printBuffer);
             }
-            SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, printBuffer, strlen(printBuffer));
+            DRV_USART_WriteBuffer( appData.usartHandle, printBuffer, strlen(printBuffer));
             appData.state = APP_SPIN;
             break;
 

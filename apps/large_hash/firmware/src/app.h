@@ -144,6 +144,7 @@ typedef struct
     uint32_t sha512_feed_timing;
     
     int32_t wallTime;
+    DRV_HANDLE              usartHandle;
 } APP_DATA;
 
 
