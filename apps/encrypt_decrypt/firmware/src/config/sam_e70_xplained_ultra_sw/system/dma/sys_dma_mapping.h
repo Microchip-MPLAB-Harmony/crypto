@@ -1,5 +1,23 @@
-// DOM-IGNORE-BEGIN
 /*******************************************************************************
+  DMA System Service Mapping File
+
+  Company:
+    Microchip Technology Inc.
+
+  File Name:
+    sys_dma_mapping.h
+
+  Summary:
+    DMA System Service mapping file.
+
+  Description:
+    This header file contains the mapping of the APIs defined in the API header
+    to either the function implementations or macro implementation or the
+    specific variant implementation.
+*******************************************************************************/
+
+//DOM-IGNORE-BEGIN
+/******************************************************************************
 * Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
@@ -21,36 +39,24 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
-// DOM-IGNORE-END
+//DOM-IGNORE-END
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <device.h> /* for ARM CMSIS __BKPT() */
+#ifndef SYS_DMA_MAPPING_H
+#define SYS_DMA_MAPPING_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-/* Harmony specific
- * We implement only the syscalls we want over the stubs provided by libpic32c
- */
-extern void _exit(int status);
+// *****************************************************************************
+// *****************************************************************************
+// Section: DMA System Service Mapping
+// *****************************************************************************
+// *****************************************************************************
 
-extern void _exit(int status)
-{
-    /* Software breakpoint */
-#ifdef __DEBUG
-    __BKPT(0);
-#endif
 
-    /* halt CPU */
-    while (1)
-    {
-    }
-}
+#define SYS_DMA_ChannelCallbackRegister(channel, eventHandler, context)
 
-#ifdef __cplusplus
-}
-#endif
+#define SYS_DMA_ChannelTransfer(channel, srcAddr, destAddr, blockSize)
+
+#define SYS_DMA_ChannelIsBusy(channel)
+
+#define SYS_DMA_ChannelDisable(channel)
+#endif // SYS_DMA_MAPPING_H
