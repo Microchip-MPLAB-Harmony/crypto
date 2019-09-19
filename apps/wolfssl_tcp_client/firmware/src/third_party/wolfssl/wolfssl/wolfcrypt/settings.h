@@ -190,6 +190,9 @@
 /* Uncomment next line if using Espressif ESP32-WROOM-32SE */
 /* #define WOLFSSL_ESPWROOM32SE */
 
+/* Uncomment next line if using ARM CRYPTOCELL*/
+/* #define WOLFSSL_CRYPTOCELL */
+
 #include <wolfssl/wolfcrypt/visibility.h>
 
 #ifdef WOLFSSL_USER_SETTINGS
@@ -199,7 +202,13 @@
 
 /* make sure old RNG name is used with CTaoCrypt FIPS */
 #ifdef HAVE_FIPS
-    #define WC_RNG RNG
+    #if !defined(HAVE_FIPS_VERSION) || (HAVE_FIPS_VERSION < 2)
+        #define WC_RNG RNG
+    #else
+        #ifndef WOLFSSL_STM32L4
+            #define RNG WC_RNG
+        #endif
+    #endif
     /* blinding adds API not available yet in FIPS mode */
     #undef WC_RSA_BLINDING
 #endif
@@ -274,7 +283,7 @@
     #define NO_FILESYSTEM
     #define CUSTOM_RAND_TYPE uint16_t
     #define CUSTOM_RAND_GENERATE random_rand
-    static inline unsigned int LowResTimer(void)
+    static inline word32 LowResTimer(void)
     {
         return clock_seconds();
     }
@@ -435,7 +444,15 @@
     #define SINGLE_THREADED
     #define NO_DEV_RANDOM
     #ifndef INTEL_GALILEO /* Galileo has time.h compatibility */
-        #define TIME_OVERRIDES /* must define XTIME and XGMTIME externally */
+        #define TIME_OVERRIDES
+        #ifndef XTIME
+            #error "Must define XTIME externally see porting guide"
+            #error "https://www.wolfssl.com/docs/porting-guide/"
+        #endif
+        #ifndef XGMTIME
+            #error "Must define XGMTIME externally see porting guide"
+            #error "https://www.wolfssl.com/docs/porting-guide/"
+        #endif
     #endif
     #define WOLFSSL_USER_IO
     #define HAVE_ECC
@@ -712,6 +729,11 @@ extern void uITRON4_free(void *p) ;
     #define USE_WOLF_STRTOK /* use with HAVE_ALPN */
     #define HAVE_TLS_EXTENSIONS
     #define HAVE_AESGCM
+    #ifdef WOLFSSL_TI_CRYPT
+        #define NO_GCM_ENCRYPT_EXTRA
+        #define NO_PUBLIC_GCM_SET_IV
+        #define NO_PUBLIC_CCM_SET_NONCE
+    #endif
     #define HAVE_SUPPORTED_CURVES
     #define ALT_ECC_SIZE
 
@@ -749,7 +771,7 @@ extern void uITRON4_free(void *p) ;
         #undef SIZEOF_LONG
         #define SIZEOF_LONG_LONG 8
     #else
-        #sslpro: settings.h - please implement SIZEOF_LONG and SIZEOF_LONG_LONG
+        #error settings.h - please implement SIZEOF_LONG and SIZEOF_LONG_LONG
     #endif
 
     #define XMALLOC(s, h, type) ((void *)rtp_malloc((s), SSL_PRO_MALLOC))
@@ -1093,6 +1115,9 @@ extern void uITRON4_free(void *p) ;
     defined(WOLFSSL_STM32L4)
 
     #define SIZEOF_LONG_LONG 8
+    #ifndef CHAR_BIT
+      #define CHAR_BIT 8
+    #endif
     #define NO_DEV_RANDOM
     #define NO_WOLFSSL_DIR
     #undef  NO_RABBIT
@@ -1131,6 +1156,9 @@ extern void uITRON4_free(void *p) ;
             #include "stm32f7xx_hal.h"
         #elif defined(WOLFSSL_STM32F1)
             #include "stm32f1xx_hal.h"
+        #endif
+        #if defined(WOLFSSL_CUBEMX_USE_LL) && defined(WOLFSSL_STM32L4)
+            #include "stm32l4xx_ll_rng.h"
         #endif
 
         #ifndef STM32_HAL_TIMEOUT
@@ -1274,12 +1302,14 @@ extern void uITRON4_free(void *p) ;
                     ((CPU_CHAR *)Str_Cat_N((CPU_CHAR *)(pstr_dest), \
                      (const CPU_CHAR *)(pstr_cat),(CPU_SIZE_T)(len_max)))
     #define XMEMSET(pmem, data_val, size) \
-                    ((void)Mem_Set((void *)(pmem), (CPU_INT08U) (data_val), \
+                    ((void)Mem_Set((void *)(pmem), \
+                    (CPU_INT08U) (data_val), \
                     (CPU_SIZE_T)(size)))
     #define XMEMCPY(pdest, psrc, size) ((void)Mem_Copy((void *)(pdest), \
                      (void *)(psrc), (CPU_SIZE_T)(size)))
     #define XMEMCMP(pmem_1, pmem_2, size) \
-                   (((CPU_BOOLEAN)Mem_Cmp((void *)(pmem_1), (void *)(pmem_2), \
+                   (((CPU_BOOLEAN)Mem_Cmp((void *)(pmem_1), \
+                                          (void *)(pmem_2), \
                      (CPU_SIZE_T)(size))) ? DEF_NO : DEF_YES)
     #define XMEMMOVE XMEMCPY
 
@@ -1328,7 +1358,6 @@ extern void uITRON4_free(void *p) ;
 
 
 #if defined(WOLFSSL_XILINX)
-    #define USER_TIME /* XTIME in asn.c */
     #define NO_WOLFSSL_DIR
     #define NO_DEV_RANDOM
     #define HAVE_AESGCM
@@ -1825,6 +1854,27 @@ extern void uITRON4_free(void *p) ;
     #endif
 #endif
 
+#ifndef NO_PKCS12
+    #undef  HAVE_PKCS12
+    #define HAVE_PKCS12
+#endif
+
+#ifndef NO_PKCS8
+    #undef  HAVE_PKCS8
+    #define HAVE_PKCS8
+#endif
+
+#if !defined(NO_PBKDF1) || defined(WOLFSSL_ENCRYPTED_KEYS) || defined(HAVE_PKCS8) || defined(HAVE_PKCS12)
+    #undef  HAVE_PBKDF1
+    #define HAVE_PBKDF1
+#endif
+
+#if !defined(NO_PBKDF2) || defined(HAVE_PKCS7) || defined(HAVE_SCRYPT)
+    #undef  HAVE_PBKDF2
+    #define HAVE_PBKDF2
+#endif
+
+
 #if !defined(WOLFCRYPT_ONLY) && !defined(NO_OLD_TLS) && \
         (defined(NO_SHA) || defined(NO_MD5))
     #error old TLS requires MD5 and SHA
@@ -1990,6 +2040,9 @@ extern void uITRON4_free(void *p) ;
     #define WOLF_CRYPTO_CB
 #endif
 
+#if defined(WOLFSSL_TLS13) && defined(WOLFSSL_NO_SIGALG)
+    #error TLS 1.3 requires the Signature Algorithms extension to be enabled
+#endif
 
 #ifdef __cplusplus
     }   /* extern "C" */

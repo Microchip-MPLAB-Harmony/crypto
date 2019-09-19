@@ -193,6 +193,9 @@ extern "C" {
 #define MICROCHIP_TCPIP
 #define WOLFSSL_DTLS
 
+#define WOLFSSL_TLS13
+#define HAVE_TLS_EXTENSIONS
+#define HAVE_SUPPORTED_CURVES
 
 
     
@@ -201,7 +204,9 @@ extern "C" {
 
 #define NO_ERROR_STRINGS
     
+#define NO_OLD_TLS
     
+#define USE_FAST_MATH
     
     
     
@@ -509,10 +514,12 @@ extern "C" {
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
+#define WOLF_CRYPTO_CB
 #define NO_MD4
 #define WOLFSSL_SHA224
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
+#define HAVE_HKDF
 #define WOLFSSL_AES_128
 #define WOLFSSL_AES_192
 #define WOLFSSL_AES_256
@@ -523,13 +530,17 @@ extern "C" {
 #define WOLFSSL_AES_COUNTER
 #define HAVE_AESGCM
 #define HAVE_AESCCM
+#define WOLFSSL_CMAC
 #define NO_RC4
 #define NO_HC128
 #define NO_RABBIT
 #define HAVE_ECC
-#define NO_DH
-#define NO_DSA
+#define HAVE_X963_KDF
+#define WOLFSSL_CUSTOM_CURVES
+#define HAVE_CURVE25519
+#define HAVE_ED25519
 #define USE_CERT_BUFFERS_2048
+#define WC_RSA_PSS
 #define NO_DEV_RANDOM
 #define HAVE_HASHDRBG
 #define WC_NO_HARDEN

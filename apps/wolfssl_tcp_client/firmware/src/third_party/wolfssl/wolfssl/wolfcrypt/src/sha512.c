@@ -186,7 +186,6 @@
 #endif
 
 #if defined(WOLFSSL_IMX6_CAAM) && !defined(NO_IMX6_CAAM_HASH)
-	
     /* functions defined in wolfcrypt/src/port/caam/caam_sha.c */
 #elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_SHA2128)
 
@@ -702,8 +701,6 @@ static WC_INLINE int Sha512Update(wc_Sha512* sha512, const byte* data, word32 le
 
 #ifdef WOLFSSL_SHA512
 
-
-
 int wc_Sha512Update(wc_Sha512* sha512, const byte* data, word32 len)
 {
     if (sha512 == NULL || (data == NULL && len > 0)) {
@@ -757,6 +754,9 @@ static WC_INLINE int Sha512Final(wc_Sha512* sha512)
      defined(NO_WOLFSSL_ESP32WROOM32_CRYPT_HASH)
         ret = Transform_Sha512(sha512);
 #else
+       if(sha512->ctx.mode == ESP32_SHA_INIT) {
+            esp_sha_try_hw_lock(&sha512->ctx);
+       }
         ret = esp_sha512_process(sha512);
         if(ret == 0 && sha512->ctx.mode == ESP32_SHA_SW){
             ret = Transform_Sha512(sha512);
@@ -873,7 +873,6 @@ int wc_InitSha512(wc_Sha512* sha512)
 {
     return wc_InitSha512_ex(sha512, NULL, INVALID_DEVID);
 }
-
 
 void wc_Sha512Free(wc_Sha512* sha512)
 {
