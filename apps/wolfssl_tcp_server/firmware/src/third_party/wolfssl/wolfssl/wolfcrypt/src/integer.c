@@ -75,6 +75,9 @@
 #endif
 
 #if defined(WOLFSSL_HAVE_SP_RSA) || defined(WOLFSSL_HAVE_SP_DH)
+#ifdef __cplusplus
+    extern "C" {
+#endif
 WOLFSSL_LOCAL int sp_ModExp_1024(mp_int* base, mp_int* exp, mp_int* mod,
     mp_int* res);
 WOLFSSL_LOCAL int sp_ModExp_1536(mp_int* base, mp_int* exp, mp_int* mod,
@@ -83,6 +86,9 @@ WOLFSSL_LOCAL int sp_ModExp_2048(mp_int* base, mp_int* exp, mp_int* mod,
     mp_int* res);
 WOLFSSL_LOCAL int sp_ModExp_3072(mp_int* base, mp_int* exp, mp_int* mod,
     mp_int* res);
+#ifdef __cplusplus
+    } /* extern "C" */
+#endif
 #endif
 
 /* reverse an array, used for radix code */
@@ -4437,11 +4443,20 @@ static int mp_prime_miller_rabin (mp_int * a, mp_int * b, int *result)
     goto LBL_R;
   }
 #if defined(WOLFSSL_HAVE_SP_RSA) || defined(WOLFSSL_HAVE_SP_DH)
+#ifndef WOLFSSL_SP_NO_2048
   if (mp_count_bits(a) == 1024)
       err = sp_ModExp_1024(b, &r, a, &y);
   else if (mp_count_bits(a) == 2048)
       err = sp_ModExp_2048(b, &r, a, &y);
   else
+#endif
+#ifndef WOLFSSL_SP_NO_3072
+  if (mp_count_bits(a) == 1536)
+      err = sp_ModExp_1536(b, &r, a, &y);
+  else if (mp_count_bits(a) == 3072)
+      err = sp_ModExp_3072(b, &r, a, &y);
+  else
+#endif
 #endif
       err = mp_exptmod (b, &r, a, &y);
   if (err != MP_OKAY)
@@ -4639,8 +4654,10 @@ int mp_prime_is_prime_ex (mp_int * a, int t, int *result, WC_RNG *rng)
         goto LBL_B;
     }
 
-    if (mp_cmp_d(&b, 2) != MP_GT || mp_cmp(&b, &c) != MP_LT)
+    if (mp_cmp_d(&b, 2) != MP_GT || mp_cmp(&b, &c) != MP_LT) {
+        ix--;
         continue;
+    }
 
     if ((err = mp_prime_miller_rabin (a, &b, &res)) != MP_OKAY) {
       goto LBL_B;
@@ -4854,8 +4871,8 @@ int mp_gcd (mp_int * a, mp_int * b, mp_int * c)
     }
     c->sign = MP_ZPOS;
     res = MP_OKAY;
-LBL_V:mp_clear (&u);
-LBL_U:mp_clear (&v);
+LBL_V:mp_clear (&v);
+LBL_U:mp_clear (&u);
     return res;
 }
 

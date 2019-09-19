@@ -1294,6 +1294,23 @@ int SetCipherSpecs(WOLFSSL* ssl)
         break;
 #endif
 
+#ifdef BUILD_TLS_RSA_WITH_NULL_MD5
+    case TLS_RSA_WITH_NULL_MD5 :
+        ssl->specs.bulk_cipher_algorithm = wolfssl_cipher_null;
+        ssl->specs.cipher_type           = stream;
+        ssl->specs.mac_algorithm         = md5_mac;
+        ssl->specs.kea                   = rsa_kea;
+        ssl->specs.sig_algo              = rsa_sa_algo;
+        ssl->specs.hash_size             = WC_MD5_DIGEST_SIZE;
+        ssl->specs.pad_size              = PAD_MD5;
+        ssl->specs.static_ecdh           = 0;
+        ssl->specs.key_size              = 0;
+        ssl->specs.block_size            = 0;
+        ssl->specs.iv_size               = 0;
+
+        break;
+#endif
+
 #ifdef BUILD_TLS_RSA_WITH_NULL_SHA
     case TLS_RSA_WITH_NULL_SHA :
         ssl->specs.bulk_cipher_algorithm = wolfssl_cipher_null;
@@ -2611,8 +2628,9 @@ static int SetKeys(Ciphers* enc, Ciphers* dec, Keys* keys, CipherSpecs* specs,
                 if (gcmRet != 0) return gcmRet;
                 XMEMCPY(keys->aead_enc_imp_IV, keys->client_write_IV,
                         AEAD_MAX_IMP_SZ);
-#if (!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
-    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
+#if !defined(NO_PUBLIC_GCM_SET_IV) && \
+    ((!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
+    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)))
                 if (!skipIv) {
                     gcmRet = wc_AesGcmSetIV(enc->aes, AESGCM_NONCE_SZ,
                             keys->client_write_IV, AESGCM_IMP_IV_SZ, rng);
@@ -2635,8 +2653,9 @@ static int SetKeys(Ciphers* enc, Ciphers* dec, Keys* keys, CipherSpecs* specs,
                 if (gcmRet != 0) return gcmRet;
                 XMEMCPY(keys->aead_enc_imp_IV, keys->server_write_IV,
                         AEAD_MAX_IMP_SZ);
-#if (!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
-    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
+#if !defined(NO_PUBLIC_GCM_SET_IV) && \
+    ((!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
+    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)))
                 if (!skipIv) {
                     gcmRet = wc_AesGcmSetIV(enc->aes, AESGCM_NONCE_SZ,
                             keys->server_write_IV, AESGCM_IMP_IV_SZ, rng);
@@ -2711,8 +2730,9 @@ static int SetKeys(Ciphers* enc, Ciphers* dec, Keys* keys, CipherSpecs* specs,
                 }
                 XMEMCPY(keys->aead_enc_imp_IV, keys->client_write_IV,
                         AEAD_MAX_IMP_SZ);
-#if (!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
-    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
+#if !defined(NO_PUBLIC_CCM_SET_NONCE) && \
+    ((!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
+    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)))
                 if (!skipIv) {
                     CcmRet = wc_AesCcmSetNonce(enc->aes, keys->client_write_IV,
                             AEAD_MAX_IMP_SZ);
@@ -2739,8 +2759,9 @@ static int SetKeys(Ciphers* enc, Ciphers* dec, Keys* keys, CipherSpecs* specs,
                 }
                 XMEMCPY(keys->aead_enc_imp_IV, keys->server_write_IV,
                         AEAD_MAX_IMP_SZ);
-#if (!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
-    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
+#if !defined(NO_PUBLIC_CCM_SET_NONCE) && \
+    ((!defined(HAVE_FIPS) && !defined(HAVE_SELFTEST)) || \
+    (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)))
                 if (!skipIv) {
                     CcmRet = wc_AesCcmSetNonce(enc->aes, keys->server_write_IV,
                             AEAD_MAX_IMP_SZ);

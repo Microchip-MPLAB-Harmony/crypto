@@ -57,6 +57,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 typedef struct 
 {
+    int devId;
+    word32 flags; /* enum wc_HashFlags in hash.h */
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105)
     struct icm_descriptor icm_descriptor __attribute__((aligned (64)));
     uint8_t  buffer[SHA_BLOCK_SIZE]   __attribute__((aligned (64)));
