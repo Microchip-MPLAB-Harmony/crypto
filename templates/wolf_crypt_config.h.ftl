@@ -113,6 +113,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
     <#if wolfcrypt_sha512 == true>
         <#lt>#define WOLFSSL_SHA512
+        <#lt>#define HAVE_SHA512
+    <#else>
+        <#lt>#define NO_SHA512
     </#if>
     <#if wolfcrypt_sha2128_hw == true>
         <#lt>#define WOLFSSL_HAVE_MCHP_HW_SHA2128
@@ -299,6 +302,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
 </#if>
 <#if wolfcrypt_dh == true>
+    <#lt>#define HAVE_DH
     <#if wolfcrypt_dh_anon == true>
         <#lt>#define HAVE_ANON
     </#if>
