@@ -77,7 +77,7 @@ static void CLK_MasterClockInitialize(void)
 /*********************************************************************************
 Clock Initialize
 *********************************************************************************/
-void CLK_Initialize( void )
+void CLOCK_Initialize( void )
 {
 
 
@@ -94,5 +94,5 @@ void CLK_Initialize( void )
 
     /* Enable Peripheral Clock */
     PMC_REGS->PMC_PCER0=0x835c00;
-    PMC_REGS->PMC_PCER1=0x80;
+    PMC_REGS->PMC_PCER1=0x3000081;
 }

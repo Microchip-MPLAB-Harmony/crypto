@@ -199,6 +199,9 @@ extern "C" {
 #define MICROCHIP_TCPIP
 #define WOLFSSL_DTLS
 
+#define WOLFSSL_TLS13
+#define HAVE_TLS_EXTENSIONS
+#define HAVE_SUPPORTED_CURVES
 
 
     
@@ -302,7 +305,9 @@ extern "C" {
 
 /* Net Pres RTOS Configurations*/
 #define NET_PRES_RTOS_STACK_SIZE           8192
-#define NET_PRES_RTOS_TASK_PRIORITY             1
+#define NET_PRES_RTOS_TASK_PRIORITY             1	
+	
+#define FREERTOS
 
 
 
@@ -521,6 +526,7 @@ extern "C" {
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
+#define WOLF_CRYPTO_CB
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105
@@ -531,6 +537,8 @@ extern "C" {
 #define WOLFSSL_HAVE_MCHP_HW_SHA264
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
+#define HAVE_SHA512
+#define HAVE_HKDF
 #define WOLFSSL_AES_128
 #define WOLFSSL_AES_192
 #define WOLFSSL_AES_256
@@ -544,14 +552,15 @@ extern "C" {
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_HAVE_MCHP_HW_AES_CTR
 #define HAVE_AESGCM
-#define WOLFSSL_HAVE_MCHP_HW_AES_GCM
 #define HAVE_AESCCM
 #define NO_RC4
 #define NO_HC128
 #define NO_RABBIT
 #define HAVE_ECC
+#define HAVE_DH
 #define NO_DSA
 #define USE_CERT_BUFFERS_2048
+#define WC_RSA_PSS
 #define NO_DEV_RANDOM
 #define WOLFSSL_HAVE_MCHP_HW_RANDOM
 #define HAVE_HASHDRBG
