@@ -61,7 +61,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "device.h" /* SAME70 system header. */
 #include "wolfssl/wolfcrypt/aes.h"
 
-#include "crypto/crypto.h"
 #include "wolfssl/wolfcrypt/error-crypt.h"
 #include "wolfssl/wolfcrypt/logging.h"
 #include "wolfssl/wolfcrypt/port/pic32/crypt_aes_u2238.h"
