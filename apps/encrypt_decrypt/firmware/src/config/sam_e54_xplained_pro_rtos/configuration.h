@@ -88,18 +88,6 @@ extern "C" {
 #define SYS_TIME_CPU_CLOCK_FREQUENCY         120000000
 #define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES      (188)
 
-/* Console System Service Configuration Options */
-#define SYS_CONSOLE_DEVICE_MAX_INSTANCES   1
-#define SYS_CONSOLE_UART_MAX_INSTANCES     1
-
-
-/* RX queue size has one additional element for the empty spot needed in circular queue */
-#define SYS_CONSOLE_UART_RD_QUEUE_DEPTH_IDX0    11
-
-/* TX queue size has one additional element for the empty spot needed in circular queue */
-#define SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0    65
-#define SYS_CONSOLE_BUFFER_DMA_READY
-
 
 
 // *****************************************************************************
@@ -107,6 +95,12 @@ extern "C" {
 // Section: Driver Configuration
 // *****************************************************************************
 // *****************************************************************************
+/* USART Driver Instance 0 Configuration Options */
+#define DRV_USART_INDEX_0                  0
+#define DRV_USART_CLIENTS_NUMBER_IDX0      1
+
+/* USART Driver Global Configuration Options */
+#define DRV_USART_INSTANCES_NUMBER         1
 
 
 // *****************************************************************************
@@ -120,7 +114,6 @@ extern "C" {
 #define MICROCHIP_MPLAB_HARMONY
 #define MICROCHIP_MPLAB_HARMONY_3
 #define HAVE_MCAPI
-#define WOLFSSL_IGNORE_FILE_WARN
 #define SIZEOF_LONG_LONG 8
 #define WOLFSSL_USER_IO
 #define NO_WRITEV
@@ -128,19 +121,21 @@ extern "C" {
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
-#define WOLFSSL_IGNORE_FILE_WARN
-#define WOLFCRYPT_ONLY
+#define WOLF_CRYPTO_CB
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_ECC_HW_PUKCC
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_RSA_HW_PUKCC
 #define NO_MD4
 #define WOLFSSL_HAVE_MCHP_HW_SHA1
 #define WOLFSSL_SHA224
 #define WOLFSSL_HAVE_MCHP_HW_SHA264
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
+#define HAVE_SHA512
 #define WOLFSSL_AES_128
 #define WOLFSSL_AES_192
 #define WOLFSSL_AES_256
@@ -160,8 +155,10 @@ extern "C" {
 #define NO_HC128
 #define NO_RABBIT
 #define HAVE_ECC
+#define WOLFSSL_HAVE_MCHP_HW_ECC
 #define NO_DH
 #define NO_DSA
+#define WOLFSSL_HAVE_MCHP_HW_RSA
 #define USE_CERT_BUFFERS_2048
 #define NO_DEV_RANDOM
 #define HAVE_HASHDRBG
@@ -169,6 +166,7 @@ extern "C" {
 #define FREERTOS
 #define NO_ERROR_STRINGS
 #define NO_WOLFSSL_MEMORY
+#define HAVE_LIBZ
 
 
 
