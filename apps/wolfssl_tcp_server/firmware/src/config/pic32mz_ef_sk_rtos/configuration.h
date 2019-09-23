@@ -245,6 +245,9 @@ extern "C" {
 #define MICROCHIP_TCPIP
 #define WOLFSSL_DTLS
 
+#define WOLFSSL_TLS13
+#define HAVE_TLS_EXTENSIONS
+#define HAVE_SUPPORTED_CURVES
 
 
     
@@ -253,6 +256,7 @@ extern "C" {
 
 #define NO_ERROR_STRINGS
     
+#define NO_OLD_TLS
     
     
     
@@ -348,7 +352,9 @@ extern "C" {
 
 /* Net Pres RTOS Configurations*/
 #define NET_PRES_RTOS_STACK_SIZE           8192
-#define NET_PRES_RTOS_TASK_PRIORITY             1
+#define NET_PRES_RTOS_TASK_PRIORITY             1	
+	
+#define FREERTOS
 
 
 
@@ -476,6 +482,7 @@ extern "C" {
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
+#define WOLF_CRYPTO_CB
 #define WOLFSSL_MICROCHIP_PIC32MZ
 #define NO_MD4
 #define WOLFSSL_PIC32MZ_HASH
@@ -483,6 +490,8 @@ extern "C" {
 #define WOLFSSL_PIC32MZ_HASH
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
+#define HAVE_SHA512
+#define HAVE_HKDF
 #define WOLFSSL_AES_128
 #define WOLFSSL_AES_192
 #define WOLFSSL_AES_256
@@ -497,9 +506,10 @@ extern "C" {
 #define NO_HC128
 #define NO_RABBIT
 #define HAVE_ECC
-#define NO_DH
+#define HAVE_DH
 #define NO_DSA
 #define USE_CERT_BUFFERS_2048
+#define WC_RSA_PSS
 #define NO_DEV_RANDOM
 #define WOLFSSL_PIC32MZ_RNG
 #define HAVE_HASHDRBG
