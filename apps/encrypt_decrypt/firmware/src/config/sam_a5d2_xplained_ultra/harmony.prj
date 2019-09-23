@@ -123,8 +123,8 @@
           <Name dnOrder="1">crypt_aes_u2238.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2917180FC9913A830DF4AC5C45789AB8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2917180FC9913A830DF4AC5C45789AB8</UserChecksum>
+          <GeneratedChecksum dnOrder="4">13F27880611DC3E056C1C1B57B77518B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">13F27880611DC3E056C1C1B57B77518B</UserChecksum>
         </File>
         <File dnOrder="15">
           <Type dnOrder="0">SOURCE</Type>
@@ -139,8 +139,8 @@
           <Name dnOrder="1">crypt_pukcl_functions.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">9F326A0A94E4A3CB7E1A7641C2CFE1B4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9F326A0A94E4A3CB7E1A7641C2CFE1B4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">8D76A5130D2A36C015FCA43AA4575CFC</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8D76A5130D2A36C015FCA43AA4575CFC</UserChecksum>
         </File>
         <File dnOrder="17">
           <Type dnOrder="0">SOURCE</Type>
@@ -179,8 +179,8 @@
           <Name dnOrder="1">crypt_sha1_sam6156.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">926E1E03312125A66919FEFF8D0A40DD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">926E1E03312125A66919FEFF8D0A40DD</UserChecksum>
+          <GeneratedChecksum dnOrder="4">452C774CA60EC50D25175BC4E372AF2F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">452C774CA60EC50D25175BC4E372AF2F</UserChecksum>
         </File>
         <File dnOrder="22">
           <Type dnOrder="0">SOURCE</Type>
@@ -195,8 +195,8 @@
           <Name dnOrder="1">crypt_sha224_sam6156.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B41A68A44C10B1BB0F37E75516B41B03</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B41A68A44C10B1BB0F37E75516B41B03</UserChecksum>
+          <GeneratedChecksum dnOrder="4">289C9C1774FEF7B82519F2149653D4D6</GeneratedChecksum>
+          <UserChecksum dnOrder="5">289C9C1774FEF7B82519F2149653D4D6</UserChecksum>
         </File>
         <File dnOrder="24">
           <Type dnOrder="0">SOURCE</Type>
@@ -211,32 +211,32 @@
           <Name dnOrder="1">crypt_sha256_sam6156.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8DAE315393D33A32F10FC73C97868E85</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8DAE315393D33A32F10FC73C97868E85</UserChecksum>
+          <GeneratedChecksum dnOrder="4">7BEA7B6FFE2DC6744EB36C30FE726191</GeneratedChecksum>
+          <UserChecksum dnOrder="5">7BEA7B6FFE2DC6744EB36C30FE726191</UserChecksum>
         </File>
         <File dnOrder="26">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha384_sam6156.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6FF5F7A283B8B1B4BCCA9E055D3F19A8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6FF5F7A283B8B1B4BCCA9E055D3F19A8</UserChecksum>
+          <GeneratedChecksum dnOrder="4">77D656BD488E01CB8AFE3402CB62DCF9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">77D656BD488E01CB8AFE3402CB62DCF9</UserChecksum>
         </File>
         <File dnOrder="27">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_sha512_sam6156.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">BF2582BACBEAF4327F62B2824E77FD4C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">BF2582BACBEAF4327F62B2824E77FD4C</UserChecksum>
+          <GeneratedChecksum dnOrder="4">9D136C33757AD14EE319D8E5DC25D519</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9D136C33757AD14EE319D8E5DC25D519</UserChecksum>
         </File>
         <File dnOrder="28">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">crypt_tdes_sam6150.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1ECD6A1D203A3F974316B98906D2C907</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1ECD6A1D203A3F974316B98906D2C907</UserChecksum>
+          <GeneratedChecksum dnOrder="4">96924DFDA57A88CCB8C15AE06A6A3875</GeneratedChecksum>
+          <UserChecksum dnOrder="5">96924DFDA57A88CCB8C15AE06A6A3875</UserChecksum>
         </File>
         <File dnOrder="29">
           <Type dnOrder="0">SOURCE</Type>
@@ -251,8 +251,8 @@
           <Name dnOrder="1">crypto.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5898EA1FF8486CBA89234AF45C24FEB4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5898EA1FF8486CBA89234AF45C24FEB4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">F3FE43CBF92DE1106B46B38AA5ABE39C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F3FE43CBF92DE1106B46B38AA5ABE39C</UserChecksum>
         </File>
         <File dnOrder="31">
           <Type dnOrder="0">SOURCE</Type>
@@ -296,13 +296,29 @@
         </File>
         <File dnOrder="36">
           <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">drv_usart.c</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/usart/</LogicalPath>
+          <PhysicalPath dnOrder="3">/driver/usart/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">FA72ED3991E913F61160B04BFE6DFEA0</GeneratedChecksum>
+          <UserChecksum dnOrder="5">FA72ED3991E913F61160B04BFE6DFEA0</UserChecksum>
+        </File>
+        <File dnOrder="37">
+          <Type dnOrder="0">SOURCE</Type>
+          <Name dnOrder="1">drv_usart_local.h</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/usart/</LogicalPath>
+          <PhysicalPath dnOrder="3">/driver/usart/src/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">3C994B39539F3385A12F1D8C099E6786</GeneratedChecksum>
+          <UserChecksum dnOrder="5">3C994B39539F3385A12F1D8C099E6786</UserChecksum>
+        </File>
+        <File dnOrder="38">
+          <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">dsa.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">9951EA41E6BF3CC1EBF89CC55B27280C</GeneratedChecksum>
           <UserChecksum dnOrder="5">9951EA41E6BF3CC1EBF89CC55B27280C</UserChecksum>
         </File>
-        <File dnOrder="37">
+        <File dnOrder="39">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ecc.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -310,7 +326,7 @@
           <GeneratedChecksum dnOrder="4">43973D996823948F5BE8B4030397163B</GeneratedChecksum>
           <UserChecksum dnOrder="5">43973D996823948F5BE8B4030397163B</UserChecksum>
         </File>
-        <File dnOrder="38">
+        <File dnOrder="40">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ecc_fp.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -318,7 +334,7 @@
           <GeneratedChecksum dnOrder="4">5308B82A0AA0A9BB91151DC9112DA0C2</GeneratedChecksum>
           <UserChecksum dnOrder="5">5308B82A0AA0A9BB91151DC9112DA0C2</UserChecksum>
         </File>
-        <File dnOrder="39">
+        <File dnOrder="41">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ed25519.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -326,7 +342,7 @@
           <GeneratedChecksum dnOrder="4">83E36D137C37D038CD4A225A02EF3A88</GeneratedChecksum>
           <UserChecksum dnOrder="5">83E36D137C37D038CD4A225A02EF3A88</UserChecksum>
         </File>
-        <File dnOrder="40">
+        <File dnOrder="42">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">error.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -334,7 +350,7 @@
           <GeneratedChecksum dnOrder="4">15671C7436D62376BCF2958AADB93413</GeneratedChecksum>
           <UserChecksum dnOrder="5">15671C7436D62376BCF2958AADB93413</UserChecksum>
         </File>
-        <File dnOrder="41">
+        <File dnOrder="43">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">exceptions.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -342,7 +358,7 @@
           <GeneratedChecksum dnOrder="4">AC89AA0F2AF07C0733678D30AE1A5E02</GeneratedChecksum>
           <UserChecksum dnOrder="5">AC89AA0F2AF07C0733678D30AE1A5E02</UserChecksum>
         </File>
-        <File dnOrder="42">
+        <File dnOrder="44">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fault_handlers.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -350,7 +366,7 @@
           <GeneratedChecksum dnOrder="4">9E84FBBFC8C498CF6B6DC9EBC4E3B1FE</GeneratedChecksum>
           <UserChecksum dnOrder="5">9E84FBBFC8C498CF6B6DC9EBC4E3B1FE</UserChecksum>
         </File>
-        <File dnOrder="43">
+        <File dnOrder="45">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fe_low_mem.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -358,7 +374,7 @@
           <GeneratedChecksum dnOrder="4">241FF2B44C0A9E91D13A486D5A72FEAA</GeneratedChecksum>
           <UserChecksum dnOrder="5">241FF2B44C0A9E91D13A486D5A72FEAA</UserChecksum>
         </File>
-        <File dnOrder="44">
+        <File dnOrder="46">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">fe_operations.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -366,7 +382,7 @@
           <GeneratedChecksum dnOrder="4">34806FBCF58DBA00E1176F40B4072D64</GeneratedChecksum>
           <UserChecksum dnOrder="5">34806FBCF58DBA00E1176F40B4072D64</UserChecksum>
         </File>
-        <File dnOrder="45">
+        <File dnOrder="47">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ge_low_mem.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -374,7 +390,7 @@
           <GeneratedChecksum dnOrder="4">F9633F8C1902FB0C82DB8918B4734579</GeneratedChecksum>
           <UserChecksum dnOrder="5">F9633F8C1902FB0C82DB8918B4734579</UserChecksum>
         </File>
-        <File dnOrder="46">
+        <File dnOrder="48">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ge_operations.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -382,7 +398,7 @@
           <GeneratedChecksum dnOrder="4">18ACF851046CA4BC3DB60C5BDAEB8236</GeneratedChecksum>
           <UserChecksum dnOrder="5">18ACF851046CA4BC3DB60C5BDAEB8236</UserChecksum>
         </File>
-        <File dnOrder="47">
+        <File dnOrder="49">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hash.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -390,7 +406,7 @@
           <GeneratedChecksum dnOrder="4">1D0843C1578B592A4748906999CFB966</GeneratedChecksum>
           <UserChecksum dnOrder="5">1D0843C1578B592A4748906999CFB966</UserChecksum>
         </File>
-        <File dnOrder="48">
+        <File dnOrder="50">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hc128.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -398,7 +414,7 @@
           <GeneratedChecksum dnOrder="4">5BC00868F0BBBFE5B5A95D5597590CE3</GeneratedChecksum>
           <UserChecksum dnOrder="5">5BC00868F0BBBFE5B5A95D5597590CE3</UserChecksum>
         </File>
-        <File dnOrder="49">
+        <File dnOrder="51">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">hmac.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -406,7 +422,7 @@
           <GeneratedChecksum dnOrder="4">B368F6F779C666F8323BC2E14FCD4108</GeneratedChecksum>
           <UserChecksum dnOrder="5">B368F6F779C666F8323BC2E14FCD4108</UserChecksum>
         </File>
-        <File dnOrder="50">
+        <File dnOrder="52">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">iar_monitor.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/stdio/</LogicalPath>
@@ -414,7 +430,7 @@
           <GeneratedChecksum dnOrder="4">51D19E2818A4282EE571C71E4EF288FB</GeneratedChecksum>
           <UserChecksum dnOrder="5">51D19E2818A4282EE571C71E4EF288FB</UserChecksum>
         </File>
-        <File dnOrder="51">
+        <File dnOrder="53">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">idea.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -422,15 +438,15 @@
           <GeneratedChecksum dnOrder="4">9EF6E822154AA294F033974ADD363F28</GeneratedChecksum>
           <UserChecksum dnOrder="5">9EF6E822154AA294F033974ADD363F28</UserChecksum>
         </File>
-        <File dnOrder="52">
+        <File dnOrder="54">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">initialization.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1129140B515C9F5015FC5D74BE74700D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1129140B515C9F5015FC5D74BE74700D</UserChecksum>
+          <GeneratedChecksum dnOrder="4">1D04E1227D228A0449878A5FF89C10B1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1D04E1227D228A0449878A5FF89C10B1</UserChecksum>
         </File>
-        <File dnOrder="53">
+        <File dnOrder="55">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">integer.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -438,7 +454,7 @@
           <GeneratedChecksum dnOrder="4">2C6ABA83550962317DB999F70068A984</GeneratedChecksum>
           <UserChecksum dnOrder="5">2C6ABA83550962317DB999F70068A984</UserChecksum>
         </File>
-        <File dnOrder="54">
+        <File dnOrder="56">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">interrupts.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -446,7 +462,7 @@
           <GeneratedChecksum dnOrder="4">C29F9E18CAFEE290602D7DE492E156B5</GeneratedChecksum>
           <UserChecksum dnOrder="5">C29F9E18CAFEE290602D7DE492E156B5</UserChecksum>
         </File>
-        <File dnOrder="55">
+        <File dnOrder="57">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">logging.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -454,7 +470,7 @@
           <GeneratedChecksum dnOrder="4">452BA7458A13EFAE96C59F88FF04CAE5</GeneratedChecksum>
           <UserChecksum dnOrder="5">452BA7458A13EFAE96C59F88FF04CAE5</UserChecksum>
         </File>
-        <File dnOrder="56">
+        <File dnOrder="58">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md2.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -462,7 +478,7 @@
           <GeneratedChecksum dnOrder="4">9F05CCA2FC5A0C0C2B0BAF5084B1E0C0</GeneratedChecksum>
           <UserChecksum dnOrder="5">9F05CCA2FC5A0C0C2B0BAF5084B1E0C0</UserChecksum>
         </File>
-        <File dnOrder="57">
+        <File dnOrder="59">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md4.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -470,7 +486,7 @@
           <GeneratedChecksum dnOrder="4">75BCD67ED360BC008D80477027475209</GeneratedChecksum>
           <UserChecksum dnOrder="5">75BCD67ED360BC008D80477027475209</UserChecksum>
         </File>
-        <File dnOrder="58">
+        <File dnOrder="60">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">md5.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -478,7 +494,7 @@
           <GeneratedChecksum dnOrder="4">356BFB00C65245D24EE5855D26AD94A6</GeneratedChecksum>
           <UserChecksum dnOrder="5">356BFB00C65245D24EE5855D26AD94A6</UserChecksum>
         </File>
-        <File dnOrder="59">
+        <File dnOrder="61">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">memory.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -486,7 +502,7 @@
           <GeneratedChecksum dnOrder="4">1D0764A90CC29EF4DAECA784F39E45D9</GeneratedChecksum>
           <UserChecksum dnOrder="5">1D0764A90CC29EF4DAECA784F39E45D9</UserChecksum>
         </File>
-        <File dnOrder="60">
+        <File dnOrder="62">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pic32mz-crypt.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -494,7 +510,7 @@
           <GeneratedChecksum dnOrder="4">90CD9F212363B62399563A070E6E8CDA</GeneratedChecksum>
           <UserChecksum dnOrder="5">90CD9F212363B62399563A070E6E8CDA</UserChecksum>
         </File>
-        <File dnOrder="61">
+        <File dnOrder="63">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pkcs12.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -502,7 +518,7 @@
           <GeneratedChecksum dnOrder="4">80FAFD16CAD86F9DFE1C31C717854F3D</GeneratedChecksum>
           <UserChecksum dnOrder="5">80FAFD16CAD86F9DFE1C31C717854F3D</UserChecksum>
         </File>
-        <File dnOrder="62">
+        <File dnOrder="64">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pkcs7.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -510,7 +526,7 @@
           <GeneratedChecksum dnOrder="4">774F5073CAF6D343F1D81C1A9D83A9D3</GeneratedChecksum>
           <UserChecksum dnOrder="5">774F5073CAF6D343F1D81C1A9D83A9D3</UserChecksum>
         </File>
-        <File dnOrder="63">
+        <File dnOrder="65">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_aic.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/aic/</LogicalPath>
@@ -518,15 +534,15 @@
           <GeneratedChecksum dnOrder="4">10862E5E0B12B06E93866BED38746A18</GeneratedChecksum>
           <UserChecksum dnOrder="5">10862E5E0B12B06E93866BED38746A18</UserChecksum>
         </File>
-        <File dnOrder="64">
+        <File dnOrder="66">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_clk.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">31350E6AA743D8667DA4C4D3DE82E2B4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">31350E6AA743D8667DA4C4D3DE82E2B4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">BE65B8AFA1A98BB6D83A7D43A4DE677B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BE65B8AFA1A98BB6D83A7D43A4DE677B</UserChecksum>
         </File>
-        <File dnOrder="65">
+        <File dnOrder="67">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_matrix.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/matrix/</LogicalPath>
@@ -534,23 +550,23 @@
           <GeneratedChecksum dnOrder="4">A1D44A4F1F0E0FFA06D8BF524BA8088D</GeneratedChecksum>
           <UserChecksum dnOrder="5">A1D44A4F1F0E0FFA06D8BF524BA8088D</UserChecksum>
         </File>
-        <File dnOrder="66">
+        <File dnOrder="68">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_mmu.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/mmu/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/mmu/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8ED352943056112DC11932692C60A630</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8ED352943056112DC11932692C60A630</UserChecksum>
+          <GeneratedChecksum dnOrder="4">CF91D2B6E472ABD65D50D3708248D1CE</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CF91D2B6E472ABD65D50D3708248D1CE</UserChecksum>
         </File>
-        <File dnOrder="67">
+        <File dnOrder="69">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_pio.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/pio/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/pio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6E5CAD7C492AEB2671977046BBACE6A0</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6E5CAD7C492AEB2671977046BBACE6A0</UserChecksum>
+          <GeneratedChecksum dnOrder="4">E298B26DD5CE222D0475FD899F11E62B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E298B26DD5CE222D0475FD899F11E62B</UserChecksum>
         </File>
-        <File dnOrder="68">
+        <File dnOrder="70">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_pit.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/pit/</LogicalPath>
@@ -558,7 +574,7 @@
           <GeneratedChecksum dnOrder="4">40ED64934E7BCB99211E0DA8D02BD558</GeneratedChecksum>
           <UserChecksum dnOrder="5">40ED64934E7BCB99211E0DA8D02BD558</UserChecksum>
         </File>
-        <File dnOrder="69">
+        <File dnOrder="71">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_tc0.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/tc/</LogicalPath>
@@ -566,15 +582,15 @@
           <GeneratedChecksum dnOrder="4">6E9384D0C5DC3F5702E55C47B6C82358</GeneratedChecksum>
           <UserChecksum dnOrder="5">6E9384D0C5DC3F5702E55C47B6C82358</UserChecksum>
         </File>
-        <File dnOrder="70">
+        <File dnOrder="72">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">plib_uart1.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/uart/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/uart/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">ED8FA25BF7ED5C89F7B3BE76725ED883</GeneratedChecksum>
-          <UserChecksum dnOrder="5">ED8FA25BF7ED5C89F7B3BE76725ED883</UserChecksum>
+          <GeneratedChecksum dnOrder="4">1CE1BB096EB76116DCABE49A15761D01</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1CE1BB096EB76116DCABE49A15761D01</UserChecksum>
         </File>
-        <File dnOrder="71">
+        <File dnOrder="73">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">poly1305.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -582,7 +598,7 @@
           <GeneratedChecksum dnOrder="4">CE548432F82AB8E1E78DFDBA375F82A8</GeneratedChecksum>
           <UserChecksum dnOrder="5">CE548432F82AB8E1E78DFDBA375F82A8</UserChecksum>
         </File>
-        <File dnOrder="72">
+        <File dnOrder="74">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">pwdbased.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -590,7 +606,7 @@
           <GeneratedChecksum dnOrder="4">A4F91F445824CFD560BEF661CB438A89</GeneratedChecksum>
           <UserChecksum dnOrder="5">A4F91F445824CFD560BEF661CB438A89</UserChecksum>
         </File>
-        <File dnOrder="73">
+        <File dnOrder="75">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">rabbit.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -598,7 +614,7 @@
           <GeneratedChecksum dnOrder="4">73BDE873BA99835BCBEE28B4F6371781</GeneratedChecksum>
           <UserChecksum dnOrder="5">73BDE873BA99835BCBEE28B4F6371781</UserChecksum>
         </File>
-        <File dnOrder="74">
+        <File dnOrder="76">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">random.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -606,7 +622,7 @@
           <GeneratedChecksum dnOrder="4">B79E1933B6DDC1B34BA88598769B8767</GeneratedChecksum>
           <UserChecksum dnOrder="5">B79E1933B6DDC1B34BA88598769B8767</UserChecksum>
         </File>
-        <File dnOrder="75">
+        <File dnOrder="77">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">ripemd.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -614,7 +630,7 @@
           <GeneratedChecksum dnOrder="4">F935DA8383E455664BA80F5D80893060</GeneratedChecksum>
           <UserChecksum dnOrder="5">F935DA8383E455664BA80F5D80893060</UserChecksum>
         </File>
-        <File dnOrder="76">
+        <File dnOrder="78">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">rsa.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -622,7 +638,7 @@
           <GeneratedChecksum dnOrder="4">FC9649AE70732F2025702362361424F3</GeneratedChecksum>
           <UserChecksum dnOrder="5">FC9649AE70732F2025702362361424F3</UserChecksum>
         </File>
-        <File dnOrder="77">
+        <File dnOrder="79">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sha.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -630,7 +646,7 @@
           <GeneratedChecksum dnOrder="4">4388B833903D784A6ECAC2D0A109657E</GeneratedChecksum>
           <UserChecksum dnOrder="5">4388B833903D784A6ECAC2D0A109657E</UserChecksum>
         </File>
-        <File dnOrder="78">
+        <File dnOrder="80">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sha256.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -638,7 +654,7 @@
           <GeneratedChecksum dnOrder="4">7FE81319BB340ACADC1014A7BCD4C2F4</GeneratedChecksum>
           <UserChecksum dnOrder="5">7FE81319BB340ACADC1014A7BCD4C2F4</UserChecksum>
         </File>
-        <File dnOrder="79">
+        <File dnOrder="81">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sha3.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -646,7 +662,7 @@
           <GeneratedChecksum dnOrder="4">8998FA2D8D6E2A7EF42C3ECB36E7145D</GeneratedChecksum>
           <UserChecksum dnOrder="5">8998FA2D8D6E2A7EF42C3ECB36E7145D</UserChecksum>
         </File>
-        <File dnOrder="80">
+        <File dnOrder="82">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sha512.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -654,7 +670,7 @@
           <GeneratedChecksum dnOrder="4">4DC4A63C4D46852AB6BC6D623B0AC194</GeneratedChecksum>
           <UserChecksum dnOrder="5">4DC4A63C4D46852AB6BC6D623B0AC194</UserChecksum>
         </File>
-        <File dnOrder="81">
+        <File dnOrder="83">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">signature.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -662,7 +678,7 @@
           <GeneratedChecksum dnOrder="4">ED11A97EDC9086C5939BDF554DDA0BF9</GeneratedChecksum>
           <UserChecksum dnOrder="5">ED11A97EDC9086C5939BDF554DDA0BF9</UserChecksum>
         </File>
-        <File dnOrder="82">
+        <File dnOrder="84">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_arm32.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -670,7 +686,7 @@
           <GeneratedChecksum dnOrder="4">655EF8E7D5480CCF77FF38E6E968FE62</GeneratedChecksum>
           <UserChecksum dnOrder="5">655EF8E7D5480CCF77FF38E6E968FE62</UserChecksum>
         </File>
-        <File dnOrder="83">
+        <File dnOrder="85">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_arm64.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -678,7 +694,7 @@
           <GeneratedChecksum dnOrder="4">4BFC1CDEAF38C0C6CA390F737CD4DBEA</GeneratedChecksum>
           <UserChecksum dnOrder="5">4BFC1CDEAF38C0C6CA390F737CD4DBEA</UserChecksum>
         </File>
-        <File dnOrder="84">
+        <File dnOrder="86">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_armthumb.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -686,7 +702,7 @@
           <GeneratedChecksum dnOrder="4">0D3F7AE1A211293E7D0A16DD5616E01E</GeneratedChecksum>
           <UserChecksum dnOrder="5">0D3F7AE1A211293E7D0A16DD5616E01E</UserChecksum>
         </File>
-        <File dnOrder="85">
+        <File dnOrder="87">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_c32.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -694,7 +710,7 @@
           <GeneratedChecksum dnOrder="4">3BB5F98B0F0605EEE1970A4F453B84B2</GeneratedChecksum>
           <UserChecksum dnOrder="5">3BB5F98B0F0605EEE1970A4F453B84B2</UserChecksum>
         </File>
-        <File dnOrder="86">
+        <File dnOrder="88">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_c64.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -702,7 +718,7 @@
           <GeneratedChecksum dnOrder="4">24F05E307932E7B8C925168FDADBE76E</GeneratedChecksum>
           <UserChecksum dnOrder="5">24F05E307932E7B8C925168FDADBE76E</UserChecksum>
         </File>
-        <File dnOrder="87">
+        <File dnOrder="89">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_cortexm.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -710,7 +726,7 @@
           <GeneratedChecksum dnOrder="4">B65FA6CA7E3FBBD61C1E2F4BEFAE5676</GeneratedChecksum>
           <UserChecksum dnOrder="5">B65FA6CA7E3FBBD61C1E2F4BEFAE5676</UserChecksum>
         </File>
-        <File dnOrder="88">
+        <File dnOrder="90">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_int.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -718,7 +734,7 @@
           <GeneratedChecksum dnOrder="4">42147D45AE53F5671FF015DC5C8FF37C</GeneratedChecksum>
           <UserChecksum dnOrder="5">42147D45AE53F5671FF015DC5C8FF37C</UserChecksum>
         </File>
-        <File dnOrder="89">
+        <File dnOrder="91">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sp_x86_64.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -726,7 +742,7 @@
           <GeneratedChecksum dnOrder="4">EB7819AF3858BAEA1BCF23956D92D96F</GeneratedChecksum>
           <UserChecksum dnOrder="5">EB7819AF3858BAEA1BCF23956D92D96F</UserChecksum>
         </File>
-        <File dnOrder="90">
+        <File dnOrder="92">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">srp.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -734,7 +750,7 @@
           <GeneratedChecksum dnOrder="4">0FD31EE935C90EF8392B1DD8EF0F084F</GeneratedChecksum>
           <UserChecksum dnOrder="5">0FD31EE935C90EF8392B1DD8EF0F084F</UserChecksum>
         </File>
-        <File dnOrder="91">
+        <File dnOrder="93">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_cache.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/cache/</LogicalPath>
@@ -742,47 +758,15 @@
           <GeneratedChecksum dnOrder="4">2B6EF5AAF13176F5A5E93B547721DB50</GeneratedChecksum>
           <UserChecksum dnOrder="5">2B6EF5AAF13176F5A5E93B547721DB50</UserChecksum>
         </File>
-        <File dnOrder="92">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sys_console.c</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/console/</LogicalPath>
-          <PhysicalPath dnOrder="3">/system/console/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">11DBED3EBA5848386C91E11BD79A720A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">11DBED3EBA5848386C91E11BD79A720A</UserChecksum>
-        </File>
-        <File dnOrder="93">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sys_console_local.h</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/console/</LogicalPath>
-          <PhysicalPath dnOrder="3">/system/console/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5BA0902794A8669B3FE37E8A8BEE9D65</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5BA0902794A8669B3FE37E8A8BEE9D65</UserChecksum>
-        </File>
         <File dnOrder="94">
           <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sys_console_uart.c</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/console/</LogicalPath>
-          <PhysicalPath dnOrder="3">/system/console/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">635C7CC6CC208FC8B7FAC29E4809C3E8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">635C7CC6CC208FC8B7FAC29E4809C3E8</UserChecksum>
+          <Name dnOrder="1">sys_dma.c</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/dma/</LogicalPath>
+          <PhysicalPath dnOrder="3">/system/dma/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">DBBC8FE07E165E5808B7D1D87C64009C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DBBC8FE07E165E5808B7D1D87C64009C</UserChecksum>
         </File>
         <File dnOrder="95">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sys_console_uart.h</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/console/</LogicalPath>
-          <PhysicalPath dnOrder="3">/system/console/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C514492B43B820E1241D77EA36A5A68D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C514492B43B820E1241D77EA36A5A68D</UserChecksum>
-        </File>
-        <File dnOrder="96">
-          <Type dnOrder="0">SOURCE</Type>
-          <Name dnOrder="1">sys_console_uart_definitions.h</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/console/</LogicalPath>
-          <PhysicalPath dnOrder="3">/system/console/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4AA93FD1E4FEEF15802C414B8519EC36</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4AA93FD1E4FEEF15802C414B8519EC36</UserChecksum>
-        </File>
-        <File dnOrder="97">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_int.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/int/</LogicalPath>
@@ -790,7 +774,7 @@
           <GeneratedChecksum dnOrder="4">0128FD5EAC2B910A9EA7090F32CFE236</GeneratedChecksum>
           <UserChecksum dnOrder="5">0128FD5EAC2B910A9EA7090F32CFE236</UserChecksum>
         </File>
-        <File dnOrder="98">
+        <File dnOrder="96">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">sys_time.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/time/</LogicalPath>
@@ -798,7 +782,7 @@
           <GeneratedChecksum dnOrder="4">70DAE413C209782D51F61D7C896593FB</GeneratedChecksum>
           <UserChecksum dnOrder="5">70DAE413C209782D51F61D7C896593FB</UserChecksum>
         </File>
-        <File dnOrder="99">
+        <File dnOrder="97">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">tasks.c</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -806,7 +790,7 @@
           <GeneratedChecksum dnOrder="4">DE51BB8F6FDBC39FB049CB2A14E56B25</GeneratedChecksum>
           <UserChecksum dnOrder="5">DE51BB8F6FDBC39FB049CB2A14E56B25</UserChecksum>
         </File>
-        <File dnOrder="100">
+        <File dnOrder="98">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">tfm.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -814,7 +798,7 @@
           <GeneratedChecksum dnOrder="4">DE55533958F14F42D3E38426ADE361DC</GeneratedChecksum>
           <UserChecksum dnOrder="5">DE55533958F14F42D3E38426ADE361DC</UserChecksum>
         </File>
-        <File dnOrder="101">
+        <File dnOrder="99">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wc_encrypt.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -822,7 +806,7 @@
           <GeneratedChecksum dnOrder="4">1EE5DC589D7E18253CFE6C8931F4E757</GeneratedChecksum>
           <UserChecksum dnOrder="5">1EE5DC589D7E18253CFE6C8931F4E757</UserChecksum>
         </File>
-        <File dnOrder="102">
+        <File dnOrder="100">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wc_pkcs11.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -830,7 +814,7 @@
           <GeneratedChecksum dnOrder="4">2D2AABED1C03837F3A35471989B65878</GeneratedChecksum>
           <UserChecksum dnOrder="5">2D2AABED1C03837F3A35471989B65878</UserChecksum>
         </File>
-        <File dnOrder="103">
+        <File dnOrder="101">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wc_port.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -838,7 +822,7 @@
           <GeneratedChecksum dnOrder="4">636F64A313AFD10E64FFF6B933B8AA44</GeneratedChecksum>
           <UserChecksum dnOrder="5">636F64A313AFD10E64FFF6B933B8AA44</UserChecksum>
         </File>
-        <File dnOrder="104">
+        <File dnOrder="102">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wolfevent.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -846,7 +830,7 @@
           <GeneratedChecksum dnOrder="4">9D115E4AE50757918BA106A868D31634</GeneratedChecksum>
           <UserChecksum dnOrder="5">9D115E4AE50757918BA106A868D31634</UserChecksum>
         </File>
-        <File dnOrder="105">
+        <File dnOrder="103">
           <Type dnOrder="0">SOURCE</Type>
           <Name dnOrder="1">wolfmath.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -854,7 +838,7 @@
           <GeneratedChecksum dnOrder="4">623B428CDCEF17408755CB5B8E57061C</GeneratedChecksum>
           <UserChecksum dnOrder="5">623B428CDCEF17408755CB5B8E57061C</UserChecksum>
         </File>
-        <File dnOrder="106">
+        <File dnOrder="104">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_CRT_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -862,7 +846,7 @@
           <GeneratedChecksum dnOrder="4">BEE21C246D91A27ED51FACBC8C75DF64</GeneratedChecksum>
           <UserChecksum dnOrder="5">BEE21C246D91A27ED51FACBC8C75DF64</UserChecksum>
         </File>
-        <File dnOrder="107">
+        <File dnOrder="105">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ClearFlags_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -870,7 +854,7 @@
           <GeneratedChecksum dnOrder="4">EB2CEA9C804BAB983A7325C2D9401253</GeneratedChecksum>
           <UserChecksum dnOrder="5">EB2CEA9C804BAB983A7325C2D9401253</UserChecksum>
         </File>
-        <File dnOrder="108">
+        <File dnOrder="106">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Comp_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -878,7 +862,7 @@
           <GeneratedChecksum dnOrder="4">31A60386C52D1F5967D338EFA79B7E2B</GeneratedChecksum>
           <UserChecksum dnOrder="5">31A60386C52D1F5967D338EFA79B7E2B</UserChecksum>
         </File>
-        <File dnOrder="109">
+        <File dnOrder="107">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_CondCopy_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -886,7 +870,7 @@
           <GeneratedChecksum dnOrder="4">4EC9521B2D1F428DFB470B5AF7555503</GeneratedChecksum>
           <UserChecksum dnOrder="5">4EC9521B2D1F428DFB470B5AF7555503</UserChecksum>
         </File>
-        <File dnOrder="110">
+        <File dnOrder="108">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Div_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -894,7 +878,7 @@
           <GeneratedChecksum dnOrder="4">2705C02BF05FE6CFB9B259FC08FF4226</GeneratedChecksum>
           <UserChecksum dnOrder="5">2705C02BF05FE6CFB9B259FC08FF4226</UserChecksum>
         </File>
-        <File dnOrder="111">
+        <File dnOrder="109">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ExpMod_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -902,7 +886,7 @@
           <GeneratedChecksum dnOrder="4">C487AFD5CE6151013E7B7581E9934435</GeneratedChecksum>
           <UserChecksum dnOrder="5">C487AFD5CE6151013E7B7581E9934435</UserChecksum>
         </File>
-        <File dnOrder="112">
+        <File dnOrder="110">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_FastCopy_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -910,7 +894,7 @@
           <GeneratedChecksum dnOrder="4">02734247709EA0A77A4E8F5C82C0D437</GeneratedChecksum>
           <UserChecksum dnOrder="5">02734247709EA0A77A4E8F5C82C0D437</UserChecksum>
         </File>
-        <File dnOrder="113">
+        <File dnOrder="111">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Fill_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -918,7 +902,7 @@
           <GeneratedChecksum dnOrder="4">B5E6BFCC35F7C308BA3DD8FC8B918EA2</GeneratedChecksum>
           <UserChecksum dnOrder="5">B5E6BFCC35F7C308BA3DD8FC8B918EA2</UserChecksum>
         </File>
-        <File dnOrder="114">
+        <File dnOrder="112">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Fmult_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -926,7 +910,7 @@
           <GeneratedChecksum dnOrder="4">5B795B9419AE11F4F71F1B369ADD9A40</GeneratedChecksum>
           <UserChecksum dnOrder="5">5B795B9419AE11F4F71F1B369ADD9A40</UserChecksum>
         </File>
-        <File dnOrder="115">
+        <File dnOrder="113">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_GCD_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -934,7 +918,7 @@
           <GeneratedChecksum dnOrder="4">AE3C9958A1778EE6396CAEB0FF3887E0</GeneratedChecksum>
           <UserChecksum dnOrder="5">AE3C9958A1778EE6396CAEB0FF3887E0</UserChecksum>
         </File>
-        <File dnOrder="116">
+        <File dnOrder="114">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_GF2NEcDsa_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -942,7 +926,7 @@
           <GeneratedChecksum dnOrder="4">2DB4692476C5D7FDBE7062F6FA916C9A</GeneratedChecksum>
           <UserChecksum dnOrder="5">2DB4692476C5D7FDBE7062F6FA916C9A</UserChecksum>
         </File>
-        <File dnOrder="117">
+        <File dnOrder="115">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_GF2NEccAdd_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -950,7 +934,7 @@
           <GeneratedChecksum dnOrder="4">E6CC1EA6B34CFB2EAC3837FED20DF7CF</GeneratedChecksum>
           <UserChecksum dnOrder="5">E6CC1EA6B34CFB2EAC3837FED20DF7CF</UserChecksum>
         </File>
-        <File dnOrder="118">
+        <File dnOrder="116">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_GF2NEccConv_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -958,7 +942,7 @@
           <GeneratedChecksum dnOrder="4">06816780EF50309165FCE65F2147E576</GeneratedChecksum>
           <UserChecksum dnOrder="5">06816780EF50309165FCE65F2147E576</UserChecksum>
         </File>
-        <File dnOrder="119">
+        <File dnOrder="117">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_GF2NEccDbl_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -966,7 +950,7 @@
           <GeneratedChecksum dnOrder="4">F4391006B01F71A38435BB1B5AECA6A6</GeneratedChecksum>
           <UserChecksum dnOrder="5">F4391006B01F71A38435BB1B5AECA6A6</UserChecksum>
         </File>
-        <File dnOrder="120">
+        <File dnOrder="118">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_GF2NEccMul_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -974,7 +958,7 @@
           <GeneratedChecksum dnOrder="4">B8F2D1226FA00AFB30A65264BA491B3A</GeneratedChecksum>
           <UserChecksum dnOrder="5">B8F2D1226FA00AFB30A65264BA491B3A</UserChecksum>
         </File>
-        <File dnOrder="121">
+        <File dnOrder="119">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Hardware_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -982,7 +966,7 @@
           <GeneratedChecksum dnOrder="4">6E81A46356583D48FF298F2D8F57B3A7</GeneratedChecksum>
           <UserChecksum dnOrder="5">6E81A46356583D48FF298F2D8F57B3A7</UserChecksum>
         </File>
-        <File dnOrder="122">
+        <File dnOrder="120">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Headers_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -990,7 +974,7 @@
           <GeneratedChecksum dnOrder="4">53B1D0D18D6AD1B9A73A7FF3DCE007F4</GeneratedChecksum>
           <UserChecksum dnOrder="5">53B1D0D18D6AD1B9A73A7FF3DCE007F4</UserChecksum>
         </File>
-        <File dnOrder="123">
+        <File dnOrder="121">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_JumpTable_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -998,7 +982,7 @@
           <GeneratedChecksum dnOrder="4">D081E34DF7326C88AADD3C74BDC129E4</GeneratedChecksum>
           <UserChecksum dnOrder="5">D081E34DF7326C88AADD3C74BDC129E4</UserChecksum>
         </File>
-        <File dnOrder="124">
+        <File dnOrder="122">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_PrimeGen_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1006,7 +990,7 @@
           <GeneratedChecksum dnOrder="4">196783F63BD5C8178256E6A7EFDDEB1B</GeneratedChecksum>
           <UserChecksum dnOrder="5">196783F63BD5C8178256E6A7EFDDEB1B</UserChecksum>
         </File>
-        <File dnOrder="125">
+        <File dnOrder="123">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Rc_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1014,7 +998,7 @@
           <GeneratedChecksum dnOrder="4">47DD9F857A955FAE9355CC512ACA6797</GeneratedChecksum>
           <UserChecksum dnOrder="5">47DD9F857A955FAE9355CC512ACA6797</UserChecksum>
         </File>
-        <File dnOrder="126">
+        <File dnOrder="124">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_RedMod_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1022,7 +1006,7 @@
           <GeneratedChecksum dnOrder="4">B34AEB7F1B0A3EAF5FC0711807D92C06</GeneratedChecksum>
           <UserChecksum dnOrder="5">B34AEB7F1B0A3EAF5FC0711807D92C06</UserChecksum>
         </File>
-        <File dnOrder="127">
+        <File dnOrder="125">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Rng_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1030,7 +1014,7 @@
           <GeneratedChecksum dnOrder="4">5247641FD3387FA9BC416877B18C4028</GeneratedChecksum>
           <UserChecksum dnOrder="5">5247641FD3387FA9BC416877B18C4028</UserChecksum>
         </File>
-        <File dnOrder="128">
+        <File dnOrder="126">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_SelfTest_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1038,7 +1022,7 @@
           <GeneratedChecksum dnOrder="4">114CF0EEE6D57FDA0B019F6BF4DC5F63</GeneratedChecksum>
           <UserChecksum dnOrder="5">114CF0EEE6D57FDA0B019F6BF4DC5F63</UserChecksum>
         </File>
-        <File dnOrder="129">
+        <File dnOrder="127">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Services_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1046,7 +1030,7 @@
           <GeneratedChecksum dnOrder="4">CB3665DB9B360F2D69DD06212520A1A8</GeneratedChecksum>
           <UserChecksum dnOrder="5">CB3665DB9B360F2D69DD06212520A1A8</UserChecksum>
         </File>
-        <File dnOrder="130">
+        <File dnOrder="128">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Smult_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1054,7 +1038,7 @@
           <GeneratedChecksum dnOrder="4">000EF9ECA6E87FA620C3CA6A08CEB762</GeneratedChecksum>
           <UserChecksum dnOrder="5">000EF9ECA6E87FA620C3CA6A08CEB762</UserChecksum>
         </File>
-        <File dnOrder="131">
+        <File dnOrder="129">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Square_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1062,7 +1046,7 @@
           <GeneratedChecksum dnOrder="4">30B5AEAF94C251F97783BE57DBD85ED5</GeneratedChecksum>
           <UserChecksum dnOrder="5">30B5AEAF94C251F97783BE57DBD85ED5</UserChecksum>
         </File>
-        <File dnOrder="132">
+        <File dnOrder="130">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_Swap_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1070,7 +1054,7 @@
           <GeneratedChecksum dnOrder="4">DA30F4F707E48AA8D5A832BA3B7D8BD8</GeneratedChecksum>
           <UserChecksum dnOrder="5">DA30F4F707E48AA8D5A832BA3B7D8BD8</UserChecksum>
         </File>
-        <File dnOrder="133">
+        <File dnOrder="131">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEcDsa_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1078,7 +1062,7 @@
           <GeneratedChecksum dnOrder="4">8B4555E7A67CAFC764FD4AB4AA2FC073</GeneratedChecksum>
           <UserChecksum dnOrder="5">8B4555E7A67CAFC764FD4AB4AA2FC073</UserChecksum>
         </File>
-        <File dnOrder="134">
+        <File dnOrder="132">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEccAddSub_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1086,7 +1070,7 @@
           <GeneratedChecksum dnOrder="4">041893E57A555DF74561381EA7EA5A5B</GeneratedChecksum>
           <UserChecksum dnOrder="5">041893E57A555DF74561381EA7EA5A5B</UserChecksum>
         </File>
-        <File dnOrder="135">
+        <File dnOrder="133">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEccAdd_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1094,7 +1078,7 @@
           <GeneratedChecksum dnOrder="4">EDABECDA0A1C36C32066FF5EB52C6779</GeneratedChecksum>
           <UserChecksum dnOrder="5">EDABECDA0A1C36C32066FF5EB52C6779</UserChecksum>
         </File>
-        <File dnOrder="136">
+        <File dnOrder="134">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEccConv_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1102,7 +1086,7 @@
           <GeneratedChecksum dnOrder="4">350854A01B236F97268F274C2C2302C5</GeneratedChecksum>
           <UserChecksum dnOrder="5">350854A01B236F97268F274C2C2302C5</UserChecksum>
         </File>
-        <File dnOrder="137">
+        <File dnOrder="135">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEccDbl_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1110,7 +1094,7 @@
           <GeneratedChecksum dnOrder="4">63B8F987974B860EF64107D589B21BBB</GeneratedChecksum>
           <UserChecksum dnOrder="5">63B8F987974B860EF64107D589B21BBB</UserChecksum>
         </File>
-        <File dnOrder="138">
+        <File dnOrder="136">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEccMul_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1118,7 +1102,7 @@
           <GeneratedChecksum dnOrder="4">9B6715081F71EA775C04301750FC6654</GeneratedChecksum>
           <UserChecksum dnOrder="5">9B6715081F71EA775C04301750FC6654</UserChecksum>
         </File>
-        <File dnOrder="139">
+        <File dnOrder="137">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_ZpEccQuickDualMul_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1126,7 +1110,7 @@
           <GeneratedChecksum dnOrder="4">9ED4E250196860B68AAC105353866E66</GeneratedChecksum>
           <UserChecksum dnOrder="5">9ED4E250196860B68AAC105353866E66</UserChecksum>
         </File>
-        <File dnOrder="140">
+        <File dnOrder="138">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_cf_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1134,7 +1118,7 @@
           <GeneratedChecksum dnOrder="4">6EC2BD8761B13D95640F425EDDB0CAA9</GeneratedChecksum>
           <UserChecksum dnOrder="5">6EC2BD8761B13D95640F425EDDB0CAA9</UserChecksum>
         </File>
-        <File dnOrder="141">
+        <File dnOrder="139">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_mapping_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1142,7 +1126,7 @@
           <GeneratedChecksum dnOrder="4">6B3CF5FCA70E35B8BF9C70FB8C542749</GeneratedChecksum>
           <UserChecksum dnOrder="5">6B3CF5FCA70E35B8BF9C70FB8C542749</UserChecksum>
         </File>
-        <File dnOrder="142">
+        <File dnOrder="140">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">CryptoLib_typedef_pb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1150,23 +1134,23 @@
           <GeneratedChecksum dnOrder="4">A09B71FC8EC907D1886884A6BA60BF43</GeneratedChecksum>
           <UserChecksum dnOrder="5">A09B71FC8EC907D1886884A6BA60BF43</UserChecksum>
         </File>
-        <File dnOrder="143">
+        <File dnOrder="141">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">acc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">CA6C4C9F24BAB982B29331CDED714AAB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">CA6C4C9F24BAB982B29331CDED714AAB</UserChecksum>
+          <GeneratedChecksum dnOrder="4">5C14481232C1C1187ED0D0DF737FE13E</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5C14481232C1C1187ED0D0DF737FE13E</UserChecksum>
         </File>
-        <File dnOrder="144">
+        <File dnOrder="142">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">adc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6237FDF43B1E7622E88D9384678DA5B1</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6237FDF43B1E7622E88D9384678DA5B1</UserChecksum>
+          <GeneratedChecksum dnOrder="4">42ACC05CDB04D46B0F9234AE4C887232</GeneratedChecksum>
+          <UserChecksum dnOrder="5">42ACC05CDB04D46B0F9234AE4C887232</UserChecksum>
         </File>
-        <File dnOrder="145">
+        <File dnOrder="143">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">aes.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1174,31 +1158,31 @@
           <GeneratedChecksum dnOrder="4">366F19D05C1B142C290BE2DD550105FA</GeneratedChecksum>
           <UserChecksum dnOrder="5">366F19D05C1B142C290BE2DD550105FA</UserChecksum>
         </File>
-        <File dnOrder="146">
+        <File dnOrder="144">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">aes.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B9B377F0F4569E345DF0BE61B37EFB1E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B9B377F0F4569E345DF0BE61B37EFB1E</UserChecksum>
+          <GeneratedChecksum dnOrder="4">16D6BD2D5DB16C3D905A4C6ACF104AD9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">16D6BD2D5DB16C3D905A4C6ACF104AD9</UserChecksum>
         </File>
-        <File dnOrder="147">
+        <File dnOrder="145">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">aesb.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">670EACDD3DFB8F543C6C5A4DE4D0B079</GeneratedChecksum>
-          <UserChecksum dnOrder="5">670EACDD3DFB8F543C6C5A4DE4D0B079</UserChecksum>
+          <GeneratedChecksum dnOrder="4">98A800D472CAC4899D8F0D3EA037867C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">98A800D472CAC4899D8F0D3EA037867C</UserChecksum>
         </File>
-        <File dnOrder="148">
+        <File dnOrder="146">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">aic.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F0631F7FAA0C57382BE4F3565FAC91C4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F0631F7FAA0C57382BE4F3565FAC91C4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">1337A24B3DCC2CFEF04B9DA5211ECB3C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1337A24B3DCC2CFEF04B9DA5211ECB3C</UserChecksum>
         </File>
-        <File dnOrder="149">
+        <File dnOrder="147">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">arc4.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1206,7 +1190,7 @@
           <GeneratedChecksum dnOrder="4">E175C74682BE105D84AB00D8F8DB70A4</GeneratedChecksum>
           <UserChecksum dnOrder="5">E175C74682BE105D84AB00D8F8DB70A4</UserChecksum>
         </File>
-        <File dnOrder="150">
+        <File dnOrder="148">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">arm_common_tables.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/DSP/Include/</LogicalPath>
@@ -1214,7 +1198,7 @@
           <GeneratedChecksum dnOrder="4">ECE7DC494F56CE01D96DE918E61B7C02</GeneratedChecksum>
           <UserChecksum dnOrder="5">ECE7DC494F56CE01D96DE918E61B7C02</UserChecksum>
         </File>
-        <File dnOrder="151">
+        <File dnOrder="149">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">arm_const_structs.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/DSP/Include/</LogicalPath>
@@ -1222,7 +1206,7 @@
           <GeneratedChecksum dnOrder="4">B99479A6A9F72E72C614DB59601DC762</GeneratedChecksum>
           <UserChecksum dnOrder="5">B99479A6A9F72E72C614DB59601DC762</UserChecksum>
         </File>
-        <File dnOrder="152">
+        <File dnOrder="150">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">arm_math.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/DSP/Include/</LogicalPath>
@@ -1230,7 +1214,7 @@
           <GeneratedChecksum dnOrder="4">4726F6E7A3CDEDAE6075A88F3D16F093</GeneratedChecksum>
           <UserChecksum dnOrder="5">4726F6E7A3CDEDAE6075A88F3D16F093</UserChecksum>
         </File>
-        <File dnOrder="153">
+        <File dnOrder="151">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">asn.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1238,7 +1222,7 @@
           <GeneratedChecksum dnOrder="4">C942FC4FF07284D161C0F34E1E653DBC</GeneratedChecksum>
           <UserChecksum dnOrder="5">C942FC4FF07284D161C0F34E1E653DBC</UserChecksum>
         </File>
-        <File dnOrder="154">
+        <File dnOrder="152">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">asn_public.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1246,23 +1230,23 @@
           <GeneratedChecksum dnOrder="4">D4B4B5297FE15636E5461AC6DAFF8140</GeneratedChecksum>
           <UserChecksum dnOrder="5">D4B4B5297FE15636E5461AC6DAFF8140</UserChecksum>
         </File>
-        <File dnOrder="155">
+        <File dnOrder="153">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">atsama5d27.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F24A23F69AF921F2803FA3F748E385FC</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F24A23F69AF921F2803FA3F748E385FC</UserChecksum>
+          <GeneratedChecksum dnOrder="4">B614972D6C657DEA3AE128A8B0FEED01</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B614972D6C657DEA3AE128A8B0FEED01</UserChecksum>
         </File>
-        <File dnOrder="156">
+        <File dnOrder="154">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">aximx.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">ACE3CA77CB6C5AB18C37C58AC8F8D314</GeneratedChecksum>
-          <UserChecksum dnOrder="5">ACE3CA77CB6C5AB18C37C58AC8F8D314</UserChecksum>
+          <GeneratedChecksum dnOrder="4">CA90FE29FBE180F03EE735AB0BAB71E2</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CA90FE29FBE180F03EE735AB0BAB71E2</UserChecksum>
         </File>
-        <File dnOrder="157">
+        <File dnOrder="155">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">blake2-impl.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1270,7 +1254,7 @@
           <GeneratedChecksum dnOrder="4">F909AC0C7F7B7A5AD499C02D6307403C</GeneratedChecksum>
           <UserChecksum dnOrder="5">F909AC0C7F7B7A5AD499C02D6307403C</UserChecksum>
         </File>
-        <File dnOrder="158">
+        <File dnOrder="156">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">blake2-int.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1278,7 +1262,7 @@
           <GeneratedChecksum dnOrder="4">054901D75DE51C9EF877C6A4A82785AF</GeneratedChecksum>
           <UserChecksum dnOrder="5">054901D75DE51C9EF877C6A4A82785AF</UserChecksum>
         </File>
-        <File dnOrder="159">
+        <File dnOrder="157">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">blake2.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1286,7 +1270,7 @@
           <GeneratedChecksum dnOrder="4">8764315A27751515EB0EFFE1D5CEDD11</GeneratedChecksum>
           <UserChecksum dnOrder="5">8764315A27751515EB0EFFE1D5CEDD11</UserChecksum>
         </File>
-        <File dnOrder="160">
+        <File dnOrder="158">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">camellia.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1294,7 +1278,7 @@
           <GeneratedChecksum dnOrder="4">365E46FB55F9FB6C2D9ACF465C6CA8D4</GeneratedChecksum>
           <UserChecksum dnOrder="5">365E46FB55F9FB6C2D9ACF465C6CA8D4</UserChecksum>
         </File>
-        <File dnOrder="161">
+        <File dnOrder="159">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">certs_test.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1302,7 +1286,7 @@
           <GeneratedChecksum dnOrder="4">9FB401FE77EFF8EEA8F8FE7993D2AFB4</GeneratedChecksum>
           <UserChecksum dnOrder="5">9FB401FE77EFF8EEA8F8FE7993D2AFB4</UserChecksum>
         </File>
-        <File dnOrder="162">
+        <File dnOrder="160">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chacha.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1310,7 +1294,7 @@
           <GeneratedChecksum dnOrder="4">2F689847E88D745EBE15321338C4FD57</GeneratedChecksum>
           <UserChecksum dnOrder="5">2F689847E88D745EBE15321338C4FD57</UserChecksum>
         </File>
-        <File dnOrder="163">
+        <File dnOrder="161">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chacha20_poly1305.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1318,23 +1302,23 @@
           <GeneratedChecksum dnOrder="4">FDEC947F981DBDAE93A901D504AD483C</GeneratedChecksum>
           <UserChecksum dnOrder="5">FDEC947F981DBDAE93A901D504AD483C</UserChecksum>
         </File>
-        <File dnOrder="164">
+        <File dnOrder="162">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">chipid.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">FDBF21CA973A4DA73087F7426A498F00</GeneratedChecksum>
-          <UserChecksum dnOrder="5">FDBF21CA973A4DA73087F7426A498F00</UserChecksum>
+          <GeneratedChecksum dnOrder="4">667121ADFFE8796E7A5DF0A4CDB11087</GeneratedChecksum>
+          <UserChecksum dnOrder="5">667121ADFFE8796E7A5DF0A4CDB11087</UserChecksum>
         </File>
-        <File dnOrder="165">
+        <File dnOrder="163">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">classd.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4307272A99092158FDD7931C60E65467</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4307272A99092158FDD7931C60E65467</UserChecksum>
+          <GeneratedChecksum dnOrder="4">A54A573B741A78245A139BAA487ECEE5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">A54A573B741A78245A139BAA487ECEE5</UserChecksum>
         </File>
-        <File dnOrder="166">
+        <File dnOrder="164">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmac.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1342,7 +1326,7 @@
           <GeneratedChecksum dnOrder="4">92D9C73209E7A1C3E07D13D493AE492B</GeneratedChecksum>
           <UserChecksum dnOrder="5">92D9C73209E7A1C3E07D13D493AE492B</UserChecksum>
         </File>
-        <File dnOrder="167">
+        <File dnOrder="165">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_compiler.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -1350,7 +1334,7 @@
           <GeneratedChecksum dnOrder="4">1A60177F0720FF6F1D979B798DF018C0</GeneratedChecksum>
           <UserChecksum dnOrder="5">1A60177F0720FF6F1D979B798DF018C0</UserChecksum>
         </File>
-        <File dnOrder="168">
+        <File dnOrder="166">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_cp15.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -1358,7 +1342,7 @@
           <GeneratedChecksum dnOrder="4">0A327C3031D097409B602CA5B79B1358</GeneratedChecksum>
           <UserChecksum dnOrder="5">0A327C3031D097409B602CA5B79B1358</UserChecksum>
         </File>
-        <File dnOrder="169">
+        <File dnOrder="167">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_gcc.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -1366,7 +1350,7 @@
           <GeneratedChecksum dnOrder="4">25431DA0E64D60CDB443B02ABAC00FC8</GeneratedChecksum>
           <UserChecksum dnOrder="5">25431DA0E64D60CDB443B02ABAC00FC8</UserChecksum>
         </File>
-        <File dnOrder="170">
+        <File dnOrder="168">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cmsis_iccarm.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -1374,7 +1358,7 @@
           <GeneratedChecksum dnOrder="4">A194C342920D5CD34C03C2E40907D2E6</GeneratedChecksum>
           <UserChecksum dnOrder="5">A194C342920D5CD34C03C2E40907D2E6</UserChecksum>
         </File>
-        <File dnOrder="171">
+        <File dnOrder="169">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">coding.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1382,7 +1366,7 @@
           <GeneratedChecksum dnOrder="4">C90E20A48057BB796970126A7E624A7A</GeneratedChecksum>
           <UserChecksum dnOrder="5">C90E20A48057BB796970126A7E624A7A</UserChecksum>
         </File>
-        <File dnOrder="172">
+        <File dnOrder="170">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">compress.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1390,7 +1374,7 @@
           <GeneratedChecksum dnOrder="4">5566A02E142784821EF1BF111FD89315</GeneratedChecksum>
           <UserChecksum dnOrder="5">5566A02E142784821EF1BF111FD89315</UserChecksum>
         </File>
-        <File dnOrder="173">
+        <File dnOrder="171">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">config.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra</LogicalPath>
@@ -1398,15 +1382,15 @@
           <GeneratedChecksum dnOrder="4">9537C1E41F14DFF1B50CF8AE3880105C</GeneratedChecksum>
           <UserChecksum dnOrder="5">9537C1E41F14DFF1B50CF8AE3880105C</UserChecksum>
         </File>
-        <File dnOrder="174">
+        <File dnOrder="172">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">04BC9FA211039862D37F9ECADA858007</GeneratedChecksum>
-          <UserChecksum dnOrder="5">04BC9FA211039862D37F9ECADA858007</UserChecksum>
+          <GeneratedChecksum dnOrder="4">707BD8EA87AFA5F8D744218A4E67CBD1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">707BD8EA87AFA5F8D744218A4E67CBD1</UserChecksum>
         </File>
-        <File dnOrder="175">
+        <File dnOrder="173">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">core_ca.h</Name>
           <LogicalPath dnOrder="2">packs/CMSIS/CMSIS/Core_A/Include/</LogicalPath>
@@ -1414,7 +1398,7 @@
           <GeneratedChecksum dnOrder="4">789BC94E81700B86004C6A43BAC0EFF2</GeneratedChecksum>
           <UserChecksum dnOrder="5">789BC94E81700B86004C6A43BAC0EFF2</UserChecksum>
         </File>
-        <File dnOrder="176">
+        <File dnOrder="174">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cpuid.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1422,7 +1406,7 @@
           <GeneratedChecksum dnOrder="4">E3E64EC1ACF10AAFFD81B112FCFE922A</GeneratedChecksum>
           <UserChecksum dnOrder="5">E3E64EC1ACF10AAFFD81B112FCFE922A</UserChecksum>
         </File>
-        <File dnOrder="177">
+        <File dnOrder="175">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1430,7 +1414,7 @@
           <GeneratedChecksum dnOrder="4">2A0EA7EB78185FC65ACC67460460CF89</GeneratedChecksum>
           <UserChecksum dnOrder="5">2A0EA7EB78185FC65ACC67460460CF89</UserChecksum>
         </File>
-        <File dnOrder="178">
+        <File dnOrder="176">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_hwInt.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1438,7 +1422,7 @@
           <GeneratedChecksum dnOrder="4">24A0F9072EB565469E9D0EA6A50AA9B6</GeneratedChecksum>
           <UserChecksum dnOrder="5">24A0F9072EB565469E9D0EA6A50AA9B6</UserChecksum>
         </File>
-        <File dnOrder="179">
+        <File dnOrder="177">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_sam6149.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1446,7 +1430,7 @@
           <GeneratedChecksum dnOrder="4">0586DB4F768CE4E459F407E80E6F47CD</GeneratedChecksum>
           <UserChecksum dnOrder="5">0586DB4F768CE4E459F407E80E6F47CD</UserChecksum>
         </File>
-        <File dnOrder="180">
+        <File dnOrder="178">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_aes_u2238.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1454,7 +1438,7 @@
           <GeneratedChecksum dnOrder="4">28C1907C94F4949424B4AF00BF3D943C</GeneratedChecksum>
           <UserChecksum dnOrder="5">28C1907C94F4949424B4AF00BF3D943C</UserChecksum>
         </File>
-        <File dnOrder="181">
+        <File dnOrder="179">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_ecc_pukcl.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1462,7 +1446,7 @@
           <GeneratedChecksum dnOrder="4">1E48E3EF03D4EC58983E15C763BBD2C4</GeneratedChecksum>
           <UserChecksum dnOrder="5">1E48E3EF03D4EC58983E15C763BBD2C4</UserChecksum>
         </File>
-        <File dnOrder="182">
+        <File dnOrder="180">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_pukcl_definitions.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1470,7 +1454,7 @@
           <GeneratedChecksum dnOrder="4">DACDA35FD8D3295C9EBE5B268A92EB2B</GeneratedChecksum>
           <UserChecksum dnOrder="5">DACDA35FD8D3295C9EBE5B268A92EB2B</UserChecksum>
         </File>
-        <File dnOrder="183">
+        <File dnOrder="181">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_pukcl_functions.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1478,7 +1462,7 @@
           <GeneratedChecksum dnOrder="4">947ABD1E6BFBD0C9DBF66783FA568E98</GeneratedChecksum>
           <UserChecksum dnOrder="5">947ABD1E6BFBD0C9DBF66783FA568E98</UserChecksum>
         </File>
-        <File dnOrder="184">
+        <File dnOrder="182">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_rng_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1486,7 +1470,7 @@
           <GeneratedChecksum dnOrder="4">FCC4C8CF0814D837F00009BB915E5E16</GeneratedChecksum>
           <UserChecksum dnOrder="5">FCC4C8CF0814D837F00009BB915E5E16</UserChecksum>
         </File>
-        <File dnOrder="185">
+        <File dnOrder="183">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_rsa_pukcl.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1494,7 +1478,7 @@
           <GeneratedChecksum dnOrder="4">4B075F53792F65EB728B52807A09C330</GeneratedChecksum>
           <UserChecksum dnOrder="5">4B075F53792F65EB728B52807A09C330</UserChecksum>
         </File>
-        <File dnOrder="186">
+        <File dnOrder="184">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha1_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1502,7 +1486,7 @@
           <GeneratedChecksum dnOrder="4">7B2CDD31F160F04C96A2E0C567697FB9</GeneratedChecksum>
           <UserChecksum dnOrder="5">7B2CDD31F160F04C96A2E0C567697FB9</UserChecksum>
         </File>
-        <File dnOrder="187">
+        <File dnOrder="185">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha224_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1510,7 +1494,7 @@
           <GeneratedChecksum dnOrder="4">E35293EB0980D228390604912872DE89</GeneratedChecksum>
           <UserChecksum dnOrder="5">E35293EB0980D228390604912872DE89</UserChecksum>
         </File>
-        <File dnOrder="188">
+        <File dnOrder="186">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha256_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1518,7 +1502,7 @@
           <GeneratedChecksum dnOrder="4">11ED19DEF086F6DAB3E0BA9F3B06338E</GeneratedChecksum>
           <UserChecksum dnOrder="5">11ED19DEF086F6DAB3E0BA9F3B06338E</UserChecksum>
         </File>
-        <File dnOrder="189">
+        <File dnOrder="187">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha384_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1526,7 +1510,7 @@
           <GeneratedChecksum dnOrder="4">349C68DF40D5144AEF219EFF7144B26C</GeneratedChecksum>
           <UserChecksum dnOrder="5">349C68DF40D5144AEF219EFF7144B26C</UserChecksum>
         </File>
-        <File dnOrder="190">
+        <File dnOrder="188">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha512_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1534,7 +1518,7 @@
           <GeneratedChecksum dnOrder="4">882BE8503DCAD6BC4E3291F9AE882C81</GeneratedChecksum>
           <UserChecksum dnOrder="5">882BE8503DCAD6BC4E3291F9AE882C81</UserChecksum>
         </File>
-        <File dnOrder="191">
+        <File dnOrder="189">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1542,7 +1526,7 @@
           <GeneratedChecksum dnOrder="4">9EB434500C04122BEC743AE92B2FBC91</GeneratedChecksum>
           <UserChecksum dnOrder="5">9EB434500C04122BEC743AE92B2FBC91</UserChecksum>
         </File>
-        <File dnOrder="192">
+        <File dnOrder="190">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_sam11105.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1550,7 +1534,7 @@
           <GeneratedChecksum dnOrder="4">F0CAF4F4674F7062F3641AA51F879BA0</GeneratedChecksum>
           <UserChecksum dnOrder="5">F0CAF4F4674F7062F3641AA51F879BA0</UserChecksum>
         </File>
-        <File dnOrder="193">
+        <File dnOrder="191">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_sha_sam6156.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1558,7 +1542,7 @@
           <GeneratedChecksum dnOrder="4">5A0F3110C877F96C5FD10F71995E3DC6</GeneratedChecksum>
           <UserChecksum dnOrder="5">5A0F3110C877F96C5FD10F71995E3DC6</UserChecksum>
         </File>
-        <File dnOrder="194">
+        <File dnOrder="192">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1566,23 +1550,23 @@
           <GeneratedChecksum dnOrder="4">A0520D271D494005FA8D251B14F2AA70</GeneratedChecksum>
           <UserChecksum dnOrder="5">A0520D271D494005FA8D251B14F2AA70</UserChecksum>
         </File>
-        <File dnOrder="195">
+        <File dnOrder="193">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_hwInt.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">EB09F45A1C19CCEE2382C8177AD377D8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">EB09F45A1C19CCEE2382C8177AD377D8</UserChecksum>
+          <GeneratedChecksum dnOrder="4">BF5E28E67D0E7C4D226186A6B8D1B50C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BF5E28E67D0E7C4D226186A6B8D1B50C</UserChecksum>
         </File>
-        <File dnOrder="196">
+        <File dnOrder="194">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_tdes_sam6150.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">FEBE52B5B54BE41111C025EDD9D30D6C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">FEBE52B5B54BE41111C025EDD9D30D6C</UserChecksum>
+          <GeneratedChecksum dnOrder="4">F6A4FEF4B44857F41E78068E81149995</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F6A4FEF4B44857F41E78068E81149995</UserChecksum>
         </File>
-        <File dnOrder="197">
+        <File dnOrder="195">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypt_wolfcryptcb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
@@ -1590,15 +1574,15 @@
           <GeneratedChecksum dnOrder="4">FFB11BBBF9255548A04CCBE962977BF3</GeneratedChecksum>
           <UserChecksum dnOrder="5">FFB11BBBF9255548A04CCBE962977BF3</UserChecksum>
         </File>
-        <File dnOrder="198">
+        <File dnOrder="196">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">crypto.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">78218E04D905F1591A76A8EE5F48238F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">78218E04D905F1591A76A8EE5F48238F</UserChecksum>
+          <GeneratedChecksum dnOrder="4">CD0A7B833F1402D2D8367696275CFDB3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CD0A7B833F1402D2D8367696275CFDB3</UserChecksum>
         </File>
-        <File dnOrder="199">
+        <File dnOrder="197">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">cryptocb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1606,7 +1590,7 @@
           <GeneratedChecksum dnOrder="4">4E7D8F4AD089A6C85CC0954112D45B75</GeneratedChecksum>
           <UserChecksum dnOrder="5">4E7D8F4AD089A6C85CC0954112D45B75</UserChecksum>
         </File>
-        <File dnOrder="200">
+        <File dnOrder="198">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">curve25519.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1614,15 +1598,15 @@
           <GeneratedChecksum dnOrder="4">3F1E7DFD55D18C0F302A4A3BB385DB80</GeneratedChecksum>
           <UserChecksum dnOrder="5">3F1E7DFD55D18C0F302A4A3BB385DB80</UserChecksum>
         </File>
-        <File dnOrder="201">
+        <File dnOrder="199">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">definitions.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C0CB42F79B1DD8C3F7261761B9010D2B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C0CB42F79B1DD8C3F7261761B9010D2B</UserChecksum>
+          <GeneratedChecksum dnOrder="4">D3B4FE86A1F5BA92261ADE5C3593AC8F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D3B4FE86A1F5BA92261ADE5C3593AC8F</UserChecksum>
         </File>
-        <File dnOrder="202">
+        <File dnOrder="200">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">des3.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1630,7 +1614,7 @@
           <GeneratedChecksum dnOrder="4">A153C4FD72C7F6AE399376ED4CE06010</GeneratedChecksum>
           <UserChecksum dnOrder="5">A153C4FD72C7F6AE399376ED4CE06010</UserChecksum>
         </File>
-        <File dnOrder="203">
+        <File dnOrder="201">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">device.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/</LogicalPath>
@@ -1638,7 +1622,7 @@
           <GeneratedChecksum dnOrder="4">FAA04921E75A13B8730954676182E8F1</GeneratedChecksum>
           <UserChecksum dnOrder="5">FAA04921E75A13B8730954676182E8F1</UserChecksum>
         </File>
-        <File dnOrder="204">
+        <File dnOrder="202">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">device_cache.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -1646,7 +1630,7 @@
           <GeneratedChecksum dnOrder="4">18669A3AEE1115DA27AACDFADB1416ED</GeneratedChecksum>
           <UserChecksum dnOrder="5">18669A3AEE1115DA27AACDFADB1416ED</UserChecksum>
         </File>
-        <File dnOrder="205">
+        <File dnOrder="203">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">dh.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -1654,7 +1638,7 @@
           <GeneratedChecksum dnOrder="4">212A459BE3CD968F59ABB7A7D38E0EE2</GeneratedChecksum>
           <UserChecksum dnOrder="5">212A459BE3CD968F59ABB7A7D38E0EE2</UserChecksum>
         </File>
-        <File dnOrder="206">
+        <File dnOrder="204">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">driver.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/</LogicalPath>
@@ -1662,13 +1646,29 @@
           <GeneratedChecksum dnOrder="4">1D2094DFA60F847FFD4E8153B6E78027</GeneratedChecksum>
           <UserChecksum dnOrder="5">1D2094DFA60F847FFD4E8153B6E78027</UserChecksum>
         </File>
-        <File dnOrder="207">
+        <File dnOrder="205">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">driver_common.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/</LogicalPath>
           <PhysicalPath dnOrder="3">/driver/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">CC7DFCC51CD25171A3E400E18969354F</GeneratedChecksum>
           <UserChecksum dnOrder="5">CC7DFCC51CD25171A3E400E18969354F</UserChecksum>
+        </File>
+        <File dnOrder="206">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">drv_usart.h</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/usart/</LogicalPath>
+          <PhysicalPath dnOrder="3">/driver/usart/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">51C7B4F72276D0DF26BB9BF5CE4082D7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">51C7B4F72276D0DF26BB9BF5CE4082D7</UserChecksum>
+        </File>
+        <File dnOrder="207">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">drv_usart_definitions.h</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/driver/usart/</LogicalPath>
+          <PhysicalPath dnOrder="3">/driver/usart/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">E668B86EEFB033501D88F0933752C3D8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E668B86EEFB033501D88F0933752C3D8</UserChecksum>
         </File>
         <File dnOrder="208">
           <Type dnOrder="0">HEADER</Type>
@@ -1723,8 +1723,8 @@
           <Name dnOrder="1">flexcom.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4E243D3278CDE7B37E2A085FE72439F4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4E243D3278CDE7B37E2A085FE72439F4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">150355846181EE52322D0997512F0A93</GeneratedChecksum>
+          <UserChecksum dnOrder="5">150355846181EE52322D0997512F0A93</UserChecksum>
         </File>
         <File dnOrder="215">
           <Type dnOrder="0">HEADER</Type>
@@ -1739,8 +1739,8 @@
           <Name dnOrder="1">gmac.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B50365835745CCB61A3ED5F508C00E8C</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B50365835745CCB61A3ED5F508C00E8C</UserChecksum>
+          <GeneratedChecksum dnOrder="4">EAB1A5F27C3DB5D528D10161385121BC</GeneratedChecksum>
+          <UserChecksum dnOrder="5">EAB1A5F27C3DB5D528D10161385121BC</UserChecksum>
         </File>
         <File dnOrder="217">
           <Type dnOrder="0">HEADER</Type>
@@ -1771,16 +1771,16 @@
           <Name dnOrder="1">i2sc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">38EF349D6F6B52FFB77D5340BF50787D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">38EF349D6F6B52FFB77D5340BF50787D</UserChecksum>
+          <GeneratedChecksum dnOrder="4">969D0C1D06E161AE59BEB8E111B46FC1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">969D0C1D06E161AE59BEB8E111B46FC1</UserChecksum>
         </File>
         <File dnOrder="221">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">icm.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C0948D61713C45DBF035C94A508EB5EB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C0948D61713C45DBF035C94A508EB5EB</UserChecksum>
+          <GeneratedChecksum dnOrder="4">8D954BB383236DE16CD9260A5C775E55</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8D954BB383236DE16CD9260A5C775E55</UserChecksum>
         </File>
         <File dnOrder="222">
           <Type dnOrder="0">HEADER</Type>
@@ -1803,24 +1803,24 @@
           <Name dnOrder="1">isc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C36398F7831C0F732801071DB86C96C3</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C36398F7831C0F732801071DB86C96C3</UserChecksum>
+          <GeneratedChecksum dnOrder="4">575055262F2E5BFE4545A9CA581FD311</GeneratedChecksum>
+          <UserChecksum dnOrder="5">575055262F2E5BFE4545A9CA581FD311</UserChecksum>
         </File>
         <File dnOrder="225">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">l2cc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">036A751068A0A04C109779296384B871</GeneratedChecksum>
-          <UserChecksum dnOrder="5">036A751068A0A04C109779296384B871</UserChecksum>
+          <GeneratedChecksum dnOrder="4">F96B54D122553657DDC448DCE825D84F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F96B54D122553657DDC448DCE825D84F</UserChecksum>
         </File>
         <File dnOrder="226">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">lcdc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">900EBCCAB58EE56233D497F66CA67DDD</GeneratedChecksum>
-          <UserChecksum dnOrder="5">900EBCCAB58EE56233D497F66CA67DDD</UserChecksum>
+          <GeneratedChecksum dnOrder="4">01F015B060E85AB106E941A2D0833FE7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">01F015B060E85AB106E941A2D0833FE7</UserChecksum>
         </File>
         <File dnOrder="227">
           <Type dnOrder="0">HEADER</Type>
@@ -1835,16 +1835,16 @@
           <Name dnOrder="1">matrix.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">37B32886738F803469CC706F0B1BD7B9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">37B32886738F803469CC706F0B1BD7B9</UserChecksum>
+          <GeneratedChecksum dnOrder="4">0207C170B13F58B5B1C1C938EBD99CBC</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0207C170B13F58B5B1C1C938EBD99CBC</UserChecksum>
         </File>
         <File dnOrder="229">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">mcan.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F4D87F41A515522F5542FF4FF8E873B1</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F4D87F41A515522F5542FF4FF8E873B1</UserChecksum>
+          <GeneratedChecksum dnOrder="4">DFCFE83FF36CBFB32F631637679ED7A5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DFCFE83FF36CBFB32F631637679ED7A5</UserChecksum>
         </File>
         <File dnOrder="230">
           <Type dnOrder="0">HEADER</Type>
@@ -1899,8 +1899,8 @@
           <Name dnOrder="1">mpddrc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A3E4A2708BEEDB7D2D92C9C5CAC2A2E7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A3E4A2708BEEDB7D2D92C9C5CAC2A2E7</UserChecksum>
+          <GeneratedChecksum dnOrder="4">CAD129A5254B93EDD153F150ADF4DA00</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CAD129A5254B93EDD153F150ADF4DA00</UserChecksum>
         </File>
         <File dnOrder="237">
           <Type dnOrder="0">HEADER</Type>
@@ -1947,8 +1947,8 @@
           <Name dnOrder="1">pdmic.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7BF18650232B8FEEB716960F74024A46</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7BF18650232B8FEEB716960F74024A46</UserChecksum>
+          <GeneratedChecksum dnOrder="4">1E8CE98CEE8131695FD2254061AB9CA9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1E8CE98CEE8131695FD2254061AB9CA9</UserChecksum>
         </File>
         <File dnOrder="243">
           <Type dnOrder="0">HEADER</Type>
@@ -1963,24 +1963,24 @@
           <Name dnOrder="1">pio.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E79DC46CF7648CF39BBBDBDF6869C56D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E79DC46CF7648CF39BBBDBDF6869C56D</UserChecksum>
+          <GeneratedChecksum dnOrder="4">21822DC7D5F2C6FD68CAED7CD088D47D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">21822DC7D5F2C6FD68CAED7CD088D47D</UserChecksum>
         </File>
         <File dnOrder="245">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pio_ctrl.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">A6971BCFA5BD142A0B1453FE9D22F3DB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">A6971BCFA5BD142A0B1453FE9D22F3DB</UserChecksum>
+          <GeneratedChecksum dnOrder="4">5A48506EB298B9AF7CDE3C88957DB058</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5A48506EB298B9AF7CDE3C88957DB058</UserChecksum>
         </File>
         <File dnOrder="246">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">pit.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">903924B4003A9C82EE621D696B866DBF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">903924B4003A9C82EE621D696B866DBF</UserChecksum>
+          <GeneratedChecksum dnOrder="4">4AE7333A9D9B7556D3125543069C96A1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4AE7333A9D9B7556D3125543069C96A1</UserChecksum>
         </File>
         <File dnOrder="247">
           <Type dnOrder="0">HEADER</Type>
@@ -2019,8 +2019,8 @@
           <Name dnOrder="1">plib_clk.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/peripheral/clk/</LogicalPath>
           <PhysicalPath dnOrder="3">/peripheral/clk/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3176DF5386ABD348A93A3A6169F52E8B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3176DF5386ABD348A93A3A6169F52E8B</UserChecksum>
+          <GeneratedChecksum dnOrder="4">115B0136EFE9ED871D67D3B10CBEBDC8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">115B0136EFE9ED871D67D3B10CBEBDC8</UserChecksum>
         </File>
         <File dnOrder="252">
           <Type dnOrder="0">HEADER</Type>
@@ -2091,8 +2091,8 @@
           <Name dnOrder="1">pmc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6DAB7DC729D2ADBA6014A5B5FA154CB9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6DAB7DC729D2ADBA6014A5B5FA154CB9</UserChecksum>
+          <GeneratedChecksum dnOrder="4">6AFFB41BAB7801FE69DA97C2D665BFF0</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6AFFB41BAB7801FE69DA97C2D665BFF0</UserChecksum>
         </File>
         <File dnOrder="261">
           <Type dnOrder="0">HEADER</Type>
@@ -2107,8 +2107,8 @@
           <Name dnOrder="1">ptc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E5B61DEE296573A2EFF07704827868B7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E5B61DEE296573A2EFF07704827868B7</UserChecksum>
+          <GeneratedChecksum dnOrder="4">AA8ED4FBB33E67EC9021078DDB8CFC8B</GeneratedChecksum>
+          <UserChecksum dnOrder="5">AA8ED4FBB33E67EC9021078DDB8CFC8B</UserChecksum>
         </File>
         <File dnOrder="263">
           <Type dnOrder="0">HEADER</Type>
@@ -2123,16 +2123,16 @@
           <Name dnOrder="1">pwm.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">8217053C99F24F885BCD95DC4BCC32A5</GeneratedChecksum>
-          <UserChecksum dnOrder="5">8217053C99F24F885BCD95DC4BCC32A5</UserChecksum>
+          <GeneratedChecksum dnOrder="4">B73C956F979701E60AF55A5841AFC4AF</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B73C956F979701E60AF55A5841AFC4AF</UserChecksum>
         </File>
         <File dnOrder="265">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">qspi.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">E161D3555907427C79CB2E855E9672F9</GeneratedChecksum>
-          <UserChecksum dnOrder="5">E161D3555907427C79CB2E855E9672F9</UserChecksum>
+          <GeneratedChecksum dnOrder="4">27E04A21D1C9B716BF17143946D03D32</GeneratedChecksum>
+          <UserChecksum dnOrder="5">27E04A21D1C9B716BF17143946D03D32</UserChecksum>
         </File>
         <File dnOrder="266">
           <Type dnOrder="0">HEADER</Type>
@@ -2171,56 +2171,56 @@
           <Name dnOrder="1">rstc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">EFAA31DF78CD9BA84A835ABD9664FBCA</GeneratedChecksum>
-          <UserChecksum dnOrder="5">EFAA31DF78CD9BA84A835ABD9664FBCA</UserChecksum>
+          <GeneratedChecksum dnOrder="4">CAEACDA91D87210431FE9C6778A69B52</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CAEACDA91D87210431FE9C6778A69B52</UserChecksum>
         </File>
         <File dnOrder="271">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">rtc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6BA8C64C3112EF7087ACFB75ED24D6E7</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6BA8C64C3112EF7087ACFB75ED24D6E7</UserChecksum>
+          <GeneratedChecksum dnOrder="4">CA15585ACF211289C6FE0C0996D5B102</GeneratedChecksum>
+          <UserChecksum dnOrder="5">CA15585ACF211289C6FE0C0996D5B102</UserChecksum>
         </File>
         <File dnOrder="272">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">rxlp.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F4315B0A715844734EE03E5682F19F10</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F4315B0A715844734EE03E5682F19F10</UserChecksum>
+          <GeneratedChecksum dnOrder="4">047F8E606689E0465FA9E47534142F15</GeneratedChecksum>
+          <UserChecksum dnOrder="5">047F8E606689E0465FA9E47534142F15</UserChecksum>
         </File>
         <File dnOrder="273">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sama5d27.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/pio/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/pio/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4D6624899814F04B6C08AB4756B11BD1</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4D6624899814F04B6C08AB4756B11BD1</UserChecksum>
+          <GeneratedChecksum dnOrder="4">1ED8E1049B21B5F81EC5681F8C13B463</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1ED8E1049B21B5F81EC5681F8C13B463</UserChecksum>
         </File>
         <File dnOrder="274">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sckc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">54CEAD0D20187239B14D3BBB08104211</GeneratedChecksum>
-          <UserChecksum dnOrder="5">54CEAD0D20187239B14D3BBB08104211</UserChecksum>
+          <GeneratedChecksum dnOrder="4">5822CFC47D86300AC0D9B8AE5E20E2B7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">5822CFC47D86300AC0D9B8AE5E20E2B7</UserChecksum>
         </File>
         <File dnOrder="275">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sdmmc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0C346858E13BC4CF88B655C34438BD39</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0C346858E13BC4CF88B655C34438BD39</UserChecksum>
+          <GeneratedChecksum dnOrder="4">1E1E0DF9008F0D267181CAE3A528D2CA</GeneratedChecksum>
+          <UserChecksum dnOrder="5">1E1E0DF9008F0D267181CAE3A528D2CA</UserChecksum>
         </File>
         <File dnOrder="276">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">secumod.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">7FBD3768C66BDEA0594387B7A481C449</GeneratedChecksum>
-          <UserChecksum dnOrder="5">7FBD3768C66BDEA0594387B7A481C449</UserChecksum>
+          <GeneratedChecksum dnOrder="4">3DB1999E072116983DF1FD5EDF91D66C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">3DB1999E072116983DF1FD5EDF91D66C</UserChecksum>
         </File>
         <File dnOrder="277">
           <Type dnOrder="0">HEADER</Type>
@@ -2243,24 +2243,24 @@
           <Name dnOrder="1">sfc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">90CB22563EB1331ED48E9FD9FF01350B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">90CB22563EB1331ED48E9FD9FF01350B</UserChecksum>
+          <GeneratedChecksum dnOrder="4">287449FA6C9E184444D0FA9A2889A7B4</GeneratedChecksum>
+          <UserChecksum dnOrder="5">287449FA6C9E184444D0FA9A2889A7B4</UserChecksum>
         </File>
         <File dnOrder="280">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sfr.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C54F6389C0E8A4885876F66941966EBF</GeneratedChecksum>
-          <UserChecksum dnOrder="5">C54F6389C0E8A4885876F66941966EBF</UserChecksum>
+          <GeneratedChecksum dnOrder="4">BC31203C03404B59C55ADE16C066A6D7</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BC31203C03404B59C55ADE16C066A6D7</UserChecksum>
         </File>
         <File dnOrder="281">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sfrbu.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">81E324269EE4D7BE232CA1AC00596E00</GeneratedChecksum>
-          <UserChecksum dnOrder="5">81E324269EE4D7BE232CA1AC00596E00</UserChecksum>
+          <GeneratedChecksum dnOrder="4">6498810291F73765AB6CDB9FF0DD21E1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6498810291F73765AB6CDB9FF0DD21E1</UserChecksum>
         </File>
         <File dnOrder="282">
           <Type dnOrder="0">HEADER</Type>
@@ -2275,8 +2275,8 @@
           <Name dnOrder="1">sha.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0273FE1B9EEF46739A0787A476C7C711</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0273FE1B9EEF46739A0787A476C7C711</UserChecksum>
+          <GeneratedChecksum dnOrder="4">42B6B48ED57C0128A9EEA2C7BF899994</GeneratedChecksum>
+          <UserChecksum dnOrder="5">42B6B48ED57C0128A9EEA2C7BF899994</UserChecksum>
         </File>
         <File dnOrder="284">
           <Type dnOrder="0">HEADER</Type>
@@ -2307,8 +2307,8 @@
           <Name dnOrder="1">shdwc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">1605D3102C3E6FBD072929C8364C9B9A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1605D3102C3E6FBD072929C8364C9B9A</UserChecksum>
+          <GeneratedChecksum dnOrder="4">ADD4E1408E506B97C623E758F6EA5683</GeneratedChecksum>
+          <UserChecksum dnOrder="5">ADD4E1408E506B97C623E758F6EA5683</UserChecksum>
         </File>
         <File dnOrder="288">
           <Type dnOrder="0">HEADER</Type>
@@ -2323,8 +2323,8 @@
           <Name dnOrder="1">smc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">460B26C29FF9053374677BD6B6FF9A8E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">460B26C29FF9053374677BD6B6FF9A8E</UserChecksum>
+          <GeneratedChecksum dnOrder="4">855132B7B5E027186CF75F30FDDC681A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">855132B7B5E027186CF75F30FDDC681A</UserChecksum>
         </File>
         <File dnOrder="290">
           <Type dnOrder="0">HEADER</Type>
@@ -2347,8 +2347,8 @@
           <Name dnOrder="1">spi.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AF385ECB2B94CAD0EF0D30140F69A239</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AF385ECB2B94CAD0EF0D30140F69A239</UserChecksum>
+          <GeneratedChecksum dnOrder="4">DD49CCCE870061194980A50FC0E73247</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DD49CCCE870061194980A50FC0E73247</UserChecksum>
         </File>
         <File dnOrder="293">
           <Type dnOrder="0">HEADER</Type>
@@ -2363,8 +2363,8 @@
           <Name dnOrder="1">ssc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B800732AB611B4F0D4C9CECCC3B44889</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B800732AB611B4F0D4C9CECCC3B44889</UserChecksum>
+          <GeneratedChecksum dnOrder="4">6E768D36932215A709BAD672B3DF16E5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">6E768D36932215A709BAD672B3DF16E5</UserChecksum>
         </File>
         <File dnOrder="295">
           <Type dnOrder="0">HEADER</Type>
@@ -2376,13 +2376,21 @@
         </File>
         <File dnOrder="296">
           <Type dnOrder="0">HEADER</Type>
-          <Name dnOrder="1">sys_console.h</Name>
-          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/console/</LogicalPath>
-          <PhysicalPath dnOrder="3">/system/console/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">133B4854322EF5DEAFDAD339FD7B1F40</GeneratedChecksum>
-          <UserChecksum dnOrder="5">133B4854322EF5DEAFDAD339FD7B1F40</UserChecksum>
+          <Name dnOrder="1">sys_dma.h</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/dma/</LogicalPath>
+          <PhysicalPath dnOrder="3">/system/dma/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">391A028A0ECEAB07432B0C900D953B8C</GeneratedChecksum>
+          <UserChecksum dnOrder="5">391A028A0ECEAB07432B0C900D953B8C</UserChecksum>
         </File>
         <File dnOrder="297">
+          <Type dnOrder="0">HEADER</Type>
+          <Name dnOrder="1">sys_dma_mapping.h</Name>
+          <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/dma/</LogicalPath>
+          <PhysicalPath dnOrder="3">/system/dma/</PhysicalPath>
+          <GeneratedChecksum dnOrder="4">D6141C37E3995B1B6C326EBA5F1FA067</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D6141C37E3995B1B6C326EBA5F1FA067</UserChecksum>
+        </File>
+        <File dnOrder="298">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_int.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/int/</LogicalPath>
@@ -2390,7 +2398,7 @@
           <GeneratedChecksum dnOrder="4">1329D2DEB6E5AC9515AD4D165C60DC74</GeneratedChecksum>
           <UserChecksum dnOrder="5">1329D2DEB6E5AC9515AD4D165C60DC74</UserChecksum>
         </File>
-        <File dnOrder="298">
+        <File dnOrder="299">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_int_mapping.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/int/</LogicalPath>
@@ -2398,7 +2406,7 @@
           <GeneratedChecksum dnOrder="4">D5F3C8B8016B12FF575690A3CC761BFD</GeneratedChecksum>
           <UserChecksum dnOrder="5">D5F3C8B8016B12FF575690A3CC761BFD</UserChecksum>
         </File>
-        <File dnOrder="299">
+        <File dnOrder="300">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_time.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/time/</LogicalPath>
@@ -2406,7 +2414,7 @@
           <GeneratedChecksum dnOrder="4">5B1C0201624F17531B457421E59F38CD</GeneratedChecksum>
           <UserChecksum dnOrder="5">5B1C0201624F17531B457421E59F38CD</UserChecksum>
         </File>
-        <File dnOrder="300">
+        <File dnOrder="301">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_time_definitions.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/time/</LogicalPath>
@@ -2414,7 +2422,7 @@
           <GeneratedChecksum dnOrder="4">F8165EAB8A02643100386E92CD7EB3C6</GeneratedChecksum>
           <UserChecksum dnOrder="5">F8165EAB8A02643100386E92CD7EB3C6</UserChecksum>
         </File>
-        <File dnOrder="301">
+        <File dnOrder="302">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">sys_time_local.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/time/</LogicalPath>
@@ -2422,7 +2430,7 @@
           <GeneratedChecksum dnOrder="4">62F39464265EC34979649F761FB4FE57</GeneratedChecksum>
           <UserChecksum dnOrder="5">62F39464265EC34979649F761FB4FE57</UserChecksum>
         </File>
-        <File dnOrder="302">
+        <File dnOrder="303">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">system.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/</LogicalPath>
@@ -2430,7 +2438,7 @@
           <GeneratedChecksum dnOrder="4">BE95B4F134C5C929787B9DA6FDBF3501</GeneratedChecksum>
           <UserChecksum dnOrder="5">BE95B4F134C5C929787B9DA6FDBF3501</UserChecksum>
         </File>
-        <File dnOrder="303">
+        <File dnOrder="304">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">system_common.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/</LogicalPath>
@@ -2438,7 +2446,7 @@
           <GeneratedChecksum dnOrder="4">C3F5136D520DAC4416512EBFCCA023C3</GeneratedChecksum>
           <UserChecksum dnOrder="5">C3F5136D520DAC4416512EBFCCA023C3</UserChecksum>
         </File>
-        <File dnOrder="304">
+        <File dnOrder="305">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">system_module.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/system/</LogicalPath>
@@ -2446,23 +2454,23 @@
           <GeneratedChecksum dnOrder="4">1C75A8A6B60598A2FD0D533F57839B72</GeneratedChecksum>
           <UserChecksum dnOrder="5">1C75A8A6B60598A2FD0D533F57839B72</UserChecksum>
         </File>
-        <File dnOrder="305">
+        <File dnOrder="306">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">tc.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0702EDD6E1634201BE33630C84E0ACD8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0702EDD6E1634201BE33630C84E0ACD8</UserChecksum>
+          <GeneratedChecksum dnOrder="4">C8B730C5BF8F91B5B40F7E55910E72D9</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C8B730C5BF8F91B5B40F7E55910E72D9</UserChecksum>
         </File>
-        <File dnOrder="306">
+        <File dnOrder="307">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">tdes.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D850162DCCF8C83521D15E33F453A0E0</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D850162DCCF8C83521D15E33F453A0E0</UserChecksum>
+          <GeneratedChecksum dnOrder="4">16B0E6121B87D01D1E12716B2375DE65</GeneratedChecksum>
+          <UserChecksum dnOrder="5">16B0E6121B87D01D1E12716B2375DE65</UserChecksum>
         </File>
-        <File dnOrder="307">
+        <File dnOrder="308">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">tfm.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2470,7 +2478,7 @@
           <GeneratedChecksum dnOrder="4">6A934FAEF07EF2528F9230170B984C27</GeneratedChecksum>
           <UserChecksum dnOrder="5">6A934FAEF07EF2528F9230170B984C27</UserChecksum>
         </File>
-        <File dnOrder="308">
+        <File dnOrder="309">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">toolchain_specifics.h</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
@@ -2478,23 +2486,23 @@
           <GeneratedChecksum dnOrder="4">0EAC3A85FB97F7922EACDDEB885A0230</GeneratedChecksum>
           <UserChecksum dnOrder="5">0EAC3A85FB97F7922EACDDEB885A0230</UserChecksum>
         </File>
-        <File dnOrder="309">
+        <File dnOrder="310">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">trng.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">05A48E2769497BEFF4CD12D57E027EA2</GeneratedChecksum>
-          <UserChecksum dnOrder="5">05A48E2769497BEFF4CD12D57E027EA2</UserChecksum>
+          <GeneratedChecksum dnOrder="4">C9C0B8783FA6729C4DCB5F5A723565AB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C9C0B8783FA6729C4DCB5F5A723565AB</UserChecksum>
         </File>
-        <File dnOrder="310">
+        <File dnOrder="311">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">twihs.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2D106DD02110DA4BAA92984924DA83D1</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2D106DD02110DA4BAA92984924DA83D1</UserChecksum>
+          <GeneratedChecksum dnOrder="4">F52E03CE2FDAC446C8FC209C6C67795A</GeneratedChecksum>
+          <UserChecksum dnOrder="5">F52E03CE2FDAC446C8FC209C6C67795A</UserChecksum>
         </File>
-        <File dnOrder="311">
+        <File dnOrder="312">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">types.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2502,31 +2510,31 @@
           <GeneratedChecksum dnOrder="4">BA9FF23CA7A9A95103BBA22BD2938AF4</GeneratedChecksum>
           <UserChecksum dnOrder="5">BA9FF23CA7A9A95103BBA22BD2938AF4</UserChecksum>
         </File>
-        <File dnOrder="312">
+        <File dnOrder="313">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">uart.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">5DF8884F67A662C042BA0AAB3C60F699</GeneratedChecksum>
-          <UserChecksum dnOrder="5">5DF8884F67A662C042BA0AAB3C60F699</UserChecksum>
+          <GeneratedChecksum dnOrder="4">C944AF8A1F67D64B07AC9A56E4933ED2</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C944AF8A1F67D64B07AC9A56E4933ED2</UserChecksum>
         </File>
-        <File dnOrder="313">
+        <File dnOrder="314">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">udphs.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">D293C9C9BCD25AEE02282235265A3061</GeneratedChecksum>
-          <UserChecksum dnOrder="5">D293C9C9BCD25AEE02282235265A3061</UserChecksum>
+          <GeneratedChecksum dnOrder="4">D42209E27D6329D36D158965A518874F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">D42209E27D6329D36D158965A518874F</UserChecksum>
         </File>
-        <File dnOrder="314">
+        <File dnOrder="315">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">uhphs.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4F0434C8FAED28FD8DC2913C760BF431</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4F0434C8FAED28FD8DC2913C760BF431</UserChecksum>
+          <GeneratedChecksum dnOrder="4">089B7D70AF8BF088C4741E3ABB8CEDC5</GeneratedChecksum>
+          <UserChecksum dnOrder="5">089B7D70AF8BF088C4741E3ABB8CEDC5</UserChecksum>
         </File>
-        <File dnOrder="315">
+        <File dnOrder="316">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">visibility.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2534,7 +2542,7 @@
           <GeneratedChecksum dnOrder="4">F38532240D5BCE7E440C289515E928DE</GeneratedChecksum>
           <UserChecksum dnOrder="5">F38532240D5BCE7E440C289515E928DE</UserChecksum>
         </File>
-        <File dnOrder="316">
+        <File dnOrder="317">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">wc_encrypt.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2542,7 +2550,7 @@
           <GeneratedChecksum dnOrder="4">2860069374A5C36F82FD48A85657BDFD</GeneratedChecksum>
           <UserChecksum dnOrder="5">2860069374A5C36F82FD48A85657BDFD</UserChecksum>
         </File>
-        <File dnOrder="317">
+        <File dnOrder="318">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">wc_pkcs11.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2550,7 +2558,7 @@
           <GeneratedChecksum dnOrder="4">8F56EBEA8B818256B708568A8FBCD723</GeneratedChecksum>
           <UserChecksum dnOrder="5">8F56EBEA8B818256B708568A8FBCD723</UserChecksum>
         </File>
-        <File dnOrder="318">
+        <File dnOrder="319">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">wc_port.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2558,15 +2566,15 @@
           <GeneratedChecksum dnOrder="4">91500C2B2F189B5C86754050F42C4517</GeneratedChecksum>
           <UserChecksum dnOrder="5">91500C2B2F189B5C86754050F42C4517</UserChecksum>
         </File>
-        <File dnOrder="319">
+        <File dnOrder="320">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">wdt.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AF9041491EC49D2F59E6EAD60471B8F4</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AF9041491EC49D2F59E6EAD60471B8F4</UserChecksum>
+          <GeneratedChecksum dnOrder="4">8E2841BADB5A46AC002490389DE1980D</GeneratedChecksum>
+          <UserChecksum dnOrder="5">8E2841BADB5A46AC002490389DE1980D</UserChecksum>
         </File>
-        <File dnOrder="320">
+        <File dnOrder="321">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">wolfevent.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2574,7 +2582,7 @@
           <GeneratedChecksum dnOrder="4">B316CBF721F3EEB2A7315822A9ACAF08</GeneratedChecksum>
           <UserChecksum dnOrder="5">B316CBF721F3EEB2A7315822A9ACAF08</UserChecksum>
         </File>
-        <File dnOrder="321">
+        <File dnOrder="322">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">wolfmath.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2582,23 +2590,23 @@
           <GeneratedChecksum dnOrder="4">FB780A28537DF0474A8ED86F7661F874</GeneratedChecksum>
           <UserChecksum dnOrder="5">FB780A28537DF0474A8ED86F7661F874</UserChecksum>
         </File>
-        <File dnOrder="322">
+        <File dnOrder="323">
           <Type dnOrder="0">HEADER</Type>
           <Name dnOrder="1">xdmac.h</Name>
           <LogicalPath dnOrder="2">packs/ATSAMA5D27_DFP/component/</LogicalPath>
           <PhysicalPath dnOrder="3">/../../packs/ATSAMA5D27_DFP/component/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">AA4804D2AEEE7CA559B6D0F9E90037E6</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AA4804D2AEEE7CA559B6D0F9E90037E6</UserChecksum>
+          <GeneratedChecksum dnOrder="4">BAEA0B24CF4B7AB66C1CE056293D837F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">BAEA0B24CF4B7AB66C1CE056293D837F</UserChecksum>
         </File>
-        <File dnOrder="323">
+        <File dnOrder="324">
           <Type dnOrder="0">LINKER</Type>
           <Name dnOrder="1">ddr.icf</Name>
           <LogicalPath dnOrder="2">config/sam_a5d2_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2CEF4947DB26E11903492ABAF1DC564E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2CEF4947DB26E11903492ABAF1DC564E</UserChecksum>
+          <GeneratedChecksum dnOrder="4">2E5FDBF437500D522230A7E9CA37BF82</GeneratedChecksum>
+          <UserChecksum dnOrder="5">2E5FDBF437500D522230A7E9CA37BF82</UserChecksum>
         </File>
-        <File dnOrder="324">
+        <File dnOrder="325">
           <Type dnOrder="0">IMPORTANT</Type>
           <Name dnOrder="1">misc.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
@@ -2610,7 +2618,7 @@
     </Manifest>
     <Settings dnOrder="4">
       <Setting dnOrder="0" key="CMSISPath" value=".\dev_packs\arm\CMSIS\5.5.1"/>
-      <Setting dnOrder="1" key="DFPPath" value=".\dev_packs\Microchip\SAMA5D2_DFP\0.1.18\atdf\ATSAMA5D27.atdf"/>
+      <Setting dnOrder="1" key="DFPPath" value=".\dev_packs\Microchip\SAMA5D2_DFP\1.0.5\atdf\ATSAMA5D27.atdf"/>
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="OVERWRITE"/>

@@ -79,18 +79,6 @@ extern "C" {
 // Section: System Service Configuration
 // *****************************************************************************
 // *****************************************************************************
-/* Console System Service Configuration Options */
-#define SYS_CONSOLE_DEVICE_MAX_INSTANCES   1
-#define SYS_CONSOLE_UART_MAX_INSTANCES     1
-
-
-/* RX queue size has one additional element for the empty spot needed in circular queue */
-#define SYS_CONSOLE_UART_RD_QUEUE_DEPTH_IDX0    11
-
-/* TX queue size has one additional element for the empty spot needed in circular queue */
-#define SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0    65
-#define SYS_CONSOLE_BUFFER_DMA_READY
-
 /* TIME System Service Configuration Options */
 #define SYS_TIME_INDEX_0                     0
 #define SYS_TIME_MAX_TIMERS                  5
@@ -107,6 +95,12 @@ extern "C" {
 // Section: Driver Configuration
 // *****************************************************************************
 // *****************************************************************************
+/* USART Driver Global Configuration Options */
+#define DRV_USART_INSTANCES_NUMBER         1
+/* USART Driver Instance 0 Configuration Options */
+#define DRV_USART_INDEX_0                  0
+#define DRV_USART_CLIENTS_NUMBER_IDX0      1
+
 
 
 // *****************************************************************************
@@ -139,6 +133,7 @@ extern "C" {
 #define WOLFSSL_HAVE_MCHP_HW_SHA264
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
+#define HAVE_SHA512
 #define WOLFSSL_HAVE_MCHP_HW_SHA2128
 #define WOLFSSL_HAVE_MCHP_3DES
 #define WOLFSSL_AES_128

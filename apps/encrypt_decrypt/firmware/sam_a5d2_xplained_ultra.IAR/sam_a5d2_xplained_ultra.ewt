@@ -2683,6 +2683,12 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\driver\driver_common.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\driver\usart\drv_usart.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\driver\usart\drv_usart_definitions.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\dsa.h</name>
             </file>
             <file>
@@ -2947,7 +2953,10 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\cache\sys_cache.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\console\sys_console.h</name>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\dma\sys_dma.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\dma\sys_dma_mapping.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\int\sys_int.h</name>
@@ -3145,6 +3154,12 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\dh.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\driver\usart\src\drv_usart.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\driver\usart\src\drv_usart_local.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\dsa.c</name>
             </file>
             <file>
@@ -3316,19 +3331,7 @@
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\cache\sys_cache.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\console\src\sys_console.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\console\src\sys_console_local.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\console\src\sys_console_uart.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\console\src\sys_console_uart.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\console\src\sys_console_uart_definitions.h</name>
+                <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\dma\sys_dma.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_a5d2_xplained_ultra\system\int\src\sys_int.c</name>
