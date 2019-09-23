@@ -102,7 +102,8 @@ uint32_t SecureCopy(uint8_t * dst, uint32_t dstSz, const uint8_t * src, uint32_t
     uint32_t bytesToCopy = dstSz < srcSz ? dstSz : srcSz;
     if (reverse == 0)
     {
-        for (uint32_t x = 0; x < bytesToCopy; x++)
+        uint32_t x = 0;
+        for (x = 0; x < bytesToCopy; x++)
         {
             *(dst++) = *(src++);
         }
@@ -110,7 +111,8 @@ uint32_t SecureCopy(uint8_t * dst, uint32_t dstSz, const uint8_t * src, uint32_t
     else
     {
         uint8_t * revDst = dst + bytesToCopy - 1;
-        for (uint32_t x = 0; x < bytesToCopy; x++)
+        uint32_t x = 0;
+        for (x = 0; x < bytesToCopy; x++)
         {
             *(revDst--) = *(src++);
         }        
