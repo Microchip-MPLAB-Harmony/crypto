@@ -130,6 +130,7 @@ void FLEXCOM8_Handler           ( void ) __attribute__((weak, alias("Dummy_Handl
 void FLEXCOM9_Handler           ( void ) __attribute__((weak, alias("Dummy_Handler")));
 void WDT1_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler")));
 void QSPI_Handler               ( void ) __attribute__((weak, alias("Dummy_Handler")));
+void HEFC_INT0_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler")));
 void HEFC_INTFIX_Handler        ( void ) __attribute__((weak, alias("Dummy_Handler")));
 void HEFC_INTNOFIX_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler")));
 void TC2_CH0_Handler            ( void ) __attribute__((weak, alias("Dummy_Handler")));
@@ -225,6 +226,7 @@ const DeviceVectors exception_table=
     .pfnFLEXCOM9_Handler           = ( void * ) FLEXCOM9_Handler,
     .pfnWDT1_Handler               = ( void * ) WDT1_Handler,
     .pfnQSPI_Handler               = ( void * ) QSPI_Handler,
+    .pfnHEFC_INT0_Handler          = ( void * ) HEFC_INT0_Handler,
     .pfnHEFC_INTFIX_Handler        = ( void * ) HEFC_INTFIX_Handler,
     .pfnHEFC_INTNOFIX_Handler      = ( void * ) HEFC_INTNOFIX_Handler,
     .pfnTC2_CH0_Handler            = ( void * ) TC2_CH0_Handler,

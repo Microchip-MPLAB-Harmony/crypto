@@ -628,7 +628,7 @@ int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa)
     if (rsa->holder == NULL)
         return -1;
 
-    return wc_InitRsaKey((RsaKey*)rsa->holder, NULL);
+    return wc_InitRsaKey_ex((RsaKey*)rsa->holder, NULL, 0);
 }
 
 
