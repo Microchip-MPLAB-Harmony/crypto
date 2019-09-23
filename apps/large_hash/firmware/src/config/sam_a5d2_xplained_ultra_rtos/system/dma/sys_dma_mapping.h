@@ -1,5 +1,24 @@
 /*******************************************************************************
-* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
+  DMA System Service Mapping File
+
+  Company:
+    Microchip Technology Inc.
+
+  File Name:
+    sys_dma_mapping.h
+
+  Summary:
+    DMA System Service mapping file.
+
+  Description:
+    This header file contains the mapping of the APIs defined in the API header
+    to either the function implementations or macro implementation or the
+    specific variant implementation.
+*******************************************************************************/
+
+//DOM-IGNORE-BEGIN
+/******************************************************************************
+* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -20,59 +39,24 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
+//DOM-IGNORE-END
 
-#ifndef PLIB_CLK_H
-#define PLIB_CLK_H
+#ifndef SYS_DMA_MAPPING_H
+#define SYS_DMA_MAPPING_H
 
-#include <stddef.h>
 
-#ifdef __cplusplus  // Provide C++ Compatibility
-
-    extern "C" {
-
-#endif
- 
 // *****************************************************************************
 // *****************************************************************************
-// Section: CLK Module System Interface Routines
+// Section: DMA System Service Mapping
 // *****************************************************************************
 // *****************************************************************************
 
-// *****************************************************************************
-/* Function:
-    void CLK_Initialize ( void )
 
-  Summary:
-    Initializes hardware of the System Clock and Peripheral Clock.
-    
-  Description:
-    This function initializes the hardware of System Clock and Peripheral Clocks.
+#define SYS_DMA_ChannelCallbackRegister(channel, eventHandler, context)
 
-  Precondition:
-    None.
+#define SYS_DMA_ChannelTransfer(channel, srcAddr, destAddr, blockSize)
 
-  Parameters:
-    None.
+#define SYS_DMA_ChannelIsBusy(channel)
 
-  Returns:
-    None.
-
-  Example:
-    <code>
-    //Example 1: Do not alter the configuration bit settings
-    CLK_Initialize ( );
-
-    </code>
-
-  Remarks:
-    None.
-*/
-
-void CLK_Initialize ( void );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif //PLIB_CLK_H
-
+#define SYS_DMA_ChannelDisable(channel)
+#endif // SYS_DMA_MAPPING_H
