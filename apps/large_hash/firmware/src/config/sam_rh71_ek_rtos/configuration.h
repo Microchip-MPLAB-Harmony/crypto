@@ -131,6 +131,7 @@ extern "C" {
 #define WOLFSSL_HAVE_MCHP_HW_SHA264
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
+#define HAVE_SHA512
 #define WOLFSSL_HAVE_MCHP_HW_SHA2128
 #define NO_DES3
 #define NO_AES
