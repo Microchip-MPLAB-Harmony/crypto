@@ -1025,7 +1025,7 @@
 
         return ret;
     }
-
+#elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_3DES)
 
 #elif defined(WOLFSSL_PIC32MZ_CRYPT)
 
