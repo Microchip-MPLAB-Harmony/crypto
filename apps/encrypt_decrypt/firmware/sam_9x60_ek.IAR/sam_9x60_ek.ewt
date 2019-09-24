@@ -2464,7 +2464,19 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_aes_u2238.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_ecc_pukcl.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_pukcl_definitions.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_pukcl_functions.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_rng_hw.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_rsa_pukcl.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_sha1_hw.h</name>
@@ -2500,10 +2512,124 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_tdes_sam6150.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_wolfcryptcb.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\crypto\crypto.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\cryptocb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_cf_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ClearFlags_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Comp_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_CondCopy_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_CRT_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Div_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ExpMod_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_FastCopy_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Fill_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Fmult_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_GCD_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_GF2NEccAdd_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_GF2NEccConv_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_GF2NEccDbl_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_GF2NEccMul_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_GF2NEcDsa_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Hardware_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Headers_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_JumpTable_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_mapping_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_PrimeGen_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Rc_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_RedMod_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Rng_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_SelfTest_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Services_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Smult_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Square_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_Swap_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_typedef_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEccAdd_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEccAddSub_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEccConv_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEccDbl_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEccMul_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEccQuickDualMul_pb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\CryptoLib_ZpEcDsa_pb.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\curve25519.h</name>
@@ -2531,6 +2657,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\driver\driver_common.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\driver\usart\drv_usart.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\driver\usart\drv_usart_definitions.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\dsa.h</name>
@@ -2785,7 +2917,10 @@
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\cache\sys_cache.h</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\console\sys_console.h</name>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\dma\sys_dma.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\dma\sys_dma_mapping.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\int\sys_int.h</name>
@@ -2890,6 +3025,9 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\blake2b.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\blake2s.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\bsp\bsp.c</name>
             </file>
             <file>
@@ -2920,10 +3058,19 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_aes_u2238.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_ecc_pukcl.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_pukcl_functions.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_rng_sam6334.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_rng_u2242.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_rsa_pukcl.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_sha1_sam11105.c</name>
@@ -2953,6 +3100,9 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_tdes_sam6150.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_wolfcryptcb.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\crypto\src\crypto.c</name>
             </file>
             <file>
@@ -2969,6 +3119,12 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\dh.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\driver\usart\src\drv_usart.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\driver\usart\src\drv_usart_local.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\dsa.c</name>
@@ -3133,19 +3289,7 @@
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\cache\sys_cache.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\console\src\sys_console.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\console\src\sys_console_local.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\console\src\sys_console_uart.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\console\src\sys_console_uart.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\console\src\sys_console_uart_definitions.h</name>
+                <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\dma\sys_dma.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\config\sam_9x60_ek\system\int\src\sys_int.c</name>
