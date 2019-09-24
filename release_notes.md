@@ -19,6 +19,17 @@
 - **wolfSSL** - 4.1.0-stable
 - **Net** - 3.4.0 For wolfSSL demonstrations
 
+| Development kits | Applications |
+| --- | --- | --- |
+| [ATSAMA5D2C-XULT](https://www.microchip.com/Developmenttools/ProductDetails/ATSAMA5D2C-XULT) | 6 |
+| [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/ATSAME54-XPRO) | 8 |
+| [SAM E70 Xplained Ultra Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/atsamv71-xult) | 12 |
+| [PIC32MZ Embedded Connectivity with FPU (EF) Starter Kit (Crypto)](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM320007-C) | 12 |
+| SAM9x60-EK | 6 |
+| [SAML21 Xplained Pro](https://www.microchip.com/developmenttools/ProductDetails/atsaml21-xpro-b) | 3 |
+| SAMRH71-EK | 6 |
+
+
 ### Known Issues
 - The ICD4 loads the reset line of the SAM V71 Xplained Ultra board. Do not press reset button on the Xplained Ultra board while ICD4 is connected to the board.
 
