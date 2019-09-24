@@ -55,16 +55,17 @@
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/pio/plib_pio.h"
 #include "peripheral/aic/plib_aic.h"
-#include "system/console/sys_console.h"
-#include "system/console/src/sys_console_uart_definitions.h"
-#include "peripheral/dbgu/plib_dbgu.h"
 #include "peripheral/tc/plib_tc0.h"
+#include "system/time/sys_time.h"
+#include "wolfssl/wolfcrypt/port/pic32/crypt_wolfcryptcb.h"
+#include "driver/usart/drv_usart.h"
+#include "peripheral/dbgu/plib_dbgu.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "system/int/sys_int.h"
 #include "system/cache/sys_cache.h"
+#include "system/dma/sys_dma.h"
 #include "osal/osal.h"
-#include "system/time/sys_time.h"
 #include "app.h"
 
 
@@ -187,8 +188,7 @@ void SYS_Tasks ( void );
 
 typedef struct
 {
-    SYS_MODULE_OBJ  sysConsole0;
-
+    SYS_MODULE_OBJ  drvUsart0;
     SYS_MODULE_OBJ  sysTime;
 
 } SYSTEM_OBJECTS;

@@ -62,6 +62,54 @@
 // Section: Driver Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+// <editor-fold defaultstate="collapsed" desc="DRV_USART Instance 0 Initialization Data">
+
+static DRV_USART_CLIENT_OBJ drvUSART0ClientObjPool[DRV_USART_CLIENTS_NUMBER_IDX0];
+
+
+const DRV_USART_PLIB_INTERFACE drvUsart0PlibAPI = {
+    .readCallbackRegister = (DRV_USART_PLIB_READ_CALLBACK_REG)DBGU_ReadCallbackRegister,
+    .read = (DRV_USART_PLIB_READ)DBGU_Read,
+    .readIsBusy = (DRV_USART_PLIB_READ_IS_BUSY)DBGU_ReadIsBusy,
+    .readCountGet = (DRV_USART_PLIB_READ_COUNT_GET)DBGU_ReadCountGet,
+    .writeCallbackRegister = (DRV_USART_PLIB_WRITE_CALLBACK_REG)DBGU_WriteCallbackRegister,
+    .write = (DRV_USART_PLIB_WRITE)DBGU_Write,
+    .writeIsBusy = (DRV_USART_PLIB_WRITE_IS_BUSY)DBGU_WriteIsBusy,
+    .writeCountGet = (DRV_USART_PLIB_WRITE_COUNT_GET)DBGU_WriteCountGet,
+    .errorGet = (DRV_USART_PLIB_ERROR_GET)DBGU_ErrorGet,
+    .serialSetup = (DRV_USART_PLIB_SERIAL_SETUP)DBGU_SerialSetup
+};
+
+const uint32_t drvUsart0remapDataWidth[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x0, 0xFFFFFFFF };
+const uint32_t drvUsart0remapParity[] = { 0x800, 0x0, 0x200, 0x600, 0x400, 0xFFFFFFFF };
+const uint32_t drvUsart0remapStopBits[] = { 0x0, 0xFFFFFFFF, 0xFFFFFFFF };
+const uint32_t drvUsart0remapError[] = { 0x20, 0x80, 0x40 };
+
+const DRV_USART_INIT drvUsart0InitData =
+{
+    .usartPlib = &drvUsart0PlibAPI,
+
+    /* USART Number of clients */
+    .numClients = DRV_USART_CLIENTS_NUMBER_IDX0,
+
+    /* USART Client Objects Pool */
+    .clientObjPool = (uintptr_t)&drvUSART0ClientObjPool[0],
+
+    .dmaChannelTransmit = SYS_DMA_CHANNEL_NONE,
+
+    .dmaChannelReceive = SYS_DMA_CHANNEL_NONE,
+
+
+    .remapDataWidth = drvUsart0remapDataWidth,
+
+    .remapParity = drvUsart0remapParity,
+
+    .remapStopBits = drvUsart0remapStopBits,
+
+    .remapError = drvUsart0remapError,
+};
+
+// </editor-fold>
 
 
 // *****************************************************************************
@@ -84,52 +132,6 @@ SYSTEM_OBJECTS sysObj;
 // Section: System Initialization
 // *****************************************************************************
 // *****************************************************************************
-// <editor-fold defaultstate="collapsed" desc="SYS_CONSOLE Instance 0 Initialization Data">
-
-static QElement sysConsole0UARTRdQueueElements[SYS_CONSOLE_UART_RD_QUEUE_DEPTH_IDX0];
-static QElement sysConsole0UARTWrQueueElements[SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0];
-
-/* Declared in console device implementation (sys_console_uart.c) */
-extern const SYS_CONSOLE_DEV_DESC sysConsoleUARTDevDesc;
-
-const SYS_CONSOLE_UART_PLIB_INTERFACE sysConsole0UARTPlibAPI =
-{
-    .read = (SYS_CONSOLE_UART_PLIB_READ)DBGU_Read,
-    .write = (SYS_CONSOLE_UART_PLIB_WRITE)DBGU_Write,
-    .readCallbackRegister = (SYS_CONSOLE_UART_PLIB_REGISTER_CALLBACK_READ)DBGU_ReadCallbackRegister,
-    .writeCallbackRegister = (SYS_CONSOLE_UART_PLIB_REGISTER_CALLBACK_WRITE)DBGU_WriteCallbackRegister,
-    .errorGet = (SYS_CONSOLE_UART_PLIB_ERROR_GET)DBGU_ErrorGet,
-};
-
-
-const SYS_CONSOLE_UART_INTERRUPT_SOURCES sysConsole0UARTInterruptSources =
-{
-    /* Peripheral has single interrupt vector */
-    .isSingleIntSrc                        = true,
-
-    /* Peripheral interrupt line */
-    .intSources.usartInterrupt             = DBGU_IRQn,
-};
-
-const SYS_CONSOLE_UART_INIT_DATA sysConsole0UARTInitData =
-{
-    .uartPLIB = &sysConsole0UARTPlibAPI,
-    .readQueueElementsArr = sysConsole0UARTRdQueueElements,
-    .writeQueueElementsArr = sysConsole0UARTWrQueueElements,
-    .readQueueDepth = SYS_CONSOLE_UART_RD_QUEUE_DEPTH_IDX0,
-    .writeQueueDepth = SYS_CONSOLE_UART_WR_QUEUE_DEPTH_IDX0,
-    .interruptSources = &sysConsole0UARTInterruptSources,
-};
-
-const SYS_CONSOLE_INIT sysConsole0Init =
-{
-    .deviceInitData = (const void*)&sysConsole0UARTInitData,
-    .consDevDesc = &sysConsoleUARTDevDesc,
-    .deviceIndex = 0,
-};
-
-// </editor-fold>
-
 // <editor-fold defaultstate="collapsed" desc="SYS_TIME Initialization Data">
 
 const SYS_TIME_PLIB_INTERFACE sysTimePlibAPI = {
@@ -172,21 +174,26 @@ void SYS_Initialize ( void* data )
 	BSP_Initialize();
 	PIT_TimerInitialize();
 
-MMU_Initialize();
+    MMU_Initialize();
 
     INT_Initialize();
-    DBGU_Initialize();
+    
+    /* Disable WDT   */
+    WDT_REGS->WDT_MR = WDT_MR_WDDIS_Msk;
 
  
     TC0_CH0_TimerInitialize(); 
      
     
+    DBGU_Initialize();
 
 
-    sysObj.sysConsole0 = SYS_CONSOLE_Initialize(SYS_CONSOLE_INDEX_0, (SYS_MODULE_INIT *)&sysConsole0Init);
+    sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)&drvUsart0InitData);
+
 
     sysObj.sysTime = SYS_TIME_Initialize(SYS_TIME_INDEX_0, (SYS_MODULE_INIT *)&sysTimeInitData);
 
+    CRYPT_WCCB_Initialize();
 
     APP_Initialize();
 
