@@ -34,4 +34,7 @@ MPLAB Harmony 3 projects.
 | templates | Crypto file templates                                      |
 
 # Dependencies
- - MPLAB Harmony 3 Crypto Module now requires wolfSSL version 4.
+- **Core** - 3.5.0
+- **CSP** - 3.5.0
+- **wolfSSL** - 4.1.0-stable
+- **Net** - 3.4.0 For wolfSSL demonstration
