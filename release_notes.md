@@ -4,14 +4,14 @@
 ### New Features
 - **New Chip Support** - This release adds support for the SAMRH71 chips
 - **MPLAB Harmony Crypt API and WolfCrypt Split** - Removed the vast majority of duplicated code between wolfcrypt and the MPLAB Harmony crypt library.  The Harmony Crypt API / Library now requires the wolfSSL package.  
--- **IAR Support** projects using IAR need to have the HAVE_CONFIG_H preprocessor option defined in the project options.
--- **MHC Configuration** The wolfCrypt module must be imported to be used with the MPLAB Harmony Crypto API
+  - **IAR Support** projects using IAR need to have the HAVE_CONFIG_H preprocessor option defined in the project options.
+  - **MHC Configuration** The wolfCrypt module must be imported to be used with the MPLAB Harmony Crypto API
 - **wolfCrypt/wolfSSL Upgraded** - MPLAB Harmony Crypt Library now supports wolfSSL 4.1.0-stable.
 - **PUKCC/L Support** - Support for the public key engine on the SAME5x chips has been added.  This includes ECC and RSA support.
 
 ### Demonstration Application Relocation Notice
 - **wolfSSL Demo Applications** these demonstrations are being moved to the net repository in the next release.  The demonstrations in this repository are now redundant and will be removed in the 3.5.0 release of the MPLAB Harmony Crypto library.  Please refer to the Net repository for these demonstrations from net version 3.5 onwards.
--- **IAR Demonstrations** these demonstrations have been moved and are currently maintained in the net repository.  
+  - **IAR Demonstrations** these demonstrations have been moved and are currently maintained in the net repository.  
 
 ### Dependencies
 - **Core** - 3.5.0
