@@ -41,31 +41,31 @@ cryptoHwSha1Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSS
                        ["ICM", "11105", "H", ["crypt_sha1_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20B
                        ["ICM", "U2010", "1.2.0", ["crypt_sha1_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", ["crypt_sha1_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAMA5D27
-                       ["SHA", "6156", "R", ["crypt_sha1_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60
+                       ["SHA", "6156", "S", ["crypt_sha1_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60
                       ]
 
 cryptoHwSha224Support = [
                        ["ICM", "11105", "H", ["crypt_sha224_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        ["ICM", "U2010", "1.2.0", ["crypt_sha224_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
-                       ["SHA", "6156", "R", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156", "CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60                       
+                       ["SHA", "6156", "S", ["crypt_sha224_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156", "CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60                       
                       ]
                       
 cryptoHwSha256Support = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
                        ["ICM", "11105", "H", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        ["ICM", "U2010", "1.2.0", ["crypt_sha256_sam11105.c"], set(["CRYPTO_SHA_HW_11105", "CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", ["crypt_sha256_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
-                       ["SHA", "6156", "R", ["crypt_sha256_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
+                       ["SHA", "6156", "S", ["crypt_sha256_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
                       ]
                       
 cryptoHwSha384Support = [
                        ["SHA", "6156", "O", ["crypt_sha384_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
-                       ["SHA", "6156", "R", ["crypt_sha384_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
+                       ["SHA", "6156", "S", ["crypt_sha384_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
                       ]
                       
 cryptoHwSha512Support = [
                        ["SHA", "6156", "O", ["crypt_sha512_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
-                       ["SHA", "6156", "R", ["crypt_sha512_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
+                       ["SHA", "6156", "S", ["crypt_sha512_sam6156.c", "crypt_sha_sam6156.c"], set(["CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
                       ]
 
 cryptoHwAesSupport = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
@@ -73,12 +73,12 @@ cryptoHwAesSupport = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL
                        ["AES", "U2238", "2.2.0", ["crypt_aes_u2238.c"], set(["CRYPTO_AES_HW_U2238"])], #ATSAME54P20A
                        ["AES", "U2238", "2.0.0", ["crypt_aes_u2238.c"], set(["CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149", "CRYPTO_AES_HW_6149_ZB"])], #ATSAMA5D28
-                       ["AES", "6149", "ZE", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149", "CRYPTO_AES_HW_6149_ZE"])] #ATSAM9x60
+                       ["AES", "6149", "ZH", ["crypt_aes_sam6149.c"], set(["CRYPTO_AES_HW_6149", "CRYPTO_AES_HW_6149_ZE"])] #ATSAM9x60
                       ]
 
 cryptoHwDesSupport = [["CRYPTO", "00158", "", ["pic32mz-crypt.c"], set(["WOLFSSL_MICROCHIP_PIC32MZ", "WOLFSSL_PIC32MZ_HASH"])], #PIC32MZ EF
                       ["TDES", "6150", "N", ["crypt_tdes_sam6150.c"], set(["CRYPTO_TDES_HW_6150"])], #ATSAMA5D27 
-                      ["TDES", "6150", "P", ["crypt_tdes_sam6150.c"], set(["CRYPTO_TDES_HW_6150"])], #ATSAM9X60 
+                      ["TDES", "6150", "R", ["crypt_tdes_sam6150.c"], set(["CRYPTO_TDES_HW_6150"])], #ATSAM9X60 
                       
                      ]
 
