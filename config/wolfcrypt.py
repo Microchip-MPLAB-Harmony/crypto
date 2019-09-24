@@ -188,6 +188,7 @@ cryptoAesCcmEnabledSymbol = None
 cryptoHwDesSupport = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                       ["TDES", "6150", "N", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150"])], #ATSAMA5D27 
                       ["TDES", "6150", "P", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150"])], #ATSAM9X60 
+                      ["TDES", "6150", "R", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TDES_HW_6150"])], #ATSAM9X60 
                      ]
 cryptoHwDesSupported = False
 cryptoHwDesEnabledSymbol = None
