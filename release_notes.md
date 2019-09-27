@@ -18,6 +18,7 @@
 - **CSP** - 3.5.0
 - **wolfSSL** - 4.1.0-stable
 - **Net** - 3.4.0 For wolfSSL demonstrations
+- **zlib** - v1.2.11 For compression support
 
 | Development kits | Applications |
 | --- | --- | --- |

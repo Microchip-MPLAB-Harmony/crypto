@@ -17,7 +17,8 @@ the hardware accelerators.
 
 **Note:** Microchip Technology Inc. and wolfSSL Inc. have entered a ten year
 agreement in 2019 to allow the use of wolfCrypt (excluding FIPS) inside of 
-MPLAB Harmony 3 projects.
+MPLAB Harmony 3 projects.  Please contact Microchip and wolfSSL for the
+commercial release of wolfSSL before using in production.
 
  - [Release Notes](./release_notes.md)
  - [MPLAB Harmony 3 Crypto Wiki](https://github.com/Microchip-MPLAB-Harmony/crypto/wiki)
@@ -38,3 +39,4 @@ MPLAB Harmony 3 projects.
 - **CSP** - 3.5.0
 - **wolfSSL** - 4.1.0-stable
 - **Net** - 3.4.0 For wolfSSL demonstration
+- **zlib** - v1.2.11 For compression support
