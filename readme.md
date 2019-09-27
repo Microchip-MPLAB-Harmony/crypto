@@ -40,3 +40,6 @@ commercial release of wolfSSL before using in production.
 - **wolfSSL** - 4.1.0-stable
 - **Net** - 3.4.0 For wolfSSL demonstration
 - **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.25
+- **XC32** - v3.20
+- **IAR** - 8.40.1
