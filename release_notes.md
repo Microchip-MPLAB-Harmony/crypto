@@ -1,5 +1,9 @@
 # Microchip MPLAB® Harmony 3 Release Notes
 
+## Crypto Release v3.4.1
+### Bug Fixes
+- **MHC Information** - Corrected version infomation used by the MHC.
+
 ## Crypto Release v3.4.0
 ### New Features
 - **New Chip Support** - This release adds support for the SAMRH71 chips

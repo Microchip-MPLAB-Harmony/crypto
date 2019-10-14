@@ -2,7 +2,7 @@
 <Package name="crypto">
     <Dependencies>
         <Dependency name="core" version="v3.5.0"/>
-        <Dependency name="wolfssl" version="v4.1.0-stable"/>
+        <Dependency name="wolfssl" version="v4.1.0"/>
         <Dependency name="zlib" version="v1.2.11"/>        
     </Dependencies>
 </Package>
