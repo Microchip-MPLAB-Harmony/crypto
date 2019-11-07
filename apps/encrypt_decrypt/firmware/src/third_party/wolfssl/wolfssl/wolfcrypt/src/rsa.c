@@ -606,7 +606,7 @@ int wc_CheckRsaKey(RsaKey* key)
             ret = MP_READ_E;
     }
 
-#ifdef WOLFSSL_SP_RSA
+#ifdef WOLFSSL_HAVE_SP_RSA
 #ifndef WOLFSSL_SP_NO_2048
     if (mp_count_bits(&key->n) == 2048) {
         ret = sp_ModExp_2048(k, &key->e, &key->n, tmp);
@@ -2677,8 +2677,7 @@ static int RsaPrivateDecryptEx(byte* in, word32 inLen, byte* out,
         ret = wc_RsaFunction(key->data, inLen, key->data, &key->dataLen,
                                                             rsa_type, key, rng);
 #else
-        ret = wc_RsaFunction(out, inLen, out, &key->dataLen, rsa_type, key,
-                                                                           rng);
+        ret = wc_RsaFunction(in, inLen, out, &key->dataLen, rsa_type, key, rng);
 #endif
 
         if (ret >= 0 || ret == WC_PENDING_E) {
@@ -2705,13 +2704,13 @@ static int RsaPrivateDecryptEx(byte* in, word32 inLen, byte* out,
         if (rsa_type == RSA_PUBLIC_DECRYPT && ret > (int)outLen)
             ret = RSA_BUFFER_E;
         else if (ret >= 0 && pad != NULL) {
-#if !defined(WOLFSSL_RSA_VERIFY_ONLY)
+#if !defined(WOLFSSL_RSA_VERIFY_ONLY) && !defined(WOLFSSL_RSA_VERIFY_INLINE)
             signed char c;
 #endif
 
             /* only copy output if not inline */
             if (outPtr == NULL) {
-#if !defined(WOLFSSL_RSA_VERIFY_ONLY)
+#if !defined(WOLFSSL_RSA_VERIFY_ONLY) && !defined(WOLFSSL_RSA_VERIFY_INLINE)
                 word32 i, j;
                 int start = (int)((size_t)pad - (size_t)key->data);
 
@@ -2897,7 +2896,7 @@ int wc_RsaSSL_Verify(const byte* in, word32 inLen, byte* out, word32 outLen,
 
 #ifdef WC_RSA_PSS
 /* Verify the message signed with RSA-PSS.
- * The input buffer is reused for the ouput buffer.
+ * The input buffer is reused for the output buffer.
  * Salt length is equal to hash length.
  *
  * in     Buffer holding encrypted data.
@@ -2915,7 +2914,7 @@ int wc_RsaPSS_VerifyInline(byte* in, word32 inLen, byte** out,
 }
 
 /* Verify the message signed with RSA-PSS.
- * The input buffer is reused for the ouput buffer.
+ * The input buffer is reused for the output buffer.
  *
  * in       Buffer holding encrypted data.
  * inLen    Length of data in buffer.
@@ -3066,7 +3065,7 @@ int wc_RsaPSS_CheckPadding_ex(const byte* in, word32 inSz, byte* sig,
 
 
 /* Verify the message signed with RSA-PSS.
- * The input buffer is reused for the ouput buffer.
+ * The input buffer is reused for the output buffer.
  * Salt length is equal to hash length.
  *
  * in     Buffer holding encrypted data.
