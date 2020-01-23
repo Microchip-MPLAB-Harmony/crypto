@@ -41,7 +41,16 @@ def loadModule():
     wolfCryptComponent.addDependency("LIB_WOLFCRYPT_ZLIB_Dependency", "LIB_ZLIB", False, False)
 
     ############################### Third Party zlib Module ###################################
-    wolfCryptComponent = Module.CreateComponent("lib_zlib", "zLib Library", "/Third Party Libraries", "config/zlib.py")
-    wolfCryptComponent.addMultiCapability("lib_zlib", "LIB_ZLIB", "LIB_ZLIB")
+    zlibComponent = Module.CreateComponent("lib_zlib", "zLib Library", "/Third Party Libraries", "config/zlib.py")
+    zlibComponent.addMultiCapability("lib_zlib", "LIB_ZLIB", "LIB_ZLIB")
     
-    
+    ############################### BA414E Driver Module ###################################
+    periphNode = ATDF.getNode("/avr-tools-device-file/devices/device/peripherals")
+    modules = periphNode.getChildren()
+    for module in modules:
+        if module.getAttribute("name") == "BA414E":
+            wolfCryptComponent.addDependency("LIB_CRYPTO_BA414E_Dependency", "DRV_BA414E", False, False)
+            ba414eComponent = Module.CreateComponent("drv_ba414e", "BA414E", "/Harmony/Drivers/Cryptographic Accelerators", "config/ba414e.py")
+            ba414eComponent.addMultiCapability("drv_ba414e", "DRV_BA414E", "DRV_BA414E")
+
+

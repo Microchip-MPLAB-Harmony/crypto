@@ -222,6 +222,7 @@ cryptoRsaEnabledSymbol = None
 
 cryptoHwEccSupport = [
                       ["PUKCC", "U2009", "2.5.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
+                      ["BA414E", "00343", "", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_ECC_HW_BA414E", "WOLFSSL_HAVE_MCHP_BA414E_CRYPTO"])], #PCI32MZ-W
                       ]
 cryptoHwEccSupported = False
 cryptoHwEccEnabledSymbol = None
