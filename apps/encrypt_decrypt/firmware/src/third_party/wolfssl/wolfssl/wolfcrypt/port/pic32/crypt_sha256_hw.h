@@ -54,15 +54,15 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "crypt_sha_sam6156.h"
 #endif
 
-typedef struct 
+struct wc_Sha256 
 {
     int devId;
     word32 flags; /* enum wc_HashFlags in hash.h */
 
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105)
-    struct icm_descriptor icm_descriptor __attribute__((aligned (64)));
-    uint8_t  buffer[SHA256_BLOCK_SIZE] __attribute__((aligned (64)));  /* 64 bytes = 512 bits */
-    uint32_t digest[SHA256_DIGEST_SIZE/4] __attribute__((aligned (128)));
+    struct icm_descriptor icm_descriptor;
+    uint8_t  buffer[SHA256_BLOCK_SIZE];  /* 64 bytes = 512 bits */
+    uint32_t digest[SHA256_DIGEST_SIZE/4];
     uint64_t total_len;   /* number of bytes to be processed  */
 #elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156)
     CRYPT_SHA_SAM6156_shaDescriptor sha_descriptor;
@@ -70,7 +70,10 @@ typedef struct
     uint32_t digest[SHA256_DIGEST_SIZE/4];
     uint64_t total_len;   /* number of bytes to be processed  */
 #endif
-}wc_Sha256;
-
+};
+#ifndef WC_SHA256_TYPE_DEFINED
+    typedef struct wc_Sha256 wc_Sha256;
+    #define WC_SHA256_TYPE_DEFINED
+#endif
 
 #endif
