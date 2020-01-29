@@ -228,8 +228,8 @@ cryptoHwEccSupported = False
 cryptoHwEccEnabledSymbol = None
 cryptoEccEnabledSymbol = None
 
-cryptoOverridableSrcFiles = ["aes.c", "des3.c", "md5.c", "random.c", "sha.c", "sha256.c", "sha512.c"]
-cryptoOverridableHeaderFiles = ["settings.h", "aes.h", "des3.h", "md5.h", "random.h", "sha.h", "sha256.h", "sha512.h", "wc_port.h"]
+cryptoOverridableSrcFiles = ["aes.c", "des3.c", "random.c", "sha.c", "sha256.c", "sha512.c"]
+cryptoOverridableHeaderFiles = ["settings.h", "aes.h", "sha.h", "sha256.h", "sha512.h", "wc_port.h"]
 
 localwolfCryptComponent = None
 cryptoHwAdditionalDefines = set([])

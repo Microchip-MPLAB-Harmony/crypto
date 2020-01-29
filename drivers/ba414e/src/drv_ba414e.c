@@ -170,24 +170,6 @@ static const uint32_t init_ucode_array[810]={
 // Section: Static functions
 // *****************************************************************************
 // *****************************************************************************
-static char byteString[256];
-static void bytesToString(uint8_t * bytes, uint8_t length, uint8_t spaceBreakAt, uint8_t lineBreakAt)
-{
-    byteString[0] = 0;
-    uint8_t counter;
-    for (counter = 0; counter < length; counter++)
-    {
-        if ((spaceBreakAt != 0) && ((counter+1) % spaceBreakAt == 0))
-        {
-            strncat(byteString, " ", sizeof(byteString));
-        }
-        if ((lineBreakAt != 0) && ((counter+1) % lineBreakAt == 0))
-        {
-            strncat(byteString, "\r\n", sizeof(byteString));
-        }
-    }    
-}
-
 static inline void DRV_BA414E_DirectCopy(void * dst, const void * src, uint32_t dstLen, uint32_t srcLen)
 {
     uint32_t numBytes = srcLen;
@@ -409,19 +391,6 @@ static void DRV_BA414E_scmClear(void)
         addr += 4ul;
     }
 }
-
-static void DRV_BA414E_scmSlotClear (uint8_t slot_num)
-{
-    uint32_t addr = DRV_BA414E_getSlotAddr(slot_num);
-    uint32_t endAddr = addr + (1 << DRV_BA414E_SCM_SLOT_LS);
-
-    while ( addr < endAddr ) {
-        *(uint32_t*)(addr) = 0x0ul;
-        addr += 4ul;
-    }
-
-}
-
 
 static void DRV_BA414E_ucmemInit(void)
 {

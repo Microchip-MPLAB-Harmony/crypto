@@ -62,9 +62,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #include "driver/ba414e/drv_ba414e.h"
 
-extern char * dbgBufferPtr;
-extern uint32_t debugBufferSize;
-
 int Crypt_ECC_HandleReq(int devId, wc_CryptoInfo* info, void* ctx)
 {
     DRV_HANDLE ba414Handle = DRV_BA414E_Open(DRV_BA414E_INDEX_0, DRV_IO_INTENT_READWRITE | DRV_IO_INTENT_BLOCKING);
