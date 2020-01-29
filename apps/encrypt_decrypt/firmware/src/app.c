@@ -843,7 +843,7 @@ void ecc_test(void)
     uint8_t    sharedA[1024];
     uint8_t    sharedB[1024];
     uint8_t    sig[1024];
-    uint8_t    digest[20];
+    uint8_t    digest[32];
     uint8_t    exportBuf[1024];
 
     word32  x, y;
@@ -2504,6 +2504,339 @@ void APP_Reset() {
     appData.wrComplete = true;
 }
 
+#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+#include "wolfssl/wolfcrypt/tfm.h"
+
+const static char primTestPrime[] = "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF";
+const static char primTestA[] = "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC";
+const static char primTestB[] = "5AC635D8AA3A93E7B3EBBD55769886BC651D06B0CC53B0F63BCE3C3E27D2604B";
+const static char primTestOrder[] = "FFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551";
+const static char primTestGx[] = "6B17D1F2E12C4247F8BCE6E563A440F277037D812DEB33A0F4A13945D898C296";
+const static char primTestGy[] = "4FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5";
+
+
+const static char primTestModAdd[] = "5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d26048"; //(A+B)%P
+const static char primTestModSub[] = "a539ca2655c56c194c1442aa896779439ae2f95033ac4f09c431c3c1d82d9fb1"; //(A-B)%P
+const static char primTestModMult[] = "efad5e740150444ae43cc7ff9c366bcad0a8ebef9b04ed1d4c954b458888df1d"; //(A*B)%P
+const static char primTestModExp[] = "85582a98093647809f4dce8e4c9331a84ad2091f2f8cc98ecbaa1e2eb993f5a4"; //(A^B)%P
+
+const static char primTestPx[] =  "282167aa6ba380c53a9c5230c0b53b1ebc456983cc05f0f2b869a75f7f232e91";
+const static char primTestPy[] =  "cc8a545065e3a76c6731a0f4471a338442ef3cc3c978e787e0d5cdc907dd4e9c";
+const static char primTestQx[] =  "05b8430eb7a99e24877ce69baf3dc580e309633d6b385f83ee1c3ec3591f1a53";
+const static char primTestQy[] =  "93c06e805ddceb2fde50930dd7cfebb987c6ff9666af164eb5184d8e6662ed6a";
+const static char primTestRx[] =  "4b5c21597658f4e3eddfb4b99f25b4d6540f32ff1fd5c530c60a794448610bc6";
+const static char primTestNRy[] = "de3d92bdbbd47d935980ca6cf8988ab6630be6764c885ceb9793970f695217ee";
+const static char primTestSx[] =  "ad68ea339d3db924f4ccee64bcc0609ed8258760dd85428bb3194f262dff4888";
+const static char primTestMax[] = "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+
+const static char primTestI[] =   "5564f045b2ea1e566cf1dd741f70d9be35d2df5b9a5502946ee03cf8dae27e1e";
+const static char primTestJ[] =   "a906f61e4d3a5d4eb2965ff34cf917dd044445c878c17ca5d5b93786da9f83cf";
+const static char primTestK[] =   "4234b4fb17aa435c52fbfdebe64039b43478200e54ff7b6e07b69cad74153c15";
+const static char primTestOne[] = "0000000000000000000000000000000000000000000000000000000000000001";
+const static char primTestTwo[] = "0000000000000000000000000000000000000000000000000000000000000002";
+
+const static char primTestPDx[] = {0x57, 0xf6, 0x5d, 0x88, 0xbe, 0xe8, 0x1d, 0xc0, 0x0c, 0x7c, 0xc2, 0xe1, 0x48, 0xe7, 0x80, 0x5b, 
+                                   0x2e, 0xb3, 0x22, 0x06, 0xac, 0x97, 0xe8, 0xe6, 0xfb, 0x12, 0x5c, 0x37, 0x91, 0x13, 0xae, 0x99};
+const static char primTestPDy[] = {0xaa, 0x01, 0x10, 0xa3, 0xdf, 0x6d, 0x2e, 0x3f, 0x37, 0xfe, 0x84, 0xbe, 0x9f, 0xa3, 0x05, 0xec, 
+                                   0xa4, 0xbe, 0x33, 0x9d, 0xcb, 0x5e, 0xcf, 0xc5, 0x8e, 0xf7, 0x50, 0xc5, 0xa6, 0xef, 0xc2, 0x84};
+
+
+mp_int mpPrime, mpA, mpB, mpOrder, mpGx, mpGy, mpC, mpRes, mpResY;
+mp_int mpPx, mpPy, mpQx, mpQy, mpRx, mpRy, mpNRy, mpSx, mpMax;
+mp_int mpI, mpJ, mpK, mpOne, mp2;
+
+
+void prim_test(void)
+{
+    DRV_HANDLE ba414Handle = DRV_BA414E_Open(DRV_BA414E_INDEX_0, DRV_IO_INTENT_READWRITE | DRV_IO_INTENT_BLOCKING);
+    
+    mp_clear(&mpPrime);
+    mp_clear(&mpA);
+    mp_clear(&mpB);
+    mp_clear(&mpOrder);
+    mp_clear(&mpGx);
+    mp_clear(&mpGy);
+    mp_clear(&mpC);
+    mp_clear(&mpRes);
+    mp_clear(&mpResY);
+    mp_clear(&mpPx);
+    mp_clear(&mpPy);
+    mp_clear(&mpQx);
+    mp_clear(&mpQy);
+    mp_clear(&mpRx);
+    mp_clear(&mpRy);
+    mp_clear(&mpNRy);
+    mp_clear(&mpSx);
+    mp_clear(&mpMax);
+    mp_clear(&mpI);
+    mp_clear(&mpJ);
+    mp_clear(&mpK);
+    mp_clear(&mpOne);
+    mp_clear(&mp2);
+    
+    mp_read_radix(&mpPrime, primTestPrime, 16);
+    mp_read_radix(&mpA, primTestA, 16);
+    mp_read_radix(&mpB, primTestB, 16);
+    mp_read_radix(&mpOrder, primTestOrder, 16);
+    mp_read_radix(&mpGx, primTestGx, 16);
+    mp_read_radix(&mpGy, primTestGy, 16);
+    mp_read_radix(&mpRes, primTestModAdd, 16);
+    
+    mp_read_radix(&mpPx, primTestPx, 16);
+    mp_read_radix(&mpPy, primTestPy, 16);
+    mp_read_radix(&mpQx, primTestQx, 16);
+    mp_read_radix(&mpQy, primTestQy, 16);
+    mp_read_radix(&mpRx, primTestRx, 16);
+    mp_read_radix(&mpNRy, primTestNRy, 16);
+    mp_read_radix(&mpSx, primTestSx, 16);
+    mp_read_radix(&mpMax, primTestMax, 16);
+    mp_read_radix(&mpI, primTestI, 16);
+    mp_read_radix(&mpJ, primTestJ, 16);
+    mp_read_radix(&mpK, primTestK, 16);
+    mp_read_radix(&mpOne, primTestOne, 16);
+    mp_read_radix(&mp2, primTestTwo, 16);
+    
+    appData.prim_test_result = 22;
+    
+    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModAddition(ba414Handle, 
+                                            DRV_BA414E_OPSZ_256, 
+                                            (uint8_t*)&(mpC.dp), 
+                                            (uint8_t*)&(mpPrime.dp), 
+                                            (uint8_t*)&(mpA.dp), 
+                                            (uint8_t*)&(mpB.dp), 
+                                            0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    if (memcmp(mpC.dp, mpRes.dp, 32) == 0)
+    {
+        appData.prim_test_result--;        
+    }    
+    mp_clear(&mpC);
+    
+    ret = DRV_BA414E_PRIM_ModSubtraction(ba414Handle, 
+                                        DRV_BA414E_OPSZ_256, 
+                                        (uint8_t*)&(mpC.dp), 
+                                        (uint8_t*)&(mpMax.dp), 
+                                        (uint8_t*)&(mpA.dp), 
+                                        (uint8_t*)&(mpB.dp), 
+                                        0, 0);
+    mp_read_radix(&mpRes, primTestModSub, 16);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    if (memcmp(mpC.dp, mpRes.dp, 32) == 0)
+    {
+        appData.prim_test_result--;        
+    }    
+    mp_clear(&mpC);
+
+    
+    ret = DRV_BA414E_PRIM_ModMultiplication(ba414Handle, 
+                                            DRV_BA414E_OPSZ_256, 
+                                            (uint8_t*)&(mpC.dp), 
+                                            (uint8_t*)&(mpPrime.dp), 
+                                            (uint8_t*)&(mpA.dp), 
+                                            (uint8_t*)&(mpB.dp), 
+                                            0, 0);
+    mp_read_radix(&mpRes, primTestModMult, 16);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    if (memcmp(mpC.dp, mpRes.dp, 32) == 0)
+    {
+        appData.prim_test_result--;        
+    }    
+    mp_clear(&mpC);
+
+    DRV_BA414E_PRIM_ModExponentiation(ba414Handle, 
+                                    DRV_BA414E_OPSZ_256, 
+                                    (uint8_t*)&(mpC.dp), 
+                                    (uint8_t*)&(mpPrime.dp), 
+                                    (uint8_t*)&(mpA.dp), 
+                                    (uint8_t*)&(mpB.dp), 
+                                    0, 0);
+    mp_read_radix(&mpRes, primTestModExp, 16);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    if (memcmp(mpC.dp, mpRes.dp, 32) == 0)
+    {
+        appData.prim_test_result--;        
+    }    
+    mp_clear(&mpC);
+
+    DRV_BA414E_ECC_DOMAIN eccDomain;
+    eccDomain.keySize = 32;
+    eccDomain.opSize = DRV_BA414E_OPSZ_256;
+    eccDomain.primeField = (uint8_t*)&(mpPrime.dp);
+    eccDomain.order = (uint8_t*)&(mpOrder.dp);
+    eccDomain.generatorX = (uint8_t*)&(mpGx.dp);
+    eccDomain.generatorY = (uint8_t*)&(mpGy.dp);
+    eccDomain.a = (uint8_t*)&(mpA.dp);
+    eccDomain.b = (uint8_t*)&(mpB.dp);
+    
+    ret = DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, &eccDomain, 
+                                            (uint8_t*)&(mpPx.dp), 
+                                            (uint8_t*)&(mpPy.dp),
+                                            0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    
+    ret = DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, &eccDomain, 
+                                            (uint8_t*)&(mpQx.dp), 
+                                            (uint8_t*)&(mpQy.dp), 
+                                            0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    
+    DRV_BA414E_PRIM_ModSubtraction(ba414Handle, DRV_BA414E_OPSZ_256, 
+                                    (uint8_t*)&(mpRy.dp), 
+                                    (uint8_t*)&(mpMax.dp), 
+                                    (uint8_t*)&(mpPrime.dp), 
+                                    (uint8_t*)&(mpNRy.dp),
+                                    0, 0);
+    ret = DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRx.dp), 
+                                    (uint8_t*)&(mpRy.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    
+    ret = DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRx.dp), 
+                                    (uint8_t*)&(mpNRy.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+
+    ret = DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpOne.dp), 
+                                    (uint8_t*)&(mpOne.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_POINT_NOT_ON_CURVE)
+    {
+        appData.prim_test_result--;
+    }
+
+    ret = DRV_BA414E_PRIM_EccPointAddition(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpRx.dp), 
+                                    (uint8_t*)&(mpRy.dp), 
+                                    (uint8_t*)&(mpRx.dp), 
+                                    (uint8_t*)&(mpNRy.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_ERROR_POINT_AT_INFINITY)
+    {
+        appData.prim_test_result--;
+    }
+    
+    ret = DRV_BA414E_PRIM_EccPointMultiplication(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpPx.dp), 
+                                    (uint8_t*)&(mpPy.dp), 
+                                    (uint8_t*)&(mpK.dp), 
+                                    0, 0);
+    if ((memcmp(mpRx.dp, mpRes.dp, 32) == 0) && (memcmp(mpRy.dp, mpResY.dp, 32) == 0))
+    {
+        appData.prim_test_result--;
+    }
+    
+    
+    mp_clear(&mpRes);
+    mp_clear(&mpResY);
+    
+    ret = DRV_BA414E_PRIM_EccPointMultiplication(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpPx.dp), 
+                                    (uint8_t*)&(mpPy.dp), 
+                                    (uint8_t*)&(mpI.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    ret = DRV_BA414E_PRIM_EccPointAddition(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpQx.dp), 
+                                    (uint8_t*)&(mpQy.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    ret = DRV_BA414E_PRIM_EccPointMultiplication(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    (uint8_t*)&(mpJ.dp), 
+                                    0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    ret = DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, &eccDomain, 
+                                    (uint8_t*)&(mpRes.dp), 
+                                    (uint8_t*)&(mpResY.dp), 
+                                    0, 0);
+    
+
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    if ((memcmp(mpSx.dp, mpRes.dp, 32) == 0))
+    {
+        appData.prim_test_result--;
+    }
+    mp_clear(&mpRes);
+    mp_clear(&mpResY);
+
+    mp_clear(&mpRes);
+    mp_clear(&mpResY);
+    ret = DRV_BA414E_PRIM_EccPointDouble(ba414Handle, &eccDomain, 
+                                        (uint8_t*)&(mpRes.dp), 
+                                        (uint8_t*)&(mpResY.dp), 
+                                        (uint8_t*)&(mpPx.dp), 
+                                        (uint8_t*)&(mpPy.dp), 
+                                        0, 0);
+    if (ret == DRV_BA414E_OP_SUCCESS)
+    {
+        appData.prim_test_result--;
+    }
+    if ((memcmp(primTestPDx, mpRes.dp, 32) == 0) && (memcmp(primTestPDy, mpResY.dp, 32) == 0))
+    {
+        appData.prim_test_result--;
+    }
+    
+    
+    DRV_BA414E_Close(ba414Handle);
+    
+    
+}
+
+
+#endif
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -2702,9 +3035,16 @@ void APP_Tasks(void) {
             testCount++;
             rsa_test();
 #endif
+            appData.state = APP_STATE_TEST_PRIMS;
+            break;
+            
+        case APP_STATE_TEST_PRIMS:
+#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+            testCount++;
+            prim_test();
+#endif
             appData.state = APP_STATE_DISPLAY_RESULTS;
             break;
-                      
         case APP_STATE_DISPLAY_RESULTS:
 #ifndef NO_MD5
             sprintf(printBuffer, "%s\n\rMD5 test:          %s", 
@@ -2821,7 +3161,10 @@ void APP_Tasks(void) {
                     printBuffer, (appData.rsa_test_result==expectedResult?"Pass":"FAIL"));
             sprintf(printBuffer, "%s\t %10"PRIu64" clock cycles", printBuffer, appData.rsa_timing);
 #endif
-
+#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+            sprintf(printBuffer, "%s\n\rPrimative test:    %s", 
+                    printBuffer, (appData.prim_test_result==expectedResult?"Pass":"FAIL"));
+#endif
             appData.state = APP_STATE_CHECK_RESULTS;
 
             break;
@@ -2891,6 +3234,9 @@ void APP_Tasks(void) {
 #ifndef NO_RSA
                 expectedResult != appData.rsa_test_result ||
 #endif
+#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+                expectedResult != appData.prim_test_result ||
+#endif                    
                 expectedResult != dummy_test_result /* always false */
             ) 
             {
@@ -2917,6 +3263,7 @@ void APP_Tasks(void) {
             break;
         }
     }
+
 }
 
 

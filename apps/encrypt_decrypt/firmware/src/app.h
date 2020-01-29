@@ -88,6 +88,7 @@ typedef enum
     APP_STATE_TEST_RANDOM,
     APP_STATE_TEST_ECC,
     APP_STATE_TEST_COMPRESS,
+    APP_STATE_TEST_PRIMS,
     APP_STATE_DISPLAY_RESULTS,
     APP_STATE_WAIT_FOR_CONSOLE,
     APP_STATE_CHECK_RESULTS,
@@ -177,6 +178,8 @@ typedef struct
 
     int compress_test_result;
     uint32_t compress_timing;
+    
+    int prim_test_result;
 
     int32_t wallTime;
     DRV_HANDLE              usartHandle;
