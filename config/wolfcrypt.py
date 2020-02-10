@@ -33,6 +33,7 @@ cryptoHwEnabledSymbol = None
 
 cryptoHwTrngSupport = [["RNG", "00159", "", [], set([])],  #PIC32MZ EF
                       ["TRNG", "6334", "G", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAMV70Q20B
+                      ["TRNG", "U2242", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAML11
                       ["TRNG", "U2242", "1.1.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAME54P20A
                       ["TRNG", "U2242", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAML21J18B
                       ["TRNG", "6334", "K", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAMA5D27
@@ -64,6 +65,8 @@ cryptoHwSha224Support = [
                        ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60                       
+                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11 (Omega)
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM (Lifeguard)
                       ]
 cryptoHwSha224Supported = False
 cryptoHwSha224EnabledSymbol = None
@@ -73,7 +76,9 @@ cryptoHwSha256Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["ICM", "11105", "H", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
                        ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
-                       ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAM9X60                       
+                       ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAM9X60
+                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11 (Omega)
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM (Lifeguard)
                       ]
 cryptoHwSha256Supported = False
 cryptoHwSha256EnabledSymbol = None
@@ -101,12 +106,21 @@ cryptoHwAesEnabledSymbol = None
 cryptoAesEcbEnabledSymbol = None
 cryptoAesEcbHwEnabledSymbol = None
 
+cryptoHW_U2803 = [["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2803"])],] #ATSAML11 (Omega)
+cryptoHW_U2803Present = False
+cryptoHW_U2803Symbol = None
+cryptoHW_U2805 = [["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2805"])],] #PIC32CM (Lifeguard)
+cryptoHW_U2805Present = False
+cryptoHW_U2805Symbol = None
+    
 cryptoHwAes128Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "6149", "W", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMV70Q20B
                        ["AES", "U2238", "2.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAME54P20A
                        ["AES", "U2238", "2.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMA5D28
-                       ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])] #ATSAM9x60
+                       ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
+                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803"])], #ATSAML11 (Omega)
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM (Lifeguard)
                       ]
 cryptoHwAes128Supported = False                     
 cryptoAes128EnabledSymbol = None
@@ -116,7 +130,8 @@ cryptoHwAes192Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "U2238", "2.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAME54P20A
                        ["AES", "U2238", "2.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMA5D28
-                       ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])] #ATSAM9x60
+                       ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM (Lifeguard)
                       ]
 cryptoHwAes192Supported = False
 cryptoAes192EnabledSymbol = None
@@ -126,7 +141,8 @@ cryptoHwAes256Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "U2238", "2.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAME54P20A
                        ["AES", "U2238", "2.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMA5D28
-                       ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])] #ATSAM9x60
+                       ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM (Lifeguard)
                       ]
 cryptoHwAes256Supported = False
 cryptoAes256EnabledSymbol = None
@@ -339,6 +355,11 @@ def instantiateComponent(wolfCryptComponent):
     global cryptoHwEccEnabledSymbol
     global cryptoEccEnabledSymbol
 
+    global cryptoHW_U2803Present
+    global cryptoHW_U2803Symbol
+    global cryptoHW_U2805Present
+    global cryptoHW_U2805Symbol
+
     global localwolfCryptComponent
     global cryptoAdditionalHwDefines
     global cryptoWolfSSLIncluded
@@ -372,7 +393,6 @@ def instantiateComponent(wolfCryptComponent):
     else:
         cryptoHwEnabledSymbol.setVisible(False)    
     cryptoHwEnabledSymbol.setDefaultValue(False)
-    
     
     hashMenu = wolfCryptComponent.createMenuSymbol("wolfcrypt_hash", None)
     hashMenu.setLabel("Hash Algorithms")
@@ -445,8 +465,6 @@ def instantiateComponent(wolfCryptComponent):
     cryptoSha224EnabledSymbol.setVisible(False)
     cryptoSha224EnabledSymbol.setDefaultValue(True)
     cryptoSha224EnabledSymbol.setDependencies(handleSha224Enabled, ["wolfcrypt_hw", "wolfcrypt_sha256", "wolfcrypt_sha264_hw"])
-
-
 
     sha2128HashMenu = wolfCryptComponent.createMenuSymbol("wolcrypt_sha2_128_hash", hashMenu)
     sha2128HashMenu.setLabel("SHA-2 384/512 Hash Algorithm.")
@@ -569,7 +587,6 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHwAesEnabledSymbol.setDefaultValue(False)
     cryptoHwAesEnabledSymbol.setDependencies(handleAesHwEnableChange, ["wolfcrypt_aes", "wolfcrypt_hw"])
     
-
     cryptoAes128EnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_128", cryptoAesEnabledSymbol)
     cryptoAes128EnabledSymbol.setLabel("Support 128-bit AES?")
     cryptoAes128EnabledSymbol.setDescription("Enable Support for 128-Bit AES Cryptography.")
@@ -584,13 +601,18 @@ def instantiateComponent(wolfCryptComponent):
     cryptoAes192EnabledSymbol.setDefaultValue(True)
     cryptoAes192EnabledSymbol.setDependencies(handleAes192BitSymbolChange, ["wolfcrypt_aes", "wolfcrypt_aes_hw", "wolfcrypt_hw"])
     
+    cryptoHwAes192Symbol = wolfCryptComponent.createBooleanSymbol("crypto_HwAes192", None)
+    cryptoHwAes192Symbol.setLabel("HW AES 192 available")
+    cryptoHwAes192Symbol.setDescription("HW AES 192 available")
+    cryptoHwAes192Symbol.setVisible(False) # never display this symbol; see also cryptoHwAes192Supported
+    cryptoHwAes192Symbol.setDefaultValue(False)
+
     cryptoAes256EnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_256", cryptoAesEnabledSymbol)
     cryptoAes256EnabledSymbol.setLabel("Support 256-bit AES?")
     cryptoAes256EnabledSymbol.setDescription("Enable Support for 256-Bit AES Cryptography.")
     cryptoAes256EnabledSymbol.setVisible(True)
     cryptoAes256EnabledSymbol.setDefaultValue(True)
     cryptoAes256EnabledSymbol.setDependencies(handleAes256BitSymbolChange, ["wolfcrypt_aes", "wolfcrypt_aes_hw", "wolfcrypt_hw"])
-
 
     cryptoAesEcbEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_ecb", cryptoAesEnabledSymbol)
     cryptoAesEcbEnabledSymbol.setLabel("Support ECB Mode?")
@@ -998,6 +1020,15 @@ def instantiateComponent(wolfCryptComponent):
     cryptoDhAnonEnabledSymbol.setDefaultValue(False)
     cryptoDhAnonEnabledSymbol.setVisible(True)
 
+    cryptoHW_U2803Symbol = wolfCryptComponent.createBooleanSymbol("cryptoCrya_U2803", None)
+    cryptoHW_U2803Symbol.setVisible(False) # never reveal this symbol
+    cryptoHW_U2803Symbol.setDefaultValue(False)
+    cryptoHW_U2803Symbol.setValue(cryptoHW_U2803Present)
+    cryptoHW_U2805Symbol = wolfCryptComponent.createBooleanSymbol("cryptoCrya_U2805", None)
+    cryptoHW_U2805Symbol.setVisible(False) # never reveal this symbol
+    cryptoHW_U2805Symbol.setDefaultValue(False)
+    cryptoHW_U2805Symbol.setValue(cryptoHW_U2805Present)
+
     # generate the config info and add it to list in configuration.h
     wolfCryptConfigInfo = wolfCryptComponent.createFileSymbol("wolfcryptConfigInfo", None)
     wolfCryptConfigInfo.setSourcePath("templates/wolf_crypt_config.h.ftl")
@@ -1122,19 +1153,25 @@ def handleAes128BitSymbolChange(symbol, event):
     global cryptoHwAes128Supported
     global cryptoAes128EnabledSymbol
 
-    if (cryptoAesEnabledSymbol.getValue() == True):
-        if (cryptoHwEnabledSymbol.getValue() == True):
-            if (cryptoHwAesEnabledSymbol.getValue() == True):
+    # Because cryptoAes128EnabledSymbol cannot be programmatically cleared
+    # any time after the user has clicked it, these tests must be duplicated
+    # in the .ftl in order to properly mask the aes128/192/256 enables.
+    if (cryptoAesEnabledSymbol.getValue() == True):             # wolfcrypt_aes
+        if (cryptoHwEnabledSymbol.getValue() == True):          # wolfcrypt_hw
+            if (cryptoHwAesEnabledSymbol.getValue() == True):   # wolfcrypt_aes_hw
                 if (cryptoHwAes128Supported == True):
-                    cryptoAes128EnabledSymbol.setVisible(True)
+                    willBeVisible = True
                 else:
-                    cryptoAes128EnabledSymbol.setVisible(False)
+                    willBeVisible = False
             else:
-                cryptoAes128EnabledSymbol.setVisible(True)
+                willBeVisible = True
         else:
-            cryptoAes128EnabledSymbol.setVisible(True)
+            willBeVisible = True
     else:
-        cryptoAes128EnabledSymbol.setVisible(False)
+        willBeVisible = False
+
+    cryptoAes128EnabledSymbol.setVisible(willBeVisible)
+
 
 def handleAes192BitSymbolChange(symbol, event):
     global cryptoHwEnabledSymbol
@@ -1147,15 +1184,18 @@ def handleAes192BitSymbolChange(symbol, event):
         if (cryptoHwEnabledSymbol.getValue() == True):
             if (cryptoHwAesEnabledSymbol.getValue() == True):
                 if (cryptoHwAes192Supported == True):
-                    cryptoAes192EnabledSymbol.setVisible(True)
+                    willBeVisible = True
                 else:
-                    cryptoAes192EnabledSymbol.setVisible(False)
+                    willBeVisible = False
             else:
-                cryptoAes192EnabledSymbol.setVisible(True)
+                willBeVisible = True
         else:
-            cryptoAes192EnabledSymbol.setVisible(True)
+            willBeVisible = True
     else:
-        cryptoAes192EnabledSymbol.setVisible(False)
+        willBeVisible = False
+    
+    cryptoAes192EnabledSymbol.setVisible(willBeVisible)
+
 
 def handleAes256BitSymbolChange(symbol, event):
     global cryptoHwEnabledSymbol
@@ -1168,15 +1208,17 @@ def handleAes256BitSymbolChange(symbol, event):
         if (cryptoHwEnabledSymbol.getValue() == True):
             if (cryptoHwAesEnabledSymbol.getValue() == True):
                 if (cryptoHwAes256Supported == True):
-                    cryptoAes256EnabledSymbol.setVisible(True)
+                    willBeVisible = True
                 else:
-                    cryptoAes256EnabledSymbol.setVisible(False)
+                    willBeVisible = False
             else:
-                cryptoAes256EnabledSymbol.setVisible(True)
+                willBeVisible = True
         else:
-            cryptoAes256EnabledSymbol.setVisible(True)
+            willBeVisible = True
     else:
-        cryptoAes256EnabledSymbol.setVisible(False)
+        willBeVisible = False
+
+    cryptoAes256EnabledSymbol.setVisible(willBeVisible)
 
 
 def handleHwAesEcbEnabled(symbol, event):
@@ -1464,6 +1506,10 @@ def setupHardware() :
     global cryptoHwRsaSupported
     global cryptoHwEccSupport
     global cryptoHwEccSupported
+    global cryptoHW_U2803
+    global cryptoHW_U2803Present
+    global cryptoHW_U2805
+    global cryptoHW_U2805Present
     global cryptoAdditionalHwDefines
     global cryptoHwAdditionalDefines
     
@@ -1490,9 +1536,12 @@ def setupHardware() :
     cryptoHwDesOfbSupported = scanHardware(cryptoHwDesOfbSupport)
     cryptoHwRsaSupported = scanHardware(cryptoHwRsaSupport)
     cryptoHwEccSupported = scanHardware(cryptoHwEccSupport)
+    cryptoHW_U2803Present = scanHardware(cryptoHW_U2803)
+    cryptoHW_U2805Present = scanHardware(cryptoHW_U2805)
     
     if (cryptoHwTrngSupported or cryptoHwMd5Supported or 
-        cryptoHwSha1Supported or cryptoHwSha224Supported or cryptoHwSha256Supported or
+        cryptoHwSha1Supported or 
+        cryptoHwSha224Supported or cryptoHwSha256Supported or
         cryptoHwSha384Supported or cryptoHwSha512Supported or 
         cryptoHwAes128Supported or cryptoHwAes128Supported or 
         cryptoHwAes192Supported or cryptoHwAes256Supported or

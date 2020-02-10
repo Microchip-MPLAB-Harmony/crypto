@@ -35,8 +35,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
-#define WOLF_CRYPTO_CB
-<#if wolfssl_included?has_content == false && wolfssl_included == false>
+#define WOLF_CRYPTO_CB  // provide call-back support
+<#if wolfssl_included?has_content == false || wolfssl_included == false>
     <#lt>#define WOLFCRYPT_ONLY
 </#if>
 <#if wolfcrypt_hw == true>
@@ -76,7 +76,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
 </#if>
 <#if wolfcrypt_sha1 == false>
-    <#lt>#define NO_SHA
+    <#lt>#define NO_SHA // specifically, no SHA1 (legacy name)
 <#else>
     <#assign hmacPrereqs=true>
     <#if wolfcrypt_hw == true && wolfcrypt_sha1_hw == true>
@@ -90,6 +90,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#if wolfcrypt_sha256 == false>
     <#lt>#define NO_SHA256
 <#else>
+    <#-- because of legacy, WOLFSSL_SHA256 or HAVE_SHA256 are never asserted -->
     <#assign hmacPrereqs=true>
     <#if wolfcrypt_hw == true && wolfcrypt_sha264_hw == true>
         <#if wolfcryptCoreSeries?starts_with("PIC32M")>
@@ -166,11 +167,28 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#else>
     <#if wolfcrypt_aes_128 == true>
         <#lt>#define WOLFSSL_AES_128
+        <#if wolfcrypt_hw == true && wolfcrypt_aes_hw == true && cryptoCrya_U2803 == true>
+            <#-- limit key size if AES HW is enabled and this is a SAML11 -->
+            <#lt>#define AES_MAX_KEY_SIZE 128 // limited CRYA in SAML11
+        </#if>
+    <#else>
+        <#-- disabling and enabling must be mutually exclusive -->
+        <#lt>#define NO_AES_128
     </#if>
-    <#if wolfcrypt_aes_192 == true>
+    <#if wolfcrypt_aes_192 == false 
+         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true && cryptoCrya_U2803 == true)>
+        <#-- disable if AES HW is enabled and this is a SAML11 -->
+        <#lt>#define NO_AES_192
+    <#else>
+        <#-- disabling and enabling must be mutually exclusive -->
         <#lt>#define WOLFSSL_AES_192
     </#if>
-    <#if wolfcrypt_aes_256 == true>
+    <#if wolfcrypt_aes_256 == false 
+         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true && cryptoCrya_U2803 == true)>
+        <#-- disable if AES HW is enabled and this is a SAML11 -->
+        <#lt>#define NO_AES_256
+    <#else>
+        <#-- disabling and enabling must be mutually exclusive -->
         <#lt>#define WOLFSSL_AES_256
     </#if>
     <#lt>#define WOLFSSL_AES_DIRECT
@@ -185,6 +203,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define HAVE_AES_ECB
         <#if wolfcrypt_hw == true && wolfcrypt_aes_ecb_hw == true && wolfcrypt_aes_hw == true>
             <#if wolfcryptCoreSeries?starts_with("PIC32M")>
+            <#elseif cryptoCrya_U2803 == true>
+            <#-- CRYA is 1-block only so keep aes.c/wc_AesEcbEncrypt() to iterate -->
             <#else>
                 <#lt>#define WOLFSSL_HAVE_MCHP_HW_AES_ECB
             </#if>
@@ -198,6 +218,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
                 <#lt>#define WOLFSSL_HAVE_MCHP_HW_AES_CBC
             </#if>
         </#if>
+    <#else>
+        <#-- disabling and enabling must be mutually exclusive -->
+        <#-- (only the CBC submode requires this inhibit) -->
+        <#lt>#define NO_AES_CBC
     </#if>
     <#if wolfcrypt_aes_ctr == true>
         <#lt>#define WOLFSSL_AES_COUNTER
