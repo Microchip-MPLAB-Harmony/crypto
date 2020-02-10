@@ -30,7 +30,7 @@
 /* Defines the Crypto Callback interface version, for compatibility */
 /* Increment this when Crypto Callback interface changes are made */
 #define CRYPTO_CB_VER   2
-
+#define WOLFSSL_GLOBAL /* as nothing */
 
 #ifdef WOLF_CRYPTO_CB
 
