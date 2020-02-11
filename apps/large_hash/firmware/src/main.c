@@ -39,6 +39,11 @@ int main ( void )
     /* Initialize all modules */
     SYS_Initialize ( NULL );
 
+#if defined(__SAML11E16A__) // compiler pre-defined
+    extern void sam_l11_secure_init(void);
+    sam_l11_secure_init();
+#endif
+
     while ( true )
     {
         /* Maintain state machines of all polled MPLAB Harmony modules. */

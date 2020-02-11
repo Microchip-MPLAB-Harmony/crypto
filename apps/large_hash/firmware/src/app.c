@@ -31,6 +31,27 @@
 #include <stdio.h>
 //#include "crypto\src\sha256.h"
 
+// Discover which options are enabled in Harmony
+#include "configuration.h"
+
+#if defined(WOLFSSL_HAVE_MCHP_HW_MD5) || !defined(NO_MD5)
+#define TEST_WITH_MD5
+#endif
+#if defined(WOLFSSL_HAVE_MCHP_HW_SHA1) || !defined(NO_SHA)
+#define TEST_WITH_SHA1
+#endif
+#if defined(WOLFSSL_SHA224)
+#define TEST_WITH_SHA224
+#endif
+#if !defined(NO_SHA256)
+#define TEST_WITH_SHA256
+#endif
+#if defined(WOLFSSL_SHA384)
+#define TEST_WITH_SHA384
+#endif
+#if defined(WOLFSSL_SHA512)
+#define TEST_WITH_SHA512
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -85,22 +106,27 @@ APP_DATA appData ={
     .rdComplete = true
 };
 
-static const uint8_t MD5Expected[] = "\x30\xc2\x55\x7e\x83\x02\xa5\xbe"
+/* This macro suppresses any un-used variable errors
+ * when the configuration does not employ the mode.
+ */
+#define USED  __attribute__((used))
+
+static const USED uint8_t MD5Expected[] = "\x30\xc2\x55\x7e\x83\x02\xa5\xbe"
         "\xb2\x90\xc7\x15\x20\xd8\x7f\x42";
-static const uint8_t SHAExpected[] = "\xf7\xfe\xc1\x28\xd7\xfc\xd5\x92"
+static const USED uint8_t SHAExpected[] = "\xf7\xfe\xc1\x28\xd7\xfc\xd5\x92"
         "\x22\xba\x37\x36\x8d\x3b\x72\x10"
         "\xd4\xc7\xb6\xef";
-static const uint8_t SHA256Expected[] = "\x85\xa8\x4a\x75\x88\x6e\x8a\x52"
+static const USED uint8_t SHA256Expected[] = "\x85\xa8\x4a\x75\x88\x6e\x8a\x52"
         "\x6d\xbe\xc4\xe1\x6e\x33\x75\xfa"
         "\xa3\x07\xb4\xae\xad\x79\xc9\xed"
         "\x32\x64\xc0\x47\x7a\x6f\x6e\xba";
-static const uint8_t SHA384Expected[] = "\xa5\x50\x56\x1a\x63\x30\x04\x8e"
+static const USED uint8_t SHA384Expected[] = "\xa5\x50\x56\x1a\x63\x30\x04\x8e"
         "\xfe\x82\x6a\x97\xe5\xfe\xd8\x43"
         "\xfa\x1c\xe6\x46\xa9\xbf\x54\x6c"
         "\xcb\x43\x3c\x2f\xcb\x0e\x54\x82"
         "\x1c\x4c\x94\x5e\xed\x9a\x59\x2b"
         "\x5b\xf4\x31\x57\xe2\x12\xf2\x77";
-static const uint8_t SHA512Expected[] = "\x7f\x49\x15\x7f\xb3\x59\xb3\x9e"
+static const USED uint8_t SHA512Expected[] = "\x7f\x49\x15\x7f\xb3\x59\xb3\x9e"
         "\xa6\xda\x93\x4d\xc9\xa1\x07\x09"
         "\xfe\xdf\x88\x46\xd1\x39\xd0\xe6"
         "\x37\xa3\xc0\xfc\x83\x3b\x6f\x42"
@@ -118,13 +144,12 @@ uint32_t APP_getTicks(void) {
     return SYS_TIME_CounterGet();
 }
 
-char printBuffer[50 * 1024] = {0};
+char printBuffer[2 * 1024] = {0};
+#define PB_SIZE (sizeof(printBuffer)/sizeof(printBuffer[0]))
 
 void APP_DisplayHash(uint8_t *hash, uint32_t hashSz) {
     while (hashSz--) {
-        sprintf(printBuffer, "%s%02X", printBuffer, *hash++);
-
-        //sprintf(printBuffer, "%s%02X", *hash++);
+        snprintf(printBuffer, PB_SIZE, "%s%02X", printBuffer, *hash++);
     }
 }
 
@@ -228,6 +253,7 @@ void APP_Sha512Run_Bulk(void) {
 }
 #endif
 
+#if defined(TEST_WITH_MD5)
 void APP_Md5Run_Feed(void) {
     CRYPT_MD5_CTX md5;
     uint32_t hashStart;
@@ -249,8 +275,10 @@ void APP_Md5Run_Feed(void) {
     hashStop = APP_getTicks();
     appData.md5_feed_timing = hashStop - hashStart;
 }
+#endif
 uint8_t __attribute__((aligned(64))) myBuf[1024];
 
+#if defined(TEST_WITH_SHA1)
 void APP_ShaRun_Feed(void) {
     CRYPT_SHA_CTX sha;
     uint32_t hashStart;
@@ -271,6 +299,7 @@ void APP_ShaRun_Feed(void) {
     hashStop = APP_getTicks();
     appData.sha1_feed_timing = hashStop - hashStart;
 }
+#endif
 #if 0
 char outputBuffer[160 * 512] = {0};
 
@@ -281,6 +310,7 @@ void printHash(uint32_t * digest) {
 }
 #endif
 
+#if defined(TEST_WITH_SHA256)
 void APP_Sha256Run_Feed(void) {
     CRYPT_SHA256_CTX sha256;
     uint32_t hashStart;
@@ -318,7 +348,8 @@ void APP_Sha256Run_Feed(void) {
     hashStop = APP_getTicks();
     appData.sha256_feed_timing = hashStop - hashStart;
 }
-
+#endif
+#if defined(TEST_WITH_SHA384)
 void APP_Sha384Run_Feed(void) {
     CRYPT_SHA384_CTX sha384;
     uint32_t hashStart;
@@ -335,7 +366,9 @@ void APP_Sha384Run_Feed(void) {
     hashStop = APP_getTicks();
     appData.sha384_feed_timing = hashStop - hashStart;
 }
+#endif // TEST_WITH_SHA384
 
+#if defined(TEST_WITH_SHA512)
 void APP_Sha512Run_Feed(void) {
     CRYPT_SHA512_CTX sha512;
     uint32_t hashStart;
@@ -352,6 +385,7 @@ void APP_Sha512Run_Feed(void) {
     hashStop = APP_getTicks();
     appData.sha512_feed_timing = hashStop - hashStart;
 }
+#endif //TEST_WITH_SHA512
 
 // *****************************************************************************
 // *****************************************************************************
@@ -378,6 +412,22 @@ void APP_Reset() {
 // Section: Application Initialization and State Machine Functions
 // *****************************************************************************
 // *****************************************************************************
+#define CRLF    "\r\n"
+const char *appHeader = CRLF CRLF
+    " Application created " __DATE__ " " __TIME__ " initialized!" CRLF
+    " Testing from SRAM (dynamic) buffers"
+#if defined(RUN_FLASH_TEST)
+    " and a Flash (constant) buffer"
+#else
+    " (only)"
+#endif
+    "." CRLF
+#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) || defined(WOLFSSL_MICROCHIP_PIC32MZ)
+    " Compiled to use hardware acceleration." CRLF
+#else
+    " Compiled for software-defined operation." CRLF
+#endif
+    " -- this test may take a few seconds." CRLF;
 
 /*******************************************************************************
   Function:
@@ -386,8 +436,6 @@ void APP_Reset() {
   Remarks:
     See prototype in app.h.
  */
-char *msgBuffer = "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n";
-
 void APP_Initialize(void) {
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT;
@@ -401,7 +449,7 @@ void APP_Initialize(void) {
   Remarks:
     See prototype in app.h.
  */
-
+    
 void APP_Tasks(void) {
 
     static int i;
@@ -411,12 +459,16 @@ void APP_Tasks(void) {
             /* Application's initial state. */
         case APP_STATE_INIT:
         {
-            /* Show Hyperterminal is working using available output functions */
-            //            SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
-            //            SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
-            // SYS_CONSOLE_Write(SYS_CONSOLE_INDEX_0, STDOUT_FILENO, msgBuffer, strlen(msgBuffer));            
-
             appData.usartHandle = DRV_USART_Open(DRV_USART_INDEX_0, DRV_IO_INTENT_READWRITE);
+
+            /* Show Hyperterminal is working using available output functions */
+            // SYS_DEBUG(SYS_ERROR_INFO,appHeader);
+            // SYS_CONSOLE_Write
+            //  (SYS_CONSOLE_INDEX_0, STDOUT_FILENO, appHeader, strlen(appHeader));            
+            // SYS_MESSAGE(appHeader);            
+            DRV_USART_WriteBuffer
+                (appData.usartHandle, (char *)appHeader, strlen(appHeader));
+      
             appData.state = APP_STATE_RUN_MD5_FEED;
             break;
         }
@@ -451,102 +503,109 @@ void APP_Tasks(void) {
 #endif
 
         case APP_STATE_RUN_MD5_FEED:
+#if defined(TEST_WITH_MD5)
             APP_Md5Run_Feed();
+#endif
             appData.state = APP_STATE_RUN_SHA1_FEED;
             break;
 
         case APP_STATE_RUN_SHA1_FEED:
+#if defined(TEST_WITH_SHA1)
             APP_ShaRun_Feed();
+#endif
             appData.state = APP_STATE_RUN_SHA256_FEED;
             break;
 
         case APP_STATE_RUN_SHA256_FEED:
+#if defined(TEST_WITH_SHA256)
             APP_Sha256Run_Feed();
+#endif
             appData.state = APP_STATE_RUN_SHA384_FEED;
             break;
-
         case APP_STATE_RUN_SHA384_FEED:
+#if defined(TEST_WITH_SHA384)
             APP_Sha384Run_Feed();
+#endif
             appData.state = APP_STATE_RUN_SHA512_FEED;
             break;
-
         case APP_STATE_RUN_SHA512_FEED:
+#if defined(TEST_WITH_SHA512)
             APP_Sha512Run_Feed();
+#endif
             i = 0;
             appData.state = APP_STATE_DISPLAY_RESULTS;
             break;
-
         case APP_STATE_DISPLAY_RESULTS:
             switch (i) {
                 case 0:
 
 #if (RUN_FLASH_TEST)
-                    sprintf(printBuffer, "%s\n\rMD5 from Flash:    ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rMD5 from Flash:    ", printBuffer);
                     APP_DisplayHash(appData.md5_result, CRYPT_MD5_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.md5_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.md5_timing);
 #endif
                     break;
 
                 case 1:
-                    sprintf(printBuffer, "%s\n\rMD5 from feed:     ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rMD5 from feed:     ", printBuffer);
                     APP_DisplayHash(appData.md5_feed_result, CRYPT_MD5_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.md5_feed_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.md5_feed_timing);
                     break;
 
                 case 2:
 #if (RUN_FLASH_TEST)
-                    sprintf(printBuffer, "%s\n\rSHA from Flash:    ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA from Flash:    ", printBuffer);
                     APP_DisplayHash(appData.sha1_result, CRYPT_SHA_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha1_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha1_timing);
 #endif
                     break;
 
                 case 3:
-                    sprintf(printBuffer, "%s\n\rSHA from feed:     ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA from feed:     ", printBuffer);
                     APP_DisplayHash(appData.sha1_feed_result, CRYPT_SHA_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha1_feed_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha1_feed_timing);
                     break;
 
                 case 4:
 #if (RUN_FLASH_TEST)
-                    sprintf(printBuffer, "%s\n\rSHA256 from Flash: ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA256 from Flash: ", printBuffer);
                     APP_DisplayHash(appData.sha256_result, CRYPT_SHA256_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha256_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha256_timing);
 #endif
                     break;
 
                 case 5:
-                    sprintf(printBuffer, "%s\n\rSHA256 from feed:  ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA256 from feed:  ", printBuffer);
                     APP_DisplayHash(appData.sha256_feed_result, CRYPT_SHA256_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha256_feed_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha256_feed_timing);
                     break;
 
                 case 6:
 #if (RUN_FLASH_TEST)
-                    sprintf(printBuffer, "%s\n\rSHA384 from Flash: ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA384 from Flash: ", printBuffer);
                     APP_DisplayHash(appData.sha384_result, CRYPT_SHA384_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha384_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha384_timing);
 #endif
                     break;
 
                 case 7:
-                    sprintf(printBuffer, "%s\n\rSHA384 from feed:  ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA384 from feed:  ", printBuffer);
                     APP_DisplayHash(appData.sha384_feed_result, CRYPT_SHA384_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha384_feed_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha384_feed_timing);
                     break;
 
                 case 8:
 #if (RUN_FLASH_TEST)
-                    sprintf(printBuffer, "%s\n\rSHA512 from Flash: ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA512 from Flash: ", printBuffer);
                     APP_DisplayHash(appData.sha512_result, CRYPT_SHA512_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha512_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha512_timing);
 #endif
                     break;
 
                 case 9:
-                    sprintf(printBuffer, "%s\n\rSHA512 from feed:  ", printBuffer);
+                    snprintf(printBuffer, PB_SIZE, "%s\n\rSHA512 from feed:  ", printBuffer);
                     APP_DisplayHash(appData.sha512_feed_result, CRYPT_SHA512_DIGEST_SIZE);
-                    sprintf(printBuffer, "%s\t took %d clock cycles", printBuffer, (int) appData.sha512_feed_timing);
+                    snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha512_feed_timing);
                     break;
             }
             i++;
@@ -558,24 +617,36 @@ void APP_Tasks(void) {
             break;
 
         case APP_STATE_CHECK_RESULTS:
-            if (
+            __NOP();
+            if ( 0
 #if (RUN_FLASH_TEST)
-                    memcmp(MD5Expected, appData.md5_result, CRYPT_MD5_DIGEST_SIZE) ||
-                    memcmp(SHAExpected, appData.sha1_result, CRYPT_SHA_DIGEST_SIZE) ||
-                    memcmp(SHA256Expected, appData.sha256_result, CRYPT_SHA256_DIGEST_SIZE) ||
-                    memcmp(SHA384Expected, appData.sha384_result, CRYPT_SHA384_DIGEST_SIZE) ||
-                    memcmp(SHA512Expected, appData.sha512_result, CRYPT_SHA512_DIGEST_SIZE) ||
+                 || memcmp(MD5Expected, appData.md5_result, CRYPT_MD5_DIGEST_SIZE)
+                 || memcmp(SHAExpected, appData.sha1_result, CRYPT_SHA_DIGEST_SIZE)
+                 || memcmp(SHA256Expected, appData.sha256_result, CRYPT_SHA256_DIGEST_SIZE)
+                 || memcmp(SHA384Expected, appData.sha384_result, CRYPT_SHA384_DIGEST_SIZE)
+                 || memcmp(SHA512Expected, appData.sha512_result, CRYPT_SHA512_DIGEST_SIZE)
 #endif
-                    memcmp(MD5Expected, appData.md5_feed_result, CRYPT_MD5_DIGEST_SIZE) ||
-                    memcmp(SHAExpected, appData.sha1_feed_result, CRYPT_SHA_DIGEST_SIZE) ||
-                    memcmp(SHA256Expected, appData.sha256_feed_result, CRYPT_SHA256_DIGEST_SIZE) ||
-                    memcmp(SHA384Expected, appData.sha384_feed_result, CRYPT_SHA384_DIGEST_SIZE) ||
-                    memcmp(SHA512Expected, appData.sha512_feed_result, CRYPT_SHA512_DIGEST_SIZE)) {
+#if defined(TEST_WITH_MD5)
+                 || memcmp(MD5Expected, appData.md5_feed_result, CRYPT_MD5_DIGEST_SIZE)
+#endif
+#if defined(TEST_WITH_SHA1)
+                    || memcmp(SHAExpected, appData.sha1_feed_result, CRYPT_SHA_DIGEST_SIZE)
+#endif
+#if defined(TEST_WITH_SHA256)
+                 || memcmp(SHA256Expected, appData.sha256_feed_result, CRYPT_SHA256_DIGEST_SIZE)
+#endif
+#if defined(TEST_WITH_SHA384)
+                 || memcmp(SHA384Expected, appData.sha384_feed_result, CRYPT_SHA384_DIGEST_SIZE)
+#endif
+#if defined(TEST_WITH_SHA512)
+                 || memcmp(SHA512Expected, appData.sha512_feed_result, CRYPT_SHA512_DIGEST_SIZE)
+#endif
+            ){
                 // We had an error during comparisons
-                sprintf(printBuffer, "%s\n\rA test failed.", printBuffer);
+                snprintf(printBuffer, PB_SIZE, "%s\n\rA test failed.\r\n", printBuffer);
                 //BSP_LEDOn(BSP_LED_1);
             } else {
-                sprintf(printBuffer, "%s\n\rAll tests passed.", printBuffer);
+                snprintf(printBuffer, PB_SIZE, "%s\n\rAll tests passed.\r\n", printBuffer);
                 //BSP_LEDOn(BSP_LED_3);
             }
             
@@ -593,6 +664,10 @@ void APP_Tasks(void) {
         case APP_SPIN:
 
             /* The default state should never be executed. */
+#if LOOP_FOREVER
+            appData.state = APP_STATE_RUN_MD5_FEED;
+            break;
+#endif
         default:
         {
             /* TODO: Handle error in application's state machine. */
