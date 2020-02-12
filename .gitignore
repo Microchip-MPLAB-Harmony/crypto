@@ -17,6 +17,6 @@
 **/*.IAR/*.dep
 
 **/*.IAR/*.custom_argvars
-
-
+**/.history/*
+**/.vscode/*
 
