@@ -82,7 +82,7 @@ typedef struct
     CRYPT_AES_U2238_AES_CTRLB ctrlb;
 #elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803) // SAML11
     /* nothing to define -- use the default Aes structure */
-#elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805) // PIC32MC
+#elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805) // PIC32CM
     /* nothing to define -- use the default Aes structure */
 #endif
 }crypt_aes_hw_descriptor;

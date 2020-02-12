@@ -65,8 +65,8 @@ cryptoHwSha224Support = [
                        ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60                       
-                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11 (Omega)
-                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM (Lifeguard)
+                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM
                       ]
 cryptoHwSha224Supported = False
 cryptoHwSha224EnabledSymbol = None
@@ -77,8 +77,8 @@ cryptoHwSha256Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27                       
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAM9X60
-                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11 (Omega)
-                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM (Lifeguard)
+                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM
                       ]
 cryptoHwSha256Supported = False
 cryptoHwSha256EnabledSymbol = None
@@ -106,10 +106,10 @@ cryptoHwAesEnabledSymbol = None
 cryptoAesEcbEnabledSymbol = None
 cryptoAesEcbHwEnabledSymbol = None
 
-cryptoHW_U2803 = [["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2803"])],] #ATSAML11 (Omega)
+cryptoHW_U2803 = [["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2803"])],] #ATSAML11
 cryptoHW_U2803Present = False
 cryptoHW_U2803Symbol = None
-cryptoHW_U2805 = [["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2805"])],] #PIC32CM (Lifeguard)
+cryptoHW_U2805 = [["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2805"])],] #PIC32CM
 cryptoHW_U2805Present = False
 cryptoHW_U2805Symbol = None
     
@@ -119,8 +119,8 @@ cryptoHwAes128Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "U2238", "2.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMA5D28
                        ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
-                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803"])], #ATSAML11 (Omega)
-                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM (Lifeguard)
+                       ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803"])], #ATSAML11
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM
                       ]
 cryptoHwAes128Supported = False                     
 cryptoAes128EnabledSymbol = None
@@ -131,7 +131,7 @@ cryptoHwAes192Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "U2238", "2.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMA5D28
                        ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
-                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM (Lifeguard)
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM
                       ]
 cryptoHwAes192Supported = False
 cryptoAes192EnabledSymbol = None
@@ -142,7 +142,7 @@ cryptoHwAes256Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "U2238", "2.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238"])], #ATSAML21J18B
                        ["AES", "6149", "ZB", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMA5D28
                        ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
-                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM (Lifeguard)
+                       ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM
                       ]
 cryptoHwAes256Supported = False
 cryptoAes256EnabledSymbol = None
