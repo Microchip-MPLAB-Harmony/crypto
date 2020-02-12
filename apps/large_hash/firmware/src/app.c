@@ -617,7 +617,6 @@ void APP_Tasks(void) {
             break;
 
         case APP_STATE_CHECK_RESULTS:
-            __NOP();
             if ( 0
 #if (RUN_FLASH_TEST)
                  || memcmp(MD5Expected, appData.md5_result, CRYPT_MD5_DIGEST_SIZE)
