@@ -49,8 +49,8 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "crypto/crypto.h"
-#include "wolfssl/wolfcrypt/port/pic32/crypt_wolfcryptcb.h"
 #include "peripheral/coretimer/plib_coretimer.h"
+#include "wolfssl/wolfcrypt/port/pic32/crypt_wolfcryptcb.h"
 #include "peripheral/uart/plib_uart1.h"
 #include "driver/usart/drv_usart.h"
 #include "bsp/bsp.h"
