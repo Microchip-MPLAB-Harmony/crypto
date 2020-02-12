@@ -204,6 +204,7 @@ int wc_InitSha256_ex(wc_Sha256* sha256, void* heap, int devId)
     return 0;
 }
 
+#if !defined(NO_SHA224)
 int wc_InitSha224_ex(wc_Sha256* sha224, void* heap, int devId)
 {
     // (void*)heap;
@@ -229,6 +230,7 @@ int wc_InitSha224_ex(wc_Sha256* sha224, void* heap, int devId)
     sha224->bufferLength = 0;
     return 0;
 }
+#endif // NO_SHA224
 
 /* Data encryption process: "gather" operation allows any length
  * data segment to be added to the hash. Repetitive calls are accumulated
