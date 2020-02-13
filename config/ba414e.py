@@ -210,8 +210,9 @@ def getVectorIndex(string):
     return vector_index
     
 def setInteruptStatus(status):
-    ba414eIntIndex = getVectorIndex("BA414E")
-    ba414eErrorIntIndex = getVectorIndex("BA414E_ERROR")
+    ba414eIntIndex = getVectorIndex("CRYPTO1")
+    ba414eErrorIntIndex = getVectorIndex("CRYPTO1_FAULT")
+    print("BA414E:Set Interrupt Status EVIC_" + str(ba414eIntIndex) + "_ENABLE " + str(status) )
 
     Database.setSymbolValue("core", "EVIC_" + str(ba414eIntIndex) + "_ENABLE", status, 1)
     Database.setSymbolValue("core", "EVIC_" + str(ba414eErrorIntIndex) + "_ENABLE", status, 1)

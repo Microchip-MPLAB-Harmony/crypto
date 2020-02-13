@@ -49,20 +49,21 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "crypto/crypto.h"
-#include "peripheral/coretimer/plib_coretimer.h"
-#include "wolfssl/wolfcrypt/port/pic32/crypt_wolfcryptcb.h"
-#include "peripheral/uart/plib_uart1.h"
-#include "driver/usart/drv_usart.h"
+#include "driver/ba414e/drv_ba414e.h"
 #include "bsp/bsp.h"
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/evic/plib_evic.h"
+#include "system/time/sys_time.h"
+#include "peripheral/coretimer/plib_coretimer.h"
+#include "wolfssl/wolfcrypt/port/pic32/crypt_wolfcryptcb.h"
+#include "peripheral/uart/plib_uart1.h"
+#include "driver/usart/drv_usart.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "system/int/sys_int.h"
 #include "system/dma/sys_dma.h"
 #include "osal/osal.h"
-#include "system/time/sys_time.h"
 #include "app.h"
 
 
@@ -185,8 +186,11 @@ void SYS_Tasks ( void );
 
 typedef struct
 {
-    SYS_MODULE_OBJ  drvUsart0;
+
+    SYS_MODULE_OBJ  ba414e;
+
     SYS_MODULE_OBJ  sysTime;
+    SYS_MODULE_OBJ  drvUsart0;
 
 } SYSTEM_OBJECTS;
 

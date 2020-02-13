@@ -8,48 +8,55 @@
         <logicalFolder name="f1"
                        displayName="pic32mz_w1_curiosity_rtos"
                        projectFiles="true">
-          <logicalFolder name="f3" displayName="bsp" projectFiles="true">
+          <logicalFolder name="f2" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/bsp/bsp.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f4" displayName="crypto" projectFiles="true">
+          <logicalFolder name="f5" displayName="crypto" projectFiles="true">
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/crypto/crypto.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f2" displayName="driver" projectFiles="true">
-            <logicalFolder name="f1" displayName="usart" projectFiles="true">
-              <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/usart/drv_usart_definitions.h</itemPath>
+          <logicalFolder name="f1" displayName="driver" projectFiles="true">
+            <logicalFolder name="f1" displayName="ba414e" projectFiles="true">
+              <logicalFolder name="f1" displayName="src" projectFiles="true">
+                <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/ba414e/src/drv_ba414e_local.h</itemPath>
+              </logicalFolder>
+              <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/ba414e/drv_ba414e.h</itemPath>
+              <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/ba414e/drv_ba414e_definitions.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f2" displayName="usart" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/usart/drv_usart.h</itemPath>
+              <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/usart/drv_usart_definitions.h</itemPath>
             </logicalFolder>
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/driver.h</itemPath>
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/driver_common.h</itemPath>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f3" displayName="clk" projectFiles="true">
+          <logicalFolder name="f3" displayName="peripheral" projectFiles="true">
+            <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="coretimer" projectFiles="true">
+            <logicalFolder name="f4" displayName="coretimer" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/coretimer/plib_coretimer.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="evic" projectFiles="true">
+            <logicalFolder name="f3" displayName="evic" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/evic/plib_evic.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="gpio" projectFiles="true">
+            <logicalFolder name="f2" displayName="gpio" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/gpio/plib_gpio.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f2" displayName="uart" projectFiles="true">
+            <logicalFolder name="f5" displayName="uart" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/uart/plib_uart_common.h</itemPath>
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/uart/plib_uart1.h</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <logicalFolder name="f5" displayName="system" projectFiles="true">
-            <logicalFolder name="f2" displayName="dma" projectFiles="true">
+          <logicalFolder name="f4" displayName="system" projectFiles="true">
+            <logicalFolder name="f3" displayName="dma" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/dma/sys_dma.h</itemPath>
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/dma/sys_dma_mapping.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="int" projectFiles="true">
+            <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/int/sys_int_mapping.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f3" displayName="time" projectFiles="true">
+            <logicalFolder name="f1" displayName="time" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/time/sys_time.h</itemPath>
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/time/sys_time_definitions.h</itemPath>
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/time/src/sys_time_local.h</itemPath>
@@ -58,15 +65,15 @@
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/system_common.h</itemPath>
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/system_module.h</itemPath>
           </logicalFolder>
-          <itemPath>../src/config/pic32mz_w1_curiosity_rtos/config.h</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_rtos/toolchain_specifics.h</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_rtos/definitions.h</itemPath>
+          <itemPath>../src/config/pic32mz_w1_curiosity_rtos/config.h</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_rtos/FreeRTOSConfig.h</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_rtos/user.h</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_rtos/configuration.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f4" displayName="FreeRTOS" projectFiles="true">
+      <logicalFolder name="f5" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
           <logicalFolder name="f1" displayName="include" projectFiles="true">
             <itemPath>../src/third_party/rtos/FreeRTOS/Source/Include/croutine.h</itemPath>
@@ -96,12 +103,12 @@
           </logicalFolder>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f5" displayName="osal" projectFiles="true">
+      <logicalFolder name="f6" displayName="osal" projectFiles="true">
         <itemPath>../src/config/pic32mz_w1_curiosity_rtos/osal/osal.h</itemPath>
         <itemPath>../src/config/pic32mz_w1_curiosity_rtos/osal/osal_definitions.h</itemPath>
         <itemPath>../src/config/pic32mz_w1_curiosity_rtos/osal/osal_freertos.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="f3" displayName="packs" projectFiles="true">
+      <logicalFolder name="f4" displayName="packs" projectFiles="true">
         <logicalFolder name="f1"
                        displayName="PIC32MZ1025W104132_DFP"
                        projectFiles="true">
@@ -152,6 +159,8 @@
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_aes_hwInt.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_aes_sam6149.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_aes_u2238.h</itemPath>
+          <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_crya_saml11.h</itemPath>
+          <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_ecc_ba414e.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_ecc_pukcl.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_pukcl_definitions.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_pukcl_functions.h</itemPath>
@@ -185,6 +194,7 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/cpuid.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/cryptocb.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/curve25519.h</itemPath>
+        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/des3.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/dh.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/dsa.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/ecc.h</itemPath>
@@ -201,6 +211,7 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/logging.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/md2.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/md4.h</itemPath>
+        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/md5.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/memory.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/mem_track.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/misc.h</itemPath>
@@ -212,6 +223,7 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/poly1305.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/pwdbased.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/rabbit.h</itemPath>
+        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/random.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/ripemd.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/rsa.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/selftest.h</itemPath>
@@ -229,14 +241,24 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/wolfmath.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/settings.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/aes.h</itemPath>
-        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/des3.h</itemPath>
-        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/md5.h</itemPath>
-        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/random.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/sha.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/sha256.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/sha512.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/wc_port.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/certs_test.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="zlib" projectFiles="true">
+        <itemPath>../src/third_party/zlib/crc32.h</itemPath>
+        <itemPath>../src/third_party/zlib/deflate.h</itemPath>
+        <itemPath>../src/third_party/zlib/gzguts.h</itemPath>
+        <itemPath>../src/third_party/zlib/inffast.h</itemPath>
+        <itemPath>../src/third_party/zlib/inffixed.h</itemPath>
+        <itemPath>../src/third_party/zlib/inflate.h</itemPath>
+        <itemPath>../src/third_party/zlib/inftrees.h</itemPath>
+        <itemPath>../src/third_party/zlib/trees.h</itemPath>
+        <itemPath>../src/third_party/zlib/zconf.h</itemPath>
+        <itemPath>../src/third_party/zlib/zlib.h</itemPath>
+        <itemPath>../src/third_party/zlib/zutil.h</itemPath>
       </logicalFolder>
       <itemPath>../src/app.h</itemPath>
     </logicalFolder>
@@ -251,46 +273,51 @@
         <logicalFolder name="f1"
                        displayName="pic32mz_w1_curiosity_rtos"
                        projectFiles="true">
-          <logicalFolder name="f3" displayName="bsp" projectFiles="true">
+          <logicalFolder name="f2" displayName="bsp" projectFiles="true">
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/bsp/bsp.c</itemPath>
           </logicalFolder>
-          <logicalFolder name="f5" displayName="crypto" projectFiles="true">
+          <logicalFolder name="f6" displayName="crypto" projectFiles="true">
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/crypto/src/crypto.c</itemPath>
           </logicalFolder>
-          <logicalFolder name="f2" displayName="driver" projectFiles="true">
-            <logicalFolder name="f1" displayName="usart" projectFiles="true">
+          <logicalFolder name="f1" displayName="driver" projectFiles="true">
+            <logicalFolder name="f1" displayName="ba414e" projectFiles="true">
+              <logicalFolder name="f1" displayName="src" projectFiles="true">
+                <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/ba414e/src/drv_ba414e.c</itemPath>
+              </logicalFolder>
+            </logicalFolder>
+            <logicalFolder name="f2" displayName="usart" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/usart/src/drv_usart.c</itemPath>
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/driver/usart/src/drv_usart_local.h</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <logicalFolder name="f1" displayName="peripheral" projectFiles="true">
-            <logicalFolder name="f3" displayName="clk" projectFiles="true">
+          <logicalFolder name="f4" displayName="peripheral" projectFiles="true">
+            <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/clk/plib_clk.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="coretimer" projectFiles="true">
+            <logicalFolder name="f4" displayName="coretimer" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/coretimer/plib_coretimer.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="evic" projectFiles="true">
+            <logicalFolder name="f3" displayName="evic" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/evic/plib_evic.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="gpio" projectFiles="true">
+            <logicalFolder name="f2" displayName="gpio" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/gpio/plib_gpio.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f2" displayName="uart" projectFiles="true">
+            <logicalFolder name="f5" displayName="uart" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/peripheral/uart/plib_uart1.c</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <logicalFolder name="f4" displayName="stdio" projectFiles="true">
+          <logicalFolder name="f3" displayName="stdio" projectFiles="true">
             <itemPath>../src/config/pic32mz_w1_curiosity_rtos/stdio/xc32_monitor.c</itemPath>
           </logicalFolder>
-          <logicalFolder name="f6" displayName="system" projectFiles="true">
-            <logicalFolder name="f2" displayName="dma" projectFiles="true">
+          <logicalFolder name="f5" displayName="system" projectFiles="true">
+            <logicalFolder name="f3" displayName="dma" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/dma/sys_dma.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f1" displayName="int" projectFiles="true">
+            <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/int/src/sys_int.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f3" displayName="time" projectFiles="true">
+            <logicalFolder name="f1" displayName="time" projectFiles="true">
               <itemPath>../src/config/pic32mz_w1_curiosity_rtos/system/time/src/sys_time.c</itemPath>
             </logicalFolder>
           </logicalFolder>
@@ -303,7 +330,7 @@
           <itemPath>../src/config/pic32mz_w1_curiosity_rtos/tasks.c</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f3" displayName="FreeRTOS" projectFiles="true">
+      <logicalFolder name="f4" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
           <logicalFolder name="f1" displayName="portable" projectFiles="true">
             <logicalFolder name="f1" displayName="MemMang" projectFiles="true">
@@ -325,7 +352,7 @@
           <itemPath>../src/third_party/rtos/FreeRTOS/Source/stream_buffer.c</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f4" displayName="osal" projectFiles="true">
+      <logicalFolder name="f5" displayName="osal" projectFiles="true">
         <itemPath>../src/config/pic32mz_w1_curiosity_rtos/osal/osal_freertos.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="wolfcrypt" projectFiles="true">
@@ -333,11 +360,13 @@
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/pic32mz-crypt.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_aes_sam6149.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_aes_u2238.c</itemPath>
+          <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_ecc_ba414e.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_ecc_pukcl.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_pukcl_functions.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_rng_sam6334.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_rng_u2242.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_rsa_pukcl.c</itemPath>
+          <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_sam_u2803.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_sha1_sam11105.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_sha1_sam6156.c</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/crypt_sha224_sam11105.c</itemPath>
@@ -381,6 +410,7 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/logging.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/md2.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/md4.c</itemPath>
+        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/md5.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/memory.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/pkcs12.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/pkcs7.c</itemPath>
@@ -408,11 +438,24 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/wolfmath.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/aes.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/des3.c</itemPath>
-        <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/md5.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/random.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="zlib" projectFiles="true">
+        <itemPath>../src/third_party/zlib/adler32.c</itemPath>
+        <itemPath>../src/third_party/zlib/compress.c</itemPath>
+        <itemPath>../src/third_party/zlib/crc32.c</itemPath>
+        <itemPath>../src/third_party/zlib/deflate.c</itemPath>
+        <itemPath>../src/third_party/zlib/gzclose.c</itemPath>
+        <itemPath>../src/third_party/zlib/infback.c</itemPath>
+        <itemPath>../src/third_party/zlib/inffast.c</itemPath>
+        <itemPath>../src/third_party/zlib/inflate.c</itemPath>
+        <itemPath>../src/third_party/zlib/inftrees.c</itemPath>
+        <itemPath>../src/third_party/zlib/trees.c</itemPath>
+        <itemPath>../src/third_party/zlib/uncompr.c</itemPath>
+        <itemPath>../src/third_party/zlib/zutil.c</itemPath>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
@@ -471,13 +514,14 @@
       </makeCustomizationType>
       <C32>
         <property key="additional-warnings" value="true"/>
+        <property key="addresss-attribute-use" value="false"/>
         <property key="enable-app-io" value="false"/>
         <property key="enable-omit-frame-pointer" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/pic32mz_w1_curiosity_rtos;../src/packs/PIC32MZ1025W104132_DFP;../src/mips;../src/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MZ;../src/third_party/rtos/FreeRTOS/Source/include"/>
+                  value="../src;../src/config/pic32mz_w1_curiosity_rtos;../src/packs/PIC32MZ1025W104132_DFP;../src/mips;../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src/third_party/zlib;../src/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MZ;../src/third_party/rtos/FreeRTOS/Source/include"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -487,9 +531,11 @@
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros"
-                  value="HAVE_CONFIG_H;WOLFSSL_IGNORE_FILE_WARN"/>
+                  value="HAVE_CONFIG_H;WOLFSSL_IGNORE_FILE_WARN;ECC_PRIM_TEST"/>
         <property key="strict-ansi" value="false"/>
         <property key="support-ansi" value="false"/>
+        <property key="toplevel-reordering" value=""/>
+        <property key="unaligned-access" value=""/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
@@ -498,16 +544,36 @@
         <property key="additional-options-chop-files" value="false"/>
       </C32-AR>
       <C32-AS>
+        <property key="assembler-symbols" value=""/>
+        <property key="enable-symbols" value="true"/>
+        <property key="exclude-floating-point-library" value="false"/>
+        <property key="expand-macros" value="false"/>
         <property key="extra-include-directories-for-assembler"
-                  value="../src/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MZ;../src/third_party/rtos/FreeRTOS/Source/include;../src/config/pic32mz_w1_curiosity_rtos;"/>
+                  value="../src/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MZ;../src/third_party/rtos/FreeRTOS/Source/include;../src/config/pic32mz_w1_curiosity_rtos"/>
         <property key="extra-include-directories-for-preprocessor"
-                  value="../src/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MZ;../src/third_party/rtos/FreeRTOS/Source/include;../src/config/pic32mz_w1_curiosity_rtos;"/>
+                  value="../src/third_party/rtos/FreeRTOS/Source/portable/MPLAB/PIC32MZ;../src/third_party/rtos/FreeRTOS/Source/include;../src/config/pic32mz_w1_curiosity_rtos"/>
+        <property key="false-conditionals" value="false"/>
+        <property key="generate-16-bit-code" value="false"/>
+        <property key="generate-micro-compressed-code" value="false"/>
+        <property key="keep-locals" value="false"/>
+        <property key="list-assembly" value="false"/>
+        <property key="list-source" value="false"/>
+        <property key="list-symbols" value="false"/>
+        <property key="oXC32asm-list-to-file" value="false"/>
+        <property key="omit-debug-dirs" value="false"/>
+        <property key="omit-forms" value="false"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="warning-level" value=""/>
       </C32-AS>
       <C32-CO>
         <property key="coverage-enable" value=""/>
       </C32-CO>
       <C32-LD>
         <property key="additional-options-use-response-files" value="false"/>
+        <property key="additional-options-write-sla" value="false"/>
+        <property key="allocate-dinit" value="false"/>
+        <property key="code-dinit" value="false"/>
+        <property key="ebase-addr" value=""/>
         <property key="enable-check-sections" value="false"/>
         <property key="exclude-floating-point-library" value="false"/>
         <property key="exclude-standard-libraries" value="false"/>
@@ -524,6 +590,8 @@
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="heap-size" value="32768"/>
         <property key="input-libraries" value=""/>
+        <property key="kseg-length" value=""/>
+        <property key="kseg-origin" value=""/>
         <property key="linker-symbols" value=""/>
         <property key="map-file" value="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"/>
         <property key="no-device-startup-code" value="true"/>
@@ -533,6 +601,8 @@
         <property key="preprocessor-macros" value=""/>
         <property key="remove-unused-sections" value="true"/>
         <property key="report-memory-usage" value="false"/>
+        <property key="serial-length" value=""/>
+        <property key="serial-origin" value=""/>
         <property key="stack-size" value=""/>
         <property key="symbol-stripping" value=""/>
         <property key="trace-symbols" value=""/>
@@ -540,6 +610,7 @@
       </C32-LD>
       <C32CPP>
         <property key="additional-warnings" value="false"/>
+        <property key="addresss-attribute-use" value="false"/>
         <property key="check-new" value="false"/>
         <property key="eh-specs" value="true"/>
         <property key="enable-app-io" value="false"/>
@@ -560,13 +631,20 @@
         <property key="preprocessor-macros" value=""/>
         <property key="rtti" value="true"/>
         <property key="strict-ansi" value="false"/>
+        <property key="toplevel-reordering" value=""/>
+        <property key="unaligned-access" value=""/>
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
       </C32CPP>
       <C32Global>
+        <property key="common-include-directories" value=""/>
         <property key="gp-relative-option" value=""/>
         <property key="legacy-libc" value="false"/>
+        <property key="mdtcm" value=""/>
+        <property key="mitcm" value=""/>
+        <property key="mstacktcm" value="false"/>
+        <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
       </C32Global>
@@ -632,7 +710,29 @@
         <property key="voltagevalue" value="3.25"/>
       </PICkit3PlatformTool>
       <PKOBSKDEPlatformTool>
-        <property key="firmware.download.all" value="false"/>
+        <property key="AutoSelectMemRanges" value="auto"/>
+        <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
+        <property key="ToolFirmwareFilePath"
+                  value="Press to browse for a specific firmware version"/>
+        <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="memories.configurationmemory" value="true"/>
+        <property key="memories.dataflash" value="true"/>
+        <property key="memories.eeprom" value="true"/>
+        <property key="memories.id" value="true"/>
+        <property key="memories.programmemory" value="true"/>
+        <property key="memories.programmemory.ranges" value="10000000-100fffff"/>
+        <property key="memories.userotp" value="true"/>
+        <property key="programoptions.donoteraseauxmem" value="false"/>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.preservedataflash" value="false"/>
+        <property key="programoptions.preservedataflash.ranges" value=""/>
+        <property key="programoptions.preserveeeprom" value="false"/>
+        <property key="programoptions.preserveeeprom.ranges"
+                  value="${memories.eedata.default}"/>
+        <property key="programoptions.preserveprogram.ranges" value=""/>
+        <property key="programoptions.preserveprogramrange" value="false"/>
+        <property key="programoptions.usehighvoltageonmclr" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="true"/>
       </PKOBSKDEPlatformTool>
     </conf>
   </confs>

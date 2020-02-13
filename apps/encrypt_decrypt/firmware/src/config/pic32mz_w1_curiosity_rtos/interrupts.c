@@ -63,6 +63,8 @@ void CORE_TIMER_InterruptHandler( void );
 void UART1_FAULT_InterruptHandler( void );
 void UART1_RX_InterruptHandler( void );
 void UART1_TX_InterruptHandler( void );
+void DRV_BA414E_InterruptHandler( void );
+void DRV_BA414E_ErrorInterruptHandler( void );
 
 
 
@@ -87,6 +89,16 @@ void UART1_RX_Handler (void)
 void UART1_TX_Handler (void)
 {
     UART1_TX_InterruptHandler();
+}
+
+void CRYPTO1_Handler (void)
+{
+    DRV_BA414E_InterruptHandler();
+}
+
+void CRYPTO1_FAULT_Handler (void)
+{
+    DRV_BA414E_ErrorInterruptHandler();
 }
 
 

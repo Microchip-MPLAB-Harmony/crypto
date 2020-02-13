@@ -84,7 +84,7 @@ extern "C" {
 #define SYS_TIME_MAX_TIMERS                  5
 #define SYS_TIME_HW_COUNTER_WIDTH            32
 #define SYS_TIME_HW_COUNTER_PERIOD           4294967295U
-#define SYS_TIME_HW_COUNTER_HALF_PERIOD		 (SYS_TIME_HW_COUNTER_PERIOD>>1)
+#define SYS_TIME_HW_COUNTER_HALF_PERIOD	     (SYS_TIME_HW_COUNTER_PERIOD>>1)
 #define SYS_TIME_CPU_CLOCK_FREQUENCY         200000000
 #define SYS_TIME_COMPARE_UPDATE_EXECUTION_CYCLES      (620)
 
@@ -95,12 +95,12 @@ extern "C" {
 // Section: Driver Configuration
 // *****************************************************************************
 // *****************************************************************************
-/* USART Driver Global Configuration Options */
-#define DRV_USART_INSTANCES_NUMBER         1
 /* USART Driver Instance 0 Configuration Options */
 #define DRV_USART_INDEX_0                  0
 #define DRV_USART_CLIENTS_NUMBER_IDX0      1
 
+/* USART Driver Global Configuration Options */
+#define DRV_USART_INSTANCES_NUMBER         1
 
 
 // *****************************************************************************
@@ -108,6 +108,16 @@ extern "C" {
 // Section: Middleware & Other Library Configuration
 // *****************************************************************************
 // *****************************************************************************
+
+/* MPLAB Harmony BA414E Driver Definitions*/
+#define DRV_BA414E_NUM_CLIENTS 5
+
+
+/* Net Pres RTOS Configurations*/
+#define DRV_BA414E_RTOS_STACK_SIZE           1024
+#define DRV_BA414E_RTOS_TASK_PRIORITY             2	
+
+
 
 /*** wolfCrypt Library Configuration ***/
 #define MICROCHIP_PIC32
@@ -121,8 +131,11 @@ extern "C" {
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
-#define WOLF_CRYPTO_CB
+#define WOLF_CRYPTO_CB  // provide call-back support
+#define WOLFCRYPT_ONLY
 #define WOLFSSL_MICROCHIP_PIC32MZ
+#define WOLFSSL_HAVE_MCHP_HW_CRYPTO_ECC_HW_BA414E
+#define WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
 #define NO_MD4
 #define WOLFSSL_PIC32MZ_HASH
 #define WOLFSSL_PIC32MZ_HASH
@@ -144,6 +157,7 @@ extern "C" {
 #define NO_HC128
 #define NO_RABBIT
 #define HAVE_ECC
+#define WOLFSSL_HAVE_MCHP_HW_ECC
 #define NO_DH
 #define NO_DSA
 #define USE_CERT_BUFFERS_2048

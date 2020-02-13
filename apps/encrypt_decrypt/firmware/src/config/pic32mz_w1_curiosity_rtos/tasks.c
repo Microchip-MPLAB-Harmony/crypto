@@ -59,6 +59,15 @@
 // Section: RTOS "Tasks" Routine
 // *****************************************************************************
 // *****************************************************************************
+
+void _DRV_BA414E_Tasks(  void *pvParameters  )
+{
+    while(1)
+    {
+        DRV_BA414E_Tasks(sysObj.ba414e);
+    }
+}
+
 /* Handle for the APP_Tasks. */
 TaskHandle_t xAPP_Tasks;
 
@@ -95,6 +104,16 @@ void SYS_Tasks ( void )
 
     /* Maintain Middleware & Other Libraries */
     
+    xTaskCreate( _DRV_BA414E_Tasks,
+        "DRV_BA414E_Tasks",
+        DRV_BA414E_RTOS_STACK_SIZE,
+        (void*)NULL,
+        DRV_BA414E_RTOS_TASK_PRIORITY,
+        (TaskHandle_t*)NULL
+    );
+
+
+
 
     /* Maintain the application's state machine. */
         /* Create OS Thread for APP_Tasks. */

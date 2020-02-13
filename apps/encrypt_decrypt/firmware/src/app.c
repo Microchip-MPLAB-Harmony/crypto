@@ -2504,7 +2504,7 @@ void APP_Reset() {
     appData.wrComplete = true;
 }
 
-#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+#if defined(WOLFSSL_HAVE_MCHP_BA414E_CRYPTO) && defined(ECC_PRIM_TEST)
 #include "wolfssl/wolfcrypt/tfm.h"
 
 const static char primTestPrime[] = "FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF";
@@ -3039,7 +3039,7 @@ void APP_Tasks(void) {
             break;
             
         case APP_STATE_TEST_PRIMS:
-#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+#if defined(WOLFSSL_HAVE_MCHP_BA414E_CRYPTO) && defined(ECC_PRIM_TEST)
             testCount++;
             prim_test();
 #endif
@@ -3161,7 +3161,7 @@ void APP_Tasks(void) {
                     printBuffer, (appData.rsa_test_result==expectedResult?"Pass":"FAIL"));
             sprintf(printBuffer, "%s\t %10"PRIu64" clock cycles", printBuffer, appData.rsa_timing);
 #endif
-#ifdef WOLFSSL_HAVE_MCHP_BA414E_CRYPTO
+#if defined(WOLFSSL_HAVE_MCHP_BA414E_CRYPTO) && defined(ECC_PRIM_TEST)
             sprintf(printBuffer, "%s\n\rPrimative test:    %s", 
                     printBuffer, (appData.prim_test_result==expectedResult?"Pass":"FAIL"));
 #endif
