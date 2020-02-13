@@ -1,20 +1,20 @@
 /*******************************************************************************
-  NVIC PLIB Header
+  Matrix (AHB) PLIB
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_nvic.h
+    plib_matrix.c
 
   Summary:
-    NVIC PLIB Header File
+    AHB Matrix PLIB implementation file
 
   Description:
-    None
-
+    Configure AHB masters and slaves.
 *******************************************************************************/
 
+// DOM-IGNORE-BEGIN
 /*******************************************************************************
 * Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
@@ -37,31 +37,39 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
+// DOM-IGNORE-END
 
-#ifndef PLIB_NVIC_H
-#define PLIB_NVIC_H
+#ifndef _PLIB_MATRIX_H    // Guards against multiple inclusion
+#define _PLIB_MATRIX_H
 
-#include <stddef.h>
-
-// DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 
     extern "C" {
 
 #endif
-// DOM-IGNORE-END
 
 
-/***************************** NVIC Inline *******************************/
-
-void NVIC_Initialize( void );
 
 
-// DOM-IGNORE-BEGIN
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Routines
+// *****************************************************************************
+// *****************************************************************************
+
+// *****************************************************************************
+
+void MATRIX_Initialize(void);
+
+
 #ifdef __cplusplus  // Provide C++ Compatibility
 
     }
 
 #endif
-// DOM-IGNORE-END
-#endif // PLIB_NVIC_H
+
+#endif // _FILE_TEMPLATE_HEADER_H
+
+/*******************************************************************************
+ End of File
+*/
