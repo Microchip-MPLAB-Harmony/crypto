@@ -1,7 +1,7 @@
 /**
  * \brief Component description for FLEXRAMECC
  *
- * Copyright (c) 2019 Microchip Technology Inc. and its subsidiaries.
+ * Copyright (c) 2020 Microchip Technology Inc. and its subsidiaries.
  *
  * Subject to your compliance with these terms, you may use Microchip software and any derivatives
  * exclusively with Microchip products. It is your responsibility to comply with third party license
@@ -20,7 +20,7 @@
  *
  */
 
-/* file generated from device description version 2019-08-29T14:13:58Z */
+/* file generated from device description version 2020-01-08T10:06:16Z */
 #ifndef _SAMRH71_FLEXRAMECC_COMPONENT_H_
 #define _SAMRH71_FLEXRAMECC_COMPONENT_H_
 
@@ -51,7 +51,10 @@
 
 
 /* -------- FLEXRAMECC_TESTCB1 : (FLEXRAMECC Offset: 0x04) (R/W 32) FLEXRAMECC Test mode register 1 -------- */
-#define FLEXRAMECC_TESTCB1_Msk                _U_(0x00000000)                                      /**< (FLEXRAMECC_TESTCB1) Register Mask  */
+#define FLEXRAMECC_TESTCB1_TCB1_Pos           _U_(0)                                               /**< (FLEXRAMECC_TESTCB1) Test Check Bit Position */
+#define FLEXRAMECC_TESTCB1_TCB1_Msk           (_U_(0xFF) << FLEXRAMECC_TESTCB1_TCB1_Pos)           /**< (FLEXRAMECC_TESTCB1) Test Check Bit Mask */
+#define FLEXRAMECC_TESTCB1_TCB1(value)        (FLEXRAMECC_TESTCB1_TCB1_Msk & ((value) << FLEXRAMECC_TESTCB1_TCB1_Pos))
+#define FLEXRAMECC_TESTCB1_Msk                _U_(0x000000FF)                                      /**< (FLEXRAMECC_TESTCB1) Register Mask  */
 
 
 /* -------- FLEXRAMECC_SR : (FLEXRAMECC Offset: 0x0C) ( R/ 32) FLEXRAMECC Status register -------- */
