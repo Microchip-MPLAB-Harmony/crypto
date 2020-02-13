@@ -1,22 +1,17 @@
 /*******************************************************************************
-  Interrupt System Service Library Interface Implementation File
+  Matrix (AHB) PLIB
 
-  Company
+  Company:
     Microchip Technology Inc.
 
-  File Name
-    sys_int_nvic.c
+  File Name:
+    plib_matrix.c
 
-  Summary
-    NVIC implementation of interrupt system service library.
+  Summary:
+    AHB Matrix PLIB implementation file
 
-  Description
-    This file implements the interface to the interrupt system service library
-    not provided in CMSIS.
-
-  Remarks:
-    None.
-
+  Description:
+    Configure AHB masters and slaves.
 *******************************************************************************/
 
 // DOM-IGNORE-BEGIN
@@ -50,77 +45,22 @@
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-#include "system/int/sys_int.h"
-
-
-// *****************************************************************************
-// *****************************************************************************
-// Section: Interface Implementation
-// *****************************************************************************
-// *****************************************************************************
+#include <device.h>
 
 // *****************************************************************************
-void SYS_INT_Enable( void )
+
+void MATRIX_Initialize(void)
 {
-    __DMB();
-    __enable_irq();
-
-    return;
+    MATRIX0_REGS->MATRIX_PASSR0= 0x00000FFF;
+    MATRIX0_REGS->MATRIX_PSR0= 0x07070707;
+    MATRIX0_REGS->MATRIX_PASSR1= 0x00000FFF;
+    MATRIX0_REGS->MATRIX_PSR1= 0x07070707;
+    MATRIX0_REGS->MATRIX_PSR6 = 0x07070707;
+    MATRIX0_REGS->MATRIX_PASSR6 = 0x00000FFF;
+    MATRIX0_REGS->MATRIX_PASSR7= 0x00000FFF;
+    MATRIX0_REGS->MATRIX_PSR7= 0x07070707;
 }
 
-
-// *****************************************************************************
-bool SYS_INT_Disable( void )
-{
-    bool processorStatus;
-
-    processorStatus = (bool) (__get_PRIMASK() == 0);
-
-    __disable_irq();
-    __DMB();
-
-    return processorStatus;
-}
-
-
-// *****************************************************************************
-void SYS_INT_Restore( bool state )
-{
-    if( state == true )
-    {
-        __DMB();
-        __enable_irq();
-    }
-    else
-    {
-        __disable_irq();
-        __DMB();
-    }
-
-    return;
-}
-
-bool SYS_INT_SourceDisable( INT_SOURCE source )
-{
-    bool processorStatus;
-    bool intSrcStatus;
-
-    processorStatus = SYS_INT_Disable();
-
-    intSrcStatus = NVIC_GetEnableIRQ(source);
-
-    NVIC_DisableIRQ( source );
-
-    SYS_INT_Restore( processorStatus );
-
-    /* return the source status */
-    return intSrcStatus;
-}
-
-void SYS_INT_SourceRestore( INT_SOURCE source, bool status )
-{
-    if( status ) {
-        SYS_INT_SourceEnable( source );
-    }
-    return;
-}
+/*******************************************************************************
+ End of File
+*/
