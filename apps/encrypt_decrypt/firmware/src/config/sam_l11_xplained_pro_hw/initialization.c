@@ -68,10 +68,6 @@
 #pragma config BOD33_HYST = CLEAR
 
 
-void TC0_TimerCallbackRegister
-    (SYS_TIME_PLIB_CALLBACK callback, uintptr_t context){}
-
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Driver Initialization Data
@@ -126,6 +122,11 @@ const DRV_USART_INIT drvUsart0InitData =
 
 // </editor-fold>
 
+/* Do not remove the following line when performing Harmony3 code build. 
+ * Refer to the crypt library release notes for V3.5. 
+ */
+void TC0_TimerCallbackRegister
+    (SYS_TIME_PLIB_CALLBACK callback, uintptr_t context){}
 
 // *****************************************************************************
 // *****************************************************************************
