@@ -121,7 +121,8 @@ extern "C" {
 #define USE_FAST_MATH
 #define NO_PWDBASED
 #define HAVE_MCAPI
-#define WOLF_CRYPTO_CB
+#define WOLF_CRYPTO_CB  // provide call-back support
+#define WOLFCRYPT_ONLY
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105

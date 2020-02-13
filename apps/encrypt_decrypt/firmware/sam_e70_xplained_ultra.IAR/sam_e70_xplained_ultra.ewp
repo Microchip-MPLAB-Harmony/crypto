@@ -2265,6 +2265,9 @@
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_aes_u2238.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_crya_saml11.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\port\pic32\crypt_ecc_ba414e.h</name>
             </file>
             <file>
@@ -2857,6 +2860,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_rsa_pukcl.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_sam_u2803.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\src\third_party\wolfssl\wolfssl\wolfcrypt\src\port\pic32\crypt_sha1_sam11105.c</name>
