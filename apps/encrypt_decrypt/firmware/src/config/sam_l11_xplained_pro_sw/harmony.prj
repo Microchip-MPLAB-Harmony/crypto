@@ -51,8 +51,8 @@
           <Name dnOrder="1">asn.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">2A4184D86EFF6CC61E3BB2501FB2A470</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2A4184D86EFF6CC61E3BB2501FB2A470</UserChecksum>
+          <GeneratedChecksum dnOrder="4">DDB40A6E3D39B3140261A55C392D320F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DDB40A6E3D39B3140261A55C392D320F</UserChecksum>
         </File>
         <File dnOrder="6">
           <Type dnOrder="0">SOURCE</Type>
@@ -219,8 +219,8 @@
           <Name dnOrder="1">crypt_sam_u2803.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">22BA58C2363327B0F8FEE11BE5178E0E</GeneratedChecksum>
-          <UserChecksum dnOrder="5">22BA58C2363327B0F8FEE11BE5178E0E</UserChecksum>
+          <GeneratedChecksum dnOrder="4">C60C882F9ACCB89C27D771B07930A15F</GeneratedChecksum>
+          <UserChecksum dnOrder="5">C60C882F9ACCB89C27D771B07930A15F</UserChecksum>
         </File>
         <File dnOrder="27">
           <Type dnOrder="0">SOURCE</Type>
@@ -524,7 +524,7 @@
           <LogicalPath dnOrder="2">config/sam_l11_xplained_pro_sw/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">401FF45D53A2A2C21806D1F4E589B287</GeneratedChecksum>
-          <UserChecksum dnOrder="5">31A80006F94B1089F83E8BF4A42172D7</UserChecksum>
+          <UserChecksum dnOrder="5">401FF45D53A2A2C21806D1F4E589B287</UserChecksum>
         </File>
         <File dnOrder="65">
           <Type dnOrder="0">SOURCE</Type>
@@ -1515,8 +1515,8 @@
           <Name dnOrder="1">crypt_aes_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">4D1BC5EAFC5121E74A6B7DC93E31B427</GeneratedChecksum>
-          <UserChecksum dnOrder="5">4D1BC5EAFC5121E74A6B7DC93E31B427</UserChecksum>
+          <GeneratedChecksum dnOrder="4">B0EA96907330C52D7AAF105D31330A75</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B0EA96907330C52D7AAF105D31330A75</UserChecksum>
         </File>
         <File dnOrder="189">
           <Type dnOrder="0">HEADER</Type>
@@ -1547,8 +1547,8 @@
           <Name dnOrder="1">crypt_crya_saml11.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F0DFAD2B187AE289DFD97B88A2ECBA97</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F0DFAD2B187AE289DFD97B88A2ECBA97</UserChecksum>
+          <GeneratedChecksum dnOrder="4">DA55C4353FDBB4268299AD9DB735A1F1</GeneratedChecksum>
+          <UserChecksum dnOrder="5">DA55C4353FDBB4268299AD9DB735A1F1</UserChecksum>
         </File>
         <File dnOrder="193">
           <Type dnOrder="0">HEADER</Type>
@@ -1619,8 +1619,8 @@
           <Name dnOrder="1">crypt_sha256_hw.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">21B3AC1BA3235CC06DCAF0C692C582AC</GeneratedChecksum>
-          <UserChecksum dnOrder="5">21B3AC1BA3235CC06DCAF0C692C582AC</UserChecksum>
+          <GeneratedChecksum dnOrder="4">E22193A59CE6CA220104EB2FE5F6DD28</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E22193A59CE6CA220104EB2FE5F6DD28</UserChecksum>
         </File>
         <File dnOrder="202">
           <Type dnOrder="0">HEADER</Type>
@@ -1707,8 +1707,8 @@
           <Name dnOrder="1">cryptocb.h</Name>
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">94E1441ECF76968C3377C41D2FE6629F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">94E1441ECF76968C3377C41D2FE6629F</UserChecksum>
+          <GeneratedChecksum dnOrder="4">4E7D8F4AD089A6C85CC0954112D45B75</GeneratedChecksum>
+          <UserChecksum dnOrder="5">4E7D8F4AD089A6C85CC0954112D45B75</UserChecksum>
         </File>
         <File dnOrder="213">
           <Type dnOrder="0">HEADER</Type>
@@ -2714,7 +2714,7 @@
       <Setting dnOrder="2" key="FORCE_OPTIMIZATION" value="false"/>
       <Setting dnOrder="3" key="GENERATE_BACKUP" value="true"/>
       <Setting dnOrder="4" key="MERGE_STRATEGY" value="USER_ALL"/>
-      <Setting dnOrder="5" key="PackageFilter" value="bsp;core;crypto;crypto;crypto;crypto;csp;"/>
+      <Setting dnOrder="5" key="PackageFilter" value="bsp;core;crypto;csp;"/>
     </Settings>
   </Configurator>
 </Configuration>

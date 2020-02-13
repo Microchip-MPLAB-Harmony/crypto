@@ -68,9 +68,6 @@
 #pragma config BOD33_HYST = CLEAR
 
 
-void TC0_TimerCallbackRegister(SYS_TIME_PLIB_CALLBACK callback, uintptr_t context){
-    return;
-}
 
 
 // *****************************************************************************
