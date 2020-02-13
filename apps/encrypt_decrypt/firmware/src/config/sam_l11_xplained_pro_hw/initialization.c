@@ -68,6 +68,8 @@
 #pragma config BOD33_HYST = CLEAR
 
 
+
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Driver Initialization Data
@@ -201,6 +203,8 @@ void SYS_Initialize ( void* data )
     SERCOM0_USART_Initialize();
 
     TC0_TimerInitialize();
+
+	TRNG_Initialize();
 
 
     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)&drvUsart0InitData);
