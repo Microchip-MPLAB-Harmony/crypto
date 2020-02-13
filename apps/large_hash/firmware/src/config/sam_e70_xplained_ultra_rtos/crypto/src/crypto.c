@@ -328,15 +328,17 @@ int CRYPT_HMAC_SetKey(CRYPT_HMAC_CTX* hmac, int type, const unsigned char* key,
     typedef char hmac_test[sizeof(CRYPT_HMAC_CTX) >= sizeof(Hmac) ? 1 : -1];
     (void)sizeof(hmac_test);
 
-    if (hmac == NULL || key == NULL)
+    if (hmac == NULL || key == NULL || 0 == sz)
         return BAD_FUNC_ARG;
 
-    if (type != CRYPT_HMAC_SHA && type != CRYPT_HMAC_SHA256 &&
-        type != CRYPT_HMAC_SHA384 && type != CRYPT_HMAC_SHA512) {
-        return BAD_FUNC_ARG;  /* bad hmac type */
-    }
+    int wc_sha;
+    if      (CRYPT_HMAC_SHA    == type) wc_sha = WC_SHA;
+    else if (CRYPT_HMAC_SHA256 == type) wc_sha = WC_SHA256;
+    else if (CRYPT_HMAC_SHA384 == type) wc_sha = WC_SHA384;
+    else if (CRYPT_HMAC_SHA512 == type) wc_sha = WC_SHA512;
+    else return BAD_FUNC_ARG;
 
-    return wc_HmacSetKey((Hmac*)hmac, type, key, sz);
+    return wc_HmacSetKey((Hmac*)hmac, wc_sha, key, sz);
 }
 
 
@@ -628,7 +630,7 @@ int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa)
     if (rsa->holder == NULL)
         return -1;
 
-    return wc_InitRsaKey((RsaKey*)rsa->holder, NULL);
+    return wc_InitRsaKey_ex((RsaKey*)rsa->holder, NULL, 0);
 }
 
 
