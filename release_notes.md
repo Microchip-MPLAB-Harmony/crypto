@@ -30,6 +30,8 @@
 | [SAML11 Xplained Pro Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/dm320205) | 4 |
 
 ### Known Issues
+- The PIC32MZ-W1 public key cryptographic engine uses an asynchronous driver to access its functionality.  wolfCrypt and the Harmony 3 crypto library are both blocking.  To use the PIC32MZ-W1 with wolfCrypt and the Harmony 3 crypto library an RTOS must be used.
+
 - During regeneration of the SAML11 projects the timer callback may be erased.  When regenerating the projects look for the inline comment on the lines that should not be erased
 
 - When starting the MHC with the SAMRH71F20C the MPLAB-X project needs to be set to use SAMRH71F20B, after the MHC has been launched then the MPLAB-X project can be changed back to using the SAMRH71F20C
