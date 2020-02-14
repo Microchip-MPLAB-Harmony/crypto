@@ -35,11 +35,10 @@ commercial release of wolfSSL before using in production.
 | templates | Crypto file templates                                      |
 
 # Dependencies
-- **Core** - 3.5.0
-- **CSP** - 3.5.0
-- **wolfSSL** - 4.1.0-stable
-- **Net** - 3.4.0 For wolfSSL demonstration
+- **Core** - 3.6.1
+- **CSP** - 3.6.1
+- **wolfSSL** - 4.3.0
 - **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.25
+- **MPLAB-X** - v5.30
 - **XC32** - v3.20
 - **IAR** - 8.40.1

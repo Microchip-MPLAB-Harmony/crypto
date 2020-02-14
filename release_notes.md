@@ -1,4 +1,47 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.5.0
+### New Features
+- **New Chip Support** - This release adds support for the SAML11 and PIC32MZ-W1 chips
+- **wolfSSL Updated** - This release has been updated to be compativle with wolfSSL 4.3.0
+- **Additional IAR Projects** - Two new projects have been added to support the SAME70 with the IAR IDE.
+
+### Demonstration Application Relocation Notice
+- **wolfSSL Demo Applications** these demonstrations have been moved to the net repository.  
+
+### Dependencies
+- **Core** - 3.6.1
+- **CSP** - 3.6.1
+- **wolfSSL** - 4.3.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.30
+- **XC32** - v3.20
+- **IAR** - 8.40.1
+
+| Development kits | Applications |
+| --- | --- | --- |
+| [ATSAMA5D2C-XULT](https://www.microchip.com/Developmenttools/ProductDetails/ATSAMA5D2C-XULT) | 6 |
+| [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/ATSAME54-XPRO) | 6 |
+| [SAM E70 Xplained Ultra Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/atsamv71-xult) | 8 |
+| [PIC32MZ Embedded Connectivity with FPU (EF) Starter Kit (Crypto)](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM320007-C) | 6 |
+| [SAM9X60-EK Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/DT100126) | 6 |
+| [SAML21 Xplained Pro](https://www.microchip.com/developmenttools/ProductDetails/atsaml21-xpro-b) | 3 |
+| [SAMRH71F20-EK Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAMRH71F20-EK) | 6 |
+| PIC32MZ-W1 | 6 |
+| [SAML11 Xplained Pro Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/dm320205) | 4 |
+
+### Known Issues
+- During regeneration of the SAML11 projects the timer callback may be erased.  When regenerating the projects look for the inline comment on the lines that should not be erased
+
+- When starting the MHC with the SAMRH71F20C the MPLAB-X project needs to be set to use SAMRH71F20B, after the MHC has been launched then the MPLAB-X project can be changed back to using the SAMRH71F20C
+
+- The ICD4 loads the reset line of the SAM V71 Xplained Ultra board. Do not press reset button on the Xplained Ultra board while ICD4 is connected to the board.
+
+- Interactive help using the Show User Manual Entry in the Right-click menu for configuration options provided by this module is not yet available from within the MPLAB Harmony Configurator (MHC).  Please see the &quot;Configuring the Library&quot; section in the help documentation in the doc folder for this module instead.  Help is available in both CHM and PDF formats.
+
+- ATSAMA5D2C demo applications build with a warning message: ```Warning[Pe111]: statement is unreachable for return ( EXIT_FAILURE ); statement of main() in IAR```
+
+- ECC and RSA software calculations take upwards of 32 kBytes of stack, when using these algorithms with an RTOS plan accordingly.
+
 
 ## Crypto Release v3.4.1
 ### Bug Fixes
