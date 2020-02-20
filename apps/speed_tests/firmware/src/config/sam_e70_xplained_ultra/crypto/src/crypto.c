@@ -406,7 +406,6 @@ int CRYPT_RNG_Initialize(CRYPT_RNG_CTX* rng)
 	return same70_InitRng();
 #else
     return wc_InitRng((WC_RNG*)rng);
-    return wc_InitRng((WC_RNG*)rng);
 #endif
 }
 

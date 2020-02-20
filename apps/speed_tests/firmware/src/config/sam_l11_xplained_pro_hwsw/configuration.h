@@ -123,8 +123,10 @@ extern "C" {
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803
 #define NO_MD4
+#define NO_SHA // specifically, no SHA1 (legacy name)
 #define WOLFSSL_SHA224
 #define WOLFSSL_HAVE_MCHP_HW_SHA264
+#define NO_HMAC
 #define NO_DES3
 #define WOLFSSL_AES_128
 #define AES_MAX_KEY_SIZE 128 // limited CRYA in SAML11
@@ -137,7 +139,6 @@ extern "C" {
 #define HAVE_AES_CBC
 #define WOLFSSL_AES_COUNTER
 #define WOLFSSL_AES_CFB
-#define HAVE_AESGCM
 #define NO_RC4
 #define NO_HC128
 #define NO_RABBIT

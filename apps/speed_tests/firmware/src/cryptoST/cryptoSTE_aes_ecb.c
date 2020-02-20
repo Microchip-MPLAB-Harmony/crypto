@@ -278,7 +278,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
         
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if ((NULL != td->goldenCipher.data) || (td->goldenCipher.length == 0))
+            if ((NULL == td->goldenCipher.data) || (0 == td->goldenCipher.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
             else if (XMEMCMP(cipher, td->goldenCipher.data, td->goldenCipher.length))
@@ -287,15 +287,33 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                     "computed ciphertext does not match golden data (was iterate==1?)";
                 if (CSTE_VERBOSE)
                 {
+                    cryptoST_PRINT_hexLine(CRLF "..input :", 
+                            vector->vector.data, vector->vector.length);
                     cryptoST_PRINT_hexLine(CRLF "..cipher:", 
                             cipher, vector->vector.length);
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
                             td->goldenCipher.data, td->goldenCipher.length);
+                    cryptoST_PRINT_hexLine(CRLF "..key   :", 
+                            td->key.data, td->key.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
             }
-            // Note: the test above will probably fail if iterate!=1.
+#if 0
+            else if (1)
+            {
+                printf(CRLF "...test passed....");
+                cryptoST_PRINT_hexLine(CRLF "..input :", 
+                        vector->vector.data, vector->vector.length);
+                cryptoST_PRINT_hexLine(CRLF "..cipher:", 
+                        cipher, vector->vector.length);
+                cryptoST_PRINT_hexLine(CRLF "..golden:",
+                        td->goldenCipher.data, td->goldenCipher.length);
+                cryptoST_PRINT_hexLine(CRLF "..key   :", 
+                        td->key.data, td->key.length);
+                PRINT_WAIT(CRLF);
+            }
+#endif
         }
     } while(0);
     

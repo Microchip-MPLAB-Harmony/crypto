@@ -78,8 +78,12 @@ typedef struct
     //uint8_t aesGHash[16];
     //uint32_t aesAadlen;
     //uint32_t aesCtr;
-    CRYPT_AES_U2238_AES_CTRLA ctrla_klk;
-    CRYPT_AES_U2238_AES_CTRLB ctrlb_klk;
+    CRYPT_AES_U2238_AES_CTRLA ctrla;
+    CRYPT_AES_U2238_AES_CTRLB ctrlb;
+#elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803) // SAML11
+    /* nothing to define -- use the default Aes structure */
+#elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805) // PIC32CM
+    /* nothing to define -- use the default Aes structure */
 #endif
 }crypt_aes_hw_descriptor;
 

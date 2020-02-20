@@ -607,7 +607,7 @@
         </Boolean>
         <Boolean dnOrder="11" id="wolfcrypt_aes_gcm">
           <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
+            <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
         <Boolean dnOrder="12" id="wolfcrypt_aes_hw">
@@ -630,58 +630,51 @@
             <Dynamic dnOrder="0" id="lib_wolfcrypt" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="15" id="wolfcrypt_hkdf">
-          <Attributes dnOrder="0">
-            <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
-            </Boolean>
-          </Attributes>
-        </Boolean>
-        <Boolean dnOrder="16" id="wolfcrypt_hmac">
+        <Boolean dnOrder="15" id="wolfcrypt_hmac">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
           <Values dnOrder="1">
-            <User dnOrder="0" value="true"/>
+            <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="17" id="wolfcrypt_hw">
+        <Boolean dnOrder="16" id="wolfcrypt_hw">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="18" id="wolfcrypt_md5">
+        <Boolean dnOrder="17" id="wolfcrypt_md5">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="19" id="wolfcrypt_random_hw">
+        <Boolean dnOrder="18" id="wolfcrypt_random_hw">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="20" id="wolfcrypt_rsa">
+        <Boolean dnOrder="19" id="wolfcrypt_rsa">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="21" id="wolfcrypt_sha1">
+        <Boolean dnOrder="20" id="wolfcrypt_sha1">
           <Values dnOrder="0">
-            <User dnOrder="0" value="true"/>
+            <User dnOrder="0" value="false"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="22" id="wolfcrypt_sha224">
+        <Boolean dnOrder="21" id="wolfcrypt_sha224">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="23" id="wolfcrypt_sha264_hw">
+        <Boolean dnOrder="22" id="wolfcrypt_sha264_hw">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
@@ -691,7 +684,7 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="24" id="wolfcrypt_tdes">
+        <Boolean dnOrder="23" id="wolfcrypt_tdes">
           <Values dnOrder="0">
             <User dnOrder="0" value="false"/>
           </Values>
@@ -1024,8 +1017,7 @@
     </UniqueComponent>
   </Components>
   <UserData>
-    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="0"/>
-    <ComponentGraph dnOrder="1" id="__ROOTVIEW">
+    <ComponentGraph dnOrder="0" id="__ROOTVIEW">
       <ElementPositions dnOrder="0">
         <ElementPosition dnOrder="0" id="BSP_default" x="338" y="47"/>
         <ElementPosition dnOrder="1" id="HarmonyCore" x="549" y="75"/>
@@ -1044,5 +1036,6 @@
         <ElementPosition dnOrder="14" id="tc0" x="97" y="130"/>
       </ElementPositions>
     </ComponentGraph>
+    <GraphSettings canvasHeight="400" canvasWidth="400" dnOrder="1"/>
   </UserData>
 </Configuration>

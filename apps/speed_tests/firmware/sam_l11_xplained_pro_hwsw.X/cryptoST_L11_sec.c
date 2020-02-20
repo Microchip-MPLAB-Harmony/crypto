@@ -5,17 +5,53 @@
     Microchip Technology Inc.
 
   File Name:
-    cyrptoST_execute.c
+    cyrptoST_L11_sec.c
 
   Summary:
-    This file provides the generic execution framework for the 
-    crypto speed test suite (cryptoST).
+    This file provides custom configuration when running the
+    crypto speed test suite (cryptoST) on SAM L11.
 
   Description:
- *  The test database is scanned for vectors that match the selected
- *  test options (see below). Each vector is then exercised beneath
- *  a timer, and the average iteration duration is calculated.
+    The bench mark suite can be customize for the selected CPU. This
+    may be required to limit memory requirements or to execute
+    hw vs. sw comparisons. The test suite is partially configured 
+    through the Harmony3 GUI for the wolfCrypt library.
+ 
+    For SAM L11:
+    1. Set "Use Hardware Cryptography" =false for software-only execution.
+    2. For HW acceleration set it =true.
+    2a. _disable_ hw support under AES128 and SHA2 for sw/hw speed
+        comparison and also set .compareHWvSW=true (below)
+    2b. Otherwise all tests are accelerated (also set .compareHWvSW=false)
  *******************************************************************************/
+
+//DOM-IGNORE-BEGIN
+/*****************************************************************************
+ Copyright (C) 2013-2020 Microchip Technology Inc. and its subsidiaries.
+
+Microchip Technology Inc. and its subsidiaries.
+
+Subject to your compliance with these terms, you may use Microchip software 
+and any derivatives exclusively with Microchip products. It is your 
+responsibility to comply with third party license terms applicable to your 
+use of third party software (including open source software) that may 
+accompany Microchip software.
+
+THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
+EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
+WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
+PURPOSE.
+
+IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
+INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
+WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
+BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
+FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
+ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
+THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
+*****************************************************************************/
+
+//DOM-IGNORE-END
 
 // *****************************************************************************
 // *****************************************************************************
@@ -45,9 +81,7 @@ static cryptoSTE_parameters_t exec_repetitiveTimed =
 
     .verifyByDecryption = false,
     .verifyByGoldenCiphertext = false,
-    
-    // .displayType = CST_TEXT, // CST_TEXT or CST_JSON
-    // .displayType = CST_CSV, // CST_TEXT or CST_JSON
+    .displayType = CST_CSV, // CST_TEXT or CST_JSON
     // .displayType does not affect the VERBOSE messages
 };
 
@@ -61,7 +95,6 @@ static cryptoSTE_parameters_t exec_onceThroughAndCheck =
 
     .verifyByDecryption = true,
     .verifyByGoldenCiphertext = true,
-    
     .displayType = CST_TEXT, // CST_TEXT or CST_JSON
     // .displayType does not affect the VERBOSE messages
 };

@@ -590,10 +590,22 @@ int CRYPT_AES_GcmJ0Generation(Aes* aes, const unsigned char* iv, unsigned int iv
     finalBlock[13] = (uint8_t)((bits>>16)&0xff);
     finalBlock[12] = (uint8_t)((bits>>24)&0xff);
     
+    /* The lines below are subject to a type-punning warning because 
+    * the (uint8_t*) is cast to a (uint32_t*) which might typically suffer 
+    * from a misalignment problem. The conditional breakpoint will
+    * trigger the debugger if the byte-pointer is misaligned, but will
+    * be eliminated if the compiler can prove correct alignment.
+    * Such a warning is thrown only at higher optimization levels.
+    */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#include <assert.h> // prove we have 4-byte alignment
+    __conditional_software_breakpoint(0 == ((uint32_t)finalBlock) % 4);
     AES_REGS->AES_IDATAR[0] = ((uint32_t*)finalBlock)[0];
     AES_REGS->AES_IDATAR[1] = ((uint32_t*)finalBlock)[1];
     AES_REGS->AES_IDATAR[2] = ((uint32_t*)finalBlock)[2];
     AES_REGS->AES_IDATAR[3] = ((uint32_t*)finalBlock)[3];
+#pragma GCC diagnostic push
 
     /* Note the blocking here - state machine this? */
     while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;      
@@ -870,10 +882,22 @@ int crypt_aesGcmGenerateTag(Aes* aes, unsigned int sz, unsigned char* authTag, u
 
     
     //3. Fill AES_IDATARx.IDATA with the GHASH value read at step 6 and wait for DATRDY to be set
+    /* The lines below are subject to a type-punning warning because 
+    * the (uint8_t*) is cast to a (uint32_t*) which might typically suffer 
+    * from a misalignment problem. The conditional breakpoint will
+    * trigger the debugger if the byte-pointer is misaligned, but will
+    * be eliminated if the compiler can prove correct alignment.
+    * Such a warning is thrown only at higher optimization levels.
+    */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#include <assert.h> // prove we have 4-byte alignment
+    __conditional_software_breakpoint(0 == ((uint32_t)aes->tmp) % 4);
     AES_REGS->AES_IDATAR[0] = ((uint32_t*)aes->tmp)[0];
     AES_REGS->AES_IDATAR[1] = ((uint32_t*)aes->tmp)[1];
     AES_REGS->AES_IDATAR[2] = ((uint32_t*)aes->tmp)[2];
     AES_REGS->AES_IDATAR[3] = ((uint32_t*)aes->tmp)[3];
+#pragma GCC diagnostic pop
 
     while (!(AES_REGS->AES_ISR & AES_ISR_DATRDY_Msk))  ;
 

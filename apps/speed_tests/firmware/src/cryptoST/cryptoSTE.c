@@ -349,7 +349,7 @@ bool cryptoSTE_executeOneVector(cryptoST_testDetail_t * rv,
 
         if (param->results.errorMessage)
         {
-            printf("-v %s **** run-time error: %s" CRLF,
+            printf(CRLF "-v %s **** run-time error: %s" CRLF,
                     param->results.testHandler, param->results.errorMessage);
             cryptoSTE_announceDetails(5, rv);
             printf("     Forcing use of crypto HW: %s" CRLF,
@@ -365,7 +365,7 @@ bool cryptoSTE_executeOneVector(cryptoST_testDetail_t * rv,
                         wc_GetErrorString(param->results.wolfSSLresult));
 #endif
             }
-            printf("==================================" CRLF CRLF);
+            printf("==================================" CRLF);
         }
         else if (CSTE_VERBOSE > 1) 
                 PRINT_WAIT("-- test completed without errors" CRLF);

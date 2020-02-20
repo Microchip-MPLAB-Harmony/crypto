@@ -60,7 +60,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/error-crypt.h>
 
 #include "definitions.h"
-#include "crya\crya_saml11.h"
+#include "wolfssl/wolfcrypt/port/pic32/crypt_crya_saml11.h"
  
 // Debug NOP: add a NOP instruction for breakpoints but only in DEBUG mode.
 #if defined(NDEBUG) || !defined(__DEBUG)
@@ -154,7 +154,8 @@ static void crya_aes128_decrypt
 #endif
 #endif // WOLFSSL_AES_128
 
-#if !defined(NO_SHA256)
+#if !defined(NO_SHA256) \
+ && defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803)
 
 #include "wolfssl/wolfcrypt/sha256.h"
  /* This wrapper provides the RAM buffer necessary for proper CRYA
@@ -203,6 +204,7 @@ int wc_InitSha256_ex(wc_Sha256* sha256, void* heap, int devId)
     return 0;
 }
 
+#if !defined(NO_SHA224)
 int wc_InitSha224_ex(wc_Sha256* sha224, void* heap, int devId)
 {
     // (void*)heap;
@@ -228,6 +230,7 @@ int wc_InitSha224_ex(wc_Sha256* sha224, void* heap, int devId)
     sha224->bufferLength = 0;
     return 0;
 }
+#endif // NO_SHA224
 
 /* Data encryption process: "gather" operation allows any length
  * data segment to be added to the hash. Repetitive calls are accumulated

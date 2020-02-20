@@ -65,6 +65,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #if defined(WOLFSSL_AES_COUNTER)
 #include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
 #endif
+#if defined(HAVE_AES_ECB)
+#include "../test_data/cryptoSTD_aesavs.h"
+#endif
 // #include "../test_data/cryptoSTD_wolfSSL_aes_gcm.h"
 #if !defined(NO_SHA256)
 #include "../test_data/cryptoSTD_sha256.h"
@@ -124,6 +127,11 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = microchip_sha224;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
+#ifdef CRYPTOSTD_AESAVS_H
+    ST_list[numberOfLoadedAPI++] = aesavs_aes128;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+    
     __conditional_software_breakpoint(numberOfLoadedAPI > 0);
 
     // Zero-out the array to eliminate bus noise.

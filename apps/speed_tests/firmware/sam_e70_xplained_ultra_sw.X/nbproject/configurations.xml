@@ -193,6 +193,7 @@
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_aes_hwInt.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_aes_sam6149.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_aes_u2238.h</itemPath>
+          <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_crya_saml11.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_ecc_ba414e.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_ecc_pukcl.h</itemPath>
           <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/crypt_pukcl_definitions.h</itemPath>
@@ -467,6 +468,7 @@
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha224.h</itemPath>
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha256.c</itemPath>
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha256.h</itemPath>
+      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -497,8 +499,8 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="SAME70_DFP" vendor="Microchip" version="4.1.50"/>
         <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
+        <pack name="SAME70_DFP" vendor="Microchip" version="4.1.50"/>
       </packs>
       <compileType>
         <linkerTool>
@@ -568,9 +570,9 @@
         <property key="additional-warnings" value="true"/>
         <property key="addresss-attribute-use" value="false"/>
         <property key="enable-app-io" value="false"/>
-        <property key="enable-omit-frame-pointer" value="false"/>
+        <property key="enable-omit-frame-pointer" value="true"/>
         <property key="enable-symbols" value="true"/>
-        <property key="enable-unroll-loops" value="false"/>
+        <property key="enable-unroll-loops" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
                   value="../src/;../src/cryptoST;../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/sam_e70_xplained_ultra;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm"/>
@@ -578,7 +580,7 @@
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
         <property key="make-warnings-into-errors" value="true"/>
-        <property key="optimization-level" value=""/>
+        <property key="optimization-level" value="-O3"/>
         <property key="place-data-into-section" value="true"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
