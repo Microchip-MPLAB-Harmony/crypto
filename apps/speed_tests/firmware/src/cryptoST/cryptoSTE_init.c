@@ -56,26 +56,44 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../../test_data/cryptoSpeedTestData.h"
 
 // Datasets are screened based on the Harmony configuration.
-#if defined(HAVE_AES_CBC)
-#include "../test_data/cryptoSTD_wolfSSL_aes_cbc.h"
-#endif
-#if defined(WOLFSSL_AES_CFB)
-#include "../test_data/cryptoSTD_wolfSSL_aes_cfb.h"
-#endif
-#if defined(WOLFSSL_AES_COUNTER)
-#include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
-#endif
-#if defined(HAVE_AES_ECB)
-#include "../test_data/cryptoSTD_aesavs.h"
-#endif
-// #include "../test_data/cryptoSTD_wolfSSL_aes_gcm.h"
-#if !defined(NO_SHA256)
-#include "../test_data/cryptoSTD_sha256.h"
+#if 0
+
+#if !defined(NO_SHA) // SHA1
+#include "../test_data/cryptoSTD_sha1.h"
 #endif
 #if !defined(NO_SHA224)
 #include "../test_data/cryptoSTD_sha224.h"
 #endif
+#if !defined(NO_SHA256)
+#include "../test_data/cryptoSTD_sha256.h"
+#endif
+#if defined(HAVE_AES_ECB)
+#include "../test_data/cryptoSTD_aesavs.h"
+#endif
+#if defined(HAVE_AES_CBC)
+#include "../test_data/cryptoSTD_wolfSSL_aes_cbc.h"
+#endif
+#if defined(HAVE_AESGCM)
+#include "../test_data/cryptoSTD_wolfSSL_aes_gcm.h"
+#endif
+
+// //////////
+#if defined(WOLFSSL_AES_COUNTER)
+#include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
+#endif
+#if defined(HAVE_AESCCM)
+#include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
+#endif
+#if defined(WOLFSSL_AES_CFB)
+#include "../test_data/cryptoSTD_wolfSSL_aes_cfb.h"
+#endif
 #include "../test_data/cryptoSTD_DS70005365.h"
+
+#endif
+#if defined(HAVE_AESCCM)
+#include "../test_data/cryptoSTD_aes_ccm.h"
+#endif
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -115,16 +133,24 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = wolfSSL_aes_gcm;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
+#ifdef CRYPTOSTV_WOLFSSL_AES_CCM
+    ST_list[numberOfLoadedAPI++] = microchip_aes_ccm;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
 #if defined(CRYPTOSTV_DS70005365)
     ST_list[numberOfLoadedAPI++] = ds70005365;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
-#if defined(CRYPTOSTV_SHA256)
-    ST_list[numberOfLoadedAPI++] = microchip_sha256;
+#if defined(CRYPTOSTV_SHA1)
+    ST_list[numberOfLoadedAPI++] = microchip_sha1;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 #if defined(CRYPTOSTV_SHA224)
     ST_list[numberOfLoadedAPI++] = microchip_sha224;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#if defined(CRYPTOSTV_SHA256)
+    ST_list[numberOfLoadedAPI++] = microchip_sha256;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 #ifdef CRYPTOSTD_AESAVS_H

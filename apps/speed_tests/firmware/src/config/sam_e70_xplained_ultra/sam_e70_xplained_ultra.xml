@@ -1069,9 +1069,12 @@
         <Boolean dnOrder="11" id="wolfcrypt_hashdrng">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
-              <Value dnOrder="0">true</Value>
+              <Value dnOrder="0">false</Value>
             </Boolean>
           </Attributes>
+          <Values dnOrder="1">
+            <User dnOrder="0" value="false"/>
+          </Values>
         </Boolean>
         <Boolean dnOrder="12" id="wolfcrypt_hkdf">
           <Attributes dnOrder="0">
@@ -1107,7 +1110,12 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="18" id="wolfcrypt_random_hw">
+        <Boolean dnOrder="18" id="wolfcrypt_random">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="false"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="19" id="wolfcrypt_random_hw">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -1117,7 +1125,12 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="19" id="wolfcrypt_sha1_hw">
+        <Boolean dnOrder="20" id="wolfcrypt_sha1">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="true"/>
+          </Values>
+        </Boolean>
+        <Boolean dnOrder="21" id="wolfcrypt_sha1_hw">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -1127,19 +1140,19 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="20" id="wolfcrypt_sha224">
+        <Boolean dnOrder="22" id="wolfcrypt_sha224">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">true</Value>
             </Boolean>
           </Attributes>
         </Boolean>
-        <Boolean dnOrder="21" id="wolfcrypt_sha256">
+        <Boolean dnOrder="23" id="wolfcrypt_sha256">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="22" id="wolfcrypt_sha264_hw">
+        <Boolean dnOrder="24" id="wolfcrypt_sha264_hw">
           <Attributes dnOrder="0">
             <Boolean dnOrder="0" id="visible">
               <Value dnOrder="0">false</Value>
@@ -1149,12 +1162,17 @@
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="23" id="wolfcrypt_sha384">
+        <Combo dnOrder="25" id="wolfcrypt_sha3">
+          <Values dnOrder="0">
+            <User dnOrder="0" value="enabled"/>
+          </Values>
+        </Combo>
+        <Boolean dnOrder="26" id="wolfcrypt_sha384">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>
         </Boolean>
-        <Boolean dnOrder="24" id="wolfcrypt_sha512">
+        <Boolean dnOrder="27" id="wolfcrypt_sha512">
           <Values dnOrder="0">
             <User dnOrder="0" value="true"/>
           </Values>

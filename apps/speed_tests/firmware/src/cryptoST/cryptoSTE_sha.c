@@ -69,6 +69,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoSTE_malloc.h"
 #include <wolfssl/wolfcrypt/types.h>
 
+#include "configuration.h"
+#include <wolfssl/wolfcrypt/settings.h>
+
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 // *****************************************************************************
@@ -82,7 +85,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
-#if !defined(NO_SHA256)
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
@@ -153,6 +155,16 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
    *********************************************************************
    *********************************************************************
  */
+#if !defined(NO_SHA) // SHA1
+#include "wolfssl/wolfcrypt/hash.h"
+ static void WC_sha128
+    (uint32_t hash[8], const uint8_t * data, const size_t length)
+{
+    wc_ShaHash(data, length, (uint8_t*)hash);
+}
+#endif
+
+#if !defined(NO_SHA256)
 #include "wolfssl/wolfcrypt/hash.h"
 static void WC_sha256
     (uint32_t hash[8], const uint8_t * data, const size_t length)
@@ -166,7 +178,26 @@ static void WC_sha224
 {
     wc_Sha224Hash(data, length, (uint8_t*)hash);
 }
+#endif // !NO_SHA224
 #endif // WOLFSSL_SHA224
+
+#if !defined(NO_SHA384)
+#include "wolfssl/wolfcrypt/hash.h"
+static void WC_sha384
+    (uint32_t hash[8], const uint8_t * data, const size_t length)
+{
+    wc_Sha384Hash(data, length, (uint8_t*)hash);
+}
+#endif // !NO_SHA256
+
+#if !defined(NO_SHA512)
+#include "wolfssl/wolfcrypt/hash.h"
+static void WC_sha512
+    (uint32_t hash[8], const uint8_t * data, const size_t length)
+{
+    wc_Sha512Hash(data, length, (uint8_t*)hash);
+}
+#endif // !NO_SHA512
 
 // *****************************************************************************
 // *****************************************************************************
@@ -201,6 +232,12 @@ const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
     {
         switch(td->technique)
         {
+#if !defined(NO_SHA) // SHA1
+            case ET_SHA_128:
+                param->results.testHandler = "WOLF SHA 128";
+                return cryptoSTE_sha(td, param, WC_sha128);
+#endif //WOLFSSL_SHA1
+#if !defined(NO_SHA256)
 #if defined(WOLFSSL_SHA224)
             case ET_SHA_224:
                 param->results.testHandler = "WOLF SHA 224";
@@ -209,9 +246,19 @@ const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
             case ET_SHA_256:
                 param->results.testHandler = "WOLF SHA 256";
                 return cryptoSTE_sha(td, param, WC_sha256);
+#endif //WOLFSSL_SHA256
+#if defined(WOLFSSL_SHA384)
+            case ET_SHA_384:
+                param->results.testHandler = "WOLF SHA 384";
+                return cryptoSTE_sha(td, param, WC_sha384);
+#endif //WOLFSSL_SHA384
+#if defined(WOLFSSL_SHA512)
+            case ET_SHA_512:
+                param->results.testHandler = "WOLF SHA 512";
+                return cryptoSTE_sha(td, param, WC_sha512);
+#endif //WOLFSSL_SHA256
             default:
                 return "SHA size not supported";
         }
     }
 }
-#endif // !NO_SHA256

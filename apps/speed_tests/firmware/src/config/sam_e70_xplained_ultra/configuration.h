@@ -121,6 +121,7 @@ extern "C" {
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
 #define HAVE_SHA512
+#define WOLFSSL_SHA3
 #define WOLFSSL_AES_128
 #define WOLFSSL_AES_192
 #define WOLFSSL_AES_256
@@ -140,7 +141,8 @@ extern "C" {
 #define NO_DH
 #define USE_CERT_BUFFERS_2048
 #define NO_DEV_RANDOM
-#define HAVE_HASHDRBG
+#define WC_NO_RNG
+#define WC_NO_HASHDRBG
 #define WC_NO_HARDEN
 #define SINGLE_THREADED
 #define NO_ERROR_STRINGS

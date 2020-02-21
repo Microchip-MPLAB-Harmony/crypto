@@ -43,6 +43,7 @@ typedef enum EncryptTechnique_e
     ET_AES_192,
     ET_AES_256,
     ET_AES_GCM,     /* hash -- use EM_NONE */
+    ET_AES_CCM,     /* hash -- use EM_NONE */
     ET_AES_GMAC,    /* hash -- use EM_NONE */
     ET_DES,         /* block=64, deprecated   */
     ET_DES3,        /* block=64, key=24 bytes */
@@ -51,7 +52,7 @@ typedef enum EncryptTechnique_e
     ET_MD4,
     ET_MD5,
     ET_MD6,
-    ET_SHA_128,
+    ET_SHA_128,     /* a.k.a. SHA or SHA1 */
     ET_SHA_224,
     ET_SHA_256,
     ET_SHA_384,
@@ -134,7 +135,7 @@ typedef struct cryptoST_testData_s
  * good practice, .goldenResult may be null when compiled, then
  * established by cryptoST_testAPI_t.openData, and ultimately
  * destroyed by cryptoST_testAPI_t.closeData. Likewise for
- * .key, .initVector and .authenticateTag as necessary.
+ * .key, .initVector (or nonce) and .authenticateTag as necessary.
  *************************************************************/
 typedef struct cryptoST_testDetail_s
 {
@@ -150,8 +151,8 @@ typedef struct cryptoST_testDetail_s
 
     // Inputs
     cryptoST_testData_t key;
-    cryptoST_testData_t initVector;
-    cryptoST_testData_t additionalAuthData; // for GCM/CTR mode
+    cryptoST_testData_t initVector; // or nonce for CCM mode
+    cryptoST_testData_t additionalAuthData; // for GCM/CTR/CCM mode
 
     // Output compare data supplied for (optional) verification
     cryptoST_testData_t goldenCipher;

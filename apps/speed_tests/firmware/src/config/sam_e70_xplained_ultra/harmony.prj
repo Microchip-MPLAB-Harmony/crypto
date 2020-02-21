@@ -1371,8 +1371,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">715CC8CF0CF705472C4A6A88C1ACCC0D</GeneratedChecksum>
-          <UserChecksum dnOrder="5">715CC8CF0CF705472C4A6A88C1ACCC0D</UserChecksum>
+          <GeneratedChecksum dnOrder="4">0CCF6ADF0BA13E750EE789E3E7879406</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0CCF6ADF0BA13E750EE789E3E7879406</UserChecksum>
         </File>
         <File dnOrder="171">
           <Type dnOrder="0">HEADER</Type>

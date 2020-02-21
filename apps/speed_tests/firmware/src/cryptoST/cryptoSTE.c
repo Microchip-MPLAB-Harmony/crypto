@@ -67,6 +67,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #if defined(HAVE_AESGCM)
 #include "cryptoSTE_aes_gcm.h"
 #endif
+#if defined(HAVE_AESCCM)
+#include "cryptoSTE_aes_ccm.h"
+#endif
 #include "cryptoSTE_sha.h"
 
 // *****************************************************************************
@@ -275,6 +278,12 @@ cryptoSTE_exec_t cryptoSTE_identifyTest(cryptoST_testDetail_t * rv)
         case ET_AES_GCM:
             if (EM_NONE == rv->mode)
                 exec = cryptoSTE_aes_gcm_timed;
+            break;
+#endif
+#if defined(HAVE_AESCCM)
+        case ET_AES_CCM:
+            if (EM_NONE == rv->mode)
+                exec = cryptoSTE_aes_ccm_timed;
             break;
 #endif
 #if !defined(NO_SHA256)

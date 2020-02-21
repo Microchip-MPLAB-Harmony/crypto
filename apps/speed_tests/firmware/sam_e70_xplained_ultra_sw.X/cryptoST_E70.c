@@ -136,7 +136,7 @@ void cryptoST(void)
     printf("Encrypt/decrypt all data to demonstrate correct operation." CRLF);
     cryptoSTE(&execData);
 #endif
-#if 1
+#if 0
     execData.testsAttempted = execData.testsSucceeded = 0;
 
     // Now do the timed tests
