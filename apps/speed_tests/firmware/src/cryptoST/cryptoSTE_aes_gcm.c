@@ -106,7 +106,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
      * Refer to test.c line 7260
      * */
     if ( (NULL == td->key->data)
-      || (NULL == td->initVector.data)
+      || (NULL == td->ivNonce.data)
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
 //    || (NULL == td->additionalAuthData.data) 
@@ -160,7 +160,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
         {
             int result = wc_AesGcmEncrypt(&enc, resultC,
                     input->vector.data, input->vector.length,
-                    td->initVector.data, td->initVector.length,
+                    td->ivNonce.data, td->ivNonce.length,
                     resultT, sizeT,
                     td->additionalAuthData.data, td->additionalAuthData.length);
             // additional authentication data
@@ -175,7 +175,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
                     cryptoST_PRINT_hexLine(CRLF "..key    :",
                             td->key->data, td->key->length);
                     cryptoST_PRINT_hexLine(CRLF "..init   :",
-                            td->initVector.data, td->initVector.length);
+                            td->ivNonce.data, td->ivNonce.length);
                     cryptoST_PRINT_hexLine(CRLF "..aad    :",
                             td->additionalAuthData.data, td->additionalAuthData.length);
                     cryptoST_PRINT_hexLine(CRLF "..rawData:",
@@ -254,7 +254,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
             XMEMSET(resultP, 0, rawSizePadded);
             param->results.wolfSSLresult = wc_AesGcmDecrypt(&dec, 
                         resultP, resultC, rawSizePadded,
-                        td->initVector.data, td->initVector.length,
+                        td->ivNonce.data, td->ivNonce.length,
                         resultT, sizeT,// td->additionalAuthData.length,
                         td->additionalAuthData.data, td->additionalAuthData.length);
 #if defined(WOLFSSL_ASYNC_CRYPT)
@@ -268,7 +268,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
                     cryptoST_PRINT_hexLine(CRLF "..key    :",
                             td->key->data, td->key->length);
                     cryptoST_PRINT_hexLine(CRLF "..init   :",
-                            td->initVector.data, td->initVector.length);
+                            td->ivNonce.data, td->ivNonce.length);
                     cryptoST_PRINT_hexLine(CRLF "..aad    :",
                             td->additionalAuthData.data, td->additionalAuthData.length);
                     cryptoST_PRINT_hexLine(CRLF "..rawData:",
@@ -309,7 +309,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
 // *****************************************************************************
 
 /* GCM is defined by NIST 800-38D
- * Inputs:  key, initVector                 for the underlying GCM
+ * Inputs:  key, ivNonce                 for the underlying GCM
  *          rawData, additionalAuthData     user inputs
  * Outputs: resultC, resultT
  * Compare: goldenResult=resultC, goldenTag=resultT

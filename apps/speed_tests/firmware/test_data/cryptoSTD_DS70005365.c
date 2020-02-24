@@ -114,7 +114,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x2c, 0x86, 0x78, 0x7d, 0x3f, 0x95, 0xdb, 0x71
             },
         },
-        .initVector = {         // not required for CRYA GCM
+        .ivNonce = {         // not required for CRYA GCM
             .length = 0,
             .data = (void*)0,
         },

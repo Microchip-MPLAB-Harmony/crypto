@@ -101,7 +101,7 @@ static void dumpHex(cryptoST_testDetail_t * td,
     cryptoST_PRINT_hexLine(CRLF "..key     :",
             td->key->data, td->key->length);
     cryptoST_PRINT_hexLine(CRLF "..nonce   :",
-            td->initVector.data, td->initVector.length); // nonce
+            td->ivNonce.data, td->ivNonce.length); // nonce
     if (input) // original raw data
         cryptoST_PRINT_hexBlock(CRLF "..rawData :",
                         input->vector.data, input->vector.length);
@@ -134,7 +134,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
      * Refer to test.c line 7260
      * */
     if ( (NULL == td->key->data)
-      || (NULL == td->initVector.data) // the nonce
+      || (NULL == td->ivNonce.data) // the nonce
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
 //    || (NULL == td->additionalAuthData.data) 
@@ -189,7 +189,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
         {
             int result = wc_AesCcmEncrypt(&enc, resultC,
                     input->vector.data, input->vector.length,
-                    td->initVector.data, td->initVector.length, // nonce
+                    td->ivNonce.data, td->ivNonce.length, // nonce
                     resultT, sizeT, // a.k.a. td->goldenTag.length
                     td->additionalAuthData.data, td->additionalAuthData.length);
 #if defined(WOLFSSL_ASYNC_CRYPT)
@@ -274,7 +274,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
             param->results.wolfSSLresult = 
                 wc_AesCcmDecrypt(&dec, resultP, 
                     resultC, input->vector.length,
-                    td->initVector.data, td->initVector.length, // nonce
+                    td->ivNonce.data, td->ivNonce.length, // nonce
                     resultT, sizeT, // a.k.a td->additionalAuthData.length,
                     td->additionalAuthData.data, td->additionalAuthData.length);
 #if defined(WOLFSSL_ASYNC_CRYPT)
@@ -322,7 +322,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
 // *****************************************************************************
 
 /* CCM is defined by NIST 800-38D
- * Inputs:  key, initVector (the nonce)     for the underlying CCM
+ * Inputs:  key, ivNonce (the nonce)     for the underlying CCM
  *          rawData, additionalAuthData     user inputs
  * Outputs: resultC, resultT
  * Compare: goldenResult=resultC, goldenTag=resultT

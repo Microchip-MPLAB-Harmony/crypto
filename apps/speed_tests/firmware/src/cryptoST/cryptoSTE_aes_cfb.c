@@ -114,7 +114,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
             
     // Data validation
     if ( (NULL == td->key->data)
-      || (NULL == td->initVector.data) )
+      || (NULL == td->ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CFB test not activated." CRLF;
     
@@ -127,7 +127,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
     ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
-                             td->initVector.data, AES_ENCRYPTION);
+                             td->ivNonce.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
     // Hold off until the serial port is finished
@@ -191,7 +191,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
 
             /* decrypt uses AES_ENCRYPTION */
             ret = wc_AesSetKey(&dec, td->key->data, td->key->length, 
-                                     td->initVector.data, AES_ENCRYPTION);
+                                     td->ivNonce.data, AES_ENCRYPTION);
             if (ret != 0) return "setting decryption key failed";
 
             if (CSTE_VERBOSE > 1) 

@@ -111,8 +111,8 @@ typedef struct cryptoST_testAPI_s
    2a. Each datum is for a specific technique/mode setting
    2b. The key/IV pair for the given output is defined if required.
    2c. .rawData is a circular reference to the raw data, if available
-   2d. If .initVector is required but null, use a random IV
-   2e. An input nonce uses .initVector
+   2d. If .ivNonce is required but null, use a random IV
+   2e. An input nonce uses .ivNonce
    3. ASCII strings provide info for auto-gen of summary labels.
    3a. .name identifies this raw data set (should be unique)
    3b. .source is a self-reference to the enclosing file
@@ -137,7 +137,7 @@ typedef struct cryptoST_testData_s
  * good practice, .goldenResult may be null when compiled, then
  * established by cryptoST_testAPI_t.openData, and ultimately
  * destroyed by cryptoST_testAPI_t.closeData. Likewise for
- * .key, .initVector (or nonce) and .authenticateTag as necessary.
+ * .key, .ivNonce (or nonce) and .authenticateTag as necessary.
  *************************************************************/
 typedef struct cryptoST_testDetail_s
 {
@@ -153,7 +153,7 @@ typedef struct cryptoST_testDetail_s
 
     // Inputs
     const cryptoST_testData_t * key;
-    cryptoST_testData_t initVector; // or nonce for CCM mode
+    cryptoST_testData_t ivNonce;
     cryptoST_testData_t additionalAuthData; // for GCM/CTR/CCM mode
 
     // Output compare data supplied for (optional) verification

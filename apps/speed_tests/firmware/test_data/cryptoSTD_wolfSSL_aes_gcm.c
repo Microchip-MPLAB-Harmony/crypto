@@ -98,7 +98,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0xae, 0x68, 0x24, 0xbf, 0xc1, 0x95, 0x57, 0xfc
             },
         },
-        .initVector = { // test.c 7177
+        .ivNonce = { // test.c 7177
             .length = 12,
             .data = (uint8_t[]){
                 0x6f, 0x58, 0xa9, 0x3f, 0xe1, 0xd2, 0x07, 0xfa,
@@ -144,7 +144,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x7d, 0xa3, 0x84, 0xeb, 0xf1, 0x24, 0x03, 0x64
             },
         },
-        .initVector = { // test.c 7212
+        .ivNonce = { // test.c 7212
             .length = 12,
             .data = (uint8_t[]){
                 0x07, 0x93, 0xef, 0x3a, 0xda, 0x78, 0x2f, 0x78,
@@ -186,7 +186,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
-        .initVector = { // test.c 7236
+        .ivNonce = { // test.c 7236
             .length = 12,
             .data = (uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
@@ -227,7 +227,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
-        .initVector = { // test.c 7236
+        .ivNonce = { // test.c 7236
             .length = 12,
             .data = (uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
@@ -265,7 +265,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
-        .initVector = { // test.c 7236
+        .ivNonce = { // test.c 7236
             .length = 12,
             .data = (uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,

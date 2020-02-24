@@ -115,7 +115,7 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
             
     // Data validation
     if ( (NULL == td->key->data)
-      || (NULL == td->initVector.data) )
+      || (NULL == td->ivNonce.data) )
         return param->results.errorMessage = "missing key or initialization data";
 
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
@@ -127,7 +127,7 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
         param->results.encryption.size = vector->vector.length;
         BP_NOP();
         ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
-                                 td->initVector.data, AES_ENCRYPTION);
+                                 td->ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) { param->results.errorMessage = "failed to set key"; break; }
 
         // Hold off until the serial port is finished
@@ -205,7 +205,7 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
                     Aes dec;
                     
                     ret = wc_AesSetKey(&dec, td->key->data, td->key->length, 
-                                             td->initVector.data, AES_DECRYPTION);
+                                             td->ivNonce.data, AES_DECRYPTION);
                     if (ret != 0) { param->results.errorMessage = "setting decryption key failed"; break; }
 
                     // Conventional decrypt and comparison

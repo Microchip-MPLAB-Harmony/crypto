@@ -98,7 +98,7 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
     if (CSTE_VERBOSE > 2)
     {
         P_INT("..bytes key    : ", rv->key->length);
-        P_INT("..bytes initV  : ", rv->initVector.length);
+        P_INT("..bytes initV  : ", rv->ivNonce.length);
         P_INT("..bytes aad    : ", rv->additionalAuthData.length);
         if (rv->goldenCipher.data)
             P_INT("..bytes gCipher: ", rv->goldenCipher.length);
@@ -110,7 +110,7 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
         cryptoST_PRINT_hexLine(CRLF "..key    : ",
                 rv->key->data, rv->key->length);
         cryptoST_PRINT_hexLine(CRLF "..initV  : ",
-                rv->initVector.data,rv->initVector.length);
+                rv->ivNonce.data,rv->ivNonce.length);
         cryptoST_PRINT_hexLine(CRLF "..gCipher: ",
                 rv->goldenCipher.data, rv->goldenCipher.length);
         printf(CRLF);

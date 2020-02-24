@@ -129,7 +129,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t*)"0123456789abcdef   ",  /* align */
         },
-        .initVector = { // test.c 6341
+        .ivNonce = { // test.c 6341
             .length = 16,
             .data = (uint8_t*)"1234567890abcdef   ",  /* align */
         },
@@ -153,7 +153,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t*)"0123456789abcdef   ",  /* align */
         },
-        .initVector = { // test.c 6341
+        .ivNonce = { // test.c 6341
             .length = 16,
             .data = (uint8_t*)"1234567890abcdef   ",  /* align */
         },
@@ -171,7 +171,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = AES128_KEY_SIZE/8, // .data is longer
             .data = (uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .initVector = { // test.c 6341
+        .ivNonce = { // test.c 6341
             .length = 16,
             .data = (uint8_t*)"1234567890abcdef   ",  /* align */
         },
@@ -193,7 +193,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
         },
         },
-        .initVector = { // test.c 6341
+        .ivNonce = { // test.c 6341
             .length = 16,
             .data = (uint8_t[]){ 
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -217,7 +217,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = AES192_KEY_SIZE/8, // .data is longer
             .data = (uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .initVector = { // test.c 6341
+        .ivNonce = { // test.c 6341
             .length = 16,
             .data = (uint8_t*)"1234567890abcdef   ",  /* align */
         },
@@ -238,7 +238,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = AES256_KEY_SIZE/8,
             .data = (uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .initVector = { // test.c 6341
+        .ivNonce = { // test.c 6341
             .length = 16,
             .data = (uint8_t*)"1234567890abcdef   ",  /* align */
         },

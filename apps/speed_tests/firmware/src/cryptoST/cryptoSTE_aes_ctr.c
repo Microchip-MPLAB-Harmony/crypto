@@ -104,7 +104,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
             
     // Data validation
     if ( (NULL == td->key->data)
-      || (NULL == td->initVector.data) )
+      || (NULL == td->ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CTR test not activated." CRLF;
     
@@ -115,7 +115,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
     ret = wc_AesSetKeyDirect(&enc, td->key->data, td->key->length,
-                                td->initVector.data, AES_ENCRYPTION);
+                                td->ivNonce.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
     // Hold off until the serial port is finished
@@ -160,7 +160,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
                 cryptoST_PRINT_hexLine(CRLF "key   : ",
                         td->key->data, td->key->length);
                 cryptoST_PRINT_hexLine(CRLF "initV : ",
-                        td->initVector.data, td->initVector.length);
+                        td->ivNonce.data, td->ivNonce.length);
                 cryptoST_PRINT_hexLine(CRLF "given : ",
                         vector->vector.data, vector->vector.length);
                 cryptoST_PRINT_hexLine(CRLF "cipher: ",
@@ -181,7 +181,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
 
         /* decrypt uses AES_ENCRYPTION */
         ret = wc_AesSetKeyDirect(&dec, td->key->data, td->key->length, 
-                                    td->initVector.data, AES_ENCRYPTION);
+                                    td->ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) return "setting decryption key failed";
 
         // Conventional decrypt and comparison
@@ -199,7 +199,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
                 cryptoST_PRINT_hexLine(CRLF "key   : ", 
                         td->key->data, td->key->length);
                 cryptoST_PRINT_hexLine(CRLF "initV : ", 
-                        td->initVector.data, td->initVector.length);
+                        td->ivNonce.data, td->ivNonce.length);
                 cryptoST_PRINT_hexLine(CRLF "given : ", 
                         vector->vector.data, vector->vector.length);
                 cryptoST_PRINT_hexLine(CRLF "plain : ", 

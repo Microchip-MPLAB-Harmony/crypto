@@ -233,7 +233,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
         return "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
     else do // so we can use "break"
     {
-        if (NULL != td->initVector.data)
+        if (NULL != td->ivNonce.data)
             param->results.warningCount++,
             param->results.warningMessage = "IV provided but not required"; 
 

@@ -95,7 +95,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c
             },
         },
-        .initVector = {
+        .ivNonce = {
             .data = nist_800_38A_iv,
             .length = ALENGTH(nist_800_38A_iv)
         },
@@ -132,7 +132,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x62,0xf8,0xea,0xd2,0x52,0x2c,0x6b,0x7b
             },
         },
-        .initVector = {
+        .ivNonce = {
             .data = nist_800_38A_iv,
             .length = ALENGTH(nist_800_38A_iv)
         },
@@ -169,7 +169,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4
             },
         },
-        .initVector = {
+        .ivNonce = {
             .data = nist_800_38A_iv,
             .length = ALENGTH(nist_800_38A_iv),
         },

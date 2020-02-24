@@ -253,7 +253,7 @@ static cryptoST_testDetail_t testDetail =
         .length = 16,
     },
     .key = &mutableKey,
-    .initVector = (cryptoST_testData_t){0},
+    .ivNonce = (cryptoST_testData_t){0},
 };
 
 /*************************************************************

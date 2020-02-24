@@ -230,7 +230,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv1pv7,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x03\x02\x01\x00\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV1_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV1_cipher[TL] },
@@ -249,7 +249,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv2pv8,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x04\x03\x02\x01\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV2_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV2_cipher[TL] },
@@ -268,7 +268,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv3pv9,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x05\x04\x03\x02\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV3_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV3_cipher[TL] },
@@ -289,7 +289,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv4pv10,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x06\x05\x04\x03\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV4_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV4_cipher[TL] },
@@ -308,7 +308,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv5pv11,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x07\x06\x05\x04\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV5_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV5_cipher[TL] },
@@ -327,7 +327,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv6pv12,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x08\x07\x06\x05\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV6_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV6_cipher[TL] },
@@ -348,7 +348,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610A_pv1pv7,
         .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x09\x08\x07\x06\xA0\xA1\xA2\xA3\xA4\xA5" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV7_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV7_cipher[TL] },
@@ -370,7 +370,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610B_pv13,
         .key = &(const cryptoST_testData_t){ .length = 16, .data = key_pv13to24 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PV13_cipher },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x41\x2B\x4E\xA9\xCD\xBE\x3C\x96\x96\x76\x6C\xFA" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV13_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV13_cipher[TL] },
@@ -389,7 +389,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &rfc3610B_pv14,
         .key = &(const cryptoST_testData_t){ .length = 16, .data = key_pv13to24 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PV14_cipher },
-        .initVector = { .length = 13, // nonce
+        .ivNonce = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x33\x56\x8E\xF7\xB2\x63\x3C\x96\x96\x76\x6C\xFA" }},
         .goldenCipher = { .length = TL-CLEAR, .data = (uint8_t*)&PV14_cipher[CLEAR] },
         .goldenTag    = { .length = PL-TL, .data = (uint8_t*)&PV14_cipher[TL] },
