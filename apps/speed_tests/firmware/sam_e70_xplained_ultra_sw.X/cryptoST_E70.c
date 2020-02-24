@@ -135,8 +135,11 @@ void cryptoST(void)
 
     printf("Encrypt/decrypt all data to demonstrate correct operation." CRLF);
     cryptoSTE(&execData);
+    
+    printf(CRLF "Tests attempted :%u" CRLF, execData.testsAttempted);
+    printf(     "Tests successful:%u" CRLF, execData.testsSucceeded);
 #endif
-#if 0
+#if 1
     execData.testsAttempted = execData.testsSucceeded = 0;
 
     // Now do the timed tests
@@ -148,10 +151,10 @@ void cryptoST(void)
     printf("> Timed testing begins!" CRLF);
     cryptoSTE(&execData);
     printf("> Timed testing concludes!" CRLF);
-#endif
     
     printf(CRLF "Tests attempted :%u" CRLF, execData.testsAttempted);
     printf(     "Tests successful:%u" CRLF, execData.testsSucceeded);
+#endif
     
     // Suppress any not-used warnings
     (void)exec_repetitiveTimed;

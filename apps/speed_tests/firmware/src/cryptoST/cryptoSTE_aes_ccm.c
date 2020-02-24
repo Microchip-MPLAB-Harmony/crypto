@@ -102,17 +102,20 @@ static void dumpHex(cryptoST_testDetail_t * td,
             td->key.data, td->key.length);
     cryptoST_PRINT_hexLine(CRLF "..nonce   :",
             td->initVector.data, td->initVector.length); // nonce
-    cryptoST_PRINT_hexLine(CRLF "..aad     :",
-            td->additionalAuthData.data, td->additionalAuthData.length);
     if (input) // original raw data
-        cryptoST_PRINT_hexLine(CRLF "..rawData :",
+        cryptoST_PRINT_hexBlock(CRLF "..rawData :",
                         input->vector.data, input->vector.length);
+    if (td->additionalAuthData.data)
+        cryptoST_PRINT_hexLine(CRLF "..aad     :",
+            td->additionalAuthData.data, td->additionalAuthData.length);
     
-    if (goldCipherToo)
-    {
-        cryptoST_PRINT_hexLine(CRLF "goldCipher:",
+    if (goldCipherToo && td->goldenCipher.data)
+        cryptoST_PRINT_hexBlock(CRLF "goldCipher:",
                 td->goldenCipher.data, td->goldenCipher.length);
-    }
+    if (goldCipherToo && td->goldenTag.data)
+        cryptoST_PRINT_hexBlock(CRLF "...goldTag:",
+                td->goldenTag.data, td->goldenTag.length);
+
     PRINT_WAIT(CRLF);
 }
 #endif // CSTE_VERBOSE
@@ -157,7 +160,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
     byte * resultC = cryptoSTE_malloc(rawSizePadded+aadSize+AES_BLOCK_SIZE);
     const size_t sizeC = rawSizePadded;
 
-    byte resultT[AES_BLOCK_SIZE]; // no contest here
+    byte resultT[td->goldenTag.length];
     const size_t sizeT = ALENGTH(resultT); // don't do this for the others
     
     if (NULL == resultC) 
@@ -176,9 +179,10 @@ static const char * cryptoSTE_aes_ccm_test_timed(
         if (0 != wc_AesCcmSetKey(&enc, td->key.data, td->key.length))
         { param->results.errorMessage = "failed to set key"; break; }
 
-        param->results.encryption.iterations = param->parameters.iterationOverride? 
-                                        param->parameters.iterationOverride
-                                      : td->recommendedRepetitions;
+        param->results.encryption.iterations = 
+                param->parameters.iterationOverride? 
+                        param->parameters.iterationOverride
+                      : td->recommendedRepetitions;
         param->results.encryption.size = input->vector.length;
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)
@@ -186,9 +190,8 @@ static const char * cryptoSTE_aes_ccm_test_timed(
             int result = wc_AesCcmEncrypt(&enc, resultC,
                     input->vector.data, input->vector.length,
                     td->initVector.data, td->initVector.length, // nonce
-                    resultT, sizeT,
+                    resultT, sizeT, // a.k.a. td->goldenTag.length
                     td->additionalAuthData.data, td->additionalAuthData.length);
-            // additional authentication data
 #if defined(WOLFSSL_ASYNC_CRYPT)
             result = wc_AsyncWait(result, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
 #endif
@@ -219,7 +222,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
                 {
                     dumpHex(td, true, input);
                     cryptoST_PRINT_hexLine(CRLF "..cipher  :", resultC, sizeC);
-                    cryptoST_PRINT_hexLine(CRLF "..authTag :", resultT, sizeT);
+                    cryptoST_PRINT_hexLine(CRLF "..compTag :", resultT, sizeT);
                 }
                 break; 
             }
@@ -232,8 +235,8 @@ static const char * cryptoSTE_aes_ccm_test_timed(
                 if (CSTE_VERBOSE)
                 {
                     dumpHex(td, true, input);
-                    cryptoST_PRINT_hexLine(CRLF "..cipher  :", resultC, sizeC);
-                    cryptoST_PRINT_hexLine(CRLF "..authTag :", resultT, sizeT);
+                    cryptoST_PRINT_hexBlock(CRLF "..cipher  :", resultC, sizeC);
+                    cryptoST_PRINT_hexLine(CRLF "..compTag :", resultT, sizeT);
                 }
                 break; 
             }
@@ -268,11 +271,12 @@ static const char * cryptoSTE_aes_ccm_test_timed(
                 PRINT_WAIT("-- decrypting and comparing" CRLF)
 
             XMEMSET(resultP, 0, rawSizePadded);
-            param->results.wolfSSLresult = wc_AesCcmDecrypt(&dec, 
-                        resultP, resultC, rawSizePadded,
-                        td->initVector.data, td->initVector.length, // nonce
-                        resultT, sizeT,// td->additionalAuthData.length,
-                        td->additionalAuthData.data, td->additionalAuthData.length);
+            param->results.wolfSSLresult = 
+                wc_AesCcmDecrypt(&dec, resultP, 
+                    resultC, input->vector.length,
+                    td->initVector.data, td->initVector.length, // nonce
+                    resultT, sizeT, // a.k.a td->additionalAuthData.length,
+                    td->additionalAuthData.data, td->additionalAuthData.length);
 #if defined(WOLFSSL_ASYNC_CRYPT)
             result = wc_AsyncWait(result, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
 #endif

@@ -283,9 +283,12 @@ void cryptoST_PRINT_hexLine(const char * const tag,
     *pos++ = 0; // EOL -- verify we did not overrun the buffer
     __conditional_software_breakpoint(ALENGTH(line) > (pos - line));
     PRINT_WAIT(line); // wait before line goes out of scope
+#if 1
+    printf(" (%d)", length);
+#endif
 }
 
-#if 0
+#if 1
 /* Print a text block having both the hexadecimal and ASCII values
  * (that is, only printable characters, no controls).
  *  */
@@ -296,13 +299,16 @@ void cryptoST_PRINT_hexBlock
     size_t offset = 0;
     while (count)
     {
-        char buffer[12];
+        char buffer[16];
+        int pad = strlen(tag);
+        if (pad > 8) pad = 8;
+        
         if (0 == offset)
         {
             memset(buffer,0,sizeof(buffer));
-            strncpy(buffer,tag,8);
+            strncpy(buffer,tag,sizeof(buffer)-1); // save room for null
         }
-        else snprintf(buffer, sizeof(buffer), "%08X ", offset);
+        else snprintf(buffer, sizeof(buffer), "  %*X:", pad, offset);
         cryptoST_PRINT_hexLine(buffer, data, count);
         PRINT_WAIT(CRLF); // wait before CRLF goes out of scope
         

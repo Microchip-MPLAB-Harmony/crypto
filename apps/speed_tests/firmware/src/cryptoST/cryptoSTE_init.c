@@ -56,8 +56,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../../test_data/cryptoSpeedTestData.h"
 
 // Datasets are screened based on the Harmony configuration.
-#if 0
-
 #if !defined(NO_SHA) // SHA1
 #include "../test_data/cryptoSTD_sha1.h"
 #endif
@@ -76,8 +74,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #if defined(HAVE_AESGCM)
 #include "../test_data/cryptoSTD_wolfSSL_aes_gcm.h"
 #endif
-
-// //////////
+#if defined(HAVE_AESCCM)
+#include "../test_data/cryptoSTD_aes_ccm.h"
+#endif
 #if defined(WOLFSSL_AES_COUNTER)
 #include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
 #endif
@@ -88,12 +87,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../test_data/cryptoSTD_wolfSSL_aes_cfb.h"
 #endif
 #include "../test_data/cryptoSTD_DS70005365.h"
-
-#endif
-#if defined(HAVE_AESCCM)
-#include "../test_data/cryptoSTD_aes_ccm.h"
-#endif
-
 
 // *****************************************************************************
 // *****************************************************************************
