@@ -91,7 +91,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt1,
-        .key = { // test.c 7171
+        .key = &(const cryptoST_testData_t){ // test.c 7171
             .length = 16,
             .data = (uint8_t[]){
                 0x29, 0x8e, 0xfa, 0x1c, 0xcf, 0x29, 0xcf, 0x62,
@@ -137,7 +137,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt2,
-        .key = { // test.c 7207
+        .key = &(const cryptoST_testData_t){ // test.c 7207
             .length = 16,
             .data = (uint8_t[]){
                 0x01, 0x6d, 0xbb, 0x38, 0xda, 0xa7, 0x6d, 0xfe,
@@ -179,7 +179,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7231",
         .rawData = &dt3, // null data
-        .key = { // test.c 7231
+        .key = &(const cryptoST_testData_t){ // test.c 7231
             .length = 16,
             .data = (uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
@@ -220,7 +220,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP sequential big block",
         .rawData = &seq4k,
-        .key = { // test.c 7231
+        .key = &(const cryptoST_testData_t){ // test.c 7231
             .length = 16,
             .data = (uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
@@ -258,7 +258,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP pseudoRandom big block",
         .rawData = &pr4k,
-        .key = { // test.c 7231
+        .key = &(const cryptoST_testData_t){ // test.c 7231
             .length = 16,
             .data = (uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,

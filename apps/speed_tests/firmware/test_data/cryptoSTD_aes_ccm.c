@@ -228,7 +228,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV1",
         .rawData = &rfc3610A_pv1pv7,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x03\x02\x01\x00\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -247,7 +247,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV2",
         .rawData = &rfc3610A_pv2pv8,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x04\x03\x02\x01\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -266,7 +266,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV3",
         .rawData = &rfc3610A_pv3pv9,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x05\x04\x03\x02\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -287,7 +287,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV4",
         .rawData = &rfc3610A_pv4pv10,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x06\x05\x04\x03\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -306,7 +306,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV5",
         .rawData = &rfc3610A_pv5pv11,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x07\x06\x05\x04\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -325,7 +325,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV6",
         .rawData = &rfc3610A_pv6pv12,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x08\x07\x06\x05\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -346,7 +346,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV7",
         .rawData = &rfc3610A_pv1pv7,
-        .key = { .data = key_pv1to12, .length = 16 },
+        .key = &(const cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PVdata_pv1to12 },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x00\x00\x09\x08\x07\x06\xA0\xA1\xA2\xA3\xA4\xA5" }},
@@ -368,7 +368,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV13",
         .rawData = &rfc3610B_pv13,
-        .key = { .length = 16, .data = key_pv13to24 },
+        .key = &(const cryptoST_testData_t){ .length = 16, .data = key_pv13to24 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PV13_cipher },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x41\x2B\x4E\xA9\xCD\xBE\x3C\x96\x96\x76\x6C\xFA" }},
@@ -387,7 +387,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV14",
         .rawData = &rfc3610B_pv14,
-        .key = { .length = 16, .data = key_pv13to24 },
+        .key = &(const cryptoST_testData_t){ .length = 16, .data = key_pv13to24 },
         .additionalAuthData = { .length = CLEAR, .data = (uint8_t*)PV14_cipher },
         .initVector = { .length = 13, // nonce
             .data = (uint8_t[]){ "\x00\x33\x56\x8E\xF7\xB2\x63\x3C\x96\x96\x76\x6C\xFA" }},

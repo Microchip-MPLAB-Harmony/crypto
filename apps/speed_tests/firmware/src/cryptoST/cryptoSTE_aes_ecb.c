@@ -225,7 +225,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if (NULL == td->key.data)
+    if (NULL == td->key->data)
         return param->results.errorMessage = "missing key or initialization data";
     
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
@@ -241,7 +241,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
 
         int ret;
         Aes enc;
-        ret = wc_AesSetKey(&enc, td->key.data, td->key.length,
+        ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
                                  NULL, AES_ENCRYPTION);
         if (ret != 0) 
             { param->results.errorMessage = "failed to set key"; break; }
@@ -294,7 +294,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
                             td->goldenCipher.data, td->goldenCipher.length);
                     cryptoST_PRINT_hexLine(CRLF "..key   :", 
-                            td->key.data, td->key.length);
+                            td->key->data, td->key->length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -310,7 +310,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                 cryptoST_PRINT_hexLine(CRLF "..golden:",
                         td->goldenCipher.data, td->goldenCipher.length);
                 cryptoST_PRINT_hexLine(CRLF "..key   :", 
-                        td->key.data, td->key.length);
+                        td->key->data, td->key->length);
                 PRINT_WAIT(CRLF);
             }
 #endif
@@ -337,7 +337,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                 else do
                 {
                     Aes dec;
-                    if (0 != wc_AesSetKey(&dec, td->key.data, td->key.length, 
+                    if (0 != wc_AesSetKey(&dec, td->key->data, td->key->length, 
                                              NULL, AES_DECRYPTION))
                     { 
                         param->results.errorMessage = "setting decryption key failed"; 
@@ -424,7 +424,7 @@ const char * cryptoSTE_aes_ecb_timed(cryptoST_testDetail_t * td,
     else
     {
         param->results.testHandler = test->name;
-        if (td->key.length != test->keySize)
+        if (td->key->length != test->keySize)
             return param->results.errorMessage = badKey;
         else
             return cryptoSTE_aes_ecb_all_timed(td, param, test);

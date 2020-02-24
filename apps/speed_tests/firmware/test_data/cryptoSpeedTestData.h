@@ -112,11 +112,13 @@ typedef struct cryptoST_testAPI_s
    2b. The key/IV pair for the given output is defined if required.
    2c. .rawData is a circular reference to the raw data, if available
    2d. If .initVector is required but null, use a random IV
+   2e. An input nonce uses .initVector
    3. ASCII strings provide info for auto-gen of summary labels.
    3a. .name identifies this raw data set (should be unique)
    3b. .source is a self-reference to the enclosing file
    3c. .description provides traceability (e.g., WolfSSL)
    3d. .pedigree describes where the gold-data came from
+   4. TDES uses a 3-key array of key data
 
    Generation of the output list in C is something of a burden.
    */
@@ -144,13 +146,13 @@ typedef struct cryptoST_testDetail_s
     int recommendedRepetitions;     // to get reasonable statistics
     bool doNotUseHWAcceleration;    // to compare HW vs. SW
 
-    const CPU_CHAR * source;        // name of enclosing file
-    const CPU_CHAR * pedigree;      // history of gold-standard data
+    const CPU_CHAR * source;         // name of enclosing file
+    const CPU_CHAR * pedigree;       // history of gold-standard data
     cryptoST_testVector_t * rawData; // reference to original data
     // depending on how the data file is built, .rawData maybe must be null
 
     // Inputs
-    cryptoST_testData_t key;
+    const cryptoST_testData_t * key;
     cryptoST_testData_t initVector; // or nonce for CCM mode
     cryptoST_testData_t additionalAuthData; // for GCM/CTR/CCM mode
 

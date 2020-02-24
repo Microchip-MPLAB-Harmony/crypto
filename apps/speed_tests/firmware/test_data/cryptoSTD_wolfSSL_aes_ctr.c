@@ -88,7 +88,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x79,0x21,0x70,0xa0,0xf3,0x00,0x9c,0xee
             },
         },
-        .key = { // line 6651 ctr128Key
+        .key = &(const cryptoST_testData_t){ // line 6651 ctr128Key
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t[]){
                 0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
@@ -124,7 +124,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x5a,0x97,0xda,0xec,0x58,0xc6,0xb0,0x50
             },
         },
-        .key = { // line 6671 ctr192Key
+        .key = &(const cryptoST_testData_t){ // line 6671 ctr192Key
             .length = AES192_KEY_SIZE/8,
             .data = (uint8_t[]){ 
                 0x8e,0x73,0xb0,0xf7,0xda,0x0e,0x64,0x52,
@@ -160,7 +160,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x13,0xc2,0xdd,0x08,0x45,0x79,0x41,0xa6
             }
         },
-        .key = { // line 6691 ctr256Key
+        .key = &(const cryptoST_testData_t){ // line 6691 ctr256Key
             .length = AES256_KEY_SIZE/8,
             .data = (uint8_t[]){   
                 0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,

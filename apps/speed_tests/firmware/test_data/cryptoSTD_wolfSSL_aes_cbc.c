@@ -125,7 +125,7 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = 0,  // refer to aes_test(), line 6374
             .data = 0,
         },
-        .key = { // test.c 6341
+        .key = &(cryptoST_testData_t){ // test.c 6341
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t*)"0123456789abcdef   ",  /* align */
         },
@@ -149,7 +149,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x2c,0xcc,0x9d,0x46,0x77,0xa2,0x33,0xcb
               }
         },
-        .key = { // test.c 6341
+        .key = &(const cryptoST_testData_t){ // test.c 6341
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t*)"0123456789abcdef   ",  /* align */
         },
@@ -167,7 +167,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
         .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES128_KEY_SIZE/8, // .data is longer
             .data = (uint8_t*)"0123456789abcdeffedcba9876543210",
         },
@@ -186,7 +186,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6557",
         .rawData = &Message2,
         .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t[]){
             0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
@@ -213,7 +213,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
         .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES192_KEY_SIZE/8, // .data is longer
             .data = (uint8_t*)"0123456789abcdeffedcba9876543210",
         },
@@ -234,7 +234,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
         .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES256_KEY_SIZE/8,
             .data = (uint8_t*)"0123456789abcdeffedcba9876543210",
         },

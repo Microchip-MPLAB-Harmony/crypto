@@ -237,6 +237,8 @@ static void setHighBitsOf16Bytes(uint8_t * data, int numberOfBits)
     }
 }
 
+static cryptoST_testData_t mutableKey = (cryptoST_testData_t)
+    { .data = buffer16, .length = sizeof(buffer16),};
 static cryptoST_testDetail_t testDetail =
 {
     .technique = ET_AES_128,
@@ -250,8 +252,7 @@ static cryptoST_testDetail_t testDetail =
         .data = (uint8_t[]){ 0 },
         .length = 16,
     },
-    .key.data = (uint8_t[16]){0},
-    .key.length = 16,
+    .key = &mutableKey,
     .initVector = (cryptoST_testData_t){0},
 };
 
@@ -271,7 +272,8 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             {
                 const plainCipher_t * newData = &GFSBox_detail[detailCounter];
                 testDetail.goldenCipher.data = (uint8_t*)(newData->cipher);
-                testDetail.key.data = (uint8_t*)zero16;
+                mutableKey.data = (uint8_t*)zero16;
+                mutableKey.length = sizeof(buffer16);
                 GFSBox_KAT.vector.data = (uint8_t*)(newData->plain);
                 new = old;
                 break;
@@ -289,7 +291,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             {
                 const keyCipher_t * newData = &KeySBox_detail[detailCounter];
                 testDetail.goldenCipher.data = (uint8_t*)(newData->cipher);
-                testDetail.key.data = (uint8_t*)(newData->key);
+                mutableKey.data = (uint8_t*)(newData->key);
                 new = old;
                 break;
             }
@@ -298,8 +300,8 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
                 detailCounter = -1;
                 testDetail.rawData = &VarText_KAT; // appendix D
                 testDetail.pedigree = PDF " appendix D";
-                testDetail.key.data = (uint8_t*)zero16;
-                testDetail.key.length = sizeof(zero16);
+                mutableKey.data = (uint8_t*)zero16;
+                mutableKey.length = sizeof(zero16);
                 setHighBitsOf16Bytes(buffer16, 0);
             }
         }
@@ -308,7 +310,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             if (ALENGTH(VarText_cipher) > detailCounter)
             {
                 testDetail.goldenCipher.data = (uint8_t*)&VarText_cipher[detailCounter];
-                testDetail.key.data = (uint8_t*)zero16;
+                mutableKey.data = (uint8_t*)zero16;
                 setHighBitsOf16Bytes(buffer16, detailCounter+1);
                 new = old;
                 break;
@@ -318,7 +320,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
                 detailCounter = -1;
                 testDetail.rawData = &VarKey_KAT; // appendix E
                 testDetail.pedigree = PDF " appendix E";
-                testDetail.key.length = sizeof(buffer16);
+                mutableKey.length = sizeof(buffer16);
             }
         }
         else if (&VarKey_KAT == old->rawData)
@@ -326,7 +328,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             if (ALENGTH(VarKey_cipher) > detailCounter)
             {
                 testDetail.goldenCipher.data = (uint8_t*)&VarKey_cipher[detailCounter];
-                testDetail.key.data = (uint8_t*)buffer16;
+                mutableKey.data = (uint8_t*)buffer16;
                 setHighBitsOf16Bytes(buffer16, detailCounter+1);
                 new = old;
                 break;

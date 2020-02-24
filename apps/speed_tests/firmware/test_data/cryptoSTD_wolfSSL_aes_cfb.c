@@ -59,7 +59,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0xb1,0x80,0x8c,0xf1,0x87,0xa4,0xf4,0xdf
             }
         },
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES128_KEY_SIZE/8,
             .data = (uint8_t[]){
             0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
@@ -98,7 +98,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x42,0xae,0x8f,0xba,0x58,0x4b,0x09,0xff
             }
         },
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES192_KEY_SIZE/8,
             .data = (uint8_t[]){ 
                 0x8e,0x73,0xb0,0xf7,0xda,0x0e,0x64,0x52,
@@ -137,7 +137,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x20,0x31,0x62,0x3d,0x55,0xb1,0xe4,0x71
             }
         },
-        .key = {
+        .key = &(const cryptoST_testData_t){
             .length = AES256_KEY_SIZE/8,
             .data = (uint8_t[]){
                 0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,

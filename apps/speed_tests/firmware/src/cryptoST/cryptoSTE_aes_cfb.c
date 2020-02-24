@@ -113,7 +113,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if ( (NULL == td->key.data)
+    if ( (NULL == td->key->data)
       || (NULL == td->initVector.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CFB test not activated." CRLF;
@@ -126,7 +126,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
     if (vector->vector.length > ALENGTH(cipher))
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
-    ret = wc_AesSetKey(&enc, td->key.data, td->key.length,
+    ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
                              td->initVector.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
@@ -190,7 +190,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
                 return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
 
             /* decrypt uses AES_ENCRYPTION */
-            ret = wc_AesSetKey(&dec, td->key.data, td->key.length, 
+            ret = wc_AesSetKey(&dec, td->key->data, td->key->length, 
                                      td->initVector.data, AES_ENCRYPTION);
             if (ret != 0) return "setting decryption key failed";
 
@@ -224,7 +224,7 @@ const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 128/8)
+    if (td->key->length != 128/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -241,7 +241,7 @@ const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 192/8)
+    if (td->key->length != 192/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -258,7 +258,7 @@ const char * cryptoSTE_aes_cfb_256_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 256/8)
+    if (td->key->length != 256/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
