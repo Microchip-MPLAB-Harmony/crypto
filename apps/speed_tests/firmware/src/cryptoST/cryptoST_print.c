@@ -293,7 +293,7 @@ void cryptoST_PRINT_hexLine(const char * const tag,
  * (that is, only printable characters, no controls).
  *  */
 void cryptoST_PRINT_hexBlock
-    (const char * const tag, uint8_t * data, size_t length)
+    (const char * const tag, const uint8_t * data, size_t length)
 {
     size_t count = length;
     size_t offset = 0;

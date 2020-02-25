@@ -126,7 +126,7 @@ typedef struct cryptoST_testAPI_s
 typedef struct cryptoST_testData_s
 {
     size_t length;  // size of the data block
-    uint8_t * data; // location of the data
+    const uint8_t * data; // location of the data
 } cryptoST_testData_t;
 
 /*************************************************************

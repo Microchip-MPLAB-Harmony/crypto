@@ -1371,8 +1371,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">0CCF6ADF0BA13E750EE789E3E7879406</GeneratedChecksum>
-          <UserChecksum dnOrder="5">0CCF6ADF0BA13E750EE789E3E7879406</UserChecksum>
+          <GeneratedChecksum dnOrder="4">3D336BD4731B60C334D4EE7BC836BBAE</GeneratedChecksum>
+          <UserChecksum dnOrder="5">3D336BD4731B60C334D4EE7BC836BBAE</UserChecksum>
         </File>
         <File dnOrder="171">
           <Type dnOrder="0">HEADER</Type>
@@ -1580,7 +1580,7 @@
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra/crypto</LogicalPath>
           <PhysicalPath dnOrder="3">/crypto/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">AD7CB0139751D6B98E7DD6258DBBA006</GeneratedChecksum>
-          <UserChecksum dnOrder="5">AD7CB0139751D6B98E7DD6258DBBA006</UserChecksum>
+          <UserChecksum dnOrder="5">C2CE692985EDC932B9E7116E71FD8F0B</UserChecksum>
         </File>
         <File dnOrder="197">
           <Type dnOrder="0">HEADER</Type>

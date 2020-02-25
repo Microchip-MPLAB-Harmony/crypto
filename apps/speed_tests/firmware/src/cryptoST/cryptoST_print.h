@@ -80,7 +80,7 @@ extern "C" {
 void cryptoST_PRINT_hexLine
     (const char * const tag, const uint8_t * const data, const size_t const length);
 void cryptoST_PRINT_hexBlock
-    (const char * const tag, uint8_t * const data, size_t const length);
+    (const char * const tag, const uint8_t * const data, size_t const length);
     
 void cryptoST_PRINT_announceElapsedTime
        (const CPU_CHAR * testName, 
