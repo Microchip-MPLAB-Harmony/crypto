@@ -97,9 +97,9 @@ static uint32_t fb_tap[]={
     0x000000E1, // 8 checked
     0x00000110, // 9 checked
     0x00000204, // 10 checked
-    0x00000404, // 11 checked
-    0x00000898, // 12 <<-- not checked
-    0x0000101A, // 13 <<-- not checked
+    0x00000415, // 11 checked
+    0x00000E08, // 12 checked
+    0x00001C80, // 13 <<-- not checked
     0, // 14
     0, // 15
     0x0000B400, // 16 checked

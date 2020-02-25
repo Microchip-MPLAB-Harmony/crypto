@@ -14,7 +14,7 @@
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "SHA256"
 
-#define DO_LARGE_ZERO_HASH  1
+#define DO_LARGE_ZERO_HASH  0
 
 #if 0
 static const CPU_CHAR default_description[] = {
@@ -77,6 +77,8 @@ static cryptoST_testVector_t satcZ =
 /*************************************************************
  * Golden data definitions.
  *************************************************************/
+static uint8_t sramBuffer32[32] = { 0 };
+#define ASIZE(a) ((sizeof(a)/sizeof(a[0])))
 static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
 {
 #if !defined(NO_SHA256)
@@ -148,14 +150,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "Blocks of null data",
         .rawData = &satcZ,
-        .goldenCipher = { // no data defined here -- get it later
-            .length = 32,
-            .data = (uint8_t*)(const uint8_t[]) // reserve room for the golden hash's
-                { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-        },
+        .goldenCipher = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
     },
 #endif // !NO_SHA
     {}
@@ -170,7 +165,11 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
  * API handlers
  *************************************************************/
 #define ZERO_MIN    (44)
+#if defined(__SAML11E16A__) // compiler pre-defined
 #define ZERO_MAX    (512*3)
+#else
+#define ZERO_MAX    (5 * 1024)
+#endif
 static __attribute__((unused)) unsigned int zero_test = 0;
 
 static cryptoST_testDetail_t * firstTest(void)
@@ -226,10 +225,12 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             // buffer size is near the cross-over from 1 block to 2.
             if (0 == zero_test)
                 zero_test = ZERO_MIN;  // get started
+            else if (zero_test >= (3*512)) // bigger is optional
+                zero_test += 1000;
+            else if (zero_test >= 512) // WC anomaly observed at 475 bytes
+                zero_test += 25;
             else if (zero_test == 64)   // covers 1-2
                 zero_test = 460;       // cover 8 blocks up to 9 blocks
-            else if (zero_test >= 512) // WC anomaly observed at 475 bytes
-                zero_test+= 25;
             else
                 zero_test++;
 
@@ -246,7 +247,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             raw->vector.length = zero_test;
             wc_Sha256Hash(raw->vector.data,
                           raw->vector.length,
-                          old->goldenCipher.data);
+                          (uint8_t*)old->goldenCipher.data);
 #endif
         }
         return old;

@@ -46,7 +46,7 @@ typedef enum EncryptTechnique_e
     ET_AES_CCM,     /* hash -- use EM_NONE */
     ET_AES_GMAC,    /* hash -- use EM_NONE */
     ET_DES,         /* block=64, deprecated   */
-    ET_DES3,        /* block=64, key=24 bytes */
+    ET_DES3,        /* block=64, key=3*8 bytes */
     ET_MD2,
     ET_MD3,
     ET_MD4,

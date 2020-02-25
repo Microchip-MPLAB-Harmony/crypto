@@ -129,11 +129,18 @@ static const char * cryptoSTE_aes_ccm_test_timed(
                                 cryptoST_testDetail_t * td,
                                 cryptoSTE_testExecution_t * param)
 {
+    // Do this prior to possible errors so that it correctly reports
+    // with any error message.
+    cryptoST_testVector_t * input = td->rawData;
+    param->results.encryption.size = input->vector.length;
+    param->results.encryption.iterations = param->parameters.iterationOverride? 
+                                    param->parameters.iterationOverride
+                                    : td->recommendedRepetitions;
     /* Data validation
      * Having NULL pointers for rawData, cipher and aad is allowed.
      * Refer to test.c line 7260
      * */
-    if ( (NULL == td->key->data)
+    if ( (NULL == td->key->data)    
       || (NULL == td->ivNonce.data) // the nonce
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
@@ -141,7 +148,6 @@ static const char * cryptoSTE_aes_ccm_test_timed(
             )
         return param->results.errorMessage = "missing key-init-raw-auth data";
     
-    cryptoST_testVector_t * input = td->rawData;
     if (CSTE_VERBOSE > 2)
     {
         P0_UINT( " data=", input->vector.length);
@@ -179,11 +185,6 @@ static const char * cryptoSTE_aes_ccm_test_timed(
         if (0 != wc_AesCcmSetKey(&enc, td->key->data, td->key->length))
         { param->results.errorMessage = "failed to set key"; break; }
 
-        param->results.encryption.iterations = 
-                param->parameters.iterationOverride? 
-                        param->parameters.iterationOverride
-                      : td->recommendedRepetitions;
-        param->results.encryption.size = input->vector.length;
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)
         {

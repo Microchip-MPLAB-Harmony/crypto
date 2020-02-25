@@ -67,6 +67,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #if defined(HAVE_AES_ECB)
 #include "../test_data/cryptoSTD_aesavs.h"
+#include "../test_data/cryptoSTD_aes_ecb.H"
 #endif
 #if defined(HAVE_AES_CBC)
 #include "../test_data/cryptoSTD_wolfSSL_aes_cbc.h"
@@ -100,7 +101,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  * as long as there are enough to cover the given API's, and that
  * will be verified by assertion when the list is loaded.
  *  */
-static cryptoST_testAPI_t ST_list[10];
+static cryptoST_testAPI_t ST_list[11];
 #define API_MAX (sizeof(ST_list)/sizeof(ST_list[0]))
 
 void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
@@ -148,6 +149,10 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
 #endif
 #ifdef CRYPTOSTD_AESAVS_H
     ST_list[numberOfLoadedAPI++] = aesavs_aes128;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#ifdef CRYPTOSTV_AES_ECB_H
+    ST_list[numberOfLoadedAPI++] = microchip_aes_ecb;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
     

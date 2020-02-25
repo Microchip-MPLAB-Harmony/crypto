@@ -113,6 +113,13 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
         cryptoSTE_announceDetails(2, td);
     }
             
+    // Do this prior to possible errors so that it correctly reports
+    // with any error message.
+    param->results.encryption.size = vector->vector.length;
+    param->results.encryption.iterations = param->parameters.iterationOverride? 
+                                    param->parameters.iterationOverride
+                                    : td->recommendedRepetitions;
+
     // Data validation
     if ( (NULL == td->key->data)
       || (NULL == td->ivNonce.data) )
@@ -124,7 +131,6 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
     else do // so we can use "break"
     {
         Aes enc;
-        param->results.encryption.size = vector->vector.length;
         BP_NOP();
         ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
                                  td->ivNonce.data, AES_ENCRYPTION);
@@ -135,10 +141,6 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
 
         // Remove any data noise that is in the target buffer
         XMEMSET(cipher, 0, sizeof(cipher));
-        param->results.encryption.iterations = param->parameters.iterationOverride? 
-                                        param->parameters.iterationOverride
-                                      : td->recommendedRepetitions;
-
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)
         {

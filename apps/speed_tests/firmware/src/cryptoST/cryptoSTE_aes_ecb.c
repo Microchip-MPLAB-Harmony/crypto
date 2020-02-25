@@ -223,11 +223,18 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
         cryptoSTE_announceVector(2, vector);
         cryptoSTE_announceDetails(2, td);
     }
-            
+
+    // Do this prior to possible errors so that it correctly reports
+    // with any error message.
+    param->results.encryption.size = vector->vector.length;
+    param->results.encryption.iterations = param->parameters.iterationOverride? 
+                                    param->parameters.iterationOverride
+                                  : td->recommendedRepetitions;
+
     // Data validation
     if (NULL == td->key->data)
         return param->results.errorMessage = "missing key or initialization data";
-    
+
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
     if (NULL == cipher)
         return "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
@@ -236,8 +243,6 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
         if (NULL != td->ivNonce.data)
             param->results.warningCount++,
             param->results.warningMessage = "IV provided but not required"; 
-
-        param->results.encryption.size = vector->vector.length;
 
         int ret;
         Aes enc;
@@ -251,9 +256,6 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
 
         // Remove any data noise that is in the target buffer
         XMEMSET(cipher, 0, sizeof(cipher));
-        param->results.encryption.iterations = param->parameters.iterationOverride? 
-                                        param->parameters.iterationOverride
-                                      : td->recommendedRepetitions;
 
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)

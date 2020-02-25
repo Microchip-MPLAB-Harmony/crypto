@@ -1371,8 +1371,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_e70_xplained_ultra/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">3D336BD4731B60C334D4EE7BC836BBAE</GeneratedChecksum>
-          <UserChecksum dnOrder="5">3D336BD4731B60C334D4EE7BC836BBAE</UserChecksum>
+          <GeneratedChecksum dnOrder="4">0CCF6ADF0BA13E750EE789E3E7879406</GeneratedChecksum>
+          <UserChecksum dnOrder="5">0CCF6ADF0BA13E750EE789E3E7879406</UserChecksum>
         </File>
         <File dnOrder="171">
           <Type dnOrder="0">HEADER</Type>
@@ -2509,7 +2509,7 @@
         <Setting append="true" category="C32" delimiter=";" dnOrder="2" key="extra-include-directories" value="../src;../src/config/sam_e70_xplained_ultra;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm"/>
         <Setting append="true" category="C32" delimiter=";" dnOrder="3" key="preprocessor-macros" value="HAVE_CONFIG_H"/>
         <Setting append="true" category="C32" delimiter=";" dnOrder="4" key="preprocessor-macros" value="WOLFSSL_IGNORE_FILE_WARN"/>
-        <Setting category="C32-LD" dnOrder="5" key="heap-size" value="40960"/>
+        <Setting category="C32-LD" dnOrder="5" key="heap-size" value="90000"/>
         <Setting category="C32-LD" dnOrder="6" key="no-device-startup-code" value="true"/>
         <Setting append="true" category="C32-LD" delimiter=";" dnOrder="7" key="preprocessor-macros" value=""/>
         <Setting category="C32Global" dnOrder="8" key="mdtcm" value=""/>
