@@ -64,8 +64,8 @@ typedef enum EncryptMode_e
     EM_NONE = 0,
     EM_ECB,  // AES, DES
     EM_CBC,  // AES, DES
-    EM_CFB,  // AES, DES
-    EM_OFB,  // AES, DES
+    EM_CFB,  // AES, deprecated for DES
+    EM_OFB,  // AES, deprecated for DES
     EM_CTR,  // AES
 } EncryptMode_t;
 
@@ -152,7 +152,7 @@ typedef struct cryptoST_testDetail_s
     // depending on how the data file is built, .rawData maybe must be null
 
     // Inputs
-    const cryptoST_testData_t * key;
+    cryptoST_testData_t * key;
     cryptoST_testData_t ivNonce;
     cryptoST_testData_t additionalAuthData; // for GCM/CTR/CCM mode
 

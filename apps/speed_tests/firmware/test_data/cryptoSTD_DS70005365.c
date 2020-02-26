@@ -62,9 +62,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = appNoteReference,
         .rawData = &ds_001122,
-        .key = &(const cryptoST_testData_t){ 
+        .key = &(cryptoST_testData_t){ 
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (const uint8_t[]){
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
             },

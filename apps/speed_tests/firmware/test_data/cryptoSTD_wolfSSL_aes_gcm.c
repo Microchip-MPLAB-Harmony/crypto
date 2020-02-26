@@ -91,9 +91,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt1,
-        .key = &(const cryptoST_testData_t){ // test.c 7171
+        .key = &(cryptoST_testData_t){ // test.c 7171
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (const uint8_t[]){
                 0x29, 0x8e, 0xfa, 0x1c, 0xcf, 0x29, 0xcf, 0x62,
                 0xae, 0x68, 0x24, 0xbf, 0xc1, 0x95, 0x57, 0xfc
             },
@@ -137,9 +137,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt2,
-        .key = &(const cryptoST_testData_t){ // test.c 7207
+        .key = &(cryptoST_testData_t){ // test.c 7207
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (const uint8_t[]){
                 0x01, 0x6d, 0xbb, 0x38, 0xda, 0xa7, 0x6d, 0xfe,
                 0x7d, 0xa3, 0x84, 0xeb, 0xf1, 0x24, 0x03, 0x64
             },
@@ -179,9 +179,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7231",
         .rawData = &dt3, // null data
-        .key = &(const cryptoST_testData_t){ // test.c 7231
+        .key = &(cryptoST_testData_t){ // test.c 7231
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
@@ -220,9 +220,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP sequential big block",
         .rawData = &seq4k,
-        .key = &(const cryptoST_testData_t){ // test.c 7231
+        .key = &(cryptoST_testData_t){ // test.c 7231
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
@@ -258,9 +258,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP pseudoRandom big block",
         .rawData = &pr4k,
-        .key = &(const cryptoST_testData_t){ // test.c 7231
+        .key = &(cryptoST_testData_t){ // test.c 7231
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },

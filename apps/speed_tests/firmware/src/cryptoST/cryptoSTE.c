@@ -71,6 +71,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoSTE_aes_ccm.h"
 #endif
 #include "cryptoSTE_sha.h"
+#include "cryptoSTE_des3.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -233,6 +234,7 @@ cryptoSTE_exec_t sortOutDES3(cryptoST_testDetail_t * rv)
     switch(rv->mode)
     {
         case EM_CBC: // for AES, DES
+            exec = cryptoSTE_des3des_timed;
             break;
         case EM_CFB: // for AES, DES
             break;

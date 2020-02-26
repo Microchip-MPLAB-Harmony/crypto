@@ -52,7 +52,7 @@ static cryptoST_testDetail_t test_item = // one and only
         .data = ((void*)0), // fill in later
         .length = 16,
     },
-    .key = &(const cryptoST_testData_t)
+    .key = &(cryptoST_testData_t)
         { .data = (DATA_CHAR*)"abcdefghijklmnop", // 128b = 16B
           .length = 16 },
 };

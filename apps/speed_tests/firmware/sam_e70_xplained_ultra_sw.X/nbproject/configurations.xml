@@ -361,6 +361,8 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="wolfcrypt" projectFiles="true">
         <logicalFolder name="f1" displayName="port" projectFiles="true">
@@ -478,6 +480,8 @@
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.c</itemPath>
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.h</itemPath>
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.h</itemPath>
+      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.c</itemPath>
+      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
