@@ -219,7 +219,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
 // *****************************************************************************
 
 #undef TNAME
-#define TNAME "AES CTR 128"
+#define TNAME "WOLF AES CTR 128"
 const char * cryptoSTE_aes_ctr_128_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
@@ -235,7 +235,7 @@ const char * cryptoSTE_aes_ctr_128_timed(cryptoST_testDetail_t * td,
 }
 
 #undef TNAME
-#define TNAME "AES CTR 192"
+#define TNAME "WOLF AES CTR 192"
 const char * cryptoSTE_aes_ctr_192_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
@@ -251,7 +251,7 @@ const char * cryptoSTE_aes_ctr_192_timed(cryptoST_testDetail_t * td,
 }
 
 #undef TNAME
-#define TNAME "AES CTR 256"
+#define TNAME "WOLF AES CTR 256"
 const char * cryptoSTE_aes_ctr_256_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {

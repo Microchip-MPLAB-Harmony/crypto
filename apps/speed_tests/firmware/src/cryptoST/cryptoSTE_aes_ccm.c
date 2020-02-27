@@ -332,7 +332,7 @@ const char * cryptoSTE_aes_ccm_timed(
             cryptoST_testDetail_t * td,
             cryptoSTE_testExecution_t * param)
 {
-    param->results.testHandler = "AES CCM";
+    param->results.testHandler = "WOLF AES CCM";
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation

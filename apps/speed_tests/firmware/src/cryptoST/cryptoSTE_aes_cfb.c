@@ -215,7 +215,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
 // *****************************************************************************
 
 #undef TNAME
-#define TNAME "AES CFB 128"
+#define TNAME "WOLF AES CFB 128"
 const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
@@ -232,7 +232,7 @@ const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
 }
 
 #undef TNAME
-#define TNAME "AES CFB 192"
+#define TNAME "WOLF AES CFB 192"
 const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
@@ -249,7 +249,7 @@ const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
 }
 
 #undef TNAME
-#define TNAME "AES CFB 256"
+#define TNAME "WOLF AES CFB 256"
 const char * cryptoSTE_aes_cfb_256_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {

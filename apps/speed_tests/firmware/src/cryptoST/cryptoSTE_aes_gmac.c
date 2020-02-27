@@ -189,7 +189,7 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
 
 #if defined(WOLFSSL_AES_128) 
 #undef TNAME
-#define TNAME "AES CBC 128"
+#define TNAME "WOLF AES CBC 128"
 const char * cryptoSTE_aes_gmac_128_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
@@ -206,7 +206,7 @@ const char * cryptoSTE_aes_gmac_128_timed(cryptoST_testDetail_t * td,
 
 #if defined(WOLFSSL_AES_192)
 #undef TNAME
-#define TNAME "AES CBC 192"
+#define TNAME "WOLF AES CBC 192"
 const char * cryptoSTE_aes_gmac_192_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
@@ -223,7 +223,7 @@ const char * cryptoSTE_aes_gmac_192_timed(cryptoST_testDetail_t * td,
 
 #if defined(WOLFSSL_AES_256)
 #undef TNAME
-#define TNAME "AES CBC 256"
+#define TNAME "WOLF AES CBC 256"
 const char * cryptoSTE_aes_gmac_256_timed(cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {

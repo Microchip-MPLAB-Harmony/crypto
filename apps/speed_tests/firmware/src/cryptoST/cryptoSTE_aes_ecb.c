@@ -390,7 +390,7 @@ const char * cryptoSTE_aes_ecb_timed(cryptoST_testDetail_t * td,
     if (EM_ECB != td->mode)
         return "test invoked for incorrect mode";
 
-    param->results.testHandler = "AES_ECB"; // establish a default name
+    param->results.testHandler = "MCHP AES_ECB"; // establish a default name
     const ecbTest_t * test = NULL;
 
     __NOP();

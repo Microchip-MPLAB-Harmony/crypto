@@ -320,7 +320,7 @@ const char * cryptoSTE_aes_gcm_timed(
             cryptoST_testDetail_t * td,
             cryptoSTE_testExecution_t * param)
 {
-    param->results.testHandler = "AES GCM";
+    param->results.testHandler = "WOLF AES GCM";
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
