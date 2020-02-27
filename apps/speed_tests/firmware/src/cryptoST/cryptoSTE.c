@@ -207,47 +207,6 @@ cryptoSTE_exec_t sortOutAES256(cryptoST_testDetail_t * rv)
 #define sortOutAES256(x) ((void*)0)
 #endif
 
-cryptoSTE_exec_t sortOutDES(cryptoST_testDetail_t * rv)
-{
-    cryptoSTE_exec_t exec = NULL;
-    
-    switch(rv->mode)
-    {
-        case EM_CBC: // for AES, DES
-            break;
-        case EM_CFB: // for AES, DES
-            break;
-        case EM_ECB: // for AES, DES
-            break;
-        case EM_OFB: // for AES, DES
-            break;
-        default:
-            break;
-    }
-    return exec;
-}
-
-cryptoSTE_exec_t sortOutDES3(cryptoST_testDetail_t * rv)
-{
-    cryptoSTE_exec_t exec = NULL;
-    
-    switch(rv->mode)
-    {
-        case EM_CBC: // for AES, DES
-            exec = cryptoSTE_des3des_timed;
-            break;
-        case EM_CFB: // for AES, DES
-            break;
-        case EM_ECB: // for AES, DES
-            break;
-        case EM_OFB: // for AES, DES
-            break;
-        default:
-            break;
-    }
-    return exec;
-}
-
 /* Identify which test to run.
  * Every combination of technique/mode is covered here.
  *  */
@@ -270,10 +229,10 @@ cryptoSTE_exec_t cryptoSTE_identifyTest(cryptoST_testDetail_t * rv)
             break;
 
         case ET_DES:  /* block=64, deprecated   */
-            exec = sortOutDES(rv);
+            // exec = cryptoSTE_des_timed;
             break;
         case ET_DES3: /* block=64, key=24 bytes */
-            exec = sortOutDES3(rv);
+            exec = cryptoSTE_des3des_timed;
             break;
 
 #if defined(HAVE_AESGCM)

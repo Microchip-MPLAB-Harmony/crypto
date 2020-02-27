@@ -35,8 +35,20 @@ static CONST cryptoST_testVector_t qbf =
     .description = threedes_description,
     .vector.data = (const uint8_t*)
         "The quick brown fox jumped over the lazy dog"
-        "\x04\x04\x04\x04\x04\x04\x04\x04",
-    .vector.length = 48, // 6 whole blocks
+        "\x04\x04\x04\x04\x04\x04\x04\x04", // PKCS note
+    .vector.length = 48, // 44 text as 6 whole blocks 
+};
+
+static CONST cryptoST_testVector_t eee =
+{
+    .name = DATA_PACKAGE_NAME "eee",
+    .source = threedes_source,
+    .description = threedes_description,
+    .vector.data = (const uint8_t*)
+        "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        "eeeeeeeeeeeeeeeeeeeeeee" // 55 e's
+        "\x01\x01\x01\x01\x01\x01\x01\x01", // PKCS note
+    .vector.length = ((55/8)+1)*8,
 };
 
 static CONST cryptoST_testVector_t lorem =
@@ -52,11 +64,11 @@ static CONST cryptoST_testVector_t lorem =
         " reprehenderit in voluptate velit esse cillum dolore eu fugiat n"
         "ulla pariatur. Excepteur sint occaecat cupidatat non proident, s"
         "unt in culpa qui officia deserunt mollit anim id est laborum."
-        "\x03\x03\x03\x03\x03\x03\x03\x03",
+        "\x03\x03\x03\x03\x03\x03\x03\x03", // PKCS note
     .vector.length = (7*64), // 3 pad bytes all with 0x03
 };
 
-static const uint8_t lorem_cipher[] = 
+static const uint8_t lorem_cipher_cbc[] = 
     "\x7C\xC4\xE2\xFC\x58\x08\x36\x5D\xED\xD8\xC3\xB6\x94\x83\xC2\xD4"
     "\xD3\x7E\x63\x67\xB7\x84\xA5\x0E\x15\xA2\x2A\xC2\x47\xAA\x04\x96"
     "\x99\x94\x51\xE7\x83\xF0\xF4\xD2\x09\x0C\x9C\x03\x24\xE3\x7F\xE7"
@@ -85,6 +97,38 @@ static const uint8_t lorem_cipher[] =
     "\x5A\x7E\x3B\x86\x50\xB0\x42\x73\xEF\x75\x5C\xDD\x47\x26\xC2\x56"
     "\x3F\x76\x82\xA1\xEE\x25\xD1\xFB\x17\x8A\x24\xD8\x58\xB8\xBE\x43"
     "\xEE\x1D\x7C\xA3\xA6\x62\xFF\x67\x60\xFE\xCB\x77\x7C\xDB\xCA\x4B";
+
+#if defined(WOLFSSL_DES_ECB)
+static const uint8_t lorem_cipher_ecb[] = 
+    "\x80\xF7\x6C\x2C\xFA\x99\xB2\xDC\xBE\x31\x31\xCB\xD7\x38\x04\x96"
+    "\x56\x3A\x71\x3C\xCE\x0E\x96\x71\xE1\xB9\x03\x46\x9F\xB9\xF5\x67"
+    "\xCB\x7A\x03\xA8\x28\x68\xA6\x28\x66\xE3\xEA\x74\xB1\xE8\x6B\xE9"
+    "\x96\xC2\x54\x69\x85\x21\xB0\x07\xAA\x39\xCF\xEA\xC9\x73\x9E\x5C"
+    "\xEE\x30\xEE\x48\x2C\x3B\xD3\x08\xF0\x72\x56\x2E\xA1\xD1\xE8\xC1"
+    "\xF2\x2E\x0D\x52\x61\xC1\x7A\x79\x19\x4D\x35\xB5\x2F\x6D\x51\xA1"
+    "\x7A\x28\x71\x09\xA8\x44\xF3\xBB\x5B\xC7\x77\x84\xEC\xE1\xE4\xDB"
+    "\xDD\x50\x5B\x1C\xA2\x3C\x12\x43\x8B\x6A\x10\x60\x75\xF4\xE8\xF6"
+    "\xB3\x0C\xC5\x51\x7D\xAC\x6E\x8C\x9A\xC1\xC9\x2C\x83\x18\x09\xF4"
+    "\x10\x35\x5E\x7D\xCB\x55\x32\x88\x4E\x69\xE7\x60\x78\x90\x59\xCC"
+    "\x40\xFD\x23\x29\x46\xB2\xCE\x4C\x6C\xEB\x75\xBD\x5D\x3D\xEA\xC8"
+    "\x50\x03\x76\xD2\x11\x63\xEA\x8B\xB5\x09\xF8\xCD\x9B\x48\x07\xBA"
+    "\xBF\x80\xB7\xDA\x1A\x8A\xC5\x94\x76\x9D\x59\xDA\x47\xDA\xC4\x31"
+    "\x79\x50\x42\xCE\x92\x6B\xF2\x69\xDE\x3C\x51\x61\x31\xF6\xE5\xF6"
+    "\x07\x63\xD6\xC4\x7F\xE5\x90\x03\xE8\x8D\x6E\xC2\x07\x2F\xD4\x73"
+    "\xCF\x7A\x61\xB9\x10\x5F\xF8\x6B\x8E\xAF\x83\x37\x10\x38\xCA\x5A"
+    "\x0D\x25\x82\xE8\x01\x0D\xDF\xE9\xD8\xE0\xBD\x29\xC5\x79\x10\xF7"
+    "\x9A\x0F\x0E\x68\x17\xE1\xEC\x63\x75\x74\x85\xBA\x23\xAE\x2F\x7A"
+    "\x6A\xEF\x8E\x5B\x2D\xE3\xAD\x66\x57\xDA\xEC\x7C\x19\x70\x21\x2D"
+    "\x13\xBF\x00\x39\xC3\xB4\x9C\x1E\x9B\x6B\xD7\x0B\xC1\xFD\x5D\x22"
+    "\x06\x94\x17\xFC\x6B\xD2\xDF\x62\xB9\xC1\xD4\xA0\x4B\x52\x80\x49"
+    "\x86\x3C\x8C\x1F\x0B\x73\x9B\xE4\xC2\xB9\xCE\x89\x7B\xB2\x72\xA2"
+    "\x9C\x00\x2D\xF5\x6A\x18\x36\x48\x54\x2A\x61\x46\x2F\x13\x63\xF4"
+    "\x0D\x3D\x00\x6C\x8D\x74\xD4\xC0\xE5\xE1\x54\xF6\x98\x91\x26\xE6"
+    "\x9E\xCB\xB7\x8A\x50\x12\xB4\x40\x07\x02\xEE\x1F\x46\xF3\xDE\xF5"
+    "\x57\xE1\x8B\x5C\x88\x92\xB6\x1A\xDA\x04\xA7\xF6\x57\xDD\x4D\xAB"
+    "\x61\x1E\xEB\xCB\x94\x9D\x9A\x6A\x14\x8A\x5C\xF9\x20\x12\xED\x49"
+    "\xA2\x90\xE8\x62\x34\xFD\x6E\xC8\x39\x0F\x9F\x9C\xA1\xCE\xB0\xB3";
+#endif // DES_ECB
 #endif // !NO_DES3
 
 /*************************************************************
@@ -93,7 +137,7 @@ static const uint8_t lorem_cipher[] =
 static const uint8_t threedes_key[] = "1234567890123456ABCDEFGH";
 static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
 {
-#if !defined(NO_DES3)
+    // ////// CBC MODE /////////////////////////////////
     {
         .technique = ET_DES3,
         .mode = EM_CBC,
@@ -124,23 +168,6 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
 
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
-        .rawData = &lorem,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
-        .ivNonce.length = 8,
-        .ivNonce.data = (const uint8_t*)"12345678",
-        .goldenCipher = {
-            .length = (28*16),
-            .data = lorem_cipher,
-        },
-    },
-    {
-        .technique = ET_DES3,
-        .mode = EM_CBC,
-        .recommendedRepetitions = 1000,
-
-        .source = __BASE_FILE__ "(" BASE_LINE ")",
-        .pedigree = threedes_description,
         .rawData = &qbf,
         .key = &(cryptoST_testData_t)
             { .length = 24, .data = threedes_key },
@@ -157,7 +184,87 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
                 "\x48\x1F\xF2\x01\x55\x81\x6A\x8C" },
         },
     },
-#endif // !NO_SHA
+    {
+        .technique = ET_DES3,
+        .mode = EM_CBC,
+        .recommendedRepetitions = 1000,
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = threedes_description,
+        .rawData = &lorem,
+        .key = &(cryptoST_testData_t)
+            { .length = 24, .data = threedes_key },
+        .ivNonce.length = 8,
+        .ivNonce.data = (const uint8_t*)"12345678",
+        .goldenCipher = {
+            .length = (28*16),
+            .data = lorem_cipher_cbc,
+        },
+    },
+    // ////// ECB MODE /////////////////////////////////
+#if defined(WOLFSSL_DES_ECB)
+/* Note: at CRYPTO=3.5.0 this may not be set in configuration.h
+ * by Harmony3 and must be added after generating code.
+ * */
+    {
+        .technique = ET_DES3,
+        .mode = EM_ECB,
+        .recommendedRepetitions = 1000,
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = threedes_description,
+        .rawData = &qbf,
+        .key = &(cryptoST_testData_t)
+            { .length = 24, .data = threedes_key },
+        // .ivNonce.length = 8,
+        // .ivNonce.data = (const uint8_t*)"12345678",
+        .goldenCipher = {
+            .length = (6*8),
+            .data = (const uint8_t[]){
+    "\x13\xD4\xD3\x54\x94\x93\xD2\x87\x0F\x93\xC3\xE0\x81\x2A\x06\xDE"
+    "\x46\x7E\x1F\x9C\x0B\xFB\x16\xC0\x70\xED\xE5\xCA\xBB\xD3\xCA\x62"
+    "\xF2\x17\xA7\xAE\x8D\x47\xF2\xC7\x19\x8F\xF3\x91\x62\xEC\xEC\x94" },
+        },
+    },
+    {
+        .technique = ET_DES3,
+        .mode = EM_ECB,
+        .recommendedRepetitions = 1000,
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = threedes_description,
+        .rawData = &eee,
+        .key = &(cryptoST_testData_t)
+            { .length = 24, .data = threedes_key },
+        // .ivNonce.length = 8,
+        // .ivNonce.data = (const uint8_t*)"12345678",
+        .goldenCipher = {
+            .length = (7*8),
+            .data = (const uint8_t[]){
+    "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
+    "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
+    "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
+    "\x9F\xA9\xB6\x06\x88\xE2\x01\xC2" },
+        },
+    },
+    {
+        .technique = ET_DES3,
+        .mode = EM_ECB,
+        .recommendedRepetitions = 1000,
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = threedes_description,
+        .rawData = &lorem,
+        .key = &(cryptoST_testData_t)
+            { .length = 24, .data = threedes_key },
+        // .ivNonce.length = 8,
+        // .ivNonce.data = (const uint8_t*)"12345678",
+        .goldenCipher = {
+            .length = (28*16),
+            .data = lorem_cipher_ecb,
+        },
+    },
+#endif // DES_ECB
     {}
 };
 #define test_item_count (sizeof(test_item)/sizeof(cryptoST_testDetail_t))

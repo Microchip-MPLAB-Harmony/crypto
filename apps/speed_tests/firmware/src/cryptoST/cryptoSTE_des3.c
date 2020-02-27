@@ -97,13 +97,13 @@ typedef struct desTest_s
 
 #if !defined(NO_DES)
 static const desTest_t wolf_des_ecb = {
-    .name = "WOLF DES_ECB",
+    .name = "WOLF DES ECB",
     .keySize = 64/8,
     .encrypt = wc_Des_EcbEncrypt,
     .decrypt = wc_Des_EcbDecrypt,
 };
 static const desTest_t wolf_des_cbc = {
-    .name = "WOLF DES_CBC",
+    .name = "WOLF DES CBC",
     .keySize = 64/8,
     .encrypt = wc_Des_CbcEncrypt,
     .decrypt = wc_Des_CbcDecrypt,
@@ -111,16 +111,27 @@ static const desTest_t wolf_des_cbc = {
 #endif
 #if !defined(NO_DES3)
 static const desTest_t wolf_des3_cbc = {
-    .name = "WOLF DES_CBC",
+    .name = "WOLF DES CBC",
     .keySize = (3*64)/8,
     .encrypt = wc_Des3_CbcEncrypt,
     .decrypt = wc_Des3_CbcDecrypt,
 };
+#if defined(WOLFSSL_DES_ECB)
+/* Note: at CRYPTO=3.5.0 this may not be set in configuration.h
+ * by Harmony3 and must be added after generating code.
+ * */
+static const desTest_t wolf_des3_ecb = {
+    .name = "WOLF DES ECB",
+    .keySize = (3*64)/8,
+    .encrypt = wc_Des3_EcbEncrypt,
+    .decrypt = wc_Des3_EcbDecrypt,
+};
+#endif // DES_ECB
 #endif
 
 // TODO: arrange for HW-accelerated w/o WolfCrypt
 static const desTest_t localEntry = {
-    .name = "MCHP_HW_DES3",
+    .name = "MCHP DES3 NONE",
     .keySize = (3*64)/8,
     .encrypt = ((void*)0),
     .decrypt = ((void*)0),
@@ -169,7 +180,6 @@ static const char * cryptoSTE_des3des_all_timed
         int ret;
         Des3 enc;
         assert_dbug(24 == td->key->length);
-        assert_dbug(8 == td->ivNonce.length);
         ret = wc_Des3_SetKey(&enc, td->key->data, td->ivNonce.data, DES_ENCRYPTION);
         if (ret != 0) 
             { param->results.errorMessage = "failed to set key"; break; }
@@ -283,7 +293,7 @@ static char * badKey = "incorrect key length";
 const char * cryptoSTE_des3des_timed(cryptoST_testDetail_t * td,
                                      cryptoSTE_testExecution_t * param)
 {
-    param->results.testHandler = "MCHP_DES"; // establish a default name
+    param->results.testHandler = "MCHP_DES3"; // establish a default name
     const desTest_t * test = NULL;
 
     __NOP();
@@ -305,8 +315,16 @@ const char * cryptoSTE_des3des_timed(cryptoST_testDetail_t * td,
 #endif
     case ET_DES3:
         if (EM_CBC == td->mode)
+        {
+            assert_dbug(8 == td->ivNonce.length);
             test = (param->parameters.useLocalDriverEntryPoints)?
                         &localEntry : &wolf_des3_cbc;
+        }
+#if defined(WOLFSSL_DES_ECB)
+        else if (EM_ECB == td->mode)
+            test = (param->parameters.useLocalDriverEntryPoints)?
+                        &localEntry : &wolf_des3_ecb;
+#endif // DES_ECB
         break;
 #endif
     default:
