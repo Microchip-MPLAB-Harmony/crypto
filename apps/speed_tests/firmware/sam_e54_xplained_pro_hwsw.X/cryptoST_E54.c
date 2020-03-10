@@ -112,6 +112,7 @@ static cryptoSTE_parameters_t exec_onceThroughAndCheck =
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
+#define HAVE_HW_DRIVERS     false
 
 // *****************************************************************************
 // *****************************************************************************
@@ -138,7 +139,7 @@ void cryptoST(void)
 
     execData.configuration.parameters = exec_onceThroughAndCheck;
     execData.configuration.parameters.displayType = CST_TEXT;
-    execData.configuration.parameters.compareHWvSW = true;
+    execData.configuration.parameters.compareHWvSW = HAVE_HW_DRIVERS;
     cryptoSTE_announceParameters(&execData.configuration);
 
     printf("Encrypt/decrypt all data to demonstrate correct operation." CRLF);
@@ -150,7 +151,7 @@ void cryptoST(void)
     // Now do the timed tests
     execData.configuration.parameters = exec_repetitiveTimed;
     execData.configuration.parameters.displayType = CST_CSV;
-    execData.configuration.parameters.compareHWvSW = true;
+    execData.configuration.parameters.compareHWvSW = HAVE_HW_DRIVERS;
     cryptoSTE_announceParameters(&execData.configuration);
 
     printf("> Timed testing begins!" CRLF);

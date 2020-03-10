@@ -152,7 +152,7 @@ typedef struct cryptoSTE_localData_s
  * WC and device-hardware versions to coexist. 
  */
 typedef void (cryptoSTE_shaOperator_t)
-    (uint32_t hash[8], const uint8_t * data, const size_t length);
+    (uint32_t hash[], const uint8_t * data, const size_t length);
 
 #ifdef	__cplusplus
 }

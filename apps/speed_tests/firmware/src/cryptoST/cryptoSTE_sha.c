@@ -110,9 +110,10 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
                                     param->parameters.iterationOverride
                                   : td->recommendedRepetitions;
 
+    assert_dbug(0 < td->goldenCipher.length);
+    uint32_t hash[td->goldenCipher.length]; // room for expected size
     do
     {
-        uint32_t hash[8];
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)
         {
@@ -158,7 +159,7 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
 #if !defined(NO_SHA) // SHA1
 #include "wolfssl/wolfcrypt/hash.h"
  static void WC_sha128
-    (uint32_t hash[8], const uint8_t * data, const size_t length)
+    (uint32_t hash[128/32], const uint8_t * data, const size_t length)
 {
     wc_ShaHash(data, length, (uint8_t*)hash);
 }
@@ -167,33 +168,35 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
 #if !defined(NO_SHA256)
 #include "wolfssl/wolfcrypt/hash.h"
 static void WC_sha256
-    (uint32_t hash[8], const uint8_t * data, const size_t length)
+    (uint32_t hash[256/32], const uint8_t * data, const size_t length)
 {
     wc_Sha256Hash(data, length, (uint8_t*)hash);
 }
 
 #if defined(WOLFSSL_SHA224)
 static void WC_sha224
-    (uint32_t hash[8], const uint8_t * data, const size_t length)
+    (uint32_t hash[224/32], const uint8_t * data, const size_t length)
 {
     wc_Sha224Hash(data, length, (uint8_t*)hash);
 }
 #endif // !NO_SHA224
 #endif // WOLFSSL_SHA224
 
-#if !defined(NO_SHA384)
-#include "wolfssl/wolfcrypt/hash.h"
+// #if !defined(NO_SHA384)
+#if defined(WOLFSSL_SHA384)
+#include "wolfssl/wolfcrypt/sha512.h"
 static void WC_sha384
-    (uint32_t hash[8], const uint8_t * data, const size_t length)
+    (uint32_t hash[384/32], const uint8_t * data, const size_t length)
 {
     wc_Sha384Hash(data, length, (uint8_t*)hash);
 }
 #endif // !NO_SHA256
 
-#if !defined(NO_SHA512)
-#include "wolfssl/wolfcrypt/hash.h"
+// #if !defined(NO_SHA512)
+#if defined(WOLFSSL_SHA512)
+#include "wolfssl/wolfcrypt/sha512.h"
 static void WC_sha512
-    (uint32_t hash[8], const uint8_t * data, const size_t length)
+    (uint32_t hash[512/32], const uint8_t * data, const size_t length)
 {
     wc_Sha512Hash(data, length, (uint8_t*)hash);
 }
@@ -207,9 +210,17 @@ static void WC_sha512
 const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param)
 {
-    /* Only support differential timing on platforms
-     * with crypto-SHA hardware.
+    /* Differential timing is supported only on selected platforms.
+     * The hardware-available flag is set when H3 is configured
+     * with "Use Hardware Cryptography", but meaningful results can
+     * only be obtained when this particular algorithm has HW support
+     * disabled, otherwise WC calls are redirected to the hardware.
      */
+#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105) \
+ || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010)
+    // TODO: add E54 support.
+#endif
+    
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803) \
  || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805)
 #include "crya/crya.h"

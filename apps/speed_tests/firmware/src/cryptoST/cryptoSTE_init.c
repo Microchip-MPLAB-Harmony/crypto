@@ -56,18 +56,17 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../../test_data/cryptoSpeedTestData.h"
 
 // Datasets are screened based on the Harmony configuration.
-#if !defined(NO_SHA) // SHA1
-#include "../test_data/cryptoSTD_sha1.h"
-#endif
-#if !defined(NO_SHA224)
-#include "../test_data/cryptoSTD_sha224.h"
-#endif
-#if !defined(NO_SHA256)
-#include "../test_data/cryptoSTD_sha256.h"
+#if !defined(NO_SHA)        \
+ || !defined(NO_SHA224)     \
+ || !defined(NO_SHA256)     \
+ || defined(WOLFSSL_SHA384) \
+ || defined(WOLFSSL_SHA512)
+#include "../test_data/cryptoSTD_sha_nist.h"
+#include "../test_data/cryptoSTD_sha_bigBlock.h"
 #endif
 #if defined(HAVE_AES_ECB)
 #include "../test_data/cryptoSTD_aesavs.h"
-#include "../test_data/cryptoSTD_aes_ecb.H"
+#include "../test_data/cryptoSTD_aes_ecb.h"
 #endif
 #if defined(HAVE_AES_CBC)
 #include "../test_data/cryptoSTD_wolfSSL_aes_cbc.h"
@@ -104,7 +103,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  * as long as there are enough to cover the given API's, and that
  * will be verified by assertion when the list is loaded.
  *  */
-static cryptoST_testAPI_t ST_list[12];
+static cryptoST_testAPI_t ST_list[13];
 #define API_MAX (sizeof(ST_list)/sizeof(ST_list[0]))
 
 void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
@@ -138,16 +137,12 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = ds70005365;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
-#if defined(CRYPTOSTV_SHA1)
-    ST_list[numberOfLoadedAPI++] = microchip_sha1;
+#if defined(CRYPTOSTV_SHA_NIST)
+    ST_list[numberOfLoadedAPI++] = microchip_sha_nist;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
-#if defined(CRYPTOSTV_SHA224)
-    ST_list[numberOfLoadedAPI++] = microchip_sha224;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-#if defined(CRYPTOSTV_SHA256)
-    ST_list[numberOfLoadedAPI++] = microchip_sha256;
+#if defined(CRYPTOSTV_SHA_BIGBLOCK)
+    ST_list[numberOfLoadedAPI++] = microchip_sha_bigBlock;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 #ifdef CRYPTOSTD_AESAVS_H

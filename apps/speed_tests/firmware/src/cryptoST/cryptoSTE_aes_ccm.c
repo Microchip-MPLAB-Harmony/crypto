@@ -63,6 +63,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <string.h>
 #include <stdbool.h>
 
+#include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 // #include <wolfssl/wolfssl/verion.h>
 #ifdef USE_FLAT_TEST_H

@@ -81,6 +81,18 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Helper routines and wrappers
 // *****************************************************************************
 // *****************************************************************************
+
+/* Differential timing is supported only on selected platforms.
+ * The hardware-available flag is set when H3 is configured
+ * with "Use Hardware Cryptography", but meaningful results can
+ * only be obtained when this particular algorithm has HW support
+ * disabled, otherwise WC calls are redirected to the hardware.
+ */
+
+#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2238)
+// TODO: add HW support for E54
+#endif
+
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803) \
  || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805)
 #include "crya/crya.h"

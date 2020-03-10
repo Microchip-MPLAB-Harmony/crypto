@@ -135,7 +135,7 @@ extern "C" {
 #define HAVE_AESCCM
 #define WOLFSSL_CMAC
 #define NO_RC4
-#define NO_HC128
+#define NO_HC128    
 #define NO_RABBIT
 #define HAVE_ECC
 #define NO_DH

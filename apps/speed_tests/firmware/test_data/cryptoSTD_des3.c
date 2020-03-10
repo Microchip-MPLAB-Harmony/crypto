@@ -39,6 +39,7 @@ static CONST cryptoST_testVector_t qbf =
     .vector.length = 48, // 44 text as 6 whole blocks 
 };
 
+#if defined(WOLFSSL_DES_ECB)
 static CONST cryptoST_testVector_t eee =
 {
     .name = DATA_PACKAGE_NAME "eee",
@@ -50,6 +51,7 @@ static CONST cryptoST_testVector_t eee =
         "\x01\x01\x01\x01\x01\x01\x01\x01", // PKCS note
     .vector.length = ((55/8)+1)*8,
 };
+#endif
 
 static CONST cryptoST_testVector_t lorem =
 {

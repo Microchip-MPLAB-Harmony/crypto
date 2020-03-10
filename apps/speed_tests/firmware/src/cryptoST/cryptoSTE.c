@@ -60,6 +60,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 /* Declare the total test suite.
  *  */
+#include "configuration.h"
 #include "cryptoSTE_aes_ecb.h"
 #include "cryptoSTE_aes_cbc.h"
 #include "cryptoSTE_aes_cfb.h"
@@ -228,13 +229,17 @@ cryptoSTE_exec_t cryptoSTE_identifyTest(cryptoST_testDetail_t * rv)
             exec = sortOutAES256(rv);
             break;
 
+#if !defined(NO_DES)
         case ET_DES:  /* block=64, deprecated   */
             // exec = cryptoSTE_des_timed;
             break;
+#endif
+#if !defined(NO_DES3)
         case ET_DES3: /* block=64, key=24 bytes */
             exec = cryptoSTE_des3des_timed;
             break;
-
+#endif
+            
 #if defined(HAVE_AESGCM)
         case ET_AES_GCM:
             if (EM_NONE == rv->mode)
