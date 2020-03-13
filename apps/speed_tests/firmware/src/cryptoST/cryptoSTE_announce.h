@@ -56,7 +56,7 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t *);
 void cryptoSTE_announceVector(int level, cryptoST_testVector_t *);
 void cryptoSTE_announceSuite(const cryptoST_testAPI_t *);
 void cryptoSTE_announceAll(cryptoSTE_localData_t *);
-// klk void cryptoSTE_announceParameters(cryptoSTE_parameters_t * parameters);
+
 void cryptoSTE_announceParameters(cryptoSTE_testExecution_t * config);
 
 #ifdef	__cplusplus

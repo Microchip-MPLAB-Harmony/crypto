@@ -13,7 +13,7 @@
 #define DATA_PACKAGE_NAME "AES_ECB"
 #define DATA_CHAR const uint8_t
 #if defined(__SAML11E16A__) // known to have not-enough memory
-#define TEST_SIZE_MAX (4*1024) // must power-of-2
+#define TEST_SIZE_MAX (2*1024) // must power-of-2
 #else // everybodyelse
 #define TEST_SIZE_MAX (32*1024) // must power-of-2
 #endif
@@ -71,8 +71,6 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
 
     // Validate that we have received the correct pointer.
     if (old != &test_item) 
-        ;
-    else if (testSize >= TEST_SIZE_MAX)
         return NULL;
     else if (testSize > 18000)
         return NULL;
@@ -90,11 +88,16 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
         testSize = 2 * 1024;
     else testSize = 1024;
 
-    softData.vector.length = testSize;
-    __conditional_software_breakpoint
-        (!cryptoSTE_generatePseudorandomUINT32
-            ((uint32_t*)softData.vector.data, 
-                0x31415927, testSize/sizeof(uint32_t)));
+    if (testSize > TEST_SIZE_MAX)
+        return NULL;
+    else
+    {
+        softData.vector.length = testSize;
+        __conditional_software_breakpoint
+            (!cryptoSTE_generatePseudorandomUINT32
+                ((uint32_t*)softData.vector.data, 
+                    0x31415927, testSize/sizeof(uint32_t)));
+    }
     return old;
 }
 

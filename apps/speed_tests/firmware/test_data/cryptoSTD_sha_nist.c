@@ -19,6 +19,12 @@
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "SHA_NIST"
 
+/* For SAML11 devices, the built-in encryption routines require
+ * that all data be int32-aligned. This macro is applied so that 
+ * const data will be correctly positioned. 
+ */
+#define ALIGN4 __attribute__((aligned(4)))
+
 /*************************************************************
  * Raw (input) data definitions.
  *************************************************************/
@@ -32,7 +38,7 @@ static CONST cryptoST_testVector_t abc_3 =
     .name = DATA_PACKAGE_NAME "_abc3",
     .source = sha_all,
     .description = sha_all_description,
-    .vector.data = (const uint8_t[]){0x61, 0x62, 0x63}, // "abc"
+    .vector.data = (ALIGN4 const uint8_t[]){0x61, 0x62, 0x63}, // "abc"
     .vector.length = 3, // 24 bits
 };
 static CONST cryptoST_testVector_t abc_56 =
@@ -40,7 +46,7 @@ static CONST cryptoST_testVector_t abc_56 =
     .name = DATA_PACKAGE_NAME "_abc56",
     .source = sha_all,
     .description = sha_all_description,
-    .vector.data = (uint8_t[]){
+    .vector.data = (ALIGN4 uint8_t[]){
         "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"},
     .vector.length = 56, // 448 bits
 };
@@ -49,7 +55,7 @@ static CONST cryptoST_testVector_t abc_112 =
     .name = DATA_PACKAGE_NAME "_abc112",
     .source = sha_all,
     .description = sha_all_description,
-    .vector.data = (const uint8_t[]){
+    .vector.data = (ALIGN4 const uint8_t[]){
         "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhi"
         "jklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"},
     .vector.length = 112, // 896 bits
@@ -151,7 +157,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .rawData = &abc_3,
         .goldenCipher = {
             .length = 32,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xba, 0x78, 0x16, 0xbf, 0x8f, 0x01, 0xcf, 0xea, 
                 0x41, 0x41, 0x40, 0xde, 0x5d, 0xae, 0x22, 0x23,
                 0xb0, 0x03, 0x61, 0xa3, 0x96, 0x17, 0x7a, 0x9c,
@@ -343,7 +349,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
  *************************************************************/
 cryptoST_testAPI_t const microchip_sha_nist =
 {
-    .name = "SHA_" DATA_PACKAGE_NAME,
+    .name = DATA_PACKAGE_NAME,
     .openData = openData_func,
     .firstTest = firstTest,
     .nextTest = nextTest,

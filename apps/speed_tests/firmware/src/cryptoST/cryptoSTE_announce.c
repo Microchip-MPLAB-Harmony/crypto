@@ -91,8 +91,12 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
     P_INT("Technique", rv->technique);
     P_INT("Mode     ", rv->mode);
     P_INT("Data size", rv->rawData->vector.length);
+    if (rv->source) 
+        PTEXT("Source   ", rv->source);
     if (rv->pedigree) 
         PTEXT("Pedigree ", rv->pedigree);
+    if (rv->rawData && rv->rawData->name)
+        PTEXT("Raw data ", rv->rawData->name);
     if (CSTE_VERBOSE > 1) 
         P_INT("..repetitions: ", rv->recommendedRepetitions);
     if (CSTE_VERBOSE > 2)

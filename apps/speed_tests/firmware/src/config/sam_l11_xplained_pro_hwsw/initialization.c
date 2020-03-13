@@ -67,9 +67,12 @@
 #pragma config WDT_WEN = CLEAR
 #pragma config BOD33_HYST = CLEAR
 
-
+/* Do not remove the following line when performing Harmony3 code build. 
+ * Refer to the crypt library release notes for V3.5. 
+ */
 void TC0_TimerCallbackRegister
     (SYS_TIME_PLIB_CALLBACK callback, uintptr_t context){}
+
 
 
 // *****************************************************************************

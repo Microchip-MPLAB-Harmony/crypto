@@ -49,6 +49,9 @@
 // *****************************************************************************
 // *****************************************************************************
 
+#if !defined(NO_AES_128) \
+ && !defined(NO_AES_192) \
+ && !defined(NO_AES_256)
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
@@ -180,6 +183,7 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
     free(cipher);
     return param->results.errorMessage;
 }
+#endif // not-no AES
 
 // *****************************************************************************
 // *****************************************************************************

@@ -123,6 +123,7 @@ extern "C" {
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242
 #define WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803
 #define NO_MD4
+#define NO_MD5
 #define NO_SHA // specifically, no SHA1 (legacy name)
 #define WOLFSSL_SHA224
 #define WOLFSSL_HAVE_MCHP_HW_SHA264
@@ -138,7 +139,7 @@ extern "C" {
 #define HAVE_AES_ECB
 #define HAVE_AES_CBC
 #define WOLFSSL_AES_COUNTER
-#define WOLFSSL_AES_CFB
+#define HAVE_AESGCM
 #define NO_RC4
 #define NO_HC128
 #define NO_RABBIT
@@ -149,6 +150,8 @@ extern "C" {
 #define HAVE_HASHDRBG
 #define WC_NO_HARDEN
 #define SINGLE_THREADED
+#define NO_ASN
+#define NO_SIG_WRAPPER
 #define NO_ERROR_STRINGS
 #define NO_WOLFSSL_MEMORY
 

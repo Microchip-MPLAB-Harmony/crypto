@@ -94,6 +94,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
+#ifdef HAVE_AESCCM
+
 #if CSTE_VERBOSE
 static void dumpHex(cryptoST_testDetail_t * td,
                     bool goldCipherToo,
@@ -120,8 +122,6 @@ static void dumpHex(cryptoST_testDetail_t * td,
     PRINT_WAIT(CRLF);
 }
 #endif // CSTE_VERBOSE
-    
-#ifdef HAVE_AESCCM
 
 /* This test based on test.c/aesccm_default_test_helper().
  * The public entry points are defined below.

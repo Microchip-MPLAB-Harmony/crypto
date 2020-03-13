@@ -51,18 +51,22 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define CRLF "\r\n"
 
 #define PRINT_MALLOC  0
+#if PRINT_MALLOC
 __attribute__((used)) static size_t allocated = 0;
- 
+__attribute__((used)) static size_t allocations = 0;
+#endif
+
 void * cryptoSTE_malloc(size_t s)
 {
     void * p = malloc(s);
 #if PRINT_MALLOC
     if (p)
     {
+        allocations++;
         allocated += s;
-        printf("<malloc %p size=%u>" CRLF, p, s);
+        printf("<(%3d) malloc %p size=%u>" CRLF, allocations, p, s);
     }
-    else printf("<malloc %p failed>" CRLF, p);
+    else printf("<(%3d) malloc %p failed size=%u>" CRLF, allocations, p, s);
 #endif
     return p;
 }
@@ -71,6 +75,7 @@ void cryptoSTE_free(void * p)
 {
     free(p);
 #if PRINT_MALLOC
-    printf("<free   %p>" CRLF, p);
+    allocations--;
+    printf("<(%3d) free   %p>" CRLF, allocations, p);
 #endif
 }

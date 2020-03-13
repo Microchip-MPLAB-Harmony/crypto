@@ -143,7 +143,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
     
     if (NULL == resultC) 
         param->results.errorMessage = 
-                "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
+                "cannot allocate memory at " __FILE__ "(" BASE_LINE ")";
     else do /* once or break */
     {
         Aes enc;
@@ -238,7 +238,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
                     "decryption skipped because of multiple iterations";
         else if (NULL == (resultP = cryptoSTE_malloc(rawSizePadded)))
             param->results.errorMessage = 
-                    "no memory for decrypt (" __BASE_FILE__ " line " BASE_LINE ")";
+                "no memory for decrypt (" __BASE_FILE__ " line " BASE_LINE ")";
         else do /* once or break */
         {
             Aes dec;
@@ -248,7 +248,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
               break; }
 
             if (0 != wc_AesGcmSetKey(&dec, td->key->data, td->key->length))
-            { param->results.errorMessage = "failed to set key"; break; }
+            { param->results.errorMessage = "failed SetKey.dec"; break; }
 
             if (CSTE_VERBOSE > 1) 
                 PRINT_WAIT("-- decrypting and comparing" CRLF)

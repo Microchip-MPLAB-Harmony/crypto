@@ -235,6 +235,7 @@ const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
                 param->results.testHandler = "CRYA SHA 256";
                 return cryptoSTE_sha(td, param, crya_sha256);
             default:
+                param->results.testHandler = "CRYA SHA";
                 return "SHA size not supported";
         }
     }
@@ -269,6 +270,7 @@ const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
                 return cryptoSTE_sha(td, param, WC_sha512);
 #endif //WOLFSSL_SHA256
             default:
+                param->results.testHandler = "SHA (default)";
                 return "SHA size not supported";
         }
     }

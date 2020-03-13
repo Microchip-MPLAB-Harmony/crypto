@@ -14,6 +14,7 @@
 #define DATA_PACKAGE_NAME "DS70005365"
 
 const CPU_CHAR appNoteReference[] = "SAML11 Security Guide AN5365 (DS70005365A)";
+#define ALIGN4 __attribute__((aligned(4)))
 
 /*************************************************************
  * Raw (input) data definitions providing small-block constants.
@@ -24,7 +25,7 @@ static CONST cryptoST_testVector_t ds_001122 =
     .name = DATA_PACKAGE_NAME "A_AES128", // DS70005365A rev.A
     .source = appNoteReference,
     .description = "DS70005365A example", // rev.A=fig.5-3, rev.B=fig.3-11
-    .vector.data = (uint8_t[]){
+    .vector.data = (ALIGN4 const uint8_t[]){
         0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77,
         0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff
     },
@@ -38,7 +39,7 @@ static CONST cryptoST_testVector_t ds_sha256 =
     .name = DATA_PACKAGE_NAME "A_SHA256", // DS70005365A rev.A
     .source = appNoteReference,
     .description = "DS70005365A example", // rev.A=fig.5-3, rev.B=fig.3-11
-    .vector.data = (uint8_t*)"hello world",
+    .vector.data = (ALIGN4 const uint8_t[]){ "hello world" },
     .vector.length = 11,
 };
 #endif
@@ -64,13 +65,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &ds_001122,
         .key = &(cryptoST_testData_t){ 
             .length = 16,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
             },
         },
         .goldenCipher = {
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x69, 0xc4, 0xe0, 0xd8, 0x6a, 0x7b, 0x04, 0x30,
                 0xd8, 0xcd, 0xb7, 0x80, 0x70, 0xb4, 0xc5, 0x5a
             },
@@ -88,7 +89,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .pedigree = appNoteReference,
         .rawData = &ds_sha256,
         .goldenCipher = {
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xb9, 0x4d, 0x27, 0xb9, 0x93, 0x4d, 0x3e, 0x08,
                 0xa5, 0x2e, 0x52, 0xd7, 0xda, 0x7d, 0xab, 0xfa,
                 0xc4, 0x84, 0xef, 0xe3, 0x7a, 0x53, 0x80, 0xee,
@@ -109,7 +110,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .rawData = &ds_001122,
         .key = { 
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xcf, 0x06, 0x3a, 0x34, 0xd4, 0xa9, 0xa7, 0x6c,
                 0x2c, 0x86, 0x78, 0x7d, 0x3f, 0x95, 0xdb, 0x71
             },
@@ -124,14 +125,14 @@ static CONST cryptoST_testDetail_t test_item[] =
         },
         .goldenCipher = { // from the application note
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xc0, 0x8a, 0x14, 0x84, 0xd1, 0x3b, 0xe1, 0xe1, 
                 0x93, 0x39, 0x67, 0x14, 0x93, 0xc3, 0xcb, 0xac
             }
         },
         .goldenTag = { 
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x42, 0x3b, 0x3a, 0x05, 0x65, 0x0a, 0xdc, 0x94, 
                 0x42, 0x15, 0x1d, 0x51, 0x54, 0x78, 0xba, 0x0a
             },

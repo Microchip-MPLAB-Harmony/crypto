@@ -60,6 +60,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "./cryptoSpeedTestData.h"
 #include "configuration.h"
 
+#if !defined(NO_AES_128) \
+ && !defined(NO_AES_192) \
+ && !defined(NO_AES_256)
+
 #define CONST /* as nothing */
 #define null ((void*)0)
 
@@ -348,6 +352,12 @@ static cryptoST_testDetail_t * firstTest(void)
     testDetail.pedigree = PDF " appendix B";
     return nextTest(&testDetail);
 };
+#else
+static cryptoST_testDetail_t * firstTest(void)
+{ return 0; }
+static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+{ return 0; }
+#endif // not-no AES
 
 /*************************************************************
  * Declaration of the test manager API
@@ -362,4 +372,3 @@ cryptoST_testAPI_t const aesavs_aes128 =
     .nextTest = nextTest,
     .closeData = NULL,
 };
-

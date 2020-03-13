@@ -155,8 +155,8 @@
           <Name dnOrder="1">crypt_aes_sam6149.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">F4651870D74059AF1EA1CADDDB5CE392</GeneratedChecksum>
-          <UserChecksum dnOrder="5">F4651870D74059AF1EA1CADDDB5CE392</UserChecksum>
+          <GeneratedChecksum dnOrder="4">9CD43B33DB93C4502F95A88BF4618717</GeneratedChecksum>
+          <UserChecksum dnOrder="5">9CD43B33DB93C4502F95A88BF4618717</UserChecksum>
         </File>
         <File dnOrder="19">
           <Type dnOrder="0">SOURCE</Type>
@@ -219,8 +219,8 @@
           <Name dnOrder="1">crypt_sam_u2803.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">C60C882F9ACCB89C27D771B07930A15F</GeneratedChecksum>
-          <UserChecksum dnOrder="5">9427542A270F60E5028FE7C22E150817</UserChecksum>
+          <GeneratedChecksum dnOrder="4">FA779EF05886E4A676E9AE631B3C9421</GeneratedChecksum>
+          <UserChecksum dnOrder="5">FA779EF05886E4A676E9AE631B3C9421</UserChecksum>
         </File>
         <File dnOrder="27">
           <Type dnOrder="0">SOURCE</Type>
@@ -508,7 +508,7 @@
           <LogicalPath dnOrder="2">config/sam_l11_xplained_pro_hwsw/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">BBE622AC7F61B2EDA63BDB76ADD8F7D8</GeneratedChecksum>
-          <UserChecksum dnOrder="5">1C8501C65485DD60C0907C3C7B38053E</UserChecksum>
+          <UserChecksum dnOrder="5">05363AA5C9A36A1BD0C7CE0B9234057D</UserChecksum>
         </File>
         <File dnOrder="63">
           <Type dnOrder="0">SOURCE</Type>
@@ -1459,8 +1459,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_l11_xplained_pro_hwsw/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">064C7683699DF139689700A34436299A</GeneratedChecksum>
-          <UserChecksum dnOrder="5">064C7683699DF139689700A34436299A</UserChecksum>
+          <GeneratedChecksum dnOrder="4">B6F3E81C9C2FFF7ED6EBD0EF4DCFE4DB</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B6F3E81C9C2FFF7ED6EBD0EF4DCFE4DB</UserChecksum>
         </File>
         <File dnOrder="182">
           <Type dnOrder="0">HEADER</Type>
@@ -2630,7 +2630,7 @@
         <Setting append="true" category="C32" delimiter=";" dnOrder="3" key="extra-include-directories" value="../src;../src/config/sam_l11_xplained_pro_hwsw;../src/packs/ATSAML11E16A_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm"/>
         <Setting append="true" category="C32" delimiter=";" dnOrder="4" key="preprocessor-macros" value="HAVE_CONFIG_H"/>
         <Setting append="true" category="C32" delimiter=";" dnOrder="5" key="preprocessor-macros" value="WOLFSSL_IGNORE_FILE_WARN"/>
-        <Setting category="C32-LD" dnOrder="6" key="heap-size" value="7000"/>
+        <Setting category="C32-LD" dnOrder="6" key="heap-size" value="9000"/>
         <Setting category="C32-LD" dnOrder="7" key="no-device-startup-code" value="true"/>
         <Setting append="true" category="C32-LD" delimiter=";" dnOrder="8" key="preprocessor-macros" value=""/>
         <Setting append="true" category="C32-LD" delimiter=";" dnOrder="9" key="preprocessor-macros" value="SECURE"/>

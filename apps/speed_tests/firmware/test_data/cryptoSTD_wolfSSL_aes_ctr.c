@@ -22,6 +22,7 @@ static const CPU_CHAR nist_800_38A_description[] = {
         "\"Recommendation for Block Cipher Modes of Operation\" "
         "NIST Special Publication 800-38A" };
 
+__attribute__((used))
 static uint8_t nist_800_38A_iv[] = // test.c line 6626
         (uint8_t[]){ 0xf0,0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,
                      0xf8,0xf9,0xfa,0xfb,0xfc,0xfd,0xfe,0xff
@@ -50,6 +51,7 @@ static uint8_t oddCipher[] = {
 };
 #endif
 
+__attribute__((used))
 static CONST cryptoST_testVector_t NIST_800_38A =
 {
     .name = "AES_CTR Message2",
@@ -66,7 +68,8 @@ static CONST cryptoST_testDetail_t test_item[] =
      * test vectors from "Recommendation for Block Cipher Modes of
      * Operation" NIST Special Publication 800-38A 
      */
-#if defined(WOLFSSL_AES_128)
+#if defined(WOLFSSL_AES_128) \
+ && defined(WOLFSSL_AES_COUNTER)
     {
         .technique = ET_AES_128,
         .mode = EM_CTR,
@@ -101,8 +104,9 @@ static CONST cryptoST_testDetail_t test_item[] =
         },
         // .authenticateTag =  { 0, NULL },
     },
-#endif /* WOLFSSL_AES_128 */
-#if defined(WOLFSSL_AES_192)
+#endif // WOLFSSL_AES_128 counter mode
+#if defined(WOLFSSL_AES_192) \
+ && defined(WOLFSSL_AES_COUNTER)
     {
         .technique = ET_AES_192,
         .mode = EM_CTR,
@@ -138,7 +142,8 @@ static CONST cryptoST_testDetail_t test_item[] =
         },
     },
 #endif
-#if defined(WOLFSSL_AES_256)
+#if defined(WOLFSSL_AES_256) \
+ && defined(WOLFSSL_AES_COUNTER)
     {
         .technique = ET_AES_256,
         .mode = EM_CTR,
@@ -184,7 +189,8 @@ static CONST cryptoST_testDetail_t test_item[] =
  *************************************************************/
 static cryptoST_testDetail_t * firstTest(void)
 {
-    return test_item;
+    // Check for an (essentially) empty list
+    return (ET_NONE == test_item->technique)? 0 : test_item;
 }
 static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
 {

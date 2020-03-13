@@ -59,7 +59,7 @@ static CONST cryptoST_testVector_t dt3 =
  * Raw (input) data definitions for run-time defined
  * sequential and random data sets having large block sizes.
  *************************************************************/
-#define SIZE4K     (3072)
+#define SIZE4K     (2944)  // 0xB80
 #define SIZE_PREALLOCATE    SIZE4K  // must be the largest
 static cryptoST_testVector_t seq4k =
 {

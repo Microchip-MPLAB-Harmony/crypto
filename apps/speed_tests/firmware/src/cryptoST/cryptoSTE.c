@@ -313,18 +313,15 @@ bool cryptoSTE_executeOneVector(cryptoST_testDetail_t * rv,
 
         if (CSTE_VERBOSE && param->results.warningMessage)
         {
-            PRINT("-v ");
-            PRINT(param->results.testHandler);
-            PRINT(" **** warning: ");
-            PRINT(param->results.warningMessage);
-            if (param->results.warningCount > 1)
-                P0_INT(" ** total ",param->results.warningCount);
-            PRINT_WAIT(CRLF);
+            printf("-v %s **** warning (%d): %s" CRLF,
+                    param->results.testHandler, 
+                    param->results.warningCount,
+                    param->results.warningMessage);
         }
 
         if (param->results.errorMessage)
         {
-            printf(CRLF "-v %s **** run-time error: %s" CRLF,
+            printf("-v %s **** error: %s" CRLF,
                     param->results.testHandler, param->results.errorMessage);
             cryptoSTE_announceDetails(5, rv);
             printf("     Forcing use of crypto HW: %s" CRLF,
@@ -396,6 +393,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
             cryptoST_testDetail_t * tr;
             for (tr = cv->firstTest(); NULL != tr; tr = cv->nextTest(tr))
             {
+                __NOP();
                 if (ET_NONE == tr->technique) // safety check
                 {
                     // get here if a data file has no test vectors
@@ -427,7 +425,10 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
                         cryptoST_PRINT_announceElapsedTime( cv->name, config);
                     else if (testFailed)
                     {
-                        printf("-^ %s failed; see message above" CRLF, cv->name);
+                        printf("-^ %s (%s) failed; see message above" CRLF, 
+                                cv->name, 
+                                config->results.testHandler?
+                                    config->results.testHandler : "--");
                     }
                 }
             }

@@ -14,6 +14,7 @@
 #include "crya/crya.h"
 #include <assert.h>
 #include "device.h"     // for __NOP()
+#include <string.h> // for memcpy()
 
 /* CRYA entry points are located in ROM as defined by the device file.
  */
@@ -36,7 +37,7 @@ __attribute__((used)) void crya_aes128_encrypt
     assert_dbug(keys && (0 == ((uint32_t)keys%4)));
     assert_dbug(src && (0 == ((uint32_t)src%4)));
     assert_dbug(dst && (0 == ((uint32_t)dst%4)));
-    
+
     secure_crya_aes128_encrypt(keys,key_len,src,dst);
 }
 

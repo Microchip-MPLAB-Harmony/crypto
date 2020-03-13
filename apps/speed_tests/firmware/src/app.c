@@ -175,7 +175,7 @@ void APP_Tasks ( void )
         case APP_STATE_BEGIN_TEST:
         {
             printf(splashMessage);
-            cryptoST();
+            cryptoST(); 
             appData.state = APP_STATE_COMPLETE;
             break;
         }

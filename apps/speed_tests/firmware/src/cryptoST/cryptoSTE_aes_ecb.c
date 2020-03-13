@@ -75,6 +75,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/aes.h>
 
 #define VERIFY_CONSECUTIVE_AES    1
+#define assert_dbug(X) __conditional_software_breakpoint((X))
 
 // *****************************************************************************
 // *****************************************************************************
@@ -142,26 +143,77 @@ __attribute__((used)) static int crya_aes_128_decrypt
 // *****************************************************************************
 
 #if defined(HAVE_AES_ECB)
-
 /* This information is used to simplify selection of the encryption
  * driver and associated name and keySize verification.
  * Note that the default encryptor returns void.
  */
+typedef int (*ecbSetKey_t)(Aes* aes, const byte* userKey, word32 keylen,
+                                     const byte* iv, int dir);
 typedef int (*ecbEncrypt_t)(Aes* aes, byte* out, const byte* in, word32 size);
 typedef int (*ecbDecrypt_t)(Aes* aes, byte* out, const byte* in, word32 size);
 typedef struct ecbTest_s
 {
     char *        name;
     const int     keySize;
+    const ecbSetKey_t   setKey;
     const ecbEncrypt_t  encrypt;
     const ecbDecrypt_t  decrypt;
 } ecbTest_t;
 
-#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803) \
- || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805)
+#if defined(WOLFSSL_AES_128) \
+ && (defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803) \
+  || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805))
+/* This is necessary because WolfCrypt sometimes transposes the key
+ * and sometimes it does not, depending on the HW-enable, but CRYA
+ * needs the key to be little-endian every time. 
+ */
+#if 0
+static uint32_t endian32(const uint32_t input)
+{
+    return input;
+    uint32_t answer;
+    uint32_t value = input; // make sure the source is in RAM
+    
+    uint8_t * A = (uint8_t*)&answer;
+    uint8_t * V = ((uint8_t*)(&value))+sizeof(value)-1;
+    for (int i = 0; i < sizeof(answer); i++)
+        *A++ = *V--;
+    
+    return answer;
+}
+
+int crya_ecb_SetKey(Aes* aes, const byte* userKey, word32 keylen,
+                                     const byte* iv, int dir)
+{
+    assert_dbug(keylen <= sizeof(aes->devKey));
+    aes->keylen = keylen;
+    // ignore iv and dir for crya
+
+    // Endian swap here because CRYA is big-endian and we are not.
+    uint32_t * dk = (uint32_t *)aes->key;
+    assert_dbug(dk && (0 == ((uint32_t)dk%4)));
+    uint32_t * uk = (uint32_t *)userKey;
+    assert_dbug(uk && (0 == ((uint32_t)uk%4)));
+    
+    for (int i = 0; i < keylen/sizeof(*uk); i++)
+        dk[i] = endian32(uk[i]);
+    return 0;
+}
+#else
+// For SAML11-CRYA do not re-order the bytes
+int crya_ecb_SetKey(Aes* aes, const byte* userKey, word32 keylen,
+                                     const byte* iv, int dir)
+{ 
+    memcpy(aes->key, userKey, keylen); 
+    aes->keylen = keylen;
+    return 0;
+}
+#endif
+
 static const ecbTest_t cyra_128 = {
     .name = "CRYA AES ECB 128",
     .keySize = 128/8,
+    .setKey  = crya_ecb_SetKey,
     .encrypt = crya_aes_128_encrypt,
     .decrypt = crya_aes_128_decrypt,
 };
@@ -174,6 +226,7 @@ static const ecbTest_t cyra_128 = {
 static const ecbTest_t cyra_192 = {
     .name = "CRYA AES ECB 192",
     .keySize = 192/8,
+    .setKey  = crya_ecb_SetKey,
     .encrypt = crya_aes_192_encrypt,
     .decrypt = crya_aes_192_decrypt,
 };
@@ -181,6 +234,7 @@ static const ecbTest_t cyra_192 = {
 static const ecbTest_t crya_256 = {
     .name = "CRYA AES ECB 256",
     .keySize = 256/8,
+    .setKey  = crya_aes_SetKey,
     .encrypt = crya_aes_256_encrypt,
     .decrypt = crya_aes_256_decrypt,
 };
@@ -193,6 +247,7 @@ static const ecbTest_t crya_256 = {
 static const ecbTest_t wolf_128 = {
     .name = "WOLF AES ECB 128",
     .keySize = 128/8,
+    .setKey  = wc_AesSetKey,
     .encrypt = wc_AesEcbEncrypt,
     .decrypt = wc_AesEcbDecrypt,
 };
@@ -201,6 +256,7 @@ static const ecbTest_t wolf_128 = {
 static const ecbTest_t wolf_192 = {
     .name = "WOLF AES ECB 128",
     .keySize = 192/8,
+    .setKey  = wc_AesSetKey,
     .encrypt = wc_AesEcbEncrypt,
     .decrypt = wc_AesEcbDecrypt,
 };
@@ -209,6 +265,7 @@ static const ecbTest_t wolf_192 = {
 static const ecbTest_t wolf_256 = {
     .name = "WOLF AES ECB 128",
     .keySize = 256/8,
+    .setKey  = wc_AesSetKey,
     .encrypt = wc_AesEcbEncrypt,
     .decrypt = wc_AesEcbDecrypt,
 };
@@ -258,7 +315,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
 
         int ret;
         Aes enc;
-        ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
+        ret = (test->setKey)(&enc, td->key->data, td->key->length,
                                  NULL, AES_ENCRYPTION);
         if (ret != 0) 
             { param->results.errorMessage = "failed to set key"; break; }
@@ -347,11 +404,12 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
             {
                 byte * plain = cryptoSTE_malloc(vector->vector.length);
                 if (NULL == plain)
-                    return "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
+                    param->results.errorMessage = 
+                        "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
                 else do
                 {
                     Aes dec;
-                    if (0 != wc_AesSetKey(&dec, td->key->data, td->key->length, 
+                    if (0 != (test->setKey)(&dec, td->key->data, td->key->length, 
                                              NULL, AES_DECRYPTION))
                     { 
                         param->results.errorMessage = "setting decryption key failed"; 
@@ -377,7 +435,8 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                         break; 
                     }
                 } while(0);
-                cryptoSTE_free(plain);
+                if (plain)
+                    cryptoSTE_free(plain);
                 if (NULL != param->results.errorMessage) 
                     break; // not really necessary, but etc.
             }
