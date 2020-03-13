@@ -11,7 +11,9 @@
 
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "AES_ECB"
-#define DATA_CHAR const uint8_t
+#define ALIGN4 __attribute__((aligned(4)))
+#define DATA_CHAR ALIGN4 const uint8_t
+
 #if defined(__SAML11E16A__) // known to have not-enough memory
 #define TEST_SIZE_MAX (2*1024) // must power-of-2
 #else // everybodyelse
@@ -52,7 +54,7 @@ static cryptoST_testDetail_t test_item = // one and only
         .data = ((void*)0), // fill in later
         .length = 16,
     },
-    .key = &(cryptoST_testData_t)
+    .key = 
         { .data = (DATA_CHAR*)"abcdefghijklmnop", // 128b = 16B
           .length = 16 },
 };

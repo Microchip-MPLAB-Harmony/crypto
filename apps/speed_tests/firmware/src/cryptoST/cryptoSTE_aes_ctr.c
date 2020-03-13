@@ -103,7 +103,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if ( (NULL == td->key->data)
+    if ( (NULL == td->key.data)
       || (NULL == td->ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CTR test not activated." CRLF;
@@ -114,7 +114,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
     if (vector->vector.length > ALENGTH(cipher))
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
-    ret = wc_AesSetKeyDirect(&enc, td->key->data, td->key->length,
+    ret = wc_AesSetKeyDirect(&enc, td->key.data, td->key.length,
                                 td->ivNonce.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
@@ -158,7 +158,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
             {
                 P0_UINT(CRLF "test length = ", testLength);
                 cryptoST_PRINT_hexLine(CRLF "key   : ",
-                        td->key->data, td->key->length);
+                        td->key.data, td->key.length);
                 cryptoST_PRINT_hexLine(CRLF "initV : ",
                         td->ivNonce.data, td->ivNonce.length);
                 cryptoST_PRINT_hexLine(CRLF "given : ",
@@ -180,7 +180,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
         byte plain[AES_BLOCK_SIZE * 4]; // trouble here?
 
         /* decrypt uses AES_ENCRYPTION */
-        ret = wc_AesSetKeyDirect(&dec, td->key->data, td->key->length, 
+        ret = wc_AesSetKeyDirect(&dec, td->key.data, td->key.length, 
                                     td->ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) return "setting decryption key failed";
 
@@ -197,7 +197,7 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
             if (CSTE_VERBOSE)
             {
                 cryptoST_PRINT_hexLine(CRLF "key   : ", 
-                        td->key->data, td->key->length);
+                        td->key.data, td->key.length);
                 cryptoST_PRINT_hexLine(CRLF "initV : ", 
                         td->ivNonce.data, td->ivNonce.length);
                 cryptoST_PRINT_hexLine(CRLF "given : ", 
@@ -227,7 +227,7 @@ const char * cryptoSTE_aes_ctr_128_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key->length != 128/8)
+    if (td->key.length != 128/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -243,7 +243,7 @@ const char * cryptoSTE_aes_ctr_192_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key->length != 192/8)
+    if (td->key.length != 192/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -259,7 +259,7 @@ const char * cryptoSTE_aes_ctr_256_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key->length != 256/8)
+    if (td->key.length != 256/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else

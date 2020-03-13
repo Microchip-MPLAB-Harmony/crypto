@@ -112,7 +112,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
      * Having NULL pointers for rawData, cipher and aad is allowed.
      * Refer to test.c line 7260
      * */
-    if ( (NULL == td->key->data)
+    if ( (NULL == td->key.data)
       || (NULL == td->ivNonce.data)
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
@@ -154,7 +154,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
         { param->results.errorMessage = "AesInit.enc failed (" BASE_LINE ")"; 
           break; }
 
-        if (0 != wc_AesGcmSetKey(&enc, td->key->data, td->key->length))
+        if (0 != wc_AesGcmSetKey(&enc, td->key.data, td->key.length))
         { param->results.errorMessage = "failed to set key"; break; }
 
         param->results.encryption.start = SYS_TIME_CounterGet();
@@ -175,7 +175,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
                 if (CSTE_VERBOSE)
                 {
                     cryptoST_PRINT_hexLine(CRLF "..key    :",
-                            td->key->data, td->key->length);
+                            td->key.data, td->key.length);
                     cryptoST_PRINT_hexLine(CRLF "..init   :",
                             td->ivNonce.data, td->ivNonce.length);
                     cryptoST_PRINT_hexLine(CRLF "..aad    :",
@@ -247,7 +247,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
             { param->results.errorMessage = "AesInit.dec failed (" BASE_LINE ")"; 
               break; }
 
-            if (0 != wc_AesGcmSetKey(&dec, td->key->data, td->key->length))
+            if (0 != wc_AesGcmSetKey(&dec, td->key.data, td->key.length))
             { param->results.errorMessage = "failed SetKey.dec"; break; }
 
             if (CSTE_VERBOSE > 1) 
@@ -268,7 +268,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
                 if (CSTE_VERBOSE)
                 {
                     cryptoST_PRINT_hexLine(CRLF "..key    :",
-                            td->key->data, td->key->length);
+                            td->key.data, td->key.length);
                     cryptoST_PRINT_hexLine(CRLF "..init   :",
                             td->ivNonce.data, td->ivNonce.length);
                     cryptoST_PRINT_hexLine(CRLF "..aad    :",
@@ -325,7 +325,7 @@ const char * cryptoSTE_aes_gcm_timed(
 
     // Data validation
     const char * answer = 0;
-    if (td->key->length != 128/8)
+    if (td->key.length != 128/8)
         answer = "incorrect key length";
     else
         return cryptoSTE_aes_gcm_test_timed(td, param);

@@ -185,7 +185,7 @@ typedef struct cryptoST_testDetail_s
     // depending on how the data file is built, .rawData maybe must be null
 
     // Inputs
-    cryptoST_testData_t * key;
+    cryptoST_testData_t key;
     cryptoST_testData_t ivNonce;
     cryptoST_testData_t additionalAuthData; // for GCM/CTR/CCM mode
 

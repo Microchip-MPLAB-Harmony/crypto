@@ -166,7 +166,7 @@ static const char * cryptoSTE_des3des_all_timed
     }
 
     // Data validation
-    if (NULL == td->key->data)
+    if (NULL == td->key.data)
         return param->results.errorMessage = "missing key or initialization data";
 
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
@@ -179,8 +179,8 @@ static const char * cryptoSTE_des3des_all_timed
 
         int ret;
         Des3 enc;
-        assert_dbug(24 == td->key->length);
-        ret = wc_Des3_SetKey(&enc, td->key->data, td->ivNonce.data, DES_ENCRYPTION);
+        assert_dbug(24 == td->key.length);
+        ret = wc_Des3_SetKey(&enc, td->key.data, td->ivNonce.data, DES_ENCRYPTION);
         if (ret != 0) 
             { param->results.errorMessage = "failed to set key"; break; }
 
@@ -210,7 +210,7 @@ static const char * cryptoSTE_des3des_all_timed
                 if (CSTE_VERBOSE)
                 {
                     cryptoST_PRINT_hexLine(CRLF "..key     :", 
-                            td->key->data, td->key->length);
+                            td->key.data, td->key.length);
                     cryptoST_PRINT_hexLine(CRLF "..ivNonce :", 
                             td->ivNonce.data, td->ivNonce.length);
                     cryptoST_PRINT_hexBlock(CRLF "..input   :", 
@@ -245,9 +245,9 @@ static const char * cryptoSTE_des3des_all_timed
                 else do
                 {
                     Des3 dec;
-                    assert_dbug(24 == td->key->length);
+                    assert_dbug(24 == td->key.length);
                     if (0 != wc_Des3_SetKey
-                        (&dec, td->key->data, td->ivNonce.data, DES_DECRYPTION))
+                        (&dec, td->key.data, td->ivNonce.data, DES_DECRYPTION))
                     { 
                         param->results.errorMessage = "setting decryption key failed"; 
                         break; 
@@ -339,7 +339,7 @@ const char * cryptoSTE_des3des_timed(cryptoST_testDetail_t * td,
     else
     {
         param->results.testHandler = test->name;
-        if (td->key->length != test->keySize)
+        if (td->key.length != test->keySize)
             return param->results.errorMessage = badKey;
         else
             return cryptoSTE_des3des_all_timed(td, param, test);

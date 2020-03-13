@@ -76,7 +76,8 @@ The key principles are these:
 
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "CCM"
-#define DATA_CHAR const uint8_t
+#define ALIGN4 __attribute__((aligned(4)))
+#define DATA_CHAR ALIGN4 const uint8_t
 
 #define AES_CCM_source "RFC3610 section 8"
 const CPU_CHAR AES_CCM_default_description[] = {
@@ -229,7 +230,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV1",
         .rawData = &rfc3610A_pv1pv7,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -249,7 +250,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV2",
         .rawData = &rfc3610A_pv2pv8,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -269,7 +270,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV3",
         .rawData = &rfc3610A_pv3pv9,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -291,7 +292,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV4",
         .rawData = &rfc3610A_pv4pv10,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -311,7 +312,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV5",
         .rawData = &rfc3610A_pv5pv11,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -331,7 +332,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV6",
         .rawData = &rfc3610A_pv6pv12,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -353,7 +354,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV7",
         .rawData = &rfc3610A_pv1pv7,
-        .key = &(cryptoST_testData_t){ .data = key_pv1to12, .length = 16 },
+        .key = { .data = key_pv1to12, .length = 16 },
         .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -376,7 +377,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV13",
         .rawData = &rfc3610B_pv13,
-        .key = &(cryptoST_testData_t){ .length = 16, .data = key_pv13to24 },
+        .key = { .length = 16, .data = key_pv13to24 },
         .additionalAuthData = { .length = CLEAR, .data = PV13_cipher },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
@@ -396,7 +397,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV14",
         .rawData = &rfc3610B_pv14,
-        .key = &(cryptoST_testData_t){ .length = 16, .data = key_pv13to24 },
+        .key = { .length = 16, .data = key_pv13to24 },
         .additionalAuthData = { .length = CLEAR, .data = PV14_cipher },
         .ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)

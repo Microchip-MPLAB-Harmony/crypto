@@ -9,6 +9,7 @@
 #include "configuration.h"
 
 #define CONST /* as nothing */
+#define ALIGN4 __attribute__((aligned(4)))
 
 /*************************************************************
  * Raw (input) data definitions.
@@ -33,7 +34,7 @@ static CONST cryptoST_testVector_t qbf =
     .name = DATA_PACKAGE_NAME "qbf",
     .source = threedes_source,
     .description = threedes_description,
-    .vector.data = (const uint8_t*)
+    .vector.data = (ALIGN4 const uint8_t*)
         "The quick brown fox jumped over the lazy dog"
         "\x04\x04\x04\x04\x04\x04\x04\x04", // PKCS note
     .vector.length = 48, // 44 text as 6 whole blocks 
@@ -45,7 +46,7 @@ static CONST cryptoST_testVector_t eee =
     .name = DATA_PACKAGE_NAME "eee",
     .source = threedes_source,
     .description = threedes_description,
-    .vector.data = (const uint8_t*)
+    .vector.data = (ALIGN4 const uint8_t*)
         "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
         "eeeeeeeeeeeeeeeeeeeeeee" // 55 e's
         "\x01\x01\x01\x01\x01\x01\x01\x01", // PKCS note
@@ -58,7 +59,7 @@ static CONST cryptoST_testVector_t lorem =
     .name = DATA_PACKAGE_NAME "lorem",
     .source = threedes_source,
     .description = threedes_description,
-    .vector.data = (const uint8_t*)
+    .vector.data = (ALIGN4 const uint8_t*)
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do "
         "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut e"
         "nim ad minim veniam, quis nostrud exercitation ullamco laboris n"
@@ -70,7 +71,7 @@ static CONST cryptoST_testVector_t lorem =
     .vector.length = (7*64), // 3 pad bytes all with 0x03
 };
 
-static const uint8_t lorem_cipher_cbc[] = 
+static ALIGN4 const uint8_t lorem_cipher_cbc[] = 
     "\x7C\xC4\xE2\xFC\x58\x08\x36\x5D\xED\xD8\xC3\xB6\x94\x83\xC2\xD4"
     "\xD3\x7E\x63\x67\xB7\x84\xA5\x0E\x15\xA2\x2A\xC2\x47\xAA\x04\x96"
     "\x99\x94\x51\xE7\x83\xF0\xF4\xD2\x09\x0C\x9C\x03\x24\xE3\x7F\xE7"
@@ -101,7 +102,7 @@ static const uint8_t lorem_cipher_cbc[] =
     "\xEE\x1D\x7C\xA3\xA6\x62\xFF\x67\x60\xFE\xCB\x77\x7C\xDB\xCA\x4B";
 
 #if defined(WOLFSSL_DES_ECB)
-static const uint8_t lorem_cipher_ecb[] = 
+static ALIGN4 const uint8_t lorem_cipher_ecb[] = 
     "\x80\xF7\x6C\x2C\xFA\x99\xB2\xDC\xBE\x31\x31\xCB\xD7\x38\x04\x96"
     "\x56\x3A\x71\x3C\xCE\x0E\x96\x71\xE1\xB9\x03\x46\x9F\xB9\xF5\x67"
     "\xCB\x7A\x03\xA8\x28\x68\xA6\x28\x66\xE3\xEA\x74\xB1\xE8\x6B\xE9"
@@ -148,13 +149,12 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
+        .key = { .length = 24, .data = threedes_key },
         .ivNonce.length = 8,
-        .ivNonce.data = (const uint8_t*)"12345678",
+        .ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
         .goldenCipher = {
             .length = (6*8),
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 "\xE6\xB6\x34\x5F\x10\x15\x38\x02"
                 "\x84\x48\x1B\xBC\xFF\xB9\x05\x2A"
                 "\x22\x7F\xC1\x4F\x73\x07\x2E\x8D"
@@ -171,13 +171,12 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
+        .key = { .length = 24, .data = threedes_key },
         .ivNonce.length = 8,
-        .ivNonce.data = (const uint8_t*)"23456789",
+        .ivNonce.data = (ALIGN4 const uint8_t*)"23456789",
         .goldenCipher = {
             .length = 48,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 "\x5B\xF2\x96\x57\xE6\x06\x4E\xB9"
                 "\x9E\x52\xAC\xC8\xE3\xA6\x80\x8A"
                 "\x76\x1A\x86\xA7\xEE\x85\xC2\x5C"
@@ -194,10 +193,9 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &lorem,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
+        .key = { .length = 24, .data = threedes_key },
         .ivNonce.length = 8,
-        .ivNonce.data = (const uint8_t*)"12345678",
+        .ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
         .goldenCipher = {
             .length = (28*16),
             .data = lorem_cipher_cbc,
@@ -216,13 +214,12 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
+        .key = { .length = 24, .data = threedes_key },
         // .ivNonce.length = 8,
         // .ivNonce.data = (const uint8_t*)"12345678",
         .goldenCipher = {
             .length = (6*8),
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
     "\x13\xD4\xD3\x54\x94\x93\xD2\x87\x0F\x93\xC3\xE0\x81\x2A\x06\xDE"
     "\x46\x7E\x1F\x9C\x0B\xFB\x16\xC0\x70\xED\xE5\xCA\xBB\xD3\xCA\x62"
     "\xF2\x17\xA7\xAE\x8D\x47\xF2\xC7\x19\x8F\xF3\x91\x62\xEC\xEC\x94" },
@@ -236,13 +233,12 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &eee,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
+        .key = { .length = 24, .data = threedes_key },
         // .ivNonce.length = 8,
         // .ivNonce.data = (const uint8_t*)"12345678",
         .goldenCipher = {
             .length = (7*8),
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
     "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
     "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
     "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
@@ -257,8 +253,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &lorem,
-        .key = &(cryptoST_testData_t)
-            { .length = 24, .data = threedes_key },
+        .key = { .length = 24, .data = threedes_key },
         // .ivNonce.length = 8,
         // .ivNonce.data = (const uint8_t*)"12345678",
         .goldenCipher = {

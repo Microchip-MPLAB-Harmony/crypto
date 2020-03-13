@@ -13,6 +13,7 @@
 
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "GCM"
+#define ALIGN4 __attribute__((aligned(4)))
 
 const CPU_CHAR AES_GCM_default_description[] = {
         "Vectors are from NIST SP 800-38D "
@@ -91,30 +92,30 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt1,
-        .key = &(cryptoST_testData_t){ // test.c 7171
+        .key = { // test.c 7171
             .length = 16,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x29, 0x8e, 0xfa, 0x1c, 0xcf, 0x29, 0xcf, 0x62,
                 0xae, 0x68, 0x24, 0xbf, 0xc1, 0x95, 0x57, 0xfc
             },
         },
         .ivNonce = { // test.c 7177
             .length = 12,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x6f, 0x58, 0xa9, 0x3f, 0xe1, 0xd2, 0x07, 0xfa,
                 0xe4, 0xed, 0x2f, 0x6d
             },
         },
         .additionalAuthData = { // test.c 7188
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x02, 0x1f, 0xaf, 0xd2, 0x38, 0x46, 0x39, 0x73,
                 0xff, 0xe8, 0x02, 0x56, 0xe5, 0xb1, 0xc6, 0xb1
             },
         },
         .goldenCipher = { // test.c 7183
             .length = 32,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xdf, 0xce, 0x4e, 0x9c, 0xd2, 0x91, 0x10, 0x3d,
                 0x7f, 0xe4, 0xe6, 0x33, 0x51, 0xd9, 0xe7, 0x9d,
                 0x3d, 0xfd, 0x39, 0x1e, 0x32, 0x67, 0x10, 0x46,
@@ -123,7 +124,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         },
         .goldenTag = { // test.c 7200
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x54, 0x24, 0x65, 0xef, 0x59, 0x93, 0x16, 0xf7,
                 0x3a, 0x7a, 0x56, 0x05, 0x09, 0xa2, 0xd9, 0xf2
             },
@@ -137,16 +138,16 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt2,
-        .key = &(cryptoST_testData_t){ // test.c 7207
+        .key = { // test.c 7207
             .length = 16,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x01, 0x6d, 0xbb, 0x38, 0xda, 0xa7, 0x6d, 0xfe,
                 0x7d, 0xa3, 0x84, 0xeb, 0xf1, 0x24, 0x03, 0x64
             },
         },
         .ivNonce = { // test.c 7212
             .length = 12,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x07, 0x93, 0xef, 0x3a, 0xda, 0x78, 0x2f, 0x78,
                 0xc9, 0x8a, 0xff, 0xe3
             },
@@ -157,14 +158,14 @@ static CONST cryptoST_testDetail_t test_item[] =
         },
         .goldenCipher = { // test.c 7221
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x60, 0x9a, 0xa3, 0xf4, 0x54, 0x1b, 0xc0, 0xfe,
                 0x99, 0x31, 0xda, 0xad, 0x2e, 0xe1, 0x5d, 0x0c
             }
         },
         .goldenTag = { // test.c 7226
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
                 0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
             },
@@ -179,23 +180,23 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7231",
         .rawData = &dt3, // null data
-        .key = &(cryptoST_testData_t){ // test.c 7231
+        .key = { // test.c 7231
             .length = 16,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
         .ivNonce = { // test.c 7236
             .length = 12,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
                 0x6a, 0x4b, 0xd5, 0xe1
             },
         },
         .additionalAuthData = { // test.c 7261
             .length = 0,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x60, 0x9a, 0xa3, 0xf4, 0x54, 0x1b, 0xc0, 0xfe,
                 0x99, 0x31, 0xda, 0xad, 0x2e, 0xe1, 0x5d, 0x0c
             },
@@ -206,7 +207,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         },
         .goldenTag = { // test.c 7241
             .length = 12,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x01, 0x42, 0x80, 0xf9, 0x44, 0xf5, 0x3c, 0x68,
                 0x11, 0x64, 0xb2, 0xff
             },
@@ -220,23 +221,23 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP sequential big block",
         .rawData = &seq4k,
-        .key = &(cryptoST_testData_t){ // test.c 7231
+        .key = { // test.c 7231
             .length = 16,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
         .ivNonce = { // test.c 7236
             .length = 12,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
                 0x6a, 0x4b, 0xd5, 0xe1
             },
         },
         .additionalAuthData = { // test.c 7177
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
                 0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
             },
@@ -258,23 +259,23 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP pseudoRandom big block",
         .rawData = &pr4k,
-        .key = &(cryptoST_testData_t){ // test.c 7231
+        .key = { // test.c 7231
             .length = 16,
-            .data = (const uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
         .ivNonce = { // test.c 7236
             .length = 12,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
                 0x6a, 0x4b, 0xd5, 0xe1
             },
         },
         .additionalAuthData = { // test.c 7177
             .length = 16,
-            .data = (uint8_t[]){
+            .data = (ALIGN4 const uint8_t[]){
                 0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
                 0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
             },

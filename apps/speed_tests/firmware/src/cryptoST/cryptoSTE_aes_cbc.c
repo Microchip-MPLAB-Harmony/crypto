@@ -121,7 +121,7 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
                                     : td->recommendedRepetitions;
 
     // Data validation
-    if ( (NULL == td->key->data)
+    if ( (NULL == td->key.data)
       || (NULL == td->ivNonce.data) )
         return param->results.errorMessage = "missing key or initialization data";
 
@@ -132,7 +132,7 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
     {
         Aes enc;
         BP_NOP();
-        ret = wc_AesSetKey(&enc, td->key->data, td->key->length,
+        ret = wc_AesSetKey(&enc, td->key.data, td->key.length,
                                  td->ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) { param->results.errorMessage = "failed to set key"; break; }
 
@@ -206,7 +206,7 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
                 {
                     Aes dec;
                     
-                    ret = wc_AesSetKey(&dec, td->key->data, td->key->length, 
+                    ret = wc_AesSetKey(&dec, td->key.data, td->key.length, 
                                              td->ivNonce.data, AES_DECRYPTION);
                     if (ret != 0) { param->results.errorMessage = "setting decryption key failed"; break; }
 
@@ -261,7 +261,7 @@ const char * cryptoSTE_aes_cbc_128_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key->length != 128/8)
+    if (td->key.length != 128/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_cbc_timed(td, param);
@@ -276,7 +276,7 @@ const char * cryptoSTE_aes_cbc_192_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key->length != 192/8)
+    if (td->key.length != 192/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_cbc_timed(td, param);
@@ -291,7 +291,7 @@ const char * cryptoSTE_aes_cbc_256_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key->length != 256/8)
+    if (td->key.length != 256/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_cbc_timed(td, param);

@@ -40,21 +40,18 @@ static cryptoST_testVector_t satcZ =
  *************************************************************/
 static uint8_t sramBuffer32[32] = { 0 };
 #define ASIZE(a) ((sizeof(a)/sizeof(a[0])))
-static CONST cryptoST_testDetail_t test_item[] =
-{
-    {
-        .technique = ET_SHA_256,
-        .mode = EM_NONE,
-        .recommendedRepetitions = 1000,
 
-        .source = __BASE_FILE__ "(" BASE_LINE ")",
-        .pedigree = "Blocks of null data",
-        .rawData = &satcZ,
-        .goldenCipher = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
-    },
-    {}
+static CONST cryptoST_testDetail_t test_item =
+{
+    .technique = ET_SHA_256,
+    .mode = EM_NONE,
+    .recommendedRepetitions = 1000,
+
+    .source = __BASE_FILE__ "(" BASE_LINE ")",
+    .pedigree = "Blocks of null data",
+    .rawData = &satcZ,
+    .goldenCipher = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
 };
-#define test_item_count (sizeof(test_item)/sizeof(cryptoST_testDetail_t))
 
 /*************************************************************
  * Helper functions
@@ -97,13 +94,14 @@ static char * closeData_func(void)
 #else
 #define closeData_func ((void*)0)
 #define openData_func  ((void*)0)
-static CONST cryptoST_testDetail_t test_item[] =
-{ {} };
 #endif // !NO_SHA
 
+#define test_item_count 1 //(sizeof(test_item)/sizeof(cryptoST_testDetail_t))
 static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
 {
     __NOP();
+
+#if !defined(NO_SHA256)
     // Assume that if the pointer is in range, that it is legitimate.
     if (old < test_item) 
         ;
@@ -162,6 +160,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
         }
         return old;
     } while (0);
+#endif
     return NULL;
 }
 
@@ -169,6 +168,7 @@ static cryptoST_testDetail_t * firstTest(void)
 {
     __NOP();
     
+#if !defined(NO_SHA256)
     // Assume that #1 is not dynamically built
     zero_test = 0;
     if (satcZ.vector.data)
@@ -179,6 +179,7 @@ static cryptoST_testDetail_t * firstTest(void)
     // If we get here the data vector is not initialized correctly
     // (e.g., the malloc failed), but main kept going.
     __conditional_software_breakpoint(0);
+#endif
     return NULL;
 }
 

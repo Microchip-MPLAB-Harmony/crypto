@@ -101,7 +101,7 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
         P_INT("..repetitions: ", rv->recommendedRepetitions);
     if (CSTE_VERBOSE > 2)
     {
-        P_INT("..bytes key    : ", rv->key->length);
+        P_INT("..bytes key    : ", rv->key.length);
         P_INT("..bytes initV  : ", rv->ivNonce.length);
         P_INT("..bytes aad    : ", rv->additionalAuthData.length);
         if (rv->goldenCipher.data)
@@ -112,7 +112,7 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
     if (CSTE_VERBOSE > 3)
     {
         cryptoST_PRINT_hexLine(CRLF "..key    : ",
-                rv->key->data, rv->key->length);
+                rv->key.data, rv->key.length);
         cryptoST_PRINT_hexLine(CRLF "..initV  : ",
                 rv->ivNonce.data,rv->ivNonce.length);
         cryptoST_PRINT_hexLine(CRLF "..gCipher: ",

@@ -125,21 +125,22 @@ extern "C" {
 #define NO_MD4
 #define NO_MD5
 #define NO_SHA // specifically, no SHA1 (legacy name)
-#define WOLFSSL_SHA224
-#define WOLFSSL_HAVE_MCHP_HW_SHA264
+#define NO_SHA256
 #define NO_HMAC
-#define NO_DES3
+#define WOLFSSL_DES_ECB
 #define WOLFSSL_AES_128
 #define AES_MAX_KEY_SIZE 128 // limited CRYA in SAML11
 #define NO_AES_192
 #define NO_AES_256
+
+// klk -- There is a bug in L11 .ftl that 
+// won't give NO_SHA224 when HW-accel is selected. :(
+#define NO_SHA224
+
 #define WOLFSSL_AES_DIRECT
 #define HAVE_AES_DECRYPT
 #define WOLFSSL_HAVE_MCHP_HW_AES_DIRECT
-#define HAVE_AES_ECB
-#define HAVE_AES_CBC
-#define WOLFSSL_AES_COUNTER
-#define HAVE_AESGCM
+#define NO_AES_CBC
 #define NO_RC4
 #define NO_HC128
 #define NO_RABBIT
@@ -147,7 +148,8 @@ extern "C" {
 #define NO_DSA
 #define NO_RSA
 #define NO_DEV_RANDOM
-#define HAVE_HASHDRBG
+#define WC_NO_RNG
+#define WC_NO_HASHDRBG
 #define WC_NO_HARDEN
 #define SINGLE_THREADED
 #define NO_ASN

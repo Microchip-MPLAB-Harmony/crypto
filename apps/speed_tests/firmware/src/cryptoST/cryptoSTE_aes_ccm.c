@@ -102,7 +102,7 @@ static void dumpHex(cryptoST_testDetail_t * td,
                     cryptoST_testVector_t * input)
 {
     cryptoST_PRINT_hexLine(CRLF "..key     :",
-            td->key->data, td->key->length);
+            td->key.data, td->key.length);
     cryptoST_PRINT_hexLine(CRLF "..nonce   :",
             td->ivNonce.data, td->ivNonce.length); // nonce
     if (input) // original raw data
@@ -141,7 +141,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
      * Having NULL pointers for rawData, cipher and aad is allowed.
      * Refer to test.c line 7260
      * */
-    if ( (NULL == td->key->data)    
+    if ( (NULL == td->key.data)    
       || (NULL == td->ivNonce.data) // the nonce
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
@@ -183,7 +183,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
         { param->results.errorMessage = "AesInit.enc failed (" BASE_LINE ")"; 
           break; }
 
-        if (0 != wc_AesCcmSetKey(&enc, td->key->data, td->key->length))
+        if (0 != wc_AesCcmSetKey(&enc, td->key.data, td->key.length))
         { param->results.errorMessage = "failed to set key"; break; }
 
         param->results.encryption.start = SYS_TIME_CounterGet();
@@ -266,7 +266,7 @@ static const char * cryptoSTE_aes_ccm_test_timed(
             { param->results.errorMessage = "AesInit.dec failed (" BASE_LINE ")"; 
               break; }
 
-            if (0 != wc_AesCcmSetKey(&dec, td->key->data, td->key->length))
+            if (0 != wc_AesCcmSetKey(&dec, td->key.data, td->key.length))
             { param->results.errorMessage = "failed to set key"; break; }
 
             if (CSTE_VERBOSE > 1) 
@@ -338,7 +338,7 @@ const char * cryptoSTE_aes_ccm_timed(
 
     // Data validation
     const char * answer = 0;
-    if (td->key->length != 128/8)
+    if (td->key.length != 128/8)
         answer = "incorrect key length";
     else
         return cryptoSTE_aes_ccm_test_timed(td, param);

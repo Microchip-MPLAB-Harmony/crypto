@@ -228,9 +228,11 @@ const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
     {
         switch(td->technique)
         {
+#if defined(WOLFSSL_SHA224)
             case ET_SHA_224:
                 param->results.testHandler = "CRYA SHA 224";
                 return cryptoSTE_sha(td, param, crya_sha224);
+#endif
             case ET_SHA_256:
                 param->results.testHandler = "CRYA SHA 256";
                 return cryptoSTE_sha(td, param, crya_sha256);

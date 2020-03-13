@@ -1459,8 +1459,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_l11_xplained_pro_hwsw/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">B6F3E81C9C2FFF7ED6EBD0EF4DCFE4DB</GeneratedChecksum>
-          <UserChecksum dnOrder="5">B6F3E81C9C2FFF7ED6EBD0EF4DCFE4DB</UserChecksum>
+          <GeneratedChecksum dnOrder="4">23D46A6776D40D65B4EEDE406879AFA8</GeneratedChecksum>
+          <UserChecksum dnOrder="5">B1B2D5B9E49061DB55876556BCD16EC9</UserChecksum>
         </File>
         <File dnOrder="182">
           <Type dnOrder="0">HEADER</Type>
