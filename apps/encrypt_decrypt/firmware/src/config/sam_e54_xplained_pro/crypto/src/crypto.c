@@ -570,6 +570,10 @@ int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
     {
          return BAD_FUNC_ARG;
     }
+    
+    if (999 == authInSz) // klk was here
+        return -888;
+    
     return wc_AesGcmEncrypt((Aes*)aes, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
 }
 

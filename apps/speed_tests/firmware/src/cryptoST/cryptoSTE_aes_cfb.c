@@ -56,11 +56,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../test_data/cryptoSpeedTestData.h"
 // #include "cryptoSTE_aes_cfb.h" -- don't include this
 
-// theory: one of these "fixes" build-time issues with wolfssl
-#include <stddef.h>
-#include <string.h>
-#include <stdbool.h>
-
+#include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 // #include <wolfssl/wolfssl/verion.h>
 #ifdef USE_FLAT_TEST_H
@@ -83,6 +79,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
+#if defined(HAVE_AES_CBC)
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local data structures
@@ -94,8 +92,28 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
+static void printAll(char * context,
+                     cryptoST_testDetail_t * td, 
+                     byte * cipher, byte * plain)
+{
+    cryptoST_testVector_t * vector = td->rawData;
+    
+    printf(CRLF "AES_CFB data (%s)" CRLF, context);
+    printf("%s" CRLF, td->source);
 
-#if defined(HAVE_AES_CBC)
+    cryptoST_PRINT_hexLine(CRLF "....msg   :", 
+            vector->vector.data, vector->vector.length);
+    cryptoST_PRINT_hexLine(CRLF "....key   :", 
+            td->in.sym.key.data, td->in.sym.key.length);
+    cryptoST_PRINT_hexLine(CRLF "....nonce :", 
+            td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+    cryptoST_PRINT_hexLine(CRLF "....golden:",
+            td->out.sym.cipher.data, td->out.sym.cipher.length);
+    cryptoST_PRINT_hexLine(CRLF "....cipher:", cipher, vector->vector.length);
+    if (plain)
+        cryptoST_PRINT_hexLine(CRLF "....plain :", plain, vector->vector.length);
+    printf(CRLF);
+}
 
 /* This is the generic encryption package.
  * The public entry points are defined below.
@@ -113,8 +131,8 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if ( (NULL == td->key->data)
-      || (NULL == td->ivNonce.data) )
+    if ( (NULL == td->in.sym.key.data)
+      || (NULL == td->in.sym.ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CFB test not activated." CRLF;
     
@@ -126,8 +144,8 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
     if (vector->vector.length > ALENGTH(cipher))
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
-    ret = wc_AesSetKey(&enc, td->key.data, td->key.length,
-                             td->ivNonce.data, AES_ENCRYPTION);
+    ret = wc_AesSetKey(&enc, td->in.sym.key.data, td->in.sym.key.length,
+                             td->in.sym.ivNonce.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
     // Hold off until the serial port is finished
@@ -151,25 +169,17 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
 
     if (param->parameters.verifyByGoldenCiphertext)
     {
-        if (td->goldenCipher.length == 0)
+        if ((0 == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
         { 
-            if (CSTE_VERBOSE > 1) 
-                PRINT("** can't verify cipher: no golden data" CRLF); 
+            param->results.warningCount++;
+            param->results.warningMessage = 
+                    "** can't verify cipher: no golden data"; 
         }
-        else if (XMEMCMP(cipher, td->goldenCipher.data, td->goldenCipher.length))
+        else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
         { 
             // Note: the test above will fail if iterate!=1.
             if (CSTE_VERBOSE)
-            {
-                PRINT(CRLF);
-                PRINT(td->source);
-                P0_UINT(CRLF "..cipher ", vector->vector.length);
-                P0_UINT("  " "..golden ", td->goldenCipher.length);
-                cryptoST_PRINT_hexLine(CRLF "..cipher:", cipher, vector->vector.length);
-                cryptoST_PRINT_hexLine(CRLF "..golden:",
-                        td->goldenCipher.data, td->goldenCipher.length);
-                PRINT_WAIT(CRLF);
-            }
+                printAll("encrypt (" BASE_LINE ")", td, cipher, ((void*)0));
             return "computed ciphertext does not match golden data (was iterate==1?)";
         }
     }
@@ -190,18 +200,24 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
                 return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
 
             /* decrypt uses AES_ENCRYPTION */
-            ret = wc_AesSetKey(&dec, td->key.data, td->key.length, 
-                                     td->ivNonce.data, AES_ENCRYPTION);
+            ret = wc_AesSetKey(&dec, td->in.sym.key.data, td->in.sym.key.length, 
+                                     td->in.sym.ivNonce.data, AES_ENCRYPTION);
             if (ret != 0) return "setting decryption key failed";
 
             if (CSTE_VERBOSE > 1) 
                 PRINT_WAIT("-- decrypting and comparing" CRLF)
 
             ret = wc_AesCfbDecrypt(&dec, plain, cipher, vector->vector.length);
-            if (ret != 0) return "decryption failed";
+            if (ret != 0)
+                return "decryption failed";
 
             if (XMEMCMP(plain, vector->vector.data, vector->vector.length))
+            {
+                if (CSTE_VERBOSE)
+                    printAll("decrypt (" BASE_LINE ")",
+                             td, cipher, plain);
                 return "recovered data does not match original";
+            }
         }
     }
 #endif /* HAVE_AES_DECRYPT */
@@ -224,7 +240,7 @@ const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 128/8)
+    if (td->in.sym.key.length != 128/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -241,7 +257,7 @@ const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 192/8)
+    if (td->in.sym.key.length != 192/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -258,7 +274,7 @@ const char * cryptoSTE_aes_cfb_256_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 256/8)
+    if (td->in.sym.key.length != 256/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else

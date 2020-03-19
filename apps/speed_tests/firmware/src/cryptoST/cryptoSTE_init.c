@@ -57,8 +57,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 // Datasets are screened based on the Harmony configuration.
 #if !defined(NO_SHA)        \
- || !defined(NO_SHA224)     \
  || !defined(NO_SHA256)     \
+ || defined(WOLFSSL_SHA224) \
  || defined(WOLFSSL_SHA384) \
  || defined(WOLFSSL_SHA512)
 #include "../test_data/cryptoSTD_sha_nist.h"
@@ -73,6 +73,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #if defined(HAVE_AESGCM)
 #include "../test_data/cryptoSTD_wolfSSL_aes_gcm.h"
+#include "../test_data/cryptoSTD_zero_aes.h"
 #endif
 #if defined(HAVE_AESCCM)
 #include "../test_data/cryptoSTD_aes_ccm.h"
@@ -82,9 +83,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #if defined(HAVE_AESCCM)
 #include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
+#include "../test_data/cryptoSTD_zero_aes.h"
 #endif
 #if defined(WOLFSSL_AES_CFB)
 #include "../test_data/cryptoSTD_wolfSSL_aes_cfb.h"
+#include "../test_data/cryptoSTD_zero_aes.h"
 #endif
 #include "../test_data/cryptoSTD_DS70005365.h"
 #if !defined(NO_DES3)
@@ -113,6 +116,10 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     // Set up a fresh execution -- copy the included API's.
     // Each line here is representative of a #include above,
     // and this list determines test order.
+#ifdef CRYPTOSTV_ZERO_AES
+    ST_list[numberOfLoadedAPI++] = microchip_zero_aes;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
 #ifdef CRYPTOSTV_WOLFSSL_AES_CFB
     ST_list[numberOfLoadedAPI++] = wolfSSL_aes_cfb;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);

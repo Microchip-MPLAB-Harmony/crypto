@@ -484,6 +484,8 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/misc.c</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
+      <itemPath>dist/sam_e54_xplained_pro/debug/sam_e54_xplained_pro.X.debug.elf</itemPath>
+      <itemPath>dist/sam_e54_xplained_pro/debug/sam_e54_xplained_pro.X.debug.map</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

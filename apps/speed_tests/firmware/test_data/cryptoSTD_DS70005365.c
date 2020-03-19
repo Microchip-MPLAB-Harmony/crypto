@@ -63,14 +63,14 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = appNoteReference,
         .rawData = &ds_001122,
-        .key = { 
+        .in.sym.key = { 
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
             },
         },
-        .goldenCipher = {
+        .out.sym.cipher = {
             .data = (ALIGN4 const uint8_t[]){
                 0x69, 0xc4, 0xe0, 0xd8, 0x6a, 0x7b, 0x04, 0x30,
                 0xd8, 0xcd, 0xb7, 0x80, 0x70, 0xb4, 0xc5, 0x5a
@@ -88,7 +88,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = appNoteReference,
         .rawData = &ds_sha256,
-        .goldenCipher = {
+        .out.hash.hash = {
             .data = (ALIGN4 const uint8_t[]){
                 0xb9, 0x4d, 0x27, 0xb9, 0x93, 0x4d, 0x3e, 0x08,
                 0xa5, 0x2e, 0x52, 0xd7, 0xda, 0x7d, 0xab, 0xfa,
@@ -123,14 +123,14 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = 0,
             .data = (void*)0,
         },
-        .goldenCipher = { // from the application note
+        .out.sym.cipher = { // from the application note
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0xc0, 0x8a, 0x14, 0x84, 0xd1, 0x3b, 0xe1, 0xe1, 
                 0x93, 0x39, 0x67, 0x14, 0x93, 0xc3, 0xcb, 0xac
             }
         },
-        .goldenTag = { 
+        .out.sym.tag = { 
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x42, 0x3b, 0x3a, 0x05, 0x65, 0x0a, 0xdc, 0x94, 

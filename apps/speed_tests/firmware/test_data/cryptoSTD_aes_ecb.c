@@ -50,11 +50,11 @@ static cryptoST_testDetail_t test_item = // one and only
     .source = __BASE_FILE__,
     .pedigree = description,
     .rawData = &softData,
-    .goldenCipher = {
+    .out.sym.cipher = {
         .data = ((void*)0), // fill in later
         .length = 16,
     },
-    .key = 
+    .in.sym.key = 
         { .data = (DATA_CHAR*)"abcdefghijklmnop", // 128b = 16B
           .length = 16 },
 };

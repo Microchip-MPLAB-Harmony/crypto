@@ -241,8 +241,7 @@ static void setHighBitsOf16Bytes(uint8_t * data, int numberOfBits)
     }
 }
 
-static cryptoST_testData_t mutableKey = (cryptoST_testData_t)
-    { .data = buffer16, .length = sizeof(buffer16),};
+/* This must never be declared const. */
 static cryptoST_testDetail_t testDetail =
 {
     .technique = ET_AES_128,
@@ -252,13 +251,15 @@ static cryptoST_testDetail_t testDetail =
     .source = __BASE_FILE__,
     .pedigree = 0 /* fill in later */,
     .rawData = 0,
-    .goldenCipher = {
+    .out.sym.cipher = {
         .data = (uint8_t[]){ 0 },
         .length = 16,
     },
-    .key = &mutableKey,
-    .ivNonce = (cryptoST_testData_t){0},
+    .in.sym.key.data = 0,   // buffer & length tbd later
+    .in.sym.key.length = 0,
+    .in.sym.ivNonce = (cryptoST_testData_t){0},
 };
+#define mutableKey  testDetail.in.sym.key
 
 /*************************************************************
  * API handlers
@@ -275,7 +276,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             if (ALENGTH(GFSBox_detail) > detailCounter)
             {
                 const plainCipher_t * newData = &GFSBox_detail[detailCounter];
-                testDetail.goldenCipher.data = (uint8_t*)(newData->cipher);
+                testDetail.out.sym.cipher.data = (uint8_t*)(newData->cipher);
                 mutableKey.data = (uint8_t*)zero16;
                 mutableKey.length = sizeof(buffer16);
                 GFSBox_KAT.vector.data = (uint8_t*)(newData->plain);
@@ -294,7 +295,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             if (ALENGTH(KeySBox_detail) > detailCounter)
             {
                 const keyCipher_t * newData = &KeySBox_detail[detailCounter];
-                testDetail.goldenCipher.data = (uint8_t*)(newData->cipher);
+                testDetail.out.sym.cipher.data = (uint8_t*)(newData->cipher);
                 mutableKey.data = (uint8_t*)(newData->key);
                 new = old;
                 break;
@@ -313,7 +314,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
         {
             if (ALENGTH(VarText_cipher) > detailCounter)
             {
-                testDetail.goldenCipher.data = (uint8_t*)&VarText_cipher[detailCounter];
+                testDetail.out.sym.cipher.data = (uint8_t*)&VarText_cipher[detailCounter];
                 mutableKey.data = (uint8_t*)zero16;
                 setHighBitsOf16Bytes(buffer16, detailCounter+1);
                 new = old;
@@ -331,7 +332,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
         {
             if (ALENGTH(VarKey_cipher) > detailCounter)
             {
-                testDetail.goldenCipher.data = (uint8_t*)&VarKey_cipher[detailCounter];
+                testDetail.out.sym.cipher.data = (uint8_t*)&VarKey_cipher[detailCounter];
                 mutableKey.data = (uint8_t*)buffer16;
                 setHighBitsOf16Bytes(buffer16, detailCounter+1);
                 new = old;

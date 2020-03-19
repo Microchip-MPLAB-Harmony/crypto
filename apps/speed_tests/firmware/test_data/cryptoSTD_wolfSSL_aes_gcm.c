@@ -56,6 +56,47 @@ static CONST cryptoST_testVector_t dt3 =
     .vector.length = 0,
 };
 
+static const char appGCM_description[] =
+    "Test Case 16 of Galois/Counter Mode of Operation (GCM) by McGrew and Viega";
+static const char appGCM_source[] = "encrypt-decrypt-test/app.c line 1273";
+static cryptoST_testVector_t appGCM =
+{
+    .name = DATA_PACKAGE_NAME "_APPGCM",
+    .source = appGCM_source,
+    .description = appGCM_description,
+    .vector.data = (ALIGN4 const uint8_t[]){
+        0xd9, 0x31, 0x32, 0x25, 0xf8, 0x84, 0x06, 0xe5,
+        0xa5, 0x59, 0x09, 0xc5, 0xaf, 0xf5, 0x26, 0x9a,
+        0x86, 0xa7, 0xa9, 0x53, 0x15, 0x34, 0xf7, 0xda,
+        0x2e, 0x4c, 0x30, 0x3d, 0x8a, 0x31, 0x8a, 0x72,
+        0x1c, 0x3c, 0x0c, 0x95, 0x95, 0x68, 0x09, 0x53,
+        0x2f, 0xcf, 0x0e, 0x24, 0x49, 0xa6, 0xb5, 0x25,
+        0xb1, 0x6a, 0xed, 0xf5, 0xaa, 0x0d, 0xe6, 0x57,
+        0xba, 0x63, 0x7b, 0x39
+    },
+    .vector.length = (7*8)+4,
+}; //  -- for app.c 192 and 256 bit tests
+
+static cryptoST_testVector_t appGCM128 =
+{
+    .name = DATA_PACKAGE_NAME "_APPGCM",
+    .source = "encrypt-decrypt-test/app.c line 1375",
+    .description = appGCM_description,
+    /* The following is an interesting test case from the example
+     * FIPS test vectors for AES-GCM. IVlen = 1 uint8_t */
+    .vector.data = (ALIGN4 const uint8_t[]){
+        0x57, 0xce, 0x45, 0x1f, 0xa5, 0xe2, 0x35, 0xa5,
+        0x8e, 0x1a, 0xa2, 0x3b, 0x77, 0xcb, 0xaf, 0xe2
+    },
+    .vector.length = (2*8)+0,
+}; //  -- for app.c 128 bit tests
+
+static ALIGN4 const uint8_t appAAD[] = { // app.c 1285
+    0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef,
+    0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef,
+    0xab, 0xad, 0xda, 0xd2 // sic: 2nd row is the same
+}; //  -- for app.c 192 and 256 bit tests
+
 /*************************************************************
  * Raw (input) data definitions for run-time defined
  * sequential and random data sets having large block sizes.
@@ -92,28 +133,28 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt1,
-        .key = { // test.c 7171
+        .in.sym.key = { // test.c 7171
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x29, 0x8e, 0xfa, 0x1c, 0xcf, 0x29, 0xcf, 0x62,
                 0xae, 0x68, 0x24, 0xbf, 0xc1, 0x95, 0x57, 0xfc
             },
         },
-        .ivNonce = { // test.c 7177
+        .in.sym.ivNonce = { // test.c 7177
             .length = 12,
             .data = (ALIGN4 const uint8_t[]){
                 0x6f, 0x58, 0xa9, 0x3f, 0xe1, 0xd2, 0x07, 0xfa,
                 0xe4, 0xed, 0x2f, 0x6d
             },
         },
-        .additionalAuthData = { // test.c 7188
+        .in.sym.additionalAuthData = { // test.c 7188
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x02, 0x1f, 0xaf, 0xd2, 0x38, 0x46, 0x39, 0x73,
                 0xff, 0xe8, 0x02, 0x56, 0xe5, 0xb1, 0xc6, 0xb1
             },
         },
-        .goldenCipher = { // test.c 7183
+        .out.sym.cipher = { // test.c 7183
             .length = 32,
             .data = (ALIGN4 const uint8_t[]){
                 0xdf, 0xce, 0x4e, 0x9c, 0xd2, 0x91, 0x10, 0x3d,
@@ -122,7 +163,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x58, 0x21, 0x2d, 0xa9, 0x65, 0x21, 0xb7, 0xdb
             }
         },
-        .goldenTag = { // test.c 7200
+        .out.sym.tag = { // test.c 7200
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x54, 0x24, 0x65, 0xef, 0x59, 0x93, 0x16, 0xf7,
@@ -138,32 +179,32 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7171",
         .rawData = &dt2,
-        .key = { // test.c 7207
+        .in.sym.key = { // test.c 7207
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x01, 0x6d, 0xbb, 0x38, 0xda, 0xa7, 0x6d, 0xfe,
                 0x7d, 0xa3, 0x84, 0xeb, 0xf1, 0x24, 0x03, 0x64
             },
         },
-        .ivNonce = { // test.c 7212
+        .in.sym.ivNonce = { // test.c 7212
             .length = 12,
             .data = (ALIGN4 const uint8_t[]){
                 0x07, 0x93, 0xef, 0x3a, 0xda, 0x78, 0x2f, 0x78,
                 0xc9, 0x8a, 0xff, 0xe3
             },
         },
-        .additionalAuthData = { // test.c 7256
+        .in.sym.additionalAuthData = { // test.c 7256
             .length = 0,
             .data = NULL,
         },
-        .goldenCipher = { // test.c 7221
+        .out.sym.cipher = { // test.c 7221
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x60, 0x9a, 0xa3, 0xf4, 0x54, 0x1b, 0xc0, 0xfe,
                 0x99, 0x31, 0xda, 0xad, 0x2e, 0xe1, 0x5d, 0x0c
             }
         },
-        .goldenTag = { // test.c 7226
+        .out.sym.tag = { // test.c 7226
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
@@ -180,32 +221,32 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 7231",
         .rawData = &dt3, // null data
-        .key = { // test.c 7231
+        .in.sym.key = { // test.c 7231
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
-        .ivNonce = { // test.c 7236
+        .in.sym.ivNonce = { // test.c 7236
             .length = 12,
             .data = (ALIGN4 const uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
                 0x6a, 0x4b, 0xd5, 0xe1
             },
         },
-        .additionalAuthData = { // test.c 7261
+        .in.sym.additionalAuthData = { // test.c 7261
             .length = 0,
             .data = (ALIGN4 const uint8_t[]){
                 0x60, 0x9a, 0xa3, 0xf4, 0x54, 0x1b, 0xc0, 0xfe,
                 0x99, 0x31, 0xda, 0xad, 0x2e, 0xe1, 0x5d, 0x0c
             },
         },
-        .goldenCipher = { // test.c 7261
+        .out.sym.cipher = { // test.c 7261
             .length = 0,
             .data = NULL,
         },
-        .goldenTag = { // test.c 7241
+        .out.sym.tag = { // test.c 7241
             .length = 12,
             .data = (ALIGN4 const uint8_t[]){
                 0x01, 0x42, 0x80, 0xf9, 0x44, 0xf5, 0x3c, 0x68,
@@ -221,32 +262,32 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP sequential big block",
         .rawData = &seq4k,
-        .key = { // test.c 7231
+        .in.sym.key = { // test.c 7231
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
-        .ivNonce = { // test.c 7236
+        .in.sym.ivNonce = { // test.c 7236
             .length = 12,
             .data = (ALIGN4 const uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
                 0x6a, 0x4b, 0xd5, 0xe1
             },
         },
-        .additionalAuthData = { // test.c 7177
+        .in.sym.additionalAuthData = { // test.c 7177
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
                 0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
             },
         },
-        .goldenCipher = { // no data
+        .out.sym.cipher = { // no data
             .length = 0,
             .data = NULL,
         },
-        .goldenTag = { // no data
+        .out.sym.tag = { // no data
             .length = 0,
             .data = NULL,
         },
@@ -259,34 +300,180 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "MCHP pseudoRandom big block",
         .rawData = &pr4k,
-        .key = { // test.c 7231
+        .in.sym.key = { // test.c 7231
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0xb0, 0x1e, 0x45, 0xcc, 0x30, 0x88, 0xaa, 0xba,
                 0x9f, 0xa4, 0x3d, 0x81, 0xd4, 0x81, 0x82, 0x3f
             },
         },
-        .ivNonce = { // test.c 7236
+        .in.sym.ivNonce = { // test.c 7236
             .length = 12,
             .data = (ALIGN4 const uint8_t[]){
                 0x5a, 0x2c, 0x4a, 0x66, 0x46, 0x87, 0x13, 0x45,
                 0x6a, 0x4b, 0xd5, 0xe1
             },
         },
-        .additionalAuthData = { // test.c 7177
+        .in.sym.additionalAuthData = { // test.c 7177
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x33, 0xaf, 0xec, 0x59, 0xc4, 0x5b, 0xaf, 0x68,
                 0x9a, 0x5e, 0x1b, 0x13, 0xae, 0x42, 0x36, 0x19
             },
         },
-        .goldenCipher = { // no data
+        .out.sym.cipher = { // no data
             .length = 0,
             .data = NULL,
         },
-        .goldenTag = { // no data
+        .out.sym.tag = { // no data
             .length = 0,
             .data = NULL,
+        },
+    },
+    {
+        .technique = ET_AES_GCM,  // ------------------- 128 bit key
+        .mode = EM_NONE,
+        .recommendedRepetitions = 100, /* *** */
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = appGCM_source,
+        .rawData = &appGCM128,
+        .in.sym.additionalAuthData = {
+            .length = (2*8),
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1398
+                0x40, 0xfc, 0xdc, 0xd7, 0x4a, 0xd7, 0x8b, 0xf1,
+                0x3e, 0x7c, 0x60, 0x55, 0x50, 0x51, 0xdd, 0x54
+            },
+        },
+        .in.sym.key = { 
+            .length = (2*8),
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1335
+                0xbb, 0x01, 0xd7, 0x03, 0x81, 0x1c, 0x10, 0x1a,
+                0x35, 0xe0, 0xff, 0xd2, 0x91, 0xba, 0xf2, 0x4b
+            },
+        },
+        .in.sym.ivNonce = {
+            .length = 1,
+            .data = (ALIGN4 const uint8_t[]){ // app.c lne 1387
+                0xca
+            },
+        },
+        .out.sym.cipher = { 
+            .length = (2*8)+0,
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1394
+                0x6b, 0x5f, 0xb3, 0x9d, 0xc1, 0xc5, 0x7a, 0x4f,
+                0xf3, 0x51, 0x4d, 0xc2, 0xd5, 0xf0, 0xd0, 0x07
+            },
+        },
+        .out.sym.tag = {
+            .length = (2*8)+0,
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1404
+                0x06, 0x90, 0xed, 0x01, 0x34, 0xdd, 0xc6, 0x95,
+                0x31, 0x2e, 0x2a, 0xf9, 0x57, 0x7a, 0x1e, 0xa6
+            },
+        },
+    },
+    {
+        .technique = ET_AES_GCM,  // ------------------- 192 bit key
+        .mode = EM_NONE,
+        .recommendedRepetitions = 100, /* *** */
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = appGCM_source,
+        .rawData = &appGCM,
+        .in.sym.additionalAuthData = {
+            .length = ALENGTH(appAAD), // (8*2)+4,
+            .data = appAAD,
+        },
+        .in.sym.key = { 
+            .length = 24,
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1335
+                0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c,
+                0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08,
+                0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c
+            },
+        },
+        .in.sym.ivNonce = {
+            .length = (8*7)+4,
+            .data = (ALIGN4 const uint8_t[]){ // app.c lne 1342
+                0x93, 0x13, 0x22, 0x5d, 0xf8, 0x84, 0x06, 0xe5,
+                0x55, 0x90, 0x9c, 0x5a, 0xff, 0x52, 0x69, 0xaa,
+                0x6a, 0x7a, 0x95, 0x38, 0x53, 0x4f, 0x7d, 0xa1,
+                0xe4, 0xc3, 0x03, 0xd2, 0xa3, 0x18, 0xa7, 0x28,
+                0xc3, 0xc0, 0xc9, 0x51, 0x56, 0x80, 0x95, 0x39,
+                0xfc, 0xf0, 0xe2, 0x42, 0x9a, 0x6b, 0x52, 0x54,
+                0x16, 0xae, 0xdb, 0xf5, 0xa0, 0xde, 0x6a, 0x57,
+                0xa6, 0x37, 0xb3, 0x9b
+            },
+        },
+        .out.sym.cipher = { 
+            .length = (8*7)+4,
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1356
+                0xd2, 0x7e, 0x88, 0x68, 0x1c, 0xe3, 0x24, 0x3c,
+                0x48, 0x30, 0x16, 0x5a, 0x8f, 0xdc, 0xf9, 0xff,
+                0x1d, 0xe9, 0xa1, 0xd8, 0xe6, 0xb4, 0x47, 0xef,
+                0x6e, 0xf7, 0xb7, 0x98, 0x28, 0x66, 0x6e, 0x45,
+                0x81, 0xe7, 0x90, 0x12, 0xaf, 0x34, 0xdd, 0xd9,
+                0xe2, 0xf0, 0x37, 0x58, 0x9b, 0x29, 0x2d, 0xb3,
+                0xe6, 0x7c, 0x03, 0x67, 0x45, 0xfa, 0x22, 0xe7,
+                0xe9, 0xb7, 0x37, 0x3b
+            },
+        },
+        .out.sym.tag = {
+            .length = (8*2),
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1366
+                0xdc, 0xf5, 0x66, 0xff, 0x29, 0x1c, 0x25, 0xbb,
+                0xb8, 0x56, 0x8f, 0xc3, 0xd3, 0x76, 0xa6, 0xd9
+            },
+        },
+    },
+    {
+        .technique = ET_AES_GCM,  // ------------------- 256 bit key
+        .mode = EM_NONE,
+        .recommendedRepetitions = 100, /* *** */
+
+        .source = __BASE_FILE__ "(" BASE_LINE ")",
+        .pedigree = appGCM_source,
+        .rawData = &appGCM,
+        .in.sym.additionalAuthData = {
+            .length = ALENGTH(appAAD), // (8*2)+4,
+            .data = appAAD,
+        },
+        .in.sym.key = { 
+            .length = 32,
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1293
+                0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c,
+                0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08,
+                0xfe, 0xff, 0xe9, 0x92, 0x86, 0x65, 0x73, 0x1c,
+                0x6d, 0x6a, 0x8f, 0x94, 0x67, 0x30, 0x83, 0x08
+            },
+        },
+        .in.sym.ivNonce = {
+            .length = (1*8)+4,
+            .data = (ALIGN4 const uint8_t[]){ // app.c lne 1301
+                0xca, 0xfe, 0xba, 0xbe, 0xfa, 0xce, 0xdb, 0xad,
+                0xde, 0xca, 0xf8, 0x88
+            },
+        },
+        .out.sym.cipher = { 
+            .length = (8*7)+4,
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1307
+                0x52, 0x2d, 0xc1, 0xf0, 0x99, 0x56, 0x7d, 0x07,
+                0xf4, 0x7f, 0x37, 0xa3, 0x2a, 0x84, 0x42, 0x7d,
+                0x64, 0x3a, 0x8c, 0xdc, 0xbf, 0xe5, 0xc0, 0xc9,
+                0x75, 0x98, 0xa2, 0xbd, 0x25, 0x55, 0xd1, 0xaa,
+                0x8c, 0xb0, 0x8e, 0x48, 0x59, 0x0d, 0xbb, 0x3d,
+                0xa7, 0xb0, 0x8b, 0x10, 0x56, 0x82, 0x88, 0x38,
+                0xc5, 0xf6, 0x1e, 0x63, 0x93, 0xba, 0x7a, 0x0a,
+                0xbc, 0xc9, 0xf6, 0x62
+            },
+        },
+        .out.sym.tag = {
+            .length = (8*2),
+            .data = (ALIGN4 const uint8_t[]){ // app.c line 1320
+                0x76, 0xfc, 0x6e, 0xce, 0x0f, 0x4e, 0x17, 0x68,
+                0xcd, 0xdf, 0x88, 0x53, 0xbb, 0x2d, 0x55, 0x1b
+            },
         },
     },
     {}

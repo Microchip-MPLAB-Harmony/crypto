@@ -60,7 +60,7 @@ The key principles are these:
     a. RFC-3610 talks about "cleartext" which is taken as the AAD value,
        where the length of cleartext is specified.
     b. Input "data" is the remnant after the AAD has been skipped.
-    c. RFC-3610 "output" concatenates AAD|cipher|goldenTag as the official
+    c. RFC-3610 "output" concatenates AAD|cipher|out.sym.tag as the official
        output, which when combined fill the specified output packet length.
     d. The length of the generated tag is the remnant of the output data
        after cleartext (AAD) and ciphertext have been skipped. Although
@@ -230,13 +230,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV1",
         .rawData = &rfc3610A_pv1pv7,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x03\x02\x01\x00\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV1_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV1_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV1_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV1_cipher[TL] },
     },
     {
         #undef TL
@@ -250,13 +250,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV2",
         .rawData = &rfc3610A_pv2pv8,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x04\x03\x02\x01\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV2_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV2_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV2_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV2_cipher[TL] },
     },
     {
         #undef TL
@@ -270,13 +270,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV3",
         .rawData = &rfc3610A_pv3pv9,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x05\x04\x03\x02\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV3_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV3_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV3_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV3_cipher[TL] },
     },
     #undef CLEAR
     #define CLEAR CLEAR12
@@ -292,13 +292,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV4",
         .rawData = &rfc3610A_pv4pv10,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x06\x05\x04\x03\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV4_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV4_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV4_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV4_cipher[TL] },
     },
     {
         #undef TL
@@ -312,13 +312,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV5",
         .rawData = &rfc3610A_pv5pv11,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x07\x06\x05\x04\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV5_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV5_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV5_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV5_cipher[TL] },
     },
     {
         #undef TL
@@ -332,13 +332,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV6",
         .rawData = &rfc3610A_pv6pv12,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x08\x07\x06\x05\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV6_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV6_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV6_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV6_cipher[TL] },
     },
     #undef CLEAR
     #define CLEAR CLEAR8
@@ -354,13 +354,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV7",
         .rawData = &rfc3610A_pv1pv7,
-        .key = { .data = key_pv1to12, .length = 16 },
-        .additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .data = key_pv1to12, .length = 16 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x09\x08\x07\x06\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV7_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV7_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV7_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV7_cipher[TL] },
     },
     // skipping PV8..PV12
     #undef CLEAR
@@ -377,13 +377,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV13",
         .rawData = &rfc3610B_pv13,
-        .key = { .length = 16, .data = key_pv13to24 },
-        .additionalAuthData = { .length = CLEAR, .data = PV13_cipher },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .length = 16, .data = key_pv13to24 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PV13_cipher },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x41\x2B\x4E\xA9\xCD\xBE\x3C\x96\x96\x76\x6C\xFA" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV13_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV13_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV13_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV13_cipher[TL] },
     },
     {
         #undef TL
@@ -397,13 +397,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV14",
         .rawData = &rfc3610B_pv14,
-        .key = { .length = 16, .data = key_pv13to24 },
-        .additionalAuthData = { .length = CLEAR, .data = PV14_cipher },
-        .ivNonce = { .length = 13, // nonce
+        .in.sym.key = { .length = 16, .data = key_pv13to24 },
+        .in.sym.additionalAuthData = { .length = CLEAR, .data = PV14_cipher },
+        .in.sym.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x33\x56\x8E\xF7\xB2\x63\x3C\x96\x96\x76\x6C\xFA" },
-        .goldenCipher = { .length = TL-CLEAR, .data = &PV14_cipher[CLEAR] },
-        .goldenTag    = { .length = PL-TL, .data = &PV14_cipher[TL] },
+        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV14_cipher[CLEAR] },
+        .out.sym.tag    = { .length = PL-TL, .data = &PV14_cipher[TL] },
     },
     // skipping PV15..PV24
     {}

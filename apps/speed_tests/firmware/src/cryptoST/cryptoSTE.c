@@ -384,7 +384,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
         }
 
         if (CSTE_VERBOSE > 2) 
-        { printf("-- executing data set %s" CRLF, cv->name); }
+        { printf("             -- executing data set %s" CRLF, cv->name); }
 
         config->parameters.useLocalDriverEntryPoints = false;
         while(1) // loop if we are doing HW-SW comparison
@@ -403,7 +403,10 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
                 }
                 else
                 {
-                    thisTest->testsAttempted++;
+                    if (CSTE_VERBOSE > 2) 
+                    { printf("             -- data item %s" CRLF, tr->rawData->name); }
+
+        thisTest->testsAttempted++;
                     if (CSTE_VERBOSE > 1) 
                     {
                         PRINT("-- executing vector " CRLF);

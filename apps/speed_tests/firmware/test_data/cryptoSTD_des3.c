@@ -149,10 +149,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .key = { .length = 24, .data = threedes_key },
-        .ivNonce.length = 8,
-        .ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
-        .goldenCipher = {
+        .in.sym.key = { .length = 24, .data = threedes_key },
+        .in.sym.ivNonce.length = 8,
+        .in.sym.ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
+        .out.sym.cipher = {
             .length = (6*8),
             .data = (ALIGN4 const uint8_t[]){
                 "\xE6\xB6\x34\x5F\x10\x15\x38\x02"
@@ -171,10 +171,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .key = { .length = 24, .data = threedes_key },
-        .ivNonce.length = 8,
-        .ivNonce.data = (ALIGN4 const uint8_t*)"23456789",
-        .goldenCipher = {
+        .in.sym.key = { .length = 24, .data = threedes_key },
+        .in.sym.ivNonce.length = 8,
+        .in.sym.ivNonce.data = (ALIGN4 const uint8_t*)"23456789",
+        .out.sym.cipher = {
             .length = 48,
             .data = (ALIGN4 const uint8_t[]){
                 "\x5B\xF2\x96\x57\xE6\x06\x4E\xB9"
@@ -193,10 +193,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &lorem,
-        .key = { .length = 24, .data = threedes_key },
-        .ivNonce.length = 8,
-        .ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
-        .goldenCipher = {
+        .in.sym.key = { .length = 24, .data = threedes_key },
+        .in.sym.ivNonce.length = 8,
+        .in.sym.ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
+        .out.sym.cipher = {
             .length = (28*16),
             .data = lorem_cipher_cbc,
         },
@@ -214,10 +214,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .key = { .length = 24, .data = threedes_key },
-        // .ivNonce.length = 8,
-        // .ivNonce.data = (const uint8_t*)"12345678",
-        .goldenCipher = {
+        .in.sym.key = { .length = 24, .data = threedes_key },
+        // .in.sym.ivNonce.length = 8,
+        // .in.sym.ivNonce.data = (const uint8_t*)"12345678",
+        .out.sym.cipher = {
             .length = (6*8),
             .data = (ALIGN4 const uint8_t[]){
     "\x13\xD4\xD3\x54\x94\x93\xD2\x87\x0F\x93\xC3\xE0\x81\x2A\x06\xDE"
@@ -233,10 +233,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &eee,
-        .key = { .length = 24, .data = threedes_key },
-        // .ivNonce.length = 8,
-        // .ivNonce.data = (const uint8_t*)"12345678",
-        .goldenCipher = {
+        .in.sym.key = { .length = 24, .data = threedes_key },
+        // .in.sym.ivNonce.length = 8,
+        // .in.sym.ivNonce.data = (const uint8_t*)"12345678",
+        .out.sym.cipher = {
             .length = (7*8),
             .data = (ALIGN4 const uint8_t[]){
     "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
@@ -253,10 +253,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &lorem,
-        .key = { .length = 24, .data = threedes_key },
-        // .ivNonce.length = 8,
-        // .ivNonce.data = (const uint8_t*)"12345678",
-        .goldenCipher = {
+        .in.sym.key = { .length = 24, .data = threedes_key },
+        // .in.sym.ivNonce.length = 8,
+        // .in.sym.ivNonce.data = (const uint8_t*)"12345678",
+        .out.sym.cipher = {
             .length = (28*16),
             .data = lorem_cipher_ecb,
         },

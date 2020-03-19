@@ -158,7 +158,7 @@ int wc_AesEncrypt(Aes* aes, const byte* inBlock, byte* outBlock)
     ctrlb->v = 0;
     ctrla->s.AESMODE = CRYPT_AES_U2238_ECB;
     ctrla->s.CIPER = CRYPT_AES_U2238_ENCRYPTION;
-    ctrla->s.ENABLE = 1;
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -174,6 +174,7 @@ int wc_AesEncrypt(Aes* aes, const byte* inBlock, byte* outBlock)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     
     uint8_t * outPtr = outBlock;
@@ -197,7 +198,7 @@ int wc_AesDecrypt(Aes* aes, const byte* inBlock, byte* outBlock)
     ctrlb->v = 0;
     ctrla->s.AESMODE = CRYPT_AES_U2238_ECB;
     ctrla->s.CIPER = CRYPT_AES_U2238_DECRYPTION;
-    ctrla->s.ENABLE = 1;
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -213,6 +214,7 @@ int wc_AesDecrypt(Aes* aes, const byte* inBlock, byte* outBlock)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     
     uint8_t * outPtr = outBlock;
@@ -238,7 +240,7 @@ int wc_AesEcbEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     ctrlb->v = 0;
     ctrla->s.AESMODE = CRYPT_AES_U2238_ECB;
     ctrla->s.CIPER = CRYPT_AES_U2238_ENCRYPTION;
-    ctrla->s.ENABLE = 1;
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -254,6 +256,7 @@ int wc_AesEcbEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     
     uint8_t * outPtr = out;
@@ -281,8 +284,7 @@ int wc_AesEcbDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     ctrlb->v = 0;    
     ctrla->s.AESMODE = CRYPT_AES_U2238_ECB;
     ctrla->s.CIPER = CRYPT_AES_U2238_DECRYPTION;
-    ctrla->s.ENABLE = 1;
-    
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -298,7 +300,7 @@ int wc_AesEcbDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
-    
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     
     uint8_t * outPtr = out;
@@ -331,7 +333,7 @@ int wc_AesCbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     ctrlb->v = 0;
     ctrla->s.AESMODE = CRYPT_AES_U2238_CBC;
     ctrla->s.CIPER = CRYPT_AES_U2238_ENCRYPTION;
-    ctrla->s.ENABLE = 1;
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -347,6 +349,7 @@ int wc_AesCbcEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     CRYPT_AES_u2238LoadIV((uint32_t*)aes->reg);
 
@@ -376,8 +379,7 @@ int wc_AesCbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     ctrlb->v = 0;    
     ctrla->s.AESMODE = CRYPT_AES_U2238_CBC;
     ctrla->s.CIPER = CRYPT_AES_U2238_DECRYPTION;
-    ctrla->s.ENABLE = 1;
-    
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -393,7 +395,7 @@ int wc_AesCbcDecrypt(Aes* aes, byte* out, const byte* in, word32 sz)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
-    
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     CRYPT_AES_u2238LoadIV((uint32_t*)aes->reg);
 
@@ -428,7 +430,7 @@ int wc_AesCtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
     ctrlb->v = 0;
     ctrla->s.AESMODE = CRYPT_AES_U2238_CTR;
     ctrla->s.CIPER = CRYPT_AES_U2238_ENCRYPTION;
-    ctrla->s.ENABLE = 1;
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -444,6 +446,7 @@ int wc_AesCtrEncrypt(Aes* aes, byte* out, const byte* in, word32 sz)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
     CRYPT_AES_u2238LoadIV((uint32_t*)aes->reg);
 
@@ -509,7 +512,7 @@ void CRYPT_AES_GcmLoadKey(Aes* aes)
     ctrla->s.CIPER = CRYPT_AES_U2238_ENCRYPTION;    
     ctrla->s.AESMODE = CRYPT_AES_U2238_ECB;
     ctrla->s.KEYSIZE = aes->hwDesc.ctrla.s.KEYSIZE;
-    ctrla->s.ENABLE = 1;
+// klk     ctrla->s.ENABLE = 1;
     switch (aes->keylen)
     {
         case 16:
@@ -525,7 +528,7 @@ void CRYPT_AES_GcmLoadKey(Aes* aes)
             aes->hwDesc.ctrla.s.KEYSIZE = CRYPT_AES_U2238_AES256;
             break;
     }
-            
+    ctrla->s.ENABLE = 1; // klk
     CRYPT_AES_u2238LoadKey(aes, (uint32_t*)aes->key);
 
     uint8_t workBuf[16] = {0};

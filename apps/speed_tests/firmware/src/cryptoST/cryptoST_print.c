@@ -284,7 +284,9 @@ void cryptoST_PRINT_hexLine(const char * const tag,
     __conditional_software_breakpoint(ALENGTH(line) > (pos - line));
     PRINT_WAIT(line); // wait before line goes out of scope
 #if 1
-    printf(" (%d)", length);
+    int align4 = ((uint32_t)data)%4;
+    char * align = (0==align4)?"":" misaligned";
+    printf(" (%d)%s", length, align);
 #endif
 }
 

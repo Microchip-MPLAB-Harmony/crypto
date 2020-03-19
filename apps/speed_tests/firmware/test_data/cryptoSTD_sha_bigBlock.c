@@ -50,7 +50,7 @@ static CONST cryptoST_testDetail_t test_item =
     .source = __BASE_FILE__ "(" BASE_LINE ")",
     .pedigree = "Blocks of null data",
     .rawData = &satcZ,
-    .goldenCipher = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
+    .out.hash.hash = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
 };
 
 /*************************************************************
@@ -102,13 +102,8 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
     __NOP();
 
 #if !defined(NO_SHA256)
-    // Assume that if the pointer is in range, that it is legitimate.
-    if (old < test_item) 
-        ;
-    
-    // We know that the final (illegitimate) entry has a null technique,
-    // but we still need to check if "old" is _way_ out of bounds.
-    else if ((old >= &test_item[test_item_count])
+    // Need to check if "old" is out of bounds.
+    if ((old != &test_item)
             || (ET_NONE == old->technique))
         ;
     else do
@@ -148,14 +143,14 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
 
             // Demonstrate that we are properly configured
             __conditional_software_breakpoint(raw->vector.data);
-            __conditional_software_breakpoint(old->goldenCipher.data);
-            __conditional_software_breakpoint(32 == old->goldenCipher.length);
+            __conditional_software_breakpoint(old->out.hash.hash.data);
+            __conditional_software_breakpoint(32 == old->out.hash.hash.length);
 
             // Let wolfCrypt compute the golden answer
             raw->vector.length = zero_test;
             wc_Sha256Hash(raw->vector.data,
                           raw->vector.length,
-                          (uint8_t*)old->goldenCipher.data);
+                          (uint8_t*)old->out.hash.hash.data);
 #endif
         }
         return old;
@@ -173,7 +168,7 @@ static cryptoST_testDetail_t * firstTest(void)
     zero_test = 0;
     if (satcZ.vector.data)
     {
-        return nextTest(&test_item[0]);
+        return nextTest(&test_item);
     }
     
     // If we get here the data vector is not initialized correctly

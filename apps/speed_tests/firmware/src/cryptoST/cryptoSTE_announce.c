@@ -101,22 +101,22 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
         P_INT("..repetitions: ", rv->recommendedRepetitions);
     if (CSTE_VERBOSE > 2)
     {
-        P_INT("..bytes key    : ", rv->key.length);
-        P_INT("..bytes initV  : ", rv->ivNonce.length);
-        P_INT("..bytes aad    : ", rv->additionalAuthData.length);
-        if (rv->goldenCipher.data)
-            P_INT("..bytes gCipher: ", rv->goldenCipher.length);
-        if (rv->goldenTag.data)
-            P_INT("..bytes gTag   : ", rv->goldenTag.length);
+        P_INT("..bytes key    : ", rv->in.sym.key.length);
+        P_INT("..bytes initV  : ", rv->in.sym.ivNonce.length);
+        P_INT("..bytes aad    : ", rv->in.sym.additionalAuthData.length);
+        if (rv->out.sym.cipher.data)
+            P_INT("..bytes gCipher: ", rv->out.sym.cipher.length);
+        if (rv->out.sym.tag.data)
+            P_INT("..bytes gTag   : ", rv->out.sym.tag.length);
     }
     if (CSTE_VERBOSE > 3)
     {
         cryptoST_PRINT_hexLine(CRLF "..key    : ",
-                rv->key.data, rv->key.length);
+                rv->in.sym.key.data, rv->in.sym.key.length);
         cryptoST_PRINT_hexLine(CRLF "..initV  : ",
-                rv->ivNonce.data,rv->ivNonce.length);
+                rv->in.sym.ivNonce.data,rv->in.sym.ivNonce.length);
         cryptoST_PRINT_hexLine(CRLF "..gCipher: ",
-                rv->goldenCipher.data, rv->goldenCipher.length);
+                rv->out.sym.cipher.data, rv->out.sym.cipher.length);
         printf(CRLF);
     }
 }

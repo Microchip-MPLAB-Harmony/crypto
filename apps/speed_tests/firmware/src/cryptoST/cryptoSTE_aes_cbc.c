@@ -121,8 +121,8 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
                                     : td->recommendedRepetitions;
 
     // Data validation
-    if ( (NULL == td->key.data)
-      || (NULL == td->ivNonce.data) )
+    if ( (NULL == td->in.sym.key.data)
+      || (NULL == td->in.sym.ivNonce.data) )
         return param->results.errorMessage = "missing key or initialization data";
 
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
@@ -132,8 +132,8 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
     {
         Aes enc;
         BP_NOP();
-        ret = wc_AesSetKey(&enc, td->key.data, td->key.length,
-                                 td->ivNonce.data, AES_ENCRYPTION);
+        ret = wc_AesSetKey(&enc, td->in.sym.key.data, td->in.sym.key.length,
+                                 td->in.sym.ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) { param->results.errorMessage = "failed to set key"; break; }
 
         // Hold off until the serial port is finished
@@ -167,17 +167,17 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
         
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if (td->goldenCipher.length == 0)
+            if (td->out.sym.cipher.length == 0)
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(cipher, td->goldenCipher.data, td->goldenCipher.length))
+            else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
             { 
                 param->results.errorMessage = "computed ciphertext does not match golden data (was iterate==1?)";
                 if (CSTE_VERBOSE)
                 {
                     cryptoST_PRINT_hexLine(CRLF "..cipher:", cipher, vector->vector.length);
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
-                            td->goldenCipher.data, td->goldenCipher.length);
+                            td->out.sym.cipher.data, td->out.sym.cipher.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -206,8 +206,8 @@ static const char * cryptoSTE_aes_cbc_timed(cryptoST_testDetail_t * td,
                 {
                     Aes dec;
                     
-                    ret = wc_AesSetKey(&dec, td->key.data, td->key.length, 
-                                             td->ivNonce.data, AES_DECRYPTION);
+                    ret = wc_AesSetKey(&dec, td->in.sym.key.data, td->in.sym.key.length, 
+                                             td->in.sym.ivNonce.data, AES_DECRYPTION);
                     if (ret != 0) { param->results.errorMessage = "setting decryption key failed"; break; }
 
                     // Conventional decrypt and comparison
@@ -261,7 +261,7 @@ const char * cryptoSTE_aes_cbc_128_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 128/8)
+    if (td->in.sym.key.length != 128/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_cbc_timed(td, param);
@@ -276,7 +276,7 @@ const char * cryptoSTE_aes_cbc_192_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 192/8)
+    if (td->in.sym.key.length != 192/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_cbc_timed(td, param);
@@ -291,7 +291,7 @@ const char * cryptoSTE_aes_cbc_256_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->key.length != 256/8)
+    if (td->in.sym.key.length != 256/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_cbc_timed(td, param);

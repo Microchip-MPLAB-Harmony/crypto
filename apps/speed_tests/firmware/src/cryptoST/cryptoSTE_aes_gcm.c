@@ -80,19 +80,61 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     #define HEAP_HINT NULL
 #endif /* WOLFSSL_STATIC_MEMORY */
 
+#ifdef HAVE_AESGCM
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local data structures
 // *****************************************************************************
 // *****************************************************************************
 
+struct localData_s
+{
+    cryptoST_softData_t C;
+    cryptoST_softData_t T;
+    cryptoST_softData_t P;
+    size_t rawSizePadded;
+    size_t aadSize;
+    size_t Csize;
+};
+
+static struct localData_s resultsBuffers;
+    
 // *****************************************************************************
 // *****************************************************************************
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
+static void printAll(cryptoST_testVector_t * input,
+                     cryptoST_testDetail_t * td,
+                     struct localData_s * results)
+{
+    cryptoST_PRINT_hexLine(CRLF "..input   :", 
+        input->vector.data, input->vector.length);
+    cryptoST_PRINT_hexLine(CRLF "..key     :", 
+        td->in.sym.key.data, td->in.sym.key.length);
+    cryptoST_PRINT_hexLine(CRLF "..nonce   :", 
+        td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+    cryptoST_PRINT_hexLine(CRLF "..aad     :",
+            td->in.sym.additionalAuthData.data, 
+                    td->in.sym.additionalAuthData.length);
+    
+    cryptoST_PRINT_hexLine(CRLF "..cipher  :", 
+            results->C.data, results->C.length);
+    cryptoST_PRINT_hexLine(CRLF "..goldData:",
+            td->out.sym.cipher.data, td->out.sym.cipher.length);
+    cryptoST_PRINT_hexLine(CRLF "..resultT :", 
+            results->T.data, results->T.length);
+    cryptoST_PRINT_hexLine(CRLF "..goldTag :",
+            td->out.sym.tag.data, td->out.sym.tag.length);
+    cryptoST_PRINT_hexLine(CRLF "..resultP :", 
+            results->P.data, results->P.length);
+    PRINT_WAIT(CRLF);
 
-#ifdef HAVE_AESGCM
+    printf("rawSizePadded: %u" CRLF, results->rawSizePadded);
+    printf("      aadSize: %u" CRLF, results->aadSize);
+    printf("        Csize: %u" CRLF, results->Csize);
+}
 
 /* This test based on test.c/aesgcm_default_test_helper().
  * The public entry points are defined below.
@@ -112,8 +154,8 @@ static const char * cryptoSTE_aes_gcm_test_timed(
      * Having NULL pointers for rawData, cipher and aad is allowed.
      * Refer to test.c line 7260
      * */
-    if ( (NULL == td->key.data)
-      || (NULL == td->ivNonce.data)
+    if ( (NULL == td->in.sym.key.data)
+      || (NULL == td->in.sym.ivNonce.data)
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
 //    || (NULL == td->additionalAuthData.data) 
@@ -131,59 +173,55 @@ static const char * cryptoSTE_aes_gcm_test_timed(
      * Note that C,T are both required in enc and dec scopes.
      * There is magic here: this depends on AES_BLOCK_SIZE to be power-of-2.
      *  */
-    size_t rawSizePadded = 
-        (input->vector.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
-    size_t aadSize = 
-        (td->additionalAuthData.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
-    byte * resultC = cryptoSTE_malloc(rawSizePadded+aadSize+AES_BLOCK_SIZE);
-    const size_t sizeC = rawSizePadded;
+    register struct localData_s * const results = &resultsBuffers;
 
-    byte resultT[AES_BLOCK_SIZE]; // no contest here
-    const size_t sizeT = ALENGTH(resultT); // don't do this for the others
+    results->rawSizePadded = 
+        (input->vector.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
+    results->aadSize = 
+        (td->in.sym.additionalAuthData.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
+    results->Csize = results->rawSizePadded
+                   + results->aadSize 
+                   + AES_BLOCK_SIZE;
+
+    results->C.data = cryptoSTE_malloc(results->Csize);
+    results->C.length = input->vector.length; // rawSizePadded;
+    results->T.data = (byte[AES_BLOCK_SIZE]){};
+    results->T.length = AES_BLOCK_SIZE;
     
-    if (NULL == resultC) 
+    if (NULL == results->C.data) 
         param->results.errorMessage = 
                 "cannot allocate memory at " __FILE__ "(" BASE_LINE ")";
     else do /* once or break */
     {
         Aes enc;
-        XMEMSET(resultC, 0, sizeC);
-        XMEMSET(resultT, 0, sizeT);
+        XMEMSET(results->C.data, 0, results->C.length);
+        XMEMSET(results->T.data, 0, results->T.length);
 
         if (0 != wc_AesInit(&enc, HEAP_HINT, INVALID_DEVID))
         { param->results.errorMessage = "AesInit.enc failed (" BASE_LINE ")"; 
           break; }
 
-        if (0 != wc_AesGcmSetKey(&enc, td->key.data, td->key.length))
+        if (0 != wc_AesGcmSetKey(&enc, td->in.sym.key.data, td->in.sym.key.length))
         { param->results.errorMessage = "failed to set key"; break; }
 
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)
         {
-            int result = wc_AesGcmEncrypt(&enc, resultC,
+            int result = wc_AesGcmEncrypt(&enc, results->C.data,
                     input->vector.data, input->vector.length,
-                    td->ivNonce.data, td->ivNonce.length,
-                    resultT, sizeT,
-                    td->additionalAuthData.data, td->additionalAuthData.length);
+                    td->in.sym.ivNonce.data, td->in.sym.ivNonce.length,
+                    results->T.data, results->T.length,
+                    td->in.sym.additionalAuthData.data, 
+                            td->in.sym.additionalAuthData.length);
             // additional authentication data
 #if defined(WOLFSSL_ASYNC_CRYPT)
-            result = wc_AsyncWait(result, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
+            results = wc_AsyncWait(results, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
 #endif
             if (0 != result)
             { 
                 param->results.errorMessage = "hash failed (" BASE_LINE ")";
                 if (CSTE_VERBOSE)
-                {
-                    cryptoST_PRINT_hexLine(CRLF "..key    :",
-                            td->key.data, td->key.length);
-                    cryptoST_PRINT_hexLine(CRLF "..init   :",
-                            td->ivNonce.data, td->ivNonce.length);
-                    cryptoST_PRINT_hexLine(CRLF "..aad    :",
-                            td->additionalAuthData.data, td->additionalAuthData.length);
-                    cryptoST_PRINT_hexLine(CRLF "..rawData:",
-                            input->vector.data, input->vector.length);
-                    PRINT_WAIT(CRLF);
-                }
+                    printAll(input, td, results);
                 break; 
             }
         }
@@ -193,34 +231,24 @@ static const char * cryptoSTE_aes_gcm_test_timed(
 
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if ((NULL == td->goldenCipher.data) || (0 == td->goldenCipher.length))
+            if ((NULL == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(resultC, td->goldenCipher.data, td->goldenCipher.length))
+            else if (XMEMCMP(results->C.data, td->out.sym.cipher.data, td->out.sym.cipher.length))
             {
                 param->results.errorMessage = "computed hash does not match golden data (was iterate==1?)";
                 if (CSTE_VERBOSE)
-                {
-                    cryptoST_PRINT_hexLine(CRLF "..cipher  :", resultC, sizeC);
-                    cryptoST_PRINT_hexLine(CRLF "..goldData:",
-                            td->goldenCipher.data, td->goldenCipher.length);
-                    PRINT_WAIT(CRLF);
-                }
+                    printAll(input, td, results);
                 break; 
             }
-            else if ((NULL == td->goldenTag.data) || (0 == td->goldenTag.length))
+            else if ((NULL == td->out.sym.tag.data) || (0 == td->out.sym.tag.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify tag: no golden tag"; 
-            else if (XMEMCMP(resultT, td->goldenTag.data, td->goldenTag.length))
+            else if (XMEMCMP(results->T.data, td->out.sym.tag.data, td->out.sym.tag.length))
             {
                 param->results.errorMessage = "computed tag does not match golden tag (was iterate==1?)";
                 if (CSTE_VERBOSE)
-                {
-                    cryptoST_PRINT_hexLine(CRLF "..resultT:", resultT, sizeT);
-                    cryptoST_PRINT_hexLine(CRLF "..goldTag:",
-                            td->goldenCipher.data, td->goldenCipher.length);
-                    PRINT_WAIT(CRLF);
-                }
+                    printAll(input, td, results);
                 break; 
             }
         }
@@ -230,13 +258,14 @@ static const char * cryptoSTE_aes_gcm_test_timed(
     if ((NULL == param->results.errorMessage) 
      && (param->parameters.verifyByDecryption)) 
     {
-        byte * resultP = NULL;
+        results->P.data = NULL;
+        results->P.length = results->rawSizePadded;
 
         if (1 < param->results.encryption.iterations)
             param->results.warningCount++,
             param->results.warningMessage = 
                     "decryption skipped because of multiple iterations";
-        else if (NULL == (resultP = cryptoSTE_malloc(rawSizePadded)))
+        else if (NULL == (results->P.data = cryptoSTE_malloc(results->P.length)))
             param->results.errorMessage = 
                 "no memory for decrypt (" __BASE_FILE__ " line " BASE_LINE ")";
         else do /* once or break */
@@ -244,63 +273,44 @@ static const char * cryptoSTE_aes_gcm_test_timed(
             Aes dec;
 
             if (0 != wc_AesInit(&dec, HEAP_HINT, INVALID_DEVID))
-            { param->results.errorMessage = "AesInit.dec failed (" BASE_LINE ")"; 
-              break; }
+                param->results.errorMessage = "AesInit.dec failed (" BASE_LINE ")"; 
+            else if (0 != wc_AesGcmSetKey(&dec, td->in.sym.key.data, td->in.sym.key.length))
+                param->results.errorMessage = "failed SetKey.dec"; 
+            else
+            {
+                if (CSTE_VERBOSE > 1) 
+                    PRINT_WAIT("-- decrypting and comparing" CRLF)
 
-            if (0 != wc_AesGcmSetKey(&dec, td->key.data, td->key.length))
-            { param->results.errorMessage = "failed SetKey.dec"; break; }
-
-            if (CSTE_VERBOSE > 1) 
-                PRINT_WAIT("-- decrypting and comparing" CRLF)
-
-            XMEMSET(resultP, 0, rawSizePadded);
-            param->results.wolfSSLresult = wc_AesGcmDecrypt(&dec, 
-                        resultP, resultC, rawSizePadded,
-                        td->ivNonce.data, td->ivNonce.length,
-                        resultT, sizeT,// td->additionalAuthData.length,
-                        td->additionalAuthData.data, td->additionalAuthData.length);
-#if defined(WOLFSSL_ASYNC_CRYPT)
-            result = wc_AsyncWait(result, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
-#endif
-            if (param->results.wolfSSLresult != 0) 
-            { 
-                param->results.errorMessage = "decryption failed (is length%16 correct?)"; 
-                if (CSTE_VERBOSE)
-                {
-                    cryptoST_PRINT_hexLine(CRLF "..key    :",
-                            td->key.data, td->key.length);
-                    cryptoST_PRINT_hexLine(CRLF "..init   :",
-                            td->ivNonce.data, td->ivNonce.length);
-                    cryptoST_PRINT_hexLine(CRLF "..aad    :",
-                            td->additionalAuthData.data, td->additionalAuthData.length);
-                    cryptoST_PRINT_hexLine(CRLF "..rawData:",
-                            input->vector.data, input->vector.length);
-                    cryptoST_PRINT_hexLine(CRLF "..decrypt:",
-                            resultP, rawSizePadded);
-                    PRINT_WAIT(CRLF);
+                XMEMSET(results->P.data, 0, results->P.length);
+                param->results.wolfSSLresult = wc_AesGcmDecrypt(&dec, 
+                            results->P.data, results->C.data, results->C.length,
+                            td->in.sym.ivNonce.data, td->in.sym.ivNonce.length,
+                            results->T.data, results->T.length,// td->additionalAuthData.length,
+                            td->in.sym.additionalAuthData.data, 
+                                td->in.sym.additionalAuthData.length);
+                #if defined(WOLFSSL_ASYNC_CRYPT)
+                results = wc_AsyncWait(results, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
+                #endif
+                if (param->results.wolfSSLresult != 0) 
+                { 
+                    param->results.errorMessage = "decryption failed (is length%16 correct?)"; 
+                    if (CSTE_VERBOSE)
+                        printAll(input, td, results);
                 }
-                break; 
-            }
-
-            if (XMEMCMP(resultP, input->vector.data, input->vector.length))
-            { 
-                param->results.errorMessage = "recovered data does not match original"; 
-                if (CSTE_VERBOSE)
-                {
-                    cryptoST_PRINT_hexLine(CRLF "..rawData:",
-                            input->vector.data, input->vector.length);
-                    cryptoST_PRINT_hexLine(CRLF "..decrypt:",
-                            resultP, rawSizePadded);
-                    PRINT_WAIT(CRLF);
+                else if (XMEMCMP(results->P.data, input->vector.data, input->vector.length))
+                { 
+                    param->results.errorMessage = "recovered data does not match original"; 
+                    if (CSTE_VERBOSE)
+                        printAll(input, td, results);
                 }
-                break; 
+                // else printAll(input, td, results);
             }
+            cryptoSTE_free(results->P.data);
         } while(0);
-        if (resultP) cryptoSTE_free(resultP);
     }
     #endif /* HAVE_AES_DECRYPT */
 
-    if (resultC) cryptoSTE_free(resultC);
+    if (results->C.data) cryptoSTE_free(results->C.data);
     return param->results.errorMessage;
 }
 
@@ -314,21 +324,35 @@ static const char * cryptoSTE_aes_gcm_test_timed(
  * Inputs:  key, ivNonce                 for the underlying GCM
  *          rawData, additionalAuthData     user inputs
  * Outputs: resultC, resultT
- * Compare: goldenResult=resultC, goldenTag=resultT
+ * Compare: out.sym.cipher=resultC, out.sym.tag=resultT
  * */
 const char * cryptoSTE_aes_gcm_timed(
             cryptoST_testDetail_t * td,
             cryptoSTE_testExecution_t * param)
 {
-    param->results.testHandler = "WOLF AES GCM";
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
     const char * answer = 0;
-    if (td->key.length != 128/8)
-        answer = "incorrect key length";
-    else
+    switch(td->in.sym.key.length)
+    {
+    case 128/8:
+        param->results.testHandler = "WOLF AES GCM 128";
         return cryptoSTE_aes_gcm_test_timed(td, param);
+        break;
+    case 192/8:
+        param->results.testHandler = "WOLF AES GCM 192";
+        return cryptoSTE_aes_gcm_test_timed(td, param);
+        break;
+    case 256/8:
+        param->results.testHandler = "WOLF AES GCM 256";
+        return cryptoSTE_aes_gcm_test_timed(td, param);
+        break;
+    default:
+        param->results.testHandler = "WOLF AES GCM (no key)";
+        answer = "incorrect key length";
+        break;
+    }
     
     return param->results.errorMessage = answer;
 }

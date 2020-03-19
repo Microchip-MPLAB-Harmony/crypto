@@ -122,15 +122,15 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6330",
         .rawData = &NowIsTheTime, // test.c 6335
-        .goldenCipher = { // aes_cbc_test() does not verify data
+        .out.sym.cipher = { // aes_cbc_test() does not verify data
             .length = 0,  // refer to aes_test(), line 6374
             .data = 0,
         },
-        .key = { // test.c 6341
+        .in.sym.key = { // test.c 6341
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t*)"0123456789abcdef   ",
         },
-        .ivNonce = { // test.c 6341
+        .in.sym.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 uint8_t*)"1234567890abcdef   ",
         },
@@ -143,18 +143,18 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6395",
         .rawData = &NowIsTheTime,
-        .goldenCipher = { // test.c 6394
+        .out.sym.cipher = { // test.c 6394
             .length = 16,
             .data = (ALIGN4  const uint8_t[]){ 
                 0x95,0x94,0x92,0x57,0x5f,0x42,0x81,0x53,
                 0x2c,0xcc,0x9d,0x46,0x77,0xa2,0x33,0xcb
               }
         },
-        .key = { // test.c 6341
+        .in.sym.key = { // test.c 6341
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t*)"0123456789abcdef   ",
         },
-        .ivNonce = { // test.c 6341
+        .in.sym.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -167,12 +167,12 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
-        .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
+        .in.sym.key = {
             .length = AES128_KEY_SIZE/8, // .data is longer
             .data = (ALIGN4 const uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .ivNonce = { // test.c 6341
+        .in.sym.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -186,15 +186,15 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6557",
         .rawData = &Message2,
-        .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
+        .in.sym.key = {
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){
                 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
                 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
             },
         },
-        .ivNonce = { // test.c 6341
+        .in.sym.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){ 
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -213,12 +213,12 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
-        .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
+        .in.sym.key = {
             .length = AES192_KEY_SIZE/8, // .data is longer
             .data = (ALIGN4 const uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .ivNonce = { // test.c 6341
+        .in.sym.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -234,12 +234,12 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
-        .goldenCipher = { 0, 0 }, // use enc/dec to check
-        .key = {
+        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
+        .in.sym.key = {
             .length = AES256_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .ivNonce = { // test.c 6341
+        .in.sym.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },

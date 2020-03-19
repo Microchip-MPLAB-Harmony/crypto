@@ -75,6 +75,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
+__attribute__((used))
 static cryptoSTE_parameters_t exec_repetitiveTimed =
 {
     /* A value of zero here invokes the recommended iteration count

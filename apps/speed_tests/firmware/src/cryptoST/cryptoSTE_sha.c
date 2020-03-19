@@ -85,6 +85,12 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
+
+#if !defined(NO_SHA)        \
+ || !defined(NO_SHA256)     \
+ || defined(WOLFSSL_SHA224) \
+ || defined(WOLFSSL_SHA384) \
+ || defined(WOLFSSL_SHA512)
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
@@ -110,8 +116,8 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
                                     param->parameters.iterationOverride
                                   : td->recommendedRepetitions;
 
-    assert_dbug(0 < td->goldenCipher.length);
-    uint32_t hash[td->goldenCipher.length]; // room for expected size
+    assert_dbug(0 < td->out.hash.hash.length);
+    uint32_t hash[td->out.hash.hash.length]; // room for expected size
     do
     {
         param->results.encryption.start = SYS_TIME_CounterGet();
@@ -128,10 +134,10 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
 
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if (td->goldenCipher.length == 0)
+            if (td->out.hash.hash.length == 0)
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(hash, td->goldenCipher.data, td->goldenCipher.length))
+            else if (XMEMCMP(hash, td->out.hash.hash.data, td->out.hash.hash.length))
             { 
                 param->results.errorMessage = "computed hash does not match golden data";
                 if (CSTE_VERBOSE)
@@ -139,7 +145,7 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
                     cryptoST_PRINT_hexLine(CRLF "..cipher:", 
                             (uint8_t*)hash, sizeof(hash));
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
-                            td->goldenCipher.data, td->goldenCipher.length);
+                            td->out.hash.hash.data, td->out.hash.hash.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -149,6 +155,7 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
     
     return param->results.errorMessage;
 }
+#endif // SHA is enabled in some form
 
 /* *********************************************************************
    *********************************************************************

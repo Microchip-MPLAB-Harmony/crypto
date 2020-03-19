@@ -158,9 +158,72 @@ typedef struct cryptoST_testAPI_s
 
 typedef struct cryptoST_testData_s
 {
-    size_t length;  // size of the data block
+    size_t length;        // size of the data block
     const uint8_t * data; // location of the data
 } cryptoST_testData_t;
+
+/* Similar, but for output buffers that are not const. */
+typedef struct cryptoST_softData_s
+{
+    size_t length;  // size of the data block
+    uint8_t * data; // location of the data
+} cryptoST_softData_t;
+
+/*************************************************************
+ * Declaration of input parameters
+ * 
+ * Any given test set requires specific (known good) input
+ * data values. The actual form these values take must be 
+ * discriminated by the type of encryption algorithm,
+ * so these will be union'd in the final data set.
+ * */
+typedef struct cryptoST_hash_input_s
+{
+    cryptoST_testData_t key;
+    cryptoST_testData_t ivNonce;
+} cryptoST_hash_input_t;
+
+typedef struct cryptoST_symmetric_input_s
+{
+    cryptoST_testData_t key;
+    cryptoST_testData_t ivNonce;
+    cryptoST_testData_t additionalAuthData;
+} cryptoST_symmetric_input_t;
+
+typedef struct cryptoST_asymmetric_rsa_input_s
+{
+} cryptoST_asymmetric_rsa_input_t;
+
+typedef struct cryptoST_asym_ecc_input_s
+{
+} cryptoST_asymmetric_ecc_input_t;
+
+/*************************************************************
+ * Declaration of output parameters
+ * 
+ * Any given test set produces output(s) specific for that
+ * method. The actual form these values take must be 
+ * discriminated by the type of encryption algorithm,
+ * so these will be union'd in the final data set.
+ * */
+typedef struct cryptoST_hash_output_s
+{
+    cryptoST_testData_t hash;
+} cryptoST_hash_output_t;
+
+typedef struct cryptoST_symmetric_output_s
+{
+    cryptoST_testData_t cipher;
+    cryptoST_testData_t tag;
+} cryptoST_symmetric_output_t;
+
+typedef struct cryptoST_asymmetric_rsa_output_s
+{
+} cryptoST_asymmetric_rsa_output_t;
+
+typedef struct cryptoST_asym_ecc_output_s
+{
+} cryptoST_asymmetric_ecc_output_t;
 
 /*************************************************************
  * Declaration of golden results
@@ -185,13 +248,22 @@ typedef struct cryptoST_testDetail_s
     // depending on how the data file is built, .rawData maybe must be null
 
     // Inputs
-    cryptoST_testData_t key;
-    cryptoST_testData_t ivNonce;
-    cryptoST_testData_t additionalAuthData; // for GCM/CTR/CCM mode
-
+    union 
+    {
+        cryptoST_hash_input_t hash;
+        cryptoST_symmetric_input_t sym;
+        cryptoST_asymmetric_rsa_input_t rsa;
+        cryptoST_asymmetric_ecc_input_t ecc;
+    } in;
+    
     // Output compare data supplied for (optional) verification
-    cryptoST_testData_t goldenCipher;
-    cryptoST_testData_t goldenTag;
+    union
+    {
+        cryptoST_hash_output_t hash;
+        cryptoST_symmetric_output_t sym;
+        cryptoST_asymmetric_rsa_output_t rsa;
+        cryptoST_asymmetric_ecc_output_t ecc;
+    } out;
 
     /* The definition of an error depends on the specific test
      * invoked by technique/mode (e.g., GMAC validation failure).

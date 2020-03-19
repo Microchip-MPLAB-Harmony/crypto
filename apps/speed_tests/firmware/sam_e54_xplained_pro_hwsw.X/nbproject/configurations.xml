@@ -390,6 +390,8 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_zero_aes.c</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_zero_aes.h</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.c</itemPath>
@@ -675,7 +677,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="80000"/>
+        <property key="heap-size" value="200000"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
