@@ -60,7 +60,7 @@ The key principles are these:
     a. RFC-3610 talks about "cleartext" which is taken as the AAD value,
        where the length of cleartext is specified.
     b. Input "data" is the remnant after the AAD has been skipped.
-    c. RFC-3610 "output" concatenates AAD|cipher|out.sym.tag as the official
+    c. RFC-3610 "output" concatenates AAD|cipher|io.sym.out.tag as the official
        output, which when combined fill the specified output packet length.
     d. The length of the generated tag is the remnant of the output data
        after cleartext (AAD) and ciphertext have been skipped. Although
@@ -94,7 +94,7 @@ static DATA_CHAR PVdata_pv1to12[] =
     "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
     "\x20";
 
-static CONST cryptoST_testVector_t rfc3610A_pv1pv7 =
+static const cryptoST_testVector_t rfc3610A_pv1pv7 =
 {
     .name = DATA_PACKAGE_NAME " PV1.PV7",
     .source = AES_CCM_source,
@@ -102,7 +102,7 @@ static CONST cryptoST_testVector_t rfc3610A_pv1pv7 =
     .vector.length = 31 - CLEAR8,
     .vector.data = &PVdata_pv1to12[CLEAR8],
 };
-static CONST cryptoST_testVector_t rfc3610A_pv2pv8 =
+static const cryptoST_testVector_t rfc3610A_pv2pv8 =
 {
     .name = DATA_PACKAGE_NAME " PV2.PV8",
     .source = AES_CCM_source,
@@ -110,7 +110,7 @@ static CONST cryptoST_testVector_t rfc3610A_pv2pv8 =
     .vector.length = 32 - CLEAR8,
     .vector.data = &PVdata_pv1to12[CLEAR8],
 };
-static CONST cryptoST_testVector_t rfc3610A_pv3pv9 =
+static const cryptoST_testVector_t rfc3610A_pv3pv9 =
 {
     .name = DATA_PACKAGE_NAME " PV3.PV9",
     .source = AES_CCM_source,
@@ -118,7 +118,7 @@ static CONST cryptoST_testVector_t rfc3610A_pv3pv9 =
     .vector.length = 33 - CLEAR8,
     .vector.data = &PVdata_pv1to12[CLEAR8],
 };
-static CONST cryptoST_testVector_t rfc3610A_pv4pv10 =
+static const cryptoST_testVector_t rfc3610A_pv4pv10 =
 {
     .name = DATA_PACKAGE_NAME " PV4.PV10",
     .source = AES_CCM_source,
@@ -126,7 +126,7 @@ static CONST cryptoST_testVector_t rfc3610A_pv4pv10 =
     .vector.length = 31 - CLEAR12,
     .vector.data = &PVdata_pv1to12[CLEAR12],
 };
-static CONST cryptoST_testVector_t rfc3610A_pv5pv11 =
+static const cryptoST_testVector_t rfc3610A_pv5pv11 =
 {
     .name = DATA_PACKAGE_NAME " PV5.PV11",
     .source = AES_CCM_source,
@@ -134,7 +134,7 @@ static CONST cryptoST_testVector_t rfc3610A_pv5pv11 =
     .vector.length = 32 - CLEAR12,
     .vector.data = &PVdata_pv1to12[CLEAR12],
 };
-static CONST cryptoST_testVector_t rfc3610A_pv6pv12 =
+static const cryptoST_testVector_t rfc3610A_pv6pv12 =
 {
     .name = DATA_PACKAGE_NAME " PV6.PV12",
     .source = AES_CCM_source,
@@ -143,7 +143,7 @@ static CONST cryptoST_testVector_t rfc3610A_pv6pv12 =
     .vector.data = &PVdata_pv1to12[CLEAR12],
 };
 
-static CONST cryptoST_testVector_t rfc3610B_pv13 =
+static const cryptoST_testVector_t rfc3610B_pv13 =
 {
     .name = DATA_PACKAGE_NAME " PV13",
     .source = AES_CCM_source,
@@ -153,7 +153,7 @@ static CONST cryptoST_testVector_t rfc3610B_pv13 =
         "\x05\x4D\x89\x5C\xEA\xC4\x7C",
     .vector.length = 31-CLEAR8,
 };
-static CONST cryptoST_testVector_t rfc3610B_pv14 =
+static const cryptoST_testVector_t rfc3610B_pv14 =
 {
     .name = DATA_PACKAGE_NAME " PV14",
     .source = AES_CCM_source,
@@ -214,7 +214,7 @@ static DATA_CHAR PV14_cipher[] = // as stated in RFC-3610
     "\x98\xC8\x5C\x92\x81\x4A\xBC\x33"
     "\xC5\x2E\xE8\x1D\x7D\x77\xC0\x8A"; // computed tag
 
-static CONST cryptoST_testDetail_t test_item[] =
+static const cryptoST_testDetail_t test_item[] =
 {
     #undef CLEAR
     #define CLEAR CLEAR8
@@ -230,13 +230,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV1",
         .rawData = &rfc3610A_pv1pv7,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x03\x02\x01\x00\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV1_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV1_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV1_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV1_cipher[TL] },
     },
     {
         #undef TL
@@ -250,13 +250,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV2",
         .rawData = &rfc3610A_pv2pv8,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x04\x03\x02\x01\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV2_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV2_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV2_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV2_cipher[TL] },
     },
     {
         #undef TL
@@ -270,13 +270,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV3",
         .rawData = &rfc3610A_pv3pv9,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x05\x04\x03\x02\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV3_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV3_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV3_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV3_cipher[TL] },
     },
     #undef CLEAR
     #define CLEAR CLEAR12
@@ -292,13 +292,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV4",
         .rawData = &rfc3610A_pv4pv10,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x06\x05\x04\x03\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV4_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV4_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV4_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV4_cipher[TL] },
     },
     {
         #undef TL
@@ -312,13 +312,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV5",
         .rawData = &rfc3610A_pv5pv11,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x07\x06\x05\x04\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV5_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV5_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV5_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV5_cipher[TL] },
     },
     {
         #undef TL
@@ -332,13 +332,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV6",
         .rawData = &rfc3610A_pv6pv12,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x08\x07\x06\x05\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV6_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV6_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV6_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV6_cipher[TL] },
     },
     #undef CLEAR
     #define CLEAR CLEAR8
@@ -354,13 +354,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV7",
         .rawData = &rfc3610A_pv1pv7,
-        .in.sym.key = { .data = key_pv1to12, .length = 16 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .data = key_pv1to12, .length = 16 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PVdata_pv1to12 },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x00\x00\x09\x08\x07\x06\xA0\xA1\xA2\xA3\xA4\xA5" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV7_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV7_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV7_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV7_cipher[TL] },
     },
     // skipping PV8..PV12
     #undef CLEAR
@@ -377,13 +377,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV13",
         .rawData = &rfc3610B_pv13,
-        .in.sym.key = { .length = 16, .data = key_pv13to24 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PV13_cipher },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .length = 16, .data = key_pv13to24 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PV13_cipher },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x41\x2B\x4E\xA9\xCD\xBE\x3C\x96\x96\x76\x6C\xFA" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV13_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV13_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV13_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV13_cipher[TL] },
     },
     {
         #undef TL
@@ -397,13 +397,13 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = AES_CCM_source " PV14",
         .rawData = &rfc3610B_pv14,
-        .in.sym.key = { .length = 16, .data = key_pv13to24 },
-        .in.sym.additionalAuthData = { .length = CLEAR, .data = PV14_cipher },
-        .in.sym.ivNonce = { .length = 13, // nonce
+        .io.sym.in.key = { .length = 16, .data = key_pv13to24 },
+        .io.sym.in.additionalAuthData = { .length = CLEAR, .data = PV14_cipher },
+        .io.sym.in.ivNonce = { .length = 13, // nonce
             .data = (DATA_CHAR*)
                 "\x00\x33\x56\x8E\xF7\xB2\x63\x3C\x96\x96\x76\x6C\xFA" },
-        .out.sym.cipher = { .length = TL-CLEAR, .data = &PV14_cipher[CLEAR] },
-        .out.sym.tag    = { .length = PL-TL, .data = &PV14_cipher[TL] },
+        .io.sym.out.cipher = { .length = TL-CLEAR, .data = &PV14_cipher[CLEAR] },
+        .io.sym.out.tag    = { .length = PL-TL, .data = &PV14_cipher[TL] },
     },
     // skipping PV15..PV24
     {}
@@ -417,12 +417,12 @@ static CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
-    cryptoST_testDetail_t * td = &test_item[0];
+    const cryptoST_testDetail_t * td = &test_item[0];
     return td;
 }
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     // Assume that if the pointer is in range, that it is legitimate.
     if (old < test_item) 

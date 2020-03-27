@@ -280,11 +280,11 @@ static const ecbTest_t wolf_256 = {
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
-static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
+static const char * cryptoSTE_aes_ecb_all_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param,
                                       const ecbTest_t * test)
 {
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     
     if (CSTE_VERBOSE > 2)
     {
@@ -301,7 +301,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                                   : td->recommendedRepetitions;
 
     // Data validation
-    if (NULL == td->in.sym.key.data)
+    if (NULL == td->io.sym.in.key.data)
         return param->results.errorMessage = "missing key or initialization data";
 
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
@@ -309,13 +309,13 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
         return "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
     else do // so we can use "break"
     {
-        if (NULL != td->in.sym.ivNonce.data)
+        if (NULL != td->io.sym.in.ivNonce.data)
             param->results.warningCount++,
             param->results.warningMessage = "IV provided but not required"; 
 
         int ret;
         Aes enc;
-        ret = (test->setKey)(&enc, td->in.sym.key.data, td->in.sym.key.length,
+        ret = (test->setKey)(&enc, td->io.sym.in.key.data, td->io.sym.in.key.length,
                                  NULL, AES_ENCRYPTION);
         if (ret != 0) 
             { param->results.errorMessage = "failed to set key"; break; }
@@ -349,10 +349,10 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
         
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if ((NULL == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
+            if ((NULL == td->io.sym.out.cipher.data) || (0 == td->io.sym.out.cipher.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
+            else if (XMEMCMP(cipher, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
             { 
                 param->results.errorMessage = 
                     "computed ciphertext does not match golden data (was iterate==1?)";
@@ -363,9 +363,9 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                     cryptoST_PRINT_hexLine(CRLF "..cipher:", 
                             cipher, vector->vector.length);
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
-                            td->out.sym.cipher.data, td->out.sym.cipher.length);
+                            td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
                     cryptoST_PRINT_hexLine(CRLF "..key   :", 
-                            td->in.sym.key.data, td->in.sym.key.length);
+                            td->io.sym.in.key.data, td->io.sym.in.key.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -379,9 +379,9 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                 cryptoST_PRINT_hexLine(CRLF "..cipher:", 
                         cipher, vector->vector.length);
                 cryptoST_PRINT_hexLine(CRLF "..golden:",
-                        td->out.sym.cipher.data, td->out.sym.cipher.length);
+                        td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
                 cryptoST_PRINT_hexLine(CRLF "..key   :", 
-                        td->in.sym.key.data, td->in.sym.key.length);
+                        td->io.sym.in.key.data, td->io.sym.in.key.length);
                 PRINT_WAIT(CRLF);
             }
 #endif
@@ -410,7 +410,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
                 {
                     Aes dec;
                     if (0 != (test->setKey)(&dec, 
-                                             td->in.sym.key.data, td->in.sym.key.length, 
+                                             td->io.sym.in.key.data, td->io.sym.in.key.length, 
                                              NULL, AES_DECRYPTION))
                     { 
                         param->results.errorMessage = "setting decryption key failed"; 
@@ -456,7 +456,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(cryptoST_testDetail_t * td,
 // *****************************************************************************
 
 static char * badKey = "incorrect key length";
-const char * cryptoSTE_aes_ecb_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_ecb_timed(const cryptoST_testDetail_t * td,
                                      cryptoSTE_testExecution_t * param)
 {
     if (EM_ECB != td->mode)
@@ -498,7 +498,7 @@ const char * cryptoSTE_aes_ecb_timed(cryptoST_testDetail_t * td,
     else
     {
         param->results.testHandler = test->name;
-        if (td->in.sym.key.length != test->keySize)
+        if (td->io.sym.in.key.length != test->keySize)
             return param->results.errorMessage = badKey;
         else
             return cryptoSTE_aes_ecb_all_timed(td, param, test);

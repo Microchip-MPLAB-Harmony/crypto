@@ -90,10 +90,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
-static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
+static const char * cryptoSTE_aes_ctr_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param)
 {
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     
     if (CSTE_VERBOSE > 2)
     {
@@ -103,8 +103,8 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if ( (NULL == td->in.sym.key.data)
-      || (NULL == td->in.sym.ivNonce.data) )
+    if ( (NULL == td->io.sym.in.key.data)
+      || (NULL == td->io.sym.in.ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CTR test not activated." CRLF;
     
@@ -114,8 +114,8 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
     if (vector->vector.length > ALENGTH(cipher))
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
-    ret = wc_AesSetKeyDirect(&enc, td->in.sym.key.data, td->in.sym.key.length,
-                                td->in.sym.ivNonce.data, AES_ENCRYPTION);
+    ret = wc_AesSetKeyDirect(&enc, td->io.sym.in.key.data, td->io.sym.in.key.length,
+                                td->io.sym.in.ivNonce.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
     // Hold off until the serial port is finished
@@ -126,10 +126,10 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
      * for truncating the input buffer.
      * */
     size_t testLength = vector->vector.length;
-    if (td->out.sym.cipher.data && td->out.sym.cipher.length)
+    if (td->io.sym.out.cipher.data && td->io.sym.out.cipher.length)
     { 
-        if (td->out.sym.cipher.length < testLength)
-            testLength = td->out.sym.cipher.length;
+        if (td->io.sym.out.cipher.length < testLength)
+            testLength = td->io.sym.out.cipher.length;
     }
     
     // Remove any data noise that is in the target buffer
@@ -149,24 +149,24 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
 
     if (param->parameters.verifyByGoldenCiphertext)
     {
-        if ((NULL == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
+        if ((NULL == td->io.sym.out.cipher.data) || (0 == td->io.sym.out.cipher.length))
             param->results.warningCount++,
             param->results.warningMessage = "can't verify cipher: no golden data"; 
-        else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
+        else if (XMEMCMP(cipher, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
         {
             if (CSTE_VERBOSE)
             {
                 P0_UINT(CRLF "test length = ", testLength);
                 cryptoST_PRINT_hexLine(CRLF "key   : ",
-                        td->in.sym.key.data, td->in.sym.key.length);
+                        td->io.sym.in.key.data, td->io.sym.in.key.length);
                 cryptoST_PRINT_hexLine(CRLF "initV : ",
-                        td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+                        td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
                 cryptoST_PRINT_hexLine(CRLF "given : ",
                         vector->vector.data, vector->vector.length);
                 cryptoST_PRINT_hexLine(CRLF "cipher: ",
                         cipher, ALENGTH(cipher));
                 cryptoST_PRINT_hexLine(CRLF "gold  : ",
-                        td->out.sym.cipher.data, td->out.sym.cipher.length);
+                        td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
                 PRINT(CRLF);
             }
             return "computed ciphertext does not match golden data (was iterate==1?)";
@@ -180,8 +180,8 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
         byte plain[AES_BLOCK_SIZE * 4]; // trouble here?
 
         /* decrypt uses AES_ENCRYPTION */
-        ret = wc_AesSetKeyDirect(&dec, td->in.sym.key.data, td->in.sym.key.length, 
-                                    td->in.sym.ivNonce.data, AES_ENCRYPTION);
+        ret = wc_AesSetKeyDirect(&dec, td->io.sym.in.key.data, td->io.sym.in.key.length, 
+                                    td->io.sym.in.ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) return "setting decryption key failed";
 
         // Conventional decrypt and comparison
@@ -197,9 +197,9 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
             if (CSTE_VERBOSE)
             {
                 cryptoST_PRINT_hexLine(CRLF "key   : ", 
-                        td->in.sym.key.data, td->in.sym.key.length);
+                        td->io.sym.in.key.data, td->io.sym.in.key.length);
                 cryptoST_PRINT_hexLine(CRLF "initV : ", 
-                        td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+                        td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
                 cryptoST_PRINT_hexLine(CRLF "given : ", 
                         vector->vector.data, vector->vector.length);
                 cryptoST_PRINT_hexLine(CRLF "plain : ", 
@@ -220,14 +220,14 @@ static const char * cryptoSTE_aes_ctr_timed(cryptoST_testDetail_t * td,
 
 #undef TNAME
 #define TNAME "WOLF AES CTR 128"
-const char * cryptoSTE_aes_ctr_128_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_ctr_128_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 128/8)
+    if (td->io.sym.in.key.length != 128/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -236,14 +236,14 @@ const char * cryptoSTE_aes_ctr_128_timed(cryptoST_testDetail_t * td,
 
 #undef TNAME
 #define TNAME "WOLF AES CTR 192"
-const char * cryptoSTE_aes_ctr_192_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_ctr_192_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 192/8)
+    if (td->io.sym.in.key.length != 192/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -252,14 +252,14 @@ const char * cryptoSTE_aes_ctr_192_timed(cryptoST_testDetail_t * td,
 
 #undef TNAME
 #define TNAME "WOLF AES CTR 256"
-const char * cryptoSTE_aes_ctr_256_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_ctr_256_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 256/8)
+    if (td->io.sym.in.key.length != 256/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else

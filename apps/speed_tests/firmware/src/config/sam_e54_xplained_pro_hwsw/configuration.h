@@ -153,10 +153,11 @@ extern "C" {
 #define NO_RABBIT
 #define NO_DH
 #define NO_DSA
-#define NO_RSA
+#define WOLFSSL_HAVE_MCHP_HW_RSA
+#define USE_CERT_BUFFERS_2048
+#define WC_NO_RSA_OAEP
 #define NO_DEV_RANDOM
-#define WC_NO_RNG
-#define WC_NO_HASHDRBG
+#define HAVE_HASHDRBG
 #define WC_NO_HARDEN
 #define SINGLE_THREADED
 #define NO_ERROR_STRINGS

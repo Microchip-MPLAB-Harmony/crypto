@@ -33,7 +33,7 @@ static const CPU_CHAR sha_all[] =
 static const CPU_CHAR sha_all_description[] =
     "NIST Computer Security Division standard test cases.";
 
-static CONST cryptoST_testVector_t abc_3 =
+static const cryptoST_testVector_t abc_3 =
 {
     .name = DATA_PACKAGE_NAME "_abc3",
     .source = sha_all,
@@ -41,7 +41,7 @@ static CONST cryptoST_testVector_t abc_3 =
     .vector.data = (ALIGN4 const uint8_t[]){0x61, 0x62, 0x63}, // "abc"
     .vector.length = 3, // 24 bits
 };
-static CONST cryptoST_testVector_t abc_56 =
+static const cryptoST_testVector_t abc_56 =
 {
     .name = DATA_PACKAGE_NAME "_abc56",
     .source = sha_all,
@@ -50,7 +50,7 @@ static CONST cryptoST_testVector_t abc_56 =
         "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"},
     .vector.length = 56, // 448 bits
 };
-static CONST cryptoST_testVector_t abc_112 =
+static const cryptoST_testVector_t abc_112 =
 {
     .name = DATA_PACKAGE_NAME "_abc112",
     .source = sha_all,
@@ -64,7 +64,7 @@ static CONST cryptoST_testVector_t abc_112 =
 /*************************************************************
  * Golden data definitions.
  *************************************************************/
-static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
+static __attribute__((unused)) const cryptoST_testDetail_t test_item[] =
 {
 #if !defined(NO_SHA) // SHA1
     {
@@ -75,7 +75,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_3,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 20,
             .data = (uint8_t[]){ "\xA9\x99\x3E\x36" 
                                  "\x47\x06\x81\x6A" 
@@ -93,7 +93,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_56,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 20,
             .data = (uint8_t[]){ "\x84\x98\x3E\x44" 
                                  "\x1C\x3B\xD2\x6E"
@@ -113,7 +113,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_3,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 28,
             .data = (uint8_t[]){ "\x23\x09\x7D\x22"
                                  "\x34\x05\xD8\x22"
@@ -133,7 +133,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_56,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 28,
             .data = (uint8_t[]){ "\x75\x38\x8B\x16"
                                  "\x51\x27\x76\xCC"
@@ -155,7 +155,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_3,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 32,
             .data = (ALIGN4 const uint8_t[]){
                 0xba, 0x78, 0x16, 0xbf, 0x8f, 0x01, 0xcf, 0xea, 
@@ -175,7 +175,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_56,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 32,
             .data = (const uint8_t[]){
                 0x24, 0x8d, 0x6a, 0x61, 0xd2, 0x06, 0x38, 0xb8, 
@@ -195,7 +195,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_112,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 32,
             .data = (const uint8_t[]){
                 0xcf, 0x5b, 0x16, 0xa7, 0x78, 0xaf, 0x83, 0x80,
@@ -217,7 +217,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_3,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 48,
             .data = (const uint8_t[]){
                 0xCB, 0x00, 0x75, 0x3F, 0x45, 0xA3, 0x5E, 0x8B,
@@ -239,7 +239,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_112,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 48,
             .data = (const uint8_t[]){
                 0x09, 0x33, 0x0C, 0x33, 0xF7, 0x11, 0x47, 0xE8,
@@ -263,7 +263,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_3,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 64,
             .data = (const uint8_t[]){
                 0xDD, 0xAF, 0x35, 0xA1, 0x93, 0x61, 0x7A, 0xBA,
@@ -288,7 +288,7 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = sha_all,
         .rawData = &abc_112,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .length = 64,
             .data = (const uint8_t[]){
                 0x8E, 0x95, 0x9B, 0x75, 0xDA, 0xE3, 0x13, 0xDA,
@@ -317,13 +317,13 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     __NOP();
     return &test_item[0];
 }
 
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     __NOP();
     // Assume that if the pointer is in range, that it is legitimate.

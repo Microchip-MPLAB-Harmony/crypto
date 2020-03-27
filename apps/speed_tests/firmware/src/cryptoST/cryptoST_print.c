@@ -233,6 +233,7 @@ void cryptoST_PRINT_hexLine(const char * const tag,
                             size_t const length)
 {
     PRINT(tag);
+    printf(" ");
     if (NULL == data)
     { PRINT("** null pointer"); return; }
     if (0 == length)

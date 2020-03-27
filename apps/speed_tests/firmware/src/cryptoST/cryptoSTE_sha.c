@@ -94,11 +94,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
-static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
+static const char * cryptoSTE_sha(const cryptoST_testDetail_t * td,
                                        cryptoSTE_testExecution_t * param,
                                        cryptoSTE_shaOperator_t * hash_operator)
 {
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     
     if (CSTE_VERBOSE > 2)
     {
@@ -116,8 +116,8 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
                                     param->parameters.iterationOverride
                                   : td->recommendedRepetitions;
 
-    assert_dbug(0 < td->out.hash.hash.length);
-    uint32_t hash[td->out.hash.hash.length]; // room for expected size
+    assert_dbug(0 < td->io.hash.out.hash.length);
+    uint32_t hash[td->io.hash.out.hash.length]; // room for expected size
     do
     {
         param->results.encryption.start = SYS_TIME_CounterGet();
@@ -134,10 +134,10 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
 
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if (td->out.hash.hash.length == 0)
+            if (td->io.hash.out.hash.length == 0)
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(hash, td->out.hash.hash.data, td->out.hash.hash.length))
+            else if (XMEMCMP(hash, td->io.hash.out.hash.data, td->io.hash.out.hash.length))
             { 
                 param->results.errorMessage = "computed hash does not match golden data";
                 if (CSTE_VERBOSE)
@@ -145,7 +145,7 @@ static const char * cryptoSTE_sha(cryptoST_testDetail_t * td,
                     cryptoST_PRINT_hexLine(CRLF "..cipher:", 
                             (uint8_t*)hash, sizeof(hash));
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
-                            td->out.hash.hash.data, td->out.hash.hash.length);
+                            td->io.hash.out.hash.data, td->io.hash.out.hash.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -214,7 +214,7 @@ static void WC_sha512
 // Section: External API
 // *****************************************************************************
 // *****************************************************************************
-const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param)
 {
     /* Differential timing is supported only on selected platforms.

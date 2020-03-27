@@ -52,8 +52,8 @@ extern "C" {
 // #include "../test_data/cryptoSpeedTestData.h"
 #include "cryptoSTE.h"
 
-void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t *);
-void cryptoSTE_announceVector(int level, cryptoST_testVector_t *);
+void cryptoSTE_announceDetails(int level, const cryptoST_testDetail_t *);
+void cryptoSTE_announceVector(int level, const cryptoST_testVector_t *);
 void cryptoSTE_announceSuite(const cryptoST_testAPI_t *);
 void cryptoSTE_announceAll(cryptoSTE_localData_t *);
 

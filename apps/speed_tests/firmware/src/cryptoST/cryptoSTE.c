@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    cyrptoST_execute.c
+    cyrptoSTE.c
 
   Summary:
     This file provides the generic execution framework for the 
@@ -73,6 +73,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #include "cryptoSTE_sha.h"
 #include "cryptoSTE_des3.h"
+#include "cryptoSTE_rsa.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -82,7 +83,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 static volatile const int level = 0;
 
 // This is a local convenience, but should be applied more generally.
-typedef const char * (*cryptoSTE_exec_t)(cryptoST_testDetail_t *,
+typedef const char * (*cryptoSTE_exec_t)(const cryptoST_testDetail_t *,
                                          cryptoSTE_testExecution_t *);
 
 // *****************************************************************************
@@ -94,7 +95,7 @@ typedef const char * (*cryptoSTE_exec_t)(cryptoST_testDetail_t *,
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 #if defined(WOLFSSL_AES_128)
-cryptoSTE_exec_t sortOutAES128(cryptoST_testDetail_t * rv)
+cryptoSTE_exec_t sortOutAES128(const cryptoST_testDetail_t * rv)
 {
     cryptoSTE_exec_t exec = NULL;
     
@@ -133,7 +134,7 @@ cryptoSTE_exec_t sortOutAES128(cryptoST_testDetail_t * rv)
 #endif
 
 #if defined(WOLFSSL_AES_192)
-cryptoSTE_exec_t sortOutAES192(cryptoST_testDetail_t * rv)
+cryptoSTE_exec_t sortOutAES192(const cryptoST_testDetail_t * rv)
 {
     cryptoSTE_exec_t exec = NULL;
     
@@ -171,7 +172,7 @@ cryptoSTE_exec_t sortOutAES192(cryptoST_testDetail_t * rv)
 #endif
 
 #if defined(WOLFSSL_AES_256)
-cryptoSTE_exec_t sortOutAES256(cryptoST_testDetail_t * rv)
+cryptoSTE_exec_t sortOutAES256(const cryptoST_testDetail_t * rv)
 {
     cryptoSTE_exec_t exec = NULL;
     
@@ -211,7 +212,7 @@ cryptoSTE_exec_t sortOutAES256(cryptoST_testDetail_t * rv)
 /* Identify which test to run.
  * Every combination of technique/mode is covered here.
  *  */
-cryptoSTE_exec_t cryptoSTE_identifyTest(cryptoST_testDetail_t * rv)
+cryptoSTE_exec_t cryptoSTE_identifyTest(const cryptoST_testDetail_t * rv)
 {
     // Pointer to the selected test routine
     cryptoSTE_exec_t exec = NULL;
@@ -260,6 +261,12 @@ cryptoSTE_exec_t cryptoSTE_identifyTest(cryptoST_testDetail_t * rv)
         case ET_SHA_512: exec = cryptoSTE_crya_sha_timed;
             break;
 #endif
+#if !defined(NO_RSA)
+        case ET_PK_RSA_SIGN:
+        case ET_PK_RSA_VERIFY:
+            exec = cryptoSTE_rsa_timed;
+            break;
+#endif
         case ET_MD2:
         case ET_MD3:
         case ET_MD4:
@@ -275,7 +282,7 @@ cryptoSTE_exec_t cryptoSTE_identifyTest(cryptoST_testDetail_t * rv)
 /* Identify which test to run, run it, and announce any errors.
  * Return 'false' for good result
  *  */
-bool cryptoSTE_executeOneVector(cryptoST_testDetail_t * rv,
+bool cryptoSTE_executeOneVector(const cryptoST_testDetail_t * rv,
                                 cryptoSTE_testExecution_t * param)
 {
     bool answer = true; // means test has failed
@@ -390,7 +397,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
         while(1) // loop if we are doing HW-SW comparison
         {
             __NOP();
-            cryptoST_testDetail_t * tr;
+            const cryptoST_testDetail_t * tr;
             for (tr = cv->firstTest(); NULL != tr; tr = cv->nextTest(tr))
             {
                 __NOP();
@@ -406,7 +413,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
                     if (CSTE_VERBOSE > 2) 
                     { printf("             -- data item %s" CRLF, tr->rawData->name); }
 
-        thisTest->testsAttempted++;
+                    thisTest->testsAttempted++;
                     if (CSTE_VERBOSE > 1) 
                     {
                         PRINT("-- executing vector " CRLF);

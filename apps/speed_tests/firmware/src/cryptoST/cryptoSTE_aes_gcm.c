@@ -105,28 +105,28 @@ static struct localData_s resultsBuffers;
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
-static void printAll(cryptoST_testVector_t * input,
-                     cryptoST_testDetail_t * td,
+static void printAll(const cryptoST_testVector_t * input,
+                     const cryptoST_testDetail_t * td,
                      struct localData_s * results)
 {
     cryptoST_PRINT_hexLine(CRLF "..input   :", 
         input->vector.data, input->vector.length);
     cryptoST_PRINT_hexLine(CRLF "..key     :", 
-        td->in.sym.key.data, td->in.sym.key.length);
+        td->io.sym.in.key.data, td->io.sym.in.key.length);
     cryptoST_PRINT_hexLine(CRLF "..nonce   :", 
-        td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+        td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
     cryptoST_PRINT_hexLine(CRLF "..aad     :",
-            td->in.sym.additionalAuthData.data, 
-                    td->in.sym.additionalAuthData.length);
+            td->io.sym.in.additionalAuthData.data, 
+                    td->io.sym.in.additionalAuthData.length);
     
     cryptoST_PRINT_hexLine(CRLF "..cipher  :", 
             results->C.data, results->C.length);
     cryptoST_PRINT_hexLine(CRLF "..goldData:",
-            td->out.sym.cipher.data, td->out.sym.cipher.length);
+            td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
     cryptoST_PRINT_hexLine(CRLF "..resultT :", 
             results->T.data, results->T.length);
     cryptoST_PRINT_hexLine(CRLF "..goldTag :",
-            td->out.sym.tag.data, td->out.sym.tag.length);
+            td->io.sym.out.tag.data, td->io.sym.out.tag.length);
     cryptoST_PRINT_hexLine(CRLF "..resultP :", 
             results->P.data, results->P.length);
     PRINT_WAIT(CRLF);
@@ -140,12 +140,12 @@ static void printAll(cryptoST_testVector_t * input,
  * The public entry points are defined below.
  *   */
 static const char * cryptoSTE_aes_gcm_test_timed(
-                                cryptoST_testDetail_t * td,
+                                const cryptoST_testDetail_t * td,
                                 cryptoSTE_testExecution_t * param)
 {
     // Do this prior to possible errors so that it correctly reports
     // with any error message.
-    cryptoST_testVector_t * input = td->rawData;
+    const cryptoST_testVector_t * input = td->rawData;
     param->results.encryption.size = input->vector.length;
     param->results.encryption.iterations = param->parameters.iterationOverride? 
                                     param->parameters.iterationOverride
@@ -154,8 +154,8 @@ static const char * cryptoSTE_aes_gcm_test_timed(
      * Having NULL pointers for rawData, cipher and aad is allowed.
      * Refer to test.c line 7260
      * */
-    if ( (NULL == td->in.sym.key.data)
-      || (NULL == td->in.sym.ivNonce.data)
+    if ( (NULL == td->io.sym.in.key.data)
+      || (NULL == td->io.sym.in.ivNonce.data)
       || (NULL == td->rawData)
 //    || (NULL == td->rawData->vector.data)
 //    || (NULL == td->additionalAuthData.data) 
@@ -178,7 +178,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
     results->rawSizePadded = 
         (input->vector.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
     results->aadSize = 
-        (td->in.sym.additionalAuthData.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
+        (td->io.sym.in.additionalAuthData.length + (AES_BLOCK_SIZE-1))&~(AES_BLOCK_SIZE-1);
     results->Csize = results->rawSizePadded
                    + results->aadSize 
                    + AES_BLOCK_SIZE;
@@ -201,7 +201,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
         { param->results.errorMessage = "AesInit.enc failed (" BASE_LINE ")"; 
           break; }
 
-        if (0 != wc_AesGcmSetKey(&enc, td->in.sym.key.data, td->in.sym.key.length))
+        if (0 != wc_AesGcmSetKey(&enc, td->io.sym.in.key.data, td->io.sym.in.key.length))
         { param->results.errorMessage = "failed to set key"; break; }
 
         param->results.encryption.start = SYS_TIME_CounterGet();
@@ -209,10 +209,10 @@ static const char * cryptoSTE_aes_gcm_test_timed(
         {
             int result = wc_AesGcmEncrypt(&enc, results->C.data,
                     input->vector.data, input->vector.length,
-                    td->in.sym.ivNonce.data, td->in.sym.ivNonce.length,
+                    td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length,
                     results->T.data, results->T.length,
-                    td->in.sym.additionalAuthData.data, 
-                            td->in.sym.additionalAuthData.length);
+                    td->io.sym.in.additionalAuthData.data, 
+                            td->io.sym.in.additionalAuthData.length);
             // additional authentication data
 #if defined(WOLFSSL_ASYNC_CRYPT)
             results = wc_AsyncWait(results, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
@@ -231,20 +231,20 @@ static const char * cryptoSTE_aes_gcm_test_timed(
 
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if ((NULL == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
+            if ((NULL == td->io.sym.out.cipher.data) || (0 == td->io.sym.out.cipher.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(results->C.data, td->out.sym.cipher.data, td->out.sym.cipher.length))
+            else if (XMEMCMP(results->C.data, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
             {
                 param->results.errorMessage = "computed hash does not match golden data (was iterate==1?)";
                 if (CSTE_VERBOSE)
                     printAll(input, td, results);
                 break; 
             }
-            else if ((NULL == td->out.sym.tag.data) || (0 == td->out.sym.tag.length))
+            else if ((NULL == td->io.sym.out.tag.data) || (0 == td->io.sym.out.tag.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify tag: no golden tag"; 
-            else if (XMEMCMP(results->T.data, td->out.sym.tag.data, td->out.sym.tag.length))
+            else if (XMEMCMP(results->T.data, td->io.sym.out.tag.data, td->io.sym.out.tag.length))
             {
                 param->results.errorMessage = "computed tag does not match golden tag (was iterate==1?)";
                 if (CSTE_VERBOSE)
@@ -274,7 +274,7 @@ static const char * cryptoSTE_aes_gcm_test_timed(
 
             if (0 != wc_AesInit(&dec, HEAP_HINT, INVALID_DEVID))
                 param->results.errorMessage = "AesInit.dec failed (" BASE_LINE ")"; 
-            else if (0 != wc_AesGcmSetKey(&dec, td->in.sym.key.data, td->in.sym.key.length))
+            else if (0 != wc_AesGcmSetKey(&dec, td->io.sym.in.key.data, td->io.sym.in.key.length))
                 param->results.errorMessage = "failed SetKey.dec"; 
             else
             {
@@ -284,10 +284,10 @@ static const char * cryptoSTE_aes_gcm_test_timed(
                 XMEMSET(results->P.data, 0, results->P.length);
                 param->results.wolfSSLresult = wc_AesGcmDecrypt(&dec, 
                             results->P.data, results->C.data, results->C.length,
-                            td->in.sym.ivNonce.data, td->in.sym.ivNonce.length,
+                            td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length,
                             results->T.data, results->T.length,// td->additionalAuthData.length,
-                            td->in.sym.additionalAuthData.data, 
-                                td->in.sym.additionalAuthData.length);
+                            td->io.sym.in.additionalAuthData.data, 
+                                td->io.sym.in.additionalAuthData.length);
                 #if defined(WOLFSSL_ASYNC_CRYPT)
                 results = wc_AsyncWait(results, &enc.asyncDev, WC_ASYNC_FLAG_NONE);
                 #endif
@@ -324,17 +324,17 @@ static const char * cryptoSTE_aes_gcm_test_timed(
  * Inputs:  key, ivNonce                 for the underlying GCM
  *          rawData, additionalAuthData     user inputs
  * Outputs: resultC, resultT
- * Compare: out.sym.cipher=resultC, out.sym.tag=resultT
+ * Compare: io.sym.out.cipher=resultC, io.sym.out.tag=resultT
  * */
 const char * cryptoSTE_aes_gcm_timed(
-            cryptoST_testDetail_t * td,
+            const cryptoST_testDetail_t * td,
             cryptoSTE_testExecution_t * param)
 {
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
     const char * answer = 0;
-    switch(td->in.sym.key.length)
+    switch(td->io.sym.in.key.length)
     {
     case 128/8:
         param->results.testHandler = "WOLF AES GCM 128";

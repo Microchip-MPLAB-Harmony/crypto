@@ -54,7 +54,7 @@ extern "C" {
 #include "../test_data/cryptoSpeedTestData.h"
 
 extern const char * cryptoSTE_des3des_timed
-    (cryptoST_testDetail_t * result, cryptoSTE_testExecution_t * param);
+    (const cryptoST_testDetail_t * result, cryptoSTE_testExecution_t * param);
 
 #ifdef	__cplusplus
 }

@@ -41,7 +41,7 @@ static cryptoST_testVector_t satcZ =
 static uint8_t sramBuffer32[32] = { 0 };
 #define ASIZE(a) ((sizeof(a)/sizeof(a[0])))
 
-static CONST cryptoST_testDetail_t test_item =
+static const cryptoST_testDetail_t test_item =
 {
     .technique = ET_SHA_256,
     .mode = EM_NONE,
@@ -50,7 +50,7 @@ static CONST cryptoST_testDetail_t test_item =
     .source = __BASE_FILE__ "(" BASE_LINE ")",
     .pedigree = "Blocks of null data",
     .rawData = &satcZ,
-    .out.hash.hash = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
+    .io.hash.out.hash = { .data = sramBuffer32, .length = ASIZE(sramBuffer32) },
 };
 
 /*************************************************************
@@ -97,7 +97,7 @@ static char * closeData_func(void)
 #endif // !NO_SHA
 
 #define test_item_count 1 //(sizeof(test_item)/sizeof(cryptoST_testDetail_t))
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     __NOP();
 
@@ -119,11 +119,6 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
 #if DO_LARGE_ZERO_HASH
             old = (void*)0;
 #else
-            // Note that this is bogus if we've overloaded the WC entry point.
-            // Produce a zero-filled block of some length
-            __conditional_software_breakpoint(old->rawData);
-            cryptoST_testVector_t * raw = old->rawData;
-
             // This test is about verification of mechanics when the
             // buffer size is near the cross-over from 1 block to 2.
             if (0 == zero_test)
@@ -142,15 +137,15 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
                 break;
 
             // Demonstrate that we are properly configured
-            __conditional_software_breakpoint(raw->vector.data);
-            __conditional_software_breakpoint(old->out.hash.hash.data);
-            __conditional_software_breakpoint(32 == old->out.hash.hash.length);
+            __conditional_software_breakpoint(satcZ.vector.data);
+            __conditional_software_breakpoint(old->io.hash.out.hash.data);
+            __conditional_software_breakpoint(32 == old->io.hash.out.hash.length);
 
             // Let wolfCrypt compute the golden answer
-            raw->vector.length = zero_test;
-            wc_Sha256Hash(raw->vector.data,
-                          raw->vector.length,
-                          (uint8_t*)old->out.hash.hash.data);
+            satcZ.vector.length = zero_test;
+            wc_Sha256Hash(satcZ.vector.data,
+                          satcZ.vector.length,
+                          (uint8_t*)old->io.hash.out.hash.data);
 #endif
         }
         return old;
@@ -159,7 +154,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
     return NULL;
 }
 
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     __NOP();
     

@@ -29,7 +29,7 @@ static const CPU_CHAR threedes_source[] =
  *      and: https://en.wikipedia.org/wiki/PKCS
  * */
 
-static CONST cryptoST_testVector_t qbf =
+static const cryptoST_testVector_t qbf =
 {
     .name = DATA_PACKAGE_NAME "qbf",
     .source = threedes_source,
@@ -41,7 +41,7 @@ static CONST cryptoST_testVector_t qbf =
 };
 
 #if defined(WOLFSSL_DES_ECB)
-static CONST cryptoST_testVector_t eee =
+static const cryptoST_testVector_t eee =
 {
     .name = DATA_PACKAGE_NAME "eee",
     .source = threedes_source,
@@ -54,7 +54,7 @@ static CONST cryptoST_testVector_t eee =
 };
 #endif
 
-static CONST cryptoST_testVector_t lorem =
+static const cryptoST_testVector_t lorem =
 {
     .name = DATA_PACKAGE_NAME "lorem",
     .source = threedes_source,
@@ -138,7 +138,7 @@ static ALIGN4 const uint8_t lorem_cipher_ecb[] =
  * Golden data definitions.
  *************************************************************/
 static const uint8_t threedes_key[] = "1234567890123456ABCDEFGH";
-static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
+static __attribute__((unused)) const cryptoST_testDetail_t test_item[] =
 {
     // ////// CBC MODE /////////////////////////////////
     {
@@ -149,10 +149,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .in.sym.key = { .length = 24, .data = threedes_key },
-        .in.sym.ivNonce.length = 8,
-        .in.sym.ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
-        .out.sym.cipher = {
+        .io.sym.in.key = { .length = 24, .data = threedes_key },
+        .io.sym.in.ivNonce.length = 8,
+        .io.sym.in.ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
+        .io.sym.out.cipher = {
             .length = (6*8),
             .data = (ALIGN4 const uint8_t[]){
                 "\xE6\xB6\x34\x5F\x10\x15\x38\x02"
@@ -171,10 +171,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .in.sym.key = { .length = 24, .data = threedes_key },
-        .in.sym.ivNonce.length = 8,
-        .in.sym.ivNonce.data = (ALIGN4 const uint8_t*)"23456789",
-        .out.sym.cipher = {
+        .io.sym.in.key = { .length = 24, .data = threedes_key },
+        .io.sym.in.ivNonce.length = 8,
+        .io.sym.in.ivNonce.data = (ALIGN4 const uint8_t*)"23456789",
+        .io.sym.out.cipher = {
             .length = 48,
             .data = (ALIGN4 const uint8_t[]){
                 "\x5B\xF2\x96\x57\xE6\x06\x4E\xB9"
@@ -193,10 +193,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &lorem,
-        .in.sym.key = { .length = 24, .data = threedes_key },
-        .in.sym.ivNonce.length = 8,
-        .in.sym.ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
-        .out.sym.cipher = {
+        .io.sym.in.key = { .length = 24, .data = threedes_key },
+        .io.sym.in.ivNonce.length = 8,
+        .io.sym.in.ivNonce.data = (ALIGN4 const uint8_t*)"12345678",
+        .io.sym.out.cipher = {
             .length = (28*16),
             .data = lorem_cipher_cbc,
         },
@@ -214,10 +214,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &qbf,
-        .in.sym.key = { .length = 24, .data = threedes_key },
-        // .in.sym.ivNonce.length = 8,
-        // .in.sym.ivNonce.data = (const uint8_t*)"12345678",
-        .out.sym.cipher = {
+        .io.sym.in.key = { .length = 24, .data = threedes_key },
+        // .io.sym.in.ivNonce.length = 8,
+        // .io.sym.in.ivNonce.data = (const uint8_t*)"12345678",
+        .io.sym.out.cipher = {
             .length = (6*8),
             .data = (ALIGN4 const uint8_t[]){
     "\x13\xD4\xD3\x54\x94\x93\xD2\x87\x0F\x93\xC3\xE0\x81\x2A\x06\xDE"
@@ -233,10 +233,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &eee,
-        .in.sym.key = { .length = 24, .data = threedes_key },
-        // .in.sym.ivNonce.length = 8,
-        // .in.sym.ivNonce.data = (const uint8_t*)"12345678",
-        .out.sym.cipher = {
+        .io.sym.in.key = { .length = 24, .data = threedes_key },
+        // .io.sym.in.ivNonce.length = 8,
+        // .io.sym.in.ivNonce.data = (const uint8_t*)"12345678",
+        .io.sym.out.cipher = {
             .length = (7*8),
             .data = (ALIGN4 const uint8_t[]){
     "\xDB\x5E\x0A\x57\x6B\x31\x6D\x78\xDB\x5E\x0A\x57\x6B\x31\x6D\x78"
@@ -253,10 +253,10 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = threedes_description,
         .rawData = &lorem,
-        .in.sym.key = { .length = 24, .data = threedes_key },
-        // .in.sym.ivNonce.length = 8,
-        // .in.sym.ivNonce.data = (const uint8_t*)"12345678",
-        .out.sym.cipher = {
+        .io.sym.in.key = { .length = 24, .data = threedes_key },
+        // .io.sym.in.ivNonce.length = 8,
+        // .io.sym.in.ivNonce.data = (const uint8_t*)"12345678",
+        .io.sym.out.cipher = {
             .length = (28*16),
             .data = lorem_cipher_ecb,
         },
@@ -273,13 +273,13 @@ static __attribute__((unused)) CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     __NOP();
     return &test_item[0];
 }
 
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     __NOP();
     // Assume that if the pointer is in range, that it is legitimate.

@@ -47,12 +47,12 @@ static cryptoST_testDetail_t test_item =
     .pedigree = source,
     .rawData = &null_vector,
     // .goldenCipher -- no cipher text
-    .in.sym.key = {
+    .io.sym.in.key = {
         .length = AES128_KEY_SIZE/8, // =16
         .data = (ALIGN4 const uint8_t*) // at least 32 bytes
             "Microchip null data test keys for all.",
     },
-    .in.sym.ivNonce = {
+    .io.sym.in.ivNonce = {
         .length = 16,
         .data = (ALIGN4 const uint8_t[]){
             0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
@@ -67,7 +67,7 @@ static cryptoST_testDetail_t test_item =
 #define SIZE_PREALLOCATE    64
 
 uint test_step = 0;
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     // Assume that if its in range, that it is legitimate.
     if (old != &test_item) 
@@ -79,37 +79,37 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
     case 1:
         test_item.technique = ET_AES_128;
         test_item.mode = EM_CFB;
-        test_item.in.sym.key.length = 128/8;
+        test_item.io.sym.in.key.length = 128/8;
         null_vector.vector.length = 16;
         break;
     case 2:
         test_item.technique = ET_AES_192;
         test_item.mode = EM_CFB;
-        test_item.in.sym.key.length = 192/8;
+        test_item.io.sym.in.key.length = 192/8;
         null_vector.vector.length = 16;
         break;
     case 3:
         test_item.technique = ET_AES_256;
         test_item.mode = EM_CFB;
-        test_item.in.sym.key.length = 256/8;
+        test_item.io.sym.in.key.length = 256/8;
         null_vector.vector.length = 16;
         break;
     case 4:
         test_item.technique = ET_AES_128;
         test_item.mode = EM_CFB;
-        test_item.in.sym.key.length = 128/8;
+        test_item.io.sym.in.key.length = 128/8;
         null_vector.vector.length = SIZE_PREALLOCATE;
         break;
     case 5:
         test_item.technique = ET_AES_192;
         test_item.mode = EM_CFB;
-        test_item.in.sym.key.length = 192/8;
+        test_item.io.sym.in.key.length = 192/8;
         null_vector.vector.length = SIZE_PREALLOCATE;
         break;
     case 6:
         test_item.technique = ET_AES_256;
         test_item.mode = EM_CFB;
-        test_item.in.sym.key.length = 256/8;
+        test_item.io.sym.in.key.length = 256/8;
         null_vector.vector.length = SIZE_PREALLOCATE;
         break;
     default:
@@ -118,12 +118,12 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
     return old;
 }
 #else
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 { return NULL; }
 #define test_item (*((void*)0))
 #endif
 
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 { return nextTest(&test_item); }
 
 static char * openData(void)

@@ -93,10 +93,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 static void printAll(char * context,
-                     cryptoST_testDetail_t * td, 
+                     const cryptoST_testDetail_t * td, 
                      byte * cipher, byte * plain)
 {
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     
     printf(CRLF "AES_CFB data (%s)" CRLF, context);
     printf("%s" CRLF, td->source);
@@ -104,11 +104,11 @@ static void printAll(char * context,
     cryptoST_PRINT_hexLine(CRLF "....msg   :", 
             vector->vector.data, vector->vector.length);
     cryptoST_PRINT_hexLine(CRLF "....key   :", 
-            td->in.sym.key.data, td->in.sym.key.length);
+            td->io.sym.in.key.data, td->io.sym.in.key.length);
     cryptoST_PRINT_hexLine(CRLF "....nonce :", 
-            td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+            td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
     cryptoST_PRINT_hexLine(CRLF "....golden:",
-            td->out.sym.cipher.data, td->out.sym.cipher.length);
+            td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
     cryptoST_PRINT_hexLine(CRLF "....cipher:", cipher, vector->vector.length);
     if (plain)
         cryptoST_PRINT_hexLine(CRLF "....plain :", plain, vector->vector.length);
@@ -118,10 +118,10 @@ static void printAll(char * context,
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
-static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
+static const char * cryptoSTE_aes_cfb_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param)
 {
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     
     if (CSTE_VERBOSE > 2)
     {
@@ -131,8 +131,8 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if ( (NULL == td->in.sym.key.data)
-      || (NULL == td->in.sym.ivNonce.data) )
+    if ( (NULL == td->io.sym.in.key.data)
+      || (NULL == td->io.sym.in.ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CFB test not activated." CRLF;
     
@@ -144,8 +144,8 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
     if (vector->vector.length > ALENGTH(cipher))
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
     
-    ret = wc_AesSetKey(&enc, td->in.sym.key.data, td->in.sym.key.length,
-                             td->in.sym.ivNonce.data, AES_ENCRYPTION);
+    ret = wc_AesSetKey(&enc, td->io.sym.in.key.data, td->io.sym.in.key.length,
+                             td->io.sym.in.ivNonce.data, AES_ENCRYPTION);
     if (ret != 0) return "failed to set key";
     
     // Hold off until the serial port is finished
@@ -169,13 +169,13 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
 
     if (param->parameters.verifyByGoldenCiphertext)
     {
-        if ((0 == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
+        if ((0 == td->io.sym.out.cipher.data) || (0 == td->io.sym.out.cipher.length))
         { 
             param->results.warningCount++;
             param->results.warningMessage = 
                     "** can't verify cipher: no golden data"; 
         }
-        else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
+        else if (XMEMCMP(cipher, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
         { 
             // Note: the test above will fail if iterate!=1.
             if (CSTE_VERBOSE)
@@ -200,8 +200,8 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
                 return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
 
             /* decrypt uses AES_ENCRYPTION */
-            ret = wc_AesSetKey(&dec, td->in.sym.key.data, td->in.sym.key.length, 
-                                     td->in.sym.ivNonce.data, AES_ENCRYPTION);
+            ret = wc_AesSetKey(&dec, td->io.sym.in.key.data, td->io.sym.in.key.length, 
+                                     td->io.sym.in.ivNonce.data, AES_ENCRYPTION);
             if (ret != 0) return "setting decryption key failed";
 
             if (CSTE_VERBOSE > 1) 
@@ -232,7 +232,7 @@ static const char * cryptoSTE_aes_cfb_timed(cryptoST_testDetail_t * td,
 
 #undef TNAME
 #define TNAME "WOLF AES CFB 128"
-const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_cfb_128_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     BP_NOP();
@@ -240,7 +240,7 @@ const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 128/8)
+    if (td->io.sym.in.key.length != 128/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -249,7 +249,7 @@ const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * td,
 
 #undef TNAME
 #define TNAME "WOLF AES CFB 192"
-const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_cfb_192_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     BP_NOP();
@@ -257,7 +257,7 @@ const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 192/8)
+    if (td->io.sym.in.key.length != 192/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else
@@ -266,7 +266,7 @@ const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * td,
 
 #undef TNAME
 #define TNAME "WOLF AES CFB 256"
-const char * cryptoSTE_aes_cfb_256_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_cfb_256_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     BP_NOP();
@@ -274,7 +274,7 @@ const char * cryptoSTE_aes_cfb_256_timed(cryptoST_testDetail_t * td,
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 256/8)
+    if (td->io.sym.in.key.length != 256/8)
         return "incorrect key length" CRLF
                "     " TNAME " test not activated." CRLF;
     else

@@ -18,7 +18,7 @@
 #if defined(WOLFSSL_AES_128) \
  || defined(WOLFSSL_AES_192) \
  || defined(WOLFSSL_AES_256)
-static CONST cryptoST_testVector_t test_vector =
+static const cryptoST_testVector_t test_vector =
 {
     .name = "AES_CFB",
     .source = "/wolfssl/wolfcrypt/test/test.c line 5447",
@@ -37,7 +37,7 @@ static CONST cryptoST_testVector_t test_vector =
 };
 #endif
 
-static CONST cryptoST_testDetail_t test_item[] =
+static const cryptoST_testDetail_t test_item[] =
 {
     // Keys and results for AES CFB 128, 192, 256
 #if defined(WOLFSSL_AES_128)
@@ -49,7 +49,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 5464",
         .rawData = &test_vector,
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .length = 48,
             .data = (ALIGN4 const uint8_t[]){
                 0x3b,0x3f,0xd9,0x2e,0xb7,0x2d,0xad,0x20,
@@ -60,14 +60,14 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0xb1,0x80,0x8c,0xf1,0x87,0xa4,0xf4,0xdf
             }
         },
-        .in.sym.key = {
+        .io.sym.in.key = {
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){
             0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
             0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c
             }
         },
-        .in.sym.ivNonce = {
+        .io.sym.in.ivNonce = {
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
@@ -85,7 +85,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 5447",
         .rawData = &test_vector,
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .length = 64,
             .data = (ALIGN4 const uint8_t[]){
                 0xcd,0xc8,0x0d,0x6f,0xdd,0xf1,0x8c,0xab,
@@ -98,14 +98,14 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x42,0xae,0x8f,0xba,0x58,0x4b,0x09,0xff
             }
         },
-        .in.sym.key = {
+        .io.sym.in.key = {
             .length = AES192_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){ 
                 0x8e,0x73,0xb0,0xf7,0xda,0x0e,0x64,0x52,
                 0xc8,0x10,0xf3,0x2b,0x80,0x90,0x79,0xe5,
                 0x62,0xf8,0xea,0xd2,0x52,0x2c,0x6b,0x7b }
             },
-        .in.sym.ivNonce = {
+        .io.sym.in.ivNonce = {
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
@@ -123,7 +123,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 5526",
         .rawData = &test_vector,
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .length = 64,
             .data = (ALIGN4 const uint8_t[]){
                 0xdc,0x7e,0x84,0xbf,0xda,0x79,0x16,0x4b,
@@ -136,7 +136,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x20,0x31,0x62,0x3d,0x55,0xb1,0xe4,0x71
             }
         },
-        .in.sym.key = {
+        .io.sym.in.key = {
             .length = AES256_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){
                 0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,
@@ -145,7 +145,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4
             },
         },
-        .in.sym.ivNonce = {
+        .io.sym.in.ivNonce = {
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,
@@ -161,11 +161,11 @@ static CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     return test_item;
 }
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     // Assume that if its in range, that it is legitimate.
     if (old < test_item) 

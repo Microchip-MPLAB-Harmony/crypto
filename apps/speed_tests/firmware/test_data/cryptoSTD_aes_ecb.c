@@ -50,11 +50,11 @@ static cryptoST_testDetail_t test_item = // one and only
     .source = __BASE_FILE__,
     .pedigree = description,
     .rawData = &softData,
-    .out.sym.cipher = {
+    .io.sym.out.cipher = {
         .data = ((void*)0), // fill in later
         .length = 16,
     },
-    .in.sym.key = 
+    .io.sym.in.key = 
         { .data = (DATA_CHAR*)"abcdefghijklmnop", // 128b = 16B
           .length = 16 },
 };
@@ -67,7 +67,7 @@ static cryptoST_testDetail_t test_item = // one and only
  * API handlers
  *************************************************************/
 static size_t testSize = 0;
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     __NOP();
 
@@ -103,7 +103,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
     return old;
 }
 
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     __NOP();
     testSize = 0;

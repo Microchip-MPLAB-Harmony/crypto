@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    cryptoST_des3des.c
+    cryptoST_des3.c
 
   Summary:
     DES and triple-DES mode encryption driver
@@ -147,12 +147,12 @@ static const desTest_t localEntry = {
  * The public entry points are defined below.
  *  */
 static const char * cryptoSTE_des3des_all_timed
-      ( cryptoST_testDetail_t * td,
+      ( const cryptoST_testDetail_t * td,
         cryptoSTE_testExecution_t * param,
         const desTest_t * test )
 {
     // Do this prior to possible errors so that it correctly reports.
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     param->results.encryption.size = vector->vector.length;
     param->results.encryption.iterations = param->parameters.iterationOverride? 
                                     param->parameters.iterationOverride
@@ -166,7 +166,7 @@ static const char * cryptoSTE_des3des_all_timed
     }
 
     // Data validation
-    if (NULL == td->in.sym.key.data)
+    if (NULL == td->io.sym.in.key.data)
         return param->results.errorMessage = "missing key or initialization data";
 
     byte * cipher = cryptoSTE_malloc(vector->vector.length);
@@ -179,9 +179,9 @@ static const char * cryptoSTE_des3des_all_timed
 
         int ret;
         Des3 enc;
-        assert_dbug(24 == td->in.sym.key.length);
-        ret = wc_Des3_SetKey(&enc, td->in.sym.key.data, 
-                                   td->in.sym.ivNonce.data, DES_ENCRYPTION);
+        assert_dbug(24 == td->io.sym.in.key.length);
+        ret = wc_Des3_SetKey(&enc, td->io.sym.in.key.data, 
+                                   td->io.sym.in.ivNonce.data, DES_ENCRYPTION);
         if (ret != 0) 
             { param->results.errorMessage = "failed to set key"; break; }
 
@@ -201,25 +201,25 @@ static const char * cryptoSTE_des3des_all_timed
         
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if ((NULL == td->out.sym.cipher.data) || (0 == td->out.sym.cipher.length))
+            if ((NULL == td->io.sym.out.cipher.data) || (0 == td->io.sym.out.cipher.length))
                 param->results.warningCount++,
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
+            else if (XMEMCMP(cipher, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
             { 
                 param->results.errorMessage = 
                     "computed ciphertext does not match golden data";
                 if (CSTE_VERBOSE)
                 {
                     cryptoST_PRINT_hexLine(CRLF "..key     :", 
-                            td->in.sym.key.data, td->in.sym.key.length);
+                            td->io.sym.in.key.data, td->io.sym.in.key.length);
                     cryptoST_PRINT_hexLine(CRLF "..ivNonce :", 
-                            td->in.sym.ivNonce.data, td->in.sym.ivNonce.length);
+                            td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
                     cryptoST_PRINT_hexBlock(CRLF "..input   :", 
                             vector->vector.data, vector->vector.length);
                     cryptoST_PRINT_hexBlock(CRLF "..cipher  :", 
-                            cipher, td->out.sym.cipher.length);
+                            cipher, td->io.sym.out.cipher.length);
                     cryptoST_PRINT_hexBlock(CRLF "..golden  :",
-                            td->out.sym.cipher.data, td->out.sym.cipher.length);
+                            td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -246,10 +246,10 @@ static const char * cryptoSTE_des3des_all_timed
                 else do
                 {
                     Des3 dec;
-                    assert_dbug(24 == td->in.sym.key.length);
+                    assert_dbug(24 == td->io.sym.in.key.length);
                     if (0 != wc_Des3_SetKey
-                        (&dec, td->in.sym.key.data, 
-                               td->in.sym.ivNonce.data, DES_DECRYPTION))
+                        (&dec, td->io.sym.in.key.data, 
+                               td->io.sym.in.ivNonce.data, DES_DECRYPTION))
                     { 
                         param->results.errorMessage = "setting decryption key failed"; 
                         break; 
@@ -292,7 +292,7 @@ static const char * cryptoSTE_des3des_all_timed
 // *****************************************************************************
 
 static char * badKey = "incorrect key length";
-const char * cryptoSTE_des3des_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_des3des_timed(const cryptoST_testDetail_t * td,
                                      cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = "MCHP_DES3"; // establish a default name
@@ -318,7 +318,7 @@ const char * cryptoSTE_des3des_timed(cryptoST_testDetail_t * td,
     case ET_DES3:
         if (EM_CBC == td->mode)
         {
-            assert_dbug(8 == td->in.sym.ivNonce.length);
+            assert_dbug(8 == td->io.sym.in.ivNonce.length);
             test = (param->parameters.useLocalDriverEntryPoints)?
                         &localEntry : &wolf_des3_cbc;
         }
@@ -341,7 +341,7 @@ const char * cryptoSTE_des3des_timed(cryptoST_testDetail_t * td,
     else
     {
         param->results.testHandler = test->name;
-        if (td->in.sym.key.length != test->keySize)
+        if (td->io.sym.in.key.length != test->keySize)
             return param->results.errorMessage = badKey;
         else
             return cryptoSTE_des3des_all_timed(td, param, test);

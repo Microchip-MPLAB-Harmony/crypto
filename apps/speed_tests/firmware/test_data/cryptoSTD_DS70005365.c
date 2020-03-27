@@ -20,7 +20,7 @@ const CPU_CHAR appNoteReference[] = "SAML11 Security Guide AN5365 (DS70005365A)"
  * Raw (input) data definitions providing small-block constants.
  *************************************************************/
 #if defined(HAVE_AES_ECB)
-static CONST cryptoST_testVector_t ds_001122 =
+static const cryptoST_testVector_t ds_001122 =
 {
     .name = DATA_PACKAGE_NAME "A_AES128", // DS70005365A rev.A
     .source = appNoteReference,
@@ -34,7 +34,7 @@ static CONST cryptoST_testVector_t ds_001122 =
 #endif // HAVE_AES_ECB
 
 #if !defined(NO_SHA256)
-static CONST cryptoST_testVector_t ds_sha256 =
+static const cryptoST_testVector_t ds_sha256 =
 {
     .name = DATA_PACKAGE_NAME "A_SHA256", // DS70005365A rev.A
     .source = appNoteReference,
@@ -52,7 +52,7 @@ static CONST cryptoST_testVector_t ds_sha256 =
 /*************************************************************
  * Key inputs and golden data and tag result definitions.
  *************************************************************/
-static CONST cryptoST_testDetail_t test_item[] =
+static const cryptoST_testDetail_t test_item[] =
 {
 #if defined(HAVE_AES_ECB)
     {
@@ -63,14 +63,14 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = appNoteReference,
         .rawData = &ds_001122,
-        .in.sym.key = { 
+        .io.sym.in.key = { 
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
                 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
             },
         },
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .data = (ALIGN4 const uint8_t[]){
                 0x69, 0xc4, 0xe0, 0xd8, 0x6a, 0x7b, 0x04, 0x30,
                 0xd8, 0xcd, 0xb7, 0x80, 0x70, 0xb4, 0xc5, 0x5a
@@ -88,7 +88,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = appNoteReference,
         .rawData = &ds_sha256,
-        .out.hash.hash = {
+        .io.hash.out.hash = {
             .data = (ALIGN4 const uint8_t[]){
                 0xb9, 0x4d, 0x27, 0xb9, 0x93, 0x4d, 0x3e, 0x08,
                 0xa5, 0x2e, 0x52, 0xd7, 0xda, 0x7d, 0xab, 0xfa,
@@ -123,14 +123,14 @@ static CONST cryptoST_testDetail_t test_item[] =
             .length = 0,
             .data = (void*)0,
         },
-        .out.sym.cipher = { // from the application note
+        .io.sym.out.cipher = { // from the application note
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0xc0, 0x8a, 0x14, 0x84, 0xd1, 0x3b, 0xe1, 0xe1, 
                 0x93, 0x39, 0x67, 0x14, 0x93, 0xc3, 0xcb, 0xac
             }
         },
-        .out.sym.tag = { 
+        .io.sym.out.tag = { 
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){
                 0x42, 0x3b, 0x3a, 0x05, 0x65, 0x0a, 0xdc, 0x94, 
@@ -150,12 +150,12 @@ static CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     // Assume that #1 is not dynamically built
     return (1 == test_item_count)? NULL : test_item;
 }
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     __NOP();
     

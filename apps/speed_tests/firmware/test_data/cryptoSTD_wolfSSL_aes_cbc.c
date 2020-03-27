@@ -14,7 +14,7 @@
 #define ALIGN4 __attribute__((aligned(4)))
 
 #if defined(WOLFSSL_AES_128)
-static CONST cryptoST_testVector_t NowIsTheTime =
+static const cryptoST_testVector_t NowIsTheTime =
 {
     .name = "AES_CBC NITT",
     .source = "/wolfssl/wolfcrypt/test/test.c line 6335",
@@ -35,7 +35,7 @@ const CPU_CHAR NIST_800_38A_description[] = {
         "test vectors from "
         "\"Recommendation for Block Cipher Modes of Operation\" "
         "NIST Special Publication 800-38A" };
-static CONST cryptoST_testVector_t Message2 =
+static const cryptoST_testVector_t Message2 =
 {
     .name = "AES_CBC MSG2",
     .source = "/wolfssl/wolfcrypt/test/test.c line 6335",
@@ -101,7 +101,7 @@ static const uint8_t bigMessage[] = (const uint8_t[]){
     0x65,0x73,0x20,0x4a,0x61,0x63,0x6b,0x20
 };
 
-static CONST cryptoST_testVector_t BigMessage =
+static const cryptoST_testVector_t BigMessage =
 {
     .name = "AES_CBC big message",
     .source = "/wolfssl/wolfcrypt/test/test.c line 6443",
@@ -111,7 +111,7 @@ static CONST cryptoST_testVector_t BigMessage =
 };
 #endif
 
-static CONST cryptoST_testDetail_t test_item[] =
+static const cryptoST_testDetail_t test_item[] =
 {
 #if defined(WOLFSSL_AES_128)
     {
@@ -122,15 +122,15 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6330",
         .rawData = &NowIsTheTime, // test.c 6335
-        .out.sym.cipher = { // aes_cbc_test() does not verify data
+        .io.sym.out.cipher = { // aes_cbc_test() does not verify data
             .length = 0,  // refer to aes_test(), line 6374
             .data = 0,
         },
-        .in.sym.key = { // test.c 6341
+        .io.sym.in.key = { // test.c 6341
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t*)"0123456789abcdef   ",
         },
-        .in.sym.ivNonce = { // test.c 6341
+        .io.sym.in.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 uint8_t*)"1234567890abcdef   ",
         },
@@ -143,18 +143,18 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6395",
         .rawData = &NowIsTheTime,
-        .out.sym.cipher = { // test.c 6394
+        .io.sym.out.cipher = { // test.c 6394
             .length = 16,
             .data = (ALIGN4  const uint8_t[]){ 
                 0x95,0x94,0x92,0x57,0x5f,0x42,0x81,0x53,
                 0x2c,0xcc,0x9d,0x46,0x77,0xa2,0x33,0xcb
               }
         },
-        .in.sym.key = { // test.c 6341
+        .io.sym.in.key = { // test.c 6341
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t*)"0123456789abcdef   ",
         },
-        .in.sym.ivNonce = { // test.c 6341
+        .io.sym.in.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -167,12 +167,12 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
-        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
-        .in.sym.key = {
+        .io.sym.out.cipher = { 0, 0 }, // use enc/dec to check
+        .io.sym.in.key = {
             .length = AES128_KEY_SIZE/8, // .data is longer
             .data = (ALIGN4 const uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .in.sym.ivNonce = { // test.c 6341
+        .io.sym.in.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -186,15 +186,15 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6557",
         .rawData = &Message2,
-        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
-        .in.sym.key = {
+        .io.sym.out.cipher = { 0, 0 }, // use enc/dec to check
+        .io.sym.in.key = {
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){
                 0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6,
                 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c
             },
         },
-        .in.sym.ivNonce = { // test.c 6341
+        .io.sym.in.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t[]){ 
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -213,12 +213,12 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
-        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
-        .in.sym.key = {
+        .io.sym.out.cipher = { 0, 0 }, // use enc/dec to check
+        .io.sym.in.key = {
             .length = AES192_KEY_SIZE/8, // .data is longer
             .data = (ALIGN4 const uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .in.sym.ivNonce = { // test.c 6341
+        .io.sym.in.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -234,12 +234,12 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__,
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6494",
         .rawData = &BigMessage,
-        .out.sym.cipher = { 0, 0 }, // use enc/dec to check
-        .in.sym.key = {
+        .io.sym.out.cipher = { 0, 0 }, // use enc/dec to check
+        .io.sym.in.key = {
             .length = AES256_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t*)"0123456789abcdeffedcba9876543210",
         },
-        .in.sym.ivNonce = { // test.c 6341
+        .io.sym.in.ivNonce = { // test.c 6341
             .length = 16,
             .data = (ALIGN4 const uint8_t*)"1234567890abcdef   ",
         },
@@ -253,11 +253,11 @@ static CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     return test_item;
 }
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     // Assume that if its in range, that it is legitimate.
     if (old < test_item) 

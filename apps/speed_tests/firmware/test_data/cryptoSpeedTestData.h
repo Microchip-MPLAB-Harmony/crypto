@@ -19,6 +19,8 @@
 #include <stdint.h>
 #include <stddef.h> // for size_t
 #include <stdbool.h>
+#include "configuration.h"
+#include <wolfssl/wolfcrypt/settings.h>
 
 /* Standard definitions
    FIXME: get these from the Harmony framework
@@ -57,8 +59,17 @@ typedef enum EncryptTechnique_e
     ET_SHA_256,
     ET_SHA_384,
     ET_SHA_512,
-    ET_ECC,
-    ET_RSA,
+
+    ET_PK_RSA_SIGN,
+    ET_PK_RSA_VERIFY,
+    ET_PK_DH,
+    ET_PK_ECDH,
+    ET_PK_ECDSA_SIGN,
+    ET_PK_ECDSA_VERIFY,
+    ET_PK_ED25519,
+    ET_PK_CURVE25519,
+    ET_PK_RSA_KEYGEN,
+    ET_PK_EC_KEYGEN,
 
     /* These options allow the TA100 commands to be speed-tested.
      * All are listed here, but not all have test drivers. */
@@ -90,6 +101,8 @@ typedef enum EncryptTechnique_e
     TA100_Verify,
     TA100_Write,
     TA100_Sequences,
+            
+    ET_UNKNOWN, // error case to cover RSA translation
 } EncryptTechnique_t;
 
 typedef enum EncryptMode_e
@@ -110,8 +123,8 @@ typedef struct cryptoST_testDetail_s cryptoST_testDetail_t;
 typedef struct cryptoST_testVector_s cryptoST_testVector_t;
 
 typedef char * cryptoST_OpenData_t(void);  // Allocate memory, precompute golden results
-typedef cryptoST_testDetail_t * cryptoST_FirstDetail_t(void);
-typedef cryptoST_testDetail_t * cryptoST_NextDetail_t(cryptoST_testDetail_t *);
+typedef const cryptoST_testDetail_t * cryptoST_FirstDetail_t(void);
+typedef const cryptoST_testDetail_t * cryptoST_NextDetail_t(const cryptoST_testDetail_t *);
 typedef char * cryptoST_CloseData_t(void); // release any allocated memory
 
 /*************************************************************
@@ -190,9 +203,24 @@ typedef struct cryptoST_symmetric_input_s
     cryptoST_testData_t additionalAuthData;
 } cryptoST_symmetric_input_t;
 
-typedef struct cryptoST_asymmetric_rsa_input_s
+typedef struct cryptoST_asymmetric_rsas_input_s
 {
-} cryptoST_asymmetric_rsa_input_t;
+    /* By concatenation: PU = {e,n}, PR = {d,n} */
+    const cryptoST_testData_t * n;  // =pq; product of primes
+    const cryptoST_testData_t * e;  // selected
+    const cryptoST_testData_t * d;  // =e^(-1) mod ..etc.
+    EncryptTechnique_t hashmode;
+} cryptoST_asymmetric_rsas_input_t; // RSA signing
+
+typedef struct cryptoST_asymmetric_rsav_input_s
+{
+    /* By concatenation: PU = {e,n}, PR = {d,n} */
+    const cryptoST_testData_t * n;  // =pq; product of primes
+    const cryptoST_testData_t * e;  // selected
+    const cryptoST_testData_t * d;  // =e^(-1) mod ..etc.
+    const cryptoST_testData_t * em;  // encrypted message
+    EncryptTechnique_t hashmode;
+} cryptoST_asymmetric_rsav_input_t; // RSA verification
 
 typedef struct cryptoST_asym_ecc_input_s
 {
@@ -217,9 +245,16 @@ typedef struct cryptoST_symmetric_output_s
     cryptoST_testData_t tag;
 } cryptoST_symmetric_output_t;
 
-typedef struct cryptoST_asymmetric_rsa_output_s
+typedef struct cryptoST_asymmetric_rsas_output_s
 {
-} cryptoST_asymmetric_rsa_output_t;
+    cryptoST_testData_t cipher;
+    cryptoST_testData_t salt; // why this?
+} cryptoST_asymmetric_rsas_output_t;
+
+typedef struct cryptoST_asymmetric_rsav_output_s
+{
+    // output is the raw data
+} cryptoST_asymmetric_rsav_output_t;
 
 typedef struct cryptoST_asym_ecc_output_s
 {
@@ -244,27 +279,47 @@ typedef struct cryptoST_testDetail_s
 
     const CPU_CHAR * source;         // name of enclosing file
     const CPU_CHAR * pedigree;       // history of gold-standard data
-    cryptoST_testVector_t * rawData; // reference to original data
+    const cryptoST_testVector_t * rawData; // reference to original data
     // depending on how the data file is built, .rawData maybe must be null
 
     // Inputs
-    union 
-    {
-        cryptoST_hash_input_t hash;
-        cryptoST_symmetric_input_t sym;
-        cryptoST_asymmetric_rsa_input_t rsa;
-        cryptoST_asymmetric_ecc_input_t ecc;
-    } in;
-    
-    // Output compare data supplied for (optional) verification
     union
     {
-        cryptoST_hash_output_t hash;
-        cryptoST_symmetric_output_t sym;
-        cryptoST_asymmetric_rsa_output_t rsa;
-        cryptoST_asymmetric_ecc_output_t ecc;
-    } out;
-
+        /* The SYM and HASH entries are always enabled
+         * because there is no "single" WC #define that
+         * operates for all of them. The others are
+         * bigger and less frequently used.
+         * */
+        struct // AES is in because its too hard inhibit
+        {
+            cryptoST_symmetric_input_t in;
+            cryptoST_symmetric_output_t out;
+        } sym;
+        struct
+        {
+            cryptoST_hash_input_t in;
+            cryptoST_hash_output_t out;
+        } hash;
+#if !defined(NO_RSA)
+        struct
+        {
+            cryptoST_asymmetric_rsas_input_t in; // sign
+            cryptoST_asymmetric_rsas_output_t out;
+        } rsas;
+        struct
+        {
+            cryptoST_asymmetric_rsav_input_t in; // verify
+            cryptoST_asymmetric_rsav_output_t out;
+        } rsav;
+#endif // NO_RSA
+#if !defined(NO_ECC)
+        struct
+        {
+            cryptoST_asymmetric_ecc_input_t in;
+            cryptoST_asymmetric_ecc_output_t out;
+        } ecc;
+    } io; // unnamed unions are not allowed by MISRA
+#endif // NO_ECC
     /* The definition of an error depends on the specific test
      * invoked by technique/mode (e.g., GMAC validation failure).
      *  */

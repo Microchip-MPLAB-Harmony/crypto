@@ -15,7 +15,7 @@ extern "C" {
 #include "../test_data/cryptoSpeedTestData.h"
 
 #if 1
-const char * cryptoSTE_crya_sha_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param);
 #else
 #define cryptoSTE_sha_timed(t_,r_,i_) \

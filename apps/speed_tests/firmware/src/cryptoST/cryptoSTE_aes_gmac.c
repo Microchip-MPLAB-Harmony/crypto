@@ -55,10 +55,10 @@
 /* This is the generic encryption package.
  * The public entry points are defined below.
  *  */
-static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
+static const char * cryptoSTE_aes_gmac_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param)
 {
-    cryptoST_testVector_t * vector = td->rawData;
+    const cryptoST_testVector_t * vector = td->rawData;
     
     if (CSTE_VERBOSE > 2)
     {
@@ -68,8 +68,8 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
     }
             
     // Data validation
-    if ( (NULL == td->in.sym.key.data)
-      || (NULL == td->in.sym.ivNonce.data) )
+    if ( (NULL == td->io.sym.in.key.data)
+      || (NULL == td->io.sym.in.ivNonce.data) )
         return "missing vector, key or initialization data" CRLF
                "     AES CBC test not activated." CRLF;
 
@@ -82,8 +82,8 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
         int ret;
         param->results.encryption.size = vector->vector.length;
     
-        ret = wc_AesSetKey(&enc, td->in.sym.key.data, td->in.sym.key.length,
-                                 td->in.sym.ivNonce.data, AES_ENCRYPTION);
+        ret = wc_AesSetKey(&enc, td->io.sym.in.key.data, td->io.sym.in.key.length,
+                                 td->io.sym.in.ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) { param->results.errorMessage = "failed to set key"; break; }
 
         // Hold off until the serial port is finished
@@ -110,16 +110,16 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
 
         if (param->parameters.verifyByGoldenCiphertext)
         {
-            if (td->out.sym.cipher.length == 0)
+            if (td->io.sym.out.cipher.length == 0)
                 param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(cipher, td->out.sym.cipher.data, td->out.sym.cipher.length))
+            else if (XMEMCMP(cipher, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
             { 
                 param->results.errorMessage = "computed ciphertext does not match golden data (was iterate==1?)";
                 if (CSTE_VERBOSE)
                 {
                     cryptoST_PRINT_hexLine(CRLF "..cipher:", cipher, vector->vector.length);
                     cryptoST_PRINT_hexLine(CRLF "..golden:",
-                            td->out.sym.cipher.data, td->out.sym.cipher.length);
+                            td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
                     PRINT_WAIT(CRLF);
                 }
                 break; 
@@ -144,8 +144,8 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
                 {
                     Aes dec;
                     
-                    ret = wc_AesSetKey(&dec, td->in.sym.key.data, td->in.sym.key.length, 
-                                             td->in.sym.ivNonce.data, AES_DECRYPTION);
+                    ret = wc_AesSetKey(&dec, td->io.sym.in.key.data, td->io.sym.in.key.length, 
+                                             td->io.sym.in.ivNonce.data, AES_DECRYPTION);
                     if (ret != 0) { param->results.errorMessage = "setting decryption key failed"; break; }
 
                     // Conventional decrypt and comparison
@@ -194,14 +194,14 @@ static const char * cryptoSTE_aes_gmac_timed(cryptoST_testDetail_t * td,
 #if defined(WOLFSSL_AES_128) 
 #undef TNAME
 #define TNAME "WOLF AES CBC 128"
-const char * cryptoSTE_aes_gmac_128_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_gmac_128_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 128/8)
+    if (td->io.sym.in.key.length != 128/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_gmac_timed(td, param);
@@ -211,14 +211,14 @@ const char * cryptoSTE_aes_gmac_128_timed(cryptoST_testDetail_t * td,
 #if defined(WOLFSSL_AES_192)
 #undef TNAME
 #define TNAME "WOLF AES CBC 192"
-const char * cryptoSTE_aes_gmac_192_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_gmac_192_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 192/8)
+    if (td->io.sym.in.key.length != 192/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_gmac_timed(td, param);
@@ -228,14 +228,14 @@ const char * cryptoSTE_aes_gmac_192_timed(cryptoST_testDetail_t * td,
 #if defined(WOLFSSL_AES_256)
 #undef TNAME
 #define TNAME "WOLF AES CBC 256"
-const char * cryptoSTE_aes_gmac_256_timed(cryptoST_testDetail_t * td,
+const char * cryptoSTE_aes_gmac_256_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
     // Data validation
-    if (td->in.sym.key.length != 256/8)
+    if (td->io.sym.in.key.length != 256/8)
         return "incorrect key length";
     else
         return cryptoSTE_aes_gmac_timed(td, param);

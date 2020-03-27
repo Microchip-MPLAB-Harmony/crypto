@@ -54,7 +54,7 @@ static uint8_t oddCipher[] = {
 #endif
 
 __attribute__((used))
-static CONST cryptoST_testVector_t NIST_800_38A =
+static const cryptoST_testVector_t NIST_800_38A =
 {
     .name = "AES_CTR Message2",
     .source = "/wolfssl/wolfcrypt/test/test.c line 6632",
@@ -64,7 +64,7 @@ static CONST cryptoST_testVector_t NIST_800_38A =
 };
 #endif // all the AES sizes
 
-static CONST cryptoST_testDetail_t test_item[] =
+static const cryptoST_testDetail_t test_item[] =
 {
     /* **************************************************************
      * test vectors from "Recommendation for Block Cipher Modes of
@@ -80,7 +80,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6657",
         .rawData = &NIST_800_38A,
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .length = 64,
             .data = (ALIGN4 const uint8_t[]) // line 6657 ctr128Cipher
             {   0x87,0x4d,0x61,0x91,0xb6,0x20,0xe3,0x26,
@@ -93,14 +93,14 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x79,0x21,0x70,0xa0,0xf3,0x00,0x9c,0xee
             },
         },
-        .in.sym.key = { // line 6651 ctr128Key
+        .io.sym.in.key = { // line 6651 ctr128Key
             .length = AES128_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){
                 0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,
                 0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c
             },
         },
-        .in.sym.ivNonce = {
+        .io.sym.in.ivNonce = {
             .data = nist_800_38A_iv,
             .length = ALENGTH(nist_800_38A_iv)
         },
@@ -117,7 +117,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6671",
         .rawData = &NIST_800_38A,
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .length = 64,
             .data = (ALIGN4 const uint8_t[]){ // line 6678 ctr192Cipher
                 0x1a,0xbc,0x93,0x24,0x17,0x52,0x1c,0xa2,
@@ -130,7 +130,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x5a,0x97,0xda,0xec,0x58,0xc6,0xb0,0x50
             },
         },
-        .in.sym.key = { // line 6671 ctr192Key
+        .io.sym.in.key = { // line 6671 ctr192Key
             .length = AES192_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){ 
                 0x8e,0x73,0xb0,0xf7,0xda,0x0e,0x64,0x52,
@@ -138,7 +138,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x62,0xf8,0xea,0xd2,0x52,0x2c,0x6b,0x7b
             },
         },
-        .in.sym.ivNonce = {
+        .io.sym.in.ivNonce = {
             .data = nist_800_38A_iv,
             .length = ALENGTH(nist_800_38A_iv)
         },
@@ -154,7 +154,7 @@ static CONST cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = "/wolfssl/wolfcrypt/test/test.c line 6690",
         .rawData = &NIST_800_38A,
-        .out.sym.cipher = {
+        .io.sym.out.cipher = {
             .length = 64,
             .data = (ALIGN4 const uint8_t[]){ // line 6699 ctr256Cipher
                 0x60,0x1e,0xc3,0x13,0x77,0x57,0x89,0xa5,
@@ -167,7 +167,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x13,0xc2,0xdd,0x08,0x45,0x79,0x41,0xa6
             }
         },
-        .in.sym.key = { // line 6691 ctr256Key
+        .io.sym.in.key = { // line 6691 ctr256Key
             .length = AES256_KEY_SIZE/8,
             .data = (ALIGN4 const uint8_t[]){   
                 0x60,0x3d,0xeb,0x10,0x15,0xca,0x71,0xbe,
@@ -176,7 +176,7 @@ static CONST cryptoST_testDetail_t test_item[] =
                 0x2d,0x98,0x10,0xa3,0x09,0x14,0xdf,0xf4
             },
         },
-        .in.sym.ivNonce = {
+        .io.sym.in.ivNonce = {
             .data = nist_800_38A_iv,
             .length = ALENGTH(nist_800_38A_iv),
         },
@@ -189,12 +189,12 @@ static CONST cryptoST_testDetail_t test_item[] =
 /*************************************************************
  * API handlers
  *************************************************************/
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     // Check for an (essentially) empty list
     return (ET_NONE == test_item->technique)? 0 : test_item;
 }
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     // Assume that if its in range, that it is legitimate.
     if (old < test_item) 

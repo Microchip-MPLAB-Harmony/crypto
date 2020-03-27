@@ -66,22 +66,23 @@ extern "C" {
 #include "../test_data/cryptoSpeedTestData.h"
 
 #if defined(WOLFSSL_AES_CFB) && defined(WOLFSSL_AES_128)
-const char * cryptoSTE_aes_cfb_128_timed(cryptoST_testDetail_t * result,
+const char * cryptoSTE_aes_cfb_128_timed(const cryptoST_testDetail_t * result,
                                    cryptoSTE_testExecution_t * param);
 #else
 #define cryptoSTE_aes_cfb_128_timed()     ((void*)0)
 #endif // def WOLFSSL_AES_128
 
 #if defined(WOLFSSL_AES_CFB) && defined(WOLFSSL_AES_192)
-const char * cryptoSTE_aes_cfb_192_timed(cryptoST_testDetail_t * result,
+const char * cryptoSTE_aes_cfb_192_timed(const cryptoST_testDetail_t * result,
                                    cryptoSTE_testExecution_t * param);
 #else
 #define cryptoSTE_aes_cfb_192_timed()     ((void*)0)
 #endif // def WOLFSSL_AES_192
 
 #if defined(WOLFSSL_AES_CFB) && defined(WOLFSSL_AES_256)
-const char * cryptoSTE_aes_cfb_256_timed(cryptoST_testDetail_t * result,
-                                   cryptoSTE_testExecution_t * param);
+const char * cryptoSTE_aes_cfb_256_timed
+        (const const cryptoST_testDetail_t * result,
+                 cryptoSTE_testExecution_t * param);
 #else
 #define cryptoSTE_aes_cfb_256_timed()       ((void*)0)
 #endif // def WOLFSSL_AES_256

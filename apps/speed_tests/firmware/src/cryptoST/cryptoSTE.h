@@ -112,7 +112,7 @@ typedef struct cryptoSTE_timeMetadata_s
 
 typedef struct cryptoSTE_results_s
 {
-    char * testHandler;
+    const char * testHandler;
     cryptoSTE_timeMetadata_t encryption;
     // cryptoSTE_timeMetadata_t decryption;
 

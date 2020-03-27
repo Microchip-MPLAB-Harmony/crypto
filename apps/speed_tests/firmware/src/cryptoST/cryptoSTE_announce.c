@@ -83,7 +83,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
-void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
+void cryptoSTE_announceDetails(int level, const cryptoST_testDetail_t * rv)
 {
     if (NULL == rv) return;
 
@@ -101,27 +101,27 @@ void cryptoSTE_announceDetails(int level, cryptoST_testDetail_t * rv)
         P_INT("..repetitions: ", rv->recommendedRepetitions);
     if (CSTE_VERBOSE > 2)
     {
-        P_INT("..bytes key    : ", rv->in.sym.key.length);
-        P_INT("..bytes initV  : ", rv->in.sym.ivNonce.length);
-        P_INT("..bytes aad    : ", rv->in.sym.additionalAuthData.length);
-        if (rv->out.sym.cipher.data)
-            P_INT("..bytes gCipher: ", rv->out.sym.cipher.length);
-        if (rv->out.sym.tag.data)
-            P_INT("..bytes gTag   : ", rv->out.sym.tag.length);
+        P_INT("..bytes key    : ", rv->io.sym.in.key.length);
+        P_INT("..bytes initV  : ", rv->io.sym.in.ivNonce.length);
+        P_INT("..bytes aad    : ", rv->io.sym.in.additionalAuthData.length);
+        if (rv->io.sym.out.cipher.data)
+            P_INT("..bytes gCipher: ", rv->io.sym.out.cipher.length);
+        if (rv->io.sym.out.tag.data)
+            P_INT("..bytes gTag   : ", rv->io.sym.out.tag.length);
     }
     if (CSTE_VERBOSE > 3)
     {
         cryptoST_PRINT_hexLine(CRLF "..key    : ",
-                rv->in.sym.key.data, rv->in.sym.key.length);
+                rv->io.sym.in.key.data, rv->io.sym.in.key.length);
         cryptoST_PRINT_hexLine(CRLF "..initV  : ",
-                rv->in.sym.ivNonce.data,rv->in.sym.ivNonce.length);
+                rv->io.sym.in.ivNonce.data,rv->io.sym.in.ivNonce.length);
         cryptoST_PRINT_hexLine(CRLF "..gCipher: ",
-                rv->out.sym.cipher.data, rv->out.sym.cipher.length);
+                rv->io.sym.out.cipher.data, rv->io.sym.out.cipher.length);
         printf(CRLF);
     }
 }
 
-void cryptoSTE_announceVector(int level, cryptoST_testVector_t * tv)
+void cryptoSTE_announceVector(int level, const cryptoST_testVector_t * tv)
 {
     if (NULL == tv) return;
 
@@ -154,7 +154,7 @@ void cryptoSTE_announceAll(cryptoSTE_localData_t * meMySelf)
         cv = &meMySelf->vectorAPI[i];
         cryptoSTE_announceSuite(cv);
         
-        cryptoST_testDetail_t * td;
+        const cryptoST_testDetail_t * td;
         for (td = cv->firstTest(); NULL != td; td = cv->nextTest(td))
         {
             if (ET_NONE == td->technique) // safety check

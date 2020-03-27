@@ -98,7 +98,7 @@ typedef struct keyCipher_s
 static uint8_t buffer16[16] = {0};
 static const uint8_t zero16[16] = {0};
 
-__attribute__((used))
+/* not constant */
 static cryptoST_testVector_t GFSBox_KAT =
 {
     .name = "AESAVS_GFSKAT",
@@ -107,8 +107,7 @@ static cryptoST_testVector_t GFSBox_KAT =
     .vector.length = 16,
 };
 
-__attribute__((used))
-static cryptoST_testVector_t KeySBox_KAT =
+static const cryptoST_testVector_t KeySBox_KAT =
 {
     .name = "AESAVS_KeySKAT",
     .source = dataSource,
@@ -116,8 +115,7 @@ static cryptoST_testVector_t KeySBox_KAT =
     .vector.length = 16,
 };
 
-__attribute__((used))
-static cryptoST_testVector_t VarText_KAT =
+static const cryptoST_testVector_t VarText_KAT =
 {
     .name = "AESAVS_VarTextKAT",
     .source = dataSource,
@@ -125,8 +123,7 @@ static cryptoST_testVector_t VarText_KAT =
     .vector.length = 16,
 };
 
-__attribute__((used))
-static cryptoST_testVector_t VarKey_KAT =
+static const cryptoST_testVector_t VarKey_KAT =
 {
     .name = "AESAVS_VarKeyKAT",
     .source = dataSource,
@@ -251,23 +248,23 @@ static cryptoST_testDetail_t testDetail =
     .source = __BASE_FILE__,
     .pedigree = 0 /* fill in later */,
     .rawData = 0,
-    .out.sym.cipher = {
+    .io.sym.out.cipher = {
         .data = (uint8_t[]){ 0 },
         .length = 16,
     },
-    .in.sym.key.data = 0,   // buffer & length tbd later
-    .in.sym.key.length = 0,
-    .in.sym.ivNonce = (cryptoST_testData_t){0},
+    .io.sym.in.key.data = 0,   // buffer & length tbd later
+    .io.sym.in.key.length = 0,
+    .io.sym.in.ivNonce = (cryptoST_testData_t){0},
 };
-#define mutableKey  testDetail.in.sym.key
+#define mutableKey  testDetail.io.sym.in.key
 
 /*************************************************************
  * API handlers
  *************************************************************/
 static int detailCounter;
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
-    cryptoST_testDetail_t * new = 0;
+    const cryptoST_testDetail_t * new = 0;
     if (&testDetail == old) do
     {
         detailCounter++;
@@ -276,7 +273,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             if (ALENGTH(GFSBox_detail) > detailCounter)
             {
                 const plainCipher_t * newData = &GFSBox_detail[detailCounter];
-                testDetail.out.sym.cipher.data = (uint8_t*)(newData->cipher);
+                testDetail.io.sym.out.cipher.data = (uint8_t*)(newData->cipher);
                 mutableKey.data = (uint8_t*)zero16;
                 mutableKey.length = sizeof(buffer16);
                 GFSBox_KAT.vector.data = (uint8_t*)(newData->plain);
@@ -295,7 +292,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
             if (ALENGTH(KeySBox_detail) > detailCounter)
             {
                 const keyCipher_t * newData = &KeySBox_detail[detailCounter];
-                testDetail.out.sym.cipher.data = (uint8_t*)(newData->cipher);
+                testDetail.io.sym.out.cipher.data = (uint8_t*)(newData->cipher);
                 mutableKey.data = (uint8_t*)(newData->key);
                 new = old;
                 break;
@@ -314,7 +311,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
         {
             if (ALENGTH(VarText_cipher) > detailCounter)
             {
-                testDetail.out.sym.cipher.data = (uint8_t*)&VarText_cipher[detailCounter];
+                testDetail.io.sym.out.cipher.data = (uint8_t*)&VarText_cipher[detailCounter];
                 mutableKey.data = (uint8_t*)zero16;
                 setHighBitsOf16Bytes(buffer16, detailCounter+1);
                 new = old;
@@ -332,7 +329,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
         {
             if (ALENGTH(VarKey_cipher) > detailCounter)
             {
-                testDetail.out.sym.cipher.data = (uint8_t*)&VarKey_cipher[detailCounter];
+                testDetail.io.sym.out.cipher.data = (uint8_t*)&VarKey_cipher[detailCounter];
                 mutableKey.data = (uint8_t*)buffer16;
                 setHighBitsOf16Bytes(buffer16, detailCounter+1);
                 new = old;
@@ -346,7 +343,7 @@ static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
     return new;
 }
 
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 {
     detailCounter = -1;
     testDetail.rawData = &GFSBox_KAT; // appendix B
@@ -354,9 +351,9 @@ static cryptoST_testDetail_t * firstTest(void)
     return nextTest(&testDetail);
 };
 #else
-static cryptoST_testDetail_t * firstTest(void)
+static const cryptoST_testDetail_t * firstTest(void)
 { return 0; }
-static cryptoST_testDetail_t * nextTest(cryptoST_testDetail_t * old)
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 { return 0; }
 #endif // not-no AES
 
