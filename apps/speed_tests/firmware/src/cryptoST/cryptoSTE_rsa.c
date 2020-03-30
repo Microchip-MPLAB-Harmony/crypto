@@ -50,6 +50,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
+#include <stdint.h>
+#include <string.h> // for memcmp()
+
 #include "cryptoSTE.h"
 #include "cryptoST_print.h"
 #include "cryptoSTE_announce.h"
@@ -57,14 +60,12 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoSTE_rsa.h"
 #include "../test_data/cryptoSpeedTestData.h"
 
-#include <string.h> // for memcmp()
-
 #include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 #include <wolfssl/wolfcrypt/rsa.h>
 #include <wolfssl/wolfcrypt/sha.h>
 
-#define VERIFY_CONSECUTIVE_DES    1
+#define VERIFY_KEYS // optional feature
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 // *****************************************************************************
@@ -72,6 +73,17 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Helper routines and wrappers
 // *****************************************************************************
 // *****************************************************************************
+
+// Figure out what buffer will be required
+#if defined(WOLFSSL_SHA512)
+#define SHA_BUFFER_SIZE     (512/8)
+#elif defined(WOLFSSL_SHA384)
+#define SHA_BUFFER_SIZE     (384/8)
+#elif !defined(NO_SHA256)
+#define SHA_BUFFER_SIZE     (256/8)
+#elif defined(WOLFSSL_SHA224)
+#define SHA_BUFFER_SIZE     (224/8)
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -83,7 +95,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 /* This information is used to simplify selection of the encryption
  * driver and associated name and keySize verification.
- * Note that the default encripter returns void.
  */
 typedef struct rsaTest_s rsaTest_t;
 typedef const char * rsa_timer_t
@@ -94,10 +105,14 @@ typedef const char * rsa_sha_t(const cryptoST_testData_t *, uint8_t *);
 
 typedef struct rsaTest_s
 {
-    const char * name;
-    rsa_timer_t * timer;
-    rsa_sha_t * hash;
+    const char    * name;
+    rsa_timer_t   * timer;
+    rsa_sha_t     * hash;
+    uint            hashSize;
+    const uint8_t * asn1_header;
 } rsaTest_t;
+
+#define ASN1_HEADER_SIZE    19
 
 // *****************************************************************************
 // *****************************************************************************
@@ -117,21 +132,49 @@ static void printAll(const cryptoST_testDetail_t * const td)
     PRINT_WAIT(CRLF);
 }
 
+#if defined(WOLFSSL_SHA224)
+static const char * rsa_sha224
+        (const cryptoST_testData_t * readOnly, uint8_t * hash)
+{
+    Sha224 sha224;
+    const char * answer = 0;
+    
+    if (0 != wc_InitSha224(&sha224))
+    { answer = "unable to initialize SHA224"; }
+    else
+    {
+        if ((0 != wc_Sha224Update(&sha224,
+                   readOnly->data, readOnly->length))
+         || (0 != wc_Sha224Final(&sha224, hash)))
+       { answer = "error during SHA224 construction"; }
+
+       wc_Sha224Free(&sha224);
+    }
+    return answer;
+}
+#endif // SHA224
+
+#if !defined(NO_SHA256)
 static const char * rsa_sha256
         (const cryptoST_testData_t * readOnly, uint8_t * hash)
 {
     Sha256 sha256;
     const char * answer = 0;
     
-    if ((0 != wc_InitSha256(&sha256))
-     || (0 != wc_Sha256Update(&sha256,
-                readOnly->data, readOnly->length))
-     || (0 != wc_Sha256Final(&sha256, hash)))
-    { answer = "error during hash construction"; }
+    if (0 != wc_InitSha256(&sha256))
+    { answer = "unable to initialize SHA256"; }
+    else
+    {
+        if ((0 != wc_Sha256Update(&sha256,
+                   readOnly->data, readOnly->length))
+         || (0 != wc_Sha256Final(&sha256, hash)))
+       { answer = "error during SHA256 construction"; }
 
-    wc_Sha256Free(&sha256);
+       wc_Sha256Free(&sha256);
+    }
     return answer;
 }
+#endif // SHA256
 
 // *****************************************************************************
 // *****************************************************************************
@@ -144,35 +187,30 @@ static const char * cryptoSTE_rsa_verify_timed
                     cryptoSTE_testExecution_t * const param,
                               const rsaTest_t * const test )
 {
-    /* Instantiate permanently because RsaKey is a 4k object that
+    /* Instantiate statically because RsaKey is a 4kB object that
      * is obscure and could overflow the stack for the unwary.
-     * The biggest penalty is that other objects are beyond
-     * SP+4000 which requires the use of double-word 
-     * opcodes (.W) for pointers.
+     * The biggest penalty is that most stack objects locate
+     * beyond SP+128 and then require the use of double-word 
+     * opcodes (.W) to load pointers.
      * */
     static RsaKey rsaKey;
+    static uint8_t hashSignature[ASN1_HEADER_SIZE + SHA_BUFFER_SIZE];
+    static uint8_t rsaSignature[ALENGTH(hashSignature)];
+    assert_dbug(SHA_BUFFER_SIZE >= test->hashSize);
     
-    // Do this prior to possible errors so that it reports correctly.
-    const cryptoST_testVector_t * vector = td->rawData;
+    // Do this prior to possible errors so that it reports in all cases.
+    const cryptoST_testVector_t * const vector = td->rawData;
     param->results.encryption.size = vector->vector.length;
     param->results.encryption.iterations = param->parameters.iterationOverride? 
                                     param->parameters.iterationOverride
                                   : td->recommendedRepetitions;
 
-    /* There is magic here. The WC algorithm builds a full
-     * ASN.1 encoding of the recovered hash. So we fake the
-     * header and put our hash in line with it, but rig
-     * it so that the header comes from non-volatile memory. */
-    const uint8_t asn1_header[] = { // read-only
-        0x30, 0x31, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86,
-        0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
-        0x00, 0x04, 0x20 }; // 19 bytes
-    uint8_t hashSignature[sizeof(asn1_header) + WC_SHA256_DIGEST_SIZE] = {0};
-    memcpy(hashSignature, asn1_header, ALENGTH(asn1_header));
-    
-    /* Instantiate buffer before entering the timed loop. */
-    uint8_t rsaSignature[ALENGTH(hashSignature)] = {0};
-    int decSigLen = 0;
+    /* Initialize the buffers including the ANS1 header. 
+     * See the comment below about ASN1 header magic. */
+    memset(rsaSignature, 0, ALENGTH(rsaSignature));
+    memset(hashSignature, 0, ALENGTH(hashSignature));
+    memcpy(hashSignature, test->asn1_header, ASN1_HEADER_SIZE);
+    int computedSigLength = 0;
 
     param->results.encryption.start = SYS_TIME_CounterGet();
     for (int i = param->results.encryption.iterations; i > 0; i--)
@@ -180,29 +218,34 @@ static const char * cryptoSTE_rsa_verify_timed
         /* Calculate hash digest of the plaintext message */
         assert_dbug(test->hash);
         param->results.errorMessage = 
-            (test->hash)(&vector->vector, &hashSignature[ALENGTH(asn1_header)]);
+            (test->hash)(&vector->vector, &hashSignature[ASN1_HEADER_SIZE]);
         if (0 == param->results.errorMessage)
         {
-            if ((0 != wc_InitRsaKey(&rsaKey, NULL))
-             || (0 != mp_read_unsigned_bin(&rsaKey.n,
-                td->io.rsav.in.n->data, td->io.rsav.in.n->length))
-             || (0 != mp_read_unsigned_bin(&rsaKey.e,
-                td->io.rsav.in.e->data, td->io.rsav.in.e->length)))
-            { param->results.errorMessage = "key construction failed"; }
-            else /* Use n,e,em to compute the (supposedly) same info. */
+            /* Recover the hash digest sent with the keys. */
+            if (0 != wc_InitRsaKey(&rsaKey, NULL))
+            { param->results.errorMessage = "key initialization failed"; }
+            else
             {
-                decSigLen = wc_RsaSSL_Verify( 
-                        td->io.rsav.in.em->data, td->io.rsav.in.em->length,
-                        rsaSignature, ALENGTH(rsaSignature),
-                        &rsaKey);
-                if (decSigLen < 0)
+                if ((0 != mp_read_unsigned_bin(&rsaKey.n,
+                    td->io.rsav.in.n->data, td->io.rsav.in.n->length))
+                 || (0 != mp_read_unsigned_bin(&rsaKey.e,
+                    td->io.rsav.in.e->data, td->io.rsav.in.e->length)))
+                { param->results.errorMessage = "key construction failed"; }
+                else 
                 {
-                    param->results.errorMessage = "signature recovery failed";
-                    decSigLen = ALENGTH(rsaSignature); // self protection
+                    /* Use n,e,em to obtain the (hopefully) same hash. */
+                    computedSigLength = wc_RsaSSL_Verify( 
+                            td->io.rsav.in.em->data, td->io.rsav.in.em->length,
+                            rsaSignature, ALENGTH(rsaSignature),
+                            &rsaKey);
+                    if (computedSigLength < 0)
+                    {
+                        param->results.errorMessage = "signature recovery failed";
+                        computedSigLength = ALENGTH(rsaSignature); // self protection
+                    }
                 }
+                wc_FreeRsaKey(&rsaKey);
             }
-
-            wc_FreeRsaKey(&rsaKey);
         }
 
         param->results.encryption.stop = SYS_TIME_CounterGet();
@@ -210,13 +253,13 @@ static const char * cryptoSTE_rsa_verify_timed
         param->results.encryption.startStopIsValid = true;
     } // END TIMED LOOP
     
-    /* Success is when the recovered result matches the SHA result
+    /* Success is when the recovered result matches the hash result
      * in both length and content.   */
     if (0 == param->results.errorMessage)
     {
-        if (decSigLen != sizeof(hashSignature))
+        if (computedSigLength != ASN1_HEADER_SIZE + test->hashSize)
         { param->results.errorMessage = "incorrect computed length"; }
-        else if (0 != memcmp(hashSignature, rsaSignature, decSigLen))
+        else if (0 != memcmp(hashSignature, rsaSignature, computedSigLength))
         { param->results.errorMessage = "computed signature mismatch"; }
     }
     // else param->results.errorMessage = "no error";
@@ -225,9 +268,9 @@ static const char * cryptoSTE_rsa_verify_timed
     {
         printf(CRLF "%s", param->results.errorMessage);
         printf(CRLF "sizeof decSigLen:%d         hash:%d", 
-                decSigLen, sizeof(hashSignature));
+                computedSigLength, ASN1_HEADER_SIZE + test->hashSize);
         printAll(td);
-        cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, decSigLen);
+        cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, computedSigLength);
         cryptoST_PRINT_hexBlock(CRLF "......hash:", hashSignature, ALENGTH(hashSignature));
         printf(CRLF);
     }
@@ -260,19 +303,18 @@ static const char * cryptoSTE_rsa_sign_timed
         &key);	
     res = wc_RsaEncryptSize(&key);
 
-#if 1 // VERIFY_KEYS    
+#if defined(VERIFY_KEYS)
     byte * e = malloc(td->io.rsas.in.e->length);
     uint eSize = td->io.rsas.in.e->length; // in/out parameter
     byte * n = malloc(td->io.rsas.in.n->length);
     uint nSize = td->io.rsas.in.n->length; // in/out parameter
-    int rfpk = wc_RsaFlattenPublicKey(&key,
-            e, &eSize, n, &nSize);
+    int rfpk = wc_RsaFlattenPublicKey(&key, e, &eSize, n, &nSize);
 
     // Returned values are sometimes shortened, but never longer
     if(memcmp(e, &td->io.rsas.in.e->data[td->io.rsas.in.e->length-eSize], eSize)
     || memcmp(n, &td->io.rsas.in.n->data[td->io.rsas.in.n->length-nSize], nSize))
     {
-        param->results.errorMessage = "Oops key";
+        param->results.errorMessage = "key verification failed";
         cryptoST_PRINT_hexBlock(CRLF ".........e:",
                 td->io.rsas.in.e->data, td->io.rsas.in.e->length);
         cryptoST_PRINT_hexBlock(CRLF ".....new.e:", e, eSize);
@@ -458,30 +500,89 @@ static const char * cryptoSTE_rsa_sign_timed
 
 // *****************************************************************************
 // *****************************************************************************
+// Section: Load vectors
+// *****************************************************************************
+// *****************************************************************************
+
+/* There is magic here. The WC algorithm builds a full
+ * ASN.1 encoding of the recovered hash. So we fake the
+ * header and put our hash in line with it, but rig
+ * it so that the header comes from non-volatile memory.
+ * Some values (field lengths) vary with hash size. */
+
+#define NAME    "WOLF RSA"
+#if !defined(WOLFSSL_SHA224)
+#define test_verify_sha224 (*((void*)0))
+#define test_sign_sha224 (*((void*)0))
+#else
+static const uint8_t asn1_header_224[] = {
+        0x30, 0x2D, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86,
+        0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x04, 0x05,
+        0x00, 0x04, 0x1C }; // 19 bytes
+static const rsaTest_t test_verify_sha224 = {
+    .name = NAME " VERIFY224",
+    .hashSize = 224/8,
+    .hash = rsa_sha224,
+    .timer = cryptoSTE_rsa_verify_timed,
+    .asn1_header = asn1_header_224,
+};
+static const rsaTest_t test_sign_sha224 = {
+    .name = NAME " SIGN224",
+    .hashSize = 224/8,
+    .hash = rsa_sha224,
+    .timer = cryptoSTE_rsa_sign_timed,
+    .asn1_header = asn1_header_224,
+};
+#endif // no SHA224
+
+#if defined(NO_SHA256)
+#define test_verify_sha256 (*((void*)0))
+#define test_sign_sha256 (*((void*)0))
+#else
+static const uint8_t asn1_header_256[] = {
+        0x30, 0x31, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86,
+        0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
+        0x00, 0x04, 0x20 }; // 19 bytes
+static const rsaTest_t test_verify_sha256 = {
+    .name = NAME " VERIFY256",
+    .hashSize = 256/8,
+    .hash = rsa_sha256,
+    .timer = cryptoSTE_rsa_verify_timed,
+    .asn1_header = asn1_header_256,
+};
+static const rsaTest_t test_sign_sha256 = {
+    .name = NAME " SIGN256",
+    .hashSize = 256/8,
+    .hash = rsa_sha256,
+    .timer = cryptoSTE_rsa_sign_timed,
+    .asn1_header = asn1_header_256,
+};
+#endif // no SHA256
+
+// *****************************************************************************
+// *****************************************************************************
 // Section: External API
 // *****************************************************************************
 // *****************************************************************************
-#define NAME    "WOLF RSA"
 const char * cryptoSTE_rsa_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
     __NOP();
-    rsaTest_t test = {0};
+    const rsaTest_t * test = 0;
     
 #if !defined(NO_RSA)
+    /* The test structures are #def'd to null pointers if not enabled,
+     * so we don't have to use if-def here. */
     switch(td->technique)
     {
     case ET_PK_RSA_SIGN:
-       //     test.timer = cryptoSTE_rsa_sign_timed;
         switch(td->io.rsas.in.hashmode)
         {
         case ET_SHA_224:
-            test.name = NAME " VERIFY224";
-            // test.hash = rsa_sha256;
+            test = &test_sign_sha224;
             break;
         case ET_SHA_256:
-            test.name = NAME " VERIFY256";
-            // test.hash = rsa_sha256;
+            test = &test_sign_sha256;
             break;
         default:
             break;
@@ -489,16 +590,13 @@ const char * cryptoSTE_rsa_timed(const cryptoST_testDetail_t * td,
         break;
 
     case ET_PK_RSA_VERIFY:
-        test.timer = cryptoSTE_rsa_verify_timed;
         switch(td->io.rsav.in.hashmode)
         {
         case ET_SHA_224:
-            test.name = NAME " SIGN224";
-            // test.hash = rsa_sha224;
+            test = &test_verify_sha224;
             break;
         case ET_SHA_256:
-            test.name = NAME " SIGN256";
-            test.hash = rsa_sha256;
+            test = &test_verify_sha256;
             break;
         default:
             break;
@@ -510,10 +608,10 @@ const char * cryptoSTE_rsa_timed(const cryptoST_testDetail_t * td,
     };
 #endif
     
-    if (test.timer && test.hash && test.name)
+    if (test && test->timer && test->hash && test->name)
     {
-        param->results.testHandler = test.name;
-        return (test.timer)(td, param, &test);
+        param->results.testHandler = test->name;
+        return (test->timer)(td, param, test);
     }
     else
     {

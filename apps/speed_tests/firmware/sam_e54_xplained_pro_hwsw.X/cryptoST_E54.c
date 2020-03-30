@@ -135,7 +135,7 @@ void cryptoST(void)
         .build = "$ld:$",
     };
     
-#if 1
+#if 1 // execute and verify all data sets
     execData.testsAttempted = execData.testsSucceeded = 0;
 
     execData.configuration.parameters = exec_onceThroughAndCheck;
@@ -146,10 +146,9 @@ void cryptoST(void)
     printf("Encrypt/decrypt all data to demonstrate correct operation." CRLF);
     cryptoSTE(&execData);
 #endif
-#if 0
+#if 1 // measure run-time of all data sets possibly w/o verification
     execData.testsAttempted = execData.testsSucceeded = 0;
 
-    // Now do the timed tests
     execData.configuration.parameters = exec_repetitiveTimed;
     execData.configuration.parameters.displayType = CST_CSV;
     execData.configuration.parameters.compareHWvSW = HAVE_HW_DRIVERS;
