@@ -205,6 +205,8 @@ typedef struct cryptoST_symmetric_input_s
 
 typedef struct cryptoST_asymmetric_rsas_input_s
 {
+    const cryptoST_testData_t * PR_DER;  // private key in DER format
+
     /* By concatenation: PU = {e,n}, PR = {d,n} */
     const cryptoST_testData_t * n;  // =pq; product of primes
     const cryptoST_testData_t * e;  // selected

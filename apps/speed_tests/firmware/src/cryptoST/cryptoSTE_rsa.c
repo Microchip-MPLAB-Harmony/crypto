@@ -178,26 +178,24 @@ static const char * rsa_sha256
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Timed driver
+// Section: Timed drivers
 // *****************************************************************************
 // *****************************************************************************
-__attribute__((used))
-static const char * cryptoSTE_rsa_verify_timed
-                ( const cryptoST_testDetail_t * const td,
-                    cryptoSTE_testExecution_t * const param,
-                              const rsaTest_t * const test )
-{
+#if !defined(NO_RSA) && defined(SHA_BUFFER_SIZE)
     /* Instantiate statically because RsaKey is a 4kB object that
      * is obscure and could overflow the stack for the unwary.
      * The biggest penalty is that most stack objects locate
      * beyond SP+128 and then require the use of double-word 
      * opcodes (.W) to load pointers.
      * */
-    static RsaKey rsaKey;
-    static uint8_t hashSignature[ASN1_HEADER_SIZE + SHA_BUFFER_SIZE];
-    static uint8_t rsaSignature[ALENGTH(hashSignature)];
-    assert_dbug(SHA_BUFFER_SIZE >= test->hashSize);
-    
+static RsaKey rsaKey;
+
+__attribute__((used))
+static const char * cryptoSTE_rsa_sign_timed
+                ( const cryptoST_testDetail_t * const td,
+                    cryptoSTE_testExecution_t * const param,
+                              const rsaTest_t * const test )
+{
     // Do this prior to possible errors so that it reports in all cases.
     const cryptoST_testVector_t * const vector = td->rawData;
     param->results.encryption.size = vector->vector.length;
@@ -207,6 +205,112 @@ static const char * cryptoSTE_rsa_verify_timed
 
     /* Initialize the buffers including the ANS1 header. 
      * See the comment below about ASN1 header magic. */
+    assert_dbug(SHA_BUFFER_SIZE >= test->hashSize);
+    uint8_t hashSignature[ASN1_HEADER_SIZE + SHA_BUFFER_SIZE];
+    uint8_t rsaSignature[ALENGTH(hashSignature)];
+    memset(rsaSignature, 0, ALENGTH(rsaSignature));
+    memset(hashSignature, 0, ALENGTH(hashSignature));
+    memcpy(hashSignature, test->asn1_header, ASN1_HEADER_SIZE);
+    int computedSigLength = 0;
+
+    param->results.encryption.start = SYS_TIME_CounterGet();
+    for (int i = param->results.encryption.iterations; i > 0; i--)
+    {
+        /* Calculate hash digest of the plaintext message */
+        assert_dbug(test->hash);
+        param->results.errorMessage = 
+            (test->hash)(&vector->vector, &hashSignature[ASN1_HEADER_SIZE]);
+        if (0 == param->results.errorMessage)
+        {
+            /* Recover the hash digest sent with the keys. */
+            if (0 != wc_InitRsaKey(&rsaKey, NULL))
+            { param->results.errorMessage = "key initialization failed"; }
+            else
+            {
+                #if 0
+                if ((0 != mp_read_unsigned_bin(&rsaKey.n,
+                    td->io.rsav.in.n->data, td->io.rsav.in.n->length))
+                 || (0 != mp_read_unsigned_bin(&rsaKey.d,
+                    td->io.rsav.in.d->data, td->io.rsav.in.d->length)))
+                { param->results.errorMessage = "key construction failed"; }
+                else 
+                #endif
+                {
+                    word32 idx = 0;
+                    wc_RsaPrivateKeyDecode(td->io.rsas.in.PR_DER->data, 
+                                           &idx, &rsaKey,
+                                           td->io.rsas.in.PR_DER->length);
+
+                    static uint8_t b[256] = {0};
+                    wc_RsaSSL_Sign(hashSignature, ALENGTH(hashSignature),
+                                        b, ALENGTH(b),
+                                        &rsaKey, 0); // no RNG
+#if 0
+                    /* Use n,e,em to obtain the (hopefully) same hash. */
+                    computedSigLength = wc_RsaSSL_Verify( 
+                            td->io.rsav.in.em->data, td->io.rsav.in.em->length,
+                            rsaSignature, ALENGTH(rsaSignature),
+                            &rsaKey);
+                    if (computedSigLength < 0)
+                    {
+                        param->results.errorMessage = "signature recovery failed";
+                        computedSigLength = ALENGTH(rsaSignature); // self protection
+                    }
+#endif
+                }
+                wc_FreeRsaKey(&rsaKey);
+            }
+        }
+
+        param->results.encryption.stop = SYS_TIME_CounterGet();
+        if (param->results.errorMessage) break; // out of the test routine
+        param->results.encryption.startStopIsValid = true;
+    } // END TIMED LOOP
+    
+    /* Success is when the recovered result matches the hash result
+     * in both length and content.   */
+    if (0 == param->results.errorMessage)
+    {
+        if (computedSigLength != ASN1_HEADER_SIZE + test->hashSize)
+        { param->results.errorMessage = "incorrect computed length"; }
+        else if (0 != memcmp(hashSignature, rsaSignature, computedSigLength))
+        { param->results.errorMessage = "computed signature mismatch"; }
+    }
+    // else param->results.errorMessage = "no error";
+    
+    if (0 != param->results.errorMessage)
+    {
+        printf(CRLF "%s", param->results.errorMessage);
+        printf(CRLF "sizeof decSigLen:%d         hash:%d", 
+                computedSigLength, ASN1_HEADER_SIZE + test->hashSize);
+        printAll(td);
+        cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, computedSigLength);
+        cryptoST_PRINT_hexBlock(CRLF "......hash:", hashSignature, ALENGTH(hashSignature));
+        printf(CRLF);
+    }
+        
+    __NOP();
+    return param->results.errorMessage;
+}
+
+__attribute__((used))
+static const char * cryptoSTE_rsa_verify_timed
+                ( const cryptoST_testDetail_t * const td,
+                    cryptoSTE_testExecution_t * const param,
+                              const rsaTest_t * const test )
+{
+    // Do this prior to possible errors so that it reports in all cases.
+    const cryptoST_testVector_t * const vector = td->rawData;
+    param->results.encryption.size = vector->vector.length;
+    param->results.encryption.iterations = param->parameters.iterationOverride? 
+                                    param->parameters.iterationOverride
+                                  : td->recommendedRepetitions;
+
+    /* Initialize the buffers including the ANS1 header. 
+     * See the comment below about ASN1 header magic. */
+    assert_dbug(SHA_BUFFER_SIZE >= test->hashSize);
+    static uint8_t hashSignature[ASN1_HEADER_SIZE + SHA_BUFFER_SIZE];
+    static uint8_t rsaSignature[ALENGTH(hashSignature)];
     memset(rsaSignature, 0, ALENGTH(rsaSignature));
     memset(hashSignature, 0, ALENGTH(hashSignature));
     memcpy(hashSignature, test->asn1_header, ASN1_HEADER_SIZE);
@@ -278,225 +382,7 @@ static const char * cryptoSTE_rsa_verify_timed
     __NOP();
     return param->results.errorMessage;
 }
-
-__attribute__((used))
-static const char * cryptoSTE_rsa_sign_timed
-      ( const cryptoST_testDetail_t * const td,
-        cryptoSTE_testExecution_t * const param,
-        const rsaTest_t * const test )
-{
-    // Do this prior to possible errors so that it correctly reports.
-    const cryptoST_testVector_t * vector = td->rawData;
-    param->results.encryption.size = vector->vector.length;
-    param->results.encryption.iterations = param->parameters.iterationOverride? 
-                                    param->parameters.iterationOverride
-                                  : td->recommendedRepetitions;
-
-    RsaKey key;
-    int irk = wc_InitRsaKey(&key, ((void*)0));
-    int res = wc_RsaEncryptSize(&key);
-
-    // int mrk = wc_MakeRsaKey(key, int size, long e, WC_RNG *rng);
-    int rpkdr = wc_RsaPublicKeyDecodeRaw(
-        td->io.rsas.in.n->data, td->io.rsas.in.n->length,
-        td->io.rsas.in.e->data, td->io.rsas.in.e->length,
-        &key);	
-    res = wc_RsaEncryptSize(&key);
-
-#if defined(VERIFY_KEYS)
-    byte * e = malloc(td->io.rsas.in.e->length);
-    uint eSize = td->io.rsas.in.e->length; // in/out parameter
-    byte * n = malloc(td->io.rsas.in.n->length);
-    uint nSize = td->io.rsas.in.n->length; // in/out parameter
-    int rfpk = wc_RsaFlattenPublicKey(&key, e, &eSize, n, &nSize);
-
-    // Returned values are sometimes shortened, but never longer
-    if(memcmp(e, &td->io.rsas.in.e->data[td->io.rsas.in.e->length-eSize], eSize)
-    || memcmp(n, &td->io.rsas.in.n->data[td->io.rsas.in.n->length-nSize], nSize))
-    {
-        param->results.errorMessage = "key verification failed";
-        cryptoST_PRINT_hexBlock(CRLF ".........e:",
-                td->io.rsas.in.e->data, td->io.rsas.in.e->length);
-        cryptoST_PRINT_hexBlock(CRLF ".....new.e:", e, eSize);
-        cryptoST_PRINT_hexBlock(CRLF ".........n:", 
-                td->io.rsas.in.n->data, td->io.rsas.in.n->length);
-        cryptoST_PRINT_hexBlock(CRLF ".....new.n:", n, nSize);
-        PRINT_WAIT(CRLF);
-    }
-#endif // VERIFY_KEYS    
-
-#define SHA256_SIZE (256/8) // bits/(bits-per-byte)
-    uint8_t hash[SHA256_SIZE] = {0};
-    wc_Sha256Hash(vector->vector.data, vector->vector.length, hash);
-    
-    size_t cipherSize = 256;
-    uint8_t * cipher = malloc(cipherSize);
-
-    RNG rng; // necessary evil?
-    wc_InitRng(&rng);
-        int rpe = wc_RsaPublicEncrypt(
-        hash, SHA256_SIZE, 
-        cipher, cipherSize,
-        &key, &rng);
-    __NOP();
-    if (memcmp(cipher, td->io.rsas.out.cipher.data, cipherSize))
-    {
-        param->results.errorMessage = "Cipher text does not match golden data";
-        cryptoST_PRINT_hexBlock(CRLF "....  hash:", hash, SHA256_SIZE);
-        cryptoST_PRINT_hexBlock(CRLF "....cipher:", cipher, cipherSize);
-        cryptoST_PRINT_hexLine(CRLF "....golden:",
-                td->io.rsas.out.cipher.data, td->io.rsas.out.cipher.length);
-        cryptoST_PRINT_hexLine(CRLF ".........n:", 
-                td->io.rsas.in.n->data, td->io.rsas.in.n->length);
-        cryptoST_PRINT_hexLine(CRLF ".........e:",
-                td->io.rsas.in.e->data, td->io.rsas.in.e->length);
-        cryptoST_PRINT_hexLine(CRLF "....vector:",
-                vector->vector.data, vector->vector.length);
-        PRINT_WAIT(CRLF);
-    }
-        
-    __NOP();
-    free(cipher);
-    int frk = wc_FreeRsaKey(&key);
-
-
-    (void)rfpk;
-    (void)rpe;
-    (void)irk;
-    (void)res;
-    (void)rpkdr;
-    (void)frk;
-    return param->results.errorMessage;
-
-
-#if 0
-    if (CSTE_VERBOSE > 2)
-    {
-        P0_UINT( " data=", vector->vector.length);
-        cryptoSTE_announceVector(2, vector);
-        cryptoSTE_announceDetails(2, td);
-    }
-
-    // Data validation
-    if (NULL == td->io.sym.in.key.data)
-        return param->results.errorMessage = "missing key or initialization data";
-
-    byte * cipher = cryptoSTE_malloc(vector->vector.length);
-    if (NULL == cipher)
-        return "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
-    else do // so we can use "break"
-    {
-        // Remove any data noise that is in the target buffer
-        XMEMSET(cipher, 0, vector->vector.length);
-
-        int ret;
-        Des3 enc;
-        assert_dbug(24 == td->io.sym.in.key.length);
-        ret = wc_Des3_SetKey(&enc, td->io.sym.in.key.data, 
-                                   td->io.sym.in.ivNonce.data, DES_ENCRYPTION);
-        if (ret != 0) 
-            { param->results.errorMessage = "failed to set key"; break; }
-
-        // Hold off until the serial port is finished
-        PRINT_WAIT_WHILE_BUSY();
-
-        param->results.encryption.start = SYS_TIME_CounterGet();
-        for (int i = param->results.encryption.iterations; i > 0; i--)
-        {
-            /* Note: if vector.length is not a multiple of 16,
-             *       the default encryptor will ignore the remnant. */
-            (test->encrypt)(&enc, cipher, vector->vector.data, vector->vector.length);
-        }
-        param->results.encryption.stop = SYS_TIME_CounterGet();
-        if (param->results.errorMessage) break; // out of the test routine
-        param->results.encryption.startStopIsValid = true;
-        
-        if (param->parameters.verifyByGoldenCiphertext)
-        {
-            if ((NULL == td->io.sym.out.cipher.data) || (0 == td->io.sym.out.cipher.length))
-                param->results.warningCount++,
-                param->results.warningMessage = "can't verify cipher: no golden data"; 
-            else if (XMEMCMP(cipher, td->io.sym.out.cipher.data, td->io.sym.out.cipher.length))
-            { 
-                param->results.errorMessage = 
-                    "computed ciphertext does not match golden data";
-                if (CSTE_VERBOSE)
-                {
-                    cryptoST_PRINT_hexLine(CRLF "..key     :", 
-                            td->io.sym.in.key.data, td->io.sym.in.key.length);
-                    cryptoST_PRINT_hexLine(CRLF "..ivNonce :", 
-                            td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
-                    cryptoST_PRINT_hexBlock(CRLF "..input   :", 
-                            vector->vector.data, vector->vector.length);
-                    cryptoST_PRINT_hexBlock(CRLF "..cipher  :", 
-                            cipher, td->io.sym.out.cipher.length);
-                    cryptoST_PRINT_hexBlock(CRLF "..golden  :",
-                            td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
-                    PRINT_WAIT(CRLF);
-                }
-                break; 
-            }
-        }
-    } while(0);
-    
-    if (NULL == param->results.errorMessage) do 
-    {
-        if (param->parameters.verifyByDecryption)
-        {
-            if (1 < param->results.encryption.iterations)
-            {
-                param->results.warningCount++;
-                param->results.warningMessage = 
-                        "verification skipped: cannot recover ??? counter";
-                break;
-            }
-            else
-            {
-                byte * plain = cryptoSTE_malloc(vector->vector.length);
-                if (NULL == plain)
-                    return "cannot allocate memory (" __BASE_FILE__ " line " BASE_LINE ")";
-                else do
-                {
-                    Des3 dec;
-                    assert_dbug(24 == td->io.sym.in.key.length);
-                    if (0 != wc_Des3_SetKey
-                        (&dec, td->io.sym.in.key.data, 
-                               td->io.sym.in.ivNonce.data, DES_DECRYPTION))
-                    { 
-                        param->results.errorMessage = "setting decryption key failed"; 
-                        break; 
-                    }
-
-                    // Conventional decrypt and comparison
-                    if (CSTE_VERBOSE > 1) 
-                        PRINT_WAIT("-- decrypting and comparing" CRLF)
-                    (test->decrypt)(&dec, plain, cipher, vector->vector.length); 
-
-                    if (XMEMCMP(plain, vector->vector.data, vector->vector.length))
-                    { 
-                        param->results.errorMessage = "recovered data does not match original"; 
-                        if (CSTE_VERBOSE)
-                        {
-                            cryptoST_PRINT_hexBlock(CRLF "..rawData:",
-                                    vector->vector.data, vector->vector.length);
-                            cryptoST_PRINT_hexBlock(CRLF "..decrypt:",
-                                    plain, vector->vector.length);
-                            PRINT_WAIT(CRLF);
-                        }
-                        break; 
-                    }
-                } while(0);
-                cryptoSTE_free(plain);
-                if (NULL != param->results.errorMessage) 
-                    break; // not really necessary, but etc.
-            }
-        }
-    } while(0);
-    
-    cryptoSTE_free(cipher);
-    return param->results.errorMessage;
-#endif
-}
+#endif // RSA and SHA
 
 // *****************************************************************************
 // *****************************************************************************

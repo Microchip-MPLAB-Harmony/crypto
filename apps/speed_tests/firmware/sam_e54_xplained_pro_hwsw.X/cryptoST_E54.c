@@ -146,7 +146,7 @@ void cryptoST(void)
     printf("Encrypt/decrypt all data to demonstrate correct operation." CRLF);
     cryptoSTE(&execData);
 #endif
-#if 1 // measure run-time of all data sets possibly w/o verification
+#if 0 // measure run-time of all data sets possibly w/o verification
     execData.testsAttempted = execData.testsSucceeded = 0;
 
     execData.configuration.parameters = exec_repetitiveTimed;

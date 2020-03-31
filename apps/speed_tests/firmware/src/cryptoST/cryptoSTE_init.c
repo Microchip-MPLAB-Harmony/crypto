@@ -123,12 +123,9 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     // Set up a fresh execution -- copy the included API's.
     // Each line here is representative of a #include above,
     // and this list determines test order.
+
 #if defined(CRYPTOSTV_RSA_WC_VFY_ONLY)
     ST_list[numberOfLoadedAPI++] = RSA_WC_vfy_only;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-#if defined(CRYPTOSTV_RSA_SigVer_PKCS1_Ver_1p5)
-    ST_list[numberOfLoadedAPI++] = RSA_SigVer_PKCS1_Ver_1p5;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 
@@ -144,6 +141,10 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
 #endif
 #if defined(CRYPTOSTV_RSA_CAVS11p2_sigGenPSS)
     ST_list[numberOfLoadedAPI++] = CAVS11p2_sigGenPSS;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#if defined(CRYPTOSTV_RSA_SigVer_PKCS1_Ver_1p5)
+    ST_list[numberOfLoadedAPI++] = RSA_SigVer_PKCS1_Ver_1p5;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 
