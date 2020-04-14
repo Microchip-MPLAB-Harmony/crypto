@@ -10,6 +10,10 @@
 #include "cryptoST/cryptoSTE_malloc.h"
 #include "cryptoST/cryptoST_print.h" // for BASE_LINE
 
+#if !defined(__NOP)
+#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
+
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "DS70005365"
 

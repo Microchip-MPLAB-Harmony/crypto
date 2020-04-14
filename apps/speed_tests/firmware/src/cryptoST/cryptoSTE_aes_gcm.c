@@ -131,9 +131,12 @@ static void printAll(const cryptoST_testVector_t * input,
             results->P.data, results->P.length);
     PRINT_WAIT(CRLF);
 
-    printf("rawSizePadded: %u" CRLF, results->rawSizePadded);
-    printf("      aadSize: %u" CRLF, results->aadSize);
-    printf("        Csize: %u" CRLF, results->Csize);
+    printf("rawSizePadded: %lu" CRLF, \
+            (long unsigned int)results->rawSizePadded);
+    printf("      aadSize: %lu" CRLF, 
+            (long unsigned int)results->aadSize);
+    printf("        Csize: %lu" CRLF, 
+            (long unsigned int)results->Csize);
 }
 
 /* This test based on test.c/aesgcm_default_test_helper().

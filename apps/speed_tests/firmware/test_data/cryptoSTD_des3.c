@@ -8,6 +8,10 @@
 #include "cryptoST/cryptoST_print.h" // for BASE_LINE
 #include "configuration.h"
 
+#if !defined(__NOP)
+#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
+
 #define CONST /* as nothing */
 #define ALIGN4 __attribute__((aligned(4)))
 

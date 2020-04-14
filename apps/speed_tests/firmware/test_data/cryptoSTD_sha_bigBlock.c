@@ -11,6 +11,10 @@
 #include "app.h" // for BASE_LINE
 #include <wolfssl/wolfcrypt/hash.h>
 
+#if !defined(__NOP)
+#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
+
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "SHA_BB"
 

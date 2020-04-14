@@ -97,7 +97,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.h"
 #include "../test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.h"
 #include "../test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.h"
-#include "../test_data/cryptoSTD_rsa_WC_vfy_only.h"
+#include "../test_data/cryptoSTD_rsa_WC_vfy_sign.h"
 #include "../test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.h"
 #endif
 
@@ -113,41 +113,18 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  * as long as there are enough to cover the given API's, and that
  * will be verified by assertion when the list is loaded.
  *  */
-static cryptoST_testAPI_t ST_list[13];
+static cryptoST_testAPI_t ST_list[20];
 #define API_MAX (sizeof(ST_list)/sizeof(ST_list[0]))
 
 void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
 {
     int numberOfLoadedAPI = 0;
     
+    goto skip;
+    
     // Set up a fresh execution -- copy the included API's.
     // Each line here is representative of a #include above,
     // and this list determines test order.
-
-#if defined(CRYPTOSTV_RSA_WC_VFY_ONLY)
-    ST_list[numberOfLoadedAPI++] = RSA_WC_vfy_only;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-
-    goto enough; // klk
-
-#if defined(CRYPTOSTV_RSA_CAVS16p1_RSASP1)
-    ST_list[numberOfLoadedAPI++] = CAVS16p1_RSASP1;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-#if defined(CRYPTOSTV_RSA_CAVS11p4_sigGen15)
-    ST_list[numberOfLoadedAPI++] = CAVS11p4_sigGen15;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-#if defined(CRYPTOSTV_RSA_CAVS11p2_sigGenPSS)
-    ST_list[numberOfLoadedAPI++] = CAVS11p2_sigGenPSS;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-#if defined(CRYPTOSTV_RSA_SigVer_PKCS1_Ver_1p5)
-    ST_list[numberOfLoadedAPI++] = RSA_SigVer_PKCS1_Ver_1p5;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
-
 #ifdef CRYPTOSTV_ZERO_AES
     ST_list[numberOfLoadedAPI++] = microchip_zero_aes;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
@@ -196,7 +173,32 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = microchip_des3;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
-enough: // klk    
+
+// here
+
+#if defined(CRYPTOSTV_RSA_CAVS16p1_RSASP1)
+    ST_list[numberOfLoadedAPI++] = CAVS16p1_RSASP1;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#if defined(CRYPTOSTV_RSA_CAVS11p4_sigGen15)
+    ST_list[numberOfLoadedAPI++] = CAVS11p4_sigGen15;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#if defined(CRYPTOSTV_RSA_CAVS11p2_sigGenPSS)
+    ST_list[numberOfLoadedAPI++] = CAVS11p2_sigGenPSS;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#if defined(CRYPTOSTV_RSA_SigVer_PKCS1_Ver_1p5)
+    ST_list[numberOfLoadedAPI++] = RSA_SigVer_PKCS1_Ver_1p5;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+
+    skip:
+
+#if defined(CRYPTOSTV_RSA_WC_VFY_SIGN)
+    ST_list[numberOfLoadedAPI++] = RSA_WC_vfy_sign;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
     __conditional_software_breakpoint(numberOfLoadedAPI > 0);
 
     // Zero-out the array to eliminate bus noise.

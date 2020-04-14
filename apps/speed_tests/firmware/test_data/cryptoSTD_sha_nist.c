@@ -25,6 +25,10 @@
  */
 #define ALIGN4 __attribute__((aligned(4)))
 
+#if !defined(__NOP)
+#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
+
 /*************************************************************
  * Raw (input) data definitions.
  *************************************************************/

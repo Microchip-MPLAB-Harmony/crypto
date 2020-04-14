@@ -49,7 +49,7 @@ static const cryptoST_testVector_t Message2 =
     .vector.length = 32,
 };
 
-static const uint8_t bigMessage[] = (const uint8_t[]){
+static const uint8_t bigMessage[] = {
     /* "All work and no play makes Jack a dull boy. " */
     0x41,0x6c,0x6c,0x20,0x77,0x6f,0x72,0x6b,
     0x20,0x61,0x6e,0x64,0x20,0x6e,0x6f,0x20,

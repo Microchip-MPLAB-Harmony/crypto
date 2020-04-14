@@ -425,10 +425,10 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_only.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_only.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_sign.c</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_sign.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="wolfcrypt" projectFiles="true">
         <logicalFolder name="f1" displayName="port" projectFiles="true">

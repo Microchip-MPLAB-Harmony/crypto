@@ -44,14 +44,14 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 //DOM-IGNORE-END
 
-#ifndef CRYPTOSTV_RSA_WC_VFY_ONLY
-#define CRYPTOSTV_RSA_WC_VFY_ONLY
+#ifndef CRYPTOSTV_RSA_WC_VFY_SIGN
+#define CRYPTOSTV_RSA_WC_VFY_SIGN
 
 #include "./cryptoSpeedTestData.h"
 
 /*************************************************************
  * Obligatory entry points for executing a test
  *************************************************************/
-extern cryptoST_testAPI_t const RSA_WC_vfy_only;
+extern cryptoST_testAPI_t const RSA_WC_vfy_sign;
 
-#endif // CRYPTOSTV_RSA_WC_VFY_ONLY
+#endif // CRYPTOSTV_RSA_WC_VFY_SIGN

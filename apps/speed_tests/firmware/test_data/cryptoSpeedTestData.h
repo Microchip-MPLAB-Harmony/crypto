@@ -62,6 +62,7 @@ typedef enum EncryptTechnique_e
 
     ET_PK_RSA_SIGN,
     ET_PK_RSA_VERIFY,
+    ET_PK_RSA_EXPTMOD,
     ET_PK_DH,
     ET_PK_ECDH,
     ET_PK_ECDSA_SIGN,
@@ -116,7 +117,7 @@ typedef enum EncryptMode_e
 } EncryptMode_t;
 
 /*************************************************************
- * Look-ahead declarations for circular references, etc.
+ * Look-ahead declarations for circular references,tions for circular references, etc.
  *************************************************************/
 typedef struct cryptoST_testAPI_s cryptoST_testAPI_t;
 typedef struct cryptoST_testDetail_s cryptoST_testDetail_t; 
@@ -203,27 +204,6 @@ typedef struct cryptoST_symmetric_input_s
     cryptoST_testData_t additionalAuthData;
 } cryptoST_symmetric_input_t;
 
-typedef struct cryptoST_asymmetric_rsas_input_s
-{
-    const cryptoST_testData_t * PR_DER;  // private key in DER format
-
-    /* By concatenation: PU = {e,n}, PR = {d,n} */
-    const cryptoST_testData_t * n;  // =pq; product of primes
-    const cryptoST_testData_t * e;  // selected
-    const cryptoST_testData_t * d;  // =e^(-1) mod ..etc.
-    EncryptTechnique_t hashmode;
-} cryptoST_asymmetric_rsas_input_t; // RSA signing
-
-typedef struct cryptoST_asymmetric_rsav_input_s
-{
-    /* By concatenation: PU = {e,n}, PR = {d,n} */
-    const cryptoST_testData_t * n;  // =pq; product of primes
-    const cryptoST_testData_t * e;  // selected
-    const cryptoST_testData_t * d;  // =e^(-1) mod ..etc.
-    const cryptoST_testData_t * em;  // encrypted message
-    EncryptTechnique_t hashmode;
-} cryptoST_asymmetric_rsav_input_t; // RSA verification
-
 typedef struct cryptoST_asym_ecc_input_s
 {
 } cryptoST_asymmetric_ecc_input_t;
@@ -247,20 +227,39 @@ typedef struct cryptoST_symmetric_output_s
     cryptoST_testData_t tag;
 } cryptoST_symmetric_output_t;
 
+typedef struct cryptoST_asym_ecc_output_s
+{
+} cryptoST_asymmetric_ecc_output_t;
+
+#if !defined(NO_RSA)
+typedef struct cryptoST_asymmetric_rsas_input_s
+{
+    /* ASN.1 formatted private key file */
+    const cryptoST_testData_t * der;
+    EncryptTechnique_t hashmode;
+} cryptoST_asymmetric_rsas_input_t; // RSA signing
+
 typedef struct cryptoST_asymmetric_rsas_output_s
 {
-    cryptoST_testData_t cipher;
-    cryptoST_testData_t salt; // why this?
+    cryptoST_testData_t * signature;
+    cryptoST_testData_t * salt; // why this?
 } cryptoST_asymmetric_rsas_output_t;
+
+typedef struct cryptoST_asymmetric_rsav_input_s
+{
+    /* By concatenation: PU = {e,n}, PR = {d,n} */
+    const cryptoST_testData_t * n;  // =pq; product of primes
+    const cryptoST_testData_t * e;  // selected
+    const cryptoST_testData_t * d;  // =e^(-1) mod ..etc.
+    const cryptoST_testData_t * em;  // encrypted message
+    EncryptTechnique_t hashmode;
+} cryptoST_asymmetric_rsav_input_t; // RSA verification
 
 typedef struct cryptoST_asymmetric_rsav_output_s
 {
     // output is the raw data
 } cryptoST_asymmetric_rsav_output_t;
-
-typedef struct cryptoST_asym_ecc_output_s
-{
-} cryptoST_asymmetric_ecc_output_t;
+#endif // NO_RSA
 
 /*************************************************************
  * Declaration of golden results
@@ -292,7 +291,7 @@ typedef struct cryptoST_testDetail_s
          * operates for all of them. The others are
          * bigger and less frequently used.
          * */
-        struct // AES is in because its too hard inhibit
+        struct // AES is in because its too hard to inhibit
         {
             cryptoST_symmetric_input_t in;
             cryptoST_symmetric_output_t out;
@@ -303,12 +302,12 @@ typedef struct cryptoST_testDetail_s
             cryptoST_hash_output_t out;
         } hash;
 #if !defined(NO_RSA)
-        struct
+        struct rsas_s
         {
             cryptoST_asymmetric_rsas_input_t in; // sign
             cryptoST_asymmetric_rsas_output_t out;
         } rsas;
-        struct
+        struct rsav_s
         {
             cryptoST_asymmetric_rsav_input_t in; // verify
             cryptoST_asymmetric_rsav_output_t out;

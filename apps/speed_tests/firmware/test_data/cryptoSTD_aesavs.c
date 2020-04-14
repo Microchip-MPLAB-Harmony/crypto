@@ -254,7 +254,7 @@ static cryptoST_testDetail_t testDetail =
     },
     .io.sym.in.key.data = 0,   // buffer & length tbd later
     .io.sym.in.key.length = 0,
-    .io.sym.in.ivNonce = (cryptoST_testData_t){0},
+    // .io.sym.in.ivNonce = (const cryptoST_testData_t){0},
 };
 #define mutableKey  testDetail.io.sym.in.key
 

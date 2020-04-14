@@ -24,8 +24,7 @@ static const CPU_CHAR nist_800_38A_description[] = {
         "NIST Special Publication 800-38A" };
 
 __attribute__((used))
-static uint8_t nist_800_38A_iv[] = // test.c line 6626
-        (ALIGN4 const uint8_t[]){ 
+static ALIGN4 const uint8_t nist_800_38A_iv[] = { // test.c line 6626
             0xf0,0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,
             0xf8,0xf9,0xfa,0xfb,0xfc,0xfd,0xfe,0xff
         };

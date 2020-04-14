@@ -60,18 +60,42 @@ static const char * const formatUintField = ",%lu";
 #define PRINT_INT(val)      printf(formatSintField,val);
 #define PRINT_LUINT(val)    printf(formatUintField,val);
 
+// Debug NOP: add a NOP instruction for breakpoints but only in DEBUG mode.
+#if defined(NDEBUG) || !defined(__DEBUG)
+#define BP_NOP() /* as nothing */
+#else
+#define BP_NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
+#define assert_dbug(X) __conditional_software_breakpoint((X))
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Patch for stdlib and itoa()
+// *****************************************************************************
+// *****************************************************************************
+#if defined(__mips__)
+/* PIC is MIPS, but SAM is ARM; been broken a _long_ time. */
+char * ansi_itoa(int value, char *string, int radix)
+{ return itoa(string, value, radix); }
+#else
+/* The SAM version agrees with the ANSI standard. */
+#define ansi_itoa(v,s,r)     itoa((v),(s),(r))
+#endif
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
+/* The magic here is that size_t is different in ARM and MIPS,
+ * so we up-cast it to UL for the printf's. */
 void cryptoST_PRINT_announceElapsedTime_TEXT(cryptoSTE_results_t * testData)
 {
     PRINT(">> ");
     PRINT(testData->testHandler);
     P0_UINT( " enc=", testData->encryption.size);
 
-    const SYS_TIME_for_CSTE delta = 
+    const long unsigned int delta = 
         testData->encryption.stop - testData->encryption.start;
     if (CSTE_VERBOSE > 1)
     {
@@ -80,7 +104,7 @@ void cryptoST_PRINT_announceElapsedTime_TEXT(cryptoSTE_results_t * testData)
     }
     
     const uint32_t time = SYS_TIME_CountToUS(delta);
-    size_t const iterate = testData->encryption.iterations;
+    uint32_t const iterate = testData->encryption.iterations;
     
     // Want to show the average to 3 decimal places (using integer arithmetic)
     const uint32_t intAverage = time/iterate;
@@ -88,10 +112,14 @@ void cryptoST_PRINT_announceElapsedTime_TEXT(cryptoSTE_results_t * testData)
     const uint32_t fraction = ((1000 * remainder) + (iterate/2))/iterate;
     
     if(testData->encryption.startStopIsValid)
-        printf(" %10lu us on %d iterations (%lu.%03lu us average)", 
-                        time, iterate, intAverage, fraction);
+        printf(" %10lu us on %lu iterations (%lu.%03lu us average)", 
+                    (long unsigned int)time, 
+                    (long unsigned int)iterate, 
+                    (long unsigned int)intAverage, 
+                    (long unsigned int)fraction);
     else
-        printf(" no time recorded on %d iterations", iterate);
+        printf(" no time recorded on %lu iterations", 
+                    (long unsigned int)iterate);
 
     if (testData->errorMessage)
         printf("; test completed with error");
@@ -253,12 +281,12 @@ void cryptoST_PRINT_hexLine(const char * const tag,
         }
         else
         {
-            uint8_t datum = data[i]; // by definition, 00..FF
+            const uint8_t datum = data[i]; // by definition, 00..FF
 
             if (datum < 0x10) // insert leading zero
-                *pos++ = '0', itoa(datum, pos, 16), pos++;
+                *pos++ = '0',ansi_itoa(datum, pos, 16), pos++;
             else
-                itoa(datum, pos, 16), pos += 2;
+                ansi_itoa(datum, pos, 16), pos += 2;
         }
         
         *pos++ = ' '; // and now the trailing blank
@@ -287,7 +315,7 @@ void cryptoST_PRINT_hexLine(const char * const tag,
 #if 1
     int align4 = ((uint32_t)data)%4;
     char * align = (0==align4)?"":" misaligned";
-    printf(" (%d)%s", length, align);
+    printf(" (%lu)%s", (long unsigned int)length, align);
 #endif
 }
 
@@ -311,7 +339,8 @@ void cryptoST_PRINT_hexBlock
             memset(buffer,0,sizeof(buffer));
             strncpy(buffer,tag,sizeof(buffer)-1); // save room for null
         }
-        else snprintf(buffer, sizeof(buffer), "  %*X:", pad, offset);
+        else snprintf(buffer, sizeof(buffer), "  %*u:", 
+                            pad, (unsigned int)offset);
         cryptoST_PRINT_hexLine(buffer, data, count);
         PRINT_WAIT(CRLF); // wait before CRLF goes out of scope
         

@@ -16,6 +16,11 @@
    Known-good data for RSA encryption with public key. See also the pdf file.
    https://csrc.nist.gov/presentations/2004/the-rsa-validation-system-(rsavs)
    https://csrc.nist.gov/Projects/Cryptographic-Algorithm-Validation-Program/Component-Testing
+
+   Trivia: RSASP1 stands for "Signature Primitive" from PKCS #1 (as opposed
+   to RSAVP1 Verification Primitive), meaning that there is no "scheme" 
+   wrapper (e.g., OAEP) for transmission, which are defined by later 
+   sections of the standard.
  ******************************************************************************
  */
 
@@ -59,7 +64,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #if !defined(NO_RSA)
 static const CPU_CHAR RSA2VS_source[] = "NIST 186-4 RSA Validation System (RSA2VS.pdf)";
-static const CPU_CHAR pedigree[] = "NIST suite RSASP1 (CAVS16p1)";
+static const CPU_CHAR pedigree[] = "NIST suite RSA2SP1 (CAVS16p1)";
 
 #define forwardKey
 
@@ -73,7 +78,7 @@ static const CPU_CHAR pedigree[] = "NIST suite RSASP1 (CAVS16p1)";
 #if !defined(NO_SHA256)
 static const cryptoST_testVector_t RSASP1_256_2048_7099 =
 {
-    .name = "RSASP1_256_2048_7099",
+    .name = "RSA2SP1_256_2048_7099",
     .source = RSA2VS_source,
     .description = pedigree,
     .vector.length = 256,
@@ -129,11 +134,13 @@ static const cryptoST_testData_t cavs16p1_2048n = {
 }
 };
 
+#if 0
 static const cryptoST_testData_t cavs16p1_2048e = {
     .length = 256,
     .data = (DATA_CHAR[256]){
-}
+    }
 };
+#endif
 #endif // NO_RSA
 
 static const cryptoST_testData_t cavs16p1_2048d = {
@@ -168,22 +175,23 @@ static const cryptoST_testData_t cavs16p1_2048d = {
  * */
 static const cryptoST_testDetail_t test_item[] =
 {
-#if !defined(NO_RSA) && !defined(NO_SHA256)
+#if !defined(NO_RSA)
     {
-        .technique = ET_PK_RSA_SIGN,
+        .technique = ET_PK_RSA_EXPTMOD,
         .mode = EM_NONE,
-        .recommendedRepetitions = 1000,
+        .recommendedRepetitions = 10,
 
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = pedigree,
         .rawData = &RSASP1_256_2048_7099,
-
-        .io.rsas.in.hashmode = ET_SHA_256,
-        .io.rsas.in.n = &cavs16p1_2048n,
+#if 0
         .io.rsas.in.e = &cavs16p1_2048e,
-        .io.rsas.in.d = &cavs16p1_2048d,
-        .io.rsas.out.cipher.length = 256,
-        .io.rsas.out.cipher.data = (DATA_CHAR[256]){ // EM encrypted message to verify
+#endif
+        .io.rsav.in.n = &cavs16p1_2048n,
+        .io.rsav.in.d = &cavs16p1_2048d,
+        .io.rsav.in.em = &(const cryptoST_testData_t){ 
+                .length = 256,
+                .data = (DATA_CHAR[256]){ // message to encrypt
 #if defined(forwardKey)
 0x70, 0x99, 0x2c, 0x9d, 0x95, 0xa4, 0x90, 0x8d, 0x2a, 0x94, 0xb3, 0xab, 0x9f, 0xa1, 0xcd, 0x64, 
 0x3f, 0x12, 0x0e, 0x32, 0x6f, 0x9d, 0x78, 0x08, 0xaf, 0x50, 0xca, 0xc4, 0x2c, 0x4b, 0x0b, 0x4e, 
@@ -202,7 +210,7 @@ static const cryptoST_testDetail_t test_item[] =
 0xc2, 0xc9, 0x2b, 0x88, 0xa0, 0x7c, 0x69, 0xd7, 0x09, 0x17, 0x14, 0x0a, 0xb3, 0x82, 0x3c, 0x63, 
 0xf3, 0x12, 0xd3, 0xf1, 0x1f, 0xa8, 0x7b, 0xa2, 0x9d, 0xa3, 0xc7, 0x22, 0x4b, 0x4f, 0xb4, 0xbc
 #endif
-}
+                }},
     },
 #endif // SHA256
 #if !defined(NO_RSA) && defined(WOLFSSL_SHA224)
@@ -239,6 +247,10 @@ static const cryptoST_testDetail_t * firstTest(void)
         test_item : 0;
 }
 
+__attribute__((used))
+static char * openError(void)
+{ return "FIXME: this data set is not in DER format and will produce errors if used"; }
+
 /*************************************************************
  * Declaration of the test manager API
  * Obligatory entry points for executing a test
@@ -246,7 +258,7 @@ static const cryptoST_testDetail_t * firstTest(void)
 cryptoST_testAPI_t const CAVS16p1_RSASP1 =
 {
     .name = "RSA_" DATA_PACKAGE_NAME,
-    .openData = ((void*)0),
+    .openData = ((void*)0), // openError, // 
     .firstTest = firstTest,
     .nextTest = nextTest,
     .closeData = ((void*)0),

@@ -73,9 +73,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 // Variants on printing, defining an indentation
 #define PTEXT(pre,post) \
-    { printf("%*c%s %s" CRLF, level, ' ', pre, post); }
+    { printf("%*c%s %s" CRLF, level, ' ', (pre), (post)); }
 #define P_INT(pre,intVal) \
-    { printf("%*c%s %d" CRLF, level, ' ', pre, intVal); }
+    { printf("%*c%s %ld" CRLF, level, ' ', (pre), ((long int)intVal)); }
 
 // *****************************************************************************
 // *****************************************************************************

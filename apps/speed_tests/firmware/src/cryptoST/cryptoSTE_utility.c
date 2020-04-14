@@ -45,7 +45,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 /* Mapping function for hash types from WC to MCHP.
 */
-#include "cryptoSpeedTestData.h"
+#include "../../test_data/cryptoSpeedTestData.h"
 #include <wolfssl/wolfcrypt/types.h>
 enum wc_HashType cryptoSTE_get_wcHashType(EncryptTechnique_t mchp_type)
 {
@@ -53,6 +53,7 @@ enum wc_HashType cryptoSTE_get_wcHashType(EncryptTechnique_t mchp_type)
 
     switch(mchp_type)
     {
+    default:
     case ET_NONE:
         answer = WC_HASH_TYPE_NONE;
         break;

@@ -75,6 +75,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoSTE_des3.h"
 #include "cryptoSTE_rsa.h"
 
+#if !defined(__NOP)
+#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local data structures
@@ -264,6 +268,7 @@ cryptoSTE_exec_t cryptoSTE_identifyTest(const cryptoST_testDetail_t * rv)
 #if !defined(NO_RSA)
         case ET_PK_RSA_SIGN:
         case ET_PK_RSA_VERIFY:
+        case ET_PK_RSA_EXPTMOD:
             exec = cryptoSTE_rsa_timed;
             break;
 #endif
@@ -385,7 +390,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
             char * res = cv->openData();
             if (res)
             { 
-                printf("** %s (open) %s" CRLF, cv->name, res);
+                printf("-> ** %s (open) %s" CRLF, cv->name, res);
                 continue;
             }
         }
@@ -398,7 +403,10 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
         {
             __NOP();
             const cryptoST_testDetail_t * tr;
-            for (tr = cv->firstTest(); NULL != tr; tr = cv->nextTest(tr))
+            tr = cv->firstTest();
+            if (NULL == tr)
+                printf("-> ** %s no data provided ********" CRLF, cv->name);
+            else for (; NULL != tr; tr = cv->nextTest(tr))
             {
                 __NOP();
                 if (ET_NONE == tr->technique) // safety check
@@ -432,7 +440,9 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
                     // but if we are showing CSV then include this result.
                     if (config->results.encryption.startStopIsValid
                       || (CST_CSV == config->parameters.displayType))
+                    {
                         cryptoST_PRINT_announceElapsedTime( cv->name, config);
+                    }
                     else if (testFailed)
                     {
                         printf("-^ %s (%s) failed; see message above" CRLF, 

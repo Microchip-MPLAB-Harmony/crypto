@@ -371,7 +371,6 @@ static const cryptoST_testDetail_t test_item[] =
         .io.rsav.in.hashmode = ET_SHA_256,
         .io.rsav.in.n = &public_key_2048n,
         .io.rsav.in.e = &public_key_2048e,
-        // .io.rsav.in.d = // not in public
         .io.rsav.in.em = &message,
     },
     {
@@ -384,7 +383,11 @@ static const cryptoST_testDetail_t test_item[] =
         .rawData = &plainText,
 
         .io.rsas.in.hashmode = ET_SHA_256,
-        .io.rsas.in.PR_DER = &private_key_2048_DER,
+        .io.rsas.in.der = &private_key_2048_DER,
+        .io.rsas.out.signature = &(cryptoST_testData_t){
+                    .length = ALENGTH(rsa_sig_2048),
+                    .data = rsa_sig_2048,
+        },
     },
 #endif // SHA256
 #if !defined(NO_RSA) && defined(WOLFSSL_SHA224)
@@ -432,7 +435,7 @@ static const cryptoST_testDetail_t * firstTest(void)
  * Declaration of the test manager API
  * Obligatory entry points for executing a test
  *************************************************************/
-cryptoST_testAPI_t const RSA_WC_vfy_only =
+cryptoST_testAPI_t const RSA_WC_vfy_sign =
 {
     .name = "RSA_" DATA_PACKAGE_NAME,
     .openData = ((void*)0),

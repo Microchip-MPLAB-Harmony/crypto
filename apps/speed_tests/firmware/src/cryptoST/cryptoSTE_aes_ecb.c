@@ -76,6 +76,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #define VERIFY_CONSECUTIVE_AES    1
 #define assert_dbug(X) __conditional_software_breakpoint((X))
+#if !defined(__NOP)
+#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
+#endif
 
 // *****************************************************************************
 // *****************************************************************************
