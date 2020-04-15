@@ -57,8 +57,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define ALIGN4 __attribute__((aligned(4)))
 #define DATA_CHAR ALIGN4 const uint8_t
 
-#if !defined(NO_RSA)
-#if 0 // no DER data available
+#if !defined(NO_RSA) && defined(RSA_WITH_PSS_MODE)
 static const CPU_CHAR RSA2VS_source[] = "NIST 186-4 RSA Validation System (RSA2VS.pdf)";
 static const CPU_CHAR pedigree[] = "NIST suite SigGenPSS_186-3 (CAVS11p2)";
 
@@ -107,7 +106,6 @@ static const cryptoST_testVector_t sigGenPSS_256_2048_dfc2 =
 0x4c, 0xd0, 0xfb, 0x87, 0x2c, 0x14, 0xca, 0x8e, 0x00, 0x1e, 0x54, 0x2e, 0xa0, 0xf9, 0xcf, 0xda, 
 0x88, 0xc4, 0x2d, 0xca, 0xd8, 0xa7, 0x40, 0x97, 0xa0, 0x0c, 0x22, 0x05, 0x5b, 0x0b, 0xd4, 0x1f},
 };
-#endif
 
 #if 0 // alternative data sets
 static const cryptoST_testVector_t sigGenPSS_2048_5c61 =
@@ -165,7 +163,6 @@ static const cryptoST_testVector_t sigGenPSS_2048_fd6a =
 /*************************************************************
  * Keys material
  *************************************************************/
-#if 0 // no DER data available
 static const cryptoST_testData_t sigGenPSS_2048n = {
     .length = 256,
     .data = (DATA_CHAR[256]){
@@ -230,7 +227,6 @@ static const cryptoST_testData_t sigGenPSS_2048d = {
 0xf4, 0x86, 0x9d, 0x40, 0x0b, 0x5d, 0x13, 0xe3, 0x3e, 0xeb, 0xa3, 0x8e, 0x07, 0x5e, 0x87, 0x2b, 
 0x0e, 0xd3, 0xe9, 0x1c, 0xc9, 0xc2, 0x83, 0x86, 0x7a, 0x4f, 0xfc, 0x39, 0x01, 0xd2, 0x06, 0x9f}
 };
-#endif
 #endif // NO_RSA
 
 /*************************************************************
@@ -238,7 +234,8 @@ static const cryptoST_testData_t sigGenPSS_2048d = {
  *************************************************************/
 static const cryptoST_testDetail_t test_item[] =
 {
-#if 0 // can't do DER signing --- !defined(NO_RSA) && !defined(NO_SHA256)
+#if !defined(NO_RSA) && defined(RSA_WITH_PSS_MODE)
+#if !defined(NO_SHA256)
     {
         .technique = ET_PK_RSA_SIGN,
         .mode = EM_NONE,
@@ -248,12 +245,12 @@ static const cryptoST_testDetail_t test_item[] =
         .pedigree = pedigree,
         .rawData = &sigGenPSS_256_2048_dfc2,
 
-        .io.rsas.in.hashmode = ET_SHA_256,
-        .io.rsas.in.n = &sigGenPSS_2048n,
-        .io.rsas.in.e = &sigGenPSS_2048e,
-        .io.rsas.in.d = &sigGenPSS_2048d,
-        .io.rsas.out.cipher.length = 256,
-        .io.rsas.out.cipher.data = (DATA_CHAR[256]){
+        .io.rsav.in.hashmode = ET_SHA_256,
+        .io.rsav.in.n = &sigGenPSS_2048n,
+        .io.rsav.in.e = &sigGenPSS_2048e,
+        .io.rsav.in.d = &sigGenPSS_2048d,
+        .io.rsav.out.cipher.length = 256,
+        .io.rsav.out.cipher.data = (DATA_CHAR[256]){
 0x8b, 0x46, 0xf2, 0xc8, 0x89, 0xd8, 0x19, 0xf8, 0x60, 0xaf, 0x0a, 0x6c, 0x4c, 0x88, 0x9e, 0x4d, 
 0x14, 0x36, 0xc6, 0xca, 0x17, 0x44, 0x64, 0xd2, 0x2a, 0xe1, 0x1b, 0x9c, 0xcc, 0x26, 0x5d, 0x74, 
 0x3c, 0x67, 0xe5, 0x69, 0xac, 0xcb, 0xc5, 0xa8, 0x0d, 0x4d, 0xd5, 0xf1, 0xbf, 0x40, 0x39, 0xe2, 
@@ -271,6 +268,7 @@ static const cryptoST_testDetail_t test_item[] =
 0xa9, 0xa3, 0x80, 0x4f, 0x29, 0xe6, 0xb6, 0xa7, 0xb0, 0x59, 0xc4, 0x44, 0x1d, 0x54, 0xb2, 0x8e, 
 0x4e, 0xed, 0x25, 0x29, 0xc6, 0x10, 0x3b, 0x54, 0x32, 0xc7, 0x13, 0x32, 0xce, 0x74, 0x2b, 0xcc}
     },
+#endif // sha256 hash data
 #if defined(WOLFSSL_SHA224)
     {
         .technique = ET_PK_RSA_SIGN,
@@ -281,12 +279,12 @@ static const cryptoST_testDetail_t test_item[] =
         .pedigree = pedigree,
         .rawData = &sigGenPSS_224_2048_37dd,
 
-        .io.rsas.in.hashmode = ET_SHA_224,
-        .io.rsas.in.n = &sigGenPSS_2048n,
-        .io.rsas.in.e = &sigGenPSS_2048e,
-        .io.rsas.in.d = &sigGenPSS_2048d,
-        .io.rsas.out.cipher.length = 256,
-        .io.rsas.out.cipher.data = (DATA_CHAR[256]){
+        .io.rsav.in.hashmode = ET_SHA_224,
+        .io.rsav.in.n = &sigGenPSS_2048n,
+        .io.rsav.in.e = &sigGenPSS_2048e,
+        .io.rsav.in.d = &sigGenPSS_2048d,
+        .io.rsav.out.cipher.length = 256,
+        .io.rsav.out.cipher.data = (DATA_CHAR[256]){
 0x7e, 0x62, 0x8b, 0xcb, 0xe6, 0xff, 0x83, 0xa9, 0x37, 0xb8, 0x96, 0x11, 0x97, 0xd8, 0xbd, 0xbb, 
 0x32, 0x28, 0x18, 0xaa, 0x8b, 0xdf, 0x30, 0xcd, 0xfb, 0x67, 0xca, 0x6b, 0xf0, 0x25, 0xef, 0x6f, 
 0x09, 0xa9, 0x9d, 0xba, 0x4c, 0x3e, 0xe2, 0x80, 0x7d, 0x0b, 0x7c, 0x77, 0x77, 0x6c, 0xfe, 0xff, 
@@ -334,9 +332,8 @@ static const cryptoST_testDetail_t * nextTest
 static const cryptoST_testDetail_t * firstTest(void)
 { return nextTest(test_item); }
 
-__attribute__((used))
 static char * openData(void)
-{ return "FIXME: this data set is not in DER format and will produce errors if used"; }
+{ return (test_item_count > 1)? 0 : "no data for RSA-PSS operation"; }
 
 /*************************************************************
  * Declaration of the test manager API
@@ -345,9 +342,8 @@ static char * openData(void)
 cryptoST_testAPI_t const CAVS11p2_sigGenPSS =
 {
     .name = "RSA_" DATA_PACKAGE_NAME,
-    .openData = openData, // ((void*)0),
+    .openData = openData,
     .firstTest = firstTest,
     .nextTest = nextTest,
     .closeData = ((void*)0),
 };
-

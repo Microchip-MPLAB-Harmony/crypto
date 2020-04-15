@@ -51,7 +51,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "./cryptoSpeedTestData.h"
 #include "cryptoST/cryptoST_print.h" // for BASE_LINE
 
-#define DATA_PACKAGE_NAME "cryptoSTD_rsa_SigVer_PKCS#1_Ver_1p5"
+#define DATA_PACKAGE_NAME "PKCS#1_V1p5"
 #define ALIGN4 __attribute__((aligned(4)))
 #define DATA_CHAR ALIGN4 const uint8_t
 

@@ -146,7 +146,7 @@ void cryptoST(void)
     printf("Encrypt/decrypt all data to demonstrate correct operation." CRLF);
     cryptoSTE(&execData);
 #endif
-#if 0 // measure run-time of all data sets possibly w/o verification
+#if 1 // measure run-time of all data sets possibly w/o verification
     execData.testsAttempted = execData.testsSucceeded = 0;
 
     execData.configuration.parameters = exec_repetitiveTimed;
@@ -154,9 +154,9 @@ void cryptoST(void)
     execData.configuration.parameters.compareHWvSW = HAVE_HW_DRIVERS;
     cryptoSTE_announceParameters(&execData.configuration);
 
-    printf("> Timed testing begins!" CRLF);
+    printf("-----BEGIN TIMED TESTING-----" CRLF);
     cryptoSTE(&execData);
-    printf("> Timed testing concludes!" CRLF);
+    printf("-----END TIMED TESTING-----" CRLF);
 #endif
     
     printf(CRLF "Tests attempted :%u" CRLF, execData.testsAttempted);

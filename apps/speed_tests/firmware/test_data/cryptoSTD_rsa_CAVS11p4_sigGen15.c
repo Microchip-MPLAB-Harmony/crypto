@@ -191,7 +191,7 @@ static const cryptoST_testDetail_t test_item[] =
     {
         .technique = ET_PK_RSA_EXPTMOD,
         .mode = EM_NONE,
-        .recommendedRepetitions = 1000,
+        .recommendedRepetitions = 20,
 
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = pedigree,

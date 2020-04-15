@@ -147,18 +147,7 @@ static void printAll_verify(const cryptoST_testDetail_t * const td)
 
 static void printAll_sign(const cryptoST_testDetail_t * const td)
 {
-    /* Its not illegal to dereference a null pointer in MIPS. */
-#if 0
-    if (0 == td->io.rsas.in.n) printf(CRLF "n == null");
-    else cryptoST_PRINT_hexLine(CRLF ".........n:", 
-            td->io.rsas.in.n->data, td->io.rsas.in.n->length);
-    if (0 == td->io.rsas.in.d) printf(CRLF "d == null");
-    else cryptoST_PRINT_hexLine(CRLF ".........d:",
-            td->io.rsas.in.d->data, td->io.rsas.in.d->length);
-    if (0 == td->io.rsas.in.e) printf(CRLF "e == null");
-    else cryptoST_PRINT_hexLine(CRLF ".........e:",
-            td->io.rsas.in.e->data, td->io.rsas.in.e->length);
-#endif
+    /* Its not illegal to dereference a null pointer in MIPS hdwe. */
     if (0 == td->io.rsas.in.der) printf(CRLF "der == null");
     else cryptoST_PRINT_hexLine(CRLF ".......der:", 
             td->io.rsas.in.der->data, td->io.rsas.in.der->length);
@@ -223,24 +212,29 @@ static int RSASP1_ND(
     const char * answer = 0;
     mp_int base, computed; // ~140 words on the stack
 
-    /* Perform the calculation using little-endian structures. */
-    if (MP_OKAY != (wolfSSLresult = mp_read_unsigned_bin(
-                &base, input, inputLength)))
-    { answer = "input encoding failed"; }
-    else if (MP_OKAY != (wolfSSLresult = mp_exptmod(
-                &base, &key->d, &key->n, &computed)))
-    { answer = "exponentiation failed"; }
+    do
+    {
+        /* Perform the calculation using little-endian structures. */
+        if (MP_OKAY != (wolfSSLresult = mp_read_unsigned_bin(
+                    &base, input, inputLength)))
+        { answer = "input encoding failed"; break; }
+        else if (MP_OKAY != (wolfSSLresult = mp_exptmod(
+                    &base, &key->d, &key->n, &computed)))
+        { answer = "exponentiation failed"; break; }
 
-    /* Convert the results to big-endian order for posterity. */
-    else if (computed.used > outputLength)
-    { answer = "imminent buffer overflow"; }
-    else if (MP_OKAY !=
-        (wolfSSLresult = mp_to_unsigned_bin(&computed, output)))
-    { answer = "final conversion failure"; }
+        const size_t finalLength = computed.used * sizeof(computed.dp[0]);
 
+        /* Convert the results to big-endian order for posterity. */
+        if (finalLength > outputLength)
+        { answer = "imminent buffer overflow"; break; }
+        else if (MP_OKAY != (wolfSSLresult = mp_to_unsigned_bin(&computed, output)))
+        { answer = "final conversion failure"; break; }
+
+        return finalLength;
+    } while (0);
+    
     *cryptSTerror = answer;
-    return (wolfSSLresult < 0)? wolfSSLresult
-                    : computed.used * sizeof(computed.dp[0]);
+    return wolfSSLresult;
 }
 
 static uint8_t * PKCSpadding(uint8_t * bufferPtr, size_t PS)
@@ -267,6 +261,9 @@ static uint8_t * PKCSpadding(uint8_t * bufferPtr, size_t PS)
  * */
 static RsaKey rsaKey;
 
+// *****************************************************************************
+// Driver using N,D and explicit exponentiation
+// *****************************************************************************
 __attribute__((used))
 static const char * cryptoSTE_rsa_exptmod_timed
                 ( const cryptoST_testDetail_t * const td,
@@ -291,141 +288,154 @@ static const char * cryptoSTE_rsa_exptmod_timed
      * See the comment below about ASN1 header magic. */
     assert_dbug(SHA_BUFFER_SIZE >= test->hashSize);
     assert_dbug(SHA_HEADER_SIZE >= test->asn1_size);
-    #define RSA_EXPTMODE_PADDED_SIZE   (RSA_SIGNATURE_SIZE/8)
+    #define RSA_EXPTMOD_PADDED_SIZE   (RSA_SIGNATURE_SIZE/8)
 
-    size_t ans1_exptmode_header_size = 0;
-    uint8_t hashed[RSA_EXPTMODE_PADDED_SIZE];
+    size_t ans1_exptmod_header_size = 0;
+    uint8_t hashed[RSA_EXPTMOD_PADDED_SIZE];
     uint8_t * DER_data_ptr = hashed; // real data starts here
-// TODO: init RSA key & free it later   --- klk  
-    /* Load the key structure with N and D before starting the timer. */
-    if ((0 != mp_read_unsigned_bin(&rsaKey.n,
-        td->io.rsav.in.n->data, td->io.rsav.in.n->length))
-        || (0 != mp_read_unsigned_bin(&rsaKey.d,
-        td->io.rsav.in.d->data, td->io.rsav.in.d->length)))
-    { param->results.errorMessage = "key construction failed"; 
-      param->results.wolfSSLresult = -1; }
+
+    if (0 != (param->results.wolfSSLresult = wc_InitRsaKey(&rsaKey, NULL)))
+    { param->results.errorMessage = "key initialization failed"; }
     else
     {
-        if (test->hash)
+        /* Load the key structure with N and D before starting the timer. */
+        if ((0 != mp_read_unsigned_bin(&rsaKey.n,
+            td->io.rsav.in.n->data, td->io.rsav.in.n->length))
+            || (0 != mp_read_unsigned_bin(&rsaKey.d,
+            td->io.rsav.in.d->data, td->io.rsav.in.d->length)))
+        { param->results.errorMessage = "key construction failed"; 
+        param->results.wolfSSLresult = -1; }
+        else
         {
-            memset(hashed, 0, ALENGTH(hashed));
-
-            /* There are three components to the completed hash buffer:
-             * <  PKCS#1 header  >< DER header ><hash result>
-             * <0x00|0x01|PS|0x00><given string>< hashSize  >
-             * We need to build all three before applying encryption.
-             * PS pads the buffer to be same size as the finished 
-             * message, which is the same as the key length. */
-            const size_t notPKCS = wc_RsaEncryptSize(&rsaKey) // emLength
-                           - (test->asn1_size + test->hashSize); // tLen
-            DER_data_ptr = PKCSpadding(hashed, notPKCS);
-
-            /* Append the DER header as well. */
-            assert_dbug(test->asn1_header); // verify a header is provided
-            memcpy(DER_data_ptr, test->asn1_header, test->asn1_size);
-            ans1_exptmode_header_size = (DER_data_ptr - hashed) + test->asn1_size;
-        }
-
-        param->results.encryption.start = SYS_TIME_CounterGet();
-        for (int i = param->results.encryption.iterations; i > 0; i--)
-        {
-            /* Optionally calculate hash digest of the plaintext message.
-               Required for RSASSA-PKCS1-V1_5-SIGN but not RSASP1. */
-            if (0 == test->hash)
+            if (test->hash)
             {
-                /* Encrypt the given message. */
-                param->results.wolfSSLresult = RSASP1_ND(
-                        td->io.rsav.in.em->data, td->io.rsav.in.em->length,
-                        rsaSignature, ALENGTH(rsaSignature),
-                        &rsaKey, &param->results.errorMessage);
-                if (param->results.wolfSSLresult > 0)
-                    rsaSize = param->results.wolfSSLresult;
+                memset(hashed, 0, ALENGTH(hashed));
+
+                /* There are three components to the completed hash buffer:
+                * <  PKCS#1 header  >< DER header ><hash result>
+                * <0x00|0x01|PS|0x00><given string>< hashSize  >
+                * We need to build all three before applying encryption.
+                * PS pads the buffer to be same size as the finished 
+                * message, which is the same as the key length. */
+                const size_t notPKCS = wc_RsaEncryptSize(&rsaKey) // emLength
+                            - (test->asn1_size + test->hashSize); // tLen
+                DER_data_ptr = PKCSpadding(hashed, notPKCS);
+
+                /* Append the DER header as well. */
+                assert_dbug(test->asn1_header); // verify a header is provided
+                memcpy(DER_data_ptr, test->asn1_header, test->asn1_size);
+                ans1_exptmod_header_size = (DER_data_ptr - hashed) + test->asn1_size;
             }
-            else
+
+            param->results.encryption.start = SYS_TIME_CounterGet();
+            for (int i = param->results.encryption.iterations; i > 0; i--)
             {
-                /* Hash the message first..... */
-                param->results.errorMessage = (test->hash)(
-                        td->io.rsav.in.em, 
-                        &hashed[ans1_exptmode_header_size]);
+                /* Optionally calculate hash digest of the plaintext message.
+                Required for RSASSA-PKCS1-V1_5-SIGN but not RSASP1. */
+                if (0 == test->hash)
+                {
+                    /* Encrypt the given message. */
+                    param->results.wolfSSLresult = RSASP1_ND(
+                            td->io.rsav.in.em->data, td->io.rsav.in.em->length,
+                            rsaSignature, ALENGTH(rsaSignature),
+                            &rsaKey, &param->results.errorMessage);
+                }
+                else
+                {
+                    /* Hash the message first..... */
+                    param->results.errorMessage = (test->hash)(
+                            td->io.rsav.in.em, 
+                            &hashed[ans1_exptmod_header_size]);
+                    if (param->results.errorMessage) break;
+
+                    /* ....then encrypt header and all. */
+                    param->results.wolfSSLresult = RSASP1_ND(
+                            hashed, ans1_exptmod_header_size + test->hashSize,
+                            rsaSignature, ALENGTH(rsaSignature),
+                            &rsaKey, &param->results.errorMessage); 
+                }
+
+                /* For either path, mask any non-error results. */
+                if (param->results.wolfSSLresult > 0)
+                {
+                    rsaSize = param->results.wolfSSLresult;
+                    param->results.wolfSSLresult = 0;
+                }
+
                 if (param->results.errorMessage) break;
-
-                /* ....then encrypt header and all. */
-                param->results.wolfSSLresult = RSASP1_ND(
-                        hashed, ans1_exptmode_header_size + test->hashSize,
-                        rsaSignature, ALENGTH(rsaSignature),
-                        &rsaKey, &param->results.errorMessage); 
-                if (param->results.wolfSSLresult > 0)
-                    rsaSize = param->results.wolfSSLresult;
-            }
-            if (param->results.errorMessage) break;
-        } // END TIMED LOOP
-        param->results.encryption.stop = SYS_TIME_CounterGet();
-        param->results.encryption.startStopIsValid =
-                (0 == param->results.errorMessage);
-    }
-
-    /* Success is when the recovered result matches the given result */
-    const cryptoST_testData_t * const compare = &td->rawData->vector;
-    if (0 == param->results.errorMessage)
-    {
-        if (compare->length != rsaSize)
-        { param->results.errorMessage = "computed size is incorrect"; }
-        else if (0 != memcmp(compare->data, rsaSignature, compare->length))
-        { param->results.errorMessage = "computed signature mismatch"; }
-    }
-
-    /* Decrypt the encrypted message to verify over-and-back. */
-    if (param->parameters.verifyByDecryption && td->io.rsav.in.e)
-    {
-        assert_dbug(td->io.rsav.in.e->data && td->io.rsav.in.e->length);
-
-        /* Add the rest of the public key to the mix. */
-        if ((0 != mp_read_unsigned_bin(&rsaKey.e,
-                td->io.rsav.in.e->data, td->io.rsav.in.e->length)))
-        { param->results.errorMessage = "could not add e to key"; }
-        else 
-        {
-            uint8_t decoded[RSA_EXPTMODE_PADDED_SIZE];
-            memset(decoded,0,ALENGTH(decoded));
-
-            /* Use n,e to regenerate the original message. */
-            param->results.wolfSSLresult = wc_RsaSSL_Verify( 
-                    rsaSignature, rsaSize,
-                    decoded, ALENGTH(decoded),
-                    &rsaKey);
-            
-            /* The decoded buffer has the FF padding stripped off,
-             * so we need to make a small accommodation for comparison. */
-            if (param->results.wolfSSLresult < 0)
-            { param->results.errorMessage = "signature recovery failed"; }
-            else if (0 != memcmp(&hashed[ans1_exptmode_header_size - test->asn1_size], 
-                                    decoded, param->results.wolfSSLresult))
-            { param->results.errorMessage = "recovered hash mismatch"; }
-            else param->results.wolfSSLresult = 0;
-            
-            if (0 != param->results.errorMessage)
-                cryptoST_PRINT_hexBlock(CRLF ".recovered:", decoded, ALENGTH(decoded));
+            } // END TIMED LOOP
+            param->results.encryption.stop = SYS_TIME_CounterGet();
+            param->results.encryption.startStopIsValid =
+                    (0 == param->results.errorMessage);
         }
-    }
+
+        /* Success is when the recovered result matches the given result */
+        const cryptoST_testData_t * const compare = &td->rawData->vector;
+        if (0 == param->results.errorMessage)
+        {
+            if (compare->length != rsaSize)
+            { param->results.errorMessage = "computed size is incorrect"; }
+            else if (0 != memcmp(compare->data, rsaSignature, compare->length))
+            { param->results.errorMessage = "computed signature mismatch"; }
+        }
+
+        /* Decrypt the encrypted message to verify over-and-back. */
+        if (param->parameters.verifyByDecryption && td->io.rsav.in.e)
+        {
+            assert_dbug(td->io.rsav.in.e->data && td->io.rsav.in.e->length);
+
+            /* Add the rest of the public key to the mix. */
+            if ((0 != mp_read_unsigned_bin(&rsaKey.e,
+                    td->io.rsav.in.e->data, td->io.rsav.in.e->length)))
+            { param->results.errorMessage = "could not add e to key"; }
+            else 
+            {
+                uint8_t decoded[RSA_EXPTMOD_PADDED_SIZE];
+                memset(decoded,0,ALENGTH(decoded));
+
+                /* Use n,e to regenerate the original message. */
+                param->results.wolfSSLresult = wc_RsaSSL_Verify( 
+                        rsaSignature, rsaSize,
+                        decoded, ALENGTH(decoded),
+                        &rsaKey);
+                
+                /* The decoded buffer has the FF padding stripped off,
+                * so we need to make a small accommodation for comparison. */
+                if (param->results.wolfSSLresult < 0)
+                { param->results.errorMessage = "signature recovery failed"; }
+                else if (0 != memcmp(&hashed[ans1_exptmod_header_size - test->asn1_size], 
+                                        decoded, param->results.wolfSSLresult))
+                { param->results.errorMessage = "recovered hash mismatch"; }
+                else param->results.wolfSSLresult = 0;
+                
+                if (0 != param->results.errorMessage)
+                    cryptoST_PRINT_hexBlock(CRLF ".recovered:", decoded, ALENGTH(decoded));
+            }
+        }
+        
+        if (0 != param->results.errorMessage)
+        {
+            const cryptoST_testData_t * const compare = td->io.rsas.out.signature;
+            printf(CRLF "%s", param->results.errorMessage);
+            printAll_verify(td);
+            cryptoST_PRINT_hexBlock(CRLF "....vector:", 
+                    vector->vector.data, vector->vector.length);
+            cryptoST_PRINT_hexBlock(CRLF "......hash:", 
+                    hashed, ans1_exptmod_header_size + test->hashSize);
+            cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, rsaSize);
+            cryptoST_PRINT_hexBlock(CRLF "..expected:", compare->data, compare->length);
+            printf(CRLF);
+        }
     
-    if (0 != param->results.errorMessage)
-    {
-        const cryptoST_testData_t * const compare = td->io.rsas.out.signature;
-        printf(CRLF "%s", param->results.errorMessage);
-        printAll_verify(td);
-        cryptoST_PRINT_hexBlock(CRLF "....vector:", 
-                vector->vector.data, vector->vector.length);
-        cryptoST_PRINT_hexBlock(CRLF "......hash:", 
-                hashed, ans1_exptmode_header_size + test->hashSize);
-        cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, rsaSize);
-        cryptoST_PRINT_hexBlock(CRLF "..expected:", compare->data, compare->length);
-        printf(CRLF);
+        __NOP();
+        wc_FreeRsaKey(&rsaKey);
     }
-    __NOP();
-    wc_FreeRsaKey(&rsaKey);
     return param->results.errorMessage;
 } // cryptoSTE_rsa_exptmod_timed
 
+// *****************************************************************************
+// Driver using DER format keys and WolfCrypt signing function
+// *****************************************************************************
 __attribute__((used))
 static const char * cryptoSTE_rsa_sign_der_timed
                 ( const cryptoST_testDetail_t * const td,
@@ -524,6 +534,9 @@ static const char * cryptoSTE_rsa_sign_der_timed
     return param->results.errorMessage;
 }
 
+// *****************************************************************************
+// Driver using explicit N,E public key and WolfCrypt verification function
+// *****************************************************************************
 __attribute__((used))
 static const char * cryptoSTE_rsa_verify_ne_timed
                 ( const cryptoST_testDetail_t * const td,
@@ -622,14 +635,11 @@ static const char * cryptoSTE_rsa_verify_ne_timed
 // Section: Load vectors
 // *****************************************************************************
 // *****************************************************************************
-
-/* There is magic here. The WC algorithm builds a full
- * ASN.1 encoding of the recovered hash. So we fake the
- * header and put our hash in line with it, but rig
- * it so that the header comes from non-volatile memory.
- * Some values (field lengths) vary with hash size.
- * Most headers are detailed in pkcs-1v2.12.pdf, 
- * in the notes for EMSA-PKCS1-V1_5. */
+/* ASN1 header magic: the WC sign and verify assume a full ASN.1 encoding
+ * of the recovered hash. So we fake the header and put our hash in line
+ * with it, but rig it so that the header comes from non-volatile memory
+ * (as defined below). Some values (field lengths) vary with hash size.
+ * Headers are detailed in pkcs-1v2.12.pdf, in the notes for EMSA-PKCS1-V1_5. */
 
 #define NAME    "WOLF RSA"
 

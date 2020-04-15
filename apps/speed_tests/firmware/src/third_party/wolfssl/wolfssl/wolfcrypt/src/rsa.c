@@ -2938,13 +2938,6 @@ static int RsaPrivateDecryptEx(byte* in, word32 inLen, byte* out,
     {
         byte* pad = NULL;
 #if !defined(WOLFSSL_RSA_VERIFY_ONLY) && !defined(WOLFSSL_RSA_VERIFY_INLINE)
-#if 0 // klk
-extern void cryptoST_PRINT_hexLine
-    (const char * const tag, const uint8_t * const data, const size_t const length);
-extern void cryptoST_PRINT_hexBlock
-    (const char * const tag, const uint8_t * const data, size_t const length);
-    cryptoST_PRINT_hexBlock("\r\n" ".key->data:", key->data, key->dataLen);
-#endif
         ret = wc_RsaUnPad_ex(key->data, key->dataLen, &pad, pad_value, pad_type,
                              hash, mgf, label, labelSz, saltLen,
                              mp_count_bits(&key->n), key->heap);

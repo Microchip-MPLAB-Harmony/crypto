@@ -708,7 +708,7 @@
           <LogicalPath dnOrder="2">wolfcrypt</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/</PhysicalPath>
           <GeneratedChecksum dnOrder="4">52BC77643DB35168460E83CE8DDCEF15</GeneratedChecksum>
-          <UserChecksum dnOrder="5">2628EB946F27FF8EBD8CE628F29485C2</UserChecksum>
+          <UserChecksum dnOrder="5">52BC77643DB35168460E83CE8DDCEF15</UserChecksum>
         </File>
         <File dnOrder="88">
           <Type dnOrder="0">SOURCE</Type>
@@ -1491,8 +1491,8 @@
           <Name dnOrder="1">configuration.h</Name>
           <LogicalPath dnOrder="2">config/sam_e54_xplained_pro_hwsw/</LogicalPath>
           <PhysicalPath dnOrder="3">/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">6507F633EAC147E5E1B7455BDDFFC109</GeneratedChecksum>
-          <UserChecksum dnOrder="5">6507F633EAC147E5E1B7455BDDFFC109</UserChecksum>
+          <GeneratedChecksum dnOrder="4">E4DF9DBF105E24398DE8D9362F868854</GeneratedChecksum>
+          <UserChecksum dnOrder="5">E4DF9DBF105E24398DE8D9362F868854</UserChecksum>
         </File>
         <File dnOrder="186">
           <Type dnOrder="0">HEADER</Type>
