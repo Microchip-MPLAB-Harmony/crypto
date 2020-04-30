@@ -1,4 +1,18 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.5.1
+### Bug Fixes
+- **PIC32MZ Hardware Hashing Disable** Added a wolfcrypt #define to the generated configuration when all Hash 'Support Hardware Acceleration' are disabled.
+
+### Dependencies
+- **Core** - 3.6.1
+- **CSP** - 3.6.1
+- **wolfSSL** - 4.3.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.30
+- **XC32** - v3.20
+- **IAR** - 8.40.1
+
+
 ## Crypto Release v3.5.0
 ### New Features
 - **New Chip Support** - This release adds support for the SAML11 and PIC32MZ-W1 chips

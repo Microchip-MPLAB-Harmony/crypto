@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Module name="Crypto" id="B1073D56-43AB-4C5A-A90A-798D31D90D98" version="3.5.0">
+<Module name="Crypto" id="B1073D56-43AB-4C5A-A90A-798D31D90D98" version="3.5.1">
     <ConfigRoot path="config/module.py"/>
 </Module>

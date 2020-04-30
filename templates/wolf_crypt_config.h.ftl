@@ -63,6 +63,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#lt>#define NO_MD4
 </#if>
 <#assign hmacPrereqs=false>
+<#assign pic32MzHash=false>
 <#if wolfcrypt_md5 == false>
     <#lt>#define NO_MD5
 <#else>
@@ -70,6 +71,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#if wolfcrypt_hw == true && wolfcrypt_md5_hw == true>
         <#if wolfcryptCoreSeries?starts_with("PIC32M")>
             <#lt>#define WOLFSSL_PIC32MZ_HASH
+            <#assign pic32MzHash=true>
         <#else>
             <#lt>#define WOLFSSL_HAVE_MCHP_HW_MD5
         </#if>
@@ -79,9 +81,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#lt>#define NO_SHA // specifically, no SHA1 (legacy name)
 <#else>
     <#assign hmacPrereqs=true>
-    <#if wolfcrypt_hw == true && wolfcrypt_sha1_hw == true>
+    <#if wolfcrypt_hw == true && wolfcrypt_sha1_hw == true || pic32MzHash == true>
         <#if wolfcryptCoreSeries?starts_with("PIC32M")>
             <#lt>#define WOLFSSL_PIC32MZ_HASH
+            <#assign pic32MzHash=true>
         <#else>
             <#lt>#define WOLFSSL_HAVE_MCHP_HW_SHA1
         </#if>
@@ -92,9 +95,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#else>
     <#-- because of legacy, WOLFSSL_SHA256 or HAVE_SHA256 are never asserted -->
     <#assign hmacPrereqs=true>
-    <#if wolfcrypt_hw == true && wolfcrypt_sha264_hw == true>
+    <#if wolfcrypt_hw == true && wolfcrypt_sha264_hw == true || pic32MzHash == true>
         <#if wolfcryptCoreSeries?starts_with("PIC32M")>
             <#lt>#define WOLFSSL_PIC32MZ_HASH
+            <#assign pic32MzHash=true>
         <#else>
             <#if wolfcrypt_sha224 == true>
                 <#lt>#define WOLFSSL_SHA224
@@ -105,6 +109,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#if wolfcrypt_sha224 == true>
             <#lt>#define WOLFSSL_SHA224
         </#if>
+    </#if>
+</#if>
+<#if wolfcryptCoreSeries?starts_with("PIC32M")>
+    <#if wolfcrypt_hw == true && pic32MzHash == false>
+        <#lt>#define NO_PIC32MZ_HASH
     </#if>
 </#if>
 <#if wolfcrypt_sha384 == true || wolfcrypt_sha512>
