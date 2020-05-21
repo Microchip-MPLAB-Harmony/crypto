@@ -100,6 +100,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../test_data/cryptoSTD_rsa_WC_vfy_sign.h"
 #include "../test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.h"
 #endif
+#include "../test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -123,6 +124,13 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     // Set up a fresh execution -- copy the included API's.
     // Each line here is representative of a #include above,
     // and this list determines test order.
+
+#ifdef CRYPTOSTV_ECC_CAVS14p1_ECCCDH
+    ST_list[numberOfLoadedAPI++] = CAVS14p1_ECCCDH;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+goto done;
+
 #ifdef CRYPTOSTV_ZERO_AES
     ST_list[numberOfLoadedAPI++] = microchip_zero_aes;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
@@ -191,6 +199,8 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = RSA_SigVer_PKCS1_Ver_1p5;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
+
+done:
 
     __conditional_software_breakpoint(numberOfLoadedAPI > 0);
 

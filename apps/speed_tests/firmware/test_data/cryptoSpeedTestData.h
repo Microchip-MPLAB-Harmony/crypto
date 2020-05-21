@@ -72,6 +72,8 @@ typedef enum EncryptTechnique_e
     ET_PK_RSA_KEYGEN,
     ET_PK_EC_KEYGEN,
 
+    ET_ECC_CDH, // Cofactor Diffie-Hellman primitive
+
     /* These options allow the TA100 commands to be speed-tested.
      * All are listed here, but not all have test drivers. */
     TA100_AES,
@@ -114,6 +116,22 @@ typedef enum EncryptMode_e
     EM_CFB,  // AES, deprecated for DES
     EM_OFB,  // AES, deprecated for DES
     EM_CTR,  // AES
+
+    EM_ECC_P192,
+    EM_ECC_P224,
+    EM_ECC_P256,
+    EM_ECC_P384,
+    EM_ECC_P521,
+    EM_ECC_K163,
+    EM_ECC_K233,
+    EM_ECC_K283,
+    EM_ECC_K409,
+    EM_ECC_K571,
+    EM_ECC_B163,
+    EM_ECC_B233,
+    EM_ECC_B283,
+    EM_ECC_B409,
+    EM_ECC_B571,
 } EncryptMode_t;
 
 /*************************************************************
@@ -204,10 +222,6 @@ typedef struct cryptoST_symmetric_input_s
     cryptoST_testData_t additionalAuthData;
 } cryptoST_symmetric_input_t;
 
-typedef struct cryptoST_asym_ecc_input_s
-{
-} cryptoST_asymmetric_ecc_input_t;
-
 /*************************************************************
  * Declaration of output parameters
  * 
@@ -226,10 +240,6 @@ typedef struct cryptoST_symmetric_output_s
     cryptoST_testData_t cipher;
     cryptoST_testData_t tag;
 } cryptoST_symmetric_output_t;
-
-typedef struct cryptoST_asym_ecc_output_s
-{
-} cryptoST_asymmetric_ecc_output_t;
 
 #if !defined(NO_RSA)
 typedef struct cryptoST_asymmetric_rsas_input_s
@@ -260,6 +270,26 @@ typedef struct cryptoST_asymmetric_rsav_output_s
     // output is the raw data
 } cryptoST_asymmetric_rsav_output_t;
 #endif // NO_RSA
+
+#if !defined(NO_ECC)
+typedef struct cryptoST_ecc_key_s
+{
+    const uint8_t * x; // length is convey separately
+    const uint8_t * y;
+} cryptoST_ecc_key_t;
+
+typedef struct cryptoST_asym_ecc_input_s
+{
+    const cryptoST_ecc_key_t remotePU;
+    const uint8_t            * d; // random number
+} cryptoST_asymmetric_ecc_input_t;
+
+typedef struct cryptoST_asym_ecc_output_s
+{
+    const cryptoST_ecc_key_t localPR;
+    const uint8_t            * z; // random number
+} cryptoST_asymmetric_ecc_output_t;
+#endif
 
 /*************************************************************
  * Declaration of golden results

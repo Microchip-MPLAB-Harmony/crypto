@@ -281,6 +281,11 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/Obsolete_cryptoSTD_sha224.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/Obsolete_cryptoSTD_sha256.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_sign.c</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.h</itemPath>
+        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_sign.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="wolfcrypt" projectFiles="true">
         <logicalFolder name="f1" displayName="port" projectFiles="true">
@@ -404,6 +409,8 @@
       <packs>
         <pack name="PIC32MZ-EF_DFP" vendor="Microchip" version="1.1.45"/>
       </packs>
+      <ScriptingSettings>
+      </ScriptingSettings>
       <compileType>
         <linkerTool>
           <linkerLibItems>
