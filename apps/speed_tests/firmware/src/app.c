@@ -57,7 +57,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <assert.h>
 #include "app.h"
 #include "cryptoST/cryptoST.h"
-#include "cryptoST/cryptoST_buildInfo.h"
 
 // #define INVOKE_INITIALIZATION_DELAY
 
@@ -66,11 +65,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Global Data Definitions
 // *****************************************************************************
 // *****************************************************************************
-
-char *splashMessage = 
-    "\r\n"
-    " Microchip benchMark test suite\r\n"
-    " Application created %s %s initialized!\r\n";
 
 // *****************************************************************************
 /* Application Data
@@ -175,8 +169,6 @@ void APP_Tasks ( void )
         /* Ready, set, go!! */
         case APP_STATE_BEGIN_TEST:
         {
-            printf(splashMessage, 
-                cryptoST_buildInfo.buildDate, cryptoST_buildInfo.buildTime);
             cryptoST(); 
             appData.state = APP_STATE_COMPLETE;
             break;

@@ -1,5 +1,5 @@
 /* 
- * File:   cryptoST_buildInfo.h
+ * File:   cryptoSTE_buildInfo.h
  * Author: C14102
  *
  * Created on June 10, 2020, 11:34 AM
@@ -13,15 +13,15 @@ extern "C" {
 #endif
 
 #include <stdbool.h>
-typedef struct cryptoST_buildInfo_s
+typedef struct cryptoSTE_buildInfo_s
 {
     const char buildDate[16];
     const char buildTime[16];
     const char optimized[4];  // yes or no, not the optimization level
     const char processor[16];
-} cryptoST_buildInfo_t;
+} cryptoSTE_buildInfo_t;
 
-extern cryptoST_buildInfo_t cryptoST_buildInfo;
+extern cryptoSTE_buildInfo_t cryptoSTE_buildInfo;
 
 #ifdef	__cplusplus
 }

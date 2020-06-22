@@ -121,7 +121,7 @@ void cryptoST(void)
 
     execData.configuration.labels = (cryptoSTE_labels_t){
         .platform = "SAML11 XPlained Pro",
-        .processor = "atsaml11e16a sec",
+        .processor = cryptoSTE_buildInfo.processor,
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO)
         .accelerator = "CRYA",
 #else

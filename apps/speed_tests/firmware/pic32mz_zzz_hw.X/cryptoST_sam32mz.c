@@ -130,7 +130,7 @@ void cryptoST(void)
     
     execData.configuration.labels = (cryptoSTE_labels_t){
         .platform = "SAME54 XPlained Ultra",
-        .processor = "atsame54p20a",
+        .processor = cryptoSTE_buildInfo.processor,
         .accelerator = ENCRYPTION_ENGINE,
         .build = "$ld:$",
     };

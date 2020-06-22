@@ -62,6 +62,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoST/cryptoST_print.h"
 #include "../test_data/cryptoSpeedTestData.h"
 #include "cryptoST/cryptoSTE_init.h"
+#include "cryptoST/cryptoSTE_buildInfo.h"
 
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO)
 #define ENCRYPTION_ENGINE "PUKCC|AES256|ICM"
@@ -74,6 +75,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Local data structures
 // *****************************************************************************
 // *****************************************************************************
+char *splashMessage = 
+    "\r\n"
+    " Microchip benchMark test suite\r\n"
+    " Application created %s %s initialized!\r\n";
 
 __attribute__((used))
 static cryptoSTE_parameters_t exec_repetitiveTimed =
@@ -123,14 +128,17 @@ static cryptoSTE_parameters_t exec_onceThroughAndCheck =
 
 void cryptoST(void)
 {
+    printf(splashMessage, 
+        cryptoSTE_buildInfo.buildDate, cryptoSTE_buildInfo.buildTime);
+
     if (CSTE_VERBOSE > 1) P0_UINT("Verbose level ", CSTE_VERBOSE);
-    
+
     cryptoSTE_localData_t execData;
     cryptoSTE_init(&execData);
     
     execData.configuration.labels = (cryptoSTE_labels_t){
         .platform = "SAME54 XPlained Ultra",
-        .processor = "atsame54p20a",
+        .processor = cryptoSTE_buildInfo.processor,
         .accelerator = ENCRYPTION_ENGINE,
         .build = "$ld:$",
     };

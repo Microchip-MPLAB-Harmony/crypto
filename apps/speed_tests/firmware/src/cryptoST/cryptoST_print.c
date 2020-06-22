@@ -50,7 +50,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <stdbool.h>
 #include <stdio.h>
 #include <assert.h>
-#include "cryptoST_buildInfo.h"
+#include "cryptoSTE_buildInfo.h"
 
 #if !defined(SEP)
 #define SEP ","
@@ -180,7 +180,7 @@ void cryptoST_PRINT_announceElapsedTime_CSV
     PRINT_FIELD(labels->processor);
     PRINT_FIELD(labels->platform);
     PRINT_FIELD(labels->accelerator);
-    PRINT_FIELD(cryptoST_buildInfo.optimized);
+    PRINT_FIELD(cryptoSTE_buildInfo.optimized);
     PRINT_FIELD(labels->build);
     PRINT_LUINT(((const long unsigned int)(SYS_TIME_CPU_CLOCK_FREQUENCY)));
     PRINT_LUINT(SYS_TIME_FrequencyGet());

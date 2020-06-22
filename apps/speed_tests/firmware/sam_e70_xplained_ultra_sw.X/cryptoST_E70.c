@@ -116,7 +116,7 @@ void cryptoST(void)
     
     execData.configuration.labels = (cryptoSTE_labels_t){
         .platform = "SAME70 XPlained Ultra",
-        .processor = "atsame70q21b",
+        .processor = cryptoSTE_buildInfo.processor,
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO)
         .accelerator = "AES256|ICM",
 #else
