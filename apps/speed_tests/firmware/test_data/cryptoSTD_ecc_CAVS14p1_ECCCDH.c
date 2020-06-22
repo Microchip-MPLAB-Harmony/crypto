@@ -191,7 +191,11 @@ static char * openError(void)
  *************************************************************/
 cryptoST_testAPI_t const CAVS14p1_ECCCDH =
 {
+#ifndef ALT_ECC_SIZE
+    .name = "RSA_ALT" DATA_PACKAGE_NAME,
+#else    
     .name = "RSA_" DATA_PACKAGE_NAME,
+#endif
     .openData = ((void*)0), // openError, // 
     .firstTest = firstTest,
     .nextTest = nextTest,

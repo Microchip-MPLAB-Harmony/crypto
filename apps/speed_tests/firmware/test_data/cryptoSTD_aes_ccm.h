@@ -12,9 +12,7 @@
    check operation of the AES-CCM (CBC-CTR) mode.
 
   Description:
-    This file contains data for measuring the time required 
-    to perform AES CCM (CBC-MAC) encryption. Time is reported 
-    in clock ticks.
+  This package provides standard test cases for AES CCM encryption.
  ******************************************************************************
  */
 

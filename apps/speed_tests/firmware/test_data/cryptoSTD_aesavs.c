@@ -355,7 +355,7 @@ static const cryptoST_testDetail_t * firstTest(void)
 { return 0; }
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 { return 0; }
-#endif // not-no AES
+#endif // NO_AES
 
 /*************************************************************
  * Declaration of the test manager API

@@ -133,14 +133,6 @@ static const cryptoST_testData_t cavs16p1_2048n = {
 #endif
 }
 };
-
-#if 0
-static const cryptoST_testData_t cavs16p1_2048e = {
-    .length = 256,
-    .data = (DATA_CHAR[256]){
-    }
-};
-#endif
 #endif // NO_RSA
 
 static const cryptoST_testData_t cavs16p1_2048d = {

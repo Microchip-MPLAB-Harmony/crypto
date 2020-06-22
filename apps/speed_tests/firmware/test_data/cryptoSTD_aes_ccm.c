@@ -12,9 +12,7 @@
    check operation of the AES-CCM (CBC-CTR) mode.
 
   Description:
-    This file contains data for measuring the time required 
-    to perform AES CCM (CBC-MAC) encryption. Time is reported 
-    in clock ticks.
+  This package provides standard test cases for AES CCM encryption.
  ******************************************************************************
  */
 
@@ -73,6 +71,7 @@ The key principles are these:
 #include "cryptoST/cryptoSTE_generate.h"
 #include "cryptoST/cryptoSTE_malloc.h"
 #include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoSTD_aes_ccm.h"
 
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "CCM"
@@ -438,31 +437,10 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
         return old;
 }
 
-#if 0 // not used here
-static char * openData(void)
-{
-    /* Allocate the largest required buffer now, because there
-     * is no provision for return errors in first() or next().
-     * If we can't get it now, we won't get it later, either.
-     *  */
-    dynamicBuffer = cryptoSTE_malloc(SIZE_PREALLOCATE); // bytes
-    return dynamicBuffer? NULL :
-        DATA_PACKAGE_NAME " malloc error " __BASE_FILE__ "(" BASE_LINE ")";
-}
-
-static char * closeData(void)
-{
-    if (dynamicBuffer) cryptoSTE_free(dynamicBuffer);
-    dynamicBuffer = NULL;
-    return NULL;
-}
-#endif
-
 /*************************************************************
  * Declaration of the test manager API
  * Obligatory entry points for executing a test
  *************************************************************/
-#include "cryptoSTD_aes_ccm.h"
 cryptoST_testAPI_t const microchip_aes_ccm =
 {
     .name = "AES_" DATA_PACKAGE_NAME,

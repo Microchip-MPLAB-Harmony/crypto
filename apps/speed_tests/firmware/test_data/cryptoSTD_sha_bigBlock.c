@@ -1,7 +1,42 @@
 /* cryptoSTD_sha256
 
-  This package provides standard test cases for SHA256 encryption.
+  Crypto Speed Test Data File
+
+  Company:
+    Microchip Technology Inc.
+
+  Description:
+  This package provides standard test cases for SHA256 encryption by supplying
+  various data buffers of 'zero' to demonstrate basic SHA operation.
 */
+
+//DOM-IGNORE-BEGIN
+/*****************************************************************************
+ Copyright (C) 2013-2020 Microchip Technology Inc. and its subsidiaries.
+
+Microchip Technology Inc. and its subsidiaries.
+
+Subject to your compliance with these terms, you may use Microchip software 
+and any derivatives exclusively with Microchip products. It is your 
+responsibility to comply with third party license terms applicable to your 
+use of third party software (including open source software) that may 
+accompany Microchip software.
+
+THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
+EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
+WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
+PURPOSE.
+
+IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
+INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
+WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
+BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
+FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
+ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
+THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
+*****************************************************************************/
+
+//DOM-IGNORE-END
 
 #include <stdint.h>
 #include "./cryptoSpeedTestData.h"
@@ -15,16 +50,20 @@
 #define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
 #endif
 
-#define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "SHA_BB"
-
-#define DO_LARGE_ZERO_HASH  0
 
 #if !defined(NO_SHA256)
 
 /*************************************************************
- * Raw (input) data definitions.
+ * Data limit definitions.
  *************************************************************/
+#define ZERO_MIN    (44)
+#if defined(__SAML11E16A__) // compiler pre-defined
+#define ZERO_MAX    (512*3)
+#else
+#define ZERO_MAX    (5 * 1024)
+#endif
+
 
 /*************************************************************
  * Raw (input) data definitions for run-time defined
@@ -64,14 +103,6 @@ static const cryptoST_testDetail_t test_item =
 /*************************************************************
  * API handlers
  *************************************************************/
-#define ZERO_MIN    (44)
-#if defined(__SAML11E16A__) // compiler pre-defined
-#define ZERO_MAX    (512*3)
-#else
-#define ZERO_MAX    (5 * 1024)
-#endif
-static unsigned int zero_test = 0;
-
 static char * openData_func(void)
 {
     /* Allocate the largest required buffer now, because there
@@ -95,6 +126,8 @@ static char * closeData_func(void)
     satcZ.vector.data = NULL;
     return NULL;
 }
+
+static unsigned int zero_test = 0;
 #else
 #define closeData_func ((void*)0)
 #define openData_func  ((void*)0)
@@ -120,9 +153,6 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
         if (old->rawData == &satcZ)
         {
             __NOP();
-#if DO_LARGE_ZERO_HASH
-            old = (void*)0;
-#else
             // This test is about verification of mechanics when the
             // buffer size is near the cross-over from 1 block to 2.
             if (0 == zero_test)
@@ -150,7 +180,6 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
             wc_Sha256Hash(satcZ.vector.data,
                           satcZ.vector.length,
                           (uint8_t*)old->io.hash.out.hash.data);
-#endif
         }
         return old;
     } while (0);
