@@ -82,13 +82,13 @@ void TC0_TimerInitialize( void )
     }
 
     /* Configure counter mode & prescaler */
-    TC0_REGS->COUNT16.TC_CTRLA = TC_CTRLA_MODE_COUNT16 | TC_CTRLA_PRESCALER_DIV1 | TC_CTRLA_PRESCSYNC_PRESC ;
+    TC0_REGS->COUNT16.TC_CTRLA = TC_CTRLA_MODE_COUNT16 | TC_CTRLA_PRESCALER_DIV16 | TC_CTRLA_PRESCSYNC_PRESC ;
 
     /* Configure in Match Frequency Mode */
     TC0_REGS->COUNT16.TC_WAVE = TC_WAVE_WAVEGEN_MPWM;
 
     /* Configure timer period */
-    TC0_REGS->COUNT16.TC_CC[0U] = 60000U;
+    TC0_REGS->COUNT16.TC_CC[0U] = 3750U;
 
     /* Clear all interrupt flags */
     TC0_REGS->COUNT16.TC_INTFLAG = TC_INTFLAG_Msk;
@@ -126,7 +126,7 @@ void TC0_TimerStop( void )
 
 uint32_t TC0_TimerFrequencyGet( void )
 {
-    return (uint32_t)(60000000UL);
+    return (uint32_t)(3750000UL);
 }
 
 /* Get the current timer counter value */

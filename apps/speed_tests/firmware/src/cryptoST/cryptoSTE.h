@@ -91,7 +91,7 @@ typedef struct cryptoSTE_parameters_s
     bool compareHWvSW;
 } cryptoSTE_parameters_t;
 /* Note: useLocalDriverEntryPoints 
- * true  :: the optimized version of the function driver will be used and
+ * true  :: the hw version of the function driver will be used and
  *          will probably give the best-in-class performance; not all
  *          drivers have a local, high-speed version.
  * false :: the WC entry point will be used and will give real-world

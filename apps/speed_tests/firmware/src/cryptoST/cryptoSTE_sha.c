@@ -240,9 +240,11 @@ const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
                 param->results.testHandler = "CRYA SHA 224";
                 return cryptoSTE_sha(td, param, crya_sha224);
 #endif
+#if !defined(NO_SHA256)
             case ET_SHA_256:
                 param->results.testHandler = "CRYA SHA 256";
                 return cryptoSTE_sha(td, param, crya_sha256);
+#endif
             default:
                 param->results.testHandler = "CRYA SHA";
                 return "SHA size not supported";

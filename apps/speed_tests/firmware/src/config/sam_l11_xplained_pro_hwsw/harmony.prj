@@ -163,8 +163,8 @@
           <Name dnOrder="1">crypt_aes_u2238.c</Name>
           <LogicalPath dnOrder="2">wolfcrypt/port</LogicalPath>
           <PhysicalPath dnOrder="3">/../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/</PhysicalPath>
-          <GeneratedChecksum dnOrder="4">13F27880611DC3E056C1C1B57B77518B</GeneratedChecksum>
-          <UserChecksum dnOrder="5">13F27880611DC3E056C1C1B57B77518B</UserChecksum>
+          <GeneratedChecksum dnOrder="4">FB00ED96E1A9746BCAF6DA78FDECE2C3</GeneratedChecksum>
+          <UserChecksum dnOrder="5">FB00ED96E1A9746BCAF6DA78FDECE2C3</UserChecksum>
         </File>
         <File dnOrder="20">
           <Type dnOrder="0">SOURCE</Type>

@@ -120,8 +120,10 @@ struct crya_tellTale_SAML11_s crya_tellTale = {0};
 #if defined(WOLFSSL_AES_128)
 /* These wrappers provide parameter validation and instrumentation
  * for the ROM-based CRYA AES functions, if they exist.
+ * TODO: these are duplicated in the drivers/crya library; use those
  */
 #if defined(secure_crya_aes128_encrypt)
+__attribute__((used))
 static void crya_aes128_encrypt
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst)
 {
@@ -138,6 +140,7 @@ static void crya_aes128_encrypt
 #endif
 
 #if defined(secure_crya_aes128_decrypt)
+__attribute__((used))
 static void crya_aes128_decrypt
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst)
 {
@@ -156,17 +159,20 @@ static void crya_aes128_decrypt
 
 #if !defined(NO_SHA256) \
  && defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803)
-
-#include "wolfssl/wolfcrypt/sha256.h"
  /* This wrapper provides the RAM buffer necessary for proper CRYA
   * data processing, and anticipates when a mutex will be required for
   * access to the CRYA hardware.
   */
+__attribute__((used))
 static void crya_sha256_process(uint32_t hash_in_out[8], const uint8_t data[64])
 {
     // TODO: figure out some sort of mutex for the CRYA hardware.
     uint32_t ram_buf[64]; // 64 full words
     
+    assert_dbug(hash_in_out && (0 == ((uint32_t)hash_in_out%4))); // BAD_ALIGN_E
+    assert_dbug(data && (0 == ((uint32_t)data%4)));
+    // assert_dbug(ram_buf && (0 == ((uint32_t)ram_buf%4))); == always true
+
     TELLTALE(crya_sha256_process);
     secure_crya_sha256_process(hash_in_out,data,ram_buf);
     BP_NOP();
@@ -178,6 +184,8 @@ static void crya_sha256_process(uint32_t hash_in_out[8], const uint8_t data[64])
    *********************************************************************
    *********************************************************************
  */
+#include "wolfssl/wolfcrypt/sha256.h"
+
 int wc_InitSha256_ex(wc_Sha256* sha256, void* heap, int devId)
 {
     // (void*)heap;

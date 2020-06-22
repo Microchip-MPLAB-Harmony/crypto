@@ -49,12 +49,18 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <ctype.h>  // for isprint()
 #include <stdbool.h>
 #include <stdio.h>
+#include <assert.h>
+#include "cryptoST_buildInfo.h"
+
+#if !defined(SEP)
+#define SEP ","
+#endif
 
 // Quote marks on strings but not numeric fields
-static const char * const formatTextField = ",\"%s\"";
-// static const char * const formatLintField = ",%ld";
-static const char * const formatSintField = ",%d";
-static const char * const formatUintField = ",%lu";
+static const char * const formatTextField = SEP "\"%s\"";
+// static const char * const formatLintField = SEP "%ld";
+static const char * const formatSintField = SEP "%d";
+static const char * const formatUintField = SEP "%lu";
 #define PRINT_FIELD(msg)    printf(formatTextField,msg);
 #define PRINT_LINT(val)     printf(formatLintField,val);
 #define PRINT_INT(val)      printf(formatSintField,val);
@@ -137,33 +143,35 @@ void cryptoST_PRINT_announceElapsedTime_CSV
 {
     if (! CSV_sentHeader)
     {
-        printf( "sep=," CRLF
-                ">>,"
-                "Processor,"
-                "Platform,"
-                "Accelerator,"
-                "Build,"
-                "Fclock,"
-                "Domain,"
-                "Handler,"
-                "DataSize,"
-                "IterateEnc,"
+        printf( "sep=" SEP CRLF    // excel-only it seems
+                ">>" SEP           // line tag
+                "Processor" SEP    // per cryptoST_xx
+                "Platform" SEP     // per cryptoST_xx
+                "Accelerator" SEP  // per cryptoST_xx
+                "Optimized" SEP    // on, but not the level
+                "Build" SEP        // hopefully the git version
+                "Fcpu" SEP         // CPU frequency
+                "Ftimer" SEP       // timer frequency (unit of measure)
+                "Domain" SEP       // test category
+                "Handler" SEP      // functional test driver
+                "DataSize" SEP
+                "IterateEnc" SEP   // ...encryption
 #if SHOW_START_STOP
-                "StartTEnc,"
-                "StopTEnc,"
+                "StartTEnc" SEP    // ...encryption
+                "StopTEnc" SEP     // ...encryption
 #else
-                "DeltaTEnc,"
+                "DeltaTEnc" SEP    // ...encryption
 #endif
-                "IterateDec,"
+                "IterateDec" SEP   // ...decryption
 #if SHOW_START_STOP
-                "StartTDec,"
-                "StopTDec,"
+                "StartTDec" SEP    // ...decryption
+                "StopTDec" SEP     // ...decryption
 #else
-                "DeltaTDec,"
+                "DeltaTDec" SEP    // ...decryption
 #endif
-                "Wolf Err,"
-                "Warning,"
-                "Error"
+                "Wolf Err" SEP     // numeric error code
+                "Warning" SEP      // text
+                "Error"            // text
                 CRLF );
         CSV_sentHeader = true;
     }
@@ -172,7 +180,9 @@ void cryptoST_PRINT_announceElapsedTime_CSV
     PRINT_FIELD(labels->processor);
     PRINT_FIELD(labels->platform);
     PRINT_FIELD(labels->accelerator);
+    PRINT_FIELD(cryptoST_buildInfo.optimized);
     PRINT_FIELD(labels->build);
+    PRINT_LUINT(((const long unsigned int)(SYS_TIME_CPU_CLOCK_FREQUENCY)));
     PRINT_LUINT(SYS_TIME_FrequencyGet());
     PRINT_FIELD(testName);
     PRINT_FIELD(results->testHandler);
@@ -184,11 +194,11 @@ void cryptoST_PRINT_announceElapsedTime_CSV
         PRINT_LUINT(results->encryption.start);
         PRINT_LUINT(results->encryption.stop);
     }
-    else { PRINT(",,"); }
+    else { PRINT(SEP SEP); }
 #else
     if (results->encryption.startStopIsValid)
     { PRINT_LUINT(results->encryption.stop - results->encryption.start); }
-    else { PRINT(","); }
+    else { PRINT(SEP); }
 #endif
 #if INCLUDE_DECRYPTION
     PRINT_INT(results->decryption.iterations);
@@ -198,25 +208,25 @@ void cryptoST_PRINT_announceElapsedTime_CSV
         PRINT_LUINT(results->decryption.start);
         PRINT_LUINT(results->decryption.stop);
     }
-    else { PRINT(",,"); }
+    else { PRINT(SEP SEP); }
 #else
     if (results->decryption.startStopIsValid)
     { PRINT_LUINT(results->decryption.stop - results->decryption.start); }
-    else { PRINT(","); }
+    else { PRINT(SEP); }
 #endif
 #else
 #if SHOW_START_STOP
-    PRINT(",,,"); // decryption placeholders
+    PRINT(SEP SEP SEP); // decryption placeholders
 #else
-    PRINT(",,"); // decryption placeholders
+    PRINT(SEP SEP); // decryption placeholders
 #endif
 #endif
     if (results->wolfSSLresult)
     { PRINT_INT(results->wolfSSLresult); }
-    else { PRINT(","); }
+    else { PRINT(SEP); }
     PRINT_FIELD(results->warningMessage?results->warningMessage:"");
     PRINT_FIELD(results->errorMessage?results->errorMessage:"");
-    PRINT_WAIT(CRLF); // something w/o a comma
+    PRINT_WAIT(CRLF); // something w/o a separator
 }
 
 

@@ -237,6 +237,8 @@ static int RSASP1_ND(
     return wolfSSLresult;
 }
 
+/* EMSA-PKCS1-v1_5 reqiures that the given hash value be padded to a
+   fixed size block before encryption. */
 static uint8_t * PKCSpadding(uint8_t * bufferPtr, size_t PS)
 {
     PS -= 3; // don't count the non-FF
@@ -575,6 +577,15 @@ static const char * cryptoSTE_rsa_verify_ne_timed
             { param->results.errorMessage = "key initialization failed"; }
             else
             {
+#if defined(WOLF_CRYPTO_CB)
+                /* Magic when using a callback flavor of RSA (e.g., PUKCC).
+                 * There is no WC InitRsaKey() that will load devId, and WC
+                 * silently falls back to the SW version. Set devId
+                 * explicitly to invoke the HW method. */
+                rsaKey.devId = 0;
+                /* The formal value is not recorded by CRYPT_WCCB_Initialize() 
+                 * so we are forced to repeat that faux pas. */
+#endif
                 if ((0 != mp_read_unsigned_bin(&rsaKey.n,
                     td->io.rsav.in.n->data, td->io.rsav.in.n->length))
                  || (0 != mp_read_unsigned_bin(&rsaKey.e,
@@ -641,7 +652,8 @@ static const char * cryptoSTE_rsa_verify_ne_timed
  * (as defined below). Some values (field lengths) vary with hash size.
  * Headers are detailed in pkcs-1v2.12.pdf, in the notes for EMSA-PKCS1-V1_5. */
 
-#define NAME    "WOLF RSA"
+#define WOLF_NAME    "WOLF RSA"
+#define MCHP_NAME    "MCHP RSA"
 
 #if defined(NO_SHA224)
 #define test_verify_sha224 (*((rsaTest_t*)0))
@@ -653,7 +665,7 @@ static const uint8_t asn1_header_224[] = {
         0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x04, 0x05,
         0x00, 0x04, 0x1C }; // 19 bytes
 static const rsaTest_t test_verify_sha224 = {
-    .name = NAME " VERIFY224",
+    .name = WOLF_NAME " VERIFY224",
     .hashSize = 224/8,
     .hash = rsa_sha224,
     .timer = cryptoSTE_rsa_verify_ne_timed,
@@ -661,7 +673,7 @@ static const rsaTest_t test_verify_sha224 = {
     .asn1_size = ALENGTH(asn1_header_224),
 };
 static const rsaTest_t test_sign_sha224 = {
-    .name = NAME " SIGN224",
+    .name = WOLF_NAME " SIGN224",
     .hashSize = 224/8,
     .hash = rsa_sha224,
     .timer = cryptoSTE_rsa_sign_der_timed,
@@ -669,7 +681,7 @@ static const rsaTest_t test_sign_sha224 = {
     .asn1_size = ALENGTH(asn1_header_224),
 };
 static const rsaTest_t test_exptmod_sha224 = {
-    .name = NAME " EXPTMOD224",
+    .name = MCHP_NAME " EXPTMOD224",
     .timer = cryptoSTE_rsa_exptmod_timed,
     .hashSize = 224/8,
     .hash = rsa_sha224,
@@ -687,7 +699,7 @@ static const uint8_t asn1_header_256[] = {
         0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
         0x00, 0x04, 0x20 }; // 19 bytes
 static const rsaTest_t test_verify_sha256 = {
-    .name = NAME " VERIFY256",
+    .name = WOLF_NAME " VERIFY256",
     .hashSize = 256/8,
     .hash = rsa_sha256,
     .timer = cryptoSTE_rsa_verify_ne_timed,
@@ -695,16 +707,15 @@ static const rsaTest_t test_verify_sha256 = {
     .asn1_size = ALENGTH(asn1_header_256),
 };
 static const rsaTest_t test_sign_sha256 = {
-    .name = NAME " SIGN256",
+    .name = WOLF_NAME " SIGN256",
     .hashSize = 256/8,
     .hash = rsa_sha256,
     .timer = cryptoSTE_rsa_sign_der_timed,
     .asn1_header = asn1_header_256,
     .asn1_size = ALENGTH(asn1_header_256),
 };
-
 static const rsaTest_t test_exptmod_sha256 = {
-    .name = NAME " EXPTMOD256",
+    .name = MCHP_NAME " EXPTMOD256",
     .timer = cryptoSTE_rsa_exptmod_timed,
     .hashSize = 256/8,
     .hash = rsa_sha256,
@@ -713,8 +724,10 @@ static const rsaTest_t test_exptmod_sha256 = {
 };
 #endif // no SHA256
 
+/* This flavor encrypts the given data rather than the hash of the data.
+ */
 static const rsaTest_t test_exptmod_none = {
-    .name = NAME " EXPTMOD",
+    .name = MCHP_NAME " EXPTMOD",
     .timer = cryptoSTE_rsa_exptmod_timed,
     .hashSize = 0,
 };

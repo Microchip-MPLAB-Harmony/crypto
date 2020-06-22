@@ -154,6 +154,9 @@ void cryptoST(void)
     execData.configuration.parameters.compareHWvSW = HAVE_HW_DRIVERS;
     cryptoSTE_announceParameters(&execData.configuration);
 
+    // klk 
+    execData.configuration.parameters.iterationOverride = 2,
+    
     printf("-----BEGIN TIMED TESTING-----" CRLF);
     cryptoSTE(&execData);
     printf("-----END TIMED TESTING-----" CRLF);

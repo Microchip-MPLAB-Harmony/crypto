@@ -99,7 +99,7 @@ int main ( void )
     }
 
     /* Execution should not come here during normal operation */
-    __conditional_software_breakpoint(0);
+    __conditional_software_breakpoint   (0);
     return ( EXIT_FAILURE );
 }
 
@@ -108,3 +108,4 @@ int main ( void )
  End of File
 */
 
+    
