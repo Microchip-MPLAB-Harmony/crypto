@@ -1013,6 +1013,18 @@ def instantiateComponent(wolfCryptComponent):
     cryptoRsaPssEnabledSymbol.setDescription("Enable RSA PSS Only")
     cryptoRsaPssEnabledSymbol.setDefaultValue(False)
     cryptoRsaPssEnabledSymbol.setVisible(True)
+
+    cryptoRsaKeySize = wolfCryptComponent.createComboSymbol("wolfcrypt_rsaKeySize", cryptoRsaEnabledSymbol, ["2048 bits", "4096 bits",]) 
+    cryptoRsaKeySize.setLabel("Max Key Size") 
+    cryptoRsaKeySize.setDescription("Maximum RSA Key Size") 
+    cryptoRsaKeySize.setDefaultValue("2048 bits") 
+    cryptoRsaKeySize.setVisible(True) 
+    
+    cryptoFPMaxSize = wolfCryptComponent.createIntegerSymbol('wolfcrypt_fpMaxSize', None) 
+    cryptoFPMaxSize.setLabel('FP Max Size') 
+    cryptoFPMaxSize.setVisible(False) 
+    cryptoFPMaxSize.setDefaultValue(4096) 
+    cryptoFPMaxSize.setDependencies(setValueFPMaxSizeRSAKeySize, ["wolfcrypt_rsaKeySize"])
     
     cryptoDhEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_dh", asymmCipherMenu)
     cryptoDhEnabledSymbol.setLabel("Support Diffie-Hellman?")
@@ -1102,7 +1114,13 @@ def instantiateComponent(wolfCryptComponent):
 def handleParentSymbolChange(symbol, event):
     symbol.setVisible(event["value"])
     
-    
+def setValueFPMaxSizeRSAKeySize(symbol, event):
+    rsaKeySize = symbol.getComponent().getSymbolByID("wolfcrypt_rsaKeySize").getValue() 
+    if rsaKeySize == "2048 bits":
+        symbol.setValue(4096) 
+    elif rsaKeySize == "4096 bits":
+        symbol.setValue(8192)
+
 def handleHwDesEnabled(symbol, event):
     global cryptoHwEnabledSymbol
     global cryptoHwDesSupported
