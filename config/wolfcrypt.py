@@ -1020,8 +1020,8 @@ def instantiateComponent(wolfCryptComponent):
     cryptoRsaKeySize.setDefaultValue("2048 bits") 
     cryptoRsaKeySize.setVisible(True) 
     
-    cryptoFPMaxSize = wolfCryptComponent.createIntegerSymbol('wolfcrypt_fpMaxSize', None) 
-    cryptoFPMaxSize.setLabel('FP Max Size') 
+    cryptoFPMaxSize = wolfCryptComponent.createIntegerSymbol('wolfcrypt_certBuffMaxSize', cryptoRsaEnabledSymbol) 
+    cryptoFPMaxSize.setLabel('Cert Buffer Max Size') 
     cryptoFPMaxSize.setVisible(False) 
     cryptoFPMaxSize.setDefaultValue(4096) 
     cryptoFPMaxSize.setDependencies(setValueFPMaxSizeRSAKeySize, ["wolfcrypt_rsaKeySize"])
@@ -1115,7 +1115,7 @@ def handleParentSymbolChange(symbol, event):
     symbol.setVisible(event["value"])
     
 def setValueFPMaxSizeRSAKeySize(symbol, event):
-    rsaKeySize = symbol.getComponent().getSymbolByID("wolfcrypt_rsaKeySize").getValue() 
+    rsaKeySize = symbol.getComponent().getSymbolByID("wolfcrypt_certBuffMaxSize").getValue() 
     if rsaKeySize == "2048 bits":
         symbol.setValue(4096) 
     elif rsaKeySize == "4096 bits":
