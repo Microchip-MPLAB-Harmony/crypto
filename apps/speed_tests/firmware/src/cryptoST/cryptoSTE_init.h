@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include "cryptoSTE.h"
+#include "cryptoSTE_definitions.h"
 
 void cryptoSTE_init(cryptoSTE_localData_t * testInformation);
 

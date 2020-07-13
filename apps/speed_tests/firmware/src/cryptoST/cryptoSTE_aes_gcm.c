@@ -50,8 +50,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
-#include "cryptoSTE.h"
-#include "cryptoST_print.h"
+#include "cryptoSTE_definitions.h"
+#include "cryptoSTE_print.h"
 #include "cryptoSTE_announce.h"
 #include "cryptoSTE_aes_gcm.h"
 #include "cryptoSTE_malloc.h"

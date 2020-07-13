@@ -53,8 +53,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #include <stddef.h>
 #include <stdio.h>
-#include "cryptoSTE.h"
-#include "cryptoST_print.h"
+#include "cryptoSTE_definitions.h"
+#include "cryptoSTE_print.h"
 #include "../test_data/cryptoSpeedTestData.h"
 
 #define P_BUMP  2   /* print indent for listing data */

@@ -48,6 +48,9 @@
             <logicalFolder name="f3" displayName="cache" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_hwsw/system/cache/sys_cache.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="f4" displayName="debug" projectFiles="true">
+              <itemPath>../src/config/sam_e54_xplained_pro_hwsw/system/debug/sys_debug.h</itemPath>
+            </logicalFolder>
             <logicalFolder name="f2" displayName="int" projectFiles="true">
               <itemPath>../src/config/sam_e54_xplained_pro_hwsw/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/sam_e54_xplained_pro_hwsw/system/int/sys_int_mapping.h</itemPath>
@@ -83,7 +86,6 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_malloc.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_sha.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoST_execute.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoST_print.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="osal" projectFiles="true">
@@ -138,6 +140,7 @@
             <itemPath>../src/packs/ATSAME54P20A_DFP/pio/same54p20a.h</itemPath>
           </logicalFolder>
           <itemPath>../src/packs/ATSAME54P20A_DFP/device.h</itemPath>
+          <itemPath>../src/packs/ATSAME54P20A_DFP/atsame54p20a_compat.h</itemPath>
           <itemPath>../src/packs/ATSAME54P20A_DFP/atsame54p20a.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="CMSIS" projectFiles="true">
@@ -360,6 +363,9 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
+        <logicalFolder name="f1" displayName="platform" projectFiles="true">
+          <itemPath>../src/cryptoST/platform/cryptoST_E54.c</itemPath>
+        </logicalFolder>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
@@ -369,7 +375,6 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_generate.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_malloc.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_sha.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoST_print.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_announce.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
@@ -379,8 +384,10 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.h</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_rsa.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_rsa.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoST_buildInfo.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoST_buildInfo.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.h</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.c</itemPath>
@@ -509,7 +516,6 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
       </logicalFolder>
-      <itemPath>cryptoST_E54.c</itemPath>
       <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
     </logicalFolder>
@@ -522,6 +528,8 @@
       <itemPath>Makefile</itemPath>
       <itemPath>dist/sam_e54_xplained_pro_hwsw/debug/sam_e54_xplained_pro_hwsw.X.debug.elf</itemPath>
       <itemPath>dist/sam_e54_xplained_pro_hwsw/debug/sam_e54_xplained_pro_hwsw.X.debug.map</itemPath>
+      <itemPath>../src/config/sam_e54_xplained_pro_hwsw/harmony.prj</itemPath>
+      <itemPath>../src/config/sam_e54_xplained_pro_hwsw/sam_e54_xplained_pro_hwsw.xml</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -605,7 +613,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src;../src/config/sam_e54_xplained_pro_hwsw;../src/packs/ATSAME54P20A_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm;../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl"/>
+                  value="../src;../src/config/sam_e54_xplained_pro_hwsw;../src/packs/ATSAME54P20A_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>

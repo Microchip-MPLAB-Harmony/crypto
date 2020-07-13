@@ -12,13 +12,12 @@
 extern "C" {
 #endif
 
-#include <stdbool.h>
 typedef struct cryptoSTE_buildInfo_s
 {
-    const char buildDate[16];
-    const char buildTime[16];
-    const char optimized[4];  // yes or no, not the optimization level
-    const char processor[16];
+    const char * const buildDate;
+    const char * const buildTime;
+    const char * const optimized;  // yes or no, not the optimization level
+    const char * const processor;
 } cryptoSTE_buildInfo_t;
 
 extern cryptoSTE_buildInfo_t cryptoSTE_buildInfo;

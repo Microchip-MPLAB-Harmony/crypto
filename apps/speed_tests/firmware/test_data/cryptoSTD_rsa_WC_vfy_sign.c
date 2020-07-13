@@ -48,7 +48,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 #include "./cryptoSpeedTestData.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 
 #define DATA_PACKAGE_NAME "WC_vfy_only"
 #define ALIGN4 __attribute__((aligned(4)))
@@ -333,7 +333,7 @@ static const cryptoST_testData_t private_key_2048_DER = {
 /*************************************************************
  * Raw (input) data definitions.
  *************************************************************/
-#if !defined(NO_SHA256)
+#if !defined(NO_RSA) && !defined(NO_SHA256)
 static const unsigned char msg[] = {
     0x54, 0x68, 0x69, 0x73, 0x20, 0x69, 0x73, 0x20,
     0x74, 0x68, 0x65, 0x20, 0x6d, 0x65, 0x73, 0x73,

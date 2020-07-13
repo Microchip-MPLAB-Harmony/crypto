@@ -11,8 +11,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include "cryptoSTE.h"
-#include "cryptoST_print.h"
+#include "cryptoSTE_definitions.h"
+#include "cryptoSTE_print.h"
 #include "cryptoSTE_announce.h"
 #include "cryptoSTE_aes_cbc.h"
 #include "../test_data/cryptoSpeedTestData.h"

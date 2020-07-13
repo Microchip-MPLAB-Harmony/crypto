@@ -40,7 +40,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #include <stdint.h>
 #include "./cryptoSpeedTestData.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 #include "configuration.h"
 
 #if !defined(__NOP)

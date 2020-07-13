@@ -49,7 +49,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 extern "C" {
 #endif
 
-#include "cryptoSTE.h"
+#include "cryptoSTE_definitions.h"
     
 void cryptoSTE(cryptoSTE_localData_t * meMySelf);
 

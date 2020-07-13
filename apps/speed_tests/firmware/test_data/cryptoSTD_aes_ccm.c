@@ -70,7 +70,7 @@ The key principles are these:
 #include "./cryptoSpeedTestData.h"
 #include "cryptoST/cryptoSTE_generate.h"
 #include "cryptoST/cryptoSTE_malloc.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 #include "cryptoSTD_aes_ccm.h"
 
 #define CONST /* as nothing */

@@ -50,7 +50,7 @@ extern "C" {
 #endif
 
 // #include "../test_data/cryptoSpeedTestData.h"
-#include "cryptoSTE.h"
+#include "cryptoSTE_definitions.h"
 
 void cryptoSTE_announceDetails(int level, const cryptoST_testDetail_t *);
 void cryptoSTE_announceVector(int level, const cryptoST_testVector_t *);

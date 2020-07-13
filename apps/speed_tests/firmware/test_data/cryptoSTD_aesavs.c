@@ -87,7 +87,19 @@ typedef struct keyCipher_s
     bytes16_t cipher;
 } keyCipher_t;
 
+static union
+{
+    uint8_t buffer16[16];
+    uint8_t buffer24[24];
+    uint8_t buffer32[32];
+} buffer = {0};
 
+static const union
+{
+    uint8_t zero16[16];
+    uint8_t zero24[24];
+    uint8_t zero32[32];
+} zero = {0};
 
 // *****************************************************************************
 // *****************************************************************************
@@ -95,11 +107,8 @@ typedef struct keyCipher_s
 // *****************************************************************************
 // *****************************************************************************
 #if defined(WOLFSSL_AES_128)
-static uint8_t buffer16[16] = {0};
-static const uint8_t zero16[16] = {0};
-
 /* not constant */
-static cryptoST_testVector_t GFSBox_KAT =
+static cryptoST_testVector_t GFSBox_KAT128 =
 {
     .name = "AESAVS_GFSKAT",
     .source = dataSource,
@@ -107,7 +116,7 @@ static cryptoST_testVector_t GFSBox_KAT =
     .vector.length = 16,
 };
 
-static const cryptoST_testVector_t KeySBox_KAT =
+static const cryptoST_testVector_t KeySBox_KAT128 =
 {
     .name = "AESAVS_KeySKAT",
     .source = dataSource,
@@ -115,15 +124,15 @@ static const cryptoST_testVector_t KeySBox_KAT =
     .vector.length = 16,
 };
 
-static const cryptoST_testVector_t VarText_KAT =
+static const cryptoST_testVector_t VarText_KAT128 =
 {
     .name = "AESAVS_VarTextKAT",
     .source = dataSource,
-    .vector.data = buffer16, 
+    .vector.data = buffer.buffer16, 
     .vector.length = 16,
 };
 
-static const cryptoST_testVector_t VarKey_KAT =
+static const cryptoST_testVector_t VarKey_KAT128 =
 {
     .name = "AESAVS_VarKeyKAT",
     .source = dataSource,
@@ -133,7 +142,7 @@ static const cryptoST_testVector_t VarKey_KAT =
 
 /* Tabulations of the various keys and results detailed in the source document. */
 /* Appendix B */
-static const plainCipher_t GFSBox_detail[] = {
+static const plainCipher_t GFSBox_detail128[] = {
     {
 .plain  = {0xf3,0x44,0x81,0xec,0x3c,0xc6,0x27,0xba,0xcd,0x5d,0xc3,0xfb,0x08,0xf2,0x73,0xe6},
 .cipher = {0x03,0x36,0x76,0x3e,0x96,0x6d,0x92,0x59,0x5a,0x56,0x7c,0xc9,0xce,0x53,0x7f,0x5e},
@@ -154,7 +163,7 @@ static const plainCipher_t GFSBox_detail[] = {
 };
 
 /* Appendix C */
-static const keyCipher_t KeySBox_detail[] = {
+static const keyCipher_t KeySBox_detail128[] = {
     {
 .key    = {0x10,0xa5,0x88,0x69,0xd7,0x4b,0xe5,0xa3,0x74,0xcf,0x86,0x7c,0xfb,0x47,0x38,0x59},
 .cipher = {0x6d,0x25,0x1e,0x69,0x44,0xb0,0x51,0xe0,0x4e,0xaa,0x6f,0xb4,0xdb,0xf7,0x84,0x65},
@@ -175,7 +184,7 @@ static const keyCipher_t KeySBox_detail[] = {
 };
 
 /* Appendix D */
-static const bytes16_t VarText_cipher[] = { // data is generated algorithmically
+static const bytes16_t VarText_cipher128[] = { // data is generated algorithmically
     {0x3a,0xd7,0x8e,0x72,0x6c,0x1e,0xc0,0x2b,0x7e,0xbf,0xe9,0x2b,0x23,0xd9,0xec,0x34},
     {0xaa,0xe5,0x93,0x9c,0x8e,0xfd,0xf2,0xf0,0x4e,0x60,0xb9,0xfe,0x71,0x17,0xb2,0xc2},
     {0xf0,0x31,0xd4,0xd7,0x4f,0x5d,0xcb,0xf3,0x9d,0xaa,0xf8,0xca,0x3a,0xf6,0xe5,0x27},
@@ -184,7 +193,7 @@ static const bytes16_t VarText_cipher[] = { // data is generated algorithmically
 };
 
 /* Appendix E */
-static const bytes16_t VarKey_cipher[] = { // keys are generated algorithmically
+static const bytes16_t VarKey_cipher128[] = { // keys are generated algorithmically
     {0x0e,0xdd,0x33,0xd3,0xc6,0x21,0xe5,0x46,0x45,0x5b,0xd8,0xba,0x14,0x18,0xbe,0xc8},
     {0x4b,0xc3,0xf8,0x83,0x45,0x0c,0x11,0x3c,0x64,0xca,0x42,0xe1,0x11,0x2a,0x9e,0x87},
     {0x72,0xa1,0xda,0x77,0x0f,0x5d,0x7a,0xc4,0xc9,0xef,0x94,0xd8,0x22,0xaf,0xfd,0x97},
@@ -199,7 +208,7 @@ static const bytes16_t VarKey_cipher[] = { // keys are generated algorithmically
 // *****************************************************************************
 // *****************************************************************************
 #if defined(WOLFSSL_AES_192)
-// TODO: #error "No tests defined for AES192"
+// TODO: "Transcribe test data from AESAVS.pdf for AES192"
 #endif // WOLFSSL_AES_192
 
 // *****************************************************************************
@@ -208,7 +217,7 @@ static const bytes16_t VarKey_cipher[] = { // keys are generated algorithmically
 // *****************************************************************************
 // *****************************************************************************
 #if defined(WOLFSSL_AES_256)
-// TODO: #error "No tests defined for AES256"
+// TODO: "Transcribe test data from AESAVS.pdf for AES256"
 #endif // WOLFSSL_AES_256
 
 // *****************************************************************************
@@ -258,96 +267,155 @@ static cryptoST_testDetail_t testDetail =
 };
 #define mutableKey  testDetail.io.sym.in.key
 
-/*************************************************************
+/***********************************************************************
  * API handlers
- *************************************************************/
-static int detailCounter;
+ * Each test group (AES128, AES256, etc) has both a detailed test list
+ * and specific set-up requirements based on subTest type, and each
+ * can be disabled by H3 controls, so we treat them all separately.
+ **********************************************************************/
+static int detailCounter; // persistant
+
+#if defined(WOLFSSL_AES_128)
+static const cryptoST_testVector_t * next_aes_GFSBox_KAT128(const cryptoST_testVector_t * oldData)
+{
+    if (0 == detailCounter)
+    { testDetail.pedigree = PDF " appendix B"; }
+
+    if (ALENGTH(GFSBox_detail128) > detailCounter)
+    {
+        /* Plain and cipher are provided explicitly; key is constant. */
+        const plainCipher_t * newData = &GFSBox_detail128[detailCounter];
+        testDetail.io.sym.out.cipher.data = (uint8_t*)(newData->cipher);
+        mutableKey.data = (uint8_t*)zero.zero16;
+        mutableKey.length = sizeof(buffer.buffer16);
+        GFSBox_KAT128.vector.data = (uint8_t*)(newData->plain);
+        detailCounter++;
+        return(oldData);
+    }
+    else return 0;
+}
+
+static const cryptoST_testVector_t * next_aes_KeySBox_KAT128(const cryptoST_testVector_t * oldData)
+{
+    if (0 == detailCounter)
+    { testDetail.pedigree = PDF " appendix C"; }
+
+    if (ALENGTH(KeySBox_detail128) > detailCounter)
+    {
+        /* Key and cipher are provided explicitly; data is constant. */
+        const keyCipher_t * newData = &KeySBox_detail128[detailCounter];
+        testDetail.io.sym.out.cipher.data = (uint8_t*)(newData->cipher);
+        mutableKey.data = (uint8_t*)(newData->key);
+        detailCounter++;
+        return(oldData);
+    }
+    else return 0;
+}
+
+static const cryptoST_testVector_t * next_aes_VarText_KAT128(const cryptoST_testVector_t * oldData)
+{
+    if (0 == detailCounter)
+    { testDetail.pedigree = PDF " appendix D"; }
+
+    if (ALENGTH(VarText_cipher128) > detailCounter)
+    {
+        /* Cipher is explicit; key is constant zero; 
+           data is generated here like 0xFF.E0...00.00 */
+        testDetail.io.sym.out.cipher.data =
+                (uint8_t*)&VarText_cipher128[detailCounter];
+        mutableKey.data = (uint8_t*)zero.zero16;
+        mutableKey.length = sizeof(zero.zero16);
+        setHighBitsOf16Bytes(buffer.buffer16, detailCounter+1);
+        detailCounter++;
+        return(oldData);
+    }
+    else return 0;
+}
+
+static const cryptoST_testVector_t * next_aes_VarKey_KAT128(const cryptoST_testVector_t * oldData)
+{
+    if (0 == detailCounter)
+    { testDetail.pedigree = PDF " appendix E"; }
+
+    if (ALENGTH(VarKey_cipher128) > detailCounter)
+    {
+        /* Cipher is explicit; data is constant zero;
+           key is generated here like 0xFF.FF.F0...00.00 */
+        testDetail.io.sym.out.cipher.data = 
+                (uint8_t*)&VarKey_cipher128[detailCounter];
+        mutableKey.data = (uint8_t*)buffer.buffer16;
+        mutableKey.length = sizeof(buffer.buffer16);
+        setHighBitsOf16Bytes(buffer.buffer16, detailCounter+1);
+        detailCounter++;
+        return(oldData);
+    }
+    else return 0;
+}
+#endif // WOLFSSL_AES_128
+#if defined(WOLFSSL_AES_192)
+#endif // WOLFSSL_AES_192
+#if defined(WOLFSSL_AES_256)
+#endif // WOLFSSL_AES_256
+
+/****************************************************************************
+ * Test API
+ * Each type of test is provided by a custom generator, as discriminated by
+ * the testDetail data structure. However, we cannot switch on pointers so
+ * all the structures are in a list.
+ ****************************************************************************/
+typedef const cryptoST_testVector_t * nextData_t(const cryptoST_testVector_t * const);
+static struct detailDictionary_s 
+{ const cryptoST_testVector_t * const detail; nextData_t * const nextData; }
+const detailDictionary[] =
+{
+#if defined(WOLFSSL_AES_128)
+    { &GFSBox_KAT128,  &next_aes_GFSBox_KAT128 },
+    { &KeySBox_KAT128, &next_aes_KeySBox_KAT128 },
+    { &VarText_KAT128, &next_aes_VarText_KAT128 },
+    { &VarKey_KAT128,  &next_aes_VarKey_KAT128 },
+#endif // WOLFSSL_AES_128
+#if defined(WOLFSSL_AES_192)
+#endif // WOLFSSL_AES_192
+#if defined(WOLFSSL_AES_256)
+#endif // WOLFSSL_AES_256
+    { 0,  0 } // end marker
+};
+
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
-    const cryptoST_testDetail_t * new = 0;
-    if (&testDetail == old) do
+    if (&testDetail == old)
     {
-        detailCounter++;
-        if (&GFSBox_KAT == old->rawData)
+        const struct detailDictionary_s * lookup = &detailDictionary[0];
+        while(lookup->detail)
         {
-            if (ALENGTH(GFSBox_detail) > detailCounter)
+            /* This test will fail if we are on a repeat pass through this
+             * same data generator. It will pass if we used all the data in
+             * the previous generator and looped for a new generator. */
+            if (0 == testDetail.rawData)
             {
-                const plainCipher_t * newData = &GFSBox_detail[detailCounter];
-                testDetail.io.sym.out.cipher.data = (uint8_t*)(newData->cipher);
-                mutableKey.data = (uint8_t*)zero16;
-                mutableKey.length = sizeof(buffer16);
-                GFSBox_KAT.vector.data = (uint8_t*)(newData->plain);
-                new = old;
-                break;
+                testDetail.rawData = lookup->detail;
+                detailCounter = 0;
             }
-            else // move to the next suite of data
-            {
-                detailCounter = -1;
-                testDetail.rawData = &KeySBox_KAT; // appendix C
-                testDetail.pedigree = PDF " appendix C";
-            }
-        }
-        else if (&KeySBox_KAT == old->rawData)
-        {
-            if (ALENGTH(KeySBox_detail) > detailCounter)
-            {
-                const keyCipher_t * newData = &KeySBox_detail[detailCounter];
-                testDetail.io.sym.out.cipher.data = (uint8_t*)(newData->cipher);
-                mutableKey.data = (uint8_t*)(newData->key);
-                new = old;
-                break;
-            }
-            else // move to the next suite of data
-            {
-                detailCounter = -1;
-                testDetail.rawData = &VarText_KAT; // appendix D
-                testDetail.pedigree = PDF " appendix D";
-                mutableKey.data = (uint8_t*)zero16;
-                mutableKey.length = sizeof(zero16);
-                setHighBitsOf16Bytes(buffer16, 0);
-            }
-        }
-        else if (&VarText_KAT == old->rawData)
-        {
-            if (ALENGTH(VarText_cipher) > detailCounter)
-            {
-                testDetail.io.sym.out.cipher.data = (uint8_t*)&VarText_cipher[detailCounter];
-                mutableKey.data = (uint8_t*)zero16;
-                setHighBitsOf16Bytes(buffer16, detailCounter+1);
-                new = old;
-                break;
-            }
-            else // move to the next suite of data
-            {
-                detailCounter = -1;
-                testDetail.rawData = &VarKey_KAT; // appendix E
-                testDetail.pedigree = PDF " appendix E";
-                mutableKey.length = sizeof(buffer16);
-            }
-        }
-        else if (&VarKey_KAT == old->rawData)
-        {
-            if (ALENGTH(VarKey_cipher) > detailCounter)
-            {
-                testDetail.io.sym.out.cipher.data = (uint8_t*)&VarKey_cipher[detailCounter];
-                mutableKey.data = (uint8_t*)buffer16;
-                setHighBitsOf16Bytes(buffer16, detailCounter+1);
-                new = old;
-                break;
-            }
-            else break; // all done!
-        }
-        else break;
-    } while (1);
 
-    return new;
+            /* Scan down the list until we get to the "current" detail
+             * data structure, then call the corresponding 'next'.
+             * If we then get a null, move to the next generator. */
+            if (testDetail.rawData == lookup->detail)
+            {
+                testDetail.rawData = (lookup->nextData)(testDetail.rawData);
+                if (testDetail.rawData)
+                    return &testDetail;
+            }
+
+            lookup++;
+        }
+    }
+    return 0;
 }
 
 static const cryptoST_testDetail_t * firstTest(void)
 {
-    detailCounter = -1;
-    testDetail.rawData = &GFSBox_KAT; // appendix B
-    testDetail.pedigree = PDF " appendix B";
+    testDetail.rawData = 0;
     return nextTest(&testDetail);
 };
 #else

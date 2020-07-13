@@ -39,7 +39,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #include <assert.h>
 #include "./cryptoSpeedTestData.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 #include "cryptoST/cryptoSTE_generate.h"
 #include "cryptoST/cryptoSTE_malloc.h"
 #include "configuration.h"
@@ -59,6 +59,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
 #endif
 
+static size_t testSize = 0;
+
 /*************************************************************
  * Raw (input) data definitions.
  *************************************************************/
@@ -74,7 +76,6 @@ static cryptoST_testVector_t softData =
     .vector.data = NULL, // for now
     .vector.length = 0
 };
-#endif
 
 /*************************************************************
  * Golden data definitions.
@@ -104,7 +105,6 @@ static cryptoST_testDetail_t test_item = // one and only
 /*************************************************************
  * API handlers
  *************************************************************/
-static size_t testSize = 0;
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     __NOP();
@@ -147,6 +147,12 @@ static const cryptoST_testDetail_t * firstTest(void)
     testSize = 0;
     return nextTest(&test_item);
 }
+#else // NO_AES
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
+{ return 0; }
+static const cryptoST_testDetail_t * firstTest(void)
+{ return 0; }
+#endif
 
 #if !defined(NO_AES)
 static char * openData_func(void)

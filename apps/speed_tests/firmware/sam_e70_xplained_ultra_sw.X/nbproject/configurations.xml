@@ -6,84 +6,71 @@
                    projectFiles="true">
       <logicalFolder name="f2" displayName="config" projectFiles="true">
         <logicalFolder name="f1"
-                       displayName="sam_e70_xplained_ultra"
+                       displayName="sam_e70_xplained_ultra_sw"
                        projectFiles="true">
           <logicalFolder name="f1" displayName="bsp" projectFiles="true">
-            <itemPath>../src/config/sam_e70_xplained_ultra/bsp/bsp.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/bsp/bsp.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f3" displayName="crypto" projectFiles="true">
-            <itemPath>../src/config/sam_e70_xplained_ultra/crypto/crypto.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/crypto.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f2" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/clk/plib_clk.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="efc" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/efc/plib_efc.h</itemPath>
+            <logicalFolder name="f5" displayName="efc" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/efc/plib_efc.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="nvic" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/nvic/plib_nvic.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/nvic/plib_nvic.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="pio" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/pio/plib_pio.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/pio/plib_pio.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="tc" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/tc/plib_tc0.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/tc/plib_tc_common.h</itemPath>
+            <logicalFolder name="f4" displayName="systick" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/systick/plib_systick.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f6" displayName="usart" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/usart/plib_usart_common.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/usart/plib_usart1.h</itemPath>
+            <logicalFolder name="f6" displayName="tc" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/tc/plib_tc0.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/tc/plib_tc_common.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f7" displayName="usart" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/usart/plib_usart_common.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/usart/plib_usart1.h</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f4" displayName="system" projectFiles="true">
             <logicalFolder name="f2" displayName="cache" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/cache/sys_cache.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/cache/sys_cache.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f3" displayName="dma" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/dma/sys_dma.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/dma/sys_dma_mapping.h</itemPath>
+            <logicalFolder name="f3" displayName="debug" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/debug/sys_debug.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="int" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/int/sys_int.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/int/sys_int_mapping.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/sys_int.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/sys_int_mapping.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f4" displayName="time" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/time/sys_time.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/time/sys_time_definitions.h</itemPath>
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/time/src/sys_time_local.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/time/sys_time.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/time/sys_time_definitions.h</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/time/src/sys_time_local.h</itemPath>
             </logicalFolder>
-            <itemPath>../src/config/sam_e70_xplained_ultra/system/system.h</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra/system/system_common.h</itemPath>
-            <itemPath>../src/config/sam_e70_xplained_ultra/system/system_module.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/system.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/system_common.h</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/system_module.h</itemPath>
           </logicalFolder>
-          <itemPath>../src/config/sam_e70_xplained_ultra/config.h</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/device_cache.h</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/toolchain_specifics.h</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/definitions.h</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/user.h</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/configuration.h</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/config.h</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/device_cache.h</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/toolchain_specifics.h</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/definitions.h</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/user.h</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/configuration.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f5" displayName="cryptoST" projectFiles="true">
-        <itemPath>../src/cryptoST/cryptoST.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_aes_cfb.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_generate.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_malloc.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoST_execute.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoST_print.h</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_announce.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.h</itemPath>
-      </logicalFolder>
       <logicalFolder name="f4" displayName="osal" projectFiles="true">
-        <itemPath>../src/config/sam_e70_xplained_ultra/osal/osal.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra/osal/osal_definitions.h</itemPath>
-        <itemPath>../src/config/sam_e70_xplained_ultra/osal/osal_impl_basic.h</itemPath>
+        <itemPath>../src/config/sam_e70_xplained_ultra_sw/osal/osal.h</itemPath>
+        <itemPath>../src/config/sam_e70_xplained_ultra_sw/osal/osal_definitions.h</itemPath>
+        <itemPath>../src/config/sam_e70_xplained_ultra_sw/osal/osal_impl_basic.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="packs" projectFiles="true">
         <logicalFolder name="f1" displayName="ATSAME70Q21B_DFP" projectFiles="true">
@@ -292,77 +279,101 @@
                    projectFiles="true">
       <logicalFolder name="f2" displayName="config" projectFiles="true">
         <logicalFolder name="f1"
-                       displayName="sam_e70_xplained_ultra"
+                       displayName="sam_e70_xplained_ultra_sw"
                        projectFiles="true">
           <logicalFolder name="f1" displayName="bsp" projectFiles="true">
-            <itemPath>../src/config/sam_e70_xplained_ultra/bsp/bsp.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/bsp/bsp.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f4" displayName="crypto" projectFiles="true">
-            <itemPath>../src/config/sam_e70_xplained_ultra/crypto/src/crypto.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/crypto/src/crypto.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f3" displayName="peripheral" projectFiles="true">
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/clk/plib_clk.c</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/clk/plib_clk.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="efc" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/efc/plib_efc.c</itemPath>
+            <logicalFolder name="f5" displayName="efc" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/efc/plib_efc.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="nvic" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/nvic/plib_nvic.c</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/nvic/plib_nvic.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="pio" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/pio/plib_pio.c</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/pio/plib_pio.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="tc" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/tc/plib_tc0.c</itemPath>
+            <logicalFolder name="f4" displayName="systick" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/systick/plib_systick.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f6" displayName="usart" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/peripheral/usart/plib_usart1.c</itemPath>
+            <logicalFolder name="f6" displayName="tc" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/tc/plib_tc0.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f7" displayName="usart" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/peripheral/usart/plib_usart1.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="stdio" projectFiles="true">
-            <itemPath>../src/config/sam_e70_xplained_ultra/stdio/xc32_monitor.c</itemPath>
+            <itemPath>../src/config/sam_e70_xplained_ultra_sw/stdio/xc32_monitor.c</itemPath>
           </logicalFolder>
           <logicalFolder name="f5" displayName="system" projectFiles="true">
             <logicalFolder name="f2" displayName="cache" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/cache/sys_cache.c</itemPath>
-            </logicalFolder>
-            <logicalFolder name="f3" displayName="dma" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/dma/sys_dma.c</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/cache/sys_cache.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f1" displayName="int" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/int/src/sys_int.c</itemPath>
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/int/src/sys_int.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="time" projectFiles="true">
-              <itemPath>../src/config/sam_e70_xplained_ultra/system/time/src/sys_time.c</itemPath>
+            <logicalFolder name="f3" displayName="time" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_sw/system/time/src/sys_time.c</itemPath>
             </logicalFolder>
           </logicalFolder>
-          <itemPath>../src/config/sam_e70_xplained_ultra/initialization.c</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/interrupts.c</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/exceptions.c</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/startup_xc32.c</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/libc_syscalls.c</itemPath>
-          <itemPath>../src/config/sam_e70_xplained_ultra/tasks.c</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/initialization.c</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/interrupts.c</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/exceptions.c</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/startup_xc32.c</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/libc_syscalls.c</itemPath>
+          <itemPath>../src/config/sam_e70_xplained_ultra_sw/tasks.c</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f3" displayName="cryptoSTE" projectFiles="true">
+      <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
+        <logicalFolder name="platform" displayName="platform" projectFiles="true">
+          <itemPath>../src/cryptoST/platform/cryptoST_E70.c</itemPath>
+        </logicalFolder>
+        <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_generate.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_malloc.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoST_print.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_sha.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_announce.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_generate.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_init.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_malloc.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_sha.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_utility.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
+        <itemPath>../test_data/cryptoSTD_aesavs.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_aes_ccm.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_aes_ecb.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_des3.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_DS70005365.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_WC_vfy_sign.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_bigBlock.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_nist.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cbc.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cfb.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_ctr.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_gcm.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_zero_aes.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="wolfcrypt" projectFiles="true">
         <logicalFolder name="f1" displayName="port" projectFiles="true">
@@ -452,36 +463,8 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
       </logicalFolder>
-      <itemPath>cryptoST_E70.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/main.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
-    </logicalFolder>
-    <logicalFolder name="test_data" displayName="Test Data" projectFiles="true">
-      <itemPath>../test_data/cryptoSpeedTestData.h</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cfb.c</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cfb.h</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cbc.c</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cbc.h</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_ctr.c</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_ctr.h</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_gcm.c</itemPath>
-      <itemPath>../test_data/cryptoSTD_wolfSSL_aes_gcm.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha224.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha224.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha256.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha256.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha1.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha1.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ccm.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ccm.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.h</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -490,17 +473,17 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/misc.c</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
-      <itemPath>dist/sam_e70_xplained_ultra/debug/sam_e70_xplained_ultra_sw.X.debug.map</itemPath>
+      <itemPath>../src/config/sam_e70_xplained_ultra_sw/harmony.prj</itemPath>
+      <itemPath>../src/config/sam_e70_xplained_ultra_sw/sam_e70_xplained_ultra_sw.xml</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
     <Elem>../src</Elem>
     <Elem>../test_data</Elem>
-    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="sam_e70_xplained_ultra" type="2">
+    <conf name="sam_e70_xplained_ultra_sw" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
         <targetDevice>ATSAME70Q21B</targetDevice>
@@ -508,12 +491,12 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>2.39</languageToolchainVersion>
+        <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
-        <pack name="SAME70_DFP" vendor="Microchip" version="4.1.50"/>
+        <pack name="SAME70_DFP" vendor="Microchip" version="4.2.59"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -533,30 +516,112 @@
         </subordinates>
       </compileType>
       <makeCustomizationType>
-        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
-        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPreStepEnabled>true</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep>touch ../src/cryptoST/cryptoSTE_buildInfo.c</makeCustomizationPreStep>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
         <makeCustomizationPostStep></makeCustomizationPostStep>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="../src/cryptoST/cryptoSTE_aes_gmac.c" ex="true" overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-CO>
-        </C32-CO>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
+      <ARM-AR>
+        <property key="archiver-flags" value="-r"/>
+      </ARM-AR>
+      <ARM-AS>
+        <property key="announce-version" value="false"/>
+        <property key="include-paths" value=""/>
+        <property key="suppress-warnings" value="false"/>
+      </ARM-AS>
+      <ARM-AS-PRE>
+        <property key="announce-version" value="false"/>
+        <property key="include-paths" value=""/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros-undefined" value=""/>
+        <property key="suppress-warnings" value="false"/>
+      </ARM-AS-PRE>
+      <ARM-CPP>
+        <property key="additional-warnings" value="true"/>
+        <property key="called-functions-located" value="true"/>
+        <property key="default-bitfield-type" value="false"/>
+        <property key="default-char-type" value="false"/>
+        <property key="disable-extra-code-exception" value="true"/>
+        <property key="disable-extra-code-generation" value="true"/>
+        <property key="extra-include-directories" value=""/>
+        <property key="extra-warnings" value="false"/>
+        <property key="fast-math" value="false"/>
+        <property key="garbage-collect-data" value="false"/>
+        <property key="garbage-collect-functions" value="true"/>
+        <property key="inhibit-all" value="false"/>
+        <property key="make-warnings-into-errors" value="false"/>
+        <property key="no-system-directories" value="false"/>
+        <property key="optimization-level" value="-Os"/>
+        <property key="position-independent" value="false"/>
+        <property key="preprocess-only" value="false"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros-undefined" value=""/>
+        <property key="strict-ansi" value="false"/>
+        <property key="strict-ansi-errors" value="false"/>
+        <property key="syntax-only" value="false"/>
+        <property key="undefined-identifier" value="false"/>
+        <property key="unsafe-math" value="false"/>
+        <property key="use-rodata" value="false"/>
+        <property key="verbose" value="false"/>
+      </ARM-CPP>
+      <ARM-GCC>
+        <property key="additional-warnings" value="true"/>
+        <property key="called-functions-located" value="true"/>
+        <property key="default-bitfield-type" value="false"/>
+        <property key="default-char-type" value="false"/>
+        <property key="extra-include-directories" value=""/>
+        <property key="extra-warnings" value="false"/>
+        <property key="fast-math" value="false"/>
+        <property key="garbage-collect-data" value="false"/>
+        <property key="garbage-collect-functions" value="true"/>
+        <property key="inhibit-all" value="false"/>
+        <property key="make-warnings-into-errors" value="false"/>
+        <property key="no-system-directories" value="false"/>
+        <property key="optimization-level" value="-Os"/>
+        <property key="position-independent" value="false"/>
+        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros-undefined" value=""/>
+        <property key="strict-ansi" value="false"/>
+        <property key="strict-ansi-errors" value="false"/>
+        <property key="support-ansi" value="false"/>
+        <property key="syntax-only" value="false"/>
+        <property key="undefined-identifier" value="false"/>
+        <property key="unsafe-math" value="false"/>
+        <property key="verbose" value="false"/>
+      </ARM-GCC>
+      <ARM-Global>
+        <property key="bin" value="false"/>
+        <property key="common-include-directories" value=""/>
+        <property key="eep" value="false"/>
+        <property key="hex" value="true"/>
+        <property key="lss" value="false"/>
+        <property key="omit-pack-options" value="false"/>
+        <property key="processor-mode" value="-mthumb"/>
+        <property key="srec" value="false"/>
+        <property key="user-pack-include" value=""/>
+      </ARM-Global>
+      <ARM-LD>
+        <property key="additional-specs" value="--specs=nosys.specs"/>
+        <property key="exclude-standard-libraries" value="false"/>
+        <property key="extra-lib-directories" value=""/>
+        <property key="fast-math" value="false"/>
+        <property key="flash-segment" value=""/>
+        <property key="generate-map-file" value="true"/>
+        <property key="input-libraries" value=""/>
+        <property key="no-default-libs" value="false"/>
+        <property key="no-shared-libraries" value="false"/>
+        <property key="no-startup-files" value="false"/>
+        <property key="omit-symbol-information" value="false"/>
+        <property key="other-options" value=""/>
+        <property key="position-independent" value="false"/>
+        <property key="remove-unused-sections" value="true"/>
+        <property key="size-optimized-library" value="false"/>
+        <property key="sram-segment" value=""/>
+        <property key="unsafe-math" value="false"/>
+      </ARM-LD>
       <AtmelIceTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="communication.interface" value="swd"/>
@@ -585,17 +650,17 @@
         <property key="additional-warnings" value="true"/>
         <property key="addresss-attribute-use" value="false"/>
         <property key="enable-app-io" value="false"/>
-        <property key="enable-omit-frame-pointer" value="true"/>
+        <property key="enable-omit-frame-pointer" value="false"/>
         <property key="enable-symbols" value="true"/>
-        <property key="enable-unroll-loops" value="true"/>
+        <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src/;../src/cryptoST;../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/sam_e70_xplained_ultra;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm"/>
+                  value="../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/sam_e70_xplained_ultra_sw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
         <property key="make-warnings-into-errors" value="true"/>
-        <property key="optimization-level" value="-O3"/>
+        <property key="optimization-level" value="-O1"/>
         <property key="place-data-into-section" value="true"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
@@ -655,7 +720,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="90000"/>
+        <property key="heap-size" value="81920"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
@@ -711,18 +776,22 @@
         <property key="mdtcm" value=""/>
         <property key="mitcm" value=""/>
         <property key="mstacktcm" value="false"/>
+        <property key="omit-pack-options" value="1"/>
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
+        <appendMe value="-D__PROCESSOR__=$(MP_PROCESSOR_OPTION)"/>
       </C32Global>
       <EdbgTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="communication.activationmode" value="nohv"/>
-        <property key="communication.interface" value="jtag"/>
-        <property key="communication.speed" value="${communication.speed.default}"/>
+        <property key="communication.interface" value="swd"/>
+        <property key="communication.speed" value="2.000"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
+        <property key="firmware.toolpack"
+                  value="Press to select which tool pack to use"/>
         <property key="firmware.update.action" value="firmware.update.use.latest"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -739,17 +808,21 @@
         <property key="memories.programmemory.ranges" value="400000-5fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmerToGoFilePath"
-                  value="D:/D_git/mh3/crypto/apps/speed_tests/firmware/sam_e70_xplained_ultra_sw.X/debug/sam_e70_xplained_ultra/sam_e70_xplained_ultra_sw_ptg"/>
+                  value="D:/D_git/mh3/crypto/apps/speed_tests/firmware/sam_e70_xplained_ultra_sw.X/debug/sam_e70_xplained_ultra_sw/sam_e70_xplained_ultra_sw_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
                   value="${memories.dataflash.default}"/>
         <property key="programoptions.preserveeeprom" value="false"/>
         <property key="programoptions.preserveeeprom.ranges" value=""/>
-        <property key="programoptions.preserveprogram.ranges" value="0-2045ffff"/>
+        <property key="programoptions.preserveprogram.ranges" value=""/>
         <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveuserid" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
+        <property key="toolpack.updateoptions"
+                  value="toolpack.updateoptions.uselatestoolpack"/>
+        <property key="toolpack.updateoptions.packversion"
+                  value="Press to select which tool pack to use"/>
         <property key="voltagevalue" value=""/>
       </EdbgTool>
       <PICkit3PlatformTool>
@@ -837,19 +910,13 @@
         <property key="periphComp6.gte" value="gt"/>
         <property key="reset.scl" value="false"/>
         <property key="reset.type" value="MCLR"/>
-        <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
-        <property key="tracecontrol.select" value="0"/>
-        <property key="tracecontrol.stallontracebufferfull" value="false"/>
-        <property key="tracecontrol.timestamp" value="0"/>
-        <property key="tracecontrol.tracebufmax" value="546000"/>
-        <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
-        <property key="tracecontrol.traceresetonrun" value="false"/>
+        <property key="toolpack.updateoptions"
+                  value="toolpack.updateoptions.uselatestoolpack"/>
+        <property key="toolpack.updateoptions.packversion"
+                  value="Press to select which tool pack to use"/>
         <property key="uart0io.output" value="window"/>
         <property key="uart0io.outputfile" value=""/>
         <property key="uart0io.uartioenabled" value="false"/>
-        <property key="uart10io.output" value="window"/>
-        <property key="uart10io.outputfile" value=""/>
-        <property key="uart10io.uartioenabled" value="false"/>
         <property key="uart1io.output" value="window"/>
         <property key="uart1io.outputfile" value=""/>
         <property key="uart1io.uartioenabled" value="false"/>
@@ -868,15 +935,48 @@
         <property key="uart6io.output" value="window"/>
         <property key="uart6io.outputfile" value=""/>
         <property key="uart6io.uartioenabled" value="false"/>
-        <property key="uart7io.output" value="window"/>
-        <property key="uart7io.outputfile" value=""/>
-        <property key="uart7io.uartioenabled" value="false"/>
-        <property key="uart8io.output" value="window"/>
-        <property key="uart8io.outputfile" value=""/>
-        <property key="uart8io.uartioenabled" value="false"/>
-        <property key="uart9io.output" value="window"/>
-        <property key="uart9io.outputfile" value=""/>
-        <property key="uart9io.uartioenabled" value="false"/>
+        <property key="usart0io.output" value="window"/>
+        <property key="usart0io.outputfile" value=""/>
+        <property key="usart0io.uartioenabled" value="false"/>
+        <property key="usart1io.output" value="window"/>
+        <property key="usart1io.outputfile" value=""/>
+        <property key="usart1io.uartioenabled" value="false"/>
+        <property key="usart2io.output" value="window"/>
+        <property key="usart2io.outputfile" value=""/>
+        <property key="usart2io.uartioenabled" value="false"/>
+        <property key="usart3io.output" value="window"/>
+        <property key="usart3io.outputfile" value=""/>
+        <property key="usart3io.uartioenabled" value="false"/>
+        <property key="usart4io.output" value="window"/>
+        <property key="usart4io.outputfile" value=""/>
+        <property key="usart4io.uartioenabled" value="false"/>
+        <property key="usartc0io.output" value="window"/>
+        <property key="usartc0io.outputfile" value=""/>
+        <property key="usartc0io.uartioenabled" value="false"/>
+        <property key="usartc1io.output" value="window"/>
+        <property key="usartc1io.outputfile" value=""/>
+        <property key="usartc1io.uartioenabled" value="false"/>
+        <property key="usartd0io.output" value="window"/>
+        <property key="usartd0io.outputfile" value=""/>
+        <property key="usartd0io.uartioenabled" value="false"/>
+        <property key="usartd1io.output" value="window"/>
+        <property key="usartd1io.outputfile" value=""/>
+        <property key="usartd1io.uartioenabled" value="false"/>
+        <property key="usarte0io.output" value="window"/>
+        <property key="usarte0io.outputfile" value=""/>
+        <property key="usarte0io.uartioenabled" value="false"/>
+        <property key="usarte1io.output" value="window"/>
+        <property key="usarte1io.outputfile" value=""/>
+        <property key="usarte1io.uartioenabled" value="false"/>
+        <property key="usarte2io.output" value="window"/>
+        <property key="usarte2io.outputfile" value=""/>
+        <property key="usarte2io.uartioenabled" value="false"/>
+        <property key="usartf0io.output" value="window"/>
+        <property key="usartf0io.outputfile" value=""/>
+        <property key="usartf0io.uartioenabled" value="false"/>
+        <property key="usartf1io.output" value="window"/>
+        <property key="usartf1io.outputfile" value=""/>
+        <property key="usartf1io.uartioenabled" value="false"/>
         <property key="warningmessagebreakoptions.W0001_CORE_BITREV_MODULO_EN"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0002_CORE_SECURE_MEMORYACCESS"
@@ -1081,6 +1181,10 @@
                   value="report"/>
         <property key="warningmessagebreakoptions.W0245_ADC_BUFREGEN_NOT_ALLOWED"
                   value="report"/>
+        <property key="warningmessagebreakoptions.W0246_ADC_ACCUMULATION_BAD_RESSEL"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W0247_ADC_CONVERSION_BAD_RESSEL"
+                  value="report"/>
         <property key="warningmessagebreakoptions.W0400_PWM_PWM_FASTER_THAN_FOSC"
                   value="report"/>
         <property key="warningmessagebreakoptions.W0600_WDT_2ND_WDT_MR_WRITE"
@@ -1180,6 +1284,8 @@
         <property key="warningmessagebreakoptions.W7003_SMT_WIN_SELECTION_NOT_SUPPORT"
                   value="report"/>
         <property key="warningmessagebreakoptions.W8001_OSC_INVALID_CLOCK_SOURCE"
+                  value="report"/>
+        <property key="warningmessagebreakoptions.W8002_OSC_RESERVED_FEXTOSC"
                   value="report"/>
         <property key="warningmessagebreakoptions.W9001_TMR_GATE_AND_EXTCLOCK_ENABLED"
                   value="report"/>

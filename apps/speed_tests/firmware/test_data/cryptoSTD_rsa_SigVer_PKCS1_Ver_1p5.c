@@ -49,7 +49,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 #include "./cryptoSpeedTestData.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 
 #define DATA_PACKAGE_NAME "PKCS#1_V1p5"
 #define ALIGN4 __attribute__((aligned(4)))
@@ -181,7 +181,7 @@ static const cryptoST_testData_t PU_2048s_720 = {
 /*************************************************************
  * Raw (input) data definitions.
  *************************************************************/
-#if !defined(NO_SHA224)
+#if !defined(NO_RSA) && defined(WOLFSSL_SHA224)
 static const unsigned char msg_719[128] = {
 0xcd, 0xe4, 0xfc, 0xcd, 0x80, 0x9f, 0x88, 0x2f, 0x87, 0x47, 0x9e, 0xff, 0x1c, 0xb6, 0x01, 0x07, 
 0xb1, 0x2d, 0x3f, 0xab, 0xed, 0x45, 0xd8, 0x7a, 0xf1, 0x28, 0xa2, 0x03, 0xdf, 0x00, 0x6c, 0xea, 
@@ -203,7 +203,7 @@ static const cryptoST_testVector_t message_719 =
 };
 #endif // NO_SHA224
 
-#if !defined(NO_SHA256)
+#if !defined(NO_RSA) && !defined(NO_SHA256)
 static const unsigned char msg_763[128] = {
 0x95, 0x12, 0x3c, 0x8d, 0x1b, 0x23, 0x65, 0x40, 0xb8, 0x69, 0x76, 0xa1, 0x1c, 0xea, 0x31, 0xf8, 
 0xbd, 0x4e, 0x6c, 0x54, 0xc2, 0x35, 0x14, 0x7d, 0x20, 0xce, 0x72, 0x2b, 0x03, 0xa6, 0xad, 0x75, 

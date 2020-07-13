@@ -50,11 +50,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
-#include "cryptoSTE.h"
-#include "cryptoST_print.h"
+#include "cryptoSTE_definitions.h"
+#include "cryptoSTE_print.h"
 #include "cryptoSTE_announce.h"
 #include "cryptoSTE_aes_ctr.h"
-#include "../test_data/cryptoSpeedTestData.h"
+#include "../../test_data/cryptoSpeedTestData.h"
 
 // theory: one of these "fixes" build-time issues with wolfssl
 #include <stddef.h>

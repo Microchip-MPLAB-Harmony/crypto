@@ -18,7 +18,7 @@
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/clk/plib_clk.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="efc" projectFiles="true">
+            <logicalFolder name="f5" displayName="efc" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/efc/plib_efc.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="nvic" projectFiles="true">
@@ -27,11 +27,14 @@
             <logicalFolder name="f2" displayName="pio" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/pio/plib_pio.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="tc" projectFiles="true">
+            <logicalFolder name="f4" displayName="systick" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/systick/plib_systick.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f6" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/tc/plib_tc0.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/tc/plib_tc_common.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f6" displayName="usart" projectFiles="true">
+            <logicalFolder name="f7" displayName="usart" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/usart/plib_usart_common.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/usart/plib_usart1.h</itemPath>
             </logicalFolder>
@@ -39,6 +42,9 @@
           <logicalFolder name="f4" displayName="system" projectFiles="true">
             <logicalFolder name="f2" displayName="cache" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/cache/sys_cache.h</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f4" displayName="debug" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/debug/sys_debug.h</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="dma" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/dma/sys_dma.h</itemPath>
@@ -48,7 +54,7 @@
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/int/sys_int.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/int/sys_int_mapping.h</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="time" projectFiles="true">
+            <logicalFolder name="f5" displayName="time" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/time/sys_time.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/time/sys_time_definitions.h</itemPath>
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/system/time/src/sys_time_local.h</itemPath>
@@ -289,7 +295,7 @@
             <logicalFolder name="f1" displayName="clk" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/clk/plib_clk.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f4" displayName="efc" projectFiles="true">
+            <logicalFolder name="f5" displayName="efc" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/efc/plib_efc.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f3" displayName="nvic" projectFiles="true">
@@ -298,10 +304,13 @@
             <logicalFolder name="f2" displayName="pio" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/pio/plib_pio.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f5" displayName="tc" projectFiles="true">
+            <logicalFolder name="f4" displayName="systick" projectFiles="true">
+              <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/systick/plib_systick.c</itemPath>
+            </logicalFolder>
+            <logicalFolder name="f6" displayName="tc" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/tc/plib_tc0.c</itemPath>
             </logicalFolder>
-            <logicalFolder name="f6" displayName="usart" projectFiles="true">
+            <logicalFolder name="f7" displayName="usart" projectFiles="true">
               <itemPath>../src/config/sam_e70_xplained_ultra_hw/peripheral/usart/plib_usart1.c</itemPath>
             </logicalFolder>
           </logicalFolder>
@@ -331,6 +340,9 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
+        <logicalFolder name="f1" displayName="platform" projectFiles="true">
+          <itemPath>../src/cryptoST/platform/cryptoST_E70.c</itemPath>
+        </logicalFolder>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
@@ -343,15 +355,18 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_malloc.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_sha.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoST_print.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_rsa.h</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha224.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha256.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_cbc.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_cfb.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_ctr.c</itemPath>
@@ -359,7 +374,24 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ccm.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha1.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_WC_vfy_sign.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_WC_vfy_sign.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_bigBlock.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_bigBlock.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_nist.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_nist.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_zero_aes.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_zero_aes.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="wolfcrypt" projectFiles="true">
         <logicalFolder name="f1" displayName="port" projectFiles="true">
@@ -449,8 +481,7 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
       </logicalFolder>
-      <itemPath>cryptoST_E70.c</itemPath>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/main.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -460,6 +491,8 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/misc.c</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
+      <itemPath>../src/config/sam_e70_xplained_ultra_hw/harmony.prj</itemPath>
+      <itemPath>../src/config/sam_e70_xplained_ultra_hw/sam_e70_xplained_ultra_hw.xml</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -477,12 +510,12 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>EdbgTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>2.39</languageToolchainVersion>
+        <languageToolchainVersion>2.41</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
         <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
-        <pack name="SAME70_DFP" vendor="Microchip" version="4.1.50"/>
+        <pack name="SAME70_DFP" vendor="Microchip" version="4.2.59"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -502,8 +535,8 @@
         </subordinates>
       </compileType>
       <makeCustomizationType>
-        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
-        <makeCustomizationPreStep></makeCustomizationPreStep>
+        <makeCustomizationPreStepEnabled>true</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep>touch ../src/cryptoST/cryptoSTE_buildInfo.c</makeCustomizationPreStep>
         <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
         <makeCustomizationPostStep></makeCustomizationPostStep>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
@@ -543,7 +576,7 @@
         <property key="enable-unroll-loops" value="true"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/sam_e70_xplained_ultra_hw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/;../src/arm"/>
+                  value="../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/sam_e70_xplained_ultra_hw;../src/packs/ATSAME70Q21B_DFP;../src/packs/CMSIS/CMSIS/Core/Include;../src/packs/CMSIS/"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -561,6 +594,7 @@
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
+        <appendMe value="-D__PROCESSOR__=$(MP_PROCESSOR_OPTION)"/>
       </C32>
       <C32-AR>
         <property key="additional-options-chop-files" value="false"/>
@@ -608,7 +642,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="40960"/>
+        <property key="heap-size" value="100000"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
@@ -664,6 +698,7 @@
         <property key="mdtcm" value=""/>
         <property key="mitcm" value=""/>
         <property key="mstacktcm" value="false"/>
+        <property key="omit-pack-options" value="1"/>
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
@@ -694,6 +729,8 @@
         <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
+        <property key="firmware.toolpack"
+                  value="Press to select which tool pack to use"/>
         <property key="firmware.update.action" value="firmware.update.use.latest"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -709,8 +746,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="400000-5fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
-        <property key="programmerToGoFilePath"
-                  value="D:/D_git/mh3/crypto/apps/speed_tests/firmware/sam_e70_xplained_ultra_hw.X/debug/sam_e70_xplained_ultra_hw/sam_e70_xplained_ultra_hw_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -721,6 +756,10 @@
         <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveuserid" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
+        <property key="toolpack.updateoptions"
+                  value="toolpack.updateoptions.uselatestoolpack"/>
+        <property key="toolpack.updateoptions.packversion"
+                  value="Press to select which tool pack to use"/>
         <property key="voltagevalue" value=""/>
       </EdbgTool>
       <PICkit3PlatformTool>

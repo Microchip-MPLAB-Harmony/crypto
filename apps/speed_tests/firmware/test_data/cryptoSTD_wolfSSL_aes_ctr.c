@@ -41,7 +41,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <stdint.h>
 #include "./cryptoSpeedTestData.h"
 #include "cryptoST/cryptoSTE_malloc.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 #ifdef HAVE_CONFIG_H
     #include <config.h>
 #endif

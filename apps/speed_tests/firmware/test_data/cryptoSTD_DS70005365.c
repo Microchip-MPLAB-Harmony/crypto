@@ -44,7 +44,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "./cryptoSpeedTestData.h"
 #include "cryptoST/cryptoSTE_generate.h"
 #include "cryptoST/cryptoSTE_malloc.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 
 #if !defined(__NOP)
 #define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)

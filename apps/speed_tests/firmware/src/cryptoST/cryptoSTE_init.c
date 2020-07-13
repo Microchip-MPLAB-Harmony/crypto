@@ -50,12 +50,14 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
-#include "cryptoSTE_init.h"
+#include <assert.h>
 #include "configuration.h"
-#include <wolfssl/wolfcrypt/settings.h>
+#include "cryptoST_execute.h"
 #include "../../test_data/cryptoSpeedTestData.h"
 
-// Datasets are screened based on the Harmony configuration.
+/* Datasets are screened based on the Harmony configuration.
+ * This section defines which tests will be included, but
+ * not the order of the tests; duplicates here are OK. */
 #if !defined(NO_SHA)        \
  || !defined(NO_SHA256)     \
  || defined(WOLFSSL_SHA224) \
@@ -89,12 +91,13 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "../test_data/cryptoSTD_wolfSSL_aes_cfb.h"
 #include "../test_data/cryptoSTD_zero_aes.h"
 #endif
+#if !defined(NO_SHA256) || defined(HAVE_AES_ECB)
 #include "../test_data/cryptoSTD_DS70005365.h"
+#endif
 #if !defined(NO_DES3)
 #include "../test_data/cryptoSTD_des3.h"
 #endif
 #if !defined(NO_RSA)
-#include "../test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.h"
 #include "../test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.h"
 #include "../test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.h"
 #include "../test_data/cryptoSTD_rsa_WC_vfy_sign.h"
@@ -124,12 +127,6 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     // Set up a fresh execution -- copy the included API's.
     // Each line here is representative of a #include above,
     // and this list determines test order.
-
-#if 0
-#ifdef CRYPTOSTV_ECC_CAVS14p1_ECCCDH
-    ST_list[numberOfLoadedAPI++] = CAVS14p1_ECCCDH;
-    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
-#endif
 
 #ifdef CRYPTOSTV_ZERO_AES
     ST_list[numberOfLoadedAPI++] = microchip_zero_aes;
@@ -179,9 +176,6 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = microchip_des3;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
-
-#endif
-
 #if defined(CRYPTOSTV_RSA_WC_VFY_SIGN)
     ST_list[numberOfLoadedAPI++] = RSA_WC_vfy_sign;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
@@ -194,12 +188,16 @@ void cryptoSTE_init(cryptoSTE_localData_t * testInformation)
     ST_list[numberOfLoadedAPI++] = CAVS11p4_sigGen15;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
-#if 0 // defined(CRYPTOSTV_RSA_CAVS11p2_sigGenPSS)
+#if defined(CRYPTOSTV_RSA_CAVS11p2_sigGenPSS)
     ST_list[numberOfLoadedAPI++] = CAVS11p2_sigGenPSS;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 #if defined(CRYPTOSTV_RSA_SigVer_PKCS1_Ver_1p5)
     ST_list[numberOfLoadedAPI++] = RSA_SigVer_PKCS1_Ver_1p5;
+    __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
+#endif
+#ifdef CRYPTOSTV_ECC_CAVS14p1_ECCCDH
+    ST_list[numberOfLoadedAPI++] = CAVS14p1_ECCCDH;
     __conditional_software_breakpoint(numberOfLoadedAPI <= API_MAX);
 #endif
 

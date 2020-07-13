@@ -1341,8 +1341,8 @@ end:
     {
         struct timeval now;
 
-        if (gettimeofday(&now, 0) < 0)
-            return GETTIME_ERROR;
+     //   if (gettimeofday(&now, 0) < 0)
+     //       return GETTIME_ERROR;
         /* Convert to milliseconds number. */
         return (word32)(now.tv_sec * 1000 + now.tv_usec / 1000);
     }

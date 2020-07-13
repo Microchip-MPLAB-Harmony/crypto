@@ -53,7 +53,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 #include "./cryptoSpeedTestData.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 
 #define DATA_PACKAGE_NAME "CAVS14p1"
 #define ALIGN4 __attribute__((aligned(4)))

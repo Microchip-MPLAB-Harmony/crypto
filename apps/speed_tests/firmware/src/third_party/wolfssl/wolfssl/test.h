@@ -1429,7 +1429,7 @@ static WC_INLINE unsigned int my_psk_server_tls13_cb(WOLFSSL* ssl,
     static WC_INLINE double current_time(int reset)
     {
         struct timeval tv;
-        gettimeofday(&tv, 0);
+      //  gettimeofday(&tv, 0);
         (void)reset;
 
         return (double)tv.tv_sec + (double)tv.tv_usec / 1000000;

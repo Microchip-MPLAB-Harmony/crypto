@@ -46,8 +46,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 //DOM-IGNORE-END
 
 #include <stddef.h>
-#include "cryptoST_execute.h"
-#include "cryptoST_print.h" // for BASE_LINE
+#include "cryptoSTE_print.h" // for BASE_LINE
 #include "cryptoSTE_generate.h"
 
 /*************************************************************

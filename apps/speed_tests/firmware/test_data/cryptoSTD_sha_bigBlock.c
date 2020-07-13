@@ -42,7 +42,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "./cryptoSpeedTestData.h"
 #include "cryptoST/cryptoSTE_generate.h"
 #include "cryptoST/cryptoSTE_malloc.h"
-#include "cryptoST/cryptoST_print.h"
+#include "cryptoST/cryptoSTE_print.h"
 #include "app.h" // for BASE_LINE
 #include <wolfssl/wolfcrypt/hash.h>
 

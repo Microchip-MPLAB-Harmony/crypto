@@ -58,7 +58,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #include "wolfssl/wolfcrypt/settings.h"
 #include <wolfssl/wolfcrypt/error-crypt.h>
-#include "wolfssl/wolfcrypt/sha256.h"
 
 #include "definitions.h"
 #include "wolfssl/wolfcrypt/port/pic32/crypt_crya_saml11.h"
@@ -185,6 +184,8 @@ static void crya_sha256_process(uint32_t hash_in_out[8], const uint8_t data[64])
    *********************************************************************
    *********************************************************************
  */
+#include "wolfssl/wolfcrypt/sha256.h"
+
 int wc_InitSha256_ex(wc_Sha256* sha256, void* heap, int devId)
 {
     // (void*)heap;

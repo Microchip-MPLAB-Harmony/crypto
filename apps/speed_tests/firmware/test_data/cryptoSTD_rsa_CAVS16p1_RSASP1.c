@@ -56,7 +56,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 #include "./cryptoSpeedTestData.h"
-#include "cryptoST/cryptoST_print.h" // for BASE_LINE
+#include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 
 #define DATA_PACKAGE_NAME "CAVS16p1"
 #define ALIGN4 __attribute__((aligned(4)))
@@ -133,7 +133,6 @@ static const cryptoST_testData_t cavs16p1_2048n = {
 #endif
 }
 };
-#endif // NO_RSA
 
 static const cryptoST_testData_t cavs16p1_2048d = {
     .length = 256,
@@ -158,6 +157,7 @@ static const cryptoST_testData_t cavs16p1_2048d = {
 #endif
 }
 };
+#endif // NO_RSA
 
 /*************************************************************
  * Key, nonce and AAD inputs and golden data and tag result definitions.

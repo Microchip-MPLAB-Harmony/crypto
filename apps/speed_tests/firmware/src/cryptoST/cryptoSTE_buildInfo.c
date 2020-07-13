@@ -2,17 +2,20 @@
  * File:   cryptoSTE_buildInfo.c
  * Author: C14102
  *
- * Created on June 10, 2020, 11:34 AM
- * 
  * Make visible the compiler options.
- * This file should be gimmicked to build every time.
- *    touch ../src/cryptoST/cryptoSTE_buildInfo.c
+ * This file should be gimmicked to build every time
+ * (on the Building tab of the project properties):
+ *    touch ../src/cryptoST/cryptotouch ../src/cryptoSTSTE_buildInfo.c
+ * 
+ * Also relies on a makefile parameter to the compiler command
+ * line in Properties/XC32(GlobalOptions)/AdditionalOptions: 
+ *     -D__PROCESSOR__=$(MP_PROCESSOR_OPTION)
  */
 
 #include "cryptoSTE_buildInfo.h"
-#include "cryptoST_print.h" // for STRINGIZE
+#include "cryptoSTE_print.h" // for STRINGIZE
 
-/* public */
+/* public -- this is a singleton */
 cryptoSTE_buildInfo_t cryptoSTE_buildInfo =
 {
     .buildDate = __DATE__,
@@ -22,7 +25,5 @@ cryptoSTE_buildInfo_t cryptoSTE_buildInfo =
 #else
     .optimized = "no",
 #endif
-    // Relies on makefile hack: // -D__PROCESSOR__=$(MP_PROCESSOR_OPTION)
-    // added as a parameter to the compiler command line.
     .processor = STRINGIZE(__PROCESSOR__),
 };
