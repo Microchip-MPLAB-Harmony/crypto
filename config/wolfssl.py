@@ -146,7 +146,7 @@ def instantiateComponent(wolfsslComponent):
     wolfsslEncryptedKeys.setDescription("Enable encrypted keys support")
     wolfsslEncryptedKeys.setVisible(True)
     wolfsslEncryptedKeys.setDefaultValue(False)
-
+    
     wolfsslCertGen = wolfsslComponent.createBooleanSymbol("wolfSslCertGen", None)
     wolfsslCertGen.setLabel("Cert Generation")
     wolfsslCertGen.setDescription("Enable cert generation")
@@ -174,6 +174,12 @@ def instantiateComponent(wolfsslComponent):
     wolfsslX963kdf.setDescription("Enable X9.63 KDF support")
     wolfsslX963kdf.setVisible(True)
     wolfsslX963kdf.setDefaultValue(False)
+
+    wolfsslpwdkdf = wolfsslComponent.createBooleanSymbol("wolfsslpwdkdf", wolfsslKeyDerivationMenu)
+    wolfsslpwdkdf.setLabel("PBKDFx KDF")
+    wolfsslpwdkdf.setDescription("Enable PBKDF1, PBKDF2 & PBKDF support")
+    wolfsslpwdkdf.setVisible(True)
+    wolfsslpwdkdf.setDefaultValue(False)
     
     wolfsslNoErrorString = wolfsslComponent.createBooleanSymbol("wolfsslNoErrorStrings", None)
     wolfsslNoErrorString.setLabel("Error String")

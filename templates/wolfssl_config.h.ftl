@@ -123,6 +123,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#lt>#define WOLFSSL_SMALL_STACK
     </#if>
     
+    <#if wolfsslpwdkdf == false> 
+        <#lt>#define NO_PWDBASED
+    </#if>
+    
     <#if wolfSslSaveCache>
         <#lt>#define PERSIST_SESSION_CACHE
     </#if>
