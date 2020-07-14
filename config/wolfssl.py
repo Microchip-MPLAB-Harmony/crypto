@@ -40,6 +40,12 @@ def instantiateComponent(wolfsslComponent):
     wolfssl.setVisible(False)
     wolfssl.setDefaultValue(True)
 
+    wolfsslSmallStackSupport = wolfsslComponent.createBooleanSymbol("wolfsslSmallStackSupport", None)
+    wolfsslSmallStackSupport.setLabel("Small Stack Support")
+    wolfsslSmallStackSupport.setDescription("Enable small stack support")
+    wolfsslSmallStackSupport.setVisible(True)
+    wolfsslSmallStackSupport.setDefaultValue(True)
+
     wolfsslDebug = wolfsslComponent.createBooleanSymbol("wolfssl_debug", None)
     wolfsslDebug.setLabel("Enable Debug Messaging")
     wolfsslDebug.setVisible(True)

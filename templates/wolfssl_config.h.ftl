@@ -92,6 +92,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#lt>#define NO_SESSION_CACHE
     </#if>
 
+    <#if wolfsslSmallStackSupport> 
+        <#lt>#define WOLFSSL_SMALL_STACK
+    </#if>
+    
     <#if wolfSslSaveCache>
         <#lt>#define PERSIST_SESSION_CACHE
     </#if>
