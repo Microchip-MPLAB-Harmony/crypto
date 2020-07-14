@@ -49,10 +49,17 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define ALIGN4 __attribute__((aligned(4)))
 #define DATA_CHAR ALIGN4 const uint8_t
 
-#if defined(__SAML11E16A__) // known to have not-enough memory
-#define TEST_SIZE_MAX (2*1024) // must power-of-2
+/* A data block size of 32kB gives good trend data, but 
+ * some devices are known to not have enough memory.
+ * Total heap must be at least 4x this value because
+ * of the way wolfCrypt allocates intermediate buffers.
+ * In any case, the value should be a power-of-2.  */
+#if defined(__SAML11E16A__)
+#define TEST_SIZE_MAX (2*1024) // L11 = 16kB
+#elif defined(__ATSAML21J18B__)
+#define TEST_SIZE_MAX (6*1024) // L21 = 40kB
 #else // everybodyelse
-#define TEST_SIZE_MAX (32*1024) // must power-of-2
+#define TEST_SIZE_MAX (32*1024)
 #endif
 
 #if !defined(__NOP)
