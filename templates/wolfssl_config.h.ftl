@@ -70,6 +70,15 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#if wolfsslPostHandshakeAuth>
             <#lt>#define WOLFSSL_POST_HANDSHAKE_AUTH
         </#if>
+    <#elseif wolfsslTlsSni || wolfsslTlsEccCurvesExt>
+        <#lt>#define HAVE_TLS_EXTENSIONS
+        <#if wolfsslTlsEccCurvesExt>
+            <#lt>#define HAVE_SUPPORTED_CURVES
+        </#if>
+    </#if>
+
+    <#if wolfsslTlsSni>
+        <#lt>#define HAVE_SNI
     </#if>
 
     <#if wolfSslSessionCache=="Small">

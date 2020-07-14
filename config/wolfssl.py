@@ -63,6 +63,18 @@ def instantiateComponent(wolfsslComponent):
     wolfsslTLS13.setDescription("Enable TLS 1.3 Support")
     wolfsslTLS13.setDefaultValue(False)
     wolfsslTLS13.setVisible(True)
+
+    wolfsslTlsSni = wolfsslComponent.createBooleanSymbol("wolfsslTlsSni", wolfsslTLSMenu)
+    wolfsslTlsSni.setLabel("SNI Support")
+    wolfsslTlsSni.setDescription("Enable support for server name indication")
+    wolfsslTlsSni.setVisible(True)
+    wolfsslTlsSni.setDefaultValue(False)
+
+    wolfsslTlsEccCurvesExt = wolfsslComponent.createBooleanSymbol("wolfsslTlsEccCurvesExt", wolfsslTLSMenu)
+    wolfsslTlsEccCurvesExt.setLabel("ECC Supported Curves Support")
+    wolfsslTlsEccCurvesExt.setDescription("Enable support for ECC supported curves")
+    wolfsslTlsEccCurvesExt.setVisible(True)
+    wolfsslTlsEccCurvesExt.setDefaultValue(False)
     
     wolfsslTlsPostAuth = wolfsslComponent.createBooleanSymbol("wolfsslPostHandshakeAuth", wolfsslTLS13)
     wolfsslTlsPostAuth.setLabel("Post Handshake Authentication")
