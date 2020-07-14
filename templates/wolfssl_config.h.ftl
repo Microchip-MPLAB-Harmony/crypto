@@ -75,11 +75,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#if wolfsslTlsEccCurvesExt>
             <#lt>#define HAVE_SUPPORTED_CURVES
         </#if>
+        <#if wolfsslTlsSni>
+            <#lt>#define HAVE_SNI
+        </#if>
     </#if>
 
-    <#if wolfsslTlsSni>
-        <#lt>#define HAVE_SNI
-    </#if>
+    
 
     <#if wolfSslSessionCache=="Small">
         <#lt>#define SMALL_SESSION_CACHE
