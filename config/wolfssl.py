@@ -199,6 +199,17 @@ def instantiateComponent(wolfsslComponent):
     wolfsslConfigInfo.setMarkup(True)
     wolfsslConfigInfo.setType("STRING")
     wolfsslConfigInfo.setEnabled(True)
+
+    wolfsslFfdheMenu = wolfsslComponent.createMenuSymbol("wolfssl_ffdhe_menu", wolfsslProtocolMenu)
+    wolfsslFfdheMenu.setLabel("DHE")
+    wolfsslFfdheMenu.setVisible(True)
+    for grpSize in ['2048', '3072', '4096', '6144', '8192']:
+        wolfsslFfdheGrpSz = wolfsslComponent.createBooleanSymbol("wolfsslFfdheGroup"+grpSize, wolfsslFfdheMenu)
+        wolfsslFfdheGrpSz.setLabel(grpSize + " bits")
+        wolfsslFfdheGrpSz.setDescription("DHE " + grpSize + " Group Size")
+        wolfsslFfdheGrpSz.setDefaultValue(False)
+        wolfsslFfdheGrpSz.setVisible(True)
+    
         
     setupFiles(wolfsslComponent)
     

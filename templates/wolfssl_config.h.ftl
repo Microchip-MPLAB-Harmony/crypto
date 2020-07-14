@@ -59,6 +59,23 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define WOLFSSL_USER_IO
     <#lt>#define NO_WRITEV
     <#lt>#define MICROCHIP_TCPIP
+
+    <#if wolfsslFfdheGroup2048>
+        <#lt>#define HAVE_FFDHE_2048
+    </#if>    
+    <#if wolfsslFfdheGroup3072>
+        <#lt>#define HAVE_FFDHE_3072
+    </#if>    
+    <#if wolfsslFfdheGroup4096>
+        <#lt>#define HAVE_FFDHE_4096
+    </#if>    
+    <#if wolfsslFfdheGroup6144>
+        <#lt>#define HAVE_FFDHE_6144
+    </#if>    
+    <#if wolfsslFfdheGroup8192>
+        <#lt>#define HAVE_FFDHE_8192
+    </#if>    
+    
     <#if wolfsslDTLS>
         <#lt>#define WOLFSSL_DTLS
     </#if>
