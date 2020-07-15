@@ -86,6 +86,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#lt>#define WOLFSSL_DTLS
     </#if>
 
+    <#if wolfsslpwdkdf == false> 
+        <#lt>#define NO_PWDBASED
+    </#if>
+
     <#if wolfsslTLS13>
         <#lt>#define WOLFSSL_TLS13
         <#lt>#define HAVE_TLS_EXTENSIONS
