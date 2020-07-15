@@ -364,6 +364,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#if wolfcrypt_rsaPss == true>
         <#lt>#define WC_RSA_PSS
     </#if>
+    <#if cryptoRsaStatic == true>
+        <#lt>#define WOLFSSL_STATIC_RSA
+    </#if>
 <#else>
     <#lt>#define NO_RSA
 </#if>

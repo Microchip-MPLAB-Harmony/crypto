@@ -1002,6 +1002,12 @@ def instantiateComponent(wolfCryptComponent):
     cryptoRsaInlineEnabledSymbol.setDefaultValue(False)
     cryptoRsaInlineEnabledSymbol.setVisible(True)
     
+    cryptoRsaStatic = wolfCryptComponent.createBooleanSymbol("cryptoRsaStatic", cryptoRsaEnabledSymbol)
+    cryptoRsaStatic.setLabel("Static Suites")
+    cryptoRsaStatic.setDescription("Enable RSA Static suites")
+    cryptoRsaStatic.setDefaultValue(False)
+    cryptoRsaStatic.setVisible(True)
+    
     cryptoRsaPssEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_rsaPss", cryptoRsaEnabledSymbol)
     cryptoRsaPssEnabledSymbol.setLabel("Enable PSS?")
     cryptoRsaPssEnabledSymbol.setDescription("Enable RSA PSS Only")
