@@ -60,6 +60,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define NO_WRITEV
     <#lt>#define MICROCHIP_TCPIP
 
+    <#if wolfsslOsalHeapKeys>
+        <#lt>#define XMALLOC_OVERRIDE
+        <#lt>#define XMALLOC(s, h, type)  OSAL_Malloc((s))
+        <#lt>#define XFREE(p, h, type)    OSAL_Free((p))
+    </#if>
+    
     <#if wolfsslFfdheGroup2048>
         <#lt>#define HAVE_FFDHE_2048
     </#if>    

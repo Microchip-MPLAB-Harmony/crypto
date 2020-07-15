@@ -46,6 +46,13 @@ def instantiateComponent(wolfsslComponent):
     wolfsslSmallStackSupport.setVisible(True)
     wolfsslSmallStackSupport.setDefaultValue(True)
 
+    wolfsslOsalHeapKeys = wolfsslComponent.createBooleanSymbol("wolfsslOsalHeapKeys", None)
+    wolfsslOsalHeapKeys.setLabel("Use OSAL Heap")
+    wolfsslOsalHeapKeys.setDescription("Use OSAL heap in place of C heap")
+    wolfsslOsalHeapKeys.setVisible(True)
+    wolfsslOsalHeapKeys.setDefaultValue(False)
+    wolfsslOsalHeapKeys.setDependencies(setVisibilityOsal, ['HarmonyCore.ENABLE_OSAL'])
+
     wolfsslDebug = wolfsslComponent.createBooleanSymbol("wolfssl_debug", None)
     wolfsslDebug.setLabel("Enable Debug Messaging")
     wolfsslDebug.setVisible(True)
@@ -236,7 +243,10 @@ def trimFileNameList(rawList) :
         newList.append(filename)
     return newList
     
-    
+def setVisibilityOsal(symbol, event):
+    symbol.setVisible(event['value'])
+    symbol.setEnabled(event['value'])
+        
 def addFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
     print("Adding file: " + prefix + fileName.replace('.', '_'))
     filename = component.createFileSymbol(prefix + fileName.replace('.', '_'), None)
