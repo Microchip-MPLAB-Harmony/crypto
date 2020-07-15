@@ -339,6 +339,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#if wolfcrypt_dh_anon == true>
         <#lt>#define HAVE_ANON
     </#if>
+    <#if wolfcrypt_dh_old_prime == true>
+        <#lt>#define WOLFSSL_OLD_PRIME_CHECK
+    </#if>
 <#else>
     <#lt>#define NO_DH
 </#if>

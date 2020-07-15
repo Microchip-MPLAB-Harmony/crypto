@@ -1020,6 +1020,12 @@ def instantiateComponent(wolfCryptComponent):
     cryptoDhEnabledSymbol.setDefaultValue(False)
     cryptoDhEnabledSymbol.setVisible(True)
 
+    cryptoDhOldPrimeEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_dh_old_prime", cryptoDhEnabledSymbol)
+    cryptoDhOldPrimeEnabledSymbol.setLabel("Support Old Prime Check?")
+    cryptoDhOldPrimeEnabledSymbol.setDescription("Enable Old Prime Check")
+    cryptoDhOldPrimeEnabledSymbol.setDefaultValue(False)
+    cryptoDhOldPrimeEnabledSymbol.setVisible(True)
+
     cryptoDhAnonEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_dh_anon", cryptoDhEnabledSymbol)
     cryptoDhAnonEnabledSymbol.setLabel("Support Anonymous?")
     cryptoDhAnonEnabledSymbol.setDescription("Enable Anonymous")
