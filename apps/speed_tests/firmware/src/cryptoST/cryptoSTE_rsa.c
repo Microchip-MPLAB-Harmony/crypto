@@ -53,6 +53,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <stdint.h>
 #include <string.h> // for memcmp()
 
+#include "configuration.h"
 #include "cryptoSTE_definitions.h"
 #include "cryptoSTE_print.h"
 #include "cryptoSTE_announce.h"
@@ -60,7 +61,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoSTE_rsa.h"
 #include "../test_data/cryptoSpeedTestData.h"
 
-#include "configuration.h"
 #include <wolfssl/wolfcrypt/settings.h>
 #include <wolfssl/wolfcrypt/rsa.h>
 #include <wolfssl/wolfcrypt/sha.h>
@@ -628,7 +628,7 @@ static const char * cryptoSTE_rsa_verify_ne_timed
     if (0 != param->results.errorMessage)
     {
         printf(CRLF "%s", param->results.errorMessage);
-        printf(CRLF "sizeof decSigLen:%d         hash:%d", 
+        printf(CRLF "sizeof decSigLen:%d         hash:%ld", 
                 computedSigLength, test->asn1_size + test->hashSize);
         printAll_verify(td);
         cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, computedSigLength);
