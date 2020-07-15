@@ -396,6 +396,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if wolfcrypt_harden == false>
     <#lt>#define WC_NO_HARDEN
+<#else>
+    <#lt>#define TFM_TIMING_RESISTANT
+    <#lt>#define ECC_TIMING_RESISTANT
+    <#lt>#define WC_RSA_BLINDING
 </#if>
 <#if wolfSslRTOSSupport == "Single Threaded">
     <#lt>#define SINGLE_THREADED
