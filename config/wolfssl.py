@@ -134,6 +134,12 @@ def instantiateComponent(wolfsslComponent):
     wolfsslKeyGen.setVisible(True)
     wolfsslKeyGen.setDefaultValue(False)
     
+    wolfsslEncryptedKeys = wolfsslComponent.createBooleanSymbol("wolfsslEncryptedKeys", None)
+    wolfsslEncryptedKeys.setLabel("Encrypted Keys Support")
+    wolfsslEncryptedKeys.setDescription("Enable encrypted keys support")
+    wolfsslEncryptedKeys.setVisible(True)
+    wolfsslEncryptedKeys.setDefaultValue(False)
+
     wolfsslCertGen = wolfsslComponent.createBooleanSymbol("wolfSslCertGen", None)
     wolfsslCertGen.setLabel("Cert Generation")
     wolfsslCertGen.setDescription("Enable cert generation")

@@ -124,6 +124,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#lt>#define WOLFSSL_KEY_GEN
     </#if>
     
+    <#if wolfsslEncryptedKeys>
+        <#lt>#define WOLFSSL_ENCRYPTED_KEYS
+    </#if>
+    
     <#if wolfSslCertGen>
         <#lt>#define WOLFSSL_CERT_GEN
     </#if>
