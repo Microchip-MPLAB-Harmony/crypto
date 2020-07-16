@@ -13,8 +13,15 @@
     by Lawrence E. Bassham of NIST.
 
   Description:
-    AESAVS defines test vectors for all AES key sizes,
-    but only the 128b values have been implemented here.
+    There are 4 test groups (GFSBox, KeySBox, VarText, VarKey) 
+    characterized by patterns of specifying key, plain and cipher text. 
+    Refer to the individual test generator functions next_aes_XXXX()
+    defined below, and to the AESAVS source material.
+        
+    AESAVS defines test vectors for all AES key sizes, but the data sets
+    have been abbreviated here for space and time. Future editions of this
+    test may include additional vectors.
+
     http://csrc.nist.gov/groups/STM/cavp/documents/aes/AESAVS.pdf
  ******************************************************************************
  */
@@ -340,7 +347,7 @@ static const cryptoST_testVector_t * next_aes_VarKey_KAT128(const cryptoST_testV
     if (ALENGTH(VarKey_cipher128) > detailCounter)
     {
         /* Cipher is explicit; data is constant zero;
-           key is generated here like 0xFF.FF.F0...00.00 */
+           key is generated here like 0xFF.E0...00.00 */
         testDetail.io.sym.out.cipher.data = 
                 (uint8_t*)&VarKey_cipher128[detailCounter];
         mutableKey.data = (uint8_t*)buffer.buffer16;
