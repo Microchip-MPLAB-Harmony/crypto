@@ -67,9 +67,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #define VERIFY_KEYS // optional feature
 #define assert_dbug(X) __conditional_software_breakpoint((X))
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -428,8 +425,6 @@ static const char * cryptoSTE_rsa_exptmod_timed
             cryptoST_PRINT_hexBlock(CRLF "..expected:", compare->data, compare->length);
             printf(CRLF);
         }
-    
-        __NOP();
         wc_FreeRsaKey(&rsaKey);
     }
     return param->results.errorMessage;
@@ -531,8 +526,6 @@ static const char * cryptoSTE_rsa_sign_der_timed
         cryptoST_PRINT_hexBlock(CRLF "..expected:", compare->data, compare->length);
         printf(CRLF);
     }
-        
-    __NOP();
     return param->results.errorMessage;
 }
 
@@ -635,8 +628,6 @@ static const char * cryptoSTE_rsa_verify_ne_timed
         cryptoST_PRINT_hexBlock(CRLF "......hash:", hashSignature, ALENGTH(hashSignature));
         printf(CRLF);
     }
-        
-    __NOP();
     return param->results.errorMessage;
 }
 #endif // RSA and SHA
@@ -740,7 +731,6 @@ static const rsaTest_t test_exptmod_none = {
 const char * cryptoSTE_rsa_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
-    __NOP();
     const rsaTest_t * test = 0;
     
 #if !defined(NO_RSA)

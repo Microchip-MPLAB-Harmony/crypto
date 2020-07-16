@@ -62,10 +62,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/des3.h>
 
 #define VERIFY_CONSECUTIVE_DES    1
-#define assert_dbug(X) __conditional_software_breakpoint((X))
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -301,7 +297,6 @@ const char * cryptoSTE_des3des_timed(const cryptoST_testDetail_t * td,
     param->results.testHandler = "MCHP_DES3"; // establish a default name
     const desTest_t * test = NULL;
 
-    __NOP();
     switch(td->technique)
     {
 #if !defined(NO_DES)

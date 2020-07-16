@@ -75,10 +75,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoSTE_des3.h"
 #include "cryptoSTE_rsa.h"
 
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local data structures
@@ -401,14 +397,12 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
         config->parameters.useLocalDriverEntryPoints = false;
         while(1) // loop if we are doing HW-SW comparison
         {
-            __NOP();
             const cryptoST_testDetail_t * tr;
             tr = cv->firstTest();
             if (NULL == tr)
                 printf("-> ** %s no data provided ********" CRLF, cv->name);
             else for (; NULL != tr; tr = cv->nextTest(tr))
             {
-                __NOP();
                 if (ET_NONE == tr->technique) // safety check
                 {
                     // get here if a data file has no test vectors

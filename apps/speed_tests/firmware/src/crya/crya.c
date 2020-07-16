@@ -13,7 +13,6 @@
 #include "configuration.h"
 #include "crya/crya.h"
 #include <assert.h>
-#include "device.h"     // for __NOP()
 #include <string.h> // for memcpy()
 
 /* CRYA entry points are located in ROM as defined by the device file.
@@ -118,7 +117,6 @@ static void crya_sha256_block
     size_t bytes = length;
     uint8_t remnant[SHA256_BLOCK_SIZE];
     
-    __NOP();
     while (SHA256_BLOCK_SIZE <= bytes) // process all full-size blocks
     {
         crya_sha256_process(hash,(const uint8_t*)data);
@@ -132,14 +130,12 @@ static void crya_sha256_block
     
     // Zap the buffer tail and set the single bit after the message
     memset(&remnant[bytes],0x00,SHA256_BLOCK_SIZE-bytes);
-    __NOP();
     remnant[bytes++] = 0x80; // count this byte as it goes into the buffer
     
     // If there are not 8 bytes remaining, post what we have
     // and reset the buffer to prepare for posting the length field.
     if ((SHA256_BLOCK_SIZE-8) < bytes) // i.e. (SHA256_BLOCK_SIZE-bytes < 8)
     {
-        __NOP();
         crya_sha256_process(hash,remnant);
         memset(remnant,0,SHA256_BLOCK_SIZE);
     }

@@ -75,10 +75,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/aes.h>
 
 #define VERIFY_CONSECUTIVE_AES    1
-#define assert_dbug(X) __conditional_software_breakpoint((X))
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 
 // *****************************************************************************
 // *****************************************************************************
@@ -107,7 +103,6 @@ __attribute__((used)) static int crya_aes_128_encrypt
 {
     size_t blocks = size / AES_BLOCK_SIZE; // truncate if non-multiple
 
-    __NOP();
     while(blocks > 0) 
     {
         crya_aes128_encrypt((uint8_t*)aes->key, aes->keylen, in, out);
@@ -122,7 +117,6 @@ __attribute__((used)) static int crya_aes_128_decrypt
 {
     size_t blocks = size / AES_BLOCK_SIZE; // truncate if non-multiple
 
-    __NOP();
     while(blocks > 0) 
     {
         crya_aes128_decrypt((uint8_t*)aes->key, aes->keylen, in, out);
@@ -468,7 +462,6 @@ const char * cryptoSTE_aes_ecb_timed(const cryptoST_testDetail_t * td,
     param->results.testHandler = "MCHP AES_ECB"; // establish a default name
     const ecbTest_t * test = NULL;
 
-    __NOP();
     switch(td->technique)
     {
 #if defined(WOLFSSL_AES_128)

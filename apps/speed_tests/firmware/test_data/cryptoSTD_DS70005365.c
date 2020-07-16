@@ -46,10 +46,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "cryptoST/cryptoSTE_malloc.h"
 #include "cryptoST/cryptoSTE_print.h" // for BASE_LINE
 
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
-
 #define CONST /* as nothing */
 #define DATA_PACKAGE_NAME "DS70005365"
 
@@ -197,8 +193,6 @@ static const cryptoST_testDetail_t * firstTest(void)
 }
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
-    __NOP();
-    
     // Assume that if the pointer is in range, that it is legitimate.
     if (old < test_item) 
         return NULL;

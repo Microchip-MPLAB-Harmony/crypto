@@ -76,12 +76,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #define VERIFY_CONSECUTIVE_AES    1
 
-// Debug NOP: add a NOP instruction for breakpoints but only in DEBUG mode.
-#if defined(NDEBUG) || !defined(__DEBUG)
-#define BP_NOP() /* as nothing */
-#else
-#define BP_NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 // *****************************************************************************
@@ -131,7 +125,6 @@ static const char * cryptoSTE_aes_cbc_timed(const cryptoST_testDetail_t * td,
     else do // so we can use "break"
     {
         Aes enc;
-        BP_NOP();
         ret = wc_AesSetKey(&enc, td->io.sym.in.key.data, td->io.sym.in.key.length,
                                  td->io.sym.in.ivNonce.data, AES_ENCRYPTION);
         if (ret != 0) { param->results.errorMessage = "failed to set key"; break; }

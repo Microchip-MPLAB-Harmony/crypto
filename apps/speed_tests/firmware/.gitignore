@@ -1,0 +1,5 @@
+# Ignore all but selected directories
+pic32_mz_efm_wifi_hwsw.X/
+pic32_mz_efm_wifi_hwsw/
+pic32cm_mc_hw.X/
+pic32cm_mc_hw/

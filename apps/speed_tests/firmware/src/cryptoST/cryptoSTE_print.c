@@ -66,12 +66,6 @@ static const char * const formatUintField = SEP "%lu";
 #define PRINT_INT(val)      printf(formatSintField,val);
 #define PRINT_LUINT(val)    printf(formatUintField,val);
 
-// Debug NOP: add a NOP instruction for breakpoints but only in DEBUG mode.
-#if defined(NDEBUG) || !defined(__DEBUG)
-#define BP_NOP() /* as nothing */
-#else
-#define BP_NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 // *****************************************************************************

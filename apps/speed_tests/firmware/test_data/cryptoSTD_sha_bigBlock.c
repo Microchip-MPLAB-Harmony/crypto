@@ -46,10 +46,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "app.h" // for BASE_LINE
 #include <wolfssl/wolfcrypt/hash.h>
 
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
-
 #define DATA_PACKAGE_NAME "SHA_BB"
 
 #if !defined(NO_SHA256)
@@ -136,8 +132,6 @@ static unsigned int zero_test = 0;
 #define test_item_count 1 //(sizeof(test_item)/sizeof(cryptoST_testDetail_t))
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
-    __NOP();
-
 #if !defined(NO_SHA256)
     // Need to check if "old" is out of bounds.
     if ((old != &test_item)
@@ -152,7 +146,6 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
         // If we are now at the magic block, generate a zero-filled dataset
         if (old->rawData == &satcZ)
         {
-            __NOP();
             // This test is about verification of mechanics when the
             // buffer size is near the cross-over from 1 block to 2.
             if (0 == zero_test)
@@ -189,8 +182,6 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 
 static const cryptoST_testDetail_t * firstTest(void)
 {
-    __NOP();
-    
 #if !defined(NO_SHA256)
     // Assume that #1 is not dynamically built
     zero_test = 0;

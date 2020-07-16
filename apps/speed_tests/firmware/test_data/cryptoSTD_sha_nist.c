@@ -59,10 +59,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
  */
 #define ALIGN4 __attribute__((aligned(4)))
 
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
-
 /*************************************************************
  * Raw (input) data definitions.
  *************************************************************/
@@ -357,13 +353,11 @@ static __attribute__((unused)) const cryptoST_testDetail_t test_item[] =
  *************************************************************/
 static const cryptoST_testDetail_t * firstTest(void)
 {
-    __NOP();
     return &test_item[0];
 }
 
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
-    __NOP();
     // Assume that if the pointer is in range, that it is legitimate.
     if (old < test_item) 
         ;

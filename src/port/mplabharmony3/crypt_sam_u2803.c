@@ -62,12 +62,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include "definitions.h"
 #include "wolfssl/wolfcrypt/port/pic32/crypt_crya_saml11.h"
  
-// Debug NOP: add a NOP instruction for breakpoints but only in DEBUG mode.
-#if defined(NDEBUG) || !defined(__DEBUG)
-#define BP_NOP() /* as nothing */
-#else
-#define BP_NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 /* *********************************************************************
@@ -135,7 +129,6 @@ static void crya_aes128_encrypt
     
     TELLTALE(crya_aes128_encrypt);
     secure_crya_aes128_encrypt(keys,key_len,src,dst);
-    BP_NOP();
 }
 #endif
 
@@ -152,7 +145,6 @@ static void crya_aes128_decrypt
     
     TELLTALE(crya_aes128_decrypt);
     secure_crya_aes128_decrypt(keys,key_len,src,dst);
-    BP_NOP();
 }
 #endif
 #endif // WOLFSSL_AES_128
@@ -175,7 +167,6 @@ static void crya_sha256_process(uint32_t hash_in_out[8], const uint8_t data[64])
 
     TELLTALE(crya_sha256_process);
     secure_crya_sha256_process(hash_in_out,data,ram_buf);
-    BP_NOP();
 }
 
 /* *********************************************************************
@@ -203,7 +194,6 @@ int wc_InitSha256_ex(wc_Sha256* sha256, void* heap, int devId)
     sha256->digest[5] = (0x9b05688c);
     sha256->digest[6] = (0x1f83d9ab);
     sha256->digest[7] = (0x5be0cd19);
-    BP_NOP();
     
     // Remove any data-noise from the buffer
     memset(sha256->buffer,0,WC_SHA256_BLOCK_SIZE);
@@ -230,7 +220,6 @@ int wc_InitSha224_ex(wc_Sha256* sha224, void* heap, int devId)
     sha224->digest[5] = (0x68581511);
     sha224->digest[6] = (0x64f98fa7);
     sha224->digest[7] = (0xbefa4fa4);
-    BP_NOP();
     
     // Remove any data-noise from the buffer
     memset(sha224->buffer,0,sizeof(sha224->buffer));
@@ -248,8 +237,6 @@ int wc_InitSha224_ex(wc_Sha256* sha224, void* heap, int devId)
  */
 int wc_Sha256Update (wc_Sha256* sha256, const uint8_t *input, word32 length)
 {
-    BP_NOP();
-    
     size_t remainingLength = length;
     while(remainingLength)
     {
@@ -302,8 +289,6 @@ int wc_Sha256Update (wc_Sha256* sha256, const uint8_t *input, word32 length)
  * */
 int wc_Sha256Final_noCopy(wc_Sha256* sha256)
 {
-    BP_NOP();
-    
     // If this is not true then _process failed to post a full buffer.
     assert_dbug(WC_SHA256_BLOCK_SIZE > sha256->bufferLength);
     sha256->buffer[sha256->bufferLength] = 0x80; // required by FIPS-180-4
@@ -314,7 +299,6 @@ int wc_Sha256Final_noCopy(wc_Sha256* sha256)
     // a.k.a. ((WC_SHA256_BLOCK_SIZE-sha256->bufferLength) < 8)
     if ((WC_SHA256_BLOCK_SIZE-8) < sha256->bufferLength)
     {
-        BP_NOP();
         crya_sha256_process(sha256->digest,sha256->buffer);
         memset(sha256->buffer,0,WC_SHA256_BLOCK_SIZE);
         sha256->bufferLength = 0; // keep the metadata in sync
@@ -324,8 +308,6 @@ int wc_Sha256Final_noCopy(wc_Sha256* sha256)
     // (whether we have data in the low-part of the buffer or not)
     // so the length field is always the last few bytes.
     {
-        BP_NOP();
-        
         // The buffered value is bit-length instead of byte-length
         // Note that totalLength is a 64b integer, so we will be also.
         uint64_t bitLength = sha256->totalLength * 8; // bits-per-byte
@@ -339,7 +321,7 @@ int wc_Sha256Final_noCopy(wc_Sha256* sha256)
             bitLength >>= 8; // endian independent
         }
     }
-    BP_NOP();
+
     // The final buffer is ready to be posted.
     crya_sha256_process(sha256->digest,sha256->buffer);
     return 0;
@@ -353,7 +335,6 @@ int wc_Sha256Final(wc_Sha256* sha256, byte* hash)
     {
         // Endian swap here because CRYA is big-endian and we are not.
         // There is magic here because hash[] is not typed like digest[].
-        BP_NOP();
         uint32_t * h = (uint32_t*)hash;
         for (int i = 0; i < WC_SHA256_DIGEST_SIZE/sizeof(h[0]); i++)
             h[i] = endian32((sha256->digest)[i]);
@@ -379,7 +360,6 @@ int wc_Sha224Final(wc_Sha256* sha224, byte* hash)
     {
         // Endian swap here because CRYA is big-endian and we are not.
         // There is magic here because hash[] is not typed like digest[].
-        BP_NOP();
         uint32_t * h = (uint32_t*)hash;
         for (int i = 0; i < WC_SHA224_DIGEST_SIZE/sizeof(h[0]); i++)
             h[i] = endian32((sha224->digest)[i]);
@@ -416,7 +396,6 @@ int wc_AesEncrypt(Aes* aes, const byte* inBlock, byte* outBlock)
         return 0;
     }
 
-    BP_NOP();
     assert_dbug(beenHereBefore); // see note above
     beenHereBefore |= true;
     return WC_HW_E;
@@ -434,7 +413,6 @@ int wc_AesDecrypt(Aes* aes, const byte* inBlock, byte* outBlock)
         return 0;
     }
 
-    BP_NOP();
     assert_dbug(beenHereBefore); // see note above
     beenHereBefore |= true;
     return WC_HW_E;

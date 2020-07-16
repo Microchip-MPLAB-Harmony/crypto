@@ -62,10 +62,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define TEST_SIZE_MAX (32*1024)
 #endif
 
-#if !defined(__NOP)
-#define __NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
-
 static size_t testSize = 0;
 
 /*************************************************************
@@ -114,8 +110,6 @@ static cryptoST_testDetail_t test_item = // one and only
  *************************************************************/
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
-    __NOP();
-
     // Validate that we have received the correct pointer.
     if (old != &test_item) 
         return NULL;
@@ -150,7 +144,6 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 
 static const cryptoST_testDetail_t * firstTest(void)
 {
-    __NOP();
     testSize = 0;
     return nextTest(&test_item);
 }

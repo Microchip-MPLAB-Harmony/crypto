@@ -70,17 +70,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/wc_encrypt.h>
 
 #if defined(WOLFSSL_AES_CFB)
-
-// Debug NOP: add a NOP instruction for breakpoints but only in DEBUG mode.
-#if defined(NDEBUG) || !defined(__DEBUG)
-#define BP_NOP() /* as nothing */
-#else
-#define BP_NOP() do{ __asm__ __volatile__ ("nop"); }while(0)
-#endif
 #define assert_dbug(X) __conditional_software_breakpoint((X))
 
 #if defined(HAVE_AES_CBC)
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local data structures
@@ -139,7 +131,6 @@ static const char * cryptoSTE_aes_cfb_timed(const cryptoST_testDetail_t * td,
     Aes enc;
     int ret;
 
-    BP_NOP();
     byte cipher[AES_BLOCK_SIZE * 4];
     if (vector->vector.length > ALENGTH(cipher))
         return "input too big (" __BASE_FILE__ " line " BASE_LINE ")";
@@ -235,7 +226,6 @@ static const char * cryptoSTE_aes_cfb_timed(const cryptoST_testDetail_t * td,
 const char * cryptoSTE_aes_cfb_128_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
-    BP_NOP();
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
@@ -252,7 +242,6 @@ const char * cryptoSTE_aes_cfb_128_timed(const cryptoST_testDetail_t * td,
 const char * cryptoSTE_aes_cfb_192_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
-    BP_NOP();
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
@@ -269,7 +258,6 @@ const char * cryptoSTE_aes_cfb_192_timed(const cryptoST_testDetail_t * td,
 const char * cryptoSTE_aes_cfb_256_timed(const cryptoST_testDetail_t * td,
                                    cryptoSTE_testExecution_t * param)
 {
-    BP_NOP();
     param->results.testHandler = TNAME;
     if (CSTE_VERBOSE > 1) PRINT(CRLF);
 
@@ -281,6 +269,6 @@ const char * cryptoSTE_aes_cfb_256_timed(const cryptoST_testDetail_t * td,
         return cryptoSTE_aes_cfb_timed(td, param);
 }
 
-#endif // WOLFSSL_AES_256
+#endif // HAVE_AES_CBC
 
 #endif // WOLFSSL_AES_CFB
