@@ -176,9 +176,7 @@ static const cryptoST_testDetail_t test_item[] =
         .source = __BASE_FILE__ "(" BASE_LINE ")",
         .pedigree = pedigree,
         .rawData = &RSASP1_256_2048_7099,
-#if 0
-        .io.rsas.in.e = &cavs16p1_2048e,
-#endif
+        // .io.rsas.in.e = &cavs16p1_2048e, // e is not required 
         .io.rsav.in.n = &cavs16p1_2048n,
         .io.rsav.in.d = &cavs16p1_2048d,
         .io.rsav.in.em = &(const cryptoST_testData_t){ 

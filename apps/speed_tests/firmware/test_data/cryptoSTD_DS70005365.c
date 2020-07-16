@@ -135,7 +135,7 @@ static const cryptoST_testDetail_t test_item[] =
         },
     },
 #endif
-#if 0 // CRYA GCM is not enabled at this time
+#if defined(CRYA_GCM) // not enabled at this time
     {
         .technique = ET_AES_GCM,
         .mode = EM_NONE,
@@ -150,14 +150,6 @@ static const cryptoST_testDetail_t test_item[] =
                 0xcf, 0x06, 0x3a, 0x34, 0xd4, 0xa9, 0xa7, 0x6c,
                 0x2c, 0x86, 0x78, 0x7d, 0x3f, 0x95, 0xdb, 0x71
             },
-        },
-        .ivNonce = {         // not required for CRYA GCM
-            .length = 0,
-            .data = (void*)0,
-        },
-        .additionalAuthData = { // not required for CRYA GCM
-            .length = 0,
-            .data = (void*)0,
         },
         .io.sym.out.cipher = { // from the application note
             .length = 16,
@@ -206,14 +198,6 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
     else
         return old;
 }
-
-#if 0
-static char * openData(void)
-{ return null; }
-
-static char * closeData(void)
-{ return null; }
-#endif
 
 /*************************************************************
  * Declaration of the test manager API

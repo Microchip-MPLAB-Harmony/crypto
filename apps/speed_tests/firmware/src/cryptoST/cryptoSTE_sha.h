@@ -1,9 +1,44 @@
-/* 
- * File:   cryptoSTE_sha.h
- * Author: C14102
- *
- * Created on November 6, 2019, 7:49 AM
+/*******************************************************************************
+  Crypto Speed Test Source File
+
+  Company:
+    Microchip Technology Inc.
+
+  File Name:
+    cryptoSTE_sha.h
+
+  Description:
+    Test driver for SHA operations.
+ *******************************************************************************
  */
+
+//DOM-IGNORE-BEGIN
+/*****************************************************************************
+ Copyright (C) 2013-2020 Microchip Technology Inc. and its subsidiaries.
+
+Microchip Technology Inc. and its subsidiaries.
+
+Subject to your compliance with these terms, you may use Microchip software 
+and any derivatives exclusively with Microchip products. It is your 
+responsibility to comply with third party license terms applicable to your 
+use of third party software (including open source software) that may 
+accompany Microchip software.
+
+THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER 
+EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED 
+WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR 
+PURPOSE.
+
+IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE, 
+INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND 
+WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS 
+BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE 
+FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN 
+ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY, 
+THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
+*****************************************************************************/
+
+//DOM-IGNORE-END
 
 #ifndef CRYPTOST_SHA_H
 #define	CRYPTOST_SHA_H
@@ -14,12 +49,7 @@ extern "C" {
 
 #include "../test_data/cryptoSpeedTestData.h"
 
-#if 1
 const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param);
-#else
-#define cryptoSTE_sha_timed(t_,r_,i_) \
-    PRINT("**** SHA is not available!" CRLF);
-#endif
 
 #endif // ndef CRYPTOST_SHA_H

@@ -1,9 +1,3 @@
-/* 
- * File:   cryptoST_sha.c
- * Author: C14102
- *
- * Created on January 13, 2020
- */
 /*******************************************************************************
   Crypto Speed Test Source File
 

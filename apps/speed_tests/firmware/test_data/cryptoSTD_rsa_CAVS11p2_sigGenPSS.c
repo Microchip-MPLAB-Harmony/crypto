@@ -107,7 +107,7 @@ static const cryptoST_testVector_t sigGenPSS_256_2048_dfc2 =
 0x88, 0xc4, 0x2d, 0xca, 0xd8, 0xa7, 0x40, 0x97, 0xa0, 0x0c, 0x22, 0x05, 0x5b, 0x0b, 0xd4, 0x1f},
 };
 
-#if 0 // alternative data sets
+#if EMPLOY_ALTERNATIVE_DATA_SETS
 static const cryptoST_testVector_t sigGenPSS_2048_5c61 =
 {
     .name = "sigGenPSS_2048_5c61",

@@ -147,16 +147,6 @@ static const char * cryptoSTE_aes_cbc_timed(const cryptoST_testDetail_t * td,
         param->results.encryption.stop = SYS_TIME_CounterGet();
         if (param->results.errorMessage) break; // out of the test routine
         param->results.encryption.startStopIsValid = true;
-#if 0
-        printf("-- %08lx %08lx" CRLF, 
-                param->results.encryption.stop,
-                param->results.encryption.start);
-#elif 0
-        printf("-- %08lx %08lx %08lx" CRLF, 
-                param->results.encryption.stop,
-                param->results.encryption.start,
-                param->results.encryption.stop-param->results.encryption.start);
-#endif
         
         if (param->parameters.verifyByGoldenCiphertext)
         {

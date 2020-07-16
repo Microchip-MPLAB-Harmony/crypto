@@ -5,10 +5,10 @@
     Microchip Technology Inc.
 
   File Name:
-    cryptoST_aes_ebc.c
+    cryptoST_aes_ecb.c
 
   Summary:
-    AES EBC mode encryption driver
+    AES ECB mode encryption driver
 
   Description:
     This file contains functions to measure the time required 
@@ -333,16 +333,6 @@ static const char * cryptoSTE_aes_ecb_all_timed(const cryptoST_testDetail_t * td
         param->results.encryption.stop = SYS_TIME_CounterGet();
         if (param->results.errorMessage) break; // out of the test routine
         param->results.encryption.startStopIsValid = true;
-#if 0
-        printf("-- %08lx %08lx" CRLF, 
-                param->results.encryption.stop,
-                param->results.encryption.start);
-#elif 0
-        printf("-- %08lx %08lx %08lx" CRLF, 
-                param->results.encryption.stop,
-                param->results.encryption.start,
-                param->results.encryption.stop-param->results.encryption.start);
-#endif
         
         if (param->parameters.verifyByGoldenCiphertext)
         {
@@ -367,21 +357,6 @@ static const char * cryptoSTE_aes_ecb_all_timed(const cryptoST_testDetail_t * td
                 }
                 break; 
             }
-#if 0
-            else if (1)
-            {
-                printf(CRLF "...test passed....");
-                cryptoST_PRINT_hexLine(CRLF "..input :", 
-                        vector->vector.data, vector->vector.length);
-                cryptoST_PRINT_hexLine(CRLF "..cipher:", 
-                        cipher, vector->vector.length);
-                cryptoST_PRINT_hexLine(CRLF "..golden:",
-                        td->io.sym.out.cipher.data, td->io.sym.out.cipher.length);
-                cryptoST_PRINT_hexLine(CRLF "..key   :", 
-                        td->io.sym.in.key.data, td->io.sym.in.key.length);
-                PRINT_WAIT(CRLF);
-            }
-#endif
         }
     } while(0);
     

@@ -49,20 +49,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 extern "C" {
 #endif
 
-#if 0
-#include <wolfssl/wolfcrypt/settings.h>
-// #include <wolfssl/wolfssl/verion.h>
-#ifdef USE_FLAT_TEST_H
-    #include "test.h"
-#else
-   // #include "wolfssl/wolfcrypt/test/test.h"
-#endif
-#include <wolfssl/wolfcrypt/types.h>
-#include <wolfssl/wolfcrypt/des3.h>
-#include <wolfssl/wolfcrypt/aes.h>
-#include <wolfssl/wolfcrypt/wc_encrypt.h>
-#endif
-    
 #include "../test_data/cryptoSpeedTestData.h"
 
 #if defined(HAVE_AESGCM)

@@ -316,14 +316,13 @@ void cryptoST_PRINT_hexLine(const char * const tag,
     *pos++ = 0; // EOL -- verify we did not overrun the buffer
     __conditional_software_breakpoint(ALENGTH(line) > (pos - line));
     PRINT_WAIT(line); // wait before line goes out of scope
-#if 1
+
     int align4 = ((uint32_t)data)%4;
     char * align = (0==align4)?"":" misaligned";
     printf(" (%lu)%s", (long unsigned int)length, align);
-#endif
 }
 
-#if 1
+
 /* Print a text block having both the hexadecimal and ASCII values
  * (that is, only printable characters, no controls).
  *  */
@@ -335,8 +334,8 @@ void cryptoST_PRINT_hexBlock
     while (count)
     {
         char buffer[16];
-        int pad = strlen(tag);
-        if (pad > 8) pad = 8;
+        int pad = strlen(tag); // first line is tagged with the given text
+        if (pad > 8) pad = 8;  // subsequent lines get the buffer offset
         
         if (0 == offset)
         {
@@ -346,11 +345,10 @@ void cryptoST_PRINT_hexBlock
         else snprintf(buffer, sizeof(buffer), "  %*u:", 
                             pad, (unsigned int)offset);
         cryptoST_PRINT_hexLine(buffer, data, count);
-        PRINT_WAIT(CRLF); // wait before CRLF goes out of scope
+        PRINT_WAIT(CRLF); // wait before buffer goes out of scope
         
         data += 16;
         offset += 16;
         count = (count > 16)? count-16 : 0;
     }
 }
-#endif
