@@ -61,6 +61,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/settings.h>
 #include <wolfssl/wolfcrypt/des3.h>
 
+#define assert_dbug(X) __conditional_software_breakpoint((X))
 #define VERIFY_CONSECUTIVE_DES    1
 
 // *****************************************************************************

@@ -621,8 +621,9 @@ static const char * cryptoSTE_rsa_verify_ne_timed
     if (0 != param->results.errorMessage)
     {
         printf(CRLF "%s", param->results.errorMessage);
-        printf(CRLF "sizeof decSigLen:%d         hash:%ld", 
-                computedSigLength, test->asn1_size + test->hashSize);
+        printf(CRLF "sizeof decSigLen:%d         hash:%lu", 
+                                   computedSigLength, 
+                (unsigned long int)(test->asn1_size + test->hashSize));
         printAll_verify(td);
         cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, computedSigLength);
         cryptoST_PRINT_hexBlock(CRLF "......hash:", hashSignature, ALENGTH(hashSignature));
