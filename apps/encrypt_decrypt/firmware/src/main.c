@@ -34,6 +34,9 @@
 // *****************************************************************************
 // *****************************************************************************
 
+#if defined(__SAML11E16A__) // compiler pre-defined
+    extern void sam_l11_secure_init(void);
+#endif
 int main ( void )
 {
     /* Initialize all modules */
@@ -41,7 +44,6 @@ int main ( void )
     SYS_Initialize ( NULL );
     
 #if defined(__SAML11E16A__) // compiler pre-defined
-    extern void sam_l11_secure_init(void);
     sam_l11_secure_init();
 #endif
 

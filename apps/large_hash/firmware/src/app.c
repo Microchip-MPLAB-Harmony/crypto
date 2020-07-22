@@ -354,14 +354,14 @@ void APP_Sha384Run_Feed(void) {
     CRYPT_SHA384_CTX sha384;
     uint32_t hashStart;
     uint32_t hashStop;
-    uint8_t myBuf[1024];
+    uint8_t b384[1024];
     int i;
 
     CRYPT_SHA384_Initialize(&sha384);
-    memset(myBuf, 'a', 1024);
+    memset(b384, 'a', 1024);
     hashStart = APP_getTicks();
     for (i = 0; i < 512; i++)
-        CRYPT_SHA384_DataAdd(&sha384, myBuf, sizeof (myBuf));
+        CRYPT_SHA384_DataAdd(&sha384, b384, sizeof (b384));
     CRYPT_SHA384_Finalize(&sha384, appData.sha384_feed_result);
     hashStop = APP_getTicks();
     appData.sha384_feed_timing = hashStop - hashStart;
@@ -373,14 +373,14 @@ void APP_Sha512Run_Feed(void) {
     CRYPT_SHA512_CTX sha512;
     uint32_t hashStart;
     uint32_t hashStop;
-    uint8_t myBuf[1024];
+    uint8_t b512[1024];
     int i;
 
     CRYPT_SHA512_Initialize(&sha512);
-    memset(myBuf, 'a', 1024);
+    memset(b512, 'a', 1024);
     hashStart = APP_getTicks();
     for (i = 0; i < 512; i++)
-        CRYPT_SHA512_DataAdd(&sha512, myBuf, sizeof (myBuf));
+        CRYPT_SHA512_DataAdd(&sha512, b512, sizeof (b512));
     CRYPT_SHA512_Finalize(&sha512, appData.sha512_feed_result);
     hashStop = APP_getTicks();
     appData.sha512_feed_timing = hashStop - hashStart;
@@ -401,7 +401,7 @@ void APP_WriteComplete(void *handle) {
     appData.wrComplete = true;
 }
 
-void APP_Reset() {
+void APP_Reset(void) {
     appData.rdComplete = true;
     appData.wrComplete = true;
 }
@@ -539,7 +539,7 @@ void APP_Tasks(void) {
             switch (i) {
                 case 0:
 
-#if (RUN_FLASH_TEST)
+#if defined(RUN_FLASH_TEST)
                     snprintf(printBuffer, PB_SIZE, "%s\n\rMD5 from Flash:    ", printBuffer);
                     APP_DisplayHash(appData.md5_result, CRYPT_MD5_DIGEST_SIZE);
                     snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.md5_timing);
@@ -553,7 +553,7 @@ void APP_Tasks(void) {
                     break;
 
                 case 2:
-#if (RUN_FLASH_TEST)
+#if defined(RUN_FLASH_TEST)
                     snprintf(printBuffer, PB_SIZE, "%s\n\rSHA from Flash:    ", printBuffer);
                     APP_DisplayHash(appData.sha1_result, CRYPT_SHA_DIGEST_SIZE);
                     snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha1_timing);
@@ -567,7 +567,7 @@ void APP_Tasks(void) {
                     break;
 
                 case 4:
-#if (RUN_FLASH_TEST)
+#if defined(RUN_FLASH_TEST)
                     snprintf(printBuffer, PB_SIZE, "%s\n\rSHA256 from Flash: ", printBuffer);
                     APP_DisplayHash(appData.sha256_result, CRYPT_SHA256_DIGEST_SIZE);
                     snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha256_timing);
@@ -581,7 +581,7 @@ void APP_Tasks(void) {
                     break;
 
                 case 6:
-#if (RUN_FLASH_TEST)
+#if defined(RUN_FLASH_TEST)
                     snprintf(printBuffer, PB_SIZE, "%s\n\rSHA384 from Flash: ", printBuffer);
                     APP_DisplayHash(appData.sha384_result, CRYPT_SHA384_DIGEST_SIZE);
                     snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha384_timing);
@@ -595,7 +595,7 @@ void APP_Tasks(void) {
                     break;
 
                 case 8:
-#if (RUN_FLASH_TEST)
+#if defined(RUN_FLASH_TEST)
                     snprintf(printBuffer, PB_SIZE, "%s\n\rSHA512 from Flash: ", printBuffer);
                     APP_DisplayHash(appData.sha512_result, CRYPT_SHA512_DIGEST_SIZE);
                     snprintf(printBuffer, PB_SIZE, "%s\t took %d clock cycles", printBuffer, (int) appData.sha512_timing);
@@ -618,7 +618,7 @@ void APP_Tasks(void) {
 
         case APP_STATE_CHECK_RESULTS:
             if ( 0
-#if (RUN_FLASH_TEST)
+#if defined(RUN_FLASH_TEST)
                  || memcmp(MD5Expected, appData.md5_result, CRYPT_MD5_DIGEST_SIZE)
                  || memcmp(SHAExpected, appData.sha1_result, CRYPT_SHA_DIGEST_SIZE)
                  || memcmp(SHA256Expected, appData.sha256_result, CRYPT_SHA256_DIGEST_SIZE)
@@ -663,7 +663,7 @@ void APP_Tasks(void) {
         case APP_SPIN:
 
             /* The default state should never be executed. */
-#if LOOP_FOREVER
+#if defined(LOOP_FOREVER)
             appData.state = APP_STATE_RUN_MD5_FEED;
             break;
 #endif

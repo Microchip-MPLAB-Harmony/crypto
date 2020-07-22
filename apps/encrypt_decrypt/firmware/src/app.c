@@ -2499,7 +2499,7 @@ void APP_WriteComplete(void *handle) {
     appData.wrComplete = true;
 }
 
-void APP_Reset() {
+void APP_Reset(void) {
     appData.rdComplete = true;
     appData.wrComplete = true;
 }
@@ -2851,7 +2851,8 @@ void prim_test(void)
   Remarks:
     See prototype in app.h.
  */
-char *msgBuffer = "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n";
+const char *msgBuffer = 
+    "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n";
 
 void APP_Initialize(void) {
     /* Place the App state machine in its initial state. */
@@ -2877,7 +2878,8 @@ void APP_Tasks(void) {
             // SYS_MESSAGE("SYS_MESSAGE:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");            
             // SYS_DEBUG(SYS_ERROR_INFO,"SYS_DEBUG:" "\r\n Application created " __DATE__ " " __TIME__ " initialized!\r\n");
             appData.usartHandle = DRV_USART_Open(DRV_USART_INDEX_0, DRV_IO_INTENT_READWRITE);
-            DRV_USART_WriteBuffer( appData.usartHandle, msgBuffer, strlen(msgBuffer));
+            DRV_USART_WriteBuffer( appData.usartHandle, 
+                                    (void*)msgBuffer, strlen(msgBuffer));
             appData.state = APP_STATE_TEST_MD5;
             break;
         }
