@@ -177,10 +177,10 @@ typedef struct cryptoST_testAPI_s cryptoST_testAPI_t;
 typedef struct cryptoST_testDetail_s cryptoST_testDetail_t; 
 typedef struct cryptoST_testVector_s cryptoST_testVector_t;
 
-typedef char * cryptoST_OpenData_t(void);  // Allocate memory, precompute golden results
+typedef const char * cryptoST_OpenData_t(void);  // Allocate memory, precompute golden results
 typedef const cryptoST_testDetail_t * cryptoST_FirstDetail_t(void);
 typedef const cryptoST_testDetail_t * cryptoST_NextDetail_t(const cryptoST_testDetail_t *);
-typedef char * cryptoST_CloseData_t(void); // release any allocated memory
+typedef const char * cryptoST_CloseData_t(void); // release any allocated memory
 
 /*************************************************************
  * Declaration of the test manager API

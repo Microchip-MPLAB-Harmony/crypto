@@ -52,21 +52,24 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <assert.h>
 #include "cryptoSTE_buildInfo.h"
 
+#define INCLUDE_DECRYPTION 0
 #if !defined(SEP)
 #define SEP ","
 #endif
 
 // Quote marks on strings but not numeric fields
-static const char * const formatTextField = SEP "\"%s\"";
-// static const char * const formatLintField = SEP "%ld";
-static const char * const formatSintField = SEP "%d";
-static const char * const formatUintField = SEP "%lu";
-#define PRINT_FIELD(msg)    printf(formatTextField,msg);
-#define PRINT_LINT(val)     printf(formatLintField,val);
-#define PRINT_INT(val)      printf(formatSintField,val);
-#define PRINT_LUINT(val)    printf(formatUintField,val);
+#define PRINT_FIELD(msg)    printf(SEP "\"%s\"",msg);
+#define PRINT_LUINT(val)    printf(SEP "%lu",val);
+#define PRINT_LINT(val)     printf(SEP "%ld",val);
+#define PRINT_UINT(val)     printf(SEP "%u",val);
+#define PRINT_INT(val)      printf(SEP "%d",val);
 
 #define assert_dbug(X) __conditional_software_breakpoint((X))
+
+/* This flag affects CSV mode. When true, the start and stop timer values
+ * are displayed and the delta must be calculated during data analysis,
+ * otherwise the delta is displayed (using a different column header). */
+#define SHOW_START_STOP     1
 
 // *****************************************************************************
 // *****************************************************************************
@@ -127,7 +130,6 @@ void cryptoST_PRINT_announceElapsedTime_TEXT(cryptoSTE_results_t * testData)
     PRINT_WAIT(CRLF);
 }
 
-#define SHOW_START_STOP     1
 /* CSV = Comma Separated Values -- for import to Excel */
 static bool CSV_sentHeader = false;
 void cryptoST_PRINT_announceElapsedTime_CSV
@@ -170,23 +172,26 @@ void cryptoST_PRINT_announceElapsedTime_CSV
         CSV_sentHeader = true;
     }
 
+    /* The numeric values below are all promoted to unsigned long because
+     * the SAM and PIC32 compilers have different definitions for uint32_t,
+     * and strict type checking results in errors for one or the other. */
     PRINT(">>"); // marker to grep the data output
     PRINT_FIELD(labels->processor);
     PRINT_FIELD(labels->platform);
     PRINT_FIELD(labels->accelerator);
     PRINT_FIELD(cryptoSTE_buildInfo.optimized);
     PRINT_FIELD(labels->build);
-    PRINT_LUINT(((const long unsigned int)(SYS_TIME_CPU_CLOCK_FREQUENCY)));
-    PRINT_LUINT(SYS_TIME_FrequencyGet());
+    PRINT_LUINT((const long unsigned int)(SYS_TIME_CPU_CLOCK_FREQUENCY));
+    PRINT_LUINT((const long unsigned int)SYS_TIME_FrequencyGet()); // uint32_t
     PRINT_FIELD(testName);
     PRINT_FIELD(results->testHandler);
-    PRINT_INT(results->encryption.size);
-    PRINT_INT(results->encryption.iterations);
+    PRINT_LUINT((const long unsigned int)results->encryption.size);       // size_t
+    PRINT_LUINT((const long unsigned int)results->encryption.iterations); // size_t
 #if SHOW_START_STOP
     if (results->encryption.startStopIsValid)
     { 
-        PRINT_LUINT(results->encryption.start);
-        PRINT_LUINT(results->encryption.stop);
+        PRINT_LUINT((const long unsigned int)results->encryption.start); // SYS_TIME (uint32_t)
+        PRINT_LUINT((const long unsigned int)results->encryption.stop);  // SYS_TIME (uint32_t)
     }
     else { PRINT(SEP SEP); }
 #else
@@ -318,7 +323,7 @@ void cryptoST_PRINT_hexLine(const char * const tag,
     PRINT_WAIT(line); // wait before line goes out of scope
 
     int align4 = ((uint32_t)data)%4;
-    char * align = (0==align4)?"":" misaligned";
+    const char * const align = (0==align4)?"":" misaligned";
     printf(" (%lu)%s", (long unsigned int)length, align);
 }
 

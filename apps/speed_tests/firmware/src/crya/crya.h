@@ -53,9 +53,9 @@ extern "C" {
 #define CRYA_ALIGN __attribute__((aligned(4)))
 // e.g. CRYA_ALIGN uint8_t key[16];
     
-void crya_test_aes();
-void crya_test_sha1();
-void crya_test_all();
+void crya_test_aes(void);
+void crya_test_sha1(void);
+void crya_test_all(void);
 
 void crya_sha256(uint32_t hash[8], const uint8_t * data, const size_t length);
 void crya_sha224(uint32_t hash[8], const uint8_t * data, const size_t length);

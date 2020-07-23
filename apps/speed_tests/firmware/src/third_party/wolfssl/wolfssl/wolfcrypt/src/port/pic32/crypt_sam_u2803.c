@@ -151,8 +151,6 @@ static void crya_aes128_decrypt
 
 #if !defined(NO_SHA256) \
  && defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803)
-#include "wolfssl/wolfcrypt/sha256.h"
-
  /* This wrapper provides the RAM buffer necessary for proper CRYA
   * data processing, and anticipates when a mutex will be required for
   * access to the CRYA hardware.
@@ -177,6 +175,7 @@ static void crya_sha256_process(uint32_t hash_in_out[8], const uint8_t data[64])
    *********************************************************************
    *********************************************************************
  */
+#include "wolfssl/wolfcrypt/sha256.h"
 
 int wc_InitSha256_ex(wc_Sha256* sha256, void* heap, int devId)
 {
@@ -322,6 +321,7 @@ int wc_Sha256Final_noCopy(wc_Sha256* sha256)
             bitLength >>= 8; // endian independent
         }
     }
+
     // The final buffer is ready to be posted.
     crya_sha256_process(sha256->digest,sha256->buffer);
     return 0;

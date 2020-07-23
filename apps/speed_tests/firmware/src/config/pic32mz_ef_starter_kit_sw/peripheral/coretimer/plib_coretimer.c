@@ -56,7 +56,7 @@ void CORETIMER_CallbackSet ( CORETIMER_CALLBACK callback, uintptr_t context )
     coreTmr.context = context;
 }
 
-void CORETIMER_Start()
+void CORETIMER_Start(void)
 {
     // Disable Timer by setting Disable Count (DC) bit
     _CP0_SET_CAUSE(_CP0_GET_CAUSE() | _CP0_CAUSE_DC_MASK);
@@ -71,7 +71,7 @@ void CORETIMER_Start()
     IEC0SET=0x1;
 }
 
-void CORETIMER_Stop()
+void CORETIMER_Stop(void)
 {
     // Disable Timer by setting Disable Count (DC) bit
     _CP0_SET_CAUSE(_CP0_GET_CAUSE() | _CP0_CAUSE_DC_MASK);

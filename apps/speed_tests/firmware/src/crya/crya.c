@@ -353,7 +353,7 @@ void crya_test_sha1()
 #define crya_test_sha1()    ((void*)0)
 #endif // CRYA_TEST_SHA256
 
-void crya_test_all()
+void crya_test_all(void)
 {
     (void)crya_test_aes();
     (void)crya_test_sha1();

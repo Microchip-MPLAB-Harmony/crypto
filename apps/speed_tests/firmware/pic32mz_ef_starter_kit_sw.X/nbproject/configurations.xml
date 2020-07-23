@@ -56,12 +56,12 @@
           <itemPath>../src/config/pic32mz_ef_starter_kit_sw/configuration.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <logicalFolder name="f4" displayName="osal" projectFiles="true">
+      <logicalFolder name="f5" displayName="osal" projectFiles="true">
         <itemPath>../src/config/pic32mz_ef_starter_kit_sw/osal/osal.h</itemPath>
         <itemPath>../src/config/pic32mz_ef_starter_kit_sw/osal/osal_definitions.h</itemPath>
         <itemPath>../src/config/pic32mz_ef_starter_kit_sw/osal/osal_impl_basic.h</itemPath>
       </logicalFolder>
-      <logicalFolder name="f3" displayName="packs" projectFiles="true">
+      <logicalFolder name="f4" displayName="packs" projectFiles="true">
         <logicalFolder name="f1"
                        displayName="PIC32MZ2048EFM144_DFP"
                        projectFiles="true">
@@ -199,6 +199,19 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/sha512.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/wc_port.h</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/certs_test.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3" displayName="zlib" projectFiles="true">
+        <itemPath>../src/third_party/zlib/crc32.h</itemPath>
+        <itemPath>../src/third_party/zlib/deflate.h</itemPath>
+        <itemPath>../src/third_party/zlib/gzguts.h</itemPath>
+        <itemPath>../src/third_party/zlib/inffast.h</itemPath>
+        <itemPath>../src/third_party/zlib/inffixed.h</itemPath>
+        <itemPath>../src/third_party/zlib/inflate.h</itemPath>
+        <itemPath>../src/third_party/zlib/inftrees.h</itemPath>
+        <itemPath>../src/third_party/zlib/trees.h</itemPath>
+        <itemPath>../src/third_party/zlib/zconf.h</itemPath>
+        <itemPath>../src/third_party/zlib/zlib.h</itemPath>
+        <itemPath>../src/third_party/zlib/zutil.h</itemPath>
       </logicalFolder>
       <itemPath>../src/app.h</itemPath>
     </logicalFolder>
@@ -385,6 +398,20 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="zlib" projectFiles="true">
+        <itemPath>../src/third_party/zlib/adler32.c</itemPath>
+        <itemPath>../src/third_party/zlib/compress.c</itemPath>
+        <itemPath>../src/third_party/zlib/crc32.c</itemPath>
+        <itemPath>../src/third_party/zlib/deflate.c</itemPath>
+        <itemPath>../src/third_party/zlib/gzclose.c</itemPath>
+        <itemPath>../src/third_party/zlib/infback.c</itemPath>
+        <itemPath>../src/third_party/zlib/inffast.c</itemPath>
+        <itemPath>../src/third_party/zlib/inflate.c</itemPath>
+        <itemPath>../src/third_party/zlib/inftrees.c</itemPath>
+        <itemPath>../src/third_party/zlib/trees.c</itemPath>
+        <itemPath>../src/third_party/zlib/uncompr.c</itemPath>
+        <itemPath>../src/third_party/zlib/zutil.c</itemPath>
+      </logicalFolder>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
     </logicalFolder>
@@ -454,7 +481,7 @@
         <property key="enable-unroll-loops" value="false"/>
         <property key="exclude-floating-point" value="false"/>
         <property key="extra-include-directories"
-                  value="../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src;../src/config/pic32mz_ef_starter_kit_sw;../src/packs/PIC32MZ2048EFM144_DFP"/>
+                  value="../src/third_party/wolfssl;../src/third_party/wolfssl/wolfssl;../src/third_party/zlib;../src;../src/config/pic32mz_ef_starter_kit_sw;../src/packs/PIC32MZ2048EFM144_DFP"/>
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
         <property key="isolate-each-function" value="true"/>
@@ -472,7 +499,7 @@
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
-        <appendMe value="-std=c99"/>
+        <appendMe value="-std=c99 -Wformat=2 -Werror-implicit-function-declaration -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wbad-function-cast -Wwrite-strings -Waggregate-return -Wstrict-prototypes -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline -Wlong-long -Wunreachable-code -Wmissing-noreturn"/>
       </C32>
       <C32-AR>
         <property key="additional-options-chop-files" value="false"/>

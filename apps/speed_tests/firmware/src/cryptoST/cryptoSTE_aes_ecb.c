@@ -150,7 +150,7 @@ typedef int (*ecbEncrypt_t)(Aes* aes, byte* out, const byte* in, word32 size);
 typedef int (*ecbDecrypt_t)(Aes* aes, byte* out, const byte* in, word32 size);
 typedef struct ecbTest_s
 {
-    char *        name;
+    const char *  name;
     const int     keySize;
     const ecbSetKey_t   setKey;
     const ecbEncrypt_t  encrypt;
@@ -427,7 +427,7 @@ static const char * cryptoSTE_aes_ecb_all_timed(const cryptoST_testDetail_t * td
 // *****************************************************************************
 // *****************************************************************************
 
-static char * badKey = "incorrect key length";
+static const char * badKey = "incorrect key length";
 const char * cryptoSTE_aes_ecb_timed(const cryptoST_testDetail_t * td,
                                      cryptoSTE_testExecution_t * param)
 {

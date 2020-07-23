@@ -86,7 +86,7 @@ void CLK_Initialize( void )
 {
     bool int_flag = false;
 
-    int_flag = (bool)__builtin_disable_interrupts();
+    int_flag = __builtin_disable_interrupts() ? true : false;
 
     /* unlock system for clock configuration */
     SYSKEY = 0x00000000;
@@ -111,7 +111,7 @@ void CLK_Initialize( void )
     PMD7 = 0x500000;
 
     /* Lock system since done with clock configuration */
-    int_flag = (bool)__builtin_disable_interrupts();
+    int_flag = __builtin_disable_interrupts() ? true : false;
 
     SYSKEY = 0x33333333;
 

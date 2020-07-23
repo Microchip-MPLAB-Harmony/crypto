@@ -49,7 +49,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 extern "C" {
 #endif
 
-extern void cryptoST();
+extern void cryptoST(void);
 
 #ifdef	__cplusplus
 }

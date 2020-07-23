@@ -414,7 +414,7 @@ static const char * cryptoSTE_rsa_exptmod_timed
         
         if (0 != param->results.errorMessage)
         {
-            const cryptoST_testData_t * const compare = td->io.rsas.out.signature;
+            const cryptoST_testData_t * const signature = td->io.rsas.out.signature;
             printf(CRLF "%s", param->results.errorMessage);
             printAll_verify(td);
             cryptoST_PRINT_hexBlock(CRLF "....vector:", 
@@ -422,7 +422,7 @@ static const char * cryptoSTE_rsa_exptmod_timed
             cryptoST_PRINT_hexBlock(CRLF "......hash:", 
                     hashed, ans1_exptmod_header_size + test->hashSize);
             cryptoST_PRINT_hexBlock(CRLF "..computed:", rsaSignature, rsaSize);
-            cryptoST_PRINT_hexBlock(CRLF "..expected:", compare->data, compare->length);
+            cryptoST_PRINT_hexBlock(CRLF "..expected:", signature->data, signature->length);
             printf(CRLF);
         }
         wc_FreeRsaKey(&rsaKey);

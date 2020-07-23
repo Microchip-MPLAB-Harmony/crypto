@@ -227,7 +227,7 @@
       #if defined(_MSC_VER) || defined(__BORLANDC__)
          typedef unsigned __int64   ulong64;
       #else
-         typedef unsigned long long ulong64;
+         typedef uint64_t ulong64; // klk
       #endif
       typedef unsigned int       fp_digit;
       #define SIZEOF_FP_DIGIT 4

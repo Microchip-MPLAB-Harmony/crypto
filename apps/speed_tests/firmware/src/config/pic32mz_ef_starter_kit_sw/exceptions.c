@@ -75,10 +75,10 @@ static unsigned int _excep_code;
 static unsigned int _excep_addr;
 
 /* Pointer to the string describing the cause of the exception. */
-static char *_cause_str;
+static const char *_cause_str;
 
 /* Array identifying the cause (indexed by _exception_code). */
-static char *cause[] =
+static const char *cause[] =
 {
     "Interrupt",
     "Undefined",
@@ -117,6 +117,7 @@ static char *cause[] =
     Refer to the XC32 User's Guide for additional information.
  */
 
+__attribute__((noreturn))
 void _general_exception_handler ( void )
 {
     /* Mask off Mask of the ExcCode Field from the Cause Register

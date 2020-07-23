@@ -162,7 +162,7 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 static const cryptoST_testDetail_t * firstTest(void)
 { return nextTest(&test_item); }
 
-static char * openData(void)
+static const char * openData(void)
 {
     test_step = 0;
 
@@ -180,7 +180,7 @@ static char * openData(void)
     }
 }
 
-static char * closeData(void)
+static const char * closeData(void)
 {
     if (null_vector.vector.data)
         cryptoSTE_free((uint8_t*)null_vector.vector.data);

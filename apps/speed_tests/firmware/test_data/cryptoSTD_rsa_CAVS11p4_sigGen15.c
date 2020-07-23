@@ -247,7 +247,7 @@ static const cryptoST_testDetail_t * firstTest(void)
 }
 
 __attribute__((used))
-static char * openData(void)
+static const char * openData(void)
 { return "FIXME: this data set is not in DER format and will produce errors if used"; }
 
 /*************************************************************

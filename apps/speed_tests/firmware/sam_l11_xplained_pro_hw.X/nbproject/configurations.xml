@@ -492,9 +492,9 @@
         <itemPath>../src/third_party/zlib/uncompr.c</itemPath>
         <itemPath>../src/third_party/zlib/zutil.c</itemPath>
       </logicalFolder>
+      <itemPath>../src/arm/sam_l11_secure_init.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
-      <itemPath>../src/arm/sam_l11_secure_init.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -606,7 +606,7 @@
         <property key="use-cci" value="false"/>
         <property key="use-iar" value="false"/>
         <property key="use-indirect-calls" value="false"/>
-        <appendMe value="-D__PROCESSOR__=$(MP_PROCESSOR_OPTION)"/>
+        <appendMe value="-D__PROCESSOR__=$(MP_PROCESSOR_OPTION) -Wformat=2 -Werror-implicit-function-declaration -Wfloat-equal -Wundef -Wshadow -Wpointer-arith -Wbad-function-cast -Wwrite-strings -Waggregate-return -Wstrict-prototypes -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Winline -Wlong-long -Wunreachable-code -Wmissing-noreturn"/>
       </C32>
       <C32-AR>
         <property key="additional-options-chop-files" value="false"/>
@@ -664,7 +664,7 @@
         <property key="no-startup-files" value="false"/>
         <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>
-        <property key="preprocessor-macros" value="SECURE;AS=65500;RS=16000;ANSC=1024"/>
+        <property key="preprocessor-macros" value="SECURE;AS=65500;RS=16000;ANSC=1024;"/>
         <property key="remove-unused-sections" value="true"/>
         <property key="report-memory-usage" value="false"/>
         <property key="serial-length" value=""/>

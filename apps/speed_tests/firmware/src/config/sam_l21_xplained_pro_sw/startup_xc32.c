@@ -50,9 +50,6 @@ extern uint32_t __svectors;
 int main(void);
 extern void __attribute__((long_call)) __libc_init_array(void);
 
-/* Declaration of Reset handler (may be custom) */
-void __attribute__((optimize("-O1"), long_call)) Reset_Handler(void);
-
 /* Device Vector information is available in interrupt.c file */
 
 /* Optional application-provided functions */
@@ -68,6 +65,7 @@ extern void __attribute__((weak,long_call)) __xc32_on_bootstrap(void);
  * \brief This is the code that gets called on processor reset.
  * To initialize the device, and call the main() routine.
  */
+__attribute__((noreturn))
 void __attribute__((optimize("-O1"), section(".text.Reset_Handler"), long_call)) Reset_Handler(void)
 {
     uint32_t *pSrc;

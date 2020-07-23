@@ -383,7 +383,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
         {
             if (CSTE_VERBOSE > 2) 
             { printf("-- opening data set %s" CRLF, cv->name); }
-            char * res = cv->openData();
+            const char * res = cv->openData();
             if (res)
             { 
                 printf("-> ** %s (open) %s" CRLF, cv->name, res);
@@ -461,7 +461,7 @@ void cryptoSTE(cryptoSTE_localData_t * thisTest)
         {
             if (CSTE_VERBOSE > 2) 
             { printf("-- closing data set %s" CRLF, cv->name); }
-            char * res = cv->closeData();
+            const char * res = cv->closeData();
             if (res)
             { 
                 printf("** %s (close) %s" CRLF, cv->name, res);

@@ -52,9 +52,9 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h> // for size_t
     
-char * cryptoSTE_generateSequentialUINT32
+const char * cryptoSTE_generateSequentialUINT32
     (uint32_t * dst, uint32_t seed, size_t size);
-char * cryptoSTE_generatePseudorandomUINT32
+const char * cryptoSTE_generatePseudorandomUINT32
     (uint32_t * dst, uint32_t seed, size_t size);
 
 #ifdef	__cplusplus

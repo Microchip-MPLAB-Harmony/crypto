@@ -332,7 +332,7 @@ static const cryptoST_testDetail_t * nextTest
 static const cryptoST_testDetail_t * firstTest(void)
 { return nextTest(test_item); }
 
-static char * openData(void)
+static const char * openData(void)
 { return (test_item_count > 1)? 0 : "no data for RSA-PSS operation"; }
 
 /*************************************************************

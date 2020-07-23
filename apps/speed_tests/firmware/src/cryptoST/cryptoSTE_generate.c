@@ -69,7 +69,7 @@ static size_t maxBitNumber_UINT32(uint32_t const n)
  *************************************************************/
 /* Generate a sequential sequence to fill a buffer.
  *  */
-char * cryptoSTE_generateSequentialUINT32
+const char * cryptoSTE_generateSequentialUINT32
     (uint32_t * dst, uint32_t seed, size_t size)
 {
     uint32_t counter = seed;
@@ -110,7 +110,7 @@ static uint32_t fb_tap[]={
  * algorithm will generate N-1 distinct values, and then
  * put zero in the final element.
  * TODO: update this for non power-of-2 sizes. */
-char * cryptoSTE_generatePseudorandomUINT32
+const char * cryptoSTE_generatePseudorandomUINT32
     (uint32_t * dst, uint32_t const seed, size_t const size)
 {
     // Force a power-of-2 length

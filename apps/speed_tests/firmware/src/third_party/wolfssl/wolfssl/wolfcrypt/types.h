@@ -92,8 +92,13 @@
         typedef unsigned long word64;
     #elif defined(SIZEOF_LONG_LONG) && SIZEOF_LONG_LONG == 8
         #define WORD64_AVAILABLE
+#define C99_COMPILATION 1
+#if defined(C99_COMPILATION)
+        #define W64LIT(x) (__extension__ x##ULL) // klk
+#else
         #define W64LIT(x) x##LL
-        typedef unsigned long long word64;
+#endif
+        typedef uint64_t word64; // klk
     #elif defined(__SIZEOF_LONG_LONG__) && __SIZEOF_LONG_LONG__ == 8
         #define WORD64_AVAILABLE
         #define W64LIT(x) x##LL

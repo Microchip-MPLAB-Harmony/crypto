@@ -571,7 +571,7 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
     }
 }
 
-static char * openData(void)
+static const char * openData(void)
 {
     /* Allocate the largest required buffer now, because there
      * is no provision for return errors in first() or next().
@@ -582,7 +582,7 @@ static char * openData(void)
         DATA_PACKAGE_NAME " malloc error " __BASE_FILE__ "(" BASE_LINE ")";
 }
 
-static char * closeData(void)
+static const char * closeData(void)
 {
     if (dynamicBuffer) cryptoSTE_free(dynamicBuffer);
     dynamicBuffer = NULL;

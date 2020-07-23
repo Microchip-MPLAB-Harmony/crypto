@@ -137,7 +137,7 @@ extern "C" {
 #define HAVE_ECC
 #define NO_DH
 #define NO_DSA
-#define USE_CERT_BUFFERS_2048
+#define NO_RSA
 #define NO_DEV_RANDOM
 #define HAVE_HASHDRBG
 #define WC_NO_HARDEN

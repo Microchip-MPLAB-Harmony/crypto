@@ -149,7 +149,8 @@ extern "C" {
 #define NO_RABBIT
 #define HAVE_ECC
 #define NO_DH
-#define USE_CERT_BUFFERS_2048
+#define FP_MAX_BITS 4096
+#define USE_CERT_BUFFERS_4096
 #define NO_DEV_RANDOM
 #define WOLFSSL_HAVE_MCHP_HW_RANDOM
 #define HAVE_HASHDRBG

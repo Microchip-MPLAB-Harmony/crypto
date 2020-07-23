@@ -79,11 +79,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Local data structures
 // *****************************************************************************
 // *****************************************************************************
-char *splashMessage = 
-    "\r\n"
-    " Microchip benchMark test suite\r\n"
-    " Application created %s %s initialized!\r\n";
-
 #if defined(EXECUTE_SPEED_TEST)
 static cryptoSTE_parameters_t exec_repetitiveTimed =
 {
@@ -134,7 +129,9 @@ static cryptoSTE_parameters_t exec_onceThroughAndCheck =
 
 void cryptoST(void)
 {
-    printf(splashMessage, 
+    printf( "\r\n"
+            " Microchip benchMark test suite\r\n"
+            " Application created %s %s initialized!\r\n",
         cryptoSTE_buildInfo.buildDate, cryptoSTE_buildInfo.buildTime);
 
     if (CSTE_VERBOSE > 1) P0_UINT("Verbose level ", CSTE_VERBOSE);

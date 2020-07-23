@@ -89,7 +89,7 @@ typedef int (*des3Encrypt_t)(Des3* des, byte* out, const byte* in, word32 size);
 typedef int (*des3Decrypt_t)(Des3* des, byte* out, const byte* in, word32 size);
 typedef struct desTest_s
 {
-    char *        name;
+    const char *  name;
     const int     keySize; // 8B or 24B
     const des3Encrypt_t  encrypt;
     const des3Decrypt_t  decrypt;
@@ -291,7 +291,7 @@ static const char * cryptoSTE_des3des_all_timed
 // *****************************************************************************
 // *****************************************************************************
 
-static char * badKey = "incorrect key length";
+static const char * const badKey = "incorrect key length";
 const char * cryptoSTE_des3des_timed(const cryptoST_testDetail_t * td,
                                      cryptoSTE_testExecution_t * param)
 {

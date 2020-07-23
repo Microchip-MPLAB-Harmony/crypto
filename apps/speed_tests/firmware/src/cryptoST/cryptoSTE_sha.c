@@ -208,6 +208,11 @@ static void WC_sha512
 // Section: External API
 // *****************************************************************************
 // *****************************************************************************
+#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803) \
+ || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805)
+#include "crya/crya.h"
+#endif
+
 const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
                                       cryptoSTE_testExecution_t * param)
 {
@@ -224,7 +229,6 @@ const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
     
 #if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803) \
  || defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805)
-#include "crya/crya.h"
     if (param->parameters.useLocalDriverEntryPoints)
     {
         switch(td->technique)
@@ -245,7 +249,7 @@ const char * cryptoSTE_crya_sha_timed(const cryptoST_testDetail_t * td,
         }
     }
     else
-#endif
+#endif // u2803 or U2805
     {
         switch(td->technique)
         {

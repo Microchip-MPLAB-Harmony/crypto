@@ -131,17 +131,17 @@ void cryptoSTE_announceVector(int level, const cryptoST_testVector_t * tv)
     if (CSTE_VERBOSE > 2) P_INT("..bytes data: ", tv->vector.length);
 }
 
-static char * bar_asterisks = "**************************" CRLF;
+static const char * const bar_asterisks = "**************************" CRLF;
 void cryptoSTE_announceSuite(const cryptoST_testAPI_t * cv)
 {
     if (NULL == cv) return;
 
-    printf(bar_asterisks);
+    printf("%s", bar_asterisks);
     printf("* Test suite: %s" CRLF, cv->name);
     printf("* Requires open/close: %s - %s" CRLF,
                 (NULL == cv->openData)? "no":"yes",
                 (NULL == cv->closeData)? "no":"yes");
-    printf(bar_asterisks);
+    printf("%s", bar_asterisks);
 }
 
 void cryptoSTE_announceAll(cryptoSTE_localData_t * meMySelf)

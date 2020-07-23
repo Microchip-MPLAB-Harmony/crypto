@@ -99,7 +99,7 @@ static const cryptoST_testDetail_t test_item =
 /*************************************************************
  * API handlers
  *************************************************************/
-static char * openData_func(void)
+static const char * openData_func(void)
 {
     /* Allocate the largest required buffer now, because there
      * is no provision for return errors in first() or next().
@@ -115,7 +115,7 @@ static char * openData_func(void)
         DATA_PACKAGE_NAME " malloc error " __BASE_FILE__ "(" BASE_LINE ")";
 }
 
-static char * closeData_func(void)
+static const char * closeData_func(void)
 {
     if (satcZ.vector.data) 
         cryptoSTE_free((void*)satcZ.vector.data);

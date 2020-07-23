@@ -84,9 +84,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // Section: Support routines
 // *****************************************************************************
 // *****************************************************************************
-static void printAll(char * context,
+static void printAll(const char * context,
                      const cryptoST_testDetail_t * td, 
-                     byte * cipher, byte * plain)
+                     const byte * cipher, const byte * plain)
 {
     const cryptoST_testVector_t * vector = td->rawData;
     
