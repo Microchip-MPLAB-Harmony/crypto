@@ -525,7 +525,7 @@ DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
     if (index == 0)
     {
 #if !defined(DRV_BA414E_RTOS_STACK_SIZE)
-        if (ioIntent & DRV_IO_INTENT_BLOCKING != DRV_IO_INTENT_BLOCKING)
+        if ((ioIntent & DRV_IO_INTENT_BLOCKING) != DRV_IO_INTENT_BLOCKING)
 #endif
         {        
             if ((ioIntent & DRV_IO_INTENT_WRITE) == DRV_IO_INTENT_WRITE)
@@ -1255,15 +1255,19 @@ void DRV_BA414_BlockingCallback(DRV_BA414E_OP_RESULT result, uintptr_t context)
 {
     DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData*)context;
     cd->blockingResult = result;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
     OSAL_SEM_Post(&cd->clientBlock);
+#endif
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414_BlockingHelper(DRV_BA414E_ClientData * cd)
 {
     cd->context = (uintptr_t)cd;
     cd->callback = DRV_BA414_BlockingCallback;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
     OSAL_SEM_Post(&opData.clientAction);
     OSAL_SEM_Pend(&cd->clientBlock, OSAL_WAIT_FOREVER);
+#endif
     return cd->blockingResult;
 }
 
@@ -1300,7 +1304,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1348,7 +1354,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1391,7 +1399,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1437,7 +1447,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1480,7 +1492,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1518,7 +1532,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1560,7 +1576,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1602,7 +1620,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1644,7 +1664,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else
@@ -1685,7 +1707,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
             {
                 cd->callback = callback;
                 cd->context = context;
+#if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientAction);
+#endif
                 ret = DRV_BA414E_OP_PENDING;
             }
             else

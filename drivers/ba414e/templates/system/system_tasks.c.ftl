@@ -24,7 +24,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 ----------------------------------------------------------------------------->
 
 <#if HarmonyCore.SELECT_RTOS == "BareMetal">
-    <#lt>BA414E_Tasks(sysObj.ba414e);
+    <#lt>DRV_BA414E_Tasks(sysObj.ba414e);
 <#elseif HarmonyCore.SELECT_RTOS == "FreeRTOS">
     <#lt>    xTaskCreate( _DRV_BA414E_Tasks,
     <#lt>        "DRV_BA414E_Tasks",
