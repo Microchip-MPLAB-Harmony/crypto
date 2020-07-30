@@ -182,8 +182,10 @@ static const char * cryptoSTE_des3des_all_timed
         assert_dbug(24 == td->io.sym.in.key.length);
         ret = wc_Des3_SetKey(&enc, td->io.sym.in.key.data, 
                                    td->io.sym.in.ivNonce.data, DES_ENCRYPTION);
-        if (ret != 0) 
-            { param->results.errorMessage = "failed to set key"; break; }
+        if (ret != 0)
+        {
+            param->results.errorMessage = "failed to set key"; break;
+        }
 
         // Hold off until the serial port is finished
         PRINT_WAIT_WHILE_BUSY();

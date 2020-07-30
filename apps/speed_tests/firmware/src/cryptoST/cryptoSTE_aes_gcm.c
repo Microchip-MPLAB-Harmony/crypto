@@ -115,10 +115,10 @@ static void printAll(const cryptoST_testVector_t * input,
         td->io.sym.in.key.data, td->io.sym.in.key.length);
     cryptoST_PRINT_hexLine(CRLF "..nonce   :", 
         td->io.sym.in.ivNonce.data, td->io.sym.in.ivNonce.length);
-    cryptoST_PRINT_hexLine(CRLF "..aad     :",
+    cryptoST_PRINT_hexLine(CRLF "..authData:",
             td->io.sym.in.additionalAuthData.data, 
                     td->io.sym.in.additionalAuthData.length);
-    
+
     cryptoST_PRINT_hexLine(CRLF "..cipher  :", 
             results->C.data, results->C.length);
     cryptoST_PRINT_hexLine(CRLF "..goldData:",

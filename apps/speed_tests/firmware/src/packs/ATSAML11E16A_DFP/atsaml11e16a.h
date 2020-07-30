@@ -20,7 +20,7 @@
  *
  */
 
-/* file generated from device description version 2020-02-04T13:16:43Z */
+/* file generated from device description version 2020-06-09T10:46:48Z */
 #ifndef _SAML11E16A_H_
 #define _SAML11E16A_H_
 
@@ -30,12 +30,12 @@
 #define HEADER_FORMAT_VERSION_MAJOR (2)
 #define HEADER_FORMAT_VERSION_MINOR (0)
 
-/** \addtogroup SAML11E16A_definitions SAML11E16A definitions
+/** \addtogroup SAML11E16A_definitions b'SAML11E16A definitions
   This file defines all structures and symbols for SAML11E16A:
     - registers and bitfields
     - peripheral base address
     - peripheral ID
-    - PIO definitions
+    - PIO definitions'
  *  @{
  */
 
@@ -65,7 +65,7 @@
 #  define _UL_(x) x   /**< Assembler: Unsigned Long integer literal constant value */
 #endif /* !(defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
 #endif /* SKIP_INTEGER_LITERALS */
-/** @}  end of Atmel Global Defines */
+/** @}  b'end of Atmel Global Defines' */
 
 /* ************************************************************************** */
 /*   CMSIS DEFINITIONS FOR SAML11E16A                                         */
@@ -141,7 +141,7 @@ typedef struct _DeviceVectors
 {
   /* Stack pointer */
   void* pvStack;
-  /* Cortex-M handlers */
+  /* CORTEX-M23 handlers */
   void* pfnReset_Handler;                        /* -15 Reset Vector, invoked on Power up and warm reset */
   void* pfnNonMaskableInt_Handler;               /* -14 Non maskable Interrupt, cannot be stopped or preempted */
   void* pfnHardFault_Handler;                    /* -13 Hard Fault, all classes of Fault */
@@ -206,12 +206,6 @@ typedef struct _DeviceVectors
   void* pfnTRAM_Handler;                         /*  44 TrustRAM (TRAM) */
 } DeviceVectors;
 
-/* Defines for Deprecated Interrupt and Exceptions handler names */
-#define pfnMemManage_Handler      pfnMemoryManagement_Handler     /**< \deprecated  Backward compatibility for ASF*/
-#define pfnDebugMon_Handler       pfnDebugMonitor_Handler         /**< \deprecated  Backward compatibility for ASF*/
-#define pfnNMI_Handler            pfnNonMaskableInt_Handler       /**< \deprecated  Backward compatibility for ASF*/
-#define pfnSVC_Handler            pfnSVCall_Handler               /**< \deprecated  Backward compatibility for ASF*/
-
 #endif /* !(defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
 
 #if !(defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__))
@@ -273,17 +267,9 @@ void PTC_Handler                   ( void );
 void TRNG_Handler                  ( void );
 void TRAM_Handler                  ( void );
 #endif /* DONT_USE_PREDEFINED_PERIPHERALS_HANDLERS */
-/* Defines for Deprecated Interrupt and Exceptions handler names */
-#define MemManage_Handler         MemoryManagement_Handler        /**< \deprecated  Backward compatibility*/
-#define DebugMon_Handler          DebugMonitor_Handler            /**< \deprecated  Backward compatibility*/
-#define NMI_Handler               NonMaskableInt_Handler          /**< \deprecated  Backward compatibility*/
-#define SVC_Handler               SVCall_Handler                  /**< \deprecated  Backward compatibility*/
-
 #endif /* !(defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
 
-/*
- * \brief Configuration of the CORTEX-M23 Processor and Core Peripherals
- */
+/** \brief Configuration of the CORTEX-M23 Processor and Core Peripherals */
 #define __FPU_PRESENT                  0 /**< FPU present or not                                                        */
 #define __MPU_PRESENT                  1 /**< MPU present or not                                                        */
 #define __NVIC_PRIO_BITS               2 /**< Number of Bits used for Priority Levels                                   */
@@ -300,7 +286,7 @@ void TRAM_Handler                  ( void );
 #include "system_saml11.h"
 #endif /* USE_CMSIS_INIT */
 
-/** \defgroup SAML11E16A_api Peripheral Software API
+/** \defgroup SAML11E16A_api b'Peripheral Software API'
  *  @{
  */
 
@@ -335,9 +321,9 @@ void TRAM_Handler                  ( void );
 #include "component/tram.h"
 #include "component/trng.h"
 #include "component/wdt.h"
-/** @}  end of Peripheral Software API */
+/** @}  b'end of Peripheral Software API' */
 
-/** \addtogroup SAML11E16A_id Peripheral Ids Definitions
+/** \addtogroup SAML11E16A_id b'Peripheral Ids Definitions'
  *  @{
  */
 
@@ -378,9 +364,9 @@ void TRAM_Handler                  ( void );
 #define ID_TRAM          ( 77) /**< \brief TrustRAM (TRAM) */
 
 #define ID_PERIPH_MAX    ( 77) /**< \brief Number of peripheral IDs */
-/** @}  end of Peripheral Ids Definitions */
+/** @}  b'end of Peripheral Ids Definitions' */
 
-/** \addtogroup SAML11E16A_base Peripheral Base Address Definitions
+/** \addtogroup SAML11E16A_base b'Peripheral Base Address Definitions'
  *  @{
  */
 
@@ -429,9 +415,9 @@ void TRAM_Handler                  ( void );
 #define TRNG_REGS                        ((trng_registers_t*)0x42002800)               /**< \brief TRNG Registers Address       */
 #define WDT_REGS                         ((wdt_registers_t*)0x40002000)                /**< \brief WDT Registers Address        */
 #endif /* (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
-/** @}  end of Peripheral Base Address Definitions */
+/** @}  b'end of Peripheral Base Address Definitions' */
 
-/** \addtogroup SAML11E16A_base Peripheral Base Address Definitions
+/** \addtogroup SAML11E16A_base b'Peripheral Base Address Definitions'
  *  @{
  */
 
@@ -478,9 +464,9 @@ void TRAM_Handler                  ( void );
 #define TRAM_BASE_ADDRESS                _UL_(0x42003400)                              /**< \brief TRAM Base Address */
 #define TRNG_BASE_ADDRESS                _UL_(0x42002800)                              /**< \brief TRNG Base Address */
 #define WDT_BASE_ADDRESS                 _UL_(0x40002000)                              /**< \brief WDT Base Address */
-/** @}  end of Peripheral Base Address Definitions */
+/** @}  b'end of Peripheral Base Address Definitions' */
 
-/** \addtogroup SAML11E16A_pio Peripheral Pio Definitions
+/** \addtogroup SAML11E16A_pio b'Peripheral Pio Definitions'
  *  @{
  */
 
@@ -488,7 +474,7 @@ void TRAM_Handler                  ( void );
 /*   PIO DEFINITIONS FOR SAML11E16A                                           */
 /* ************************************************************************** */
 #include "pio/saml11e16a.h"
-/** @}  end of Peripheral Pio Definitions */
+/** @}  b'end of Peripheral Pio Definitions' */
 
 /* ************************************************************************** */
 /*   MEMORY MAPPING DEFINITIONS FOR SAML11E16A                                */
@@ -595,6 +581,8 @@ void TRAM_Handler                  ( void );
 #define EVENT_ID_GEN_AC_COMP_1                           41 /**< ID for AC event generator COMP_1 */
 #define EVENT_ID_GEN_AC_WIN_0                            42 /**< ID for AC event generator WIN_0 */
 #define EVENT_ID_GEN_DAC_EMPTY                           43 /**< ID for DAC event generator EMPTY */
+#define EVENT_ID_GEN_PTC_EOC                             44 /**< ID for PTC event generator EOC */
+#define EVENT_ID_GEN_PTC_WCOMP                           45 /**< ID for PTC event generator WCOMP */
 #define EVENT_ID_GEN_TRNG_DATARDY                        46 /**< ID for TRNG event generator DATARDY */
 #define EVENT_ID_GEN_CCL_LUT_0                           47 /**< ID for CCL event generator LUT_0 */
 #define EVENT_ID_GEN_CCL_LUT_1                           48 /**< ID for CCL event generator LUT_1 */
@@ -622,6 +610,8 @@ void TRAM_Handler                  ( void );
 #define EVENT_ID_USER_AC_COMP_0                          16 /**< ID for AC event user COMP_0 */
 #define EVENT_ID_USER_AC_COMP_1                          17 /**< ID for AC event user COMP_1 */
 #define EVENT_ID_USER_DAC_START                          18 /**< ID for DAC event user START */
+#define EVENT_ID_USER_PTC_STCONV                         19 /**< ID for PTC event user STCONV */
+#define EVENT_ID_USER_PTC_DSEQR                          20 /**< ID for PTC event user DSEQR */
 #define EVENT_ID_USER_CCL_LUT_0                          21 /**< ID for CCL event user LUT_0 */
 #define EVENT_ID_USER_CCL_LUT_1                          22 /**< ID for CCL event user LUT_1 */
 
@@ -629,7 +619,7 @@ void TRAM_Handler                  ( void );
 }
 #endif
 
-/** @}  end of SAML11E16A definitions */
+/** @}  b'end of SAML11E16A definitions' */
 
 
 #endif /* _SAML11E16A_H_ */

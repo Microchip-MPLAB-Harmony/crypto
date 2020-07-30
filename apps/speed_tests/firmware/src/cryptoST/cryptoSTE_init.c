@@ -75,7 +75,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #if defined(HAVE_AESGCM)
 #include "../test_data/cryptoSTD_wolfSSL_aes_gcm.h"
-#include "../test_data/cryptoSTD_zero_aes.h"
 #endif
 #if defined(HAVE_AESCCM)
 #include "../test_data/cryptoSTD_aes_ccm.h"
@@ -85,7 +84,6 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #endif
 #if defined(HAVE_AESCCM)
 #include "../test_data/cryptoSTD_wolfSSL_aes_ctr.h"
-#include "../test_data/cryptoSTD_zero_aes.h"
 #endif
 #if defined(WOLFSSL_AES_CFB)
 #include "../test_data/cryptoSTD_wolfSSL_aes_cfb.h"

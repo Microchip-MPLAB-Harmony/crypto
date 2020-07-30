@@ -143,6 +143,7 @@ void cryptoST_PRINT_announceElapsedTime_CSV
                 ">>" SEP           // line tag
                 "Processor" SEP    // per cryptoST_xx
                 "Platform" SEP     // per cryptoST_xx
+                "Configuration" SEP // project configuration
                 "Accelerator" SEP  // per cryptoST_xx
                 "Optimized" SEP    // on, but not the level
                 "Build" SEP        // hopefully the git version
@@ -178,6 +179,7 @@ void cryptoST_PRINT_announceElapsedTime_CSV
     PRINT(">>"); // marker to grep the data output
     PRINT_FIELD(labels->processor);
     PRINT_FIELD(labels->platform);
+    PRINT_FIELD(cryptoSTE_buildInfo.configuration);
     PRINT_FIELD(labels->accelerator);
     PRINT_FIELD(cryptoSTE_buildInfo.optimized);
     PRINT_FIELD(labels->build);
@@ -269,8 +271,8 @@ void cryptoST_PRINT_hexLine(const char * const tag,
                             const uint8_t * const data, 
                             size_t const length)
 {
-    PRINT(tag);
-    printf(" ");
+    // printf(CRLF "%s (%lu) %p", tag, (unsigned long int)length, data);
+    printf("%s ", tag);
     if (NULL == data)
     { PRINT("** null pointer"); return; }
     if (0 == length)

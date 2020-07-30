@@ -55,12 +55,12 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #include <wolfssl/wolfcrypt/settings.h>
 #define DATA_PACKAGE_NAME   "AES_NULL"
 
-#define CONST /* as nothing */
-#define ALIGN4 __attribute__((aligned(4)))
+#if (defined(WOLFSSL_AES_128)  \
+  || defined(WOLFSSL_AES_192)  \
+  || defined(WOLFSSL_AES_256)) \
+ && defined(WOLFSSL_AES_CFB)
 
-#if defined(WOLFSSL_AES_128) \
- || defined(WOLFSSL_AES_192) \
- || defined(WOLFSSL_AES_256)
+#define ALIGN4 __attribute__((aligned(4)))
 
 static const char source[] = "Microchip speed-test suite";
 
@@ -102,15 +102,19 @@ static cryptoST_testDetail_t test_item =
  *************************************************************/
 #define SIZE_PREALLOCATE    64
 
-uint test_step = 0;
+static uint test_step = 0;
 static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
 {
     // Assume that if its in range, that it is legitimate.
     if (old != &test_item) 
         return NULL;
 
+    /* TODO: make this better
+     * This section should discriminate for the different AES key sizes.
+     * As is, the vectors are delivered but the drivers may not be available.
+     * */
     test_step++;
-    switch(test_step) // TODO: make this better
+    switch(test_step)
     {
     case 1:
         test_item.technique = ET_AES_128;
@@ -153,16 +157,11 @@ static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
     }
     return old;
 }
-#else
-static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
-{ return NULL; }
-#define test_item (*((void*)0))
-#endif
 
 static const cryptoST_testDetail_t * firstTest(void)
 { return nextTest(&test_item); }
 
-static const char * openData(void)
+static const char * openData_func(void)
 {
     test_step = 0;
 
@@ -180,13 +179,21 @@ static const char * openData(void)
     }
 }
 
-static const char * closeData(void)
+static const char * closeData_func(void)
 {
     if (null_vector.vector.data)
         cryptoSTE_free((uint8_t*)null_vector.vector.data);
     null_vector.vector.data = NULL;
     return NULL;
 }
+#else
+static const cryptoST_testDetail_t * firstTest(void)
+{ return NULL; }
+static const cryptoST_testDetail_t * nextTest(const cryptoST_testDetail_t * old)
+{ return NULL; }
+#define openData_func  ((void*)0)
+#define closeData_func ((void*)0)
+#endif
 
 /*************************************************************
  * Declaration of the test manager API
@@ -196,9 +203,9 @@ static const char * closeData(void)
 cryptoST_testAPI_t const microchip_zero_aes =
 {
     .name = DATA_PACKAGE_NAME,
-    .openData = openData,
+    .openData = openData_func,
     .firstTest = firstTest,
     .nextTest = nextTest,
-    .closeData = closeData,
+    .closeData = closeData_func,
 };
 

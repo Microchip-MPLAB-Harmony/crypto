@@ -3,4 +3,9 @@ pic32_mz_efm_wifi_hwsw.X/
 pic32_mz_efm_wifi_hwsw/
 pic32cm_mc_hw.X/
 pic32cm_mc_hw/
+pic32mz_ef_starter_kit_sw.X/
+pic32mz_ef_starter_kit_hw.X/
+pic32mz_efm_curiosity2.X/
+
+.gitignore
 add_warning_switches.py

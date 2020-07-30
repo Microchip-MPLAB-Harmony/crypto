@@ -62,4 +62,5 @@ cryptoSTE_buildInfo_t cryptoSTE_buildInfo =
     .optimized = "no",
 #endif
     .processor = STRINGIZE(__PROCESSOR__),
+    .configuration = STRINGIZE(__CONFIG__),
 };

@@ -1,6 +1,6 @@
 /* misc.c
  *
- * Copyright (C) 2006-2019 wolfSSL Inc.
+ * Copyright (C) 2006-2020 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -41,7 +41,7 @@
 #ifdef NO_INLINE
     #define WC_STATIC
 #else
-    #define WC_STATIC __attribute__((unused)) static
+    #define WC_STATIC static
 #endif
 
 /* Check for if compiling misc.c when not needed. */
@@ -92,33 +92,23 @@
 #endif
 
 
-#ifdef PPC_INTRINSICS
 WC_STATIC WC_INLINE word32 ByteReverseWord32(word32 value)
 {
+#ifdef PPC_INTRINSICS
     /* PPC: load reverse indexed instruction */
     return (word32)__lwbrx(&value,0);
 #elif defined(__ICCARM__)
-WC_STATIC WC_INLINE word32 ByteReverseWord32(word32 value)
-{
     return (word32)__REV(value);
 #elif defined(KEIL_INTRINSICS)
-WC_STATIC WC_INLINE word32 ByteReverseWord32(word32 value)
-{
     return (word32)__rev(value);
 #elif defined(WOLF_ALLOW_BUILTIN) && \
         defined(__GNUC_PREREQ) && __GNUC_PREREQ(4, 3)
-WC_STATIC WC_INLINE word32 ByteReverseWord32(word32 value)
-{
     return (word32)__builtin_bswap32(value);
 #elif defined(FAST_ROTATE)
-WC_STATIC WC_INLINE word32 ByteReverseWord32(word32 value)
-{
     /* 5 instructions with rotate instruction, 9 without */
     return (rotrFixed(value, 8U) & 0xff00ff00) |
            (rotlFixed(value, 8U) & 0x00ff00ff);
 #else
-WC_STATIC word32 ByteReverseWord32(word32 value)
-{
     /* 6 instructions with rotate instruction, 8 without */
     value = ((value & 0xFF00FF00) >> 8) | ((value & 0x00FF00FF) << 8);
     return rotlFixed(value, 16U);
@@ -366,9 +356,19 @@ WC_STATIC WC_INLINE byte ctMaskEq(int a, int b)
     return (~ctMaskGT(a, b)) & (~ctMaskLT(a, b));
 }
 
+WC_STATIC WC_INLINE word16 ctMask16GT(int a, int b)
+{
+    return (((word32)a - b - 1) >> 31) - 1;
+}
+
+WC_STATIC WC_INLINE word16 ctMask16LT(int a, int b)
+{
+    return (((word32)a - b - 1) >> 31) - 1;
+}
+
 WC_STATIC WC_INLINE word16 ctMask16Eq(int a, int b)
 {
-    return (~ctMaskGT(a, b)) & (~ctMaskLT(a, b));
+    return (~ctMask16GT(a, b)) & (~ctMask16LT(a, b));
 }
 
 /* Constant time - mask set when a != b. */

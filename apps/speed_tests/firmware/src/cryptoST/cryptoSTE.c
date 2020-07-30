@@ -175,7 +175,6 @@ cryptoSTE_exec_t sortOutAES192(const cryptoST_testDetail_t * rv)
 cryptoSTE_exec_t sortOutAES256(const cryptoST_testDetail_t * rv)
 {
     cryptoSTE_exec_t exec = NULL;
-    
     switch(rv->mode)
     {
 #if defined(HAVE_AES_CBC)

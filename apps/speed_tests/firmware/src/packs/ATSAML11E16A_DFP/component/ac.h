@@ -20,7 +20,7 @@
  *
  */
 
-/* file generated from device description version 2020-02-04T13:16:43Z */
+/* file generated from device description version 2020-06-09T10:46:48Z */
 #ifndef _SAML11_AC_COMPONENT_H_
 #define _SAML11_AC_COMPONENT_H_
 

@@ -55,8 +55,7 @@
 
 /* Brief default interrupt handlers for core IRQs.*/
 
-__attribute__((noreturn))
-void NonMaskableInt_Handler(void)
+void __attribute__((noreturn)) NonMaskableInt_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
     __builtin_software_breakpoint();
@@ -66,8 +65,7 @@ void NonMaskableInt_Handler(void)
     }
 }
 
-__attribute__((noreturn))
-void HardFault_Handler(void)
+void __attribute__((noreturn)) HardFault_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
    __builtin_software_breakpoint();
@@ -77,8 +75,7 @@ void HardFault_Handler(void)
    }
 }
 
-__attribute__((noreturn))
-void DebugMonitor_Handler(void)
+void __attribute__((noreturn)) DebugMonitor_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
    __builtin_software_breakpoint();
@@ -88,8 +85,7 @@ void DebugMonitor_Handler(void)
    }
 }
 
-__attribute__((noreturn))
-void MemoryManagement_Handler(void)
+void __attribute__((noreturn)) MemoryManagement_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
    __builtin_software_breakpoint();
@@ -99,8 +95,7 @@ void MemoryManagement_Handler(void)
    }
 }
 
-__attribute__((noreturn))
-void BusFault_Handler(void)
+void __attribute__((noreturn)) BusFault_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
    __builtin_software_breakpoint();
@@ -110,8 +105,7 @@ void BusFault_Handler(void)
    }
 }
 
-__attribute__((noreturn))
-void UsageFault_Handler(void)
+void __attribute__((noreturn)) UsageFault_Handler(void)
 {
 #if defined(__DEBUG) || defined(__DEBUG_D) && defined(__XC32)
    __builtin_software_breakpoint();

@@ -53,6 +53,7 @@ typedef struct cryptoSTE_buildInfo_s
     const char * const buildTime;
     const char * const optimized;  // yes or no, not the optimization level
     const char * const processor;
+    const char * const configuration;
 } cryptoSTE_buildInfo_t;
 
 extern cryptoSTE_buildInfo_t cryptoSTE_buildInfo;

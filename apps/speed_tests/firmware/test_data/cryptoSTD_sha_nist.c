@@ -138,7 +138,7 @@ static __attribute__((unused)) const cryptoST_testDetail_t test_item[] =
         },
     },
 #endif // !NO_SHA(1)
-#if !defined(NO_SHA224) && !defined(NO_SHA256)
+#if defined(WOLFSSL_SHA224)
     {
         .technique = ET_SHA_224,
         .mode = EM_NONE,
