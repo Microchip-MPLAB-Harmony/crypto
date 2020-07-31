@@ -354,7 +354,6 @@
         <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_sha.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_utility.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoST_DERformat.c</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>../test_data/cryptoSTD_aesavs.c</itemPath>

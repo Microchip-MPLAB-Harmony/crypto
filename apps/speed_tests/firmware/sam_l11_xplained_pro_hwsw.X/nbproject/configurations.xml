@@ -368,11 +368,11 @@
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.h</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_buildInfo.h</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_print.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_des3.h</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>../test_data/cryptoSTD_aesavs.c</itemPath>

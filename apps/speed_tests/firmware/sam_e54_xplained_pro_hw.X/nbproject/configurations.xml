@@ -353,6 +353,11 @@
       <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
         <logicalFolder name="platform" displayName="platform" projectFiles="true">
           <itemPath>../src/cryptoST/platform/cryptoST_E54.c</itemPath>
+          <itemPath>../src/cryptoST/platform/cryptoST_E70.c</itemPath>
+          <itemPath>../src/cryptoST/platform/cryptoST_L11_sec.c</itemPath>
+          <itemPath>../src/cryptoST/platform/cryptoST_L21.c</itemPath>
+          <itemPath>../src/cryptoST/platform/cryptoST_sam32mz_ef_curiosity2.c</itemPath>
+          <itemPath>../src/cryptoST/platform/cryptoST_sam32mz_ef_starterKit.c</itemPath>
         </logicalFolder>
         <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
@@ -372,7 +377,6 @@
         <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_sha.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_utility.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoST_DERformat.c</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>../test_data/cryptoSTD_aesavs.c</itemPath>
@@ -488,8 +492,8 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
       </logicalFolder>
-      <itemPath>../src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
