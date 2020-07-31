@@ -79,9 +79,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
             <#lt>#define HAVE_AESGCM
         </#if>
     </#if>
-    <#if cryptoHashSHA256 == false && cryptoRandom == false>
-        <#lt>#define NO_SHA256
+    <#if cryptoRandom == false>
         <#lt>#define WC_NO_RNG
+    </#if>
+    <#if cryptoHashSHA256 == false>
+        <#lt>#define NO_SHA256
     <#elseif cryptoHashSHA256 == true && cryptoHW == true && cryptoHaveHwSha256 == true>
         <#lt>#define HAVE_MICROCHIP_HARMONY3_HW_SHA256
         <#lt>#define CONFIG_HAVE_XDMAC
