@@ -367,70 +367,49 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
-        <logicalFolder name="f1" displayName="platform" projectFiles="true">
+        <logicalFolder name="platform" displayName="platform" projectFiles="true">
           <itemPath>../src/cryptoST/platform/cryptoST_E54.c</itemPath>
         </logicalFolder>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_generate.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_malloc.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_sha.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_announce.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_rsa.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_rsa.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_announce.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_generate.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_init.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_malloc.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_print.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_sha.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_utility.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoST_buildInfo.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoST_DERformat.c</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_cbc.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_cfb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_ctr.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_gcm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSpeedTestData.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_DS70005365.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_cbc.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_cfb.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_ctr.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_wolfSSL_aes_gcm.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ccm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ccm.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aes_ecb.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_des3.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha_nist.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha_nist.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha_bigBlock.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_sha_bigBlock.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_zero_aes.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_zero_aes.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_sign.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_rsa_WC_vfy_sign.h</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.h</itemPath>
+        <itemPath>../test_data/cryptoSTD_aesavs.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_aes_ccm.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_aes_ecb.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_des3.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_DS70005365.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_ecc_CAVS14p1_ECCCDH.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p2_sigGenPSS.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS11p4_sigGen15.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_CAVS16p1_RSASP1.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_SigVer_PKCS1_Ver_1p5.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_rsa_WC_vfy_sign.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_bigBlock.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_sha_nist.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cbc.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_cfb.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_ctr.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_wolfSSL_aes_gcm.c</itemPath>
+        <itemPath>../test_data/cryptoSTD_zero_aes.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="wolfcrypt" projectFiles="true">
         <logicalFolder name="f1" displayName="port" projectFiles="true">
@@ -526,8 +505,8 @@
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha256.c</itemPath>
         <itemPath>../src/third_party/wolfssl/wolfssl/wolfcrypt/src/sha512.c</itemPath>
       </logicalFolder>
-      <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/main.c</itemPath>
       <itemPath>../src/app.c</itemPath>
+      <itemPath>../src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

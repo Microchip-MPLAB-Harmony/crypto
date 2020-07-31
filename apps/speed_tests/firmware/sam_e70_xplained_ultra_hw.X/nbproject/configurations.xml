@@ -344,29 +344,29 @@
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
-        <logicalFolder name="f1" displayName="platform" projectFiles="true">
+        <logicalFolder name="platform" displayName="platform" projectFiles="true">
           <itemPath>../src/cryptoST/platform/cryptoST_E70.c</itemPath>
         </logicalFolder>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_announce.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_generate.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_init.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_malloc.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_sha.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
-        <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_announce.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_generate.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_init.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_malloc.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_print.h</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_rsa.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_sha.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_utility.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoST_buildInfo.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoST_DERformat.c</itemPath>
       </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>D:/D_git/mh3/crypto/apps/speed_tests/firmware/test_data/cryptoSTD_aesavs.c</itemPath>
@@ -553,6 +553,8 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../src/cryptoST/cryptoSTE_aes_gmac.c" ex="true" overriding="false">
+      </item>
       <AtmelIceTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="communication.interface" value="swd"/>
@@ -713,24 +715,6 @@
         <property key="wpo-lto" value="false"/>
         <appendMe value="-D __PROCESSOR__=$(MP_PROCESSOR_OPTION) -D__CONFIG__=$(ConfName)"/>
       </C32Global>
-      <item path="D:/D_git/mh3/crypto/apps/speed_tests/firmware/src/cryptoST/cryptoSTE_aes_gmac.c"
-            ex="true"
-            overriding="false">
-        <C32>
-        </C32>
-        <C32-AR>
-        </C32-AR>
-        <C32-AS>
-        </C32-AS>
-        <C32-CO>
-        </C32-CO>
-        <C32-LD>
-        </C32-LD>
-        <C32CPP>
-        </C32CPP>
-        <C32Global>
-        </C32Global>
-      </item>
       <EdbgTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="communication.activationmode" value="nohv"/>
@@ -756,6 +740,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="400000-5fffff"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="D:/D_git/mh3/crypto/apps/speed_tests/firmware/sam_e70_xplained_ultra_hw.X/debug/sam_e70_xplained_ultra_hw/sam_e70_xplained_ultra_hw_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
