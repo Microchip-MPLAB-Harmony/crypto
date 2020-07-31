@@ -92,6 +92,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if wolfcrypt_sha256 == false>
     <#lt>#define NO_SHA256
+    <#lt>#define NO_SHA224
 <#else>
     <#-- because of legacy, WOLFSSL_SHA256 or HAVE_SHA256 are never asserted -->
     <#assign hmacPrereqs=true>
@@ -109,6 +110,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#if wolfcrypt_sha224 == true>
             <#lt>#define WOLFSSL_SHA224
         </#if>
+    </#if>
+    <#if wolfcrypt_sha224 == false>
+            <#lt>#define NO_SHA224
     </#if>
 </#if>
 <#if wolfcryptCoreSeries?starts_with("PIC32M")>
