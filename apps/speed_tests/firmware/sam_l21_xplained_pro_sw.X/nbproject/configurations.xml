@@ -328,7 +328,6 @@
         <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
-        <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_announce.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_des3.c</itemPath>

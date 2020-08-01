@@ -353,11 +353,6 @@
       <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
         <logicalFolder name="platform" displayName="platform" projectFiles="true">
           <itemPath>../src/cryptoST/platform/cryptoST_E54.c</itemPath>
-          <itemPath>../src/cryptoST/platform/cryptoST_E70.c</itemPath>
-          <itemPath>../src/cryptoST/platform/cryptoST_L11_sec.c</itemPath>
-          <itemPath>../src/cryptoST/platform/cryptoST_L21.c</itemPath>
-          <itemPath>../src/cryptoST/platform/cryptoST_sam32mz_ef_curiosity2.c</itemPath>
-          <itemPath>../src/cryptoST/platform/cryptoST_sam32mz_ef_starterKit.c</itemPath>
         </logicalFolder>
         <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
         <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
@@ -553,6 +548,8 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
+      <item path="../src/cryptoST/cryptoSTE_aes_gmac.c" ex="true" overriding="false">
+      </item>
       <AtmelIceTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="communication.interface" value="swd"/>
