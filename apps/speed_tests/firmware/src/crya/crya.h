@@ -57,7 +57,7 @@ void crya_test_aes(void);
 void crya_test_sha1(void);
 void crya_test_all(void);
 
-void crya_sha256(uint32_t hash[8], const uint8_t * data, const size_t length);
+int crya_sha256(uint32_t hash[8], const uint8_t * data, const size_t length);
 void crya_sha224(uint32_t hash[8], const uint8_t * data, const size_t length);
 void crya_aes128_encrypt
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst);

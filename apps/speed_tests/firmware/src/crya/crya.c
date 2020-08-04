@@ -200,7 +200,7 @@ static void crya_sha256_block
 }
 
 // End-to-end hash operator using 256b initialization
-void crya_sha256(uint32_t hash[8], const uint8_t * data, const size_t length)
+int crya_sha256(uint32_t hash[8], const uint8_t * data, const size_t length)
 {
     hash[0] = (0x6a09e667);
     hash[1] = (0xbb67ae85);
@@ -212,6 +212,7 @@ void crya_sha256(uint32_t hash[8], const uint8_t * data, const size_t length)
     hash[7] = (0x5be0cd19);
     
     crya_sha256_block(hash, data, length);
+    return 0;
 }
 
 #if defined(WOLFSSL_SHA224)

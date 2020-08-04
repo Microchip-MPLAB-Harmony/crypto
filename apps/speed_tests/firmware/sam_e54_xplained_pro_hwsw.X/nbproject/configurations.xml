@@ -350,6 +350,49 @@
           <itemPath>../src/config/sam_e54_xplained_pro_hwsw/tasks.c</itemPath>
         </logicalFolder>
       </logicalFolder>
+      <logicalFolder name="cryptoST" displayName="cryptoST" projectFiles="true">
+        <logicalFolder name="platform" displayName="platform" projectFiles="true">
+          <itemPath>../src/cryptoST/platform/cryptoST_E54.c</itemPath>
+        </logicalFolder>
+        <itemPath>../src/cryptoST/cryptoST.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cbc.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ccm.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ccm.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cfb.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_cfb.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ctr.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ecb.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_ecb.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gcm.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_aes_gmac.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_announce.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_announce.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_buildInfo.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_definitions.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_des3.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_des3.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_generate.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_generate.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_init.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_init.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_malloc.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_malloc.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_print.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_rsa.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_rsa.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_sha.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_sha.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_utility.c</itemPath>
+        <itemPath>../src/cryptoST/cryptoSTE_utility.h</itemPath>
+        <itemPath>../src/cryptoST/cryptoST_execute.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="test_data" displayName="test_data" projectFiles="true">
         <itemPath>../test_data/cryptoSTD_aesavs.c</itemPath>
         <itemPath>../test_data/cryptoSTD_aes_ccm.c</itemPath>

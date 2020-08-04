@@ -150,7 +150,7 @@ typedef struct cryptoSTE_localData_s
 /* Virtualize the SHA hash algorithm to allow both the
  * WC and device-hardware versions to coexist. 
  */
-typedef void (cryptoSTE_shaOperator_t)
+typedef int (cryptoSTE_shaOperator_t)
     (uint32_t hash[], const uint8_t * data, const size_t length);
 
 #ifdef	__cplusplus

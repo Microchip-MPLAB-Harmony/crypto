@@ -117,10 +117,15 @@ static const char * cryptoSTE_sha(const cryptoST_testDetail_t * td,
         param->results.encryption.start = SYS_TIME_CounterGet();
         for (int i = param->results.encryption.iterations; i > 0; i--)
         {
-            // no errors from this call
-            hash_operator(hash,
-                      vector->vector.data,
-                      vector->vector.length);
+            int ret = hash_operator(hash,
+                                    vector->vector.data,
+                                    vector->vector.length);
+            if (0 != ret)
+            {
+                param->results.errorMessage = "hash operator failed";
+                param->results.wolfSSLresult = ret;
+                break;
+            }
         }
         param->results.encryption.stop = SYS_TIME_CounterGet();
         if (param->results.errorMessage) break; // out of the test routine
@@ -159,26 +164,26 @@ static const char * cryptoSTE_sha(const cryptoST_testDetail_t * td,
  */
 #if !defined(NO_SHA) // SHA1
 #include "wolfssl/wolfcrypt/hash.h"
- static void WC_sha128
+static int WC_sha128
     (uint32_t hash[128/32], const uint8_t * data, const size_t length)
 {
-    wc_ShaHash(data, length, (uint8_t*)hash);
+    return wc_ShaHash(data, length, (uint8_t*)hash);
 }
 #endif
 
 #if !defined(NO_SHA256)
 #include "wolfssl/wolfcrypt/hash.h"
-static void WC_sha256
+static int WC_sha256
     (uint32_t hash[256/32], const uint8_t * data, const size_t length)
 {
-    wc_Sha256Hash(data, length, (uint8_t*)hash);
+    return wc_Sha256Hash(data, length, (uint8_t*)hash);
 }
 
 #if defined(WOLFSSL_SHA224)
-static void WC_sha224
+static int WC_sha224
     (uint32_t hash[224/32], const uint8_t * data, const size_t length)
 {
-    wc_Sha224Hash(data, length, (uint8_t*)hash);
+    return wc_Sha224Hash(data, length, (uint8_t*)hash);
 }
 #endif // !NO_SHA224
 #endif // WOLFSSL_SHA224
@@ -186,20 +191,20 @@ static void WC_sha224
 // #if !defined(NO_SHA384)
 #if defined(WOLFSSL_SHA384)
 #include "wolfssl/wolfcrypt/sha512.h"
-static void WC_sha384
+static int WC_sha384
     (uint32_t hash[384/32], const uint8_t * data, const size_t length)
 {
-    wc_Sha384Hash(data, length, (uint8_t*)hash);
+    return wc_Sha384Hash(data, length, (uint8_t*)hash);
 }
 #endif // !NO_SHA256
 
 // #if !defined(NO_SHA512)
 #if defined(WOLFSSL_SHA512)
 #include "wolfssl/wolfcrypt/sha512.h"
-static void WC_sha512
+static int WC_sha512
     (uint32_t hash[512/32], const uint8_t * data, const size_t length)
 {
-    wc_Sha512Hash(data, length, (uint8_t*)hash);
+    return wc_Sha512Hash(data, length, (uint8_t*)hash);
 }
 #endif // !NO_SHA512
 
