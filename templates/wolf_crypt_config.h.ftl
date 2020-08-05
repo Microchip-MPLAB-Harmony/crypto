@@ -357,10 +357,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define WOLFSSL_HAVE_MCHP_HW_RSA
     </#if>
     <#lt>#define FP_MAX_BITS ${wolfcrypt_certBuffMaxSize}
-    <#if wolfcrypt_certBuffMaxSize == 2048>
+    <#if wolfcrypt_certBuffMaxSize == 4096>
         <#lt>#define USE_CERT_BUFFERS_2048
     <#else>
-        <#lt>#define USE_CERT_BUFFERS_4096
+        <#lt>#define USE_CERT_BUFFERS_1024
     </#if>
     <#if wolfcrypt_oaep == false>
         <#lt>#define WC_NO_RSA_OAEP
