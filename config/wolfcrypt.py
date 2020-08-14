@@ -1675,6 +1675,7 @@ def setupFiles(basecomponent) :
     
     addFileName("misc.c", "misc", basecomponent, "../wolfssl/wolfcrypt/src/", "../../third_party/wolfssl/wolfssl/wolfcrypt/src/", True, "wolfcrypt")
     addFileName("certs_test.h", "wolfcrypt", basecomponent, "../wolfssl/wolfssl/", "../../third_party/wolfssl/wolfssl/", True, "wolfcrypt")
+    addFileName("evp.c", "misc", basecomponent, "../wolfssl/wolfcrypt/src/", "../../third_party/wolfssl/wolfssl/wolfcrypt/src/", True, "wolfcrypt")
 
 def onAttachmentConnected(source, target):
     global cryptoWolfSSLIncluded
