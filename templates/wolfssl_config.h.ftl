@@ -150,7 +150,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#lt>#define NO_ERROR_STRINGS
     </#if>
     
-    <#if wolfsslNoOldTls>
+    <#if !wolfsslNoOldTls>
         <#lt>#define NO_OLD_TLS
     </#if>
     
