@@ -44,7 +44,7 @@ def instantiateComponent(wolfsslComponent):
     wolfsslSmallStackSupport.setLabel("Small Stack Support")
     wolfsslSmallStackSupport.setDescription("Enable small stack support")
     wolfsslSmallStackSupport.setVisible(True)
-    wolfsslSmallStackSupport.setDefaultValue(True)
+    wolfsslSmallStackSupport.setDefaultValue(False)
 
     wolfsslOsalHeapKeys = wolfsslComponent.createBooleanSymbol("wolfsslOsalHeapKeys", None)
     wolfsslOsalHeapKeys.setLabel("Use OSAL Heap")

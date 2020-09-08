@@ -48,11 +48,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define KEEP_PEER_CERT
     <#lt>#define HAVE_CRL_IO
     <#lt>#define HAVE_IO_TIMEOUT
-    <#lt>#define HAVE_FFDHE_2048
-    <#lt>#define HAVE_FFDHE_3072
-    <#lt>#define HAVE_FFDHE_4096
-    <#lt>#define HAVE_FFDHE_6144
-    <#lt>#define HAVE_FFDHE_8192
     <#lt>#define TFM_NO_ASM
     <#lt>#define WOLFSSL_NO_ASM
     <#lt>#define SIZEOF_LONG_LONG 8

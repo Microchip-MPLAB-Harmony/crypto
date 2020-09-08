@@ -356,7 +356,19 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#if wolfcrypt_rsa_hw == true && wolfcrypt_hw == true>
         <#lt>#define WOLFSSL_HAVE_MCHP_HW_RSA
     </#if>
-    <#lt>#define FP_MAX_BITS ${wolfcrypt_certBuffMaxSize}
+	<#assign fpMaxBits=wolfcrypt_certBuffMaxSize/>
+	<#if wolfsslFfdheGroup8192?has_content && wolfsslFfdheGroup8192  && fpMaxBits < 16384>
+		<#assign fpMaxBits=16384/>
+	<#elseif wolfsslFfdheGroup6144?has_content && wolfsslFfdheGroup6144  && fpMaxBits < 12288>
+		<#assign fpMaxBits=12288/>
+	<#elseif wolfsslFfdheGroup4096?has_content && wolfsslFfdheGroup4096  && fpMaxBits < 8192>
+		<#assign fpMaxBits=8192/>
+	<#elseif wolfsslFfdheGroup3072?has_content && wolfsslFfdheGroup3072  && fpMaxBits < 6144>
+		<#assign fpMaxBits=6144/>
+	<#elseif wolfsslFfdheGroup2048?has_content && wolfsslFfdheGroup2048  && fpMaxBits < 4096>
+		<#assign fpMaxBits=4096/>
+	</#if>
+    <#lt>#define FP_MAX_BITS ${fpMaxBits}
     <#if wolfcrypt_certBuffMaxSize == 4096>
         <#lt>#define USE_CERT_BUFFERS_2048
     <#else>
