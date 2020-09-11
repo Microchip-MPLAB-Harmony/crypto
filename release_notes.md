@@ -1,4 +1,20 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.6.0
+### Major Changes
+- **Support for wolfCrypt/wolfSSL 4.5.0** The cryptographic library now has support for wolfSSL version 4.5.0
+- **New Speed Test Application**  A new application has been added focusing on demonstrating the speed of the cryptographic hardware
+- **Move Applications Into Their Own Repositories** Following the new MPLAB Harmony style all the applications have been moved into their own repositiories
+- **More MHC Configuraiton Options**  The configuration options available in MHC have been expanded for both the wolfCrypt and wolfSSL libraries
+
+## Dependencies
+- **Core** - 3.8.01
+- **CSP** - 3.8.0
+- **wolfSSL** - 4.5.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.40
+- **XC32** - v3.41
+- **IAR** - 8.50.1
+
 ## Crypto Release v3.5.1
 ### Bug Fixes
 - **PIC32MZ Hardware Hashing Disable** Added a wolfcrypt #define to the generated configuration when all Hash 'Support Hardware Acceleration' are disabled.
