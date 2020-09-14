@@ -5,6 +5,7 @@
 - **New Speed Test Application**  A new application has been added focusing on demonstrating the speed of the cryptographic hardware
 - **Move Applications Into Their Own Repositories** Following the new MPLAB Harmony style all the applications have been moved into their own repositiories
 - **More MHC Configuraiton Options**  The configuration options available in MHC have been expanded for both the wolfCrypt and wolfSSL libraries
+- **Added Support for AES on the L22**  Turned on the support for the AES hardware module for the L22
 
 ## Dependencies
 - **Core** - 3.8.01
