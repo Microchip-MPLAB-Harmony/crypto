@@ -31,13 +31,16 @@ import ntpath
 cryptoHwSupported = False
 cryptoHwEnabledSymbol = None
 
-cryptoHwTrngSupport = [["RNG", "00159", "", [], set([])],  #PIC32MZ EF
-                      ["TRNG", "6334", "G", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAMV70Q20B
-                      ["TRNG", "U2242", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAML11
-                      ["TRNG", "U2242", "1.1.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAME54P20A
-                      ["TRNG", "U2242", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAML21J18B
-                      ["TRNG", "6334", "K", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAMA5D27
-                      ["TRNG", "6334", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAM9X60
+cryptoHwTrngSupport = [
+    ["RNG", "00159", "", [], set([])],  #PIC32MZ EF
+    ["TRNG", "6334", "G", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAMV70Q20B
+    ["TRNG", "U2242", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAML11
+    ["TRNG", "U2242", "1.1.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAME54P20A
+    ["TRNG", "U2242", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #ATSAML21J18B
+    ["TRNG", "6334", "K", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAMA5D27
+    ["TRNG", "6334", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_6334"])],  #ATSAM9X60
+    ["TRNG", "U2242", "1d0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_U2242"])], #PIC32CM'Lx
+    ["TRNG", "03597", "1d0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_TRNG_HW_03597"])], #PIC32CM'Lx
                      ]
 cryptoHwTrngSupported = False
 cryptoHwTrngEnabledSymbol = None
@@ -67,6 +70,7 @@ cryptoHwSha224Support = [
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60                       
                        ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11
                        ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM
+                       ["IDAU", "03710", "2a0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_03710"])], #PIC32CM'Lx
                       ]
 cryptoHwSha224Supported = False
 cryptoHwSha224EnabledSymbol = None
@@ -79,6 +83,7 @@ cryptoHwSha256Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAM9X60
                        ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11
                        ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2805"])], #PIC32CM
+                       ["IDAU", "03710", "2a0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_03710"])], #PIC32CM'Lx
                       ]
 cryptoHwSha256Supported = False
 cryptoHwSha256EnabledSymbol = None
@@ -112,6 +117,9 @@ cryptoHW_U2803Symbol = None
 cryptoHW_U2805 = [["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_U2805"])],] #PIC32CM
 cryptoHW_U2805Present = False
 cryptoHW_U2805Symbol = None
+cryptoHW_03710 = [["IDAU", "03710", "2a0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_HW_03710"])],] #PIC32CM'Lx
+cryptoHW_03710Present = False
+cryptoHW_03710Symbol = None
     
 cryptoHwAes128Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "6149", "W", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAMV70Q20B
@@ -122,6 +130,7 @@ cryptoHwAes128Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["AES", "6149", "ZH", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_6149"])], #ATSAM9x60
                        ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2803"])], #ATSAML11
                        ["IDAU", "U2805", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_U2805"])], #PIC32CM
+                       ["IDAU", "03710", "2a0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_AES_HW_03710"])], #PIC32CM'Lx
                       ]
 cryptoHwAes128Supported = False                     
 cryptoAes128EnabledSymbol = None
@@ -365,6 +374,8 @@ def instantiateComponent(wolfCryptComponent):
     global cryptoHW_U2803Symbol
     global cryptoHW_U2805Present
     global cryptoHW_U2805Symbol
+    global cryptoHW_03710Present
+    global cryptoHW_03710Symbol
 
     global localwolfCryptComponent
     global cryptoAdditionalHwDefines
@@ -1058,6 +1069,10 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHW_U2805Symbol.setVisible(False) # never reveal this symbol
     cryptoHW_U2805Symbol.setDefaultValue(False)
     cryptoHW_U2805Symbol.setValue(cryptoHW_U2805Present)
+    cryptoHW_03710Symbol = wolfCryptComponent.createBooleanSymbol("cryptoCrya_03710", None)
+    cryptoHW_03710Symbol.setVisible(False) # never reveal this symbol
+    cryptoHW_03710Symbol.setDefaultValue(False)
+    cryptoHW_03710Symbol.setValue(cryptoHW_03710Present)
 
     # generate the config info and add it to list in configuration.h
     wolfCryptConfigInfo = wolfCryptComponent.createFileSymbol("wolfcryptConfigInfo", None)
@@ -1487,7 +1502,9 @@ def scanHardware(list):
     modules = periphNode.getChildren()
     for module in modules:
         for item in list:
-            if module.getAttribute("name") == item[0] and module.getAttribute("id") == item[1] and module.getAttribute("version") == item[2]:
+            if (module.getAttribute("name") == item[0] 
+                    and module.getAttribute("id") == item[1] 
+                    and module.getAttribute("version") == item[2]):
                 #print(item[4])
                 cryptoHwAdditionalDefines = cryptoHwAdditionalDefines.union(item[4])
                 #print(cryptoHwAdditionalDefines)
@@ -1546,6 +1563,8 @@ def setupHardware() :
     global cryptoHW_U2803Present
     global cryptoHW_U2805
     global cryptoHW_U2805Present
+    global cryptoHW_03710
+    global cryptoHW_03710Present
     global cryptoAdditionalHwDefines
     global cryptoHwAdditionalDefines
     
@@ -1574,7 +1593,8 @@ def setupHardware() :
     cryptoHwEccSupported = scanHardware(cryptoHwEccSupport)
     cryptoHW_U2803Present = scanHardware(cryptoHW_U2803)
     cryptoHW_U2805Present = scanHardware(cryptoHW_U2805)
-    
+    cryptoHW_03710Present = scanHardware(cryptoHW_03710)
+
     if (cryptoHwTrngSupported or cryptoHwMd5Supported or 
         cryptoHwSha1Supported or 
         cryptoHwSha224Supported or cryptoHwSha256Supported or

@@ -39,6 +39,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#if wolfssl_included?has_content == false || wolfssl_included == false>
     <#lt>#define WOLFCRYPT_ONLY
 </#if>
+<#-- Will be true when "Use Hardware Cryptography?" is checked -->
 <#if wolfcrypt_hw == true>
     <#if wolfcryptCoreSeries?starts_with("PIC32M")>
         <#lt>#define WOLFSSL_MICROCHIP_PIC32MZ
@@ -46,9 +47,11 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define WOLFSSL_HAVE_MCHP_HW_CRYPTO
     </#if>
     <#if wolfCryptAdditionalHwDefines?has_content>
+        <#lt>// ---------- CRYPTO HARDWARE MANIFEST START ----------
         <#list wolfCryptAdditionalHwDefines?split(", ") as val>
             <#lt>#define ${val}
         </#list>
+        <#lt>// ---------- CRYPTO HARDWARE MANIFEST END ----------
     </#if>
 <#else>
     <#if wolfcryptCoreSeries?starts_with("PIC32M")>
@@ -56,6 +59,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define WOLFSSL_HAVE_MAX
     </#if>
 </#if>
+<#lt>// ---------- FUNCTIONAL CONFIGURATION START ----------
 <#if wolfcrypt_md2 == true>
     <#lt>#define WOLFSSL_MD2
 </#if>
@@ -189,17 +193,19 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define NO_AES_128
     </#if>
     <#if wolfcrypt_aes_192 == false 
-         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true && cryptoCrya_U2803 == true)>
-        <#-- disable if AES HW is enabled and this is a SAML11 -->
-        <#lt>#define NO_AES_192
+         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true 
+                && (cryptoCrya_U2803 == true || cryptoCrya_03710 == true))>
+        <#-- disable if AES HW is enabled and this is a SAML11 or PIC32CM'Lx -->
+        <#lt>#define NO_AES_192 // not supported by HW accelerator
     <#else>
         <#-- disabling and enabling must be mutually exclusive -->
         <#lt>#define WOLFSSL_AES_192
     </#if>
     <#if wolfcrypt_aes_256 == false 
-         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true && cryptoCrya_U2803 == true)>
-        <#-- disable if AES HW is enabled and this is a SAML11 -->
-        <#lt>#define NO_AES_256
+         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true 
+                && (cryptoCrya_U2803 == true || cryptoCrya_03710 == true))>
+        <#-- disable if AES HW is enabled and this is a SAML11 or PIC32CM'Lx -->
+        <#lt>#define NO_AES_256 // not supported by HW accelerator
     <#else>
         <#-- disabling and enabling must be mutually exclusive -->
         <#lt>#define WOLFSSL_AES_256
@@ -469,3 +475,4 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#if wolfcrypt_havezlib == true && wolfcrypt_supportcompression == true>
     <#lt>#define HAVE_LIBZ
 </#if>
+<#lt>// ---------- FUNCTIONAL CONFIGURATION END ----------
