@@ -54,13 +54,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define WOLFSSL_USER_IO
     <#lt>#define NO_WRITEV
     <#lt>#define MICROCHIP_TCPIP
-
     <#if wolfsslOsalHeapKeys>
         <#lt>#define XMALLOC_OVERRIDE
         <#lt>#define XMALLOC(s, h, type)  OSAL_Malloc((s))
         <#lt>#define XFREE(p, h, type)    OSAL_Free((p))
     </#if>
-    
     <#if wolfsslFfdheGroup2048>
         <#lt>#define HAVE_FFDHE_2048
     </#if>    
@@ -76,34 +74,33 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#if wolfsslFfdheGroup8192>
         <#lt>#define HAVE_FFDHE_8192
     </#if>    
-    
     <#if wolfsslDTLS>
         <#lt>#define WOLFSSL_DTLS
     </#if>
-
     <#if wolfsslpwdkdf == false>
         <#lt>#define NO_PWDBASED
     </#if>
-
-    <#if wolfsslTLS13>
-        <#lt>#define WOLFSSL_TLS13
+    <#if wolfsslTLS13 || wolfsslTlsEccCurvesExt || wolfsslTlsSni>
         <#lt>#define HAVE_TLS_EXTENSIONS
-        <#lt>#define HAVE_SUPPORTED_CURVES
-        <#if wolfsslPostHandshakeAuth>
-            <#lt>#define WOLFSSL_POST_HANDSHAKE_AUTH
-        </#if>
-    <#elseif wolfsslTlsSni || wolfsslTlsEccCurvesExt>
-        <#lt>#define HAVE_TLS_EXTENSIONS
-        <#if wolfsslTlsEccCurvesExt>
+        <#if wolfsslTLS13>
+            <#lt>#define WOLFSSL_TLS13
+            <#lt>#define HAVE_SUPPORTED_CURVES
+            <#if wolfsslPostHandshakeAuth>
+                <#lt>#define WOLFSSL_POST_HANDSHAKE_AUTH
+            </#if>
+            <#if wolfsslHelloRetryCookie>
+                <#lt>#define WOLFSSL_SEND_HRR_COOKIE
+            </#if>
+        <#elseif wolfsslTlsEccCurvesExt>
             <#lt>#define HAVE_SUPPORTED_CURVES
         </#if>
         <#if wolfsslTlsSni>
             <#lt>#define HAVE_SNI
         </#if>
     </#if>
-
-    
-
+    <#if !wolfsslTLS12>
+        <#lt>#define WOLFSSL_NO_TLS12
+    </#if>
     <#if wolfSslSessionCache=="Small">
         <#lt>#define SMALL_SESSION_CACHE
     <#elseif wolfSslSessionCache=="Big">
@@ -113,55 +110,45 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#elseif wolfSslSessionCache=="None">
         <#lt>#define NO_SESSION_CACHE
     </#if>
-
     <#if wolfsslSmallStackSupport> 
         <#lt>#define WOLFSSL_SMALL_STACK
     </#if>
-     
     <#if wolfSslSaveCache>
         <#lt>#define PERSIST_SESSION_CACHE
     </#if>
     <#if wolfSslSaveCert>
         <#lt>#define PERSIST_CERT_CACHE
     </#if>
-    
     <#if wolfSslKeyGen>
         <#lt>#define WOLFSSL_KEY_GEN
     </#if>
-    
     <#if wolfsslEncryptedKeys>
         <#lt>#define WOLFSSL_ENCRYPTED_KEYS
     </#if>
-    
     <#if wolfSslCertGen>
         <#lt>#define WOLFSSL_CERT_GEN
     </#if>
-    
     <#if wolfSslCertReq>
         <#lt>#define WOLFSSL_CERT_REQ
     </#if>
-
     <#if !wolfsslNoErrorStrings>
         <#lt>#define NO_ERROR_STRINGS
     </#if>
-    
     <#if !wolfsslNoOldTls>
         <#lt>#define NO_OLD_TLS
+    <#else>
+        <#lt>#define WOLFSSL_ALLOW_TLSV10
+        <#lt>#define WOLFSSL_ALLOW_SSLV3
     </#if>
-    
     <#if wolfsslUseFastMath>
         <#lt>#define USE_FAST_MATH
     </#if>
-    
     <#if !wolfsslClientSupport>
         <#lt>#define NO_WOLFSSL_CLIENT
     </#if>
     <#if !wolfsslServerSupport>
         <#lt>#define NO_WOLFSSL_SERVER
     </#if>
-    
-    
-   
 <#-- 
 /*******************************************************************************
  End of File
