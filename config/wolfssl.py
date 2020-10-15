@@ -71,11 +71,28 @@ def instantiateComponent(wolfsslComponent):
     wolfsslTLSMenu.setLabel("TLS")
     wolfsslTLSMenu.setVisible(True)
     
+    wolfsslTLSComment = wolfsslComponent.createCommentSymbol("wolfsslTLSComment", wolfsslTLSMenu)
+    wolfsslTLSComment.setLabel("**Placeholder for TLS Comment")
+    wolfsslTLSComment.setVisible(False)
+
+    wolfsslTLSDowngrade = wolfsslComponent.createBooleanSymbol("wolfsslTLSDowngrade", wolfsslTLSMenu)
+    wolfsslTLSDowngrade.setLabel("TLS Downgrade Support")
+    wolfsslTLSDowngrade.setDescription("Allow TLS Downgrade To Match Highest Supported Version")
+    wolfsslTLSDowngrade.setDefaultValue(False)
+    wolfsslTLSDowngrade.setVisible(False)
+    wolfsslTLSDowngrade.setDependencies(wolfsslTLSManageVersions, ["wolfsslTLS13", "wolfsslTLS12", "wolfsslNoOldTls"])
+    
     wolfsslTLS13 = wolfsslComponent.createBooleanSymbol("wolfsslTLS13", wolfsslTLSMenu)
     wolfsslTLS13.setLabel("TLS 1.3 Support")
     wolfsslTLS13.setDescription("Enable TLS 1.3 Support")
     wolfsslTLS13.setDefaultValue(False)
     wolfsslTLS13.setVisible(True)
+
+    wolfsslTLS12 = wolfsslComponent.createBooleanSymbol("wolfsslTLS12", wolfsslTLSMenu)
+    wolfsslTLS12.setLabel("TLS 1.2 Support")
+    wolfsslTLS12.setDescription("Enable TLS 1.2 Support")
+    wolfsslTLS12.setDefaultValue(True)
+    wolfsslTLS12.setVisible(True)
 
     wolfsslTlsSni = wolfsslComponent.createBooleanSymbol("wolfsslTlsSni", wolfsslTLSMenu)
     wolfsslTlsSni.setLabel("SNI Support")
@@ -306,3 +323,30 @@ def setupFiles(basecomponent) :
     for file in wolfsslOverridableHeaderFiles:
         addFileName(file, "wolfssloverride", basecomponent, "src/", "../../third_party/wolfssl/wolfssl/", True, "wolfssl")
 
+def wolfsslTLSManageVersions(symbol, event):
+    data = symbol.getComponent()
+    stateTdg = bool(symbol.getValue())
+    stateOld = bool(data.getSymbolValue("wolfsslNoOldTls"))
+    stateT13 = bool(data.getSymbolValue("wolfsslTLS13"))
+    stateT12 = bool(data.getSymbolValue("wolfsslTLS12"))
+    tlsCount = int(stateOld + stateT13 + stateT12)
+
+    # Handle TLS downgrade option
+    if (stateTdg != (tlsCount > 1)):
+        symbol.setValue((tlsCount > 1))
+    
+    # Handle TLS Comment
+    commSymbol = data.getSymbolByID("wolfsslTLSComment")
+    setLabel = "**TLS Info**"
+    setVisible = False
+    if (stateOld and (not stateT12)):
+        setVisible = True
+        setLabel = "!!! Error: TLS 1.2 Must Be Enabled To Support Old Versions"
+    elif (tlsCount == 0):
+        setVisible = True
+        setLabel = "!!! Error: No TLS Versions Enabled"
+    elif (tlsCount > 1):
+        setVisible = True
+        setLabel = "** Info: TLS Downgrade Support Auto-Enabled"
+    commSymbol.setLabel(setLabel)
+    commSymbol.setVisible(setVisible)
