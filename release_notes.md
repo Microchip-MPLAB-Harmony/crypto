@@ -1,4 +1,19 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.6.1
+### Bug Fixes
+- **Added support for PIC32CMLx** Enabled hardware cryptographic support for PIC32CMLS00/LS60
+- **Enabled TLS Downgrade options** Improved GUI for TLS Versions added Downgrade TLS Options
+- **SNI Support Fixed with TLS1.3** Fixed SNI support when TLS1.3 is selected
+
+## Dependencies
+- **Core** - 3.8.01
+- **CSP** - 3.8.0
+- **wolfSSL** - 4.5.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.40
+- **XC32** - v3.41
+- **IAR** - 8.50.1
+
 ## Crypto Release v3.6.0
 ### Major Changes
 - **Support for wolfCrypt/wolfSSL 4.5.0** The cryptographic library now has support for wolfSSL version 4.5.0
