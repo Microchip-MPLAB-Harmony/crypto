@@ -1,7 +1,6 @@
 # Microchip MPLAB® Harmony 3 Release Notes
 ## Crypto Release v3.6.1
 ### Bug Fixes
-- **Added support for PIC32CMLx** Enabled hardware cryptographic support for PIC32CMLS00/LS60
 - **Enabled TLS Downgrade options** Improved GUI for TLS Versions added Downgrade TLS Options
 - **SNI Support Fixed with TLS1.3** Fixed SNI support when TLS1.3 is selected
 
