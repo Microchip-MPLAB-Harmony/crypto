@@ -149,6 +149,15 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#if !wolfsslServerSupport>
         <#lt>#define NO_WOLFSSL_SERVER
     </#if>
+    <#if wolfsslLoadTNGTLSCert>
+    /*Enabling TNGTLS certificate loading*/
+    <#lt>#define HAVE_SUPPORTED_CURVES
+    <#lt>#define WOLFSSL_ATECC608A
+    <#lt>#define WOLFSSL_ATECC_TNGTLS
+    <#lt>#define WOLFSSL_ATECC_ECDH_IOENC
+    <#lt>#define HAVE_PK_CALLBACKS
+    <#lt>#define WOLFSSL_ATECC508A_NOIDLE
+    </#if>
 <#-- 
 /*******************************************************************************
  End of File

@@ -246,6 +246,12 @@ def instantiateComponent(wolfsslComponent):
         wolfsslFfdheGrpSz.setDefaultValue(False)
         wolfsslFfdheGrpSz.setVisible(True)
     
+    # Enable TNGTLS Certificate loading?
+    wolfsslTNGTLScert = wolfsslComponent.createBooleanSymbol("wolfsslLoadTNGTLSCert",None)
+    wolfsslTNGTLScert.setLabel("Trust&Go client certificate")
+    wolfsslTNGTLScert.setVisible(False) #will be set from netPres
+    wolfsslTNGTLScert.setDescription("Auto load device certificate from Trust&Go TNGTLS? Cryptoauth lib should be configured seperately")
+    wolfsslTNGTLScert.setDefaultValue(False)
         
     setupFiles(wolfsslComponent)
     
