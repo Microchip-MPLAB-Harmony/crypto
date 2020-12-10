@@ -475,9 +475,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#if wolfcrypt_havezlib == true && wolfcrypt_supportcompression == true>
     <#lt>#define HAVE_LIBZ
 </#if>
-<#if wolfsslLoadTNGTLSCert>
+<#if (lib_wolfssl.wolfsslLoadTNGTLSCert)?has_content && ((lib_wolfssl.wolfsslLoadTNGTLSCert) == true)>
     <#lt>/*Enabling TNGTLS certificate loading*/
-    <#if !wolfsslTlsEccCurvesExt || !wolfsslTLS13> 
+    <#if !lib_wolfssl.wolfsslTlsEccCurvesExt || !lib_wolfssl.wolfsslTLS13> 
         <#lt>#define HAVE_SUPPORTED_CURVES
     </#if>
     <#lt>#define WOLFSSL_ATECC608A
