@@ -363,15 +363,15 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
         <#lt>#define WOLFSSL_HAVE_MCHP_HW_RSA
     </#if>
 	<#assign fpMaxBits=wolfcrypt_certBuffMaxSize/>
-	<#if lib_wolfssl.wolfsslFfdheGroup8192?has_content && lib_wolfssl.wolfsslFfdheGroup8192  && fpMaxBits < 16384>
+	<#if lib_wolfssl?has_content && lib_wolfssl.wolfsslFfdheGroup8192?has_content && lib_wolfssl.wolfsslFfdheGroup8192  && fpMaxBits < 16384>
 		<#assign fpMaxBits=16384/>
-	<#elseif lib_wolfssl.wolfsslFfdheGroup6144?has_content && lib_wolfssl.wolfsslFfdheGroup6144  && fpMaxBits < 12288>
+	<#elseif lib_wolfssl?has_content && lib_wolfssl.wolfsslFfdheGroup6144?has_content && lib_wolfssl.wolfsslFfdheGroup6144  && fpMaxBits < 12288>
 		<#assign fpMaxBits=12288/>
-	<#elseif lib_wolfssl.wolfsslFfdheGroup4096?has_content && lib_wolfssl.wolfsslFfdheGroup4096  && fpMaxBits < 8192>
+	<#elseif lib_wolfssl?has_content && lib_wolfssl.wolfsslFfdheGroup4096?has_content && lib_wolfssl.wolfsslFfdheGroup4096  && fpMaxBits < 8192>
 		<#assign fpMaxBits=8192/>
-	<#elseif lib_wolfssl.wolfsslFfdheGroup3072?has_content && lib_wolfssl.wolfsslFfdheGroup3072  && fpMaxBits < 6144>
+	<#elseif lib_wolfssl?has_content && lib_wolfssl.wolfsslFfdheGroup3072?has_content && lib_wolfssl.wolfsslFfdheGroup3072  && fpMaxBits < 6144>
 		<#assign fpMaxBits=6144/>
-	<#elseif lib_wolfssl.wolfsslFfdheGroup2048?has_content && lib_wolfssl.wolfsslFfdheGroup2048  && fpMaxBits < 4096>
+	<#elseif lib_wolfssl?has_content && lib_wolfssl.wolfsslFfdheGroup2048?has_content && lib_wolfssl.wolfsslFfdheGroup2048  && fpMaxBits < 4096>
 		<#assign fpMaxBits=4096/>
 	</#if>
     <#lt>#define FP_MAX_BITS ${fpMaxBits}
