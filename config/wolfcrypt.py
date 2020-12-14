@@ -384,6 +384,9 @@ def instantiateComponent(wolfCryptComponent):
     global cryptoSupportCompression
     global cryptoHaveZlib
     
+    global cryptoHaveSysTime
+    global cryptoDependSysTime
+    
     cryptoAdditionalHwDefines = wolfCryptComponent.createStringSymbol("wolfCryptAdditionalHwDefines", None)
     cryptoAdditionalHwDefines.setVisible(False)    
     localwolfCryptComponent = wolfCryptComponent
@@ -909,7 +912,16 @@ def instantiateComponent(wolfCryptComponent):
     cryptoSupportCompression.setVisible(False)
     cryptoSupportCompression.setDefaultValue(False)
     
+    cryptoHaveSysTime = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havesystime", None)
+    cryptoHaveSysTime.setVisible(False)
+    cryptoHaveSysTime.setDefaultValue(False)
+    ###################
     
+    cryptoDependSysTime = wolfCryptComponent.createBooleanSymbol("wolfcrypt_dependsystime", None)
+    cryptoDependSysTime.setLabel("Support Systime?")
+    cryptoDependSysTime.setDescription("Add dependency on systime (required for ASN.1)")
+    cryptoDependSysTime.setVisible(False)
+    cryptoDependSysTime.setDefaultValue(False)
     
     threadingSupport = wolfCryptComponent.createComboSymbol("wolfSslRTOSSupport", None, ["Single Threaded", "FreeRTOS",])
     threadingSupport.setLabel("Threading Support")
@@ -1707,6 +1719,8 @@ def onAttachmentConnected(source, target):
     global cryptoWolfSSLIncluded
     global cryptoSupportCompression
     global cryptoHaveZlib
+    global cryptoHaveSysTime
+    global cryptoDependSysTime
     if (target["component"].getID() == "lib_wolfssl"):
         cryptoWolfSSLIncluded.setValue(True)
 
@@ -1715,11 +1729,21 @@ def onAttachmentConnected(source, target):
     if (target["component"].getID() == "lib_zlib"):
         cryptoHaveZlib.setValue(True)
         cryptoSupportCompression.setVisible(True)
-    
+
+    if (target["component"].getID() == "wolfssl_systime_dependency"):
+        cryptoHaveSysTime.setValue(True)
+        cryptoHaveSysTime.setVisible(True)
+        cryptoDependSysTime.setVisible(True)
+        cryptoDependSysTime.setValue(False)
+        asn1Support.setValue(False)
+        #default to no systime
+        
 def onAttachmentDisconnected(source, target):
     global cryptoWolfSSLIncluded
     global cryptoSupportCompression
     global cryptoHaveZlib
+    global cryptoHaveSysTime
+    global cryptoDependSysTime
     if (target["component"].getID() == "lib_wolfssl"):
         cryptoWolfSSLIncluded.setValue(False)
 
@@ -1728,3 +1752,10 @@ def onAttachmentDisconnected(source, target):
     if (target["component"].getID() == "lib_zlib"):
         cryptoHaveZlib.setValue(False)
         cryptoSupportCompression.setVisible(False)
+
+    if (target["component"].getID() == "wolfssl_systime_dependency"):
+        cryptoHaveSysTime.setValue(False)
+        cryptoHaveSysTime.setVisible(False)
+        cryptoDependSysTime.setValue(False)
+        cryptoDependSysTime.setVisible(False)
+        asn1Support.setValue(False)        

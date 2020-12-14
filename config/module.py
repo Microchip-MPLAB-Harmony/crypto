@@ -37,7 +37,7 @@ def loadModule():
     ############################### Third Party wolfCrypt Module ###################################
     wolfCryptComponent = Module.CreateComponent("lib_wolfcrypt", "wolfCrypt Library", "/Third Party Libraries/wolfSSL/", "config/wolfcrypt.py")
     wolfCryptComponent.addMultiCapability("lib_wolfcrypt", "LIB_WOLFCRYPT", "LIB_WOLFCRYPT")
-    wolfCryptComponent.addDependency("LIB_WOLFCRYPT_Dependency", "SYS_TIME", True, True)
+    wolfCryptComponent.addDependency("LIB_WOLFCRYPT_Dependency", "SYS_TIME", False, False)#old: True, True
     wolfCryptComponent.addDependency("LIB_WOLFCRYPT_ZLIB_Dependency", "LIB_ZLIB", False, False)
 
     ############################### Third Party zlib Module ###################################
