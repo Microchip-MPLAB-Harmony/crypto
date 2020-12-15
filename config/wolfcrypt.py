@@ -864,7 +864,8 @@ def instantiateComponent(wolfCryptComponent):
     cryptoTrngEnabledSymbol.setLabel("Support Random Number Generation?")
     cryptoTrngEnabledSymbol.setDescription("Enables Random Number Generation Support.")
     cryptoTrngEnabledSymbol.setVisible(True)
-    cryptoTrngEnabledSymbol.setDefaultValue(True)
+    cryptoTrngEnabledSymbol.setDefaultValue(False)
+    cryptoTrngEnabledSymbol.setReadOnly(True)
     
     cryptoHashDrngEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_hashdrng", cryptoTrngEnabledSymbol)
     cryptoHashDrngEnabledSymbol.setLabel("Support Hash DRNG Generation?")
@@ -1725,6 +1726,7 @@ def onAttachmentConnected(source, target):
     global cryptoSupportCompression
     global cryptoHaveZlib
     global asn1Support
+    global cryptoTrngEnabledSymbol
     if (target["component"].getID() == "lib_wolfssl"):
         cryptoWolfSSLIncluded.setValue(True)
 
@@ -1736,6 +1738,7 @@ def onAttachmentConnected(source, target):
     if ((target["component"].getID() == 'sys_time') or 
         (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
         asn1Support.setReadOnly(False)
+        cryptoTrngEnabledSymbol.setReadOnly(False)
 
 def onAttachmentDisconnected(source, target):
     global cryptoWolfSSLIncluded
@@ -1752,4 +1755,6 @@ def onAttachmentDisconnected(source, target):
         cryptoSupportCompression.setVisible(False)
     if (target["component"].getID() == "sys_time"):
         asn1Support.setValue(False) 
-        asn1Support.setReadOnly(True)      
+        asn1Support.setReadOnly(True)
+        cryptoTrngEnabledSymbol.setValue(False) 
+        cryptoTrngEnabledSymbol.setReadOnly(True)
