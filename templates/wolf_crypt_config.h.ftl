@@ -475,15 +475,17 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#if wolfcrypt_havezlib == true && wolfcrypt_supportcompression == true>
     <#lt>#define HAVE_LIBZ
 </#if>
-<#if (lib_wolfssl.wolfsslLoadTNGTLSCert)?has_content && ((lib_wolfssl.wolfsslLoadTNGTLSCert) == true)>
-    <#lt>/*Enabling TNGTLS certificate loading*/
-    <#if !lib_wolfssl.wolfsslTlsEccCurvesExt || !lib_wolfssl.wolfsslTLS13> 
-        <#lt>#define HAVE_SUPPORTED_CURVES
+<#if lib_wolfssl?has_content>
+    <#if (lib_wolfssl.wolfsslLoadTNGTLSCert)?has_content && ((lib_wolfssl.wolfsslLoadTNGTLSCert) == true)>
+        <#lt>/*Enabling TNGTLS certificate loading*/
+        <#if !lib_wolfssl.wolfsslTlsEccCurvesExt || !lib_wolfssl.wolfsslTLS13> 
+            <#lt>#define HAVE_SUPPORTED_CURVES
+        </#if>
+        <#lt>#define WOLFSSL_ATECC608A
+        <#lt>#define WOLFSSL_ATECC_TNGTLS
+        <#lt>#define WOLFSSL_ATECC_ECDH_IOENC
+        <#lt>#define HAVE_PK_CALLBACKS
+        <#lt>#define WOLFSSL_ATECC508A_NOIDLE
     </#if>
-    <#lt>#define WOLFSSL_ATECC608A
-    <#lt>#define WOLFSSL_ATECC_TNGTLS
-    <#lt>#define WOLFSSL_ATECC_ECDH_IOENC
-    <#lt>#define HAVE_PK_CALLBACKS
-    <#lt>#define WOLFSSL_ATECC508A_NOIDLE
 </#if>
 <#lt>// ---------- FUNCTIONAL CONFIGURATION END ----------
