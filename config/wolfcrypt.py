@@ -906,7 +906,7 @@ def instantiateComponent(wolfCryptComponent):
     signatureSupport.setLabel("Signature API?")
     signatureSupport.setDescription("Enables the signature api.")
     signatureSupport.setVisible(True)
-    signatureSupport.setDefaultValue(True)
+    signatureSupport.setDefaultValue(False)
     
     cryptoHaveZlib = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havezlib", None)
     cryptoHaveZlib.setVisible(False)
