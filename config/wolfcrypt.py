@@ -907,7 +907,9 @@ def instantiateComponent(wolfCryptComponent):
     signatureSupport.setDescription("Enables the signature api.")
     signatureSupport.setVisible(True)
     signatureSupport.setDefaultValue(False)
-    
+    signatureSupport.setDependencies(handleAsnAndSignatureSupport, ["wolfcrypt_asn1"])
+    signatureSupport.setReadOnly(False)
+
     cryptoHaveZlib = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havezlib", None)
     cryptoHaveZlib.setVisible(False)
     cryptoHaveZlib.setDefaultValue(False)
@@ -921,7 +923,6 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHaveSysTime = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havesystime", None)
     cryptoHaveSysTime.setVisible(False)
     cryptoHaveSysTime.setDefaultValue(False)
-    ###################
     
     cryptoDependSysTime = wolfCryptComponent.createBooleanSymbol("wolfcrypt_dependsystime", None)
     cryptoDependSysTime.setLabel("Support Systime?")
@@ -1159,6 +1160,12 @@ def setValueFPMaxSizeRSAKeySize(symbol, event):
         symbol.setValue(4096) 
     elif rsaKeySize == "4096 bits":
         symbol.setValue(8192)
+
+def handleAsnAndSignatureSupport(symbol, event):
+    global asn1Support
+    global signatureSupport
+    if (asn1Support.getValue() == True):
+        signatureSupport.setEnabled(True)
 
 def handleHwDesEnabled(symbol, event):
     global cryptoHwEnabledSymbol
