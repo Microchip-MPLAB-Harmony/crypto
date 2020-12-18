@@ -1,4 +1,19 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.6.2
+### Bug Fixes
+- **Enabled Trust&Go Certificate loading** Enable load device certificate from Trust&Go TNGTLS
+- **Driver Non-Blocking fix** Fixed Non Blocking code in BA414E Harmony Driver
+- **Harmony 3 Scripting Fixes** Inter module scriping and configuring fixes
+
+## Dependencies
+- **Core** - 3.8.01
+- **CSP** - 3.8.0
+- **wolfSSL** - 4.5.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.40
+- **XC32** - v3.41
+- **IAR** - 8.50.1
+- 
 ## Crypto Release v3.6.1
 ### Bug Fixes
 - **Enabled TLS Downgrade options** Improved GUI for TLS Versions added Downgrade TLS Options
