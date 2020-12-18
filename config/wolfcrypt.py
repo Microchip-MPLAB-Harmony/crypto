@@ -893,8 +893,8 @@ def instantiateComponent(wolfCryptComponent):
     asn1Support.setLabel("Support ASN.1?")
     asn1Support.setDescription("Enables ASN.1 Support.")
     asn1Support.setVisible(True)
-    asn1Support.setDefaultValue(False) 
-    asn1Support.setReadOnly(True)    
+    asn1Support.setDefaultValue(True) 
+    #asn1Support.setReadOnly(True)    
     
     base64Support = wolfCryptComponent.createBooleanSymbol("wolfcrypt_base64", None)
     base64Support.setLabel("Support Base64 Encoding?")
@@ -1737,7 +1737,7 @@ def onAttachmentConnected(source, target):
         cryptoSupportCompression.setVisible(True)
     if ((target["component"].getID() == 'sys_time') or 
         (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
-        asn1Support.setReadOnly(False)
+        #asn1Support.setReadOnly(False)
         cryptoTrngEnabledSymbol.setReadOnly(False)
 
 def onAttachmentDisconnected(source, target):
@@ -1755,6 +1755,6 @@ def onAttachmentDisconnected(source, target):
         cryptoSupportCompression.setVisible(False)
     if (target["component"].getID() == "sys_time"):
         asn1Support.setValue(False) 
-        asn1Support.setReadOnly(True)
+        #asn1Support.setReadOnly(True)
         cryptoTrngEnabledSymbol.setValue(False) 
         cryptoTrngEnabledSymbol.setReadOnly(True)
