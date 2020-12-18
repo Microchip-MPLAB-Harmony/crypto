@@ -1739,7 +1739,8 @@ def onAttachmentConnected(source, target):
         (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
         #asn1Support.setReadOnly(False)
         cryptoTrngEnabledSymbol.setReadOnly(False)
-
+        cryptoTrngEnabledSymbol.setValue(True)
+        
 def onAttachmentDisconnected(source, target):
     global cryptoWolfSSLIncluded
     global cryptoSupportCompression
