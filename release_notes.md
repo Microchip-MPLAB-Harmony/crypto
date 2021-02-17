@@ -1,4 +1,17 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.6.3
+### Bug Fixes
+- **Resolve OSAL Malloc/Free** Resolve build error with core v3.9
+
+## Dependencies
+- **Core** - 3.9.0
+- **CSP** - 3.9.0
+- **wolfSSL** - 4.5.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.45
+- **XC32** - v2.50
+- **IAR** - 8.50.1
+- 
 ## Crypto Release v3.6.2
 ### Bug Fixes
 - **Enabled Trust&Go Certificate loading** Enable load device certificate from Trust&Go TNGTLS
