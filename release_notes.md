@@ -1,4 +1,17 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.7
+### Major Changes
+- **Support for wolfCrypt/wolfSSL 4.7.0** The cryptographic library now has support for wolfSSL version 4.7.0
+
+## Dependencies
+- **Core** - 3.9.0
+- **CSP** - 3.9.0
+- **wolfSSL** - 4.7.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.45
+- **XC32** - v2.50
+- **IAR** - 8.50.1
+
 ## Crypto Release v3.6.3
 ### Bug Fixes
 - **Resolve OSAL Malloc/Free** Resolve build error with core v3.9
