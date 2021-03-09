@@ -7253,7 +7253,10 @@ int AES_GCM_decrypt_C(Aes* aes, byte* out, const byte* in, word32 sz,
     ALIGN32 byte EKY0[AES_BLOCK_SIZE];
 
     if (ivSz == GCM_NONCE_MID_SZ) {
+        /* Counter is IV with bottom 4 bytes set to: 0x00,0x00,0x00,0x01. */
         XMEMCPY(counter, iv, ivSz);
+        XMEMSET(counter + GCM_NONCE_MID_SZ, 0,
+                                         AES_BLOCK_SIZE - GCM_NONCE_MID_SZ - 1);
         counter[AES_BLOCK_SIZE - 1] = 1;
     }
     else {
@@ -7268,7 +7271,7 @@ int AES_GCM_decrypt_C(Aes* aes, byte* out, const byte* in, word32 sz,
 #endif
     }
 
-    /* Calc the authTag again using the received auth data and the cipher text */
+    /* Calc the authTag again using received auth data and the cipher text */
     GHASH(aes, authIn, authInSz, in, sz, Tprime, sizeof(Tprime));
     wc_AesEncrypt(aes, counter, EKY0);
     xorbuf(Tprime, EKY0, sizeof(Tprime));
@@ -7318,15 +7321,16 @@ int AES_GCM_decrypt_C(Aes* aes, byte* out, const byte* in, word32 sz,
     }
     else
 #endif /* HAVE_AES_ECB && !PIC32MZ */
-    while (blocks--) {
-        IncrementGcmCounter(counter);
-    #if !defined(WOLFSSL_PIC32MZ_CRYPT)
-        wc_AesEncrypt(aes, counter, scratch);
-        xorbuf(scratch, c, AES_BLOCK_SIZE);
-        XMEMCPY(p, scratch, AES_BLOCK_SIZE);
-    #endif
-        p += AES_BLOCK_SIZE;
-        c += AES_BLOCK_SIZE;
+    {
+        while (blocks--) {
+            IncrementGcmCounter(counter);
+        #if !defined(WOLFSSL_PIC32MZ_CRYPT)
+            wc_AesEncrypt(aes, counter, scratch);
+            xorbufout(p, scratch, c, AES_BLOCK_SIZE);
+        #endif
+            p += AES_BLOCK_SIZE;
+            c += AES_BLOCK_SIZE;
+        }
     }
 
     if (partial != 0) {
