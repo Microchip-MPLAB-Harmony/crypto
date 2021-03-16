@@ -12,7 +12,6 @@
 - **zlib** - v1.2.11 For compression support
 - **MPLAB-X** - v5.45
 - **XC32** - v2.50
-- **IAR** - 8.50.1
 
 ## Crypto Release v3.6.3
 ### Bug Fixes
