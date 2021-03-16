@@ -2,6 +2,8 @@
 ## Crypto Release v3.7
 ### Major Changes
 - **Support for wolfCrypt/wolfSSL 4.7.0** The cryptographic library now has support for wolfSSL version 4.7.0
+- **Pic32mz hw mutex fix** Fix for trying to hold the mutex twice
+- **RNG memory leak fix** A deinitialize function was added to free RNG resources
 
 ## Dependencies
 - **Core** - 3.9.0
