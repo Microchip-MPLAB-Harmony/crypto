@@ -1227,9 +1227,9 @@ typedef struct CRYPT_RNG_CTX {
 	#define RANDOM_BYTE_SZ 32
 
 	int           ret;
- * 
+
 	CRYPT_RNG_CTX* mcRng = (CRYPT_RNG_CTX*)malloc(sizeof(CRYPT_RNG_CTX));
- * 
+
 	byte          out[RANDOM_BYTE_SZ];
 	
 	ret = CRYPT_RNG_Initialize(mcRng);
@@ -1264,6 +1264,8 @@ int CRYPT_RNG_Initialize(CRYPT_RNG_CTX*);
   Parameters:
     rng		- Pointer to context which saves state between calls.
 
+    ret = CRYPT_RNG_Deinitialize(rng);
+
   Remarks:
 */
 int CRYPT_RNG_Deinitialize(CRYPT_RNG_CTX* rng);
@@ -1295,15 +1297,17 @@ int CRYPT_RNG_Deinitialize(CRYPT_RNG_CTX* rng);
 	#define RANDOM_BYTE_SZ 32
 
 	int           ret;
-	CRYPT_RNG_CTX mcRng;
+	CRYPT_RNG_CTX* mcRng = (CRYPT_RNG_CTX*)malloc(sizeof(CRYPT_RNG_CTX));
 	byte          out[RANDOM_BYTE_SZ];
 	
-	ret = CRYPT_RNG_Initialize(&mcRng);
+	ret = CRYPT_RNG_Initialize(mcRng);
 	
-	ret = CRYPT_RNG_Get(&mcRng, &out[0]);
+	ret = CRYPT_RNG_Get(mcRng, &out[0]);
 
-    ret = CRYPT_RNG_BlockGenerate(&mcRng, out, RANDOM_BYTE_SZ);
+    ret = CRYPT_RNG_BlockGenerate(mcRng, out, RANDOM_BYTE_SZ);
     </code>
+    
+    ret = CRYPT_RNG_Deinitialize(mcRng);
 
   Remarks:
 */
@@ -1337,15 +1341,17 @@ int CRYPT_RNG_Get(CRYPT_RNG_CTX*, unsigned char*);
 	#define RANDOM_BYTE_SZ 32
 
 	int           ret;
-	CRYPT_RNG_CTX mcRng;
+	CRYPT_RNG_CTX* mcRng = (CRYPT_RNG_CTX*)malloc(sizeof(CRYPT_RNG_CTX));
 	byte          out[RANDOM_BYTE_SZ];
 	
-	ret = CRYPT_RNG_Initialize(&mcRng);
+	ret = CRYPT_RNG_Initialize(mcRng);
 	
-	ret = CRYPT_RNG_Get(&mcRng, &out[0]);
+	ret = CRYPT_RNG_Get(mcRng, &out[0]);
 
-    ret = CRYPT_RNG_BlockGenerate(&mcRng, out, RANDOM_BYTE_SZ);
+    ret = CRYPT_RNG_BlockGenerate(mcRng, out, RANDOM_BYTE_SZ);
     </code>
+    
+    ret = CRYPT_RNG_Deinitialize(mcRng);
     
   Remarks:
 */

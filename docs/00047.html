@@ -107,14 +107,17 @@ Example</div>
 <div class="Element13"><div class="Element12"><pre class="Element12"><strong><span style="color: #000080">#define</span></strong> RANDOM_BYTE_SZ 32
 
 <strong><span style="color: #000080">int</span></strong>           ret;
-<a href="00045.html" target="topic">CRYPT_RNG_CTX</a> mcRng;
+
+<a href="00045.html" target="topic">CRYPT_RNG_CTX</a>* mcRng = (CRYPT_RNG_CTX*)malloc(sizeof(CRYPT_RNG_CTX));
 byte          out[RANDOM_BYTE_SZ];
 
-ret = <a href="00048.html" target="topic">CRYPT_RNG_Initialize</a>(&amp;mcRng);
+ret = <a href="00048.html" target="topic">CRYPT_RNG_Initialize</a>(mcRng);
 
-ret = CRYPT_RNG_Get(&amp;mcRng, &amp;out[0]);
+ret = CRYPT_RNG_Get(mcRng, &amp;out[0]);
 
-ret = <a href="00044.html" target="topic">CRYPT_RNG_BlockGenerate</a>(&amp;mcRng, out, RANDOM_BYTE_SZ);</pre></div></div>
+ret = <a href="00044.html" target="topic">CRYPT_RNG_BlockGenerate</a>(mcRng, out, RANDOM_BYTE_SZ);
+
+ret = <a href="00128.html" target="topic">CRYPT_RNG_Deinitialize</a>(mcRng);</pre></div></div>
 </div>
 </div>
 </div>
@@ -133,7 +136,7 @@ MPLAB Harmony Crypto Module Help</div>
 <a href="contents.html" target="tocidx">Contents</a> | <a href="00112.html" target="topic">Home</a></div>
 </td><td width="25%">
 <div class="Element91">
-<a href="00044.html" target="topic">Previous</a> | <a href="00100.html" target="topic">Up</a> | <a href="00005.html" target="topic">Next</a></div>
+<a href="00044.html" target="topic">Previous</a> | <a href="00100.html" target="topic">Up</a> | <a href="00128.html" target="topic">Next</a></div>
 </td><td width="25%">
 <div class="Element97">
 <a href="mailto:docerrors@microchip.com&subject=MPLAB Harmony Documentation Feedback (Topic ID: CRYPT_RNG_Get@CRYPT_RNG_CTX*@unsigned char* Topic Title: CRYPT_RNG_Get Function)&body=Thank you for your feedback! Please include a description of your feedback, and indicate whether you are reporting an an error in the documentation or an enhancement.">Documentation Feedback</a><br> <a href="http://support.microchip.com" target="_blank">Microchip Support</a></div>
