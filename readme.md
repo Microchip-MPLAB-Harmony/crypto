@@ -15,11 +15,6 @@ for cryptography, the Microchip 32-bit SAM drivers for hardware cryptographic
 acceleration, and the deltas/patch for the wolfCrypt/wolfSSL library to use
 the hardware accelerators.
 
-**Note:** Microchip Technology Inc. and wolfSSL Inc. have entered a ten year
-agreement in 2019 to allow the use of wolfCrypt (excluding FIPS) inside of 
-MPLAB Harmony 3 projects.  Please contact Microchip and wolfSSL for the
-commercial release of wolfSSL before using in production.
-
  - [Release Notes](./release_notes.md)
  - [MPLAB Harmony 3 Crypto Wiki](https://github.com/Microchip-MPLAB-Harmony/crypto/wiki)
  - [MPLAB Harmony 3 Crypto API Help](https://microchip-mplab-harmony.github.io/crypto)
