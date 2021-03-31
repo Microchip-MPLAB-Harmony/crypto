@@ -55,6 +55,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define NO_WRITEV
     <#lt>#define MICROCHIP_TCPIP
     <#if wolfsslOsalHeapKeys>
+        <#lt>#include "osal/osal.h"
         <#lt>#define XMALLOC_OVERRIDE
         <#lt>#define XMALLOC(s, h, type)  OSAL_Malloc((s))
         <#lt>#define XFREE(p, h, type)    OSAL_Free((p))

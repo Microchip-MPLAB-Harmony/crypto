@@ -1,4 +1,8 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.7.1
+### Bug Fixes
+- **Fixed bug involving OSAL heap usage** Resolve build error in some projects
+
 ## Crypto Release v3.7
 ### Major Changes
 - **Support for wolfCrypt/wolfSSL 4.7.0** The cryptographic library now has support for wolfSSL version 4.7.0
