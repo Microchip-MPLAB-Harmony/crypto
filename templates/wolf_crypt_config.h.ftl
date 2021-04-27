@@ -263,6 +263,15 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
             </#if>
         </#if>
     </#if>
+    <#if wolfcrypt_aes_ofb == true>
+        <#lt>#define WOLFSSL_AES_OFB
+        <#if wolfcrypt_hw == true && wolfcrypt_aes_ofb_hw == true && wolfcrypt_aes_hw == true>
+            <#if wolfcryptCoreSeries?starts_with("PIC32M")>
+            <#else>
+                <#lt>#define WOLFSSL_HAVE_MCHP_HW_AES_OFB
+            </#if>
+        </#if>
+    </#if>
     <#if wolfcrypt_aes_gcm == true>
         <#lt>#define HAVE_AESGCM
         <#if wolfcrypt_hw == true && wolfcrypt_aes_gcm_hw == true && wolfcrypt_aes_hw == true>

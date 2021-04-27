@@ -728,6 +728,21 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHwAesGcmEnabledSymbol.setVisible(False)
     cryptoHwAesGcmEnabledSymbol.setDefaultValue(False)  
 
+    cryptoAesOfbEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_ofb", cryptoAesEnabledSymbol)
+    cryptoAesOfbEnabledSymbol.setLabel("Support OFB Mode?")
+    cryptoAesOfbEnabledSymbol.setDescription("Enable support OFB Mode for the AES Cipher.")
+    cryptoAesOfbEnabledSymbol.setVisible(True)
+    cryptoAesOfbEnabledSymbol.setDefaultValue(True)
+    cryptoAesOfbEnabledSymbol.setDependencies(handleParentSymbolChange, ["wolfcrypt_aes"])
+
+    cryptoHwAesOfbEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_ofb_hw", cryptoAesGcmEnabledSymbol)
+    cryptoHwAesOfbEnabledSymbol.setLabel("Support Hardware Acceleration?")
+    cryptoHwAesOfbEnabledSymbol.setDescription("Turn on support for using the hardware acceleration for multiple blocks of data in OFB mode.  Otherwise the driver will feed one block of data to the cryptography hardware at a time.")
+    if (cryptoHwAesOfbSupported == True):
+        cryptoHwAesOfbEnabledSymbol.setDependencies(handleHwAesGcmEnabled, ["wolfcrypt_hw", "wolfcrypt_aes_gcm", "wolfcrypt_aes_hw"])
+    cryptoHwAesOfbEnabledSymbol.setVisible(False)
+    cryptoHwAesOfbEnabledSymbol.setDefaultValue(False)
+
 
     cryptoAesXtsEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_xts", cryptoAesEnabledSymbol)
     cryptoAesXtsEnabledSymbol.setLabel("Support XTS Mode?")
