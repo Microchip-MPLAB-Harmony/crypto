@@ -108,6 +108,7 @@ cryptoSha512EnabledSymbol = None
 
 cryptoAesEnabledSymbol = None
 cryptoHwAesEnabledSymbol = None
+cryptoAesSmallTableEnabledSymbol = None
 cryptoAesEcbEnabledSymbol = None
 cryptoAesEcbHwEnabledSymbol = None
 
@@ -311,6 +312,7 @@ def instantiateComponent(wolfCryptComponent):
     global cryptoHmacEnabledSymbol
 
     global cryptoHwAesEnabledSymbol
+    global cryptoAesSmallTableEnabledSymbol
     global cryptoAesEnabledSymbol
     global cryptoAesEcbEnabledSymbol
     global cryptoHwAesEcbEnabledSymbol
@@ -611,13 +613,20 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHwAesEnabledSymbol.setDefaultValue(False)
     cryptoHwAesEnabledSymbol.setDependencies(handleAesHwEnableChange, ["wolfcrypt_aes", "wolfcrypt_hw"])
     
+    cryptoAesSmallTableEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_small_table", cryptoAesEnabledSymbol)
+    cryptoAesSmallTableEnabledSymbol.setLabel("Enable Small AES Tables")
+    cryptoAesSmallTableEnabledSymbol.setDescription("Enable Support for small AES Tables.")
+    cryptoAesSmallTableEnabledSymbol.setVisible(True)
+    cryptoAesSmallTableEnabledSymbol.setDefaultValue(True)
+    cryptoAesSmallTableEnabledSymbol.setDependencies(handleAesSmallTableChange, ["wolfcrypt_aes", "wolfcrypt_aes_hw", "wolfcrypt_hw"])
+
     cryptoAes128EnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_128", cryptoAesEnabledSymbol)
     cryptoAes128EnabledSymbol.setLabel("Support 128-bit AES?")
     cryptoAes128EnabledSymbol.setDescription("Enable Support for 128-Bit AES Cryptography.")
     cryptoAes128EnabledSymbol.setVisible(True)
     cryptoAes128EnabledSymbol.setDefaultValue(True)
     cryptoAes128EnabledSymbol.setDependencies(handleAes128BitSymbolChange, ["wolfcrypt_aes", "wolfcrypt_aes_hw", "wolfcrypt_hw"])
-        
+
     cryptoAes192EnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_192", cryptoAesEnabledSymbol)
     cryptoAes192EnabledSymbol.setLabel("Support 192-bit AES?")
     cryptoAes192EnabledSymbol.setDescription("Enable Support for 192-Bit AES Cryptography.")
@@ -1213,7 +1222,21 @@ def handleAesHwEnableChange(symbol, event):
         cryptoHwAesEnabledSymbol.setVisible(True)
     else:
         cryptoHwAesEnabledSymbol.setVisible(False)
-         
+
+def handleAesSmallTableChange(symbol, event):
+    global cryptoHwEnabledSymbol
+    global cryptoAesEnabledSymbol
+    global cryptoAesSmallTableEnabledSymbol
+    global cryptoHwAes128Supported
+    global cryptoHwAes192Supported
+    global cryptoHwAes256Supported
+    
+    if (cryptoAesEnabledSymbol.getValue() == True and
+        ((cryptoHwAes128Supported == True) or (cryptoHwAes192Supported == True) or
+         (cryptoHwAes256Supported == True))):
+        cryptoAesSmallTableEnabledSymbol.setVisible(True)
+    else:
+        cryptoAesSmallTableEnabledSymbol.setVisible(False)         
          
 def handleAes128BitSymbolChange(symbol, event):
     global cryptoHwEnabledSymbol

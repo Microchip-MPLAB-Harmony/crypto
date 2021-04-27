@@ -60,6 +60,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
 </#if>
 <#lt>// ---------- FUNCTIONAL CONFIGURATION START ----------
+<#if wolfcrypt_aes_small_table == true>
+    <#lt>#define WOLFSSL_AES_SMALL_TABLES
+</#if>
 <#if wolfcrypt_md2 == true>
     <#lt>#define WOLFSSL_MD2
 </#if>
