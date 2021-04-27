@@ -739,7 +739,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHwAesOfbEnabledSymbol.setLabel("Support Hardware Acceleration?")
     cryptoHwAesOfbEnabledSymbol.setDescription("Turn on support for using the hardware acceleration for multiple blocks of data in OFB mode.  Otherwise the driver will feed one block of data to the cryptography hardware at a time.")
     if (cryptoHwAesOfbSupported == True):
-        cryptoHwAesOfbEnabledSymbol.setDependencies(handleHwAesGcmEnabled, ["wolfcrypt_hw", "wolfcrypt_aes_gcm", "wolfcrypt_aes_hw"])
+        cryptoHwAesOfbEnabledSymbol.setDependencies(handleHwAesGcmEnabled, ["wolfcrypt_hw", "wolfcrypt_aes_ofb", "wolfcrypt_aes_hw"])
     cryptoHwAesOfbEnabledSymbol.setVisible(False)
     cryptoHwAesOfbEnabledSymbol.setDefaultValue(False)
 
