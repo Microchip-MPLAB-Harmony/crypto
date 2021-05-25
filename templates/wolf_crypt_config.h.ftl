@@ -469,6 +469,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if wolfcrypt_memorycallbacks == true>
     <#if wolfcrypt_memorytracking == true>
+        #define USE_WOLFSSL_MEMORY
         #define WOLFSSL_TRACK_MEMORY
     </#if>
     <#if wolfcrypt_memorylogging == true>
