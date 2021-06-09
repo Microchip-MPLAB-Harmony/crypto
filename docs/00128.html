@@ -99,16 +99,16 @@ Example</div>
 <div class="Element13"><div class="Element12"><pre class="Element12"><strong><span style="color: #000080">#define</span></strong> RANDOM_BYTE_SZ 32
 
 <strong><span style="color: #000080">int</span></strong>           ret;
-<a href="00045.html" target="topic">CRYPT_RNG_CTX</a>* mcRng = (CRYPT_RNG_CTX*)malloc(sizeof(CRYPT_RNG_CTX));
+<a href="00045.html" target="topic">CRYPT_RNG_CTX</a> mcRng;
 byte          out[RANDOM_BYTE_SZ];
 
-ret = <a href="00048.html" target="topic">CRYPT_RNG_Initialize</a>(mcRng);
+ret = <a href="00048.html" target="topic">CRYPT_RNG_Initialize</a>(&amp;mcRng);
 
-ret = <a href="00047.html" target="topic">CRYPT_RNG_Get</a>(mcRng, &amp;out[0]);
+ret = <a href="00047.html" target="topic">CRYPT_RNG_Get</a>(&amp;mcRng, &amp;out[0]);
 
-ret = <a href="00044.html" target="topic">CRYPT_RNG_BlockGenerate</a>(mcRng, out, RANDOM_BYTE_SZ);
+ret = <a href="00044.html" target="topic">CRYPT_RNG_BlockGenerate</a>(&amp;mcRng, out, RANDOM_BYTE_SZ);
 
-ret = <a href="00128.html" target="topic">CRYPT_RNG_Deinitialize</a>(mcRng);</pre></div></div>
+ret = <a href="00128.html" target="topic">CRYPT_RNG_Deinitialize</a>(&amp;mcRng);</pre></div></div>
 </div>
 </div>
 </div>
