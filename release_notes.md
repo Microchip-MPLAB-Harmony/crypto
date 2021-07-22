@@ -1,4 +1,10 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.7.2
+### Bug Fixes
+- **Fixed bugs for XC32 V3.0** Resolve compile issues with XC32 V3.0
+- **Added AES Small tables Toggle** Added small tables toggle to the GUI
+- **Added AES-OFB mode** Enabled AES-OFB Mode in GUI
+
 ## Crypto Release v3.7.1
 ### Bug Fixes
 - **Fixed bug involving OSAL heap usage** Resolve build error in some projects

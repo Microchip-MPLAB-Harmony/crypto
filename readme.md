@@ -34,6 +34,6 @@ the hardware accelerators.
 - **CSP** - 3.9.0
 - **wolfSSL** - 4.7.0
 - **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.45
-- **XC32** - v2.50
+- **MPLAB-X** - v5.45+
+- **XC32** - v2.50+
 - **IAR** - 8.40.1
