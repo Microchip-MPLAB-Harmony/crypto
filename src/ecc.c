@@ -7618,20 +7618,21 @@ int wc_ecc_get_generator(ecc_point* ecp, int curve_idx)
 /* perform sanity checks on ecc key validity, 0 on success */
 int wc_ecc_check_key(ecc_key* key)
 {
+    int    err = MP_OKAY;
 #ifndef WOLFSSL_SP_MATH
-    int    err;
 #if !defined(WOLFSSL_ATECC508A) && !defined(WOLFSSL_ATECC608A) && \
-    !defined(WOLFSSL_CRYPTOCELL)
+    !defined(WOLFSSL_CRYPTOCELL) && !defined(WOLFSSL_SILABS_SE_ACCEL)
     mp_int* b = NULL;
-#ifdef USE_ECC_B_PARAM
-    DECLARE_CURVE_SPECS(curve, 4);
-#else
-#ifndef WOLFSSL_SMALL_STACK
-    mp_int b_lcl;
-#endif
-    DECLARE_CURVE_SPECS(curve, 3);
-#endif /* USE_ECC_B_PARAM */
-#endif /* WOLFSSL_ATECC508A */
+    #ifdef USE_ECC_B_PARAM
+        DECLARE_CURVE_SPECS(curve, 4);
+    #else
+        #ifndef WOLFSSL_SMALL_STACK
+            mp_int b_lcl;
+        #endif
+        DECLARE_CURVE_SPECS(curve, 3);
+    #endif /* USE_ECC_B_PARAM */
+#endif /* !WOLFSSL_ATECC508A && !WOLFSSL_ATECC608A && 
+          !WOLFSSL_CRYPTOCELL && !WOLFSSL_SILABS_SE_ACCEL */
 #endif /* !WOLFSSL_SP_MATH */
 
     if (key == NULL)
@@ -7656,7 +7657,9 @@ int wc_ecc_check_key(ecc_key* key)
 #if defined(WOLFSSL_ATECC508A) || defined(WOLFSSL_ATECC608A) || \
     defined(WOLFSSL_CRYPTOCELL) || defined(WOLFSSL_SILABS_SE_ACCEL)
 
-    err = 0; /* consider key check success on ATECC508/608A */
+    /* consider key check success on HW crypto 
+     * ex: ATECC508/608A, CryptoCell and Silabs */
+    err = MP_OKAY;
 
 #else
     #ifdef USE_ECC_B_PARAM
@@ -7752,10 +7755,10 @@ int wc_ecc_check_key(ecc_key* key)
 
     FREE_CURVE_SPECS();
 #endif /* WOLFSSL_ATECC508A */
-    return err;
 #else
-    return WC_KEY_SIZE_E;
+    err = WC_KEY_SIZE_E;
 #endif /* !WOLFSSL_SP_MATH */
+    return err;
 }
 
 #ifdef HAVE_ECC_KEY_IMPORT
