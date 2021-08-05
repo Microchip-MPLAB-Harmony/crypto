@@ -1,4 +1,8 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.7.3
+### Bug Fixe
+- **Fix Support for TNGTLS** Implement fix for TNGTLS ATECC
+  
 ## Crypto Release v3.7.2
 ### Bug Fixes
 - **Fixed bugs for XC32 V3.0** Resolve compile issues with XC32 V3.0
