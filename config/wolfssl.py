@@ -100,6 +100,12 @@ def instantiateComponent(wolfsslComponent):
     wolfsslTlsSni.setVisible(True)
     wolfsslTlsSni.setDefaultValue(False)
 
+    wolfsslTlsAlpn = wolfsslComponent.createBooleanSymbol("wolfsslTlsAlpn", wolfsslTLSMenu)
+    wolfsslTlsAlpn.setLabel("ALPN Support")
+    wolfsslTlsAlpn.setDescription("Enable support for application layer protocol negotiation")
+    wolfsslTlsAlpn.setVisible(True)
+    wolfsslTlsAlpn.setDefaultValue(False)
+
     wolfsslTlsEccCurvesExt = wolfsslComponent.createBooleanSymbol("wolfsslTlsEccCurvesExt", wolfsslTLSMenu)
     wolfsslTlsEccCurvesExt.setLabel("ECC Supported Curves Support")
     wolfsslTlsEccCurvesExt.setDescription("Enable support for ECC supported curves")

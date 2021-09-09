@@ -98,6 +98,10 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
         <#if wolfsslTlsSni>
             <#lt>#define HAVE_SNI
         </#if>
+        <#if wolfsslTlsAlpn>
+            <#lt>#define HAVE_ALPN
+			<#lt>#define USE_WOLF_STRTOK
+        </#if>
     </#if>
     <#if !wolfsslTLS12>
         <#lt>#define WOLFSSL_NO_TLS12
