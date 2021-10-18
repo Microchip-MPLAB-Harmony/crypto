@@ -1,6 +1,6 @@
 /* types.h
  *
- * Copyright (C) 2006-2020 wolfSSL Inc.
+ * Copyright (C) 2006-2021 wolfSSL Inc.
  *
  * This file is part of wolfSSL.
  *
@@ -48,8 +48,14 @@ decouple library dependencies with standard string, memory and so on.
      * (with minimal depencencies).
      */
     #if defined(HAVE_EX_DATA) || defined(FORTRESS)
+        #ifdef HAVE_EX_DATA_CLEANUP_HOOKS
+        typedef void (*wolfSSL_ex_data_cleanup_routine_t)(void *data);
+        #endif
     typedef struct WOLFSSL_CRYPTO_EX_DATA {
         void* ex_data[MAX_EX_DATA];
+        #ifdef HAVE_EX_DATA_CLEANUP_HOOKS
+        wolfSSL_ex_data_cleanup_routine_t ex_data_cleanup_routines[MAX_EX_DATA];
+        #endif
     } WOLFSSL_CRYPTO_EX_DATA;
     #endif
 
@@ -92,12 +98,16 @@ decouple library dependencies with standard string, memory and so on.
 
     /* try to set SIZEOF_LONG or SIZEOF_LONG_LONG if user didn't */
     #if defined(_MSC_VER) || defined(HAVE_LIMITS_H)
-        #if !defined(SIZEOF_LONG_LONG) && !defined(SIZEOF_LONG)
+        /* make sure both SIZEOF_LONG_LONG and SIZEOF_LONG are set, 
+         * otherwise causes issues with CTC_SETTINGS */
+        #if !defined(SIZEOF_LONG_LONG) || !defined(SIZEOF_LONG)
             #include <limits.h>
-            #if defined(ULONG_MAX) && (ULONG_MAX == 0xffffffffUL)
+            #if !defined(SIZEOF_LONG) && defined(ULONG_MAX) && \
+                    (ULONG_MAX == 0xffffffffUL)
                 #define SIZEOF_LONG 4
             #endif
-            #if defined(ULLONG_MAX) && (ULLONG_MAX == 0xffffffffffffffffULL)
+            #if !defined(SIZEOF_LONG_LONG) && defined(ULLONG_MAX) && \
+                    (ULLONG_MAX == 0xffffffffffffffffULL)
                 #define SIZEOF_LONG_LONG 8
             #endif
         #endif
@@ -144,13 +154,12 @@ decouple library dependencies with standard string, memory and so on.
         typedef unsigned long long word64;
     #endif
 
-#if !defined(NO_64BIT) && defined(WORD64_AVAILABLE) && !defined(WC_16BIT_CPU)
+#if defined(WORD64_AVAILABLE) && !defined(WC_16BIT_CPU)
     /* These platforms have 64-bit CPU registers.  */
     #if (defined(__alpha__) || defined(__ia64__) || defined(_ARCH_PPC64) || \
          defined(__mips64)  || defined(__x86_64__) || defined(_M_X64)) || \
          defined(__aarch64__) || defined(__sparc64__) || defined(__s390x__ ) || \
-        (defined(__riscv_xlen) && (__riscv_xlen == 64))
-        typedef word64 wolfssl_word;
+        (defined(__riscv_xlen) && (__riscv_xlen == 64)) || defined(_M_ARM64)
         #define WC_64BIT_CPU
     #elif (defined(sun) || defined(__sun)) && \
           (defined(LP64) || defined(_LP64))
@@ -158,14 +167,23 @@ decouple library dependencies with standard string, memory and so on.
          * and int uses 32 bits. When using Solaris Studio sparc and __sparc are
          * available for 32 bit detection but __sparc64__ could be missed. This
          * uses LP64 for checking 64 bit CPU arch. */
-        typedef word64 wolfssl_word;
         #define WC_64BIT_CPU
     #else
-        typedef word32 wolfssl_word;
-        #ifdef WORD64_AVAILABLE
-            #define WOLFCRYPT_SLOW_WORD64
-        #endif
         #define WC_32BIT_CPU
+    #endif
+
+    #if defined(NO_64BIT)
+          typedef word32 wolfssl_word;
+          #undef WORD64_AVAILABLE
+    #else
+        #ifdef WC_64BIT_CPU
+          typedef word64 wolfssl_word;
+        #else
+          typedef word32 wolfssl_word;
+          #ifdef WORD64_AVAILABLE
+              #define WOLFCRYPT_SLOW_WORD64
+          #endif
+        #endif
     #endif
 
 #elif defined(WC_16BIT_CPU)
@@ -179,7 +197,16 @@ decouple library dependencies with standard string, memory and so on.
         typedef word32 wolfssl_word;
         #define MP_16BIT  /* for mp_int, mp_word needs to be twice as big as
                              mp_digit, no 64 bit type so make mp_digit 16 bit */
-        #define WC_32BIT_CPU
+#endif
+
+#ifdef WC_PTR_TYPE /* Allow user suppied type */
+    typedef WC_PTR_TYPE wc_ptr_t;
+#elif defined(HAVE_UINTPTR_T)
+    #include <stdint.h>
+    typedef uintptr_t wc_ptr_t;
+#else /* fallback to architecture size_t for pointer size */
+    #include <stddef.h> /* included for getting size_t type */
+    typedef size_t wc_ptr_t;
 #endif
 
     enum {
@@ -211,6 +238,8 @@ decouple library dependencies with standard string, memory and so on.
             #else
                 #define WC_INLINE inline
             #endif
+        #elif defined(__CCRX__)
+            #define WC_INLINE inline
         #else
             #define WC_INLINE
         #endif
@@ -235,6 +264,8 @@ decouple library dependencies with standard string, memory and so on.
         #define FAST_ROTATE
     #elif defined(__MWERKS__) && TARGET_CPU_PPC
         #define PPC_INTRINSICS
+        #define FAST_ROTATE
+    #elif defined(__CCRX__)
         #define FAST_ROTATE
     #elif defined(__GNUC__)  && (defined(__i386__) || defined(__x86_64__))
         /* GCC does peephole optimizations which should result in using rotate
@@ -558,17 +589,17 @@ decouple library dependencies with standard string, memory and so on.
                     {
                         va_list ap;
                         int ret;
-                        
+
                         if ((int)n <= 0) return -1;
-                        
+
                         va_start(ap, format);
-                        
-                        ret = vsnprintf(s, n, format, ap);
+
+                        ret = XVSNPRINTF(s, n, format, ap);
                         if (ret < 0)
                             ret = -1;
-                            
+
                         va_end(ap);
-                        
+
                         return ret;
                     }
                 #define XSNPRINTF _xsnprintf_
@@ -599,7 +630,7 @@ decouple library dependencies with standard string, memory and so on.
 
                         if ((int)bufsize <= 0) return -1;
                         va_start(ap, format);
-                        ret = vsnprintf(buffer, bufsize, format, ap);
+                        ret = XVSNPRINTF(buffer, bufsize, format, ap);
                         if (ret >= (int)bufsize)
                             ret = -1;
                         va_end(ap);
@@ -661,6 +692,8 @@ decouple library dependencies with standard string, memory and so on.
         #endif
         #ifdef OPENSSL_ALL
         #define XISALNUM(c)     isalnum((c))
+        #define XISASCII(c)     isascii((c))
+        #define XISSPACE(c)     isspace((c))
         #endif
         /* needed by wolfSSL_check_domain_name() */
         #define XTOLOWER(c)      tolower((c))
@@ -791,8 +824,9 @@ decouple library dependencies with standard string, memory and so on.
         WC_ALGO_TYPE_RNG = 4,
         WC_ALGO_TYPE_SEED = 5,
         WC_ALGO_TYPE_HMAC = 6,
+        WC_ALGO_TYPE_CMAC = 7,
 
-        WC_ALGO_TYPE_MAX = WC_ALGO_TYPE_HMAC
+        WC_ALGO_TYPE_MAX = WC_ALGO_TYPE_CMAC
     };
 
     /* hash types */
@@ -868,14 +902,18 @@ decouple library dependencies with standard string, memory and so on.
         WC_PK_TYPE_ECDH = 3,
         WC_PK_TYPE_ECDSA_SIGN = 4,
         WC_PK_TYPE_ECDSA_VERIFY = 5,
-        WC_PK_TYPE_ED25519 = 6,
+        WC_PK_TYPE_ED25519_SIGN = 6,
         WC_PK_TYPE_CURVE25519 = 7,
         WC_PK_TYPE_RSA_KEYGEN = 8,
         WC_PK_TYPE_EC_KEYGEN = 9,
         WC_PK_TYPE_RSA_CHECK_PRIV_KEY = 10,
         WC_PK_TYPE_EC_CHECK_PRIV_KEY = 11,
-
-        WC_PK_TYPE_MAX = WC_PK_TYPE_EC_CHECK_PRIV_KEY
+        WC_PK_TYPE_ED448 = 12,
+        WC_PK_TYPE_CURVE448 = 13,
+        WC_PK_TYPE_ED25519_VERIFY = 14,
+        WC_PK_TYPE_ED25519_KEYGEN = 15,
+        WC_PK_TYPE_CURVE25519_KEYGEN = 16,
+        WC_PK_TYPE_MAX = WC_PK_TYPE_CURVE25519_KEYGEN
     };
 
 
@@ -918,6 +956,12 @@ decouple library dependencies with standard string, memory and so on.
      * Xilinx RSA operations require alignment */
     #if defined(WOLFSSL_AESNI) || defined(WOLFSSL_ARMASM) || \
         defined(USE_INTEL_SPEEDUP) || defined(WOLFSSL_AFALG_XILINX)
+          #ifndef WOLFSSL_USE_ALIGN
+              #define WOLFSSL_USE_ALIGN
+          #endif
+    #endif /* WOLFSSL_AESNI || WOLFSSL_ARMASM || USE_INTEL_SPEEDUP || WOLFSSL_AFALG_XILINX */
+
+    #ifdef WOLFSSL_USE_ALIGN
         #if !defined(ALIGN16)
             #if defined(__IAR_SYSTEMS_ICC__) || defined(__GNUC__)
                 #define ALIGN16 __attribute__ ( (aligned (16)))
@@ -990,7 +1034,15 @@ decouple library dependencies with standard string, memory and so on.
         #ifndef ALIGN256
             #define ALIGN256
         #endif
-    #endif /* WOLFSSL_AESNI || WOLFSSL_ARMASM */
+    #endif /* WOLFSSL_USE_ALIGN */
+
+    #if !defined(PEDANTIC_EXTENSION)
+        #if defined(__GNUC__)
+            #define PEDANTIC_EXTENSION __extension__
+        #else
+            #define PEDANTIC_EXTENSION
+        #endif
+    #endif /* !PEDANTIC_EXTENSION */
 
 
     #ifndef TRUE
@@ -1036,6 +1088,14 @@ decouple library dependencies with standard string, memory and so on.
             (defined(HAVE_ECC) && defined(HAVE_ECC_KEY_EXPORT))
         #undef  WC_MP_TO_RADIX
         #define WC_MP_TO_RADIX
+    #endif
+
+    #if defined(__GNUC__) && __GNUC__ > 5
+        #define PRAGMA_GCC_IGNORE(str) _Pragma(str);
+        #define PRAGMA_GCC_POP         _Pragma("GCC diagnostic pop");
+    #else
+        #define PRAGMA_GCC_IGNORE(str)
+        #define PRAGMA_GCC_POP
     #endif
 
     #ifdef __cplusplus
