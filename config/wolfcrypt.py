@@ -400,6 +400,7 @@ def instantiateComponent(wolfCryptComponent):
     setupHardware()
     setupFiles(localwolfCryptComponent)
 
+    #---------------------------------------------------------------------------
     #wolfCrypt Library Component Menu
     wolfcrypt = wolfCryptComponent.createBooleanSymbol("wolfcrypt", None)
     wolfcrypt.setLabel("Use wolfCrypt?")
@@ -411,7 +412,6 @@ def instantiateComponent(wolfCryptComponent):
     cryptoWolfSSLIncluded.setVisible(False)
     cryptoWolfSSLIncluded.setDefaultValue(False)
 
-
     cryptoHwEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_hw", None)
     cryptoHwEnabledSymbol.setLabel("Enable Hardware Cryptography?")
     cryptoHwEnabledSymbol.setDescription("Enables hardware cryptography")
@@ -420,9 +420,9 @@ def instantiateComponent(wolfCryptComponent):
     else:
         cryptoHwEnabledSymbol.setVisible(False)
     cryptoHwEnabledSymbol.setDefaultValue(False)
-    cryptoHwEnabledSymbol.setHelp('MC_CRYPTO_API_H')
+    cryptoHwEnabledSymbol.setHelp('MC_CRYPTO_HW_SUM')
 
-
+    #Hash Menu
     hashMenu = wolfCryptComponent.createMenuSymbol("wolfcrypt_hash", None)
     hashMenu.setLabel("Hash Algorithms")
     hashMenu.setDescription("Hash Algorithms: MD and SHA")
@@ -590,7 +590,7 @@ def instantiateComponent(wolfCryptComponent):
         cryptoHwDesEnabledSymbol.setDependencies(handleHwDesEnabled, ["wolfcrypt_hw", "wolfcrypt_tdes"])
     cryptoHwDesEnabledSymbol.setVisible(False)
     cryptoHwDesEnabledSymbol.setDefaultValue(False)
-    cryptoMd2EnabledSymbol.setHelp('CRYPT_TDES_SUM')
+    cryptoHwDesEnabledSymbol.setHelp('CRYPT_TDES_SUM')
 
 
     cryptoDesEcbEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_tdes_ecb", cryptoDesEnabledSymbol)
@@ -599,7 +599,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoDesEcbEnabledSymbol.setVisible(False)
     cryptoDesEcbEnabledSymbol.setDefaultValue(False)
     cryptoDesEcbEnabledSymbol.setDependencies(handleParentSymbolChange, ["wolfcrypt_tdes"])
-    cryptoMd2EnabledSymbol.setHelp('CRYPT_TDES_SUM')
+    cryptoDesEcbEnabledSymbol.setHelp('CRYPT_TDES_SUM')
 
 
     cryptoHwDesEcbEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_tdes_ecb_hw", cryptoDesEcbEnabledSymbol)
@@ -609,7 +609,7 @@ def instantiateComponent(wolfCryptComponent):
         cryptoHwDesEcbEnabledSymbol.setDependencies(handleHwDesEcbEnabled, ["wolfcrypt_hw", "wolfcrypt_tdes_ecb", "wolfcrypt_tdes_hw"])
     cryptoHwDesEcbEnabledSymbol.setVisible(False)
     cryptoHwDesEcbEnabledSymbol.setDefaultValue(False)
-    cryptoMd2EnabledSymbol.setHelp('CRYPT_TDES_SUM')
+    cryptoHwDesEcbEnabledSymbol.setHelp('CRYPT_TDES_SUM')
 
 
     cryptoDesCbcEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_tdes_cbc", cryptoDesEnabledSymbol)
@@ -619,7 +619,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoDesCbcEnabledSymbol.setDefaultValue(True)
     cryptoDesCbcEnabledSymbol.setDependencies(handleParentSymbolChange, ["wolfcrypt_tdes"])
     cryptoDesCbcEnabledSymbol.setReadOnly(True)
-    cryptoMd2EnabledSymbol.setHelp('CRYPT_TDES_SUM')
+    cryptoDesCbcEnabledSymbol.setHelp('CRYPT_TDES_SUM')
 
 
     cryptoHwDesCbcEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_tdes_cbc_hw", cryptoDesCbcEnabledSymbol)
@@ -629,8 +629,7 @@ def instantiateComponent(wolfCryptComponent):
         cryptoHwDesCbcEnabledSymbol.setDependencies(handleHwDesCbcEnabled, ["wolfcrypt_hw", "wolfcrypt_tdes_cbc", "wolfcrypt_tdes_hw"])
     cryptoHwDesCbcEnabledSymbol.setVisible(False)
     cryptoHwDesCbcEnabledSymbol.setDefaultValue(False)
-    cryptoMd2EnabledSymbol.setHelp('CRYPT_TDES_SUM')
-
+    cryptoHwDesCbcEnabledSymbol.setHelp('CRYPT_TDES_SUM')
 
     #AES
     cryptoAesEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes", symmCipherMenu)
@@ -686,7 +685,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoAes256EnabledSymbol.setVisible(True)
     cryptoAes256EnabledSymbol.setDefaultValue(True)
     cryptoAes256EnabledSymbol.setDependencies(handleAes256BitSymbolChange, ["wolfcrypt_aes", "wolfcrypt_aes_hw", "wolfcrypt_hw"])
-    cryptoAes246EnabledSymbol.setHelp('CRYPT_AES_SUM')
+    cryptoAes256EnabledSymbol.setHelp('CRYPT_AES_SUM')
 
     cryptoAesEcbEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_aes_ecb", cryptoAesEnabledSymbol)
     cryptoAesEcbEnabledSymbol.setLabel("Support ECB Mode?")
@@ -883,7 +882,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoEccEnableSymbol.setDescription("Enable ECC Support.")
     cryptoEccEnableSymbol.setVisible(True)
     cryptoEccEnableSymbol.setDefaultValue(True)
-    cryptoEccEnabledSymbol.setHelp('CRYPT_ECC_SUM')
+    cryptoEccEnableSymbol.setHelp('CRYPT_ECC_SUM')
 
     cryptoHwEccEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_ecc_hw", cryptoEccEnableSymbol)
     cryptoHwEccEnabledSymbol.setLabel("Enable Hardware Support?")
@@ -901,21 +900,21 @@ def instantiateComponent(wolfCryptComponent):
     cryptoKdfEnableSymbol.setDescription("Enable KDF Support.")
     cryptoKdfEnableSymbol.setVisible(True)
     cryptoKdfEnableSymbol.setDefaultValue(False)
-    cryptoKdfEnabledSymbol.setHelp('CRYPT_ECC_SUM')
+    cryptoKdfEnableSymbol.setHelp('CRYPT_ECC_SUM')
 
     cryptoShamirEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_shamir", cryptoEccEnableSymbol)
     cryptoShamirEnableSymbol.setLabel("Shamir Support?")
     cryptoShamirEnableSymbol.setDescription("Enable Shamir Support.")
     cryptoShamirEnableSymbol.setVisible(True)
     cryptoShamirEnableSymbol.setDefaultValue(False)
-    cryptoShamirEnabledSymbol.setHelp('CRYPT_ECC_SUM')
+    cryptoShamirEnableSymbol.setHelp('CRYPT_ECC_SUM')
 
     cryptoCustomCurvesEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_customcurves", cryptoEccEnableSymbol)
     cryptoCustomCurvesEnableSymbol.setLabel("Custom Curve Support?")
     cryptoCustomCurvesEnableSymbol.setDescription("Enable Custom Curve Support.")
     cryptoCustomCurvesEnableSymbol.setVisible(True)
     cryptoCustomCurvesEnableSymbol.setDefaultValue(False)
-    cryptoCustomCurvesEnabledSymbol.setHelp('CRYPT_ECC_SUM')
+    cryptoCustomCurvesEnableSymbol.setHelp('CRYPT_ECC_SUM')
 
     cryptoCurve25519EnableSymbol = wolfCryptComponent.createComboSymbol("wolfcrypt_curve25519", cryptoEccEnableSymbol, ["unsupported", "small", "no 128 bit", "supported"])
     cryptoCurve25519EnableSymbol.setLabel("Curve 25519 Support")
@@ -959,7 +958,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoTrngEnabledSymbol.setVisible(True)
     cryptoTrngEnabledSymbol.setDefaultValue(False)
     cryptoTrngEnabledSymbol.setReadOnly(True)
-    cryptoTrngEnableSymbol.setHelp('CRYPT_RNG_SUM')
+    cryptoTrngEnabledSymbol.setHelp('CRYPT_RNG_SUM')
 
     cryptoHashDrngEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_hashdrng", cryptoTrngEnabledSymbol)
     cryptoHashDrngEnabledSymbol.setLabel("Support Hash DRNG Generation?")
@@ -967,7 +966,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHashDrngEnabledSymbol.setVisible(False)
     cryptoHashDrngEnabledSymbol.setDefaultValue(True)
     cryptoHashDrngEnabledSymbol.setDependencies(handleHashDrngEnabled, ["wolfcrypt_random", "wolfcrypt_sha256"])
-    cryptoHashDrngEnableSymbol.setHelp('CRYPT_RNG_SUM')
+    cryptoHashDrngEnabledSymbol.setHelp('CRYPT_RNG_SUM')
 
     cryptoRandomTestEnabledSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_randomtest", cryptoTrngEnabledSymbol)
     cryptoRandomTestEnabledSymbol.setLabel("Support RNG Test?")
@@ -984,7 +983,7 @@ def instantiateComponent(wolfCryptComponent):
         cryptoHwTrngEnabledSymbol.setDependencies(handleHwTrngEnabled, ["wolfcrypt_hw", "wolfcrypt_random_hw"])
     cryptoHwTrngEnabledSymbol.setVisible(False)
     cryptoHwTrngEnabledSymbol.setDefaultValue(False)
-    cryptoH2TrngEnableSymbol.setHelp('CRYPT_RNG_SUM')
+    cryptoHwTrngEnabledSymbol.setHelp('CRYPT_RNG_SUM')
 
     asn1Support = wolfCryptComponent.createBooleanSymbol("wolfcrypt_asn1", None)
     asn1Support.setLabel("Support ASN.1?")
@@ -1020,7 +1019,7 @@ def instantiateComponent(wolfCryptComponent):
     cryptoSupportCompression.setDescription("Add support for zLib compression")
     cryptoSupportCompression.setVisible(False)
     cryptoSupportCompression.setDefaultValue(False)
-    cryptoSupportCompressiont.setHelp('CRYPT_HUFMANN_SUM')
+    cryptoSupportCompression.setHelp('CRYPT_HUFMANN_SUM')
 
     cryptoHaveSysTime = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havesystime", None)
     cryptoHaveSysTime.setVisible(False)
@@ -1221,7 +1220,8 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHW_03710Symbol.setDefaultValue(False)
     cryptoHW_03710Symbol.setValue(cryptoHW_03710Present)
 
-    # generate the config info and add it to list in configuration.h
+    #--------------------------------------------------------------------------------------
+    #Generate the config info and add it to list in configuration.h
     wolfCryptConfigInfo = wolfCryptComponent.createFileSymbol("wolfcryptConfigInfo", None)
     wolfCryptConfigInfo.setSourcePath("templates/wolf_crypt_config.h.ftl")
     wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
