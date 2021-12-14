@@ -55,8 +55,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     </#if>
 <#else>
     <#if wolfcryptCoreSeries?starts_with("PIC32M")>
+		<#lt>#if (__XC32_VERSION > 100000000)
         <#lt>#define WOLFSSL_HAVE_MIN
         <#lt>#define WOLFSSL_HAVE_MAX
+		<#lt>#endif
     </#if>
 </#if>
 <#lt>// ---------- FUNCTIONAL CONFIGURATION START ----------

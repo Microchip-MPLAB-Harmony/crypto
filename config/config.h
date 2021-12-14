@@ -5,10 +5,4 @@
 
 #include <stddef.h>
 
-#ifndef min
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-#define WOLFSSL_HAVE_MIN
-#endif
-
-
 #endif
