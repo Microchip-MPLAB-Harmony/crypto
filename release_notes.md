@@ -1,4 +1,10 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.7.5
+### Bug Fix
+- **Resolve Build issue with XC32** Resolve compile issue with XC32 V4.0
+### Usability Enhancement
+- **GUI Help Enabled** Enable GUI Online Help
+
 ## Crypto Release v3.7.4
 ### Bug Fix
 - **SNI and ALPN TLS Support** Implement support for SNI and ALPN in TLS
