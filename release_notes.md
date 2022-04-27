@@ -1,4 +1,8 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.7.6
+### Bug Fixes
+- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
+  
 ## Crypto Release v3.7.5
 ### Bug Fix
 - **Resolve Build issue with XC32** Resolve compile issue with XC32 V4.0
