@@ -2307,7 +2307,7 @@ void wolfSSL_CRYPTO_cleanup_ex_data(WOLFSSL_CRYPTO_EX_DATA* ex_data)
 }
 #endif /* HAVE_EX_DATA_CLEANUP_HOOKS */
 
-	/* In case contexts are held in array and don't want to free actual ctx. */
+/* In case contexts are held in array and don't want to free actual ctx. */
 
 /* The allocations done in InitSSL_Ctx must be free'd with ctx->onHeapHint
  * logic. A WOLFSSL_CTX can be assigned a static memory heap hint using
@@ -21631,14 +21631,13 @@ int GetCipherSuiteFromName(const char* name, byte* cipherSuite0,
         len = (unsigned long)XSTRLEN(name);
 
     for (i = 0; i < GetCipherNamesSize(); i++) {
-        if (XSTRNCMP(name, cipher_names[i].name, len) == 0) {
-            if(cipher_names[i].name[len] == 0) {
-                *cipherSuite0 = cipher_names[i].cipherSuite0;
-                *cipherSuite  = cipher_names[i].cipherSuite;
-                *flags = cipher_names[i].flags;
-                ret = 0;
-                break;
-            }
+        if ((XSTRNCMP(name, cipher_names[i].name, len) == 0) &&
+            (cipher_names[i].name[len] == 0)) {
+            *cipherSuite0 = cipher_names[i].cipherSuite0;
+            *cipherSuite  = cipher_names[i].cipherSuite;
+            *flags = cipher_names[i].flags;
+            ret = 0;
+            break;
         }
     }
 
