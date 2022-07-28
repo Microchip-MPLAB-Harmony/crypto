@@ -271,13 +271,12 @@ struct Aes {
 #if defined(WOLFSSL_RENESAS_TSIP_TLS) && \
     defined(WOLFSSL_RENESAS_TSIP_TLS_AES_CRYPT)
     TSIP_AES_CTX ctx;
-#endif
-
-#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_AES_DIRECT)
-    crypt_aes_hw_descriptor hwDesc;
-
+#endif	
 #if defined(WOLFSSL_RENESAS_SCEPROTECT)
     SCE_AES_CTX ctx;
+#endif
+#if defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_AES_DIRECT)
+    crypt_aes_hw_descriptor hwDesc;
 #endif
 #if defined(WOLFSSL_IMXRT_DCP)
     dcp_handle_t handle;

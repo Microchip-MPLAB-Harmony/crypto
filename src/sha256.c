@@ -184,6 +184,8 @@ where 0 <= L < 2^64.
     (!defined(WOLFSSL_ESP32WROOM32_CRYPT) || defined(NO_WOLFSSL_ESP32WROOM32_CRYPT_HASH)) && \
     (!(defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_SHA264))) && \
     (!defined(WOLFSSL_RENESAS_TSIP_CRYPT) || defined(NO_WOLFSSL_RENESAS_TSIP_HASH)) && \
+    !defined(WOLFSSL_PSOC6_CRYPTO) && !defined(WOLFSSL_IMXRT_DCP) && !defined(WOLFSSL_SILABS_SE_ACCEL)
+    (!defined(WOLFSSL_RENESAS_TSIP_CRYPT) || defined(NO_WOLFSSL_RENESAS_TSIP_CRYPT_HASH)) && \
     !defined(WOLFSSL_PSOC6_CRYPTO) && !defined(WOLFSSL_IMXRT_DCP) && !defined(WOLFSSL_SILABS_SE_ACCEL) && \
     !defined(WOLFSSL_KCAPI_HASH) && !defined(WOLFSSL_SE050_HASH) && \
     (!defined(WOLFSSL_RENESAS_SCEPROTECT) || defined(NO_WOLFSSL_RENESAS_SCEPROTECT_HASH)) && \
@@ -568,7 +570,7 @@ static int InitSha256(wc_Sha256* sha256)
         ret = wolfSSL_CryptHwMutexLock();
         if (ret == 0) {
             ret = wc_Stm32_Hash_Update(&sha256->stmCtx,
-                HASH_AlgoSelection_SHA256, data, len);
+                HASH_AlgoSelection_SHA256, data, len, WC_SHA256_BLOCK_SIZE);
             wolfSSL_CryptHwMutexUnLock();
         }
         return ret;
@@ -757,6 +759,11 @@ static int InitSha256(wc_Sha256* sha256)
     !defined(NO_WOLFSSL_RENESAS_TSIP_CRYPT_HASH)
 
     /* implemented in wolfcrypt/src/port/Renesas/renesas_tsip_sha.c */
+
+#elif defined(WOLFSSL_RENESAS_SCEPROTECT) && \
+    !defined(NO_WOLFSSL_RENESAS_SCEPROTECT_HASH)
+
+    /* implemented in wolfcrypt/src/port/Renesas/renesas_sce_sha.c */
 
 #elif defined(WOLFSSL_PSOC6_CRYPTO)
 
@@ -1402,7 +1409,7 @@ static int InitSha256(wc_Sha256* sha256)
         ret = wolfSSL_CryptHwMutexLock();
         if (ret == 0) {
             ret = wc_Stm32_Hash_Update(&sha224->stmCtx,
-                HASH_AlgoSelection_SHA224, data, len);
+                HASH_AlgoSelection_SHA224, data, len, WC_SHA224_BLOCK_SIZE);
             wolfSSL_CryptHwMutexUnLock();
         }
         return ret;

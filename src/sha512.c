@@ -197,7 +197,6 @@
 #elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_SHA2128)
 #elif defined(WOLFSSL_SILABS_SHA384)
     /* functions defined in wolfcrypt/src/port/silabs/silabs_hash.c */
-
 #elif defined(WOLFSSL_KCAPI_HASH)
     /* functions defined in wolfcrypt/src/port/kcapi/kcapi_hash.c */
 
@@ -1107,6 +1106,7 @@ static int Sha512_Family_Final(wc_Sha512* sha512, byte* hash, int digestSz,
     if (sha512 == NULL || hash == NULL) {
         return BAD_FUNC_ARG;
     }
+
 #ifdef WOLF_CRYPTO_CB
     if (sha512->devId != INVALID_DEVID) {
         ret = wc_CryptoCb_Sha512Hash(sha512, NULL, 0, hash);
@@ -1237,6 +1237,9 @@ int wc_Sha512Transform(wc_Sha512* sha, const unsigned char* data)
 #endif /* !WOLFSSL_SE050 || !WOLFSSL_SE050_HASH */
 
 
+#endif /*defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_SHA2)*/
+
+
 /* -------------------------------------------------------------------------- */
 /* SHA384 */
 /* -------------------------------------------------------------------------- */
@@ -1276,6 +1279,7 @@ int wc_Sha512Transform(wc_Sha512* sha, const unsigned char* data)
         return ret;
     }
 
+#elif defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_SHA2128)
 #elif defined(WOLFSSL_SILABS_SHA512)
     /* functions defined in wolfcrypt/src/port/silabs/silabs_hash.c */
 
