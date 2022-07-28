@@ -11904,10 +11904,10 @@ static WARN_UNUSED_RESULT int _AesXtsHelper(
 
     xorbuf(out, in, totalSz);
     if (dir == AES_ENCRYPTION) {
-        return _AesEcbEncrypt(aes, out, out, totalSz);
+        return wc_AesEcbEncrypt(aes, out, out, totalSz);
     }
     else {
-        return _AesEcbDecrypt(aes, out, out, totalSz);
+        return wc_AesEcbDecrypt(aes, out, out, totalSz);
     }
 }
 #endif /* HAVE_AES_ECB */
