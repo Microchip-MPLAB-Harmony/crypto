@@ -414,10 +414,15 @@
 #endif
 
 #ifdef WOLFSSL_MICROCHIP_PIC32MZ
+<<<<<<< HEAD
 #if (__XC32_VERSION > 100000000)
     #define WOLFSSL_HAVE_MIN
     #define WOLFSSL_HAVE_MAX
 #endif
+=======
+    #define WOLFSSL_HAVE_MIN
+    #define WOLFSSL_HAVE_MAX
+>>>>>>> add8af8d (MH3-69824 add settings.h)
 
     #ifndef NO_PIC32MZ_CRYPT
         #define WOLFSSL_PIC32MZ_CRYPT
