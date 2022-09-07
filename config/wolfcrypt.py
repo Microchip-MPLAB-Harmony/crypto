@@ -944,6 +944,20 @@ def instantiateComponent(wolfCryptComponent):
     cryptoEccEncryptEnableSymbol.setDefaultValue(False)
     cryptoEccEncryptEnableSymbol.setHelp('CRYPT_ECC_SUM')
 
+    cryptoEccNoSignEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_eccnosign", cryptoEccEnableSymbol)
+    cryptoEccNoSignEnableSymbol.setLabel("Disable ECC Sign")
+    cryptoEccNoSignEnableSymbol.setDescription("Disable ECC Sign Support?")
+    cryptoEccNoSignEnableSymbol.setVisible(True)
+    cryptoEccNoSignEnableSymbol.setDefaultValue(False)
+    cryptoEccNoSignEnableSymbol.setHelp('CRYPT_ECC_SUM')
+
+    cryptoEccNoVerifyEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_eccnoverify", cryptoEccEnableSymbol)
+    cryptoEccNoVerifyEnableSymbol.setLabel("Disable ECC Verify")
+    cryptoEccNoVerifyEnableSymbol.setDescription("Disable ECC Verify Support?")
+    cryptoEccNoVerifyEnableSymbol.setVisible(True)
+    cryptoEccNoVerifyEnableSymbol.setDefaultValue(False)
+    cryptoEccNoVerifyEnableSymbol.setHelp('CRYPT_ECC_SUM')
+
     cryptoDsaEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_dsa", asymmCipherMenu)
     cryptoDsaEnableSymbol.setLabel("DSA Support?")
     cryptoDsaEnableSymbol.setDescription("Enable DSA Support.")

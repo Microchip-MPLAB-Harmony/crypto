@@ -357,6 +357,12 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
     <#if wolfcrypt_eccencrypt == true && wolfcrypt_hkdf == true>
         <#lt>#define HAVE_ECC_ENCRYPT
     </#if>
+     <#if wolfcrypt_eccnosign == true>
+        <#lt>#define NO_ECC_SIGN
+    </#if>
+     <#if wolfcrypt_eccnoverify == true>
+        <#lt>#define NO_ECC_VERIFY
+    </#if>
 </#if>
 <#if wolfcrypt_dh == true>
     <#lt>#define HAVE_DH
