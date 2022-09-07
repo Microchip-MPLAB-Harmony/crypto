@@ -258,6 +258,7 @@ cryptoHwEccSupport = [
                       ]
 cryptoHwEccSupported = False
 cryptoHwEccEnabledSymbol = None
+cryptoSWCallBackEnableSymbol = None
 cryptoEccEnabledSymbol = None
 
 cryptoOverridableSrcFiles = ["aes.c", "des3.c", "random.c", "sha.c", "sha256.c", "sha512.c", ]
@@ -372,6 +373,7 @@ def instantiateComponent(wolfCryptComponent):
 
     global cryptoHwEccSupported
     global cryptoHwEccEnabledSymbol
+    global cryptoSWCallBackEnableSymbol
     global cryptoEccEnabledSymbol
 
     global cryptoHW_U2803Present
@@ -421,6 +423,12 @@ def instantiateComponent(wolfCryptComponent):
         cryptoHwEnabledSymbol.setVisible(False)
     cryptoHwEnabledSymbol.setDefaultValue(False)
     cryptoHwEnabledSymbol.setHelp('MC_CRYPTO_HW_SUM')
+
+    cryptoSWCallBackEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_sw_cb", cryptoHwEnabledSymbol)
+    cryptoSWCallBackEnableSymbol.setLabel("Crypto ECC/RSA callback optimization")
+    cryptoSWCallBackEnableSymbol.setDescription("Enable crypto SW Callback optimization.")
+    cryptoSWCallBackEnableSymbol.setVisible(True)
+    cryptoSWCallBackEnableSymbol.setDefaultValue(False)
 
     #Hash Menu
     hashMenu = wolfCryptComponent.createMenuSymbol("wolfcrypt_hash", None)
@@ -894,6 +902,8 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHwEccEnabledSymbol.setDefaultValue(False)
     cryptoHwEccEnabledSymbol.setHelp('CRYPT_ECC_SUM')
 
+    
+    
 
     cryptoKdfEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_kdf", cryptoEccEnableSymbol)
     cryptoKdfEnableSymbol.setLabel("KDF Support?")

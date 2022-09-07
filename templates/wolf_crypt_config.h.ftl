@@ -36,6 +36,10 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define NO_PWDBASED
 #define HAVE_MCAPI
 #define WOLF_CRYPTO_CB  // provide call-back support
+<#if wolfcrypt_sw_cb == true>
+        <#lt>#define WOLF_CRYPTO_CB_ONLY_ECC
+        <#lt>#define WOLF_CRYPTO_CB_ONLY_RSA
+    </#if>
 <#if wolfssl_included?has_content == false || wolfssl_included == false>
     <#lt>#define WOLFCRYPT_ONLY
 </#if>
