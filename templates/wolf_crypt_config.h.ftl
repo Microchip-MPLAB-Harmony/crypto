@@ -56,6 +56,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
             <#lt>#define ${val}
         </#list>
         <#lt>// ---------- CRYPTO HARDWARE MANIFEST END ----------
+        <#lt>#define WOLFSSL_HAVE_MIN
+        <#lt>#define WOLFSSL_HAVE_MAX
     </#if>
 <#else>
     <#if wolfcryptCoreSeries?starts_with("PIC32M")>

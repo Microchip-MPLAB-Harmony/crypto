@@ -400,8 +400,8 @@
 
 #ifdef MICROCHIP_PIC32
     /* #define WOLFSSL_MICROCHIP_PIC32MZ */
-	#undef WOLFSSL_HAVE_MIN
-	#undef WOLFSSL_HAVE_MAX
+	// #undef WOLFSSL_HAVE_MIN
+	// #undef WOLFSSL_HAVE_MAX
     #define SIZEOF_LONG_LONG 8
     #define SINGLE_THREADED
     #ifndef MICROCHIP_TCPIP_BSD_API
@@ -417,8 +417,8 @@
 
 #ifdef WOLFSSL_MICROCHIP_PIC32MZ
 #if (__XC32_VERSION > 100000000)
-    #define WOLFSSL_HAVE_MIN
-    #define WOLFSSL_HAVE_MAX
+    //#define WOLFSSL_HAVE_MIN
+    //#define WOLFSSL_HAVE_MAX
 #endif
     #ifndef NO_PIC32MZ_CRYPT
         #define WOLFSSL_PIC32MZ_CRYPT
