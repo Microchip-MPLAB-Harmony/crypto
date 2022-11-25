@@ -335,6 +335,9 @@ def setupFiles(basecomponent) :
     for file in wolfsslOverridableHeaderFiles:
         addFileName(file, "wolfssloverride", basecomponent, "src/", "../../third_party/wolfssl/wolfssl/", True, "wolfssl")
 
+    addFileName("compat_types.h", "wolfsslOpenSsl", basecomponent, "src/", "../../wolfssl/wolfssl/openssl/", True, "wolfssl" )
+
+
 def wolfsslTLSManageVersions(symbol, event):
     data = symbol.getComponent()
     stateTdg = bool(symbol.getValue())
