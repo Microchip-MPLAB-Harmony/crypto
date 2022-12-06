@@ -262,7 +262,7 @@ cryptoSWCallBackEnableSymbol = None
 cryptoEccEnabledSymbol = None
 
 cryptoOverridableSrcFiles = ["aes.c", "des3.c", "random.c", "sha.c", "sha256.c", "sha512.c", ]
-cryptoOverridableHeaderFiles = ["aes.h", "sha.h", "sha256.h", "sha512.h", "types.h", "settings.h",]
+cryptoOverridableHeaderFiles = ["aes.h", "sha.h", "sha256.h", "sha512.h", "types.h", "settings.h","wc_port.h",]
 
 localwolfCryptComponent = None
 cryptoHwAdditionalDefines = set([])
