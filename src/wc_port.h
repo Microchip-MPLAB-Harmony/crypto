@@ -201,7 +201,7 @@
 #else /* ! WOLFSSL_LINUXKM */
 
     #ifndef SAVE_VECTOR_REGISTERS
-        #define SAVE_VECTOR_REGISTERS(...) do{}while(0)
+        #define SAVE_VECTOR_REGISTERS() do{}while(0)
     #endif
     #ifndef RESTORE_VECTOR_REGISTERS
         #define RESTORE_VECTOR_REGISTERS() do{}while(0)
