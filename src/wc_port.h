@@ -815,7 +815,9 @@ WOLFSSL_API int wolfCrypt_Cleanup(void);
 #elif defined(MICROCHIP_TCPIP_V5) || defined(MICROCHIP_TCPIP)
     #include <time.h>
     extern time_t pic32_time(time_t* timer);
+  	#ifndef XTIME
     #define XTIME(t1)       pic32_time((t1))
+    #endif
     #define XGMTIME(c, t)   gmtime((c))
 
 #elif defined(FREESCALE_MQX) || defined(FREESCALE_KSDK_MQX)
