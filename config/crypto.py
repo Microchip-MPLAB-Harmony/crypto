@@ -336,7 +336,14 @@ def addAlwaysOnFiles(cryptoComponent):
     includeFilename.setDestPath("crypto/")
     includeFilename.setOutputName("crypto.h")
     includeFilename.setType("HEADER")
-
+        
+    includeFilename = cryptoComponent.createFileSymbol("tmrFile", None)
+    includeFilename.setProjectPath("system/tmr")
+    includeFilename.setSourcePath("src/sys_tmr.h")
+    includeFilename.setDestPath("system/tmr/")
+    includeFilename.setOutputName("sys_tmr.h")
+    includeFilename.setType("HEADER")
+    
     # add crypto.c to the crypto/src directory 
     srcFilename = cryptoComponent.createFileSymbol("src_filename", None)
     srcFilename.setProjectPath("config/" + Variables.get("__CONFIGURATION_NAME") + "/crypto")
