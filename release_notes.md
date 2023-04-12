@@ -1,4 +1,12 @@
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.8.0
+### Major Changes
+- **Upgrade wolfSSL to V5.4** Upgrade wolfSSL to V5.4
+- **Additional Optimizations** Code Optimizations available through GUI 
+- **GUI Build switches not generating defines** Resolved issue with some build switches
+### Bug Fixes
+- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
+  
 ## Crypto Release v3.7.6
 ### Bug Fixes
 - **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
