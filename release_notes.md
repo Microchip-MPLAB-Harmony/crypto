@@ -11,6 +11,8 @@
 - **Bug Fixes**
 	- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
 
+### Known issues
+None
 
 ### Development Tools
 
@@ -23,6 +25,9 @@
 ### New Features
 - **Bug Fixes**
 	- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
+	
+### Known issues
+None
   
 ## Crypto Release v3.7.5
 ### New Features
@@ -31,10 +36,14 @@
 - ** Usability Enhancement**
 	- **GUI Help Enabled** Enable GUI Online Help
 
+### Known issues
+None
+
 ## Crypto Release v3.7.4
 ### New Features
 - **Bug Fixes**
 	- **SNI and ALPN TLS Support** Implement support for SNI and ALPN in TLS
+
 
 ## Crypto Release v3.7.3
 ### New Features
