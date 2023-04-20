@@ -1,0 +1,18 @@
+package:
+  format-version: "1.0.0"
+  name: "core"
+  type: "api"
+  status: "production"
+  required: false
+  version: "dev"
+
+  dependencies:
+    - name: "core"
+      type: "package"
+      version: "v3.11.0"
+    - name: "wolfssl"
+      type: "package"
+      version: "v5.4.0"
+    - name: "zlib"
+      type: "package"
+      version: "v1.2.11"
