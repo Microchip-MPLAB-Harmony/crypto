@@ -1,3 +1,6 @@
+![Microchip logo](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_logo.png)
+![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
+
 # Microchip MPLAB® Harmony 3 Release Notes
 ## Crypto Release v3.8.0
 ### New Features
@@ -8,14 +11,6 @@
 - **Bug Fixes**
 	- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
 
-
-## Dependencies
-- **Core** - 3.9.0
-- **CSP** - 3.9.0
-- **wolfSSL** - 4.7.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.45
-- **XC32** - v2.50
 
 ### Development Tools
 
