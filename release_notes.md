@@ -7,40 +7,63 @@
 	-  Resolved issue with build switch GUI
 - **Bug Fixes**
 	- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
+
+
+## Dependencies
+- **Core** - 3.9.0
+- **CSP** - 3.9.0
+- **wolfSSL** - 4.7.0
+- **zlib** - v1.2.11 For compression support
+- **MPLAB-X** - v5.45
+- **XC32** - v2.50
+
+### Development Tools
+
+- [MPLAB® X IDE v6.05](https://www.microchip.com/mplab/mplab-x-ide)
+- [MPLAB® XC32 C/C++ Compiler v4.21](https://www.microchip.com/mplab/compilers)
+- MPLAB® X IDE plug-ins:
+    - MPLAB® Code Configurator v5.3
   
 ## Crypto Release v3.7.6
-### Bug Fixes
-- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
+### New Features
+- **Bug Fixes**
+	- **Resolve build issue with XC32 V4.0** Resolve compile issues with XC32 V4.0
   
 ## Crypto Release v3.7.5
-### Bug Fix
-- **Resolve Build issue with XC32** Resolve compile issue with XC32 V4.0
-### Usability Enhancement
-- **GUI Help Enabled** Enable GUI Online Help
+### New Features
+- **Bug Fixes**
+	- **Resolve Build issue with XC32** Resolve compile issue with XC32 V4.0
+- ** Usability Enhancement**
+	- **GUI Help Enabled** Enable GUI Online Help
 
 ## Crypto Release v3.7.4
-### Bug Fix
-- **SNI and ALPN TLS Support** Implement support for SNI and ALPN in TLS
+### New Features
+- **Bug Fixes**
+	- **SNI and ALPN TLS Support** Implement support for SNI and ALPN in TLS
 
 ## Crypto Release v3.7.3
-### Bug Fix
-- **Fix Support for TNGTLS** Implement fix for TNGTLS ATECC
+### New Features
+- **Bug Fixes**
+	- **Fix Support for TNGTLS** Implement fix for TNGTLS ATECC
   
 ## Crypto Release v3.7.2
-### Bug Fixes
-- **Fixed bugs for XC32 V3.0** Resolve compile issues with XC32 V3.0
-- **Added AES Small tables Toggle** Added small tables toggle to the GUI
-- **Added AES-OFB mode** Enabled AES-OFB Mode in GUI
+### New Features
+- **Bug Fixes**
+	- **Fixed bugs for XC32 V3.0** Resolve compile issues with XC32 V3.0
+	- **Added AES Small tables Toggle** Added small tables toggle to the GUI
+	- **Added AES-OFB mode** Enabled AES-OFB Mode in GUI
 
 ## Crypto Release v3.7.1
-### Bug Fixes
-- **Fixed bug involving OSAL heap usage** Resolve build error in some projects
+### New Features
+- **Bug Fixes**
+	- **Fixed bug involving OSAL heap usage** Resolve build error in some projects
 
 ## Crypto Release v3.7
-### Major Changes
-- **Support for wolfCrypt/wolfSSL 4.7.0** The cryptographic library now has support for wolfSSL version 4.7.0
-- **Pic32mz hw mutex fix** Fix for trying to hold the mutex twice
-- **RNG memory leak fix** A deinitialize function was added to free RNG resources
+### New Features
+- **Bug Fixes**
+	- **Support for wolfCrypt/wolfSSL 4.7.0** The cryptographic library now has support for wolfSSL version 4.7.0
+	- **Pic32mz hw mutex fix** Fix for trying to hold the mutex twice
+	- **RNG memory leak fix** A deinitialize function was added to free RNG resources
 
 ## Dependencies
 - **Core** - 3.9.0
