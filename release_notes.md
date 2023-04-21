@@ -166,9 +166,9 @@ None
 | [SAM E54 Xplained Pro Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/ATSAME54-XPRO) | 8 |
 | [SAM E70 Xplained Ultra Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/atsamv71-xult) | 12 |
 | [PIC32MZ Embedded Connectivity with FPU (EF) Starter Kit (Crypto)](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/DM320007-C) | 12 |
-| SAM9x60-EK | 6 |
+| [SAM9x60-EK](https://www.microchip.com/en-us/development-tool/DT100126) | 6 |
 | [SAML21 Xplained Pro](https://www.microchip.com/developmenttools/ProductDetails/atsaml21-xpro-b) | 3 |
-| SAMRH71-EK | 6 |
+| [SAMRH71-EK](https://www.microchip.com/en-us/development-tool/SAMRH71F20-EK) | 6 |
 
 
 ### Known Issues
