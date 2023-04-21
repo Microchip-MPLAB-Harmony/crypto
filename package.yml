@@ -1,7 +1,6 @@
 package:
   format-version: "1.0.0"
-  name: "core"
-  type: "api"
+  name: "crypto"
   status: "production"
   required: false
   version: "dev"
@@ -9,7 +8,7 @@ package:
   dependencies:
     - name: "core"
       type: "package"
-      version: "v3.11.0"
+      version: "v3.12.0"
     - name: "wolfssl"
       type: "package"
       version: "v5.4.0"
