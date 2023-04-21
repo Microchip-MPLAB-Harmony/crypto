@@ -69,55 +69,25 @@ None
 	- **Pic32mz hw mutex fix** Fix for trying to hold the mutex twice
 	- **RNG memory leak fix** A deinitialize function was added to free RNG resources
 
-## Dependencies
-- **Core** - 3.9.0
-- **CSP** - 3.9.0
-- **wolfSSL** - 4.7.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.45
-- **XC32** - v2.50
 
 ## Crypto Release v3.6.3
-### Bug Fixes
-- **Resolve OSAL Malloc/Free** Resolve build error with core v3.9
+### New Features
+- **Bug Fixes**
+	- **Resolve OSAL Malloc/Free** Resolve build error with core v3.9
 
-## Dependencies
-- **Core** - 3.9.0
-- **CSP** - 3.9.0
-- **wolfSSL** - 4.5.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.45
-- **XC32** - v2.50
-- **IAR** - 8.50.1
-- 
 ## Crypto Release v3.6.2
-### Bug Fixes
-- **Enabled Trust&Go Certificate loading** Enable load device certificate from Trust&Go TNGTLS
-- **Driver Non-Blocking fix** Fixed Non Blocking code in BA414E Harmony Driver
-- **Harmony 3 Scripting Fixes** Inter module scriping and configuring fixes
-
-## Dependencies
-- **Core** - 3.8.01
-- **CSP** - 3.8.0
-- **wolfSSL** - 4.5.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.40
-- **XC32** - v3.41
-- **IAR** - 8.50.1
-- 
+### New Features
+- **Bug Fixes**
+	- **Enabled Trust&Go Certificate loading** Enable load device certificate from Trust&Go TNGTLS
+	- **Driver Non-Blocking fix** Fixed Non Blocking code in BA414E Harmony Driver
+	- **Harmony 3 Scripting Fixes** Inter module scriping and configuring fixes
+ 
 ## Crypto Release v3.6.1
-### Bug Fixes
-- **Enabled TLS Downgrade options** Improved GUI for TLS Versions added Downgrade TLS Options
-- **SNI Support Fixed with TLS1.3** Fixed SNI support when TLS1.3 is selected
+### New Features
+- **Bug Fixes**
+	- **Enabled TLS Downgrade options** Improved GUI for TLS Versions added Downgrade TLS Options
+	- **SNI Support Fixed with TLS1.3** Fixed SNI support when TLS1.3 is selected
 
-## Dependencies
-- **Core** - 3.8.01
-- **CSP** - 3.8.0
-- **wolfSSL** - 4.5.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.40
-- **XC32** - v3.41
-- **IAR** - 8.50.1
 
 ## Crypto Release v3.6.0
 ### Major Changes
@@ -127,27 +97,11 @@ None
 - **More MHC Configuraiton Options**  The configuration options available in MHC have been expanded for both the wolfCrypt and wolfSSL libraries
 - **Added Support for AES on the L22**  Turned on the support for the AES hardware module for the L22
 
-## Dependencies
-- **Core** - 3.8.01
-- **CSP** - 3.8.0
-- **wolfSSL** - 4.5.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.40
-- **XC32** - v3.41
-- **IAR** - 8.50.1
 
 ## Crypto Release v3.5.1
-### Bug Fixes
-- **PIC32MZ Hardware Hashing Disable** Added a wolfcrypt #define to the generated configuration when all Hash 'Support Hardware Acceleration' are disabled.
-
-### Dependencies
-- **Core** - 3.6.1
-- **CSP** - 3.6.1
-- **wolfSSL** - 4.3.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.30
-- **XC32** - v3.20
-- **IAR** - 8.40.1
+### New Features
+- **Bug Fixes**
+	- **PIC32MZ Hardware Hashing Disable** Added a wolfcrypt #define to the generated configuration when all Hash 'Support Hardware Acceleration' are disabled.
 
 
 ## Crypto Release v3.5.0
@@ -159,14 +113,6 @@ None
 ### Demonstration Application Relocation Notice
 - **wolfSSL Demo Applications** these demonstrations have been moved to the net repository.  
 
-### Dependencies
-- **Core** - 3.6.1
-- **CSP** - 3.6.1
-- **wolfSSL** - 4.3.0
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.30
-- **XC32** - v3.20
-- **IAR** - 8.40.1
 
 | Development kits | Applications |
 | --- | --- | --- |
@@ -177,7 +123,7 @@ None
 | [SAM9X60-EK Evaluation Kit](https://www.microchip.com/developmenttools/ProductDetails/DT100126) | 6 |
 | [SAML21 Xplained Pro](https://www.microchip.com/developmenttools/ProductDetails/atsaml21-xpro-b) | 3 |
 | [SAMRH71F20-EK Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAMRH71F20-EK) | 6 |
-| PIC32MZ-W1 | 6 |
+| [PIC32MZ-W1](https://www.microchip.com/en-us/development-tool/EV12F11A) | 6 |
 | [SAML11 Xplained Pro Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails/dm320205) | 4 |
 
 ### Known Issues
@@ -197,8 +143,9 @@ None
 
 
 ## Crypto Release v3.4.1
-### Bug Fixes
-- **MHC Information** - Corrected version infomation used by the MHC.
+### New Features
+- **Bug Fixes**
+	- **MHC Information** - Corrected version infomation used by the MHC.
 
 ## Crypto Release v3.4.0
 ### New Features
@@ -212,16 +159,6 @@ None
 ### Demonstration Application Relocation Notice
 - **wolfSSL Demo Applications** these demonstrations are being moved to the net repository in the next release.  The demonstrations in this repository are now redundant and will be removed in the 3.5.0 release of the MPLAB Harmony Crypto library.  Please refer to the Net repository for these demonstrations from net version 3.5 onwards.
   - **IAR Demonstrations** these demonstrations have been moved and are currently maintained in the net repository.  
-
-### Dependencies
-- **Core** - 3.5.0
-- **CSP** - 3.5.0
-- **wolfSSL** - 4.1.0-stable
-- **Net** - 3.4.0 For wolfSSL demonstrations
-- **zlib** - v1.2.11 For compression support
-- **MPLAB-X** - v5.25
-- **XC32** - v3.20
-- **IAR** - 8.40.1
 
 | Development kits | Applications |
 | --- | --- | --- |
