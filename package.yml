@@ -1,6 +1,7 @@
 package:
   format-version: "1.0.0"
   name: "crypto"
+  type: "api"
   status: "production"
   required: false
   version: "dev"
