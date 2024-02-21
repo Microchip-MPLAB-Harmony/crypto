@@ -2,7 +2,7 @@
 
 manifest_file_version: 1.0.0
 project: crypto_v4_api_mcc
-creation_date: 2024-02-21T16:18:04.677-07:00[America/Phoenix]
+creation_date: 2024-02-21T16:38:37.279-07:00[America/Phoenix]
 operating_system: Windows 10
 mcc_mode: Standalone
 mcc_mode_version: 5.5.0-e
@@ -23,4 +23,4 @@ modules:
 - {name: CMSIS_5, type: HARMONY, version: 5.9.0}
 - {name: wolfssl, type: HARMONY, version: master}
 - {name: bsp, type: HARMONY, version: Branch_v3.17.0}
-- {name: crypto, type: HARMONY, version: MH3-83087_Crypto_v4_0_0_Development_230724_CAL}
+- {name: crypto, type: HARMONY, version: MH3-83087_Crypto_v4_0_0_Development_240221_CAL}
