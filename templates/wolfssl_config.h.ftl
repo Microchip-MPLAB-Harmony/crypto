@@ -37,123 +37,84 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
  *******************************************************************************/
 //DOM-IGNORE-END
 
--->
-    <#lt>/******************************************************************************/
-    <#lt>/*wolfSSL TLS Layer Configuration*/
-    <#lt>/******************************************************************************/
 
-    <#lt>#define WOLFSSL_ALT_NAMES
-    <#lt>#define WOLFSSL_DER_LOAD
-    <#lt>#define KEEP_OUR_CERT
-    <#lt>#define KEEP_PEER_CERT
-    <#lt>#define HAVE_CRL_IO
-    <#lt>#define HAVE_IO_TIMEOUT
-    <#lt>#define TFM_NO_ASM
-    <#lt>#define WOLFSSL_NO_ASM
-    <#lt>#define SIZEOF_LONG_LONG 8
-    <#lt>#define WOLFSSL_USER_IO
-    <#lt>#define NO_WRITEV
-    <#lt>#define MICROCHIP_TCPIP
-    <#if wolfsslOsalHeapKeys>
-        <#lt>#include "osal/osal.h"
-        <#lt>#define XMALLOC_OVERRIDE
-        <#lt>#define XMALLOC(s, h, type)  OSAL_Malloc((s))
-        <#lt>#define XFREE(p, h, type)    OSAL_Free((p))
-    </#if>
-    <#if wolfsslFfdheGroup2048>
-        <#lt>#define HAVE_FFDHE_2048
-    </#if>    
-    <#if wolfsslFfdheGroup3072>
-        <#lt>#define HAVE_FFDHE_3072
-    </#if>    
-    <#if wolfsslFfdheGroup4096>
-        <#lt>#define HAVE_FFDHE_4096
-    </#if>    
-    <#if wolfsslFfdheGroup6144>
-        <#lt>#define HAVE_FFDHE_6144
-    </#if>    
-    <#if wolfsslFfdheGroup8192>
-        <#lt>#define HAVE_FFDHE_8192
-    </#if>    
-    <#if wolfsslDTLS>
-        <#lt>#define WOLFSSL_DTLS
-    </#if>
-    <#if wolfsslpwdkdf == false>
-        <#lt>#define NO_PWDBASED
-    </#if>
-    <#if wolfsslTLS13 || wolfsslTlsEccCurvesExt || wolfsslTlsSni>
-        <#lt>#define HAVE_TLS_EXTENSIONS
-        <#if wolfsslTLS13>
-            <#lt>#define WOLFSSL_TLS13
-            <#lt>#define HAVE_SUPPORTED_CURVES
-            <#if wolfsslPostHandshakeAuth>
-                <#lt>#define WOLFSSL_POST_HANDSHAKE_AUTH
-            </#if>
-            <#if wolfsslHelloRetryCookie>
-                <#lt>#define WOLFSSL_SEND_HRR_COOKIE
-            </#if>
-        <#elseif wolfsslTlsEccCurvesExt>
-            <#lt>#define HAVE_SUPPORTED_CURVES
-        </#if>
-        <#if wolfsslTlsSni>
-            <#lt>#define HAVE_SNI
-        </#if>
-        <#if wolfsslTlsAlpn>
-            <#lt>#define HAVE_ALPN
-			<#lt>#define USE_WOLF_STRTOK
-        </#if>
-    </#if>
-    <#if !wolfsslTLS12>
-        <#lt>#define WOLFSSL_NO_TLS12
-    </#if>
-    <#if wolfSslSessionCache=="Small">
-        <#lt>#define SMALL_SESSION_CACHE
-    <#elseif wolfSslSessionCache=="Big">
-        <#lt>#define BIG_SESSION_CACHE
-    <#elseif wolfSslSessionCache=="Huge">
-        <#lt>#define HUGE_SESSION_CACHE
-    <#elseif wolfSslSessionCache=="None">
-        <#lt>#define NO_SESSION_CACHE
-    </#if>
-    <#if wolfsslSmallStackSupport> 
-        <#lt>#define WOLFSSL_SMALL_STACK
-    </#if>
-    <#if wolfSslSaveCache>
-        <#lt>#define PERSIST_SESSION_CACHE
-    </#if>
-    <#if wolfSslSaveCert>
-        <#lt>#define PERSIST_CERT_CACHE
-    </#if>
-    <#if wolfSslKeyGen>
-        <#lt>#define WOLFSSL_KEY_GEN
-    </#if>
-    <#if wolfsslEncryptedKeys>
-        <#lt>#define WOLFSSL_ENCRYPTED_KEYS
-    </#if>
-    <#if wolfSslCertGen>
-        <#lt>#define WOLFSSL_CERT_GEN
-    </#if>
-    <#if wolfSslCertReq>
-        <#lt>#define WOLFSSL_CERT_REQ
-    </#if>
-    <#if !wolfsslNoErrorStrings>
-        <#lt>#define NO_ERROR_STRINGS
-    </#if>
-    <#if !wolfsslNoOldTls>
-        <#lt>#define NO_OLD_TLS
-    <#else>
-        <#lt>#define WOLFSSL_ALLOW_TLSV10
-        <#lt>#define WOLFSSL_ALLOW_SSLV3
-    </#if>
-    <#if wolfsslUseFastMath>
-        <#lt>#define USE_FAST_MATH
-    </#if>
-    <#if !wolfsslClientSupport>
-        <#lt>#define NO_WOLFSSL_CLIENT
-    </#if>
-    <#if !wolfsslServerSupport>
-        <#lt>#define NO_WOLFSSL_SERVER
-    </#if>
+-->
+<#lt>/******************************************************************************/
+<#lt>//Crypto V4 Common Crypto API - WolfCrypt Library Support
+<#lt>/******************************************************************************/
+#define CRYPTO_WOLFCRYPT_SUPPORT_ENABLE
+
+-->
+<#lt>/******************************************************************************/
+<#lt>/*wolfSSL TLS Layer Configuration*/
+<#lt>/******************************************************************************/
+
+/*** wolfCrypt Library Configuration ***/
+<#lt>#define MICROCHIP_PIC32
+<#lt>#define MICROCHIP_MPLAB_HARMONY
+<#lt>#define MICROCHIP_MPLAB_HARMONY_3
+<#lt>#define HAVE_MCAPI
+<#lt>#define SIZEOF_LONG_LONG 8
+<#lt>#define WOLFSSL_USER_IO
+<#lt>#define NO_WRITEV
+<#lt>#define NO_FILESYSTEM
+<#lt>#define NO_PWDBASED
+
+//Math Model Defines
+<#lt>#define USE_FAST_MATH
+<#lt>#define WOLFSSL_SP_MATH_ALL   //As recommended by WolfSSL (Garski) 
+<#lt>#define WOLFSSL_SP_MATH       //Using this to declare wolfmath functions: 
+                                   //mp_reverse used by fp_to_unsigned_bin (tfm.c)
+                                   //get_digit_count,get_digit in ecc.c 
+<#lt>#define WOLFSSL_HAVE_SP_RSA   //Needed when WOFSSL_SP_MATH defined
+<#lt>#define WOLFSSL_SP_NO_256     //To prevent usage of SP functions defined by this: 
+                                   //    #if defined(HAVE_FIPS_VERSION) && HAVE_FIPS_VERSION == 2 
+                                   //    && ( defined(WOLFSSL_SP_ARM32_ASM) || defined(WOLFSSL_SP_ARM64_ASM) ) 
+//#define WOLFSSL_SP_ARM32_ASM //Dependent on MCU Arch.
+
+<#lt>#define WOLF_CRYPTO_CB  // provide call-back support
+<#lt>#define WOLFCRYPT_ONLY
+//xxx
+
+// ---------- FUNCTIONAL CONFIGURATION START ----------
+<#lt>#define WOLFSSL_AES_SMALL_TABLES
+<#lt>#define WOLFSSL_SHA224
+<#lt>#define WOLFSSL_SHA384
+<#lt>#define WOLFSSL_SHA512
+<#lt>#define HAVE_SHA512
+<#lt>#define WOLFSSL_AES_128
+<#lt>#define WOLFSSL_AES_192
+<#lt>#define WOLFSSL_AES_256
+<#lt>#define WOLFSSL_AES_DIRECT
+<#lt>#define HAVE_AES_DECRYPT
+<#lt>#define HAVE_AES_ECB
+<#lt>#define HAVE_AES_CBC
+<#lt>#define HAVE_AES_EXT
+
+<#lt>#define WOLFSSL_AES_COUNTER
+<#lt>#define WOLFSSL_AES_CFB
+<#lt>#define WOLFSSL_AES_OFB
+<#lt>#define HAVE_AESGCM
+<#lt>#define WOLFSSL_AES_XTS
+<#lt>#define HAVE_AESCCM
+<#lt>#define WOLFSSL_AES_EAX 
+
+//<#lt>#define WOLFSSL_CMAC
+//<#lt>#define NO_RC4
+//<#lt>#define NO_HC128
+//<#lt>#define NO_RABBIT
+//<#lt>#define HAVE_ECC
+//<#lt>#define NO_DH
+<#lt>#define FP_MAX_BITS 4096
+<#lt>#define USE_CERT_BUFFERS_2048
+<#lt>#define NO_DEV_RANDOM
+<#lt>#define HAVE_HASHDRBG
+<#lt>#define WC_NO_HARDEN
+<#lt>#define SINGLE_THREADED
+<#lt>#define NO_SIG_WRAPPER
+<#lt>#define NO_ERROR_STRINGS
+<#lt>#define NO_WOLFSSL_MEMORY
+
 <#-- 
 /*******************************************************************************
  End of File

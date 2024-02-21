@@ -21,3 +21,11 @@
 **/.history/*
 **/.vscode/*
 
+*.un*
+**/nbproject/project.properties
+**/*ARCHIVE*
+**/*MOD
+**/*.o*
+**/*.swp
+**/*.generated*
+**/*.class
