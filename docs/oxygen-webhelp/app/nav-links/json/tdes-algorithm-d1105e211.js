@@ -1,0 +1,1 @@
+define({"topics":[{"title":"<ph>2.6.1<\/ph>\nTDES\/3DES Algorithm APIs","href":"GUID-4CD622E7-8D08-438F-AAFD-4E7F451CEFDE.html","attributes":{"data-id":"tdes3des-algorithm-apis"},"menu":{"hasChildren":false},"tocID":"tdes3des-algorithm-apis-d1105e219","next":"tdes3des-algorithm-apis-d1105e219"}]});

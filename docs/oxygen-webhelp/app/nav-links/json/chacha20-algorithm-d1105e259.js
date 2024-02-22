@@ -1,0 +1,1 @@
+define({"topics":[{"title":"<ph>2.7.1<\/ph>\nChaCha20 Algorithm APIs","href":"GUID-2BFBB333-EEC2-43E3-8376-AD40F53B0970.html","attributes":{"data-id":"chacha20-algorithm-apis"},"menu":{"hasChildren":false},"tocID":"chacha20-algorithm-apis-d1105e267","next":"chacha20-algorithm-apis-d1105e267"}]});

@@ -1,0 +1,1 @@
+define({"topics":[{"title":"<ph>2.5.1<\/ph>\nCamellia Algorithm APIs","href":"GUID-675F0957-0E8B-480B-9B4C-DDF7380F55E0.html","attributes":{"data-id":"camellia-algorithm-apis"},"menu":{"hasChildren":false},"tocID":"camellia-algorithm-apis-d1105e171","next":"camellia-algorithm-apis-d1105e171"}]});

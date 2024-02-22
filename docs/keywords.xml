@@ -1,0 +1,1681 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keywords publicationid="GUID-22563F6E-78F8-474D-85A8-0030EA5F2EE8"
+          language="en-US"
+          version="4"
+          documenttitle="MPLAB® Harmony Crypto Library v4.x"
+          pubtype="Online Reference"
+          pubsubtype=""
+          pubuserguidesubtype=""
+          pubproducthierarchy=""
+          devices=""
+          revisiondate="16/01/2024 00:00:00"
+          revisionletter="4"
+          isbn=""
+          pubid=""
+          reachid=""
+          description=""
+          lastmodified="21/02/2024 20:57:33"
+          covertitle="MPLAB® Harmony Crypto Library"
+          frontcover="">
+   <keyworditem topicid="GUID-D4C52344-9F63-4FE8-B033-BF2C0A44F348"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Symmetric Algorithms</register>
+      <title>Symmetric Algorithms</title>
+      <bitfield/>
+      <keyword>Symmetric Algorithms</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6BBF6DF0-98DA-4E0B-B1EE-D5264AC2BEC9"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Symmetric Algorithms Enumerations</register>
+      <title>Symmetric Algorithms Enumerations</title>
+      <bitfield/>
+      <keyword>Symmetric Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D82A919F-1701-46F4-B5D9-CC3273441F01"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Sym_Status_E</register>
+      <title>crypto_Sym_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_Sym_Status_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-098F7EFE-E879-4E28-B4A8-F31880F135DF"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Sym_OpModes_E</register>
+      <title>crypto_Sym_OpModes_E</title>
+      <bitfield/>
+      <keyword>crypto_Sym_OpModes_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F56D9AD6-DFB5-4121-9E0A-8210DDCD8E17"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-32EC4010-18ED-4708-8C28-5CF20F9C0520"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-49DC73E9-0FEB-495B-93D9-DBD9408B81A0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_AesKeySize_E</register>
+      <title>crypto_AesKeySize_E</title>
+      <bitfield/>
+      <keyword>crypto_AesKeySize_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-40799C9B-9B08-45CB-A6E5-ADC234298109"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_CipherOper_E</register>
+      <title>crypto_CipherOper_E</title>
+      <bitfield/>
+      <keyword>crypto_CipherOper_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-EFADA66D-43AD-4BA9-87BC-53D343C71258"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Symmetric Algorithms Structures</register>
+      <title>Symmetric Algorithms Structures</title>
+      <bitfield/>
+      <keyword>Symmetric Algorithms Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-AEF94FAF-E3D9-47DC-BDBA-37E7F1C4ADA4"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Sym_BlockCtx</register>
+      <title>st_Crypto_Sym_BlockCtx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Sym_BlockCtx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7C48CA1C-F2C5-4D64-AF0C-22E728DB96CA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Sym_StreamCtx</register>
+      <title>st_Crypto_Sym_StreamCtx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Sym_StreamCtx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-29BD950B-2AFE-48FC-9EDC-CCE605DB3090"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES Algorithm</register>
+      <title>AES Algorithm</title>
+      <bitfield/>
+      <keyword>AES Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DBBFA84E-1714-439B-9EAF-1D90B7B847DB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES Algorithm APIs</register>
+      <title>AES Algorithm APIs</title>
+      <bitfield/>
+      <keyword>AES Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4BE907F2-6EFF-4783-8345-B057325D9845"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Aes_Init</register>
+      <title>Crypto_Sym_Aes_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Aes_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-5258A9CB-4DE3-44D3-BA18-0231217C3072"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Aes_Cipher</register>
+      <title>Crypto_Sym_Aes_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Aes_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-774567E5-2FB6-4BA7-9560-E077EE688E45"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_AesXts_Cipher</register>
+      <title>Crypto_Sym_AesXts_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_AesXts_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3755A601-C8FC-4C78-B6C7-B8CCE5F758C0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Aes_EncryptDirect</register>
+      <title>Crypto_Sym_Aes_EncryptDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Aes_EncryptDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FC21D47D-1B95-4548-83D1-4C1AEED3AC9F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Aes_DecryptDirect</register>
+      <title>Crypto_Sym_Aes_DecryptDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Aes_DecryptDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-82FE83ED-1EE8-4B5C-909A-4E8A86EE18AF"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Camellia Algorithm</register>
+      <title>Camellia Algorithm</title>
+      <bitfield/>
+      <keyword>Camellia Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-675F0957-0E8B-480B-9B4C-DDF7380F55E0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Camellia Algorithm APIs</register>
+      <title>Camellia Algorithm APIs</title>
+      <bitfield/>
+      <keyword>Camellia Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3FABC3BD-634A-42E2-BA31-DCCDD3A5C2BB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Camellia_Init</register>
+      <title>Crypto_Sym_Camellia_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Camellia_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-660CA4C7-7A46-4579-B5E5-DB376EF3B5DA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Camellia_Cipher</register>
+      <title>Crypto_Sym_Camellia_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Camellia_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-07E17AB4-15B5-4452-A6FA-739D95C1195B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Camellia_EncryptDirect</register>
+      <title>Crypto_Sym_Camellia_EncryptDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Camellia_EncryptDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F40E0E13-076D-42AC-AF0A-8BC075FC8459"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Camellia_DecryptDirect</register>
+      <title>Crypto_Sym_Camellia_DecryptDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Camellia_DecryptDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3ECCB5DE-8083-405E-B9A6-B54884825BD1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>TDES Algorithm</register>
+      <title>TDES Algorithm</title>
+      <bitfield/>
+      <keyword>TDES Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4CD622E7-8D08-438F-AAFD-4E7F451CEFDE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>TDES/3DES Algorithm APIs</register>
+      <title>TDES/3DES Algorithm APIs</title>
+      <bitfield/>
+      <keyword>TDES Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BCE56ED5-C15F-45F5-8054-816609BDFCF8"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Tdes_Init</register>
+      <title>Crypto_Sym_Tdes_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Tdes_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7A8CDF22-CEC0-4DF8-8BA0-97BF1F0676E2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Tdes_Cipher</register>
+      <title>Crypto_Sym_Tdes_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Tdes_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9C65399F-B9EF-4E2D-952A-10D99CBBBF0D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Tdes_EncryptDirect</register>
+      <title>Crypto_Sym_Tdes_EncryptDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Tdes_EncryptDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-79CFFDFD-CB9E-49B1-A937-6B0770EE6AD7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_Tdes_DecryptDirect</register>
+      <title>Crypto_Sym_Tdes_DecryptDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_Tdes_DecryptDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-144C081B-CA0F-4340-856F-53842DAC0ECF"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>ChaCha20 Algorithm</register>
+      <title>ChaCha20 Algorithm</title>
+      <bitfield/>
+      <keyword>ChaCha20 Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2BFBB333-EEC2-43E3-8376-AD40F53B0970"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>ChaCha20 Algorithm APIs</register>
+      <title>ChaCha20 Algorithm APIs</title>
+      <bitfield/>
+      <keyword>ChaCha20 Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-75FE88D6-E954-41D3-9517-2BD0AF3D618A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_ChaCha20_Init</register>
+      <title>Crypto_Sym_ChaCha20_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_ChaCha20_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-114F1E79-4860-4D1A-A87A-59C92665D9DC"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_ChaCha20_Cipher</register>
+      <title>Crypto_Sym_ChaCha20_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_ChaCha20_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1723711A-0BC9-4497-9E0A-4932ED6647C1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_ChaCha20Direct</register>
+      <title>Crypto_Sym_ChaCha20Direct</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_ChaCha20Direct</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4FFF23D7-D26C-4648-A903-2485776F41A3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Key-Wrap Algorithm</register>
+      <title>Key-Wrap Algorithm</title>
+      <bitfield/>
+      <keyword>Key-Wrap Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F6C472FF-A886-4328-9DEE-555AC354CC5C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Key-Wrap Algorithm APIs</register>
+      <title>Key-Wrap Algorithm APIs</title>
+      <bitfield/>
+      <keyword>Key-Wrap Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4E45892C-0A91-48DC-8179-A10FABE025DB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_AesKeyWrap_Init</register>
+      <title>Crypto_Sym_AesKeyWrap_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_AesKeyWrap_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_AesKeyWrap_Cipher</register>
+      <title>Crypto_Sym_AesKeyWrap_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_AesKeyWrap_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DBEAA735-7359-474B-9336-C4DF2261D5D8"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_AesKeyWrapDirect</register>
+      <title>Crypto_Sym_AesKeyWrapDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_AesKeyWrapDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-904C11F5-E035-47A6-AD71-82EF3213325B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Sym_AesKeyUnWrapDirect</register>
+      <title>Crypto_Sym_AesKeyUnWrapDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Sym_AesKeyUnWrapDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9AFE1DCD-C661-4067-B9E7-B02BA8CC334D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Hash Algorithms</register>
+      <title>Hash Algorithms</title>
+      <bitfield/>
+      <keyword>Hash Algorithms</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0D01CA7A-EE8E-487C-9FED-4DDE8C9E6C14"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Hash Algorithms Enumerations</register>
+      <title>Hash Algorithms Enumerations</title>
+      <bitfield/>
+      <keyword>Hash Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-410448E9-840F-4EB5-A918-CA4718D707E3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Hash_Algo_E</register>
+      <title>crypto_Hash_Algo_E</title>
+      <bitfield/>
+      <keyword>crypto_Hash_Algo_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-28F849E7-9B37-45CD-B16D-0616C72D801A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Hash_Status_E</register>
+      <title>crypto_Hash_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_Hash_Status_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3898AFFC-D3C7-48D4-B0FB-3D1C2D9B77D2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-A1AAB65D-FE23-4012-8EAF-32FAA9A217F7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-A818456A-991A-470C-A5A7-65F48992FC16"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA Algorithm</register>
+      <title>SHA Algorithm</title>
+      <bitfield/>
+      <keyword>SHA Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-12BEC0D1-F4C2-433D-BEAA-5D09C4413009"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 Structures</register>
+      <title>SHA-1, SHA-2, and SHA-3 Structures</title>
+      <bitfield/>
+      <keyword>SHA-1</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-12BEC0D1-F4C2-433D-BEAA-5D09C4413009"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 Structures</register>
+      <title>SHA-1, SHA-2, and SHA-3 Structures</title>
+      <bitfield/>
+      <keyword>SHA-2</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-12BEC0D1-F4C2-433D-BEAA-5D09C4413009"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 Structures</register>
+      <title>SHA-1, SHA-2, and SHA-3 Structures</title>
+      <bitfield/>
+      <keyword>and SHA-3 Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BEC2FAC9-6C65-457C-AD5F-502A98E6FBF0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Hash_Sha_Ctx</register>
+      <title>st_Crypto_Hash_Sha_Ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Hash_Sha_Ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2616DD89-CA26-4C47-9341-D4714BF99E53"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</register>
+      <title>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</title>
+      <bitfield/>
+      <keyword>SHA-1</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2616DD89-CA26-4C47-9341-D4714BF99E53"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</register>
+      <title>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</title>
+      <bitfield/>
+      <keyword>SHA-2</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2616DD89-CA26-4C47-9341-D4714BF99E53"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</register>
+      <title>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</title>
+      <bitfield/>
+      <keyword>and SHA-3 (excluding SHAKE) APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C86D2835-B6A9-48F1-B0BE-822B42F93A34"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Sha_Digest</register>
+      <title>Crypto_Hash_Sha_Digest</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Sha_Digest</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-A1846A5F-0DF3-4C4E-A824-EA78E269E9B1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_ShaInit</register>
+      <title>Crypto_Hash_ShaInit</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_ShaInit</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-34BC13C4-9532-497E-8C49-2475D1223849"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Sha_Update</register>
+      <title>Crypto_Hash_Sha_Update</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Sha_Update</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-963461D2-C4C9-45BD-A5EB-F92657220B2C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Sha_Final</register>
+      <title>Crypto_Hash_Sha_Final</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Sha_Final</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-41B81207-6DB1-4740-B8B3-D1F9E5DD11BE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHAKE Algorithm</register>
+      <title>SHAKE Algorithm</title>
+      <bitfield/>
+      <keyword>SHAKE Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CD5A2F77-082C-4FC9-B719-28241E080240"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHAKE Structures</register>
+      <title>SHAKE Structures</title>
+      <bitfield/>
+      <keyword>SHAKE Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E051BABA-24AE-4DEC-AEE0-263CFAD5D258"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Hash_Shake_Ctx</register>
+      <title>st_Crypto_Hash_Shake_Ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Hash_Shake_Ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-24DF3641-ABE6-45E8-A9EA-7CBF61B9C0A2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</register>
+      <title>SHA-1, SHA-2, and SHA-3 (excluding SHAKE) APIs</title>
+      <bitfield/>
+      <keyword>SHA3-SHAKE APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DD682253-1D77-40C1-9D3E-1839D2DCCC7A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Shake_Digest</register>
+      <title>Crypto_Hash_Shake_Digest</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Shake_Digest</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1CFCA9A4-09D9-4A6A-95BA-818885F338F7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Shake_Init</register>
+      <title>Crypto_Hash_Shake_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Shake_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-EE123160-063E-4DA6-BB14-C383A94684FD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Shake_Update</register>
+      <title>Crypto_Hash_Shake_Update</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Shake_Update</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C98CF869-C5CF-4BE7-BC2F-391CBCA5E988"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_ShakeFinal</register>
+      <title>Crypto_Hash_ShakeFinal</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_ShakeFinal</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DDC9DCD3-7E92-45D7-AB54-18488D33A475"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>BLAKE Algorithm</register>
+      <title>BLAKE Algorithm</title>
+      <bitfield/>
+      <keyword>BLAKE Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D6F097B1-3B61-4B41-9274-B5B3E7FA0EE4"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>BLAKE Structures</register>
+      <title>BLAKE Structures</title>
+      <bitfield/>
+      <keyword>BLAKE Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7732487B-1C4D-4B03-8085-52079A0DEDA4"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Hash_Blake_Ctx</register>
+      <title>st_Crypto_Hash_Blake_Ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Hash_Blake_Ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6269AFA7-D391-486A-83FF-B6256FDE461E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>BLAKE Algorithm APIs</register>
+      <title>BLAKE Algorithm APIs</title>
+      <bitfield/>
+      <keyword>BLAKE Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E140AA65-86BF-4A25-9C60-76B83A688591"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Blake_Digest</register>
+      <title>Crypto_Hash_Blake_Digest</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Blake_Digest</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-AEB00F08-6321-4AD7-B55E-8CCD76FA0B64"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Blake_Init</register>
+      <title>Crypto_Hash_Blake_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Blake_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-189EFBA1-C1A7-447C-90DE-C441CD6FB8DB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Blake_Update</register>
+      <title>Crypto_Hash_Blake_Update</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Blake_Update</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-63AB7984-BF03-4648-8FD3-C32A12DA43BD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Blake_Final</register>
+      <title>Crypto_Hash_Blake_Final</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Blake_Final</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-ED147ED5-D54B-449B-850C-137A3FB80902"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>MD5 Algorithm</register>
+      <title>MD5 Algorithm</title>
+      <bitfield/>
+      <keyword>MD5 Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1C5C2A77-F569-41F0-A885-83F328420181"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>MD5 Structures</register>
+      <title>MD5 Structures</title>
+      <bitfield/>
+      <keyword>MD5 Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FC2A40EA-C4FE-478C-B65B-47F1AE13F28E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Hash_Md5_Ctx</register>
+      <title>st_Crypto_Hash_Md5_Ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Hash_Md5_Ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-810E3077-6D57-43BB-A0CC-6D70A5EF3BE6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>MD5 Algorithm APIs</register>
+      <title>MD5 Algorithm APIs</title>
+      <bitfield/>
+      <keyword>MD5 Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1E9C1BC1-A0F2-45CC-9C35-243CCE7D5333"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Md5_Digest</register>
+      <title>Crypto_Hash_Md5_Digest</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Md5_Digest</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-42061E3C-9189-4D8E-9AF1-08A4F6BFA2D0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Md5_Init</register>
+      <title>Crypto_Hash_Md5_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Md5_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-41591FA2-8217-4765-8F94-71CEA74FE4D5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Md5_Update</register>
+      <title>Crypto_Hash_Md5_Update</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Md5_Update</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-5A15BF55-D661-49FC-97B3-BB2D8F8CA5AE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Md5_Final</register>
+      <title>Crypto_Hash_Md5_Final</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Md5_Final</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C99BD434-6B60-4BFF-ACA8-8497D7031B05"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>RIPEMD-160 Algorithm</register>
+      <title>RIPEMD-160 Algorithm</title>
+      <bitfield/>
+      <keyword>RIPEMD-160 Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8378E107-8264-40B6-84B2-261F5DF5EB80"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>RIPEMD-160 Structures</register>
+      <title>RIPEMD-160 Structures</title>
+      <bitfield/>
+      <keyword>RIPEMD-160 Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-03122BFE-52BC-4937-A998-34DA8A7F383F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Hash_Ripemd160_Ctx</register>
+      <title>st_Crypto_Hash_Ripemd160_Ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Hash_Ripemd160_Ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-EAC7F72E-AFD6-4245-AC5C-F3F1536BF653"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>RIPEMD-160 Algorithm APIs</register>
+      <title>RIPEMD-160 Algorithm APIs</title>
+      <bitfield/>
+      <keyword>RIPEMD-160 Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8ECFDCC1-6472-4A85-8808-9B8F423801D0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Ripemd160_Digest</register>
+      <title>Crypto_Hash_Ripemd160_Digest</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Ripemd160_Digest</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E1A128DA-7F0D-44DA-9D52-4AD4AB2581D8"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Ripemd160_Init</register>
+      <title>Crypto_Hash_Ripemd160_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Ripemd160_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B8A43CD8-238A-404F-8729-28936CC712B7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Ripemd160_Update</register>
+      <title>Crypto_Hash_Ripemd160_Update</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Ripemd160_Update</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FBF79FEF-8825-4DAB-A321-DDDBEE4BF16B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Hash_Ripemd160_Final</register>
+      <title>Crypto_Hash_Ripemd160_Final</title>
+      <bitfield/>
+      <keyword>Crypto_Hash_Ripemd160_Final</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-69858BF8-B03B-4FA5-B112-874933AF9BE9"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>MAC Algorithms Enumerations</register>
+      <title>MAC Algorithms Enumerations</title>
+      <bitfield/>
+      <keyword>MAC Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-864148C6-7F09-4ED5-87B1-82870E604C60"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Hash_Status_E</register>
+      <title>crypto_Hash_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_Mac_Status_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FA428BD6-4E3C-4F86-AB8C-F098C5B65D64"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C546E426-3570-4236-8FCE-C44E186DAAB5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-43B8B5C3-279D-4265-877A-D49A807B82A2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_AesKeySize_E</register>
+      <title>crypto_AesKeySize_E</title>
+      <bitfield/>
+      <keyword>crypto_AesKeySize_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D4E9F605-BF1F-4A1B-925B-0FAA3927AF7D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-CMAC Algorithm</register>
+      <title>AES-CMAC Algorithm</title>
+      <bitfield/>
+      <keyword>AES-CMAC Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E70F4B7D-AFE2-47B8-8964-5CFE2B0304D7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-CMAC Structures</register>
+      <title>AES-CMAC Structures</title>
+      <bitfield/>
+      <keyword>AES-CMAC Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-354263BC-FFDC-4D01-8E59-8E55F9B0D647"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Mac_Aes_ctx</register>
+      <title>st_Crypto_Mac_Aes_ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Mac_Aes_ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-95CB023A-C6FF-4BEB-B958-B875E290F9E5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-CMAC Algorithm APIs</register>
+      <title>AES-CMAC Algorithm APIs</title>
+      <bitfield/>
+      <keyword>AES-CMAC Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-982285DA-2B79-46CE-9578-0AB016C8E3DA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Mac_AesCmac_Init</register>
+      <title>Crypto_Mac_AesCmac_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Mac_AesCmac_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CD2D0202-8AC0-46B6-8515-9BF963E3D878"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Mac_AesCmac_Cipher</register>
+      <title>Crypto_Mac_AesCmac_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Mac_AesCmac_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-03CBC189-3BC8-451A-AA95-D6FCEFA3D7D1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Mac_AesCmac_Final</register>
+      <title>Crypto_Mac_AesCmac_Final</title>
+      <bitfield/>
+      <keyword>Crypto_Mac_AesCmac_Final</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-928649F2-433B-4290-BAE7-EDF717394181"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Mac_AesCmac_Direct</register>
+      <title>Crypto_Mac_AesCmac_Direct</title>
+      <bitfield/>
+      <keyword>Crypto_Mac_AesCmac_Direct</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4D5264B7-A707-43D5-8C90-CE0AC903F1DA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AEAD Algorithms</register>
+      <title>AEAD Algorithms</title>
+      <bitfield/>
+      <keyword>Authenticated Encryption with Associated Data (AEAD) Algorithms</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-82435FF2-C856-4B00-A008-E2736952534C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AEAD Algorithms Enumerations</register>
+      <title>AEAD Algorithms Enumerations</title>
+      <bitfield/>
+      <keyword>AEAD Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8614BA41-DFDD-457D-9701-FF251CFE804F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_AEAD_Status_E</register>
+      <title>crypto_AEAD_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_AEAD_Status_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B4E4A2F7-6409-4D83-99D1-021618B5638D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-EFBFDAE7-FA1D-4BD5-BB32-79C7E59CEEB0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3E43B56B-0965-48A5-9C73-7FA2A2B42843"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_AesKeySize_E</register>
+      <title>crypto_AesKeySize_E</title>
+      <bitfield/>
+      <keyword>crypto_AesKeySize_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CD67D2F3-AE0B-429C-AE81-B9B6F4470AFD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_CipherOper_E</register>
+      <title>crypto_CipherOper_E</title>
+      <bitfield/>
+      <keyword>crypto_CipherOper_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6B1A5494-499D-4903-8CD2-54369694892E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-CCM Algorithm</register>
+      <title>AES-CCM Algorithm</title>
+      <bitfield/>
+      <keyword>AES-CCM Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-26BE22A2-AA07-43D0-934F-F9ABF295DD8F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-CCM Structures</register>
+      <title>AES-CCM Structures</title>
+      <bitfield/>
+      <keyword>AES-CCM Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-854883B3-AC40-49F3-983A-DB74A983106A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-CCM Algorithm APIs</register>
+      <title>AES-CCM Algorithm APIs</title>
+      <bitfield/>
+      <keyword>AES-CCM Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4FA66A29-6E7C-4536-8AB0-EDF3B50811E9"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesCcm_Cipher</register>
+      <title>Crypto_Aead_AesCcm_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesCcm_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E3B6EF4B-BEE0-4579-8B08-00248B913F0F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-EAX Algorithm</register>
+      <title>AES-EAX Algorithm</title>
+      <bitfield/>
+      <keyword>AES-EAX Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F2419079-08CD-4166-99E1-49833788C40F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-EAX Structures</register>
+      <title>AES-EAX Structures</title>
+      <bitfield/>
+      <keyword>AES-EAX Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3887162A-F034-4291-94A4-0E139B2E3B8A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Aead_AesEax_ctx</register>
+      <title>st_Crypto_Aead_AesEax_ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Aead_AesEax_ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B58BC987-B7A0-4504-84B9-4643D02056C1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>AES-EAX Algorithm APIs</register>
+      <title>AES-EAX Algorithm APIs</title>
+      <bitfield/>
+      <keyword>AES-EAX Algorithm APIs</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6FE14C5C-78D9-493B-BDCB-ED001A8DC34E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesEax_Init</register>
+      <title>Crypto_Aead_AesEax_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesEax_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E08FF1FE-055F-49A7-A5BD-783824FD64AE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesEax_Cipher</register>
+      <title>Crypto_Aead_AesEax_Cipher</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesEax_Cipher</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0CB49CCD-5C54-4C11-BEAA-7F021B4D75A7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesEax_Final</register>
+      <title>Crypto_Aead_AesEax_Final</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesEax_Final</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8E1477DC-185B-49E9-AD7F-D78F5694E322"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesEax_AddAadData</register>
+      <title>Crypto_Aead_AesEax_AddAadData</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesEax_AddAadData</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-20692A11-5B76-48A4-9EFA-9BC57E86A22C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesEax_EncryptAuthDirect</register>
+      <title>Crypto_Aead_AesEax_EncryptAuthDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesEax_EncryptAuthDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B173F793-6608-4A65-A2FE-620196289ED6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Digital Signature Algorithms</register>
+      <title>Digital Signature Algorithms</title>
+      <bitfield/>
+      <keyword>Digital Signature Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3C68EE80-5E9D-4926-8099-902C28BB3301"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_DigiSign_Status_E</register>
+      <title>crypto_DigiSign_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_DigiSign_Status_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-97FD7EA4-2677-4B31-8C74-A365DFAF05E6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BBB29DC6-0BBC-4AC7-B55A-FA609CB60CC0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DDA609C9-2891-4532-90DE-18F96ACFB3AC"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_EccCurveType_E</register>
+      <title>crypto_EccCurveType_E</title>
+      <bitfield/>
+      <keyword>crypto_EccCurveType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FBEDB0C4-1A44-44BA-9013-28650AEBEEFD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>ECDSA Algorithm</register>
+      <title>ECDSA Algorithm</title>
+      <bitfield/>
+      <keyword>ECDSA Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3F7F15B2-07CE-423E-878E-D07EB27F5524"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_DigiSign_Ecdsa_Sign</register>
+      <title>Crypto_DigiSign_Ecdsa_Sign</title>
+      <bitfield/>
+      <keyword>Crypto_DigiSign_Ecdsa_Sign</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D7EB4D30-9AEF-43CF-BB53-B3295543FC2B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_DigiSign_Ecdsa_Verify</register>
+      <title>Crypto_DigiSign_Ecdsa_Verify</title>
+      <bitfield/>
+      <keyword>Crypto_DigiSign_Ecdsa_Verify</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1629B769-42DB-45E4-AC46-EF299F2657AB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Key Agreement Scheme (KAS) Algorithms</register>
+      <title>Key Agreement Scheme (KAS) Algorithms</title>
+      <bitfield/>
+      <keyword>Key Agreement Scheme (KAS) Algorithms</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0C440F72-FABA-41DA-84D3-C5177429223E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>KAS Algorithms Enumerations</register>
+      <title>KAS Algorithms Enumerations</title>
+      <bitfield/>
+      <keyword>KAS Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E32327C9-8680-4667-8B5F-4F611DAE866A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Kas_Status_E</register>
+      <title>crypto_Kas_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_Kas_Status_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E0333AB5-E157-42B5-8346-E64AE0565210"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3BD54F59-D3E7-4C6B-9CE9-9A2163FD22CC"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E19AC4DB-6777-4F82-AFE6-24A282893CDF"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>ECDH Algorithm</register>
+      <title>ECDH Algorithm</title>
+      <bitfield/>
+      <keyword>ECDH Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-891C407A-A1A7-4E9E-803A-1CC3EBC9EEAB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Kas_Ecdh_SharedSecret</register>
+      <title>Crypto_Kas_Ecdh_SharedSecret</title>
+      <bitfield/>
+      <keyword>Crypto_Kas_Ecdh_SharedSecret</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8CBCD06A-0108-48FD-8E60-42DDB2DFEE1B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Random Number Generator (RNG) Algorithms</register>
+      <title>Random Number Generator (RNG) Algorithms</title>
+      <bitfield/>
+      <keyword>Random Number Generator (RNG) Algorithms</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C7EC3361-737C-468F-B818-2F02947B11D3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>KAS Algorithms Enumerations</register>
+      <title>KAS Algorithms Enumerations</title>
+      <bitfield/>
+      <keyword>RNG Algorithms Enumerations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F01E35C5-E73C-4595-ACD6-37B285C60E52"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_HandlerType_E</register>
+      <title>crypto_HandlerType_E</title>
+      <bitfield/>
+      <keyword>crypto_HandlerType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-87ABDAFB-D438-4790-8D44-B27D71ABD262"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>PRNG Algorithm</register>
+      <title>PRNG Algorithm</title>
+      <bitfield/>
+      <keyword>PRNG Algorithm</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1A33A361-430F-49EF-9350-A25050A88F10"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Rng_Prng_Generate</register>
+      <title>crypto_Rng_Prng_Generate</title>
+      <bitfield/>
+      <keyword>Crypto_Rng_Prng_Generate</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-95508D60-924D-440B-BC70-AE521A27FCDD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesCcm_Init</register>
+      <title>Crypto_Aead_AesCcm_Init</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesCcm_Init</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-67D4D6ED-0ECD-4B15-99AD-2DC3714C7018"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>st_Crypto_Aead_AesCcm_ctx</register>
+      <title>st_Crypto_Aead_AesCcm_ctx</title>
+      <bitfield/>
+      <keyword>st_Crypto_Aead_AesCcm_ctx</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1B19E672-DFF0-4B0F-A245-6D1A540D915D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Digital Signature Algorithms</register>
+      <title>Digital Signature Algorithms</title>
+      <bitfield/>
+      <keyword>Digital Signature (DSA) Algorithms</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CCDD139A-A9E8-40AE-AD11-09E3E43A44D1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Crypto_Aead_AesEax_DecryptAuthDirect</register>
+      <title>Crypto_Aead_AesEax_DecryptAuthDirect</title>
+      <bitfield/>
+      <keyword>Crypto_Aead_AesEax_DecryptAuthDirect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0EE98187-E103-4D9F-81A8-33DF696FDBE0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Imported External Enumerations and Structures</register>
+      <title>Imported External Enumerations and Structures</title>
+      <bitfield/>
+      <keyword>Imported External Enumerations and Structures</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-63148F7D-B7B6-4FFA-9A58-E2BB5770C989"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_EccCurveType_E</register>
+      <title>crypto_EccCurveType_E</title>
+      <bitfield/>
+      <keyword>crypto_EccCurveType_E</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CF9C7832-DF4A-4F53-95E8-5108EDA4EF53"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>crypto_Rng_Status_E</register>
+      <title>crypto_Rng_Status_E</title>
+      <bitfield/>
+      <keyword>crypto_Rng_Status_E</keyword>
+   </keyworditem>
+</keywords>

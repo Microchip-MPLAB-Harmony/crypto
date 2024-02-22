@@ -1,0 +1,1 @@
+define({"topics":[{"title":"<ph>2.4.1<\/ph>\nAES Algorithm APIs","href":"GUID-DBBFA84E-1714-439B-9EAF-1D90B7B847DB.html","attributes":{"data-id":"aes-algorithm-apis"},"menu":{"hasChildren":false},"tocID":"aes-algorithm-apis-d1105e115","next":"aes-algorithm-apis-d1105e115"}]});

@@ -1,0 +1,307 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="crypto_Sym_Status_E Crypto_Sym_AesKeyWrap_Cipher( st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData ); This API is used to wrap or unwrap the data ..."/><meta name="copyright" content="(C) Copyright 2024"/><meta name="generator" content="DITA-OT"/><title>2.8.1.2 Crypto_Sym_AesKeyWrap_Cipher</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\xuiksuiijcz\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;crypto-sym-aeskeywrap-cipher&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;Crypto_Sym_AesKeyWrap_Cipher&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;body:1;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;codeblock:1;184:15&#34;&gt;crypto_Sym_Status_E Crypto_Sym_AesKeyWrap_Cipher( st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData );&lt;/codeblock&gt;&lt;/body&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-FE3B6300-3118-4656-94EE-71C68DB8A676&#34; xtrc=&#34;topicref:40;6:6189&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-FE3B6300-3118-4656-94EE-71C68DB8A676.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-F6C472FF-A886-4328-9DEE-555AC354CC5C.md&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:38;6:5886&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-FE3B6300-3118-4656-94EE-71C68DB8A676.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;Key-Wrap Algorithm APIs&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;description&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;Description&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;This API is used to wrap or unwrap the data using AES-KW. Initialize context by calling Crypto_Sym_AesKeyWrap_Init before calling this API.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;parameters&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;Parameters&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;body:3;184:15&#34;&gt;&lt;table class=&#34;- topic/table &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;table:1;184:15&#34;&gt;&lt;tgroup class=&#34;- topic/tgroup &#34; cols=&#34;5&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;tgroup:1;184:15&#34;&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col1&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:1;184:15&#34; colnum=&#34;1&#34;/&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col2&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:2;184:15&#34; colnum=&#34;2&#34;/&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col3&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:3;184:15&#34; colnum=&#34;3&#34;/&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col4&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:4;184:15&#34; colnum=&#34;4&#34;/&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col5&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:5;184:15&#34; colnum=&#34;5&#34;/&gt;&lt;thead class=&#34;- topic/thead &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;thead:1;184:15&#34;&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:1;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:1;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;1&#34;&gt;No.&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:2;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;1&#34;&gt;Argument Type&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:3;184:15&#34; colname=&#34;col3&#34; dita-ot:x=&#34;3&#34; dita-ot:y=&#34;1&#34;&gt;Argument Name&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:4;184:15&#34; colname=&#34;col4&#34; dita-ot:x=&#34;4&#34; dita-ot:y=&#34;1&#34;&gt;Type&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:5;184:15&#34; colname=&#34;col5&#34; dita-ot:x=&#34;5&#34; dita-ot:y=&#34;1&#34;&gt;Description&lt;/entry&gt;&lt;/row&gt;&lt;/thead&gt;&lt;tbody class=&#34;- topic/tbody &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;tbody:1;184:15&#34;&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:2;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:6;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;2&#34;&gt;1&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:7;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;2&#34;&gt;st_Crypto_Sym_BlockCtx*&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:8;184:15&#34; colname=&#34;col3&#34; dita-ot:x=&#34;3&#34; dita-ot:y=&#34;2&#34;&gt;ptr_aesCtx_st&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:9;184:15&#34; colname=&#34;col4&#34; dita-ot:x=&#34;4&#34; dita-ot:y=&#34;2&#34;&gt;Input&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:10;184:15&#34; colname=&#34;col5&#34; dita-ot:x=&#34;5&#34; dita-ot:y=&#34;2&#34;&gt;AES KW algorithm context&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:3;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:11;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;3&#34;&gt;2&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:12;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;3&#34;&gt;uint8_t*&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:13;184:15&#34; colname=&#34;col3&#34; dita-ot:x=&#34;3&#34; dita-ot:y=&#34;3&#34;&gt;ptr_inputData&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:14;184:15&#34; colname=&#34;col4&#34; dita-ot:x=&#34;4&#34; dita-ot:y=&#34;3&#34;&gt;Input&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:15;184:15&#34; colname=&#34;col5&#34; dita-ot:x=&#34;5&#34; dita-ot:y=&#34;3&#34;&gt;Input data to wrap or unwrap&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:4;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:16;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;4&#34;&gt;3&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:17;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;4&#34;&gt;uint32_t&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:18;184:15&#34; colname=&#34;col3&#34; dita-ot:x=&#34;3&#34; dita-ot:y=&#34;4&#34;&gt;dataLen&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:19;184:15&#34; colname=&#34;col4&#34; dita-ot:x=&#34;4&#34; dita-ot:y=&#34;4&#34;&gt;Input&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:20;184:15&#34; colname=&#34;col5&#34; dita-ot:x=&#34;5&#34; dita-ot:y=&#34;4&#34;&gt;Input length of plain data or cipher data in bytes&lt;/entry&gt;&lt;/row&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:5;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:21;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;5&#34;&gt;4&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:22;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;5&#34;&gt;uint8_t*&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:23;184:15&#34; colname=&#34;col3&#34; dita-ot:x=&#34;3&#34; dita-ot:y=&#34;5&#34;&gt;ptr_outData&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:24;184:15&#34; colname=&#34;col4&#34; dita-ot:x=&#34;4&#34; dita-ot:y=&#34;5&#34;&gt;Output&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:25;184:15&#34; colname=&#34;col5&#34; dita-ot:x=&#34;5&#34; dita-ot:y=&#34;5&#34;&gt;Pointer to store cipher text/plain text as output&lt;/entry&gt;&lt;/row&gt;&lt;/tbody&gt;&lt;/tgroup&gt;&lt;/table&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;returns&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;topic:4;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;title:4;184:15&#34;&gt;Returns&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;body:4;184:15&#34;&gt;&lt;table class=&#34;- topic/table &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;table:2;184:15&#34;&gt;&lt;tgroup class=&#34;- topic/tgroup &#34; cols=&#34;2&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;tgroup:2;184:15&#34;&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col1&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:6;184:15&#34; colnum=&#34;1&#34;/&gt;&lt;colspec class=&#34;- topic/colspec &#34; colname=&#34;col2&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;colspec:7;184:15&#34; colnum=&#34;2&#34;/&gt;&lt;thead class=&#34;- topic/thead &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;thead:2;184:15&#34;&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:6;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:26;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;1&#34;&gt;Return Type&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:27;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;1&#34;&gt;Description&lt;/entry&gt;&lt;/row&gt;&lt;/thead&gt;&lt;tbody class=&#34;- topic/tbody &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;tbody:2;184:15&#34;&gt;&lt;row class=&#34;- topic/row &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;row:7;184:15&#34;&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:28;184:15&#34; colname=&#34;col1&#34; dita-ot:x=&#34;1&#34; dita-ot:y=&#34;2&#34;&gt;crypto_Sym_Status_E&lt;/entry&gt;&lt;entry class=&#34;- topic/entry &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;entry:29;184:15&#34; colname=&#34;col2&#34; dita-ot:x=&#34;2&#34; dita-ot:y=&#34;2&#34;&gt;Function returns the status of the API.&lt;/entry&gt;&lt;/row&gt;&lt;/tbody&gt;&lt;/tgroup&gt;&lt;/table&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;example&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;topic:5;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;title:5;184:15&#34;&gt;Example&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/xuiksuiijcz/work/4/en-US/GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md&#34; xtrc=&#34;body:5;184:15&#34;/&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.md"/><meta name="wh-out-relpath" content="GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
+    
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+    <script src="https://assets.adobedtm.com/6a72a357eb48/a636c708c7fe/launch-0b0023397020.min.js"></script><!-- Adobe Analytics -->
+</head>
+
+    <body id="crypto-sym-aeskeywrap-cipher" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB® Harmony Crypto Library "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB® Harmony Crypto Library </a></div>
+                    
+                </div>
+                
+                
+            </div>
+
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
+        
+        
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
+</div>
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="symmetric-algorithms"><div class="title"><a href="GUID-D4C52344-9F63-4FE8-B033-BF2C0A44F348.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2</ph>
+Symmetric Algorithms</a></div></div></li><li><div class="topicref" data-id="key-wrap-algorithm"><div class="title"><a href="GUID-4FFF23D7-D26C-4648-A903-2485776F41A3.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8</ph>
+Key-Wrap Algorithm</a></div></div></li><li><div class="topicref" data-id="key-wrap-algorithm-apis"><div class="title"><a href="GUID-F6C472FF-A886-4328-9DEE-555AC354CC5C.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1</ph>
+Key-Wrap Algorithm APIs</a></div></div></li><li class="active"><div class="topicref" data-id="crypto-sym-aeskeywrap-cipher"><div class="title"><a href="GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1.2</ph>
+Crypto_Sym_AesKeyWrap_Cipher</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem"><div data-tocid="summary-d1105e11" class="topicref" data-id="summary" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-195AD0A9-256B-42BA-9768-B6654594AF40.html" id="summary-d1105e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+Summary</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="symmetric-algorithms-d1105e19" class="topicref" data-id="symmetric-algorithms" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action symmetric-algorithms-d1105e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-D4C52344-9F63-4FE8-B033-BF2C0A44F348.html" id="symmetric-algorithms-d1105e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2</ph>
+Symmetric Algorithms</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="symmetric-algorithms-enumerations-d1105e27" class="topicref" data-id="symmetric-algorithms-enumerations" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action symmetric-algorithms-enumerations-d1105e27-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6BBF6DF0-98DA-4E0B-B1EE-D5264AC2BEC9.html" id="symmetric-algorithms-enumerations-d1105e27-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.1</ph>
+Symmetric Algorithms Enumerations</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="imported-external-enumerations-and-structures-d1105e51" class="topicref" data-id="imported-external-enumerations-and-structures" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action imported-external-enumerations-and-structures-d1105e51-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F56D9AD6-DFB5-4121-9E0A-8210DDCD8E17.html" id="imported-external-enumerations-and-structures-d1105e51-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.2</ph>
+Imported External Enumerations and Structures</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="symmetric-algorithms-structures-d1105e83" class="topicref" data-id="symmetric-algorithms-structures" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action symmetric-algorithms-structures-d1105e83-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-EFADA66D-43AD-4BA9-87BC-53D343C71258.html" id="symmetric-algorithms-structures-d1105e83-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.3</ph>
+Symmetric Algorithms Structures</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="aes-algorithm-d1105e107" class="topicref" data-id="aes-algorithm" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action aes-algorithm-d1105e107-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-29BD950B-2AFE-48FC-9EDC-CCE605DB3090.html" id="aes-algorithm-d1105e107-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.4</ph>
+AES Algorithm</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="camellia-algorithm-d1105e163" class="topicref" data-id="camellia-algorithm" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action camellia-algorithm-d1105e163-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-82FE83ED-1EE8-4B5C-909A-4E8A86EE18AF.html" id="camellia-algorithm-d1105e163-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.5</ph>
+Camellia Algorithm</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="tdes-algorithm-d1105e211" class="topicref" data-id="tdes-algorithm" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action tdes-algorithm-d1105e211-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-3ECCB5DE-8083-405E-B9A6-B54884825BD1.html" id="tdes-algorithm-d1105e211-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.6</ph>
+TDES Algorithm</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="chacha20-algorithm-d1105e259" class="topicref" data-id="chacha20-algorithm" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action chacha20-algorithm-d1105e259-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-144C081B-CA0F-4340-856F-53842DAC0ECF.html" id="chacha20-algorithm-d1105e259-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.7</ph>
+ChaCha20 Algorithm</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="key-wrap-algorithm-d1105e299" class="topicref" data-id="key-wrap-algorithm" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action key-wrap-algorithm-d1105e299-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-4FFF23D7-D26C-4648-A903-2485776F41A3.html" id="key-wrap-algorithm-d1105e299-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8</ph>
+Key-Wrap Algorithm</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="true"><div data-tocid="key-wrap-algorithm-apis-d1105e307" class="topicref" data-id="key-wrap-algorithm-apis" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action key-wrap-algorithm-apis-d1105e307-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F6C472FF-A886-4328-9DEE-555AC354CC5C.html" id="key-wrap-algorithm-apis-d1105e307-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1</ph>
+Key-Wrap Algorithm APIs</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="crypto-sym-aeskeywrap-init-d1105e315" class="topicref" data-id="crypto-sym-aeskeywrap-init" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-4E45892C-0A91-48DC-8179-A10FABE025DB.html" id="crypto-sym-aeskeywrap-init-d1105e315-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1.1</ph>
+Crypto_Sym_AesKeyWrap_Init</a></div></div></li><li role="treeitem" class="active"><div data-tocid="crypto-sym-aeskeywrap-cipher-d1105e323" class="topicref" data-id="crypto-sym-aeskeywrap-cipher" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-3C2C40F9-7D68-4B9C-BE07-12F5275637FA.html" id="crypto-sym-aeskeywrap-cipher-d1105e323-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1.2</ph>
+Crypto_Sym_AesKeyWrap_Cipher</a></div></div></li><li role="treeitem"><div data-tocid="crypto-sym-aeskeywrapdirect-d1105e331" class="topicref" data-id="crypto-sym-aeskeywrapdirect" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-DBEAA735-7359-474B-9336-C4DF2261D5D8.html" id="crypto-sym-aeskeywrapdirect-d1105e331-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1.3</ph>
+Crypto_Sym_AesKeyWrapDirect</a></div></div></li><li role="treeitem"><div data-tocid="crypto-sym-aeskeyunwrapdirect-d1105e339" class="topicref" data-id="crypto-sym-aeskeyunwrapdirect" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-904C11F5-E035-47A6-AD71-82EF3213325B.html" id="crypto-sym-aeskeyunwrapdirect-d1105e339-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">2.8.1.4</ph>
+Crypto_Sym_AesKeyUnWrapDirect</a></div></div></li></ul></li></ul></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="hash-algorithms-d1105e347" class="topicref" data-id="hash-algorithms" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action hash-algorithms-d1105e347-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-9AFE1DCD-C661-4067-B9E7-B02BA8CC334D.html" id="hash-algorithms-d1105e347-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">3</ph>
+Hash Algorithms</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="mac-algorithms-d1105e715" class="topicref" data-id="mac-algorithms" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action mac-algorithms-d1105e715-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-724DFDA5-6394-46A4-B0B5-D2446D54C58C.html" id="mac-algorithms-d1105e715-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">4</ph>
+MAC Algorithms</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="aead-algorithms-d1105e827" class="topicref" data-id="aead-algorithms" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action aead-algorithms-d1105e827-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-4D5264B7-A707-43D5-8C90-CE0AC903F1DA.html" id="aead-algorithms-d1105e827-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">5</ph>
+AEAD Algorithms</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="digital-signature-algorithms-d1105e1011" class="topicref" data-id="digital-signature-algorithms" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action digital-signature-algorithms-d1105e1011-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-1B19E672-DFF0-4B0F-A245-6D1A540D915D.html" id="digital-signature-algorithms-d1105e1011-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">6</ph>
+Digital Signature Algorithms</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="key-agreement-scheme-kas-algorithms-d1105e1083" class="topicref" data-id="key-agreement-scheme-kas-algorithms" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action key-agreement-scheme-kas-algorithms-d1105e1083-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-1629B769-42DB-45E4-AC46-EF299F2657AB.html" id="key-agreement-scheme-kas-algorithms-d1105e1083-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">7</ph>
+Key Agreement Scheme (KAS) Algorithms</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="random-number-generator-rng-algorithms-d1105e1147" class="topicref" data-id="random-number-generator-rng-algorithms" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action random-number-generator-rng-algorithms-d1105e1147-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-8CBCD06A-0108-48FD-8E60-42DDB2DFEE1B.html" id="random-number-generator-rng-algorithms-d1105e1147-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">8</ph>
+Random Number Generator (RNG) Algorithms</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">2.8.1.2 Crypto_Sym_AesKeyWrap_Cipher</h1><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>crypto_Sym_Status_E Crypto_Sym_AesKeyWrap_Cipher(
+    st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, 
+    uint8_t *ptr_inputData, 
+    uint32_t dataLen, 
+    uint8_t *ptr_outData
+    );</code></pre></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> Description</h2><div class="- topic/body body"><p class="- topic/p p">This API is used to wrap or unwrap the data using AES-KW. Initialize context by calling Crypto_Sym_AesKeyWrap_Init before calling this API.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title3" id="parameters"><h2 class="- topic/title title topictitle2" id="ariaid-title3" style=""> Parameters</h2><div class="- topic/body body"><div class="table-container"><table class="- topic/table table" data-cols="5"><caption></caption><colgroup><col/><col/><col/><col/><col/></colgroup><thead class="- topic/thead thead"><tr class="- topic/row"><th class="- topic/entry entry colsep-0 rowsep-0" id="parameters__entry__1">No.</th><th class="- topic/entry entry colsep-0 rowsep-0" id="parameters__entry__2">Argument Type</th><th class="- topic/entry entry colsep-0 rowsep-0" id="parameters__entry__3">Argument Name</th><th class="- topic/entry entry colsep-0 rowsep-0" id="parameters__entry__4">Type</th><th class="- topic/entry entry colsep-0 rowsep-0" id="parameters__entry__5">Description</th></tr></thead><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__1">1</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__2">st_Crypto_Sym_BlockCtx*</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__3">ptr_aesCtx_st</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__4">Input</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__5">AES KW algorithm context</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__1">2</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__2">uint8_t*</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__3">ptr_inputData</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__4">Input</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__5">Input data to wrap or unwrap</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__1">3</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__2">uint32_t</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__3">dataLen</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__4">Input</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__5">Input length of plain data or cipher data in bytes</td></tr><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__1">4</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__2">uint8_t*</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__3">ptr_outData</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__4">Output</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="parameters__entry__5">Pointer to store cipher text/plain text as output</td></tr></tbody></table></div></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title4" id="returns"><h2 class="- topic/title title topictitle2" id="ariaid-title4" style=""> Returns</h2><div class="- topic/body body"><div class="table-container"><table class="- topic/table table" data-cols="2"><caption></caption><colgroup><col/><col/></colgroup><thead class="- topic/thead thead"><tr class="- topic/row"><th class="- topic/entry entry colsep-0 rowsep-0" id="returns__entry__1">Return Type</th><th class="- topic/entry entry colsep-0 rowsep-0" id="returns__entry__2">Description</th></tr></thead><tbody class="- topic/tbody tbody"><tr class="- topic/row"><td class="- topic/entry entry colsep-0 rowsep-0" headers="returns__entry__1">crypto_Sym_Status_E</td><td class="- topic/entry entry colsep-0 rowsep-0" headers="returns__entry__2">Function returns the status of the API.</td></tr></tbody></table></div></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title5" id="example"><h2 class="- topic/title title topictitle2" id="ariaid-title5" style=""> Example</h2><div class="- topic/body body"></div></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#description" data-tocid="description"> Description</a></li><li class="topic-item"><a href="#parameters" data-tocid="parameters"> Parameters</a></li><li class="topic-item"><a href="#returns" data-tocid="returns"> Returns</a></li><li class="topic-item"><a href="#example" data-tocid="example"> Example</a></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+  
+  <script type="text/javascript">_satellite.pageBottom();</script><!-- Adobe Analytics -->
+  
+</div>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+       
+        </body>
+</html>
