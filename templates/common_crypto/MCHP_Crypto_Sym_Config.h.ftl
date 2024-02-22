@@ -78,7 +78,7 @@ extern "C" {
 // Section: Driver Configuration
 // *****************************************************************************
 // *****************************************************************************
-<#lt>#define CRYPTO_SYM_SESSION_MAX (1)      //Always define this macro to mention max. session allowed for Symmetric Algorithm
+<#lt>#define CRYPTO_SYM_SESSION_MAX (1)      //Max. session allowed 
 
 // *****************************************************************************
 // *****************************************************************************
@@ -135,9 +135,6 @@ extern "C" {
     </#if>
 <#if crypto_sym_aes_xts_en == true>
     <#lt>#define CRYPTO_SYM_AESXTS_EN            //XTS mode is selected under AES algorithm in MCC-GUI
-    </#if>
-<#if crypto_sym_aes_eax_en == true>
-    <#lt>#define CRYPTO_SYM_AESEAX_EN            //XTS mode is selected under AES algorithm in MCC-GUI
     </#if>
 
 

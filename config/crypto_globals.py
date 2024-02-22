@@ -342,8 +342,9 @@ cryptoKasEcdhEnableSymbol         = None
 #===============================================================================
 #TRNG
 CONFIG_USE_RNG                    = None
+cryptoCurrentHwRngSupport    = []
 cryptoRngTrngEnabledSymbol        = None
-cryptoRngRngEnabledSymbol         = None
+cryptoRngPrngEnabledSymbol         = None
 
 
 #===============================================================================
@@ -361,7 +362,6 @@ cryptoHW_03710Present             = False
 cryptoHW_03710Symbol              = None
 
 #Global variables. 
-cryptoCurrentHwRngSupport    = []
 
 cryptoHwFilesDict        = {}
 cryptoWolfCryptFilesDict = {}

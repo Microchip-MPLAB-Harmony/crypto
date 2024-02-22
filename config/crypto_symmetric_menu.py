@@ -306,24 +306,24 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
                 ["crypto_sym_aes_hw_en"])
 
     #AES-EAX
-    g.cryptoAesEaxEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_eax_en", g.aesModesMenu)
-    g.cryptoAesEaxEnabledSymbol.setLabel("AES EAX Mode? ")
-    g.cryptoAesEaxEnabledSymbol.setDescription(
-            "Enable support for the AES EAX Mode Algorithm.")
-    g.cryptoAesEaxEnabledSymbol.setVisible(True)
-    g.cryptoAesEaxEnabledSymbol.setDefaultValue(False)
-    #g.cryptoAesEaxEnabledSymbol.setReadOnly(True)
+    #g.cryptoAesEaxEnabledSymbol = cryptoComponent.createBooleanSymbol(
+    #        "crypto_sym_aes_eax_en", g.aesModesMenu)
+    #g.cryptoAesEaxEnabledSymbol.setLabel("AES EAX Mode? ")
+    #g.cryptoAesEaxEnabledSymbol.setDescription(
+    #        "Enable support for the AES EAX Mode Algorithm.")
+    #g.cryptoAesEaxEnabledSymbol.setVisible(True)
+    #g.cryptoAesEaxEnabledSymbol.setDefaultValue(False)
+    ##g.cryptoAesEaxEnabledSymbol.setReadOnly(True)
 
     #AES-EAX HW
-    g.cryptoHwAesEaxEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_eax_hw_en", g.cryptoAesEaxEnabledSymbol)
-    g.cryptoHwAesEaxEnabledSymbol.setVisible(False)
-    g.cryptoHwAesEaxEnabledSymbol.setDefaultValue(False)
-    if (g.cryptoHwAesEaxSupported):
-        g.cryptoHwAesEnabledSymbol.setDependencies(
-                handleAesEaxEnabled,
-                ["crypto_sym_aes_hw"])
+    #g.cryptoHwAesEaxEnabledSymbol = cryptoComponent.createBooleanSymbol(
+    #        "crypto_sym_aes_eax_hw_en", g.cryptoAesEaxEnabledSymbol)
+    #g.cryptoHwAesEaxEnabledSymbol.setVisible(False)
+    #g.cryptoHwAesEaxEnabledSymbol.setDefaultValue(False)
+    #if (g.cryptoHwAesEaxSupported):
+    #    g.cryptoHwAesEnabledSymbol.setDependencies(
+    #            handleAesEaxEnabled,
+    #            ["crypto_sym_aes_hw"])
 
 
 #-----------------------------------------------------

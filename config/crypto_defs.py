@@ -679,12 +679,13 @@ cryptoDsEcdsaEnabledSymbol         = None
 #===============================================================================
 #KAS - Key Authorization
 kasMenu      = None
-cryptoKasEcdhEnableSymbol         = None
+cryptoKasEcdhEnableSymbol          = None
 
 #===============================================================================
 #RNG - Random Number Generation
-cryptoRngTrngEnabledSymbol        = None
-cryptoRngRngEnabledSymbol         = None
+cryptoCurrentHwRngSupport          = []
+cryptoRngTrngEnabledSymbol         = None
+cryptoRngPrngEnabledSymbol         = None
 
 #===============================================================================
 # ASYM Hardware

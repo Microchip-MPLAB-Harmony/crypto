@@ -41,7 +41,7 @@ import crypto_defs as g #Modified globals
 ################################################################################
 def ScanRng():
     if   (g.cryptoRngTrngEnabledSymbol.getValue()       == True): newValue = True
-    elif (g.cryptoRngRngEnabledSymbol.getValue()        == True): newValue = True
+    elif (g.cryptoRngPrngEnabledSymbol.getValue()        == True): newValue = True
     else: newValue = False
 
     if (g.CONFIG_USE_RNG.getValue() == newValue):
@@ -65,7 +65,7 @@ def SetupCryptoRngMenu(cryptoComponent):
     g.rngMenu = cryptoComponent.createMenuSymbol(
             "crypto_rng", None)
     g.rngMenu.setLabel("RNG Algorithms")
-    g.rngMenu.setDescription("RNG Algorithms")
+    g.rngMenu.setDescription("Random Number Generation (RNG)")
     g.rngMenu.setVisible(True)
     g.rngMenu.setHelp('MC_CRYPTO_RNG_API_H')
 
@@ -73,21 +73,21 @@ def SetupCryptoRngMenu(cryptoComponent):
     #RNG-TRNG
     g.cryptoRngTrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_rng_trng_en", g.rngMenu)
-    g.cryptoRngTrngEnabledSymbol.setLabel("TRNG?")
+    g.cryptoRngTrngEnabledSymbol.setLabel("True RNG?")
     g.cryptoRngTrngEnabledSymbol.setDescription(
-            "Enable support for the TRNG")
+            "Enable support for the True RNG")
     g.cryptoRngTrngEnabledSymbol.setVisible(True)
     g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
     g.cryptoRngTrngEnabledSymbol.setDefaultValue(True)
 
     #RNG-RNG
-    g.cryptoRngRngEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_rng_rng_en", g.rngMenu)
-    g.cryptoRngRngEnabledSymbol.setLabel("RNG?")
-    g.cryptoRngRngEnabledSymbol.setDescription(
-            "Enable support for the RNG")
-    g.cryptoRngRngEnabledSymbol.setVisible(True)
-    g.cryptoRngRngEnabledSymbol.setReadOnly(False)
-    g.cryptoRngRngEnabledSymbol.setDefaultValue(True)
+    g.cryptoRngPrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_rng_prng_en", g.rngMenu)
+    g.cryptoRngPrngEnabledSymbol.setLabel("Pseudo RNG?")
+    g.cryptoRngPrngEnabledSymbol.setDescription(
+            "Enable support for the Pseudo RNG")
+    g.cryptoRngPrngEnabledSymbol.setVisible(True)
+    g.cryptoRngPrngEnabledSymbol.setReadOnly(False)
+    g.cryptoRngPrngEnabledSymbol.setDefaultValue(True)
 
 

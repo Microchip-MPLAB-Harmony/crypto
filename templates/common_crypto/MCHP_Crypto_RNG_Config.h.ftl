@@ -22,10 +22,14 @@
 
 <#lt>#define CRYPTO_RNG_SESSION_MAX (1)
 
-<#lt>#define CRYPTO_RNG_PRNG_EN
+<#if crypto_rng_prng_en == true>
+    <#lt>#define CRYPTO_RNG_PRNG_EN
+    <#lt>#define CRYPTO_RNG_WC_PRNG_EN
+    <#lt>#define CRYPTO_RNG_WC_ALGO_EN
+    </#if>
 
-<#lt>#define CRYPTO_RNG_WC_ALGO_EN
-
-<#lt>#define CRYPTO_RNG_WC_PRNG_EN
+<#if crypto_rng_trng_en == true>
+    <#lt>#define CRYPTO_RNG_TRNG_EN
+    </#if>
 
 #endif /* MCHP_CRYPTO_RNG_CONFIG_H */
