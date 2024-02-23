@@ -71,14 +71,14 @@ def SetupCryptoRngMenu(cryptoComponent):
 
 
     #RNG-TRNG
-    g.cryptoRngTrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_rng_trng_en", g.rngMenu)
-    g.cryptoRngTrngEnabledSymbol.setLabel("True RNG?")
-    g.cryptoRngTrngEnabledSymbol.setDescription(
-            "Enable support for the True RNG")
-    g.cryptoRngTrngEnabledSymbol.setVisible(True)
-    g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
-    g.cryptoRngTrngEnabledSymbol.setDefaultValue(True)
+    #g.cryptoRngTrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
+    #        "crypto_rng_trng_en", g.rngMenu)
+    #g.cryptoRngTrngEnabledSymbol.setLabel("True RNG?")
+    #g.cryptoRngTrngEnabledSymbol.setDescription(
+    #        "Enable support for the True RNG")
+    #g.cryptoRngTrngEnabledSymbol.setVisible(True)
+    #g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
+    #g.cryptoRngTrngEnabledSymbol.setDefaultValue(True)
 
     #RNG-RNG
     g.cryptoRngPrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
