@@ -62,6 +62,7 @@ crypto_Rng_Status_E Crypto_Rng_Wc_Prng_GenerateBlock(uint8_t* ptr_rngData, uint3
     {
         ret_rngStat_en = CRYPTO_RNG_ERROR_FAIL;
     }
+    wc_FreeRng(rng_st);
     return ret_rngStat_en;
 }
 #endif  /* CRYPTO_RNG_WC_PRNG_EN */
