@@ -53,9 +53,7 @@
 - N/A
 
 ### Known Issues
-1. Line 1885 of wolfcrypt library file src/thirdparty/wolfssl/wolfcrypt/src/dh.c generates a compiler error. This line
-of code must be moved to the line below the line that follows to prevent this error.  
-2. It is recommended to use the Master branch of wolfSSL as this resolves a number of build issues, dependancies will be updated in the future. 
+1. It is required to use the Master branch of wolfSSL, dependancies will be updated when master is tagged for stable release. 
 
 ### Development Tools
 
