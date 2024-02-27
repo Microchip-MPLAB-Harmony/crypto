@@ -3,48 +3,50 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
-## Crypto Release v4.0.0
+## Crypto Release v4.0.0-E1
 
 ### New Features
-- **Support for updated wolfCrypt/wolfSSL** The cryptographic library now has support for wolfSSL version 5.6.6
-- **MCC Configuration Options** Initial release of Crypto V4 API Library supporting
-1.  Hash Algorithms:
+- **New API's for all Cryptographic Operations** This is an engineering release supporting a new Harmony Crypto Library featuring a new API and optimized code base. No Hardware acceleration is available in this Engineering release.
+- **Support for updated wolfCrypt/wolfSSL** The cryptographic library now has support for wolfSSL version 5.6.6 or later.
+- **MCC Configuration Options** Initial release of Crypto V4 API Library supporting the following alogorthims
 
-    MD5  
-    RIPEMD-160  
-    SHA-1  
-    SHA-2: SHA2-224, SHA2-256, SHA2-384, SHA2-512, SHA2-512/224, SHA2-512/256  
-    SHA-3: SHA3-224, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256  
-    BLAKE: Blake2b, Blake2s  
+    1.  Hash Algorithms:
 
-2.  Symmetric Algorithms:
+            MD5  
+            RIPEMD-160  
+            SHA-1  
+            SHA-2: SHA2-224, SHA2-256, SHA2-384, SHA2-512  
+            SHA-3: SHA3-224, SHA3-256, SHA3-384, SHA3-512, SHAKE-128, SHAKE-256  
+            BLAKE: Blake2b, Blake2s  
 
-    TDES/3DES: ECB, CBC  
-    AES: ECB, CBC, OFB, CTR, XTS, CFB1, CFB8, CFB64, CFB128  
-    Camellia: ECB, CBC, OFB, CTR, XTS, CFB1, CFB8, CFB64, CFB128  
-    AES-KW  
-    ChaCha20  
+    2.  Symmetric Algorithms:
 
-3.  MAC Algorithms (Message authentication code):
+            TDES/3DES: ECB, CBC  
+            AES: ECB, CBC, OFB, CTR, XTS, CFB1, CFB8, CFB64, CFB128  
+            Camellia: ECB, CBC, OFB, CTR, XTS, CFB1, CFB8, CFB64, CFB128  
+            AES-KW  
+            ChaCha20  
 
-    AES: CMAC
+    3.  MAC Algorithms (Message authentication code):
 
-4.  Digital Signature Algorithms:
+            AES: CMAC
 
-    ECDSA
+    4.  Digital Signature Algorithms:
 
-5.  AEAD  Algorithms (Authenticated Encryption With Associated Data):
+            ECDSA
 
-    AES-CCM  
-    AES-EAX
+    5.  AEAD  Algorithms (Authenticated Encryption With Associated Data):
 
-6.  KAS Algorithms(Key Agreement Scheme):
+            AES-CCM  
+            AES-EAX
 
-    ECDH
+    6.  KAS Algorithms(Key Agreement Scheme):
 
-7.  RNG (Random Number Generator)
+            ECDH
 
-    Pseudo RNG
+    7.  RNG (Random Number Generator) - Requires SYSTICK to be enabled
+
+            Pseudo RNG
 
 
 ### Bug fixes
@@ -52,10 +54,8 @@
 
 ### Known Issues
 1. Line 1885 of wolfcrypt library file src/thirdparty/wolfssl/wolfcrypt/src/dh.c generates a compiler error. This line
-of code must be moved to the line below the line that follows to prevent this
-error.  
-2. There are a few other errors associated with the V5.6.6 WolfSSL that
-are corrected  using the latest master of 2/12/24 Commit 06f04def1b187. 
+of code must be moved to the line below the line that follows to prevent this error.  
+2. It is recommended to use the Master branch of wolfSSL as this resolves a number of build issues, dependancies will be updated in the future. 
 
 ### Development Tools
 

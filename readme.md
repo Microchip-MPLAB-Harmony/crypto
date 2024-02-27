@@ -30,11 +30,9 @@ reference information.
 # Contents Summary
 
 | Folder    | Description                                                |
-|-----------|------------------------------------------------------------|
-| apps      | Example applications for Crypto library components         |
+|-----------|----------------------------------------------------------         |
 | config    | Crypto module configuration scripts                        |
-| docs      | Crypto module library help documentation                   |
-| driver    | Crypto module peripheral device drivers                    |
+| docs      | Crypto module library help documentation                   |                    |
 | src       | Crypto v4 API Library source                               |
 | templates | Application and system file templates                      |
 
