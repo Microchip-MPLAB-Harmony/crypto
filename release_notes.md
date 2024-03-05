@@ -53,7 +53,7 @@
 - N/A
 
 ### Known Issues
-1. It is required to use the Master branch of wolfSSL, dependancies will be updated when master is tagged for stable release. 
+1. It is required to use the v5.6.7-E1 tag of wolfSSL with this repository. 
 
 ### Development Tools
 
