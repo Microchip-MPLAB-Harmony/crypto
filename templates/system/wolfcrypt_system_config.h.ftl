@@ -39,7 +39,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#lt>#define WOLFSSL_USER_IO
 <#lt>#define NO_WRITEV
 <#lt>#define NO_FILESYSTEM
-<#lt>#define USE_FAST_MATH
+<#lt>//#define USE_FAST_MATH  //Conflicts with WOLFSSL_SP_MATH
 <#lt>#define NO_INLINE 
 
 <#lt>//Math Model Defines
@@ -52,6 +52,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 //Needed when WOFSSL_SP_MATH defined
 <#lt>#define WOLFSSL_HAVE_SP_RSA  
+<#lt>#define WOLFSSL_HAVE_SP_DH
 
 <#lt>//To prevent usage of SP functions defined by this: 
 <#lt>//#if defined(HAVE_FIPS_VERSION) && HAVE_FIPS_VERSION == 2 
@@ -112,7 +113,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 <#lt>#define NO_DSA
 <#lt>#define FP_MAX_BITS 4096
 <#lt>#define USE_CERT_BUFFERS_2048
-<#lt>#define WOLFSSL_RSA_PUBLIC_ONLY
+<#lt>//#define WOLFSSL_RSA_PUBLIC_ONLY  //Conflict with WOLFSSL_HAVE_SP_DH
 <#lt>#define WC_RSA_PSS
 <#lt>#define WOLFSSL_STATIC_RSA
 <#lt>#define NO_DEV_RANDOM
