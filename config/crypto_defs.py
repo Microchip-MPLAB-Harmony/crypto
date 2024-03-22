@@ -32,6 +32,18 @@ CONFIG_USE_HMAC           = None  #Any MAC Crypto
 CONFIG_USE_RNG            = None  #Any RNG method
 
 ################################################################################
+## Trustzone - for Unicorn/Omega/Lifeguard processors
+################################################################################
+trustZoneSupported        =  False
+trustZoneEnabled          =  False
+
+trustZoneDevices = [
+    ['SAML11', 'L11'], #OMEGA
+    ['PIC32CK', 'SG'], #UNICORN
+    ['PIC32CM', 'LS']  #LIFEGUARD
+]
+
+################################################################################
 ## CRYPTO IMPLEMENTATIONS
 ################################################################################
 #===============================================================================

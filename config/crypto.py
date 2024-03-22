@@ -175,6 +175,18 @@ def instantiateComponent(cryptoComponent):
     print("Crypto: Display Name " + cryptoComponent.getDisplayName())
     print("Crypto ID: " + cryptoComponent.getID())
 
+    #TrustZone
+    #--Processor name patterns for trustzone: 
+    #  trustZoneDevices[device #][0 or 1] 
+    g.trustZoneSupported = False
+    ll = len(g.trustZoneDevices)
+    for dev in range(ll):
+        if (g.trustZoneDevices[dev][0] in processor):
+            if (g.trustZoneDevices[dev][1] in processor):
+                print("CRYPTO:  Trust Zone Supported for %s"%processor)
+                g.trustZoneSupported = True
+                break;
+
     #print("   module: %s : %s :%s\n"%(cryptoComponent["component"].getName(),
     #                                  cryptoComponent["component"].getID(),
     #                                  cryptoComponent["component"].getPath()))

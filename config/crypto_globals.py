@@ -24,7 +24,9 @@
 # THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 # ***************************************************************************'''
 
+################################################################################
 #GLOBAL Declarations
+################################################################################
 cryptoHwSupported          =  False
 cryptoHwEnabledSymbol      =  None
 
@@ -39,6 +41,13 @@ cryptoHaveSysTime         =  False
 cryptoDependSysTime       =  False
 
 asn1Support               =  False
+
+################################################################################
+## Trustzone - for Unicorn/Omega/Lifeguard processors
+################################################################################
+trustZoneSupported        =  False  #Device supports trustZone
+trustZoneEnabled          =  False  #Symbol
+trustZoneDevices = []               #TZ Device Name Patterns 
 
 #===============================================================================
 #MENU
