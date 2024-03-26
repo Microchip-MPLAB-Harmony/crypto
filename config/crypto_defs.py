@@ -36,12 +36,15 @@ CONFIG_USE_RNG            = None  #Any RNG method
 ################################################################################
 trustZoneSupported        =  False
 trustZoneEnabled          =  False
+cryptoTzEnabledSymbol     = None
 
 trustZoneDevices = [
     ['SAML11', 'L11'], #OMEGA
     ['PIC32CK', 'SG'], #UNICORN
     ['PIC32CM', 'LS']  #LIFEGUARD
 ]
+
+trustZoneFiles = []
 
 ################################################################################
 ## CRYPTO IMPLEMENTATIONS

@@ -5,7 +5,6 @@
 from wolfcrypt_globals import *
 
 localwolfCryptComponent   = None
-cryptoHwAdditionalDefines = set([])
 
 cryptoWolfSSLIncluded = None
 #cryptoSupportCompression = None
@@ -13,7 +12,7 @@ cryptoHaveZlib = None
 
 #asn1Support = None
 
-# SYMBOLS used by FTL are put in the cryptoHwAdditionalDefines
+#SYMBOLS used by FTL are put in the cryptoHwAdditionalDefines
 cryptoHwAdditionalDefines = set([])
 
 #Any HW that is enabled 

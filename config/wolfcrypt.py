@@ -30,79 +30,10 @@ import ntpath
 modulePath =  Module.getPath()
 sys.path.append(modulePath + "config")
 import wolfcrypt_globals
-import wolfcrypt_defs
+import wolfcrypt_defs        as w
+import crypto_globals               #Initial globals
+import crypto_defs           as g   #Modified globals
 print("WOLFCRYPT: Start")
-
-'''
-#Common Files required by WolfCrypt
-#--For the software implementation
-cryptoWolfCryptFiles = [
-        "aes.h", "aes.c", #"arc4.c", "arc4.h", "asm.c", "asn.c", "asn.h",
-        #"asn_public.h", "async.c", "async.h", "camellia.c",
-        #"camellia.h", "certs_test.h", "chacha.c", "chacha.h",
-        #"chacha20_poly1305.c", "chacha20_poly1305.h", "cmac.c",
-        #"cmac.h", "coding.c", "coding.h", "compress.c",
-        #"compress.h", "curve25519.c", "crypt_rng_hw.h",
-        #"curve25519.h", "des3.h", "dh.c", "dh.h", "dsa.c",
-        #"crypt_sha_sam11105.h","crypt_sha_sam6156.h",
-        #"crypt_sha_hw.h", "crypt_aes_hw.h", "crypt_aes_sam6149.h",
-        #"crypt_aes_hwInt.h", "crypt_sha1_hw.h", "crypt_sha256_hw.h",
-        #"crypt_sha224_hw.h", "crypt_aes_u2238.h", "crypt_sha384_hw.h", "crypt_sha512_hw.h",
-        #"crypt_tdes_hw.h", "crypt_tdes_sam6150.h", "crypt_tdes_hwInt.h",
-        #"dsa.h", "ecc.h", "ed25519.c", "ed25519.h", "error.c",
-        #"error-crypt.h", "fe_low_mem.c", "fe_operations.c",
-        #"fe_operations.h", "pic32mz-crypt.h",
-        #"fe_x25519_128.i", "fe_x25519_x64.i",
-        #"fips_test.h",
-        #"fp_mont_small.i", "fp_mul_comba_12.i", "fp_mul_comba_17.i",
-        #"fp_mul_comba_20.i", "fp_mul_comba_24.i", "fp_mul_comba_28.i",
-        #"fp_mul_comba_3.i", "fp_mul_comba_32.i", "fp_mul_comba_4.i",
-        #"fp_mul_comba_48.i", "fp_mul_comba_6.i", "fp_mul_comba_64.i",
-        #"fp_mul_comba_7.i", "fp_mul_comba_8.i", "fp_mul_comba_9.i",
-        #"fp_mul_comba_small_set.i", "fp_sqr_comba_12.i",
-        #"fp_sqr_comba_17.i", "fp_sqr_comba_20.i", "fp_sqr_comba_24.i",
-        #"fp_sqr_comba_28.i", "fp_sqr_comba_3.i", "fp_sqr_comba_32.i",
-        #"fp_sqr_comba_4.i", "fp_sqr_comba_48.i", "fp_sqr_comba_6.i",
-        #"fp_sqr_comba_64.i", "fp_sqr_comba_7.i", "fp_sqr_comba_8.i",
-        #"fp_sqr_comba_9.i", "fp_sqr_comba_small_set.i",
-        #"ge_low_mem.c", "ge_operations.c", "ge_operations.h",
-        "hash.c", "hash.h",
-        #"hc128.c", "hc128.h", "hmac.c",
-        #"hmac.h", "idea.c", "idea.h", "integer.c", "integer.h",
-        #"logging.c", "logging.h", "md2.c", "md2.h", "md4.c",
-        "md4.h", "md5.h",
-        #"mem_track.h", "memory.c", "memory.h",
-        #"misc.c", "misc.h", "mpi_class.h", "mpi_superclass.h",
-        #"pkcs11.h", "pkcs12.c", "pkcs12.h", "pkcs7.c",
-        #"pkcs7.h", "poly1305.c", "poly1305.h", "pwdbased.c",
-        #"pwdbased.h", "rabbit.c", "rabbit.h", "random.c", "random.h",
-        #"ripemd.c", "ripemd.h", "rsa.h",
-        #"selftest.h", "settings.h", 
-        "sha.c", "sha.h","sha256.c", "sha256.h",
-        "sha3.c", "sha3.h", "sha512.h", "sha512.c",
-        #"signature.c", 
-        #"signature.h", "sniffer.h", "sniffer_error.h",
-        #"sp.h", "sp_arm32.c", "sp_arm64.c",
-        #"sp_armthumb.c", "sp_c32.c", "sp_c64.c", "sp_int.c",
-        #"sp_int.h", "sp_x86_64.c",
-        #"srp.c", "srp.h", "ssl.h",
-        #"tfm.c", "tfm.h", "types.h", "version.h",
-        #"visibility.h", "wc_encrypt.c", "wc_encrypt.h",
-        # "des3.c", 
-        "wc_pkcs11.c", "wc_pkcs11.h", "wc_port.c", "wc_port.h",
-        "wolfmath.h",
-        "wolfevent.c", "wolfevent.h", "wolfio.h", "wolfmath.c",
-        "md5.c"
-]
-
-#ZLIB
-cryptoZlibFiles = [
-        'crc32.h','deflate.h','inffast.h','inffixed.h','inflate.h','inftrees.h',
-        'trees.h','adler32.c','crc32.c','deflate.c','zconf.h','zutil.h','zlib.h',
-        'inflate.c','trees.c','gzguts.h','zutil.c','inftrees.c','inffast.c'
-]
-'''
-
 
 #===============================================================================
 #OVERRIDE Files  
@@ -114,24 +45,10 @@ cryptoOverridableSrcFiles    = []
 #cryptoOverridableHeaderFiles = ["aes.h", "sha.h", "sha256.h", "sha512.h", "types.h", "settings.h","wc_port.h",]
 cryptoOverridableHeaderFiles = []
 
-localwolfCryptComponent   = None
-cryptoHwAdditionalDefines = set([])
-
-cryptoWolfSSLIncluded = None
-#cryptoSupportCompression = None
-cryptoHaveZlib = None
-
-#asn1Support = None
 
 def instantiateComponent(wolfCryptComponent):
 
-    global localwolfCryptComponent
-    #global cryptoAdditionalHwDefines
-    global cryptoWolfSSLIncluded
-
-    #global cryptoSupportCompression
-    global cryptoHaveZlib
-
+    #TODO:  Dependency on SysTime module
     global cryptoHaveSysTime
     global cryptoDependSysTime
 
@@ -139,9 +56,9 @@ def instantiateComponent(wolfCryptComponent):
 
     #cryptoAdditionalHwDefines = wolfCryptComponent.createStringSymbol("wolfCryptAdditionalHwDefines", None)
     #cryptoAdditionalHwDefines.setVisible(False)
-    localwolfCryptComponent = wolfCryptComponent
+    w.localwolfCryptComponent = wolfCryptComponent
 
-    setupWolfCryptFiles(localwolfCryptComponent)
+    setupWolfCryptFiles(w.localwolfCryptComponent)
 
     #---------------------------------------------------------------------------
     #wolfCrypt Library
@@ -184,6 +101,15 @@ def addFileName(fileName, prefix, component, srcPath, destPath, enabled, project
         filename.setDestPath(destPath)
         filename.setType("SOURCE")
 
+    #TrustZone - TODO:  Make TrustZone optional configuration
+    g.trustZoneFileIds.append(filename.getID())
+    if (g.trustZoneSupported == True):
+        #Set TrustZone <filelist>.setSecurity("SECURE")
+        filename.setSecurity("SECURE")
+    else:
+        #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
+        filename.setSecurity("NON_SECURE")
+
     filename.setEnabled(enabled)
 
 ################################################################################
@@ -200,6 +126,15 @@ def createFileComponent(baseComponent, fileName, srcPath, destPath):
         fileComp.setType("HEADER")
     else:
         fileComp.setType("SOURCE")
+
+    #TrustZone
+    g.trustZoneFileIds.append(fileComp.getID())
+    if (g.trustZoneEnabled.getValue() == True):
+        #Set TrustZone <filelist>.setSecurity("SECURE")
+        fileNameSymbol.setSecurity("SECURE")
+    else:
+        #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
+        fileNameSymbol.setSecurity("NON_SECURE")
 
     return fileComp
 
@@ -591,21 +526,19 @@ def setFilesForWolfSslEnabled(enable):
 
 
 def onAttachmentConnected(source, target):
-    global cryptoWolfSSLIncluded
     #global cryptoSupportCompression
-    global cryptoHaveZlib
     #global asn1Support
     #global cryptoTrngEnabledSymbol
 
     #WolfSSL
     if (target["component"].getID() == "lib_wolfssl"):
-        cryptoWolfSSLIncluded.setValue(True)
+        w.cryptoWolfSSLIncluded.setValue(True)
 
     print("'" + target["component"].getID() + "'")
 
     #ZLIB
     if (target["component"].getID() == "lib_zlib"):
-        cryptoHaveZlib.setValue(True)
+        w.cryptoHaveZlib.setValue(True)
         #cryptoSupportCompression.setVisible(True)
 
     '''
@@ -618,20 +551,18 @@ def onAttachmentConnected(source, target):
     '''
 
 def onAttachmentDisconnected(source, target):
-    global cryptoWolfSSLIncluded
     #global cryptoSupportCompression
-    global cryptoHaveZlib
     #global asn1Support
 
     #WolfSSL
     if (target["component"].getID() == "lib_wolfssl"):
-        cryptoWolfSSLIncluded.setValue(False)
+        w.cryptoWolfSSLIncluded.setValue(False)
 
     print("'" + target["component"].getID() + "'")
 
     #ZLIB
     if (target["component"].getID() == "lib_zlib"):
-        cryptoHaveZlib.setValue(False)
+        w.cryptoHaveZlib.setValue(False)
         #cryptoSupportCompression.setVisible(False)
     '''
     #SYS_TIME
