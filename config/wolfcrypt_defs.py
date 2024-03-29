@@ -7,7 +7,9 @@ from wolfcrypt_globals import *
 localwolfCryptComponent   = None
 
 cryptoWolfSSLIncluded = None
-#cryptoSupportCompression = None
+
+#Zlib
+cryptoSupportCompression = None
 cryptoHaveZlib = None
 
 #asn1Support = None

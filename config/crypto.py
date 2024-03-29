@@ -293,18 +293,18 @@ def instantiateComponent(cryptoComponent):
     #
     g.cryptoTzEnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_trustzone", None)
-    g.cryptoTzEnabledSymbol.setLabel("Enable Crypto in the TrustZone?")
+    g.cryptoTzEnabledSymbol.setLabel("Enable Crypto in TrustZone?")
     g.cryptoTzEnabledSymbol.setDescription(
-            "Enable Crypto in the TrustZone")
+            "Enable Crypto in TrustZone")
     g.cryptoTzEnabledSymbol.setHelp('CRYPT_TZ_SUM')
-    g.cryptoTzEnabledSymbol.setVisible(False)
     g.cryptoTzEnabledSymbol.setDefaultValue(False)
-    
+
     if (g.trustZoneSupported == True):
         g.cryptoTzEnabledSymbol.setVisible(True)
-        g.cryptoHwTzEnabledSymbol.setDependencies(
-                handleTzEnabled, ["crypto_trustzone"])
+        #g.cryptoTzEnabledSymbol.setDependencies(
+        #        handleTzEnabled, ["crypto_trustzone"])
         g.cryptoTzEnabledSymbol.setDefaultValue(True)
+        g.cryptoTzEnabledSymbol.setReadOnly(True)   #TODO: Make configurable
     else:
         g.cryptoTzEnabledSymbol.setVisible(False)
         g.cryptoTzEnabledSymbol.setDefaultValue(False)

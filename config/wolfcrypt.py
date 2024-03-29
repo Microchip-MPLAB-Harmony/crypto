@@ -68,6 +68,22 @@ def instantiateComponent(wolfCryptComponent):
     wolfcrypt.setVisible(False)
     wolfcrypt.setDefaultValue(True)
 
+    w.cryptoWolfSSLIncluded = wolfCryptComponent.createBooleanSymbol("wolfcrypt_included", None)
+    w.cryptoWolfSSLIncluded.setVisible(False)
+    w.cryptoWolfSSLIncluded.setDefaultValue(False)
+
+    #Configuration GUI
+    w.cryptoHaveZlib = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havezlib", None)
+    w.cryptoHaveZlib.setVisible(False)
+    w.cryptoHaveZlib.setDefaultValue(False)
+
+    w.cryptoSupportCompression = wolfCryptComponent.createBooleanSymbol("wolfcrypt_supportcompression", None)
+    w.cryptoSupportCompression.setLabel("Support Compression?")
+    w.cryptoSupportCompression.setDescription("Add support for zLib compression")
+    w.cryptoSupportCompression.setVisible(False)
+    w.cryptoSupportCompression.setDefaultValue(False)
+    w.cryptoSupportCompression.setHelp('CRYPT_HUFMANN_SUM')
+
 
 def get_script_dir(follow_symlinks=True):
     if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
@@ -521,12 +537,9 @@ def setFilesForWolfSslEnabled(enable):
             fc.setEnabled(True)
         setFilesForHwSupport(g.cryptoWolfCryptEnabledMenuComponentsList[0].value)
 
-
 '''
 
-
 def onAttachmentConnected(source, target):
-    #global cryptoSupportCompression
     #global asn1Support
     #global cryptoTrngEnabledSymbol
 
@@ -539,20 +552,16 @@ def onAttachmentConnected(source, target):
     #ZLIB
     if (target["component"].getID() == "lib_zlib"):
         w.cryptoHaveZlib.setValue(True)
-        #cryptoSupportCompression.setVisible(True)
+        w.cryptoSupportCompression.setVisible(True)
 
-    '''
     #SYS_TIME
-    if ((target["component"].getID() == 'sys_time') or
-        (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
-        #asn1Support.setReadOnly(False)
-        cryptoTrngEnabledSymbol.setReadOnly(False)
-        cryptoTrngEnabledSymbol.setValue(True)
-    '''
+    #if ((target["component"].getID() == 'sys_time') or
+    #    (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
+    #    #asn1Support.setReadOnly(False)
+    #    cryptoTrngEnabledSymbol.setReadOnly(False)
+    #    cryptoTrngEnabledSymbol.setValue(True)
 
 def onAttachmentDisconnected(source, target):
-    #global cryptoSupportCompression
-    #global asn1Support
 
     #WolfSSL
     if (target["component"].getID() == "lib_wolfssl"):
@@ -563,12 +572,11 @@ def onAttachmentDisconnected(source, target):
     #ZLIB
     if (target["component"].getID() == "lib_zlib"):
         w.cryptoHaveZlib.setValue(False)
-        #cryptoSupportCompression.setVisible(False)
-    '''
+        w.cryptoSupportCompression.setVisible(False)
+
     #SYS_TIME
-    if (target["component"].getID() == "sys_time"):
-        asn1Support.setValue(False)
-        #asn1Support.setReadOnly(True)
-        cryptoTrngEnabledSymbol.setValue(False)
-        cryptoTrngEnabledSymbol.setReadOnly(True)
-    '''
+    #if (target["component"].getID() == "sys_time"):
+    #    asn1Support.setValue(False)
+    #    #asn1Support.setReadOnly(True)
+    #    cryptoTrngEnabledSymbol.setValue(False)
+    #    cryptoTrngEnabledSymbol.setReadOnly(True)

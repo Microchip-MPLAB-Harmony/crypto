@@ -2,8 +2,10 @@
 localwolfCryptComponent   = None
 cryptoHwAdditionalDefines = set([])
 
-cryptoWolfSSLIncluded = None
-#cryptoSupportCompression = None
+cryptoWolfSSLIncluded     = None
+
+#Zlib
+cryptoSupportCompression  = None
 cryptoHaveZlib = None
 
 #asn1Support = None
