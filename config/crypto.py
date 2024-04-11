@@ -701,7 +701,7 @@ def AddAlwaysOnFiles(cryptoComponent):
         ccSystemConfigFile = cryptoComponent.createFileSymbol(
                 "DRV_CC_SYSTEM_CONFIG_TZ", None)
         ccSystemConfigFile.setOutputName(outName)
-        ccSystemConfigFile.setDestPath(destPath)
+        ccSystemConfigFile.setDestPath(dstPath)
         ccSystemConfigFile.setProjectPath(projectPath)
         ccSystemConfigFile.setSourcePath(srcPath + fileName)
         ccSystemConfigFile.setMarkup(True)
