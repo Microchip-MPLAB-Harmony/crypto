@@ -36,6 +36,7 @@ CONFIG_USE_RNG            = None  #Any RNG method
 ################################################################################
 trustZoneSupported        =  False
 trustZoneEnabled          =  False
+
 cryptoTzEnabledSymbol     = None
 
 trustZoneDevices = [

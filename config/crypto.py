@@ -76,13 +76,13 @@ def AddFileName(fileName, prefix, component,
     #TrustZone - TODO:  Make this a configurable option
     g.trustZoneFileIds.append(fileID)
     if (g.trustZoneSupported == True):
-        #Set TrustZone <filelist>.setSecurity("SECURE")
         fileNameSymbol.setSecurity("SECURE")
         tz = "S" 
+        print("CRYPTO:  Adding (TZ=%s) ""%s"" "%(tz, projectPath + fileName))
     else:
-        #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
         fileNameSymbol.setSecurity("NON_SECURE")
         tz = "N" 
+        print("CRYPTO:  Adding ""%s"" "%(projectPath + fileName))
 
     return (fileID, tz)
 
@@ -145,7 +145,6 @@ def SetupCommonCryptoFiles(basecomponent) :
                          "crypto/common_crypto/",      #Dest Path
                          True,                         #Enabled
                          projectPath) #Project Path
-        print("CRYPTO:  Adding (TZ=%s) ""%s"" "%(tz[0],projectPath + fileName))
 
     projectPath = "config/" + configName + "/crypto/common_crypto/src/"
     for fileName in ccpsfl_trim:
@@ -156,7 +155,6 @@ def SetupCommonCryptoFiles(basecomponent) :
                          "crypto/common_crypto/src/",  #Path Dest
                          True,                         #Enabled
                          projectPath)
-        print("CRYPTO:  Adding (TZ=%s) ""%s"" "%(tz[0], projectPath + fileName))
 
 
 
@@ -187,7 +185,21 @@ def instantiateComponent(cryptoComponent):
     print("Crypto: Display Name " + cryptoComponent.getDisplayName())
     print("Crypto ID: " + cryptoComponent.getID())
 
+    #Dependencies
+    g.cryptoWolfSSLIncluded = False
+
     #TrustZone
+    #--Processor name patterns for trustzone: 
+    #  trustZoneDevices[device #][0 or 1] 
+    g.trustZoneSupported = False
+    if Variables.get("__TRUSTZONE_ENABLED") != None and Variables.get("__TRUSTZONE_ENABLED") == "true":
+        g.trustZoneSupported = True
+        print("CRYPTO:  TRUST_ZONE is true")
+    else:
+        print("CRYPTO:  TRUST_ZONE NOT true")
+
+    # TODO:  This is the backup for the failure of the variable
+    #        to indicate trustZone support.
     #--Processor name patterns for trustzone: 
     #  trustZoneDevices[device #][0 or 1] 
     g.trustZoneSupported = False
@@ -198,10 +210,6 @@ def instantiateComponent(cryptoComponent):
                 print("CRYPTO:  Trust Zone Supported for %s"%processor)
                 g.trustZoneSupported = True
                 break;
-
-    #print("   module: %s : %s :%s\n"%(cryptoComponent["component"].getName(),
-    #                                  cryptoComponent["component"].getID(),
-    #                                  cryptoComponent["component"].getPath()))
 
     #cryptoAdditionalHwDefines = cryptoComponent.createStringSymbol(
     #                                 "cryptoAdditionalHwDefines", None)
@@ -247,7 +255,11 @@ def instantiateComponent(cryptoComponent):
     #wolfcryptSearchPath = basecomponent.setPath("..\src\third_party\wolfssl\wolfssl")
 
     #Project Include Path Directories
-    ccIncludePath = cryptoComponent.createSettingSymbol("XC32_CRYPTO_INCLUDE_DIRS", None)
+    if (g.trustZoneSupported == True):
+        ccIncludePath = cryptoComponent.createSettingSymbol("XC32_CRYPTO_SECURE_INCLUDE_DIRS", None)
+        ccIncludePath.setSecurity("SECURE")
+    else:
+        ccIncludePath = cryptoComponent.createSettingSymbol("XC32_CRYPTO_INCLUDE_DIRS", None)
     ccIncludePath.setCategory("C32")
     ccIncludePath.setKey("extra-include-directories")
     ccIncludePath.setValue( "../src/third_party/wolfssl/wolfssl/wolfcrypt"
@@ -270,7 +282,6 @@ def instantiateComponent(cryptoComponent):
                      "crypto/wolfcrypt/",          #Dest Path
                      True,                         #Enabled
                      projectPath)                  #Project Path
-    print("CRYPTO:  Adding (TZ=%s) ""%s"" "%(tz, projectPath + "config.h"))
 
     #INCLUDE FILE to configure WOLFCRYPT with the WOLFSSL_USER_SETTINGS 
     #Project define
@@ -281,7 +292,6 @@ def instantiateComponent(cryptoComponent):
                      "crypto/wolfcrypt/",          #Path Dest
                      True,                         #Enabled
                      projectPath)                  #Project Path
-    print("CRYPTO:  Adding (TZ=%s)""%s"" "%(tz, projectPath + "user_settings.h"))
 
     #--------------------------------------------------------
     #Crypto Function Group Configuration Files (for API optimization)
@@ -293,22 +303,21 @@ def instantiateComponent(cryptoComponent):
 
     #TrustZone
     # TODO:  Make TrustZone a visible option.
-    #
     g.cryptoTzEnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_trustzone", None)
-    g.cryptoTzEnabledSymbol.setLabel("Enable Crypto in TrustZone?")
+    g.cryptoTzEnabledSymbol.setLabel("Crypto in TrustZone?")
     g.cryptoTzEnabledSymbol.setDescription(
-            "Enable Crypto in TrustZone")
+            "Crypto Enabled in TrustZone")
     g.cryptoTzEnabledSymbol.setHelp('CRYPT_TZ_SUM')
     g.cryptoTzEnabledSymbol.setDefaultValue(False)
 
+    #TrustZone menu symbol
     if (g.trustZoneSupported == True):
         g.cryptoTzEnabledSymbol.setVisible(True)
         #g.cryptoTzEnabledSymbol.setDependencies(
         #        handleTzEnabled, ["crypto_trustzone"])
         g.cryptoTzEnabledSymbol.setDefaultValue(True)
         g.cryptoTzEnabledSymbol.setReadOnly(True)   #TODO: Make configurable
-        print("CRYPTO:  TrustZone Supported")
     else:
         g.cryptoTzEnabledSymbol.setVisible(False)
         g.cryptoTzEnabledSymbol.setDefaultValue(False)
@@ -338,11 +347,12 @@ def instantiateComponent(cryptoComponent):
     #TrustZone - TODO:  Make this a configurable option
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccHashConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding HASH=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_HASH.getValue(), projectPath + fileName + ".ftl" ))
     else:
         ccHashConfigFile.setSecurity("NON_SECURE")
-    tz = ccHashConfigFile.getSecurity()
-    print("CRYPTO:  Adding SYM=%s TZ=%s""%s"" "%(
-               g.CONFIG_USE_HASH.getValue(), tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding HASH=%s "" "%(
+                   g.CONFIG_USE_HASH.getValue(), projectPath + fileName + ".ftl" ))
 
 
     #SYM Function Group
@@ -367,12 +377,13 @@ def instantiateComponent(cryptoComponent):
     g.trustZoneFileIds.append(ccSymConfigFile.getID())
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccSymConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding SYM=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_SYM.getValue(), projectPath + fileName + ".ftl" ))
 
     else:
         ccSymConfigFile.setSecurity("NON_SECURE")
-    tz = ccSymConfigFile.getSecurity()
-    print("CRYPTO:  Adding SYM=%s TZ=%s ""%s"" "%(
-               g.CONFIG_USE_SYM.getValue(), tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding SYM=%s "" "%(
+                   g.CONFIG_USE_SYM.getValue(), projectPath + fileName + ".ftl" ))
 
     #AEAD Function Group
     #--CONFIG_USE_AEAD
@@ -395,12 +406,13 @@ def instantiateComponent(cryptoComponent):
     g.trustZoneFileIds.append(ccAeadConfigFile.getID())
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccAeadConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding AEAD=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_AEAD.getValue(), projectPath + fileName + ".ftl" ))
 
     else:
         ccAeadConfigFile.setSecurity("NON_SECURE")
-    tz = ccAeadConfigFile.getSecurity()
-    print("CRYPTO:  Adding AEAD=%s TZ=%s ""%s"" "%(
-               g.CONFIG_USE_AEAD.getValue(),tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding AEAD=%s "" "%(
+                   g.CONFIG_USE_AEAD.getValue(), projectPath + fileName + ".ftl" ))
 
     #MAC Function Group
     #--CONFIG_USE_MAC
@@ -423,12 +435,13 @@ def instantiateComponent(cryptoComponent):
     g.trustZoneFileIds.append(ccMacConfigFile.getID())
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccMacConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding MAC=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_MAC.getValue(), projectPath + fileName + ".ftl" ))
 
     else:
         ccMacConfigFile.setSecurity("NON_SECURE")
-    tz = ccAeadConfigFile.getSecurity()
-    print("CRYPTO:  Adding MAC=%s TZ=%s ""%s"" "%(
-               g.CONFIG_USE_MAC.getValue(), tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding MAC=%s "" "%(
+                   g.CONFIG_USE_MAC.getValue(), projectPath + fileName + ".ftl" ))
 
     #KAS - Key Authorization Function Group
     #--CONFIG_USE_KAS
@@ -451,12 +464,13 @@ def instantiateComponent(cryptoComponent):
     g.trustZoneFileIds.append(ccKasConfigFile.getID())
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccKasConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding KAS=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_KAS.getValue(), projectPath + fileName + ".ftl" ))
 
     else:
         ccKasConfigFile.setSecurity("NON_SECURE")
-    tz = ccKasConfigFile.getSecurity()
-    print("CRYPTO:  Adding KAS=%s TZ=%s ""%s"" "%(
-               g.CONFIG_USE_KAS.getValue(), tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding KAS=%s "" "%(
+                   g.CONFIG_USE_KAS.getValue(), projectPath + fileName + ".ftl" ))
 
     #DS - Digital Signing Function Group
     #--CONFIG_USE_DS
@@ -479,12 +493,13 @@ def instantiateComponent(cryptoComponent):
     g.trustZoneFileIds.append(ccDsConfigFile.getID())
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccDsConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding DS=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_DS.getValue(), projectPath + fileName + ".ftl" ))
 
     else:
         ccDsConfigFile.setSecurity("NON_SECURE")
-    tz = ccDsConfigFile.getSecurity()
-    print("CRYPTO:  Adding DS=%s TZ=%s ""%s"" "%(
-               g.CONFIG_USE_KAS.getValue(), tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding DS=%s "" "%(
+                   g.CONFIG_USE_DS.getValue(), projectPath + fileName + ".ftl" ))
 
     #RNG - Digital Signing Function Group
     #--CONFIG_USE_RNG
@@ -507,12 +522,13 @@ def instantiateComponent(cryptoComponent):
     g.trustZoneFileIds.append(ccRngConfigFile.getID())
     if (g.cryptoTzEnabledSymbol.getValue() == True):
         ccRngConfigFile.setSecurity("SECURE")
+        print("CRYPTO:  Adding RNG=%s (Secure)""%s"" "%(
+                   g.CONFIG_USE_RNG.getValue(), projectPath + fileName + ".ftl" ))
 
     else:
         ccRngConfigFile.setSecurity("NON_SECURE")
-    tz = ccRngConfigFile.getSecurity()
-    print("CRYPTO:  Adding RNG=%s TZ=%s ""%s"" "%(
-               g.CONFIG_USE_RNG.getValue(), tz, projectPath + fileName + ".ftl" ))
+        print("CRYPTO:  Adding RNG=%s "" "%(
+                   g.CONFIG_USE_RNG.getValue(), projectPath + fileName + ".ftl" ))
 
 ################################################################################
 #  Crypto Gui Interactions
@@ -653,31 +669,7 @@ def AddAlwaysOnFiles(cryptoComponent):
     print("CRYPTO: Always on files")
 
     configName = Variables.get("__CONFIGURATION_NAME")  # e.g. "default"
-
-    #TODO:
-    #Header file search path
-    #cryptoSearchPath = cryptoComponent.setPath(
-    #        configName + "/crypto")
-    #ccSearchPath     = cryptoComponent.setPath(
-    #        configName + "/crypto/common_crypto")
-
-    #Common Crypto(CC) API Header/Configuration
-    #--Includes all Crypto API Header files under <config>/crypto
-    #TODO:  Make Markup File/Add Selected CC API Headers
-    #srcPath = "src/crypto.h" 
-    #apiIncFilename = cryptoComponent.createFileSymbol("crypto_api_include_filename", None)
-    #apiIncFilename.setProjectPath("config/" + configName + "/crypto")
-    #apiIncFilename.setSourcePath(srcPath)
-    #apiIncFilename.setDestPath("crypto/")
-    #apiIncFilename.setOutputName("crypto.h")
-    #apiIncFilename.setType("HEADER")
-    #apiIncFilename.setEnabled(True)
-    #TrustZone
-    #if (g.cryptoTzEnabledSymbol.getValue() == True):
-    #    apiIncFilename.setSecurity("SECURE")
-    #else:
-    #    apiIncFilename.setSecurity("NON_SECURE")
-    #print("CRYPTO:  Adding %s"%(srcPath))
+    configPath = "config/" + configName 
 
     #--------------------------------------------------------------------------------------
     #Harmony Common Crypto (cc) System Files
@@ -686,42 +678,64 @@ def AddAlwaysOnFiles(cryptoComponent):
     #<config>/definitions.h include files for the crypto component API and
     #Wolfcrypto implementation
     srcPath = "templates/system/system_definitions.h.ftl"
-    ccSymSystemDefIncFile = cryptoComponent.createFileSymbol("DRV_CC_SYSTEM_DEF", None)
-    ccSymSystemDefIncFile.setOutputName("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
-    ccSymSystemDefIncFile.setSourcePath(srcPath)
-    ccSymSystemDefIncFile.setMarkup(True)
-    ccSymSystemDefIncFile.setType("STRING")
-    #g.trustZoneFileIds.append(ccSymSystemDefIncFile.get(ID))
-    print("CRYPTO:  Adding %s"%(srcPath))
+    ccSystemDefIncFile = cryptoComponent.createFileSymbol("DRV_CC_SYSTEM_DEF", None)
+    if (g.trustZoneSupported == True):
+        ccSystemDefIncFile.setOutputName("core.LIST_SYSTEM_DEFINITIONS_SECURE_H_INCLUDES")
+        tz = "S"
+        g.trustZoneFileIds.append(ccSystemDefIncFile.getID())
+        print("CRYPTO:  Adding (TZ=%s) %s"%(tz, srcPath))
+    else:
+        ccSystemDefIncFile.setOutputName("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
+        print("CRYPTO:  Adding  %s"%(srcPath))
+    ccSystemDefIncFile.setSourcePath(srcPath)
+    ccSystemDefIncFile.setMarkup(True)
+    ccSystemDefIncFile.setType("STRING")
 
     #<config>/configuration.h - Add CC Driver Configuration 
-    srcPath = "templates/system/system_config.h.ftl"
-    ccSymSystemConfigFile = cryptoComponent.createFileSymbol("DRV_CC_SYSTEM_CONFIG", None)
-    ccSymSystemConfigFile.setOutputName("core.LIST_SYSTEM_CONFIG_H_DRIVER_CONFIGURATION")
-    ccSymSystemConfigFile.setSourcePath(srcPath)
-    ccSymSystemConfigFile.setMarkup(True)
-    ccSymSystemConfigFile.setType("STRING")
-    #g.trustZoneFileIds.append(ccSymSystemConfigFile.get(ID))
-    print("CRYPTO:  Adding %s"%(srcPath))
-
-    #<config>/initialization.c - Add Driver Initialization Data code 
-    #ccSymSystemInitDataFile = cryptoComponent.createFileSymbol("DRV_CC_INIT_DATA", None)
-    #ccSymSystemInitDataFile.setType("STRING")
-    #ccSymSystemInitDataFile.setOutputName("core.LIST_SYSTEM_INIT_C_DRIVER_INITIALIZATION_DATA")
-    #ccSymSystemInitDataFile.setSourcePath("templates/system/system_initialize_data.c.ftl")
-    #ccSymSystemInitDataFile.setMarkup(True)
+    if (g.trustZoneSupported == True):
+        srcPath  = "templates/system/"
+        fileName = "system_config_wolfcrypt_tz.h.ftl"
+        projectPath = "config/" + configName + "/crypto/common_crypto/"
+        dstPath     = "",
+        outName     = "configuration_tz.h"
+        ccSystemConfigFile = cryptoComponent.createFileSymbol(
+                "DRV_CC_SYSTEM_CONFIG_TZ", None)
+        ccSystemConfigFile.setOutputName(outName)
+        ccSystemConfigFile.setDestPath(destPath)
+        ccSystemConfigFile.setProjectPath(projectPath)
+        ccSystemConfigFile.setSourcePath(srcPath + fileName)
+        ccSystemConfigFile.setMarkup(True)
+        ccSystemConfigFile.setType("STRING")
+        ccSystemConfigFile.setSecurity("SECURE")
+        g.trustZoneFileIds.append(ccSystemConfigFile.getID())
+        print("CRYPTO:  Adding (TZ) %s"%(srcPath+fileName))
+    else:
+        srcPath = "templates/system/system_config.h.ftl"
+        ccSystemConfigFile = cryptoComponent.createFileSymbol(
+                "DRV_CC_SYSTEM_CONFIG", None)
+        ccSystemConfigFile.setOutputName(
+            "core.LIST_SYSTEM_CONFIG_H_DRIVER_CONFIGURATION")
+        ccSystemConfigFile.setSourcePath(srcPath)
+        ccSystemConfigFile.setMarkup(True)
+        ccSystemConfigFile.setType("STRING")
+        print("CRYPTO:  Adding (NS) %s"%(srcPath))
 
     #<config>/initialization.c - Add Driver Initialization code
     srcPath = "templates/system/system_initialize.c.ftl"
-    ccSymSystemInitFile = cryptoComponent.createFileSymbol(
+    ccSystemInitFile = cryptoComponent.createFileSymbol(
             "DRV_CC_SYS_INIT", None)
-    ccSymSystemInitFile.setType("STRING")
-    ccSymSystemInitFile.setOutputName(
-            "core.LIST_SYSTEM_INIT_C_SYS_INITIALIZE_DRIVERS")
-    ccSymSystemInitFile.setSourcePath(srcPath)
-    ccSymSystemInitFile.setMarkup(True)
-    #g.trustZoneFileIds.append(ccSymSystemInitFile.get(ID))
-    print("CRYPTO:  Adding %s"%(srcPath))
+    ccSystemInitFile.setType("STRING")
+    if (g.trustZoneSupported == True):
+        ccSystemInitFile.setOutputName(
+                "core.LIST_SYSTEM_INIT_SECURE_C_SYS_INITIALIZE_DRIVERS")
+        print("CRYPTO:  Adding (TZ=S) %s"%(srcPath))
+        g.trustZoneFileIds.append(ccSystemInitFile.getID())
+    else:
+        ccSystemInitFile.setOutputName(
+                "core.LIST_SYSTEM_INIT_C_SYS_INITIALIZE_DRIVERS")
+        print("CRYPTO:  Adding %s"%(srcPath))
+    ccSystemInitFile.setSourcePath(srcPath)
+    ccSystemInitFile.setMarkup(True)
 
 
 ################################################################################
@@ -756,42 +770,25 @@ def setHwEnabledMenuItems(enable):
 
 def onAttachmentConnected(source, target):
 
-    #print("src: " + source["component"].getID() + " dst: " + target["component"].getID())
+    print("CRYPTO: Connected" + source["component"].getID() + "to dst " + target["component"].getID())
 
     if (source["component"].getID() == "lib_wolfcrypt"):
+        g.cryptoWolfCryptIncluded = True
         print("CRYPTO: lib_wolfcrypt support connected")
-'''
-    TODO: Put in wolfcrypt.py
-
-    if (target["component"].getID() == "lib_wolfssl"):
-        cryptoWolfSSLIncluded.setValue(True)
-
-    if (target["component"].getID() == "lib_zlib"):
-        cryptoHaveZlib.setValue(True)
-        cryptoSupportCompression.setVisible(True)
-
-    if ((target["component"].getID() == 'sys_time') or
-        (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
-        #asn1Support.setReadOnly(False)
-        cryptoTrngEnabledSymbol.setReadOnly(False)
-        cryptoTrngEnabledSymbol.setValue(True)
-'''
 
 def onAttachmentDisconnected(source, target):
+    print("CRYPTO: Detached " + source["component"].getID() + "to dst " + target["component"].getID())
+
     if (src["component"].getID() == "lib_wolfcrypt"):
         print("CRYPTO: lib_wolfcrypt support DISconnected")
 
-'''
-    TODO: put in wolfcrypt.py
-
     if (target["component"].getID() == "lib_zlib"):
         g.cryptoHaveZlib.setValue(False)
-        g.cryptoSupportCompression.setVisible(False)
+        #g.cryptoSupportCompression.setVisible(False)
 
     #TODO: put in wolfcrypt.py
-    if (target["component"].getID() == "sys_time"):
-        g.asn1Support.setValue(False)
+    #if (target["component"].getID() == "sys_time"):
+        #g.asn1Support.setValue(False)
         #asn1Support.setReadOnly(True)
         #cryptoTrngEnabledSymbol.setValue(False)
         #cryptoTrngEnabledSymbol.setReadOnly(True)
-'''

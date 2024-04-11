@@ -47,7 +47,7 @@ asn1Support               =  False
 ################################################################################
 trustZoneSupported        =  False  #Device supports trustZone
 trustZoneEnabled          =  False  #Symbol
-trustZoneDevices          = []      #TZ Device Name Patterns 
+trustZoneDevices          = []      #TZ Device Name Patterns
 trustZoneFileIds          = []      #List of file ids
 cryptoTzEnabledSymbol     = None
 

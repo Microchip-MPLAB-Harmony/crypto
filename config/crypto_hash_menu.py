@@ -64,7 +64,6 @@ def ScanHash():
         return False
     else:
         g.CONFIG_USE_HASH.setValue(newValue)
-        print("CRYPO:  CONFIG_USE_HASH = %s"%(g.CONFIG_USE_HASH.getValue()))
         return True
 
 def SetupCryptoHashMenu(cryptoComponent):

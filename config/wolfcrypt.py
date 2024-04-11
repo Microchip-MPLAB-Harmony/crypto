@@ -33,7 +33,7 @@ import wolfcrypt_globals
 import wolfcrypt_defs        as w
 import crypto_globals               #Initial globals
 import crypto_defs           as g   #Modified globals
-print("WOLFCRYPT: Start")
+print("WOLFCRYPT: Start Component Module")
 
 #===============================================================================
 #OVERRIDE Files  
@@ -68,21 +68,17 @@ def instantiateComponent(wolfCryptComponent):
     wolfcrypt.setVisible(False)
     wolfcrypt.setDefaultValue(True)
 
-    w.cryptoWolfSSLIncluded = wolfCryptComponent.createBooleanSymbol("wolfcrypt_included", None)
-    w.cryptoWolfSSLIncluded.setVisible(False)
-    w.cryptoWolfSSLIncluded.setDefaultValue(False)
-
     #Configuration GUI
     w.cryptoHaveZlib = wolfCryptComponent.createBooleanSymbol("wolfcrypt_havezlib", None)
     w.cryptoHaveZlib.setVisible(False)
     w.cryptoHaveZlib.setDefaultValue(False)
 
-    w.cryptoSupportCompression = wolfCryptComponent.createBooleanSymbol("wolfcrypt_supportcompression", None)
-    w.cryptoSupportCompression.setLabel("Support Compression?")
-    w.cryptoSupportCompression.setDescription("Add support for zLib compression")
-    w.cryptoSupportCompression.setVisible(False)
-    w.cryptoSupportCompression.setDefaultValue(False)
-    w.cryptoSupportCompression.setHelp('CRYPT_HUFMANN_SUM')
+    #w.cryptoSupportCompression = wolfCryptComponent.createBooleanSymbol("wolfcrypt_supportcompression", None)
+    #w.cryptoSupportCompression.setLabel("Support Compression?")
+    #w.cryptoSupportCompression.setDescription("Add support for zLib compression")
+    #w.cryptoSupportCompression.setVisible(False)
+    #w.cryptoSupportCompression.setDefaultValue(False)
+    #w.cryptoSupportCompression.setHelp('CRYPT_HUFMANN_SUM')
 
 
 def get_script_dir(follow_symlinks=True):
@@ -119,12 +115,13 @@ def addFileName(fileName, prefix, component, srcPath, destPath, enabled, project
 
     #TrustZone - TODO:  Make TrustZone optional configuration
     g.trustZoneFileIds.append(filename.getID())
-    if (g.trustZoneSupported == True):
-        #Set TrustZone <filelist>.setSecurity("SECURE")
-        filename.setSecurity("SECURE")
-    else:
-        #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
-        filename.setSecurity("NON_SECURE")
+    if (g.trustZoneSupported != None): 
+        if (g.trustZoneSupported == True):
+            #Set TrustZone <filelist>.setSecurity("SECURE")
+            filename.setSecurity("SECURE")
+        else:
+            #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
+            filename.setSecurity("NON_SECURE")
 
     filename.setEnabled(enabled)
 
@@ -329,14 +326,21 @@ def setupWolfCryptFiles(basecomponent) :
     #            "../../third_party/wolfssl",
     #            True, "third_party/wolfssl")
 
+    '''
     #<config>/configuration.h - Add WolfCrypt Lib Middleware Configuration
     srcPath  = "templates/system/wolfcrypt_system_config.h.ftl"
     wolfCryptConfigInfo = basecomponent.createFileSymbol("wolfcryptConfigInfo", None)
     wolfCryptConfigInfo.setSourcePath(srcPath)
-    wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
+    if (g.trustZoneSupported != None): 
+        if (g.trustZoneSupported == True):
+            wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_SECURE_H_MIDDLEWARE_CONFIGURATION")
+            print("WOLFCRYPT: Add file (TZ=S) %s"%(srcPath))
+        else:
+            wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
+            print("WOLFCRYPT: Add file %s"%(srcPath))
     wolfCryptConfigInfo.setMarkup(True)
     wolfCryptConfigInfo.setType("STRING")
-    print("WOLFCRYPT: Add file %s"%(srcPath))
+    '''
 
     #Global Preprocessor define - HAVE_CONFIG_H
     #NOTE:  Used by WolfSSL library to use the config.h, which includes the
@@ -346,15 +350,19 @@ def setupWolfCryptFiles(basecomponent) :
     wolfcryptConfigH.setKey("preprocessor-macros")
     wolfcryptConfigH.setValue("HAVE_CONFIG_H")
     wolfcryptConfigH.setAppend(True, ";")
+    if (g.trustZoneSupported == True):
+        wolfcryptConfigH.setSecurity("SECURE")
 
     #Global Preprocessor define - WOLFSSL_USER_SETTINGS
     #NOTE:  Used by WolfSSL library to use the user_settings.h, which includes
     #       the project configuration.h
-    wolfcryptConfigH = basecomponent.createSettingSymbol("wolfsslUserSettingsH", None)
-    wolfcryptConfigH.setCategory("C32")
-    wolfcryptConfigH.setKey("preprocessor-macros")
-    wolfcryptConfigH.setValue("WOLFSSL_USER_SETTINGS")
-    wolfcryptConfigH.setAppend(True, ";")
+    wolfcryptUserSettingsH= basecomponent.createSettingSymbol("wolfsslUserSettingsH", None)
+    wolfcryptUserSettingsH.setCategory("C32")
+    wolfcryptUserSettingsH.setKey("preprocessor-macros")
+    wolfcryptUserSettingsH.setValue("WOLFSSL_USER_SETTINGS")
+    wolfcryptUserSettingsH.setAppend(True, ";")
+    if (g.trustZoneSupported == True):
+        wolfcryptUserSettingsH.setSecurity("SECURE")
 
     #Global Preprocessor define - WOLFSSL_IGNORE_FILE_WARN
     wolfcryptIgnoreFileWarn = basecomponent.createSettingSymbol("wolfsslIgnoreFileWarn", None)
@@ -362,197 +370,21 @@ def setupWolfCryptFiles(basecomponent) :
     wolfcryptIgnoreFileWarn.setKey("preprocessor-macros")
     wolfcryptIgnoreFileWarn.setValue("WOLFSSL_IGNORE_FILE_WARN")
     wolfcryptIgnoreFileWarn.setAppend(True, ";")
+    if (g.trustZoneSupported == True):
+        wolfcryptIgnoreFileWarn.setSecurity("SECURE")
 
     #TODO:
     #Header file search path
     #wolfcryptSearchPath = basecomponent.setPath("..\src\third_party\wolfssl\wolfssl")
 
-'''
-################################################################################
-# Add WolfCrypt File Project
-################################################################################
-def createWolfCryptFileComponent(baseComponent, fileName, srcPath, destPath):
-    global cryptoWolfCryptFilesDict
-    if fileName in cryptoWolfCryptFilesDict:
-        print("CryptoLib Error: Attempting to add the same file twice: " + fileName)
-        return
-    fc = createFileComponent(baseComponent, fileName, srcPath, destPath)
-    cryptoWolfCryptFilesDict[fileName] = fc
-
-
-################################################################################
-# Add HW Crypto Module Driver File to project
-################################################################################
-def createHwFileComponent(baseComponent, fileName, srcPath, destPath):
-
-    #Check if already added
-    if fileName in g.cryptoWolfCryptFilesDict:
-        print("CryptoLib Error: Attempting to add a crypto hardware file that is already a common file: " + fileName)
-        return
-    if fileName in cryptoHwFileComponentsDict:
-        print("CryptoLib Error: Attempting to add the same hardware file twice: " + fileName)
-        return
-    if fileName in cryptoSwFileComponentsDict:
-        print("CryptoLib Info: Adding a HW component that already has a SW component, changing to common component " + fileName)
-        fc = cryptoSwFileComponentsDict.pop(fileName)
-        g.cryptoWolfCryptFilesDict[fileName] = fc
-        return
-
-    print("CRYPTO:  Adding HW file " + filename)
-    fc = createFileComponent(baseComponent, fileName, srcPath, destPath)
-    cryptoHwFileComponentsDict[fileName] = fc
-
-
-################################################################################
-# Add  SW Crypto File to project
-################################################################################
-def createSwFileComponent(baseComponent, fileName, srcPath, destPath):
-    print("WOLFCRYPT:  Adding " + fileName)
-    global cryptoWolfCryptFilesDict
-    global cryptoSwFileComponentsDict
-    global cryptoHwFileComponentsDict
-    if fileName in g.cryptoWolfCryptFilesDict:
-        print("CryptoLib Error: Attempting to add a crypto software file that is already a common file: " + fileName)
-        return
-    if fileName in cryptoSwFileComponentsDict:
-        print("CryptoLib Error: Attempting to add the same software file twice: " + fileName)
-        return
-    if fileName in cryptoHwFileComponentsDict:
-        print("CryptoLib Info: Adding a SW component that already has a HW component, changing to common component " + fileName)
-        fc = cryptoHwFileComponentsDict.pop(fileName)
-        g.cryptoWolfCryptFilesDict[fileName] = fc
-        return
-    fc = createFileComponent(baseComponent, fileName, srcPath, destPath)
-    cryptoSwFileComponentsDict[fileName] = fc
-
-
-################################################################################
-# Create All WolfCrypt Library files 
-# TODO:  NOT USED
-################################################################################
-def createAllFileComponents(baseComponent):
-
-    print("WOLFCRYPT: createAllFileComponents")
-    global cryptoWolfCryptFilesList
-
-    #WolfCrypt
-    for fileName in cryptoWolfCryptFiles:
-        createWolfCryptFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoZlibFiles:
-        createWolfCryptFileComponent(baseComponent, fileName, "src/zlib-1.2.7/", "crypto/src/zlib-1.2.7/")
-
-    #HW Module Driver files
-    #for fileName in cryptoCurrentHwRngSupport[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwMd5Support[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwSha1Support[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwSha224Support[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwSha256Support[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwSha384Support[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwSha512Support[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwAesSupport[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwDesSupport[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwRsaSupport[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentHwEccSupport[3]:
-    #    createHwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #SW files
-    #for fileName in cryptoCurrentSwRngSupport[3]:
-    #    createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwMd5Support[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwSha1Support[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwSha224Support[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwSha256Support[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwSha384Support[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwSha512Support[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    for fileName in cryptoCurrentSwAesSupport[3]:
-        createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentSwDesSupport[3]:
-    #    createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentSwRsaSupport[3]:
-    #    createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-    #for fileName in cryptoCurrentSwEccSupport[3]:
-    #    createSwFileComponent(baseComponent, fileName, "src/", "crypto/src/")
-
-
-################################################################################
-################################################################################
-def setFilesForHwSupport(enable):
-    print("CRYPTO: Set HW support files")
-    for fc in g.cryptoHwFileComponentsDict.values():
-        fc.setEnabled(enable)
-    for fc in g.cryptoSwFileComponentsDict.values():
-        fc.setEnabled(not enable)
-
-
-################################################################################
-################################################################################
-def setFilesForWolfSslEnabled(enable):
-    print("CRYPTO: Set files for WolfSsl")
-    if (enable):
-        for fc in g.cryptoWolfCryptFilesDict.values():
-            fc.setEnabled(False)
-        for fc in g.cryptoHwFileComponentsDict.values():
-            fc.setEnabled(False)
-        for fc in g.cryptoSwFileComponentsDict.values():
-            fc.setEnabled(False)
-    else:
-        for fc in g.cryptoWolfCryptFilesDict.values():
-            fc.setEnabled(True)
-        setFilesForHwSupport(g.cryptoWolfCryptEnabledMenuComponentsList[0].value)
-
-'''
 
 def onAttachmentConnected(source, target):
-    #global asn1Support
-    #global cryptoTrngEnabledSymbol
-
-    #WolfSSL
-    if (target["component"].getID() == "lib_wolfssl"):
-        w.cryptoWolfSSLIncluded.setValue(True)
-
-    print("'" + target["component"].getID() + "'")
+    print("WOLFCRYPT: Attached " + target["component"].getID())
 
     #ZLIB
     if (target["component"].getID() == "lib_zlib"):
         w.cryptoHaveZlib.setValue(True)
-        w.cryptoSupportCompression.setVisible(True)
+        #w.cryptoSupportCompression.setVisible(True)
 
     #SYS_TIME
     #if ((target["component"].getID() == 'sys_time') or
@@ -561,18 +393,15 @@ def onAttachmentConnected(source, target):
     #    cryptoTrngEnabledSymbol.setReadOnly(False)
     #    cryptoTrngEnabledSymbol.setValue(True)
 
+
 def onAttachmentDisconnected(source, target):
-
-    #WolfSSL
-    if (target["component"].getID() == "lib_wolfssl"):
-        w.cryptoWolfSSLIncluded.setValue(False)
-
-    print("'" + target["component"].getID() + "'")
+    print("WOLFCRYPT: Detached " + target["component"].getID())
 
     #ZLIB
     if (target["component"].getID() == "lib_zlib"):
         w.cryptoHaveZlib.setValue(False)
-        w.cryptoSupportCompression.setVisible(False)
+        #w.cryptoSupportCompression.setVisible(False)
+
 
     #SYS_TIME
     #if (target["component"].getID() == "sys_time"):

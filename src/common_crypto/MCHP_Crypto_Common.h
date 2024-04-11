@@ -93,9 +93,4 @@ typedef enum
 }crypto_EccCurveType_E;
 
 
-// *****************************************************************************
-
-
-
-
 #endif //MCHP_CRYPTO_COMMON_H
