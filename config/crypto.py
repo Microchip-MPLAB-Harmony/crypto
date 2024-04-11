@@ -58,6 +58,7 @@ def AddFileName(fileName, prefix, component,
     fileID = prefix + fileName.replace('.', '_')
     fileNameSymbol = component.createFileSymbol(fileID, None)
     fileNameSymbol.setProjectPath(projectPath)
+
     fileNameSymbol.setSourcePath(srcPath + fileName)
     fileNameSymbol.setOutputName(fileName)
 
@@ -681,9 +682,8 @@ def AddAlwaysOnFiles(cryptoComponent):
     ccSystemDefIncFile = cryptoComponent.createFileSymbol("DRV_CC_SYSTEM_DEF", None)
     if (g.trustZoneSupported == True):
         ccSystemDefIncFile.setOutputName("core.LIST_SYSTEM_DEFINITIONS_SECURE_H_INCLUDES")
-        tz = "S"
         g.trustZoneFileIds.append(ccSystemDefIncFile.getID())
-        print("CRYPTO:  Adding (TZ=%s) %s"%(tz, srcPath))
+        print("CRYPTO:  Adding (TZ) %s"%(srcPath))
     else:
         ccSystemDefIncFile.setOutputName("core.LIST_SYSTEM_DEFINITIONS_H_INCLUDES")
         print("CRYPTO:  Adding  %s"%(srcPath))
@@ -693,21 +693,22 @@ def AddAlwaysOnFiles(cryptoComponent):
 
     #<config>/configuration.h - Add CC Driver Configuration 
     if (g.trustZoneSupported == True):
-        srcPath  = "templates/system/"
-        fileName = "system_config_wolfcrypt_tz.h.ftl"
-        projectPath = "config/" + configName + "/crypto/common_crypto/"
-        dstPath     = "",
-        outName     = "configuration_tz.h"
-        ccSystemConfigFile = cryptoComponent.createFileSymbol(
+
+        fileName    = "system_config_wolfcrypt_tz.h.ftl"
+        outName     = "configuration.h"
+        projectPath    = "config/" + configName
+        srcPath     = "templates/system/"
+        dstPath     = ""
+        ccSysConfigTzFile= cryptoComponent.createFileSymbol(
                 "DRV_CC_SYSTEM_CONFIG_TZ", None)
-        ccSystemConfigFile.setOutputName(outName)
-        ccSystemConfigFile.setDestPath(dstPath)
-        ccSystemConfigFile.setProjectPath(projectPath)
-        ccSystemConfigFile.setSourcePath(srcPath + fileName)
-        ccSystemConfigFile.setMarkup(True)
-        ccSystemConfigFile.setType("STRING")
-        ccSystemConfigFile.setSecurity("SECURE")
-        g.trustZoneFileIds.append(ccSystemConfigFile.getID())
+        ccSysConfigTzFile.setSourcePath(srcPath + fileName)
+        ccSysConfigTzFile.setMarkup(True)
+        ccSysConfigTzFile.setOutputName(outName)
+        ccSysConfigTzFile.setDestPath("")
+        ccSysConfigTzFile.setProjectPath(projectPath)
+        ccSysConfigTzFile.setType("HEADER")
+        ccSysConfigTzFile.setOverwrite(True)
+        g.trustZoneFileIds.append(ccSysConfigTzFile.getID())
         print("CRYPTO:  Adding (TZ) %s"%(srcPath+fileName))
     else:
         srcPath = "templates/system/system_config.h.ftl"
@@ -718,7 +719,7 @@ def AddAlwaysOnFiles(cryptoComponent):
         ccSystemConfigFile.setSourcePath(srcPath)
         ccSystemConfigFile.setMarkup(True)
         ccSystemConfigFile.setType("STRING")
-        print("CRYPTO:  Adding (NS) %s"%(srcPath))
+        print("CRYPTO:  Adding %s"%(srcPath))
 
     #<config>/initialization.c - Add Driver Initialization code
     srcPath = "templates/system/system_initialize.c.ftl"
@@ -728,7 +729,7 @@ def AddAlwaysOnFiles(cryptoComponent):
     if (g.trustZoneSupported == True):
         ccSystemInitFile.setOutputName(
                 "core.LIST_SYSTEM_INIT_SECURE_C_SYS_INITIALIZE_DRIVERS")
-        print("CRYPTO:  Adding (TZ=S) %s"%(srcPath))
+        print("CRYPTO:  Adding (TZ) %s"%(srcPath))
         g.trustZoneFileIds.append(ccSystemInitFile.getID())
     else:
         ccSystemInitFile.setOutputName(
