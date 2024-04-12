@@ -53,7 +53,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 // *****************************************************************************
 // *****************************************************************************
 
-#include "user.h"
+//#include "user.h"
 #include "device.h"
 
 // DOM-IGNORE-BEGIN

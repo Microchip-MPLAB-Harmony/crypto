@@ -97,7 +97,7 @@ def trimFileNameList(rawList) :
         newList.append(filename)
     return newList
 
-def addFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
+def AddFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
     filename = component.createFileSymbol(prefix + fileName.replace('.', '_'), None)
     filename.setProjectPath(projectPath)
     filename.setSourcePath(srcPath + fileName)
@@ -119,9 +119,11 @@ def addFileName(fileName, prefix, component, srcPath, destPath, enabled, project
         if (g.trustZoneSupported == True):
             #Set TrustZone <filelist>.setSecurity("SECURE")
             filename.setSecurity("SECURE")
+        print("WOLFCRYPT:  Adding (TZ) ""%s"" "%(projectPath + fileName))
         else:
             #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
             filename.setSecurity("NON_SECURE")
+        print("WOLFCRYPT:  Adding ""%s"" "%(projectPath + fileName))
 
     filename.setEnabled(enabled)
 
@@ -191,7 +193,7 @@ def setupWolfCryptFiles(basecomponent) :
     #--Except the overrides
     print("WOLFCRYPT: Source files")
     for file in wcsfl:
-        addFileName(file, "wolfcrypt", basecomponent,
+        AddFileName(file, "wolfcrypt", basecomponent,
                     "../wolfssl/wolfcrypt/src/",
                     "../../third_party/wolfssl/wolfcrypt/src/",
                     True, "/third_party/wolfssl/wolfcrypt/src")
@@ -202,7 +204,7 @@ def setupWolfCryptFiles(basecomponent) :
     #--Except the overrides
     print("WOLFCRYPT: Header files")
     for file in wchfl:
-        addFileName(file, "wolfcrypt", basecomponent,
+        AddFileName(file, "wolfcrypt", basecomponent,
                     "../wolfssl/wolfssl/wolfcrypt/",
                     "../../third_party/wolfssl/wolfssl/wolfcrypt/",
                     True, "/third_party/wolfssl/wolfssl/wolfcrypt")
@@ -216,7 +218,7 @@ def setupWolfCryptFiles(basecomponent) :
     ##--All src files in the third_party/wolfssl/wolfcrypt/src/port/pic32 
     print("WOLFCRYPT: Port Source files")
     for file in wcpsfl:
-        addFileName(file, "wolfcryptport", basecomponent,
+        AddFileName(file, "wolfcryptport", basecomponent,
                     "../wolfssl/wolfcrypt/src/port/pic32/",
                     "../../third_party/wolfssl/wolfcrypt/src/port/pic32/",
                     True, "third_party/wolfssl/wolfcrypt/port/pic32")
@@ -224,7 +226,7 @@ def setupWolfCryptFiles(basecomponent) :
     ##--All hdr files in the third_party/wolfssl/wolfssl/wolfcrypt/port/pic32 
     print("WOLFCRYPT: Port Header files")
     for file in wcphfl:
-        addFileName(file, "wolfcryptport", basecomponent,
+        AddFileName(file, "wolfcryptport", basecomponent,
                     "../wolfssl/wolfssl/wolfcrypt/port/pic32/",
                     "../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/",
                     True, "third_party/wolfssl/wolfcrypt/port/pic32")
@@ -232,76 +234,23 @@ def setupWolfCryptFiles(basecomponent) :
     #All files in  thirdparty/wolfssl/wolfssl/wolfcrypt/src/port/mplabharmony3
     #directory
     #--Except the overrides
-    '''
-    harmonyCryptPortSourceFiles = get_script_dir() + "/../src/common_crypto_api/port/mplabharmony3/*.c"
-    harmonyCryptPortHeaderFiles = get_script_dir() + "/../src/common_crypto_api/port/mplabharmony3/*.h"
-
-    hcpsfl = trimFileNameList(glob.glob(harmonyCryptPortSourceFiles))
-    hcphfl = trimFileNameList(glob.glob(harmonyCryptPortHeaderFiles))
-
-    print("WOLFCRYPT: Port Source files")
-    for file in hcpsfl:
-        addFileName(file, "cryptoport", basecomponent,
-                    "src/port/mplabharmony3/",
-                    "../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/pic32/",
-                    True, "wolfcrypt/port/pic32")
-
-    #All Harmony header files in  src/port/mplabharmony3
-    for file in hcphfl:
-        addFileName(file, "cryptoport", basecomponent,
-                    "src/port/mplabharmony3/",
-                    "../../third_party/wolfssl/wolfssl/wolfcrypt/port/pic32/",
-                    True, "wolfcrypt/port/pic32")
-    '''
-
-    '''
-    #All the crypto override src files
-    print("WOLFCRYPT: OVERRIDE Source files")
-    #for file in cryptoOverridableSrcFiles:
-    #    addFileName(
-    #          file, 
-    #          "cryptooverride", #basecomponent, 
-    #          "src/", 
-    #           "../../third_party/wolfssl/wolfssl/wolfcrypt/src/", 
-    #           True, "wolfcrypt")
-
-    for file in cryptoOverridableSrcFiles:
-        addFileName(file, "cryptooverride", basecomponent,
-                    "src/",
-                    "../../third_party/wolfssl/wolfssl/wolfcrypt/src/",
-                    True, "third_party/wolfssl/wolfssl/wolfcrypt")
-
-    #All the crypto override header files
-    #NOTE: Overrides in third_party project directory
-    print("WOLFCRYPT: OVERRIDE Header files")
-    for file in cryptoOverridableHeaderFiles:
-        print("  --Override Header %s"%(file))
-        #addFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
-        addFileName(file, 
-                    "cryptooverride", 
-                    basecomponent,
-                    "src/",
-                    "../../third_party/wolfssl/wolfssl/wolfcrypt/",
-                    True, 
-                    "third_party/wolfssl/wolfssl/wolfcrypt")
-    '''
 
     print("WOLFCRYPT: Special Files")
     #misc.c 
-    addFileName("misc.c", "misc", basecomponent,
+    AddFileName("misc.c", "misc", basecomponent,
                 "../wolfssl/wolfcrypt/src/",
                 "../../third_party/wolfssl/wolfssl/wolfcrypt/src/",
                 True, 
                 "third_party/wolfssl/wolfssl/src/wolfcrypt")
 
     #certs_test.h
-    addFileName("certs_test.h", "wolfcrypt", basecomponent,
+    AddFileName("certs_test.h", "wolfcrypt", basecomponent,
                 "../wolfssl/wolfssl/",
                 "../../third_party/wolfssl/wolfssl/",
                 True, "third_party/wolfssl/wolfssl")
 
     #evp.c
-    addFileName("evp.c", "misc", basecomponent,
+    AddFileName("evp.c", "misc", basecomponent,
                 "../wolfssl/wolfcrypt/src/",
                 "../../third_party/wolfssl/wolfssl/wolfcrypt/src/",
                 True, "third_party/wolfssl/wolfssl/wolfcrypt")
@@ -318,10 +267,10 @@ def setupWolfCryptFiles(basecomponent) :
     # createFileComponent(baseComponent, fileName, srcPath, destPath):
     # --Filename from direct srcpath to config/<config name>/destPath 
     #
-    # addFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
+    # AddFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
     # --Filename from direct srcpath to project directory relative destpath
     #
-    #addFileName("config.h", "misc", basecomponent,
+    #AddFileName("config.h", "misc", basecomponent,
     #            "config/",
     #            "../../third_party/wolfssl",
     #            True, "third_party/wolfssl")

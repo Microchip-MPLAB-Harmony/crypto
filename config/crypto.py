@@ -78,11 +78,11 @@ def AddFileName(fileName, prefix, component,
     g.trustZoneFileIds.append(fileID)
     if (g.trustZoneSupported == True):
         fileNameSymbol.setSecurity("SECURE")
-        tz = "S" 
-        print("CRYPTO:  Adding (TZ=%s) ""%s"" "%(tz, projectPath + fileName))
+        tz = "S"
+        print("CRYPTO:  Adding (TZ) ""%s"" "%(projectPath + fileName))
     else:
         fileNameSymbol.setSecurity("NON_SECURE")
-        tz = "N" 
+        tz = "N"
         print("CRYPTO:  Adding ""%s"" "%(projectPath + fileName))
 
     return (fileID, tz)
@@ -708,6 +708,7 @@ def AddAlwaysOnFiles(cryptoComponent):
         ccSysConfigTzFile.setProjectPath(projectPath)
         ccSysConfigTzFile.setType("HEADER")
         ccSysConfigTzFile.setOverwrite(True)
+        ccSysConfigTzFile.setSecurity("SECURE")
         g.trustZoneFileIds.append(ccSysConfigTzFile.getID())
         print("CRYPTO:  Adding (TZ) %s"%(srcPath+fileName))
     else:
