@@ -8,6 +8,8 @@ localwolfCryptComponent   = None
 
 cryptoWolfSSLIncluded = None
 
+trustZoneSupported = False
+
 #Zlib
 cryptoSupportCompression = None
 cryptoHaveZlib = None

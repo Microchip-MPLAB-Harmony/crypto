@@ -31,7 +31,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "configuration.h"
+#include "crypto_config.h"
 //******************************************************************************
 #define CRYPTO_ECC_MAX_KEY_LENGTH (66) //Max size of Private key and Public Key will be double of it for ECC
 

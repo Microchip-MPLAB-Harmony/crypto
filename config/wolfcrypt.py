@@ -33,7 +33,11 @@ import wolfcrypt_globals
 import wolfcrypt_defs        as w
 import crypto_globals               #Initial globals
 import crypto_defs           as g   #Modified globals
-print("WOLFCRYPT: Start Component Module")
+
+if (g.trustZoneSupported != None): 
+    print("WOLFCRYPT: Start Component Module (TZ)")
+else:
+    print("WOLFCRYPT: Start Component Module")
 
 #===============================================================================
 #OVERRIDE Files  
@@ -51,6 +55,12 @@ def instantiateComponent(wolfCryptComponent):
     #TODO:  Dependency on SysTime module
     global cryptoHaveSysTime
     global cryptoDependSysTime
+
+    if Variables.get("__TRUSTZONE_ENABLED") != None and Variables.get("__TRUSTZONE_ENABLED") == "true":
+        w.trustZoneSupported = True
+        print("WOLFCRYPT:  TRUST_ZONE is true")
+    else:
+        print("WOLFCRYPT:  TRUST_ZONE NOT true")
 
     #global asn1Support
 
@@ -115,15 +125,15 @@ def AddFileName(fileName, prefix, component, srcPath, destPath, enabled, project
 
     #TrustZone - TODO:  Make TrustZone optional configuration
     g.trustZoneFileIds.append(filename.getID())
-    if (g.trustZoneSupported != None): 
-        if (g.trustZoneSupported == True):
+    if (w.trustZoneSupported != None): 
+        if (w.trustZoneSupported == True):
             #Set TrustZone <filelist>.setSecurity("SECURE")
             filename.setSecurity("SECURE")
-        print("WOLFCRYPT:  Adding (TZ) ""%s"" "%(projectPath + fileName))
+            print("WOLFCRYPT:  Adding (TZ) ""%s"" "%(projectPath + fileName))
         else:
             #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
             filename.setSecurity("NON_SECURE")
-        print("WOLFCRYPT:  Adding ""%s"" "%(projectPath + fileName))
+            print("WOLFCRYPT:  Adding ""%s"" "%(projectPath + fileName))
 
     filename.setEnabled(enabled)
 
@@ -280,8 +290,8 @@ def setupWolfCryptFiles(basecomponent) :
     srcPath  = "templates/system/wolfcrypt_system_config.h.ftl"
     wolfCryptConfigInfo = basecomponent.createFileSymbol("wolfcryptConfigInfo", None)
     wolfCryptConfigInfo.setSourcePath(srcPath)
-    if (g.trustZoneSupported != None): 
-        if (g.trustZoneSupported == True):
+    if (w.trustZoneSupported != None): 
+        if (w.trustZoneSupported == True):
             wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_SECURE_H_MIDDLEWARE_CONFIGURATION")
             print("WOLFCRYPT: Add file (TZ=S) %s"%(srcPath))
         else:
@@ -299,7 +309,7 @@ def setupWolfCryptFiles(basecomponent) :
     wolfcryptConfigH.setKey("preprocessor-macros")
     wolfcryptConfigH.setValue("HAVE_CONFIG_H")
     wolfcryptConfigH.setAppend(True, ";")
-    if (g.trustZoneSupported == True):
+    if (w.trustZoneSupported == True):
         wolfcryptConfigH.setSecurity("SECURE")
 
     #Global Preprocessor define - WOLFSSL_USER_SETTINGS
@@ -310,7 +320,7 @@ def setupWolfCryptFiles(basecomponent) :
     wolfcryptUserSettingsH.setKey("preprocessor-macros")
     wolfcryptUserSettingsH.setValue("WOLFSSL_USER_SETTINGS")
     wolfcryptUserSettingsH.setAppend(True, ";")
-    if (g.trustZoneSupported == True):
+    if (w.trustZoneSupported == True):
         wolfcryptUserSettingsH.setSecurity("SECURE")
 
     #Global Preprocessor define - WOLFSSL_IGNORE_FILE_WARN
@@ -319,7 +329,7 @@ def setupWolfCryptFiles(basecomponent) :
     wolfcryptIgnoreFileWarn.setKey("preprocessor-macros")
     wolfcryptIgnoreFileWarn.setValue("WOLFSSL_IGNORE_FILE_WARN")
     wolfcryptIgnoreFileWarn.setAppend(True, ";")
-    if (g.trustZoneSupported == True):
+    if (w.trustZoneSupported == True):
         wolfcryptIgnoreFileWarn.setSecurity("SECURE")
 
     #TODO:

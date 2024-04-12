@@ -4,6 +4,8 @@ cryptoHwAdditionalDefines = set([])
 
 cryptoWolfSSLIncluded     = None
 
+trustZoneSupported = None
+
 #Zlib
 cryptoSupportCompression  = None
 cryptoHaveZlib = None

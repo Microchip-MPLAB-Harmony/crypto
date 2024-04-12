@@ -272,13 +272,13 @@ def instantiateComponent(cryptoComponent):
 
     #<config>/MCHP_Crypto_Hash_Config.h - API File
     projectPath = "config/" + configName + "/crypto/common_crypto/"
-    
+
 
     #INCLUDE FILE to configure WOLFCRYPT with the HAVE_CONFIG_H 
     #project define.
     (symid, tz) = AddFileName("config.h",                   #Filename    
                      "common_crypto",              #MCC Symbol Name Prefix
-                     cryptoComponent,                #MCC Component
+                     cryptoComponent,              #MCC Component
                      "src/wolfcrypt/",             #Src Path
                      "crypto/wolfcrypt/",          #Dest Path
                      True,                         #Enabled
@@ -288,7 +288,7 @@ def instantiateComponent(cryptoComponent):
     #Project define
     (symid, tz) = AddFileName("user_settings.h",            #Filename    
                      "common_crypto",              #MCC Symbol Name Prefix
-                     cryptoComponent,                #MCC Component
+                     cryptoComponent,              #MCC Component
                      "src/wolfcrypt/",             #Path Src
                      "crypto/wolfcrypt/",          #Path Dest
                      True,                         #Enabled
@@ -352,7 +352,7 @@ def instantiateComponent(cryptoComponent):
                    g.CONFIG_USE_HASH.getValue(), projectPath + fileName + ".ftl" ))
     else:
         ccHashConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding HASH=%s "" "%(
+        print("CRYPTO:  Adding HASH=%s ""%s"%(
                    g.CONFIG_USE_HASH.getValue(), projectPath + fileName + ".ftl" ))
 
 
@@ -383,7 +383,7 @@ def instantiateComponent(cryptoComponent):
 
     else:
         ccSymConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding SYM=%s "" "%(
+        print("CRYPTO:  Adding SYM=%s ""%s"%(
                    g.CONFIG_USE_SYM.getValue(), projectPath + fileName + ".ftl" ))
 
     #AEAD Function Group
@@ -412,7 +412,7 @@ def instantiateComponent(cryptoComponent):
 
     else:
         ccAeadConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding AEAD=%s "" "%(
+        print("CRYPTO:  Adding AEAD=%s ""%s"%(
                    g.CONFIG_USE_AEAD.getValue(), projectPath + fileName + ".ftl" ))
 
     #MAC Function Group
@@ -441,7 +441,7 @@ def instantiateComponent(cryptoComponent):
 
     else:
         ccMacConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding MAC=%s "" "%(
+        print("CRYPTO:  Adding MAC=%s "" %s"%(
                    g.CONFIG_USE_MAC.getValue(), projectPath + fileName + ".ftl" ))
 
     #KAS - Key Authorization Function Group
@@ -470,7 +470,7 @@ def instantiateComponent(cryptoComponent):
 
     else:
         ccKasConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding KAS=%s "" "%(
+        print("CRYPTO:  Adding KAS=%s ""%s"%(
                    g.CONFIG_USE_KAS.getValue(), projectPath + fileName + ".ftl" ))
 
     #DS - Digital Signing Function Group
@@ -499,7 +499,7 @@ def instantiateComponent(cryptoComponent):
 
     else:
         ccDsConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding DS=%s "" "%(
+        print("CRYPTO:  Adding DS=%s ""%s"%(
                    g.CONFIG_USE_DS.getValue(), projectPath + fileName + ".ftl" ))
 
     #RNG - Digital Signing Function Group
@@ -528,7 +528,7 @@ def instantiateComponent(cryptoComponent):
 
     else:
         ccRngConfigFile.setSecurity("NON_SECURE")
-        print("CRYPTO:  Adding RNG=%s "" "%(
+        print("CRYPTO:  Adding RNG=%s ""%s"%(
                    g.CONFIG_USE_RNG.getValue(), projectPath + fileName + ".ftl" ))
 
 ################################################################################
@@ -691,35 +691,35 @@ def AddAlwaysOnFiles(cryptoComponent):
     ccSystemDefIncFile.setMarkup(True)
     ccSystemDefIncFile.setType("STRING")
 
-    #<config>/configuration.h - Add CC Driver Configuration 
+    #<config>/crypto_config.h - Add CC Driver Configuration 
+    fileName    = "system_config_wolfcrypt_tz.h.ftl"
+    outName     = "crypto_config.h"
+    projectPath    = "config/" + configName
+    srcPath     = "templates/system/"
+    dstPath     = ""
+    ccSysConfigFile= cryptoComponent.createFileSymbol(
+            "DRV_CC_SYSTEM_CONFIG", None)
+    ccSysConfigFile.setSourcePath(srcPath + fileName)
+    ccSysConfigFile.setMarkup(True)
+    ccSysConfigFile.setOutputName(outName)
+    ccSysConfigFile.setDestPath("")
+    ccSysConfigFile.setProjectPath(projectPath)
+    ccSysConfigFile.setType("HEADER")
+    ccSysConfigFile.setOverwrite(True)
     if (g.trustZoneSupported == True):
-
-        fileName    = "system_config_wolfcrypt_tz.h.ftl"
-        outName     = "configuration.h"
-        projectPath    = "config/" + configName
-        srcPath     = "templates/system/"
-        dstPath     = ""
-        ccSysConfigTzFile= cryptoComponent.createFileSymbol(
-                "DRV_CC_SYSTEM_CONFIG_TZ", None)
-        ccSysConfigTzFile.setSourcePath(srcPath + fileName)
-        ccSysConfigTzFile.setMarkup(True)
-        ccSysConfigTzFile.setOutputName(outName)
-        ccSysConfigTzFile.setDestPath("")
-        ccSysConfigTzFile.setProjectPath(projectPath)
-        ccSysConfigTzFile.setType("HEADER")
-        ccSysConfigTzFile.setOverwrite(True)
-        ccSysConfigTzFile.setSecurity("SECURE")
-        g.trustZoneFileIds.append(ccSysConfigTzFile.getID())
+        ccSysConfigFile.setSecurity("SECURE")
+        g.trustZoneFileIds.append(ccSysConfigFile.getID())
         print("CRYPTO:  Adding (TZ) %s"%(srcPath+fileName))
     else:
-        srcPath = "templates/system/system_config.h.ftl"
-        ccSystemConfigFile = cryptoComponent.createFileSymbol(
-                "DRV_CC_SYSTEM_CONFIG", None)
-        ccSystemConfigFile.setOutputName(
-            "core.LIST_SYSTEM_CONFIG_H_DRIVER_CONFIGURATION")
-        ccSystemConfigFile.setSourcePath(srcPath)
-        ccSystemConfigFile.setMarkup(True)
-        ccSystemConfigFile.setType("STRING")
+        #srcPath = "templates/system/system_config.h.ftl"
+        #fileName    = "system_config_wolfcrypt_tz.h.ftl"
+        #ccSystemConfigFile = cryptoComponent.createFileSymbol(
+        #        "DRV_CC_SYSTEM_CONFIG", None)
+        #ccSystemConfigFile.setOutputName(
+        #    "core.LIST_SYSTEM_CONFIG_H_DRIVER_CONFIGURATION")
+        #ccSystemConfigFile.setSourcePath(srcPath)
+        #ccSystemConfigFile.setMarkup(True)
+        #ccSystemConfigFile.setType("STRING")
         print("CRYPTO:  Adding %s"%(srcPath))
 
     #<config>/initialization.c - Add Driver Initialization code
@@ -768,7 +768,6 @@ def setHwEnabledMenuItems(enable):
         #Set TrustZone <filelist>.setSecurity("SECURE")
     #else:
         #UnSet TrustZone <filelist>.setSecurity("NON_SECURE")
-
 
 def onAttachmentConnected(source, target):
 
