@@ -39,7 +39,7 @@ import crypto_defs as g #Modified globals
 #CONFIG_USE_CRYPTO
 #--Returns True if CONFIG_USE_MAC changes value
 ################################################################################
-def ScanHash():
+def ScanMac():
     if   (g.cryptoMacAesCmacEnabledSymbol.getValue()       == True): newValue = True
     elif (g.cryptoMacAesCbcMacEnabledSymbol.getValue()      == True): newValue = True
     elif (g.cryptoMacAesGmacEnabledSymbol.getValue()      == True): newValue = True
@@ -170,6 +170,9 @@ def SetupCryptoMacMenu(cryptoComponent):
                 handleMacAesGmacEnabled,
                 ["crypto_mac_aes_hw_en"])
 
+    #Check to see if any of the MAC selections is True
+    #--Used to include the CC MAC API Files
+    ScanMac()
 
 #-----------------------------------------------------
 #MAC-AES Handlers
@@ -183,6 +186,8 @@ def handleMacAesCmacEnabled(symbol, event):
         g.cryptoMacAesCmacEnabledSymbol.setLabel("MAC-AES CMAC (HW)?")
     else:
         g.cryptoAesCmacEnabledSymbol.setLabel("MAC-AES CMAC?")
+    if (ScanMac() == True):
+        data = symbol.getComponent()
     return
 
 def handleMacAesCbcMacEnabled(symbol, event):
@@ -191,6 +196,8 @@ def handleMacAesCbcMacEnabled(symbol, event):
         g.cryptoMacAesCbcMacEnabledSymbol.setLabel("MAC-AES CBC-MAC (HW)?")
     else:
         g.cryptoMacAesCbcMacEnabledSymbol.setLabel("MAC-AES CBC-MAC?")
+    if (ScanMac() == True):
+        data = symbol.getComponent()
     return
 
 def handleMacAesGmacEnabled(symbol, event):
@@ -199,4 +206,6 @@ def handleMacAesGmacEnabled(symbol, event):
         g.cryptoAesGmacEnabledSymbol.setLabel("MAC-AES GMAC (HW)?")
     else:
         g.cryptoAesGmacEnabledSymbol.setLabel("MAC-AES GMAC ")
+    if (ScanMac() == True):
+        data = symbol.getComponent()
     return

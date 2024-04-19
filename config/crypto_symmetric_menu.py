@@ -325,11 +325,16 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
     #            handleAesEaxEnabled,
     #            ["crypto_sym_aes_hw"])
 
+    #Check to see if any of the Sym selections is True
+    #--Used to include the CC Sym API Files
+    ScanSym()
 
 #-----------------------------------------------------
 #AES
 def handleAesHwEnabled(symbol, event):
     print("CRYPTO: handle AES HW (does nothing)")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 
@@ -339,6 +344,8 @@ def handleAesEcbEnabled(symbol, event):
         g.cryptoAesEcbEnabledSymbol.setLabel("AES-ECB (HW)?")
     else:
         g.cryptoAesEcbEnabledSymbol.setLabel("AES-ECB?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesCbcEnabled(symbol, event):
@@ -347,6 +354,8 @@ def handleAesCbcEnabled(symbol, event):
         g.cryptoAesCbcEnabledSymbol.setLabel("AES-CBC (HW)?")
     else:
         g.cryptoAesCbcEnabledSymbol.setLabel("AES-CBC?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesOfbEnabled(symbol, event):
@@ -355,6 +364,8 @@ def handleAesOfbEnabled(symbol, event):
         g.cryptoAesOfbEnabledSymbol.setLabel("AES-OFB (HW)?")
     else:
         g.cryptoAesOfbEnabledSymbol.setLabel("AES-OFB?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesCfb1Enabled(symbol, event):
@@ -363,6 +374,8 @@ def handleAesCfb1Enabled(symbol, event):
         g.cryptoAesCfb1EnabledSymbol.setLabel("AES-CFB(1) (HW)?")
     else:
         g.cryptoAesCfb1EnabledSymbol.setLabel("AES-CFB(1)?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesCfb8Enabled(symbol, event):
@@ -371,6 +384,8 @@ def handleAesCfb8Enabled(symbol, event):
         g.cryptoAesCfb8EnabledSymbol.setLabel("AES-CFB(8) (HW)?")
     else:
         g.cryptoAesCfb8EnabledSymbol.setLabel("AES-CFB(8)?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesCfb64Enabled(symbol, event):
@@ -379,6 +394,8 @@ def handleAesCfb64Enabled(symbol, event):
         g.cryptoAesCfb64EnabledSymbol.setLabel("AES-CFB(64) (HW)?")
     else:
         g.cryptoAesCfb64EnabledSymbol.setLabel("AES-CFB(64)?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesCfb128Enabled(symbol, event):
@@ -387,6 +404,8 @@ def handleAesCfb128Enabled(symbol, event):
         g.cryptoAesCfb128EnabledSymbol.setLabel("AES-CFB(128) (HW)?")
     else:
         g.cryptoAesCfb128EnabledSymbol.setLabel("AES-CFB(128)?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesCtrEnabled(symbol, event):
@@ -395,6 +414,8 @@ def handleAesCtrEnabled(symbol, event):
         g.cryptoAesCtrEnabledSymbol.setLabel("AES-CTR (HW)?")
     else:
         g.cryptoAesCtrEnabledSymbol.setLabel("AES-CTR?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesXtsEnabled(symbol, event):
@@ -403,6 +424,8 @@ def handleAesXtsEnabled(symbol, event):
         g.cryptoAesXtsEnabledSymbol.setLabel("AES-XTS (HW)?")
     else:
         g.cryptoAesXtsEnabledSymbol.setLabel("AES-XTS?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 
 def handleAesEaxEnabled(symbol, event):
@@ -411,5 +434,7 @@ def handleAesEaxEnabled(symbol, event):
         g.cryptoAesEaxEnabledSymbol.setLabel("AES-XTS (HW)?")
     else:
         g.cryptoAesEaxEnabledSymbol.setLabel("AES-XTS?")
+    if (ScanSym() == True):
+        data = symbol.getComponent()
     return
 

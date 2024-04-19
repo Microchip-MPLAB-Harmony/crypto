@@ -27,8 +27,9 @@
 ################################################################################
 #GLOBAL Declarations
 ################################################################################
-cryptoHwSupported          =  False
-cryptoHwEnabledSymbol      =  None
+cryptoHwSupported          = False
+cryptoHwEnabledSymbol      = None
+cryptoHwSupportedSymbol    = None
 
 localCryptoComponent       =  None
 cryptoAdditionalHwDefines =  []
@@ -50,6 +51,19 @@ trustZoneEnabled          =  False  #Symbol
 trustZoneDevices          = []      #TZ Device Name Patterns
 trustZoneFileIds          = []      #List of file ids
 cryptoTzEnabledSymbol     = None
+
+
+################################################################################
+## Crypto HW Drivers
+################################################################################
+trngHw = []
+shaHw  = []
+aesHw  = []
+tdesHw = []
+rsaHw  = []
+eccHw  = []
+
+cryptHwDriverAvailable = []
 
 #===============================================================================
 #MENU
@@ -218,7 +232,9 @@ cryptoAeadAesSivGcmEnabledSymbol    = None
 
 #===============================================================================
 #HMAC
-CONFIG_USE_HMAC                    = None
+CONFIG_USE_MAC                     = None
+
+#MAC-AES
 cryptoHwMacAesSupported            = False
 cryptoHwMacAesEnabledSymbol        = None
 cryptoMacAesEnabledSymbol          = None
@@ -332,20 +348,18 @@ cryptoHwRsaSupported              = False
 cryptoHwRsaEnabledSymbol          = None
 cryptoRsaEnabledSymbol            = None
 
-#===============================================================================
 #ECC
-
 cryptoHwEccSupported              = False
 cryptoHwEccEnabledSymbol          = None
 cryptoSWCallBackEnableSymbol      = None
 cryptoEccEnabledSymbol            = None
 
-#-------------------------------------------------------------------------------
+#===============================================================================
 #DS - Digital Signing
 CONFIG_USE_DS                     = None
 cryptoDsEcdsaEnabledSymbol        = None
 
-#-------------------------------------------------------------------------------
+#===============================================================================
 #KAS - Key Authorization
 CONFIG_USE_KAS                    = None
 cryptoKasEcdhEnableSymbol         = None

@@ -285,22 +285,6 @@ def setupWolfCryptFiles(basecomponent) :
     #            "../../third_party/wolfssl",
     #            True, "third_party/wolfssl")
 
-    '''
-    #<config>/configuration.h - Add WolfCrypt Lib Middleware Configuration
-    srcPath  = "templates/system/wolfcrypt_system_config.h.ftl"
-    wolfCryptConfigInfo = basecomponent.createFileSymbol("wolfcryptConfigInfo", None)
-    wolfCryptConfigInfo.setSourcePath(srcPath)
-    if (w.trustZoneSupported != None): 
-        if (w.trustZoneSupported == True):
-            wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_SECURE_H_MIDDLEWARE_CONFIGURATION")
-            print("WOLFCRYPT: Add file (TZ=S) %s"%(srcPath))
-        else:
-            wolfCryptConfigInfo.setOutputName("core.LIST_SYSTEM_CONFIG_H_MIDDLEWARE_CONFIGURATION")
-            print("WOLFCRYPT: Add file %s"%(srcPath))
-    wolfCryptConfigInfo.setMarkup(True)
-    wolfCryptConfigInfo.setType("STRING")
-    '''
-
     #Global Preprocessor define - HAVE_CONFIG_H
     #NOTE:  Used by WolfSSL library to use the config.h, which includes the
     #       project configuration.h

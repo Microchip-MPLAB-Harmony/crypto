@@ -24,12 +24,13 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 ----------------------------------------------------------------------------->
 
 /*** Crypto Library Configuration ***/
-
-
 <#------------------------------------------------------------------------------ 
 The USE_ defines indicate that the function has been selected to
      be included in the build
 ------------------------------------------------------------------------------->
+
+//Enabled HW Modules
+
 <#-- HASH MD5 -->
 //Selected HASH Functions
 <#if crypto_md5 == true>
@@ -163,4 +164,10 @@ The USE_ defines indicate that the function has been selected to
         <#lt>#define USE_HASH_BLAKE2_512
         </#if>
     </#if>
+
+
+
+
+
+
 <#lt>// ---------- FUNCTIONAL CONFIGURATION END ----------

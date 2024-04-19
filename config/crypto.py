@@ -49,7 +49,6 @@ src_ext      = ('.c')
 hdr_ext      = ('.h')
 mipslib_ext  = ('.a')
 
-
 #*******************************************************************************
 # Adds File to project database and enables/disables it
 # --Root Parent
@@ -212,15 +211,15 @@ def instantiateComponent(cryptoComponent):
                 g.trustZoneSupported = True
                 break;
 
-    #cryptoAdditionalHwDefines = cryptoComponent.createStringSymbol(
-    #                                 "cryptoAdditionalHwDefines", None)
-    #cryptoAdditionalHwDefines.setVisible(False)
+    #String Implementation of defines for crypto_config.h.ftl
+    g.cryptoHwDefines = cryptoComponent.createStringSymbol(
+                                     "cryptoHwDefines", None)
+    g.cryptoHwDefines.setVisible(False)
 
     g.localCryptoComponent = cryptoComponent
 
     #Scan ATDF for Hardware suport
-    #TODO:  Run Hardware Support (Next Release)
-    #setupHardwareSupport()
+    SetupHardwareSupport(g.localCryptoComponent)
 
     #Add the crypto software implementation src library to file Generation Db
     AddAlwaysOnFiles(g.localCryptoComponent)
@@ -558,11 +557,11 @@ def handleHashDrngEnabled(symbol, event):
 ################################################################################
 # Scan the ATDF file for hardware module names given in the list items
 # where each item is a dictionary given by:
-# [ <Module name>, <Modula ID number>, "",
-#   <list of driver files>,            <set of HW symbols>)]
+# [ <atdf Module name>, <atdf Module ID number>, <atdf version code>,
+#   [], <set of HW Project Defines> ] 
 #
 ################################################################################
-def scanHardware(list):
+def ScanHardware(list):
     periphNode = ATDF.getNode("/avr-tools-device-file/devices/device/peripherals")
     modules = periphNode.getChildren()
     for module in modules:
@@ -572,80 +571,102 @@ def scanHardware(list):
                 (module.getAttribute("id")        == item[1]) and
                 (((module.getAttribute("version") == item[2]) or
                   item[2] == ""))):
-                #NOTE: item[3] Symbols used by FTL doesn't seem to be used.
-                #print(item[4])
-                g.cryptoHwAdditionalDefines = g.cryptoHwAdditionalDefines.union(item[4])
-                #print(cryptoHwAdditionalDefines)
-                #print("CRYPTO HSM:  %s (%s) %s (%s) %s (%s)"%(
-                #    module.getAttribute("name"),    item[0],
-                #    module.getAttribute("id"),      item[1],
-                #    module.getAttribute("version"), item[2]))
+
+                #Add to the symbol string to enable the HW module function
+                g.cryptoHwAdditionalDefines = (
+                    g.cryptoHwAdditionalDefines.union(item[4]))
                 return True
     return False
 
 ################################################################################
 # Detect MCU Target HW support for each particular crypto function
 # by scanning the ATDF file.
+# --Set HW Symbols to enable the implementation in the .ftl file
 #
 # crypto<hw function>Supported
 #
 ################################################################################
-def setupHardwareSupport() :
+def SetupHardwareSupport(cryptoComponent) :
+
+    g.cryptoHwSupportedSymbol= cryptoComponent.createBooleanSymbol(
+            "cryptoHwSupported", None)
+    g.cryptoHwSupportedSymbol.setVisible(False)
+    g.cryptoHwSupportedSymbol.setLabel("Crypto HW Supported")
+    g.cryptoHwSupportedSymbol.setDefaultValue(False)
+
 
     print("CRYPTO:  Scan HW Support")
-    g.cryptoHwTrngSupported   = scanHardware(g.cryptoHwTrngSupport)
+    g.cryptoHwTrngSupported   = ScanHardware(g.cryptoHwTrngSupport)
+    if (g.cryptoHwTrngSupported):
+        print("CRYPTO HW:  HW TRNG SUPPORTED")
 
     #HASH
-    g.cryptoHwMd5Supported    = scanHardware(g.cryptoHwMd5Support)
-    g.cryptoHwSha1Supported   = scanHardware(g.cryptoHwSha1Support)
-    g.cryptoHwSha224Supported = scanHardware(g.cryptoHwSha224Support)
-    g.cryptoHwSha256Supported = scanHardware(g.cryptoHwSha256Support)
-    g.cryptoHwSha384Supported = scanHardware(g.cryptoHwSha384Support)
-    g.cryptoHwSha512Supported = scanHardware(g.cryptoHwSha512Support)
+    g.cryptoHwMd5Supported    = ScanHardware(g.cryptoHwMd5Support)
+    if (g.cryptoHwMd5Supported):
+        print("CRYPTO HW:  HW MD5 SUPPORTED")
+    g.cryptoHwSha1Supported   = ScanHardware(g.cryptoHwSha1Support)
+    if (g.cryptoHwSha1Supported):
+        print("CRYPTO HW:  HW SHA1 SUPPORTED")
+    g.cryptoHwSha224Supported = ScanHardware(g.cryptoHwSha224Support)
+    g.cryptoHwSha256Supported = ScanHardware(g.cryptoHwSha256Support)
+    g.cryptoHwSha384Supported = ScanHardware(g.cryptoHwSha384Support)
+    g.cryptoHwSha512Supported = ScanHardware(g.cryptoHwSha512Support)
+    if (g.cryptoHwSha256Supported):
+        print("CRYPTO HW:  HW SHA SUPPORTED")
 
     #AES
-    g.cryptoHwAes128Supported    = scanHardware(g.cryptoHwAes128Support)
-    g.cryptoHwAes192Supported    = scanHardware(g.cryptoHwAes192Support)
-    g.cryptoHwAes256Supported    = scanHardware(g.cryptoHwAes256Support)
-    g.cryptoHwAesCbcSupported    = scanHardware(g.cryptoHwAesCbcSupport)
-    g.cryptoHwAesCtrSupported    = scanHardware(g.cryptoHwAesCtrSupport)
-    g.cryptoHwAesCfb1Supported   = scanHardware(g.cryptoHwAesCfb1Support)
-    g.cryptoHwAesCfb8Supported   = scanHardware(g.cryptoHwAesCfb8Support)
-    g.cryptoHwAesCfb64Supported  = scanHardware(g.cryptoHwAesCfb64Support)
-    g.cryptoHwAesCfb128Supported = scanHardware(g.cryptoHwAesCfb128Support)
-    g.cryptoHwAesOfbSupported    = scanHardware(g.cryptoHwAesOfbSupport)
-    g.cryptoHwAesXtsSupported    = scanHardware(g.cryptoHwAesXtsSupport)
-    g.cryptoHwAesGcmSupported    = scanHardware(g.cryptoHwAesGcmSupport)
-    g.cryptoHwAesCcmSupported    = scanHardware(g.cryptoHwAesCcmSupport)
+    g.cryptoHwAes128Supported    = ScanHardware(g.cryptoHwAes128Support)
+    g.cryptoHwAes192Supported    = ScanHardware(g.cryptoHwAes192Support)
+    g.cryptoHwAes256Supported    = ScanHardware(g.cryptoHwAes256Support)
+    g.cryptoHwAesCbcSupported    = ScanHardware(g.cryptoHwAesCbcSupport)
+    g.cryptoHwAesCtrSupported    = ScanHardware(g.cryptoHwAesCtrSupport)
+    g.cryptoHwAesCfb1Supported   = ScanHardware(g.cryptoHwAesCfb1Support)
+    g.cryptoHwAesCfb8Supported   = ScanHardware(g.cryptoHwAesCfb8Support)
+    g.cryptoHwAesCfb64Supported  = ScanHardware(g.cryptoHwAesCfb64Support)
+    g.cryptoHwAesCfb128Supported = ScanHardware(g.cryptoHwAesCfb128Support)
+    g.cryptoHwAesOfbSupported    = ScanHardware(g.cryptoHwAesOfbSupport)
+    g.cryptoHwAesXtsSupported    = ScanHardware(g.cryptoHwAesXtsSupport)
+    g.cryptoHwAesGcmSupported    = ScanHardware(g.cryptoHwAesGcmSupport)
+    g.cryptoHwAesCcmSupported    = ScanHardware(g.cryptoHwAesCcmSupport)
+
+    if (g.cryptoHwAes128Supported or g.cryptoHwAes128Supported or
+        g.cryptoHwAes192Supported or g.cryptoHwAes256Supported):
+        g.cryptoHwAesSupported = True
+        print("CRYPTO HW:  HW AES SUPPORTED")
+    else:
+        #print("CRYPTO HW:  HW AES NOT SUPPORTED")
+        g.cryptoHwAesSupported = False
 
     #AEAD
 
     #HMAC
 
     #DES
-    g.cryptoHwDesSupported    = scanHardware(g.cryptoHwDesSupport)
-    g.cryptoHwDesCbcSupported = scanHardware(g.cryptoHwDesCbcSupport)
-    g.cryptoHwDesCfbSupported = scanHardware(g.cryptoHwDesCfbSupport)
-    g.cryptoHwDesOfbSupported = scanHardware(g.cryptoHwDesOfbSupport)
+    g.cryptoHwDesSupported    = ScanHardware(g.cryptoHwDesSupport)
+    g.cryptoHwDesCbcSupported = ScanHardware(g.cryptoHwDesCbcSupport)
+    g.cryptoHwDesCfbSupported = ScanHardware(g.cryptoHwDesCfbSupport)
+    g.cryptoHwDesOfbSupported = ScanHardware(g.cryptoHwDesOfbSupport)
+    if (g.cryptoHwDesSupported):
+        print("CRYPTO HW:  HW DES SUPPORTED")
 
     #RSA
-    g.cryptoHwRsaSupported    = scanHardware(g.cryptoHwRsaSupport)
+    g.cryptoHwRsaSupported    = ScanHardware(g.cryptoHwRsaSupport)
+    if (g.cryptoHwRsaSupported):
+        print("CRYPTO HW:  HW ECC SUPPORTED")
 
     #ECC
-    g.cryptoHwEccSupported    = scanHardware(g.cryptoHwEccSupport)
-
-    #HW Modules
-    g.cryptoHW_U2803Present   = scanHardware(g.cryptoHW_U2803)
-    g.cryptoHW_U2805Present   = scanHardware(g.cryptoHW_U2805)
-    g.cryptoHW_03710Present   = scanHardware(g.cryptoHW_03710)
-
-    if (g.cryptoHwAes128Supported or g.cryptoHwAes128Supported or
-        g.cryptoHwAes192Supported or g.cryptoHwAes256Supported):
-        g.cryptoHwAesSupported = True
-        #print("CRYPTO HW:  HW AES SUPPORTED")
+    g.cryptoHwEccSupported    = ScanHardware(g.cryptoHwEccSupport)
+    if (g.cryptoHwEccSupported):
+        print("CRYPTO HW:  HW ECC SUPPORTED")
     else:
         #print("CRYPTO HW:  HW AES NOT SUPPORTED")
         g.cryptoHwAesSupported = False
+
+    #HW Modules
+    g.cryptoHW_U2803Present   = ScanHardware(g.cryptoHW_U2803)
+    g.cryptoHW_U2805Present   = ScanHardware(g.cryptoHW_U2805)
+    g.cryptoHW_03710Present   = ScanHardware(g.cryptoHW_03710)
+
 
     if (g.cryptoHwTrngSupported     or  g.cryptoHwMd5Supported or
         g.cryptoHwSha1Supported     or
@@ -657,8 +678,16 @@ def setupHardwareSupport() :
     else:
         g.cryptoHwSupported = False
 
-    #g.cryptoAdditionalHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
-    #print(g.cryptoAdditionalHwDefines.getValue())
+    #Add the HW Module enables to the , delineated string 
+    if (g.cryptoHwSupported == True):
+        g.cryptoHwSupportedSymbol.setValue(True)
+    else:
+        g.cryptoHwSupportedSymbol.setValue(False)
+    g.cryptoHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
+    print("CRYPTO:  Additional HW defines:")
+    print(g.cryptoHwAdditionalDefines)
+    print("CRYPTO:  HW defines:")
+    print(g.cryptoHwDefines.getValue())
 
 
 ################################################################################
@@ -691,37 +720,6 @@ def AddAlwaysOnFiles(cryptoComponent):
     ccSystemDefIncFile.setMarkup(True)
     ccSystemDefIncFile.setType("STRING")
 
-    #<config>/crypto_config.h - Add CC Driver Configuration 
-    fileName    = "system_config_wolfcrypt_tz.h.ftl"
-    outName     = "crypto_config.h"
-    projectPath    = "config/" + configName
-    srcPath     = "templates/system/"
-    dstPath     = ""
-    ccSysConfigFile= cryptoComponent.createFileSymbol(
-            "DRV_CC_SYSTEM_CONFIG", None)
-    ccSysConfigFile.setSourcePath(srcPath + fileName)
-    ccSysConfigFile.setMarkup(True)
-    ccSysConfigFile.setOutputName(outName)
-    ccSysConfigFile.setDestPath("")
-    ccSysConfigFile.setProjectPath(projectPath)
-    ccSysConfigFile.setType("HEADER")
-    ccSysConfigFile.setOverwrite(True)
-    if (g.trustZoneSupported == True):
-        ccSysConfigFile.setSecurity("SECURE")
-        g.trustZoneFileIds.append(ccSysConfigFile.getID())
-        print("CRYPTO:  Adding (TZ) %s"%(srcPath+fileName))
-    else:
-        #srcPath = "templates/system/system_config.h.ftl"
-        #fileName    = "system_config_wolfcrypt_tz.h.ftl"
-        #ccSystemConfigFile = cryptoComponent.createFileSymbol(
-        #        "DRV_CC_SYSTEM_CONFIG", None)
-        #ccSystemConfigFile.setOutputName(
-        #    "core.LIST_SYSTEM_CONFIG_H_DRIVER_CONFIGURATION")
-        #ccSystemConfigFile.setSourcePath(srcPath)
-        #ccSystemConfigFile.setMarkup(True)
-        #ccSystemConfigFile.setType("STRING")
-        print("CRYPTO:  Adding %s"%(srcPath))
-
     #<config>/initialization.c - Add Driver Initialization code
     srcPath = "templates/system/system_initialize.c.ftl"
     ccSystemInitFile = cryptoComponent.createFileSymbol(
@@ -738,6 +736,29 @@ def AddAlwaysOnFiles(cryptoComponent):
         print("CRYPTO:  Adding %s"%(srcPath))
     ccSystemInitFile.setSourcePath(srcPath)
     ccSystemInitFile.setMarkup(True)
+
+    #<config>/crypto_config.h 
+    fileName    = "crypto_config_wolfcrypt_hw.h.ftl"
+    outName     = "crypto_config.h"
+    projectPath    = "config/" + configName
+    srcPath     = "templates/"
+    dstPath     = ""
+    ccSysConfigFile= cryptoComponent.createFileSymbol(
+            "DRV_CC_SYSTEM_CONFIG", None)
+    ccSysConfigFile.setSourcePath(srcPath + fileName)
+    ccSysConfigFile.setMarkup(True)
+    ccSysConfigFile.setOutputName(outName)
+    ccSysConfigFile.setDestPath("")
+    ccSysConfigFile.setProjectPath(projectPath)
+    ccSysConfigFile.setType("HEADER")
+    ccSysConfigFile.setOverwrite(True)
+    if (g.trustZoneSupported == True):
+        ccSysConfigFile.setSecurity("SECURE")
+        g.trustZoneFileIds.append(ccSysConfigFile.getID())
+        print("CRYPTO(C):  Adding (TZ) %s"%(srcPath+fileName))
+    else:
+        print("CRYPTO(C):  Adding %s"%(srcPath+fileName))
+
 
 
 ################################################################################

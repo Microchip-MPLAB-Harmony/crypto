@@ -90,4 +90,7 @@ def SetupCryptoRngMenu(cryptoComponent):
     g.cryptoRngPrngEnabledSymbol.setReadOnly(False)
     g.cryptoRngPrngEnabledSymbol.setDefaultValue(True)
 
+    #Check to see if any of the AEAD selections is True
+    #--Used to include the CC AEAD API Files
+    ScanRng()
 

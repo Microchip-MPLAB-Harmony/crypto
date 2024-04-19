@@ -82,6 +82,9 @@ def SetupCryptoKasMenu(cryptoComponent):
 
     #TODO:  HW ECDH Selection
 
+    #Check to see if any of the KAS  selections is True
+    #--Used to include the CC KAS  API Files
+    ScanKas()
 #-----------------------------------------------------
 #KAS-ECDH Handlers
 def handleKasEcdhEnabled(symbol, event):
@@ -90,4 +93,6 @@ def handleKasEcdhEnabled(symbol, event):
         g.cryptoKasEcdhEnabledSymbol.setLabel("ECDH (HW)?")
     else:
         g.cryptoKasEcdhEnabledSymbol.setLabel("ECDH?")
+    if (ScanKas() == True):
+        data = symbol.getComponent()
     return

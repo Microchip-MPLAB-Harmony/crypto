@@ -216,11 +216,16 @@ def SetupCryptoAeadMenu(cryptoComponent):
                 handleAeadAesSivGcmEnabled,
                 ["crypto_aead_aes_hw_en"])
 
+    #Check to see if any of the AEAD selections is True
+    #--Used to include the CC AEAD API Files
+    ScanAead()
 
 #-----------------------------------------------------
 #AEAD-AES Handlers
 def handleAesHwEnabled(symbol, event):
     print("CRYPTO: handle AES HW (does nothing)")
+    if (ScanAead() == True):
+        data = symbol.getComponent()
     return
 
 def handleAeadAesGcmEnabled(symbol, event):
@@ -229,6 +234,8 @@ def handleAeadAesGcmEnabled(symbol, event):
         g.cryptoAeadAesGcmEnabledSymbol.setLabel("AEAD-AES GCM (HW)?")
     else:
         g.cryptoAesGcmEnabledSymbol.setLabel("AEAD-AES GCM?")
+    if (ScanAead() == True):
+        data = symbol.getComponent()
     return
 
 def handleAeadAesCcmEnabled(symbol, event):
@@ -237,6 +244,8 @@ def handleAeadAesCcmEnabled(symbol, event):
         g.cryptoAeadAesCcmEnabledSymbol.setLabel("AEAD-AES CCM (HW)?")
     else:
         g.cryptoAeadAesCcmEnabledSymbol.setLabel("AEAD-AES CCM?")
+    if (ScanAead() == True):
+        data = symbol.getComponent()
     return
 
 def handleAeadAesEaxEnabled(symbol, event):
@@ -245,6 +254,8 @@ def handleAeadAesEaxEnabled(symbol, event):
         g.cryptoAeadAesEaxEnabledSymbol.setLabel("AEAD-AES Eax (HW)?")
     else:
         g.cryptoAeadAesEaxEnabledSymbol.setLabel("AEAD-AES Eax?")
+    if (ScanAead() == True):
+        data = symbol.getComponent()
     return
 
 def handleAeadAesSivCmacEnabled(symbol, event):
@@ -253,6 +264,8 @@ def handleAeadAesSivCmacEnabled(symbol, event):
         g.cryptoAeadAesSivCmacEnabledSymbol.setLabel("AEAD-AES SIV-CMAC (HW)?")
     else:
         g.cryptoAeadAesSivCmacEnabledSymbol.setLabel("AEAD-AES SIV-CMAC?")
+    if (ScanAead() == True):
+        data = symbol.getComponent()
     return
 
 def handleAeadAesSivGcmEnabled(symbol, event):
@@ -261,4 +274,6 @@ def handleAeadAesSivGcmEnabled(symbol, event):
         g.cryptoAeadAesSivGcmEnabledSymbol.setLabel("AEAD-AES SIV-GCM (HW)?")
     else:
         g.cryptoAeadAesSivGcmEnabledSymbol.setLabel("AEAD-AES SIV-GCM?")
+    if (ScanAead() == True):
+        data = symbol.getComponent()
     return

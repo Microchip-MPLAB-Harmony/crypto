@@ -81,6 +81,10 @@ def SetupCryptoDsMenu(cryptoComponent):
     g.cryptoDsEcdsaEnabledSymbol.setDefaultValue(True)
 
     #TODO:  HW ECDSA Selection
+    
+    #Check to see if any of the Ds selections is True
+    #--Used to include the CC DS API Files
+    ScanDigSign()
 
 #-----------------------------------------------------
 #DS-AES Handlers
@@ -91,4 +95,6 @@ def handleDsEcdsaEnabled(symbol, event):
         g.cryptoDsEcdsaEnabledSymbol.setLabel("DS-AES CMAC (HW)?")
     else:
         g.cryptoDsEcdsaEnabledSymbol.setLabel("DS-AES CMAC?")
+    if (ScanDigSign() == True):
+        data = symbol.getComponent()
     return
