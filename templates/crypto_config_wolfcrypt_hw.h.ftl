@@ -88,6 +88,9 @@ extern "C" {
     <#if HAVE_MCHP_CRYPTO_TRNG_HW_HSM   == true>
         <#lt>#warning "HSM TRNG HW Driver Not Implemented"
     </#if>
+    <#if HAVE_MCHP_CRYPTO_TRNG_HW_6334 == true>
+        <#lt>#warning "6334 TRNG HW Driver Not Implemented"
+    </#if>
     <#if HAVE_MCHP_CRYPTO_TRNG_HW_U2242 == true>
         <#lt>#warning "U2242 TRNG HW Driver Not Implemented"
     </#if>
@@ -109,17 +112,41 @@ extern "C" {
     <#if HAVE_MCHP_CRYPTO_SHA_HW_03710  == true>
         <#lt>#warning "03710 SHA HW Driver Not Implemented"
     </#if>
+    <#if HAVE_MCHP_CRYPTO_SHA_HW_6156 == true>
+        <#lt>#warning "6156 SHA HW Driver Not Implemented"
+    </#if>
+    <#if HAVE_MCHP_CRYPTO_BLAKE_HW_HSM == true>
+        <#lt>#warning "HSM BLAKE HW Driver Not Implemented"
+    </#if>
+    <#if HAVE_MCHP_CRYPTO_BLAKE2_HW_HSM == true>
+        <#lt>#warning "HSM BLAKE2 HW Driver Not Implemented"
+    </#if>
+    <#if HAVE_MCHP_CRYPTO_AES_HW_HSM == true>
+        <#lt>#warning "HSM AES HW Driver Not Implemented"
+    </#if>
     <#if HAVE_MCHP_CRYPTO_AES_HW_U2238  == true>
         <#lt>#warning "U2238 AES HW Driver Not Implemented"
+    </#if>
+    <#if HAVE_MCHP_CRYPTO_AES_HW_6149 == true>
+        <#lt>#warning "6149 AES HW Driver Not Implemented"
     </#if>
     <#if HAVE_MCHP_CRYPTO_TDES_HW_6150  == true>
         <#lt>#warning "6150 TDES HW Driver Not Implemented"
     </#if>
+    <#if HAVE_MCHP_CRYPTO_TDES_HW_00158 == true>
+        <#lt>#warning "00158 TDES HW Driver Not Implemented"
+    </#if>
     <#if HAVE_MCHP_CRYPTO_RSA_HW_PUKCC  == true>
         <#lt>#warning "PUKCC RSA HW Driver Not Implemented"
     </#if>
+    <#if HAVE_MCHP_CRYPTO_RSA_HW_CPKCC == true>
+        <#lt>#warning "CPKCC RSA HW Driver Not Implemented"
+    </#if>
     <#if HAVE_MCHP_CRYPTO_ECC_HW_BA414E == true>
         <#lt>#warning "BA414E ECC HW Driver Not Implemented"
+    </#if>
+    <#if HAVE_MCHP_CRYPTO_ECC_HW_CPKCC == true>
+        <#lt>#warning "CPKCC ECC HW Driver Not Implemented"
     </#if>
     <#if HAVE_MCHP_CRYPTO_HW_BA414E     == true>
         <#lt>#warning "BA414E HW Driver Not Implemented"
@@ -130,6 +157,10 @@ extern "C" {
     <#if HAVE_MCHP_CRYPTO_HW_03710]     == true>
         <#lt>#warning "03710 HW Driver Not Implemented"
     </#if>
+    <#if HAVE_MCHP_CRYPTO_HW_U2803 == true>
+        <#lt>#warning "U2803 HW Driver Not Implemented"
+    </#if>
+
 <#else>
     <#lt>/*** Crypto Hardware Drivers Not Supported) ***/
 </#if>
