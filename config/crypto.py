@@ -594,6 +594,21 @@ def SetupHardwareSupport(cryptoComponent) :
     g.cryptoHwSupportedSymbol.setLabel("Crypto HW Supported")
     g.cryptoHwSupportedSymbol.setDefaultValue(False)
 
+    #Create HW Driver Support Symbols
+    g.hwSymbol = []
+    print("CRYPTO:  %d HW Symbol IDS"%(len(g.hwSymStrings)))
+    for hwStr in g.hwSymStrings:
+        print("CRYPTO:    %s"%(hwStr))
+    for hwStr in g.hwSymStrings:
+        print("CRYPTO:  HW STR #%d %s"%(g.hwSymStrings.index(hwStr), hwStr))
+        g.hwSymbol.append(cryptoComponent.createBooleanSymbol(
+                hwStr, None))
+        g.hwSymbol[-1].setVisible(False)
+        g.hwSymbol[-1].setLabel("Crypto HW Driver Supported")
+        g.hwSymbol[-1].setDefaultValue(False)
+    print("CRYPTO:  %d HW Driver Symbols"%(len(g.hwSymbol)))
+    for hwSym in g.hwSymbol:
+        print("CRYPTO:    %s"%(hwSym))
 
     print("CRYPTO:  Scan HW Support")
     g.cryptoHwTrngSupported   = ScanHardware(g.cryptoHwTrngSupport)
@@ -678,16 +693,27 @@ def SetupHardwareSupport(cryptoComponent) :
     else:
         g.cryptoHwSupported = False
 
-    #Add the HW Module enables to the , delineated string 
     if (g.cryptoHwSupported == True):
         g.cryptoHwSupportedSymbol.setValue(True)
     else:
         g.cryptoHwSupportedSymbol.setValue(False)
+
+    #Add the HW Module symbols
     g.cryptoHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
     print("CRYPTO:  Additional HW defines:")
     print(g.cryptoHwAdditionalDefines)
+
+    #NOTE: the symbol ID should match the string add. defines
+    for addDef in g.cryptoHwAdditionalDefines:
+        print("CRYPTO:  AddDef %s"%(addDef))
+        print(g.hwSymStrings)
+        indx =  g.hwSymStrings.index(addDef)
+        g.hwSymbol[indx].setValue(True)
+        print("CRYPTO:  Valid HS SymbolID %s"%(g.hwSymbol[indx].getID()))
+
     print("CRYPTO:  HW defines:")
     print(g.cryptoHwDefines.getValue())
+
 
 
 ################################################################################

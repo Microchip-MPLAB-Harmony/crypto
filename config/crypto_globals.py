@@ -63,7 +63,9 @@ tdesHw = []
 rsaHw  = []
 eccHw  = []
 
-cryptHwDriverAvailable = []
+#HW Module FTL Symbol Strings
+hwSymStrings = []
+hwSymbol = []
 
 #===============================================================================
 #MENU
