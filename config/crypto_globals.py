@@ -69,7 +69,7 @@ hwDriverSymbol  = []
 hwDriverFileSymbols = []
 
 #HW Driver File Generation
-hwDriverDict = {"trng": [],
+hwDriverFileDict = {}
 
 #===============================================================================
 #MENU

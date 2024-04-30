@@ -74,6 +74,7 @@ hwDriverSymbol = []
 hwDriverFileSymbols = []
 
 #HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
+#   { <dKey>: { <fKey>: [<driver files>] , ... ] }
 hwDriverDict = { "CPKCC": { "RSA":[],
                             "ECC":[] },
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
@@ -82,21 +83,23 @@ hwDriverDict = { "CPKCC": { "RSA":[],
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} } #End of HW Driver file Dict
 
+#The dict list of file symbols loaded for each function
+# {<function>: [<files symbols>], ...}
+#--Key is same as the hwDriverDict fKey
+hwDriverFileDict = {
+        "TRNG": [],
+         "SHA": [],
+         "AES": [],
+        "TDES": [],
+         "RSA": [],
+         "ECC": []}
+
 #TODO:   Make all drivers available.  Only MISTRAL for now
 hwDriverAvail = [ 
 "HAVE_MCHP_CRYPTO_RSA_HW_CPKCC",  #PIC32CX MT
 "HAVE_MCHP_CRYPTO_ECC_HW_CPKCC",  #PIC32CX MT
 "HAVE_MCHP_CRYPTO_AES_HW_6149",
 "HAVE_MCHP_CRYPTO_SHA_HW_6156"]
-
-# {<function>: [<files symbols>], ...}
-hwDriverDict = {"trng": [],
-                 "sha": [],
-                 "aes": [],
-                "tdes": [],
-                 "rsa": [],
-                 "ecc": []}
-
 
 
 

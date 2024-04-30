@@ -88,8 +88,7 @@ def ScanShaHw():
 
         if (
             g.CONFIG_USE_SHA_HW.getValue() == newValue and
-            retVal = False):  
-            return False
+            retVal == False): return False
         else:
             g.CONFIG_USE_SHA_HW.setValue(newValue)
             if(newValue == True):

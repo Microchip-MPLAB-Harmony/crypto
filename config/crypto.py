@@ -86,7 +86,7 @@ def AddFileName(fileName, prefix, component,
         tz = "N"
         print("CRYPTO:  Adding ""%s"" "%(projectPath + fileName))
 
-    return (fileID, tz)
+    return (fileNameSymbol)
 
 
 def get_script_dir(follow_symlinks=True):
@@ -140,7 +140,7 @@ def SetupCommonCryptoFiles(basecomponent) :
         #AddFileName(fileName, prefix, component, 
         #            srcPath, destPath, enabled, projectPath):
         projectPath = "config/" + configName + "/crypto/common_crypto/"
-        (symid, tz) = AddFileName(fileName,                     #Filename 
+        fileSym = AddFileName(fileName,                     #Filename 
                          "common_crypto",              #MCC Symbol Name Prefix
                          basecomponent,                #MCC Component
                          "src/common_crypto/",         #Src Path
@@ -150,7 +150,7 @@ def SetupCommonCryptoFiles(basecomponent) :
 
     projectPath = "config/" + configName + "/crypto/common_crypto/src/"
     for fileName in ccpsfl_trim:
-        (symid, tz) = AddFileName(fileName,                     #Filename    
+        fileSym = AddFileName(fileName,                     #Filename    
                          "common_crypto",              #MCC Symbol Name Prefix
                          basecomponent,                #MCC Component
                          "src/common_crypto/src/",     #Path Src
@@ -277,7 +277,7 @@ def instantiateComponent(cryptoComponent):
 
     #INCLUDE FILE to configure WOLFCRYPT with the HAVE_CONFIG_H 
     #project define.
-    (symid, tz) = AddFileName("config.h",                   #Filename    
+    (fileSym) = AddFileName("config.h",                   #Filename    
                      "common_crypto",              #MCC Symbol Name Prefix
                      cryptoComponent,              #MCC Component
                      "src/wolfcrypt/",             #Src Path
@@ -287,7 +287,7 @@ def instantiateComponent(cryptoComponent):
 
     #INCLUDE FILE to configure WOLFCRYPT with the WOLFSSL_USER_SETTINGS 
     #Project define
-    (symid, tz) = AddFileName("user_settings.h",            #Filename    
+    (fileSym) = AddFileName("user_settings.h",            #Filename    
                      "common_crypto",              #MCC Symbol Name Prefix
                      cryptoComponent,              #MCC Component
                      "src/wolfcrypt/",             #Path Src
@@ -609,15 +609,19 @@ def SetupHwDriverFiles(basecomponent):
             print("  fKey %s"%(fKey))
             for fileName in fDict[fKey]:
                 count += 1
-                (symId, tz) = AddFileName(
-                                  fileName,  #File Name 
-                                  "",        #id prefix
-                                  basecomponent, #Component
-                                  srcPath, 
-                                  dstPath, False, projPath)
+                fileSym = AddFileName(
+                              fileName,  #File Name 
+                              "",        #id prefix
+                              basecomponent, #Component
+                              srcPath, 
+                              dstPath, False, projPath)
 
-                g.hwDriverFileSymbols.append(symId) #File Sym List
-                print("  fID(%s)  %s"%(symId, fileName))
+                g.hwDriverFileDict[fKey].append(fileSym)
+                print("  fID(%s)  %s"%(fileSym.getID(), fileName))
+        print("CRYPTO: Driver Files:")
+        for fKey in g.hwDriverFileDict:
+            print("    %s--"%(fKey))
+            print(g.hwDriverFileDict[fKey])
 
 
 
