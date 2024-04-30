@@ -59,6 +59,7 @@ def ScanHash():
     elif (g.cryptoBlake384EnabledSymbol.getValue()  == True): newValue = True
     elif (g.cryptoBlake512EnabledSymbol.getValue()  == True): newValue = True
     else: newValue = False
+    print("HASH: Use HASH SCAN = %s"%(newValue))
 
     if (g.CONFIG_USE_HASH.getValue() == newValue):
         return False
@@ -66,24 +67,44 @@ def ScanHash():
         g.CONFIG_USE_HASH.setValue(newValue)
         return True
 
+#Check if the SHA is enabled and the SHA HW Driver Files are needed.
 def ScanShaHw():
-    if   (g.cryptoHwSha1EnabledSymbol.getValue()      == True): newValue = True
-    elif (g.cryptoHwSha224EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoHwSha256EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoHwSha384EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoHwSha512EnabledSymbol.getValue()    == True): newValue = True
-    else: newValue = False
+    retVal = False
+    if (ScanHash() == True):
+        retVal = True;
+    print("SHA: SCAN USE HASH %s"%(g.CONFIG_USE_HASH.getValue()))
 
-    print("SHA: Use SHA %s"%(newValue))
+    if (g.CONFIG_USE_HASH.getValue() == True):
 
-    if (g.CONFIG_USE_SHA_HW.getValue() == newValue):
-        return False
-    else:
-        g.CONFIG_USE_SHA_HW.setValue(newValue)
-        if(newValue == True):
-            print("SHA: Enable the SHA HW Files")
+        #Check for HW driver to be enabled
+        if   (g.cryptoHwSha1EnabledSymbol.getValue()      == True): newValue = True
+        elif (g.cryptoHwSha224EnabledSymbol.getValue()    == True): newValue = True
+        elif (g.cryptoHwSha256EnabledSymbol.getValue()    == True): newValue = True
+        elif (g.cryptoHwSha384EnabledSymbol.getValue()    == True): newValue = True
+        elif (g.cryptoHwSha512EnabledSymbol.getValue()    == True): newValue = True
+        else: newValue = False
+
+        print("SHA: Use SHA SCAN %s"%(newValue))
+
+        if (
+            g.CONFIG_USE_SHA_HW.getValue() == newValue and
+            retVal = False):  
+            return False
         else:
-            print("SHA: DISable the SHA HW Files")
+            g.CONFIG_USE_SHA_HW.setValue(newValue)
+            if(newValue == True):
+                print("SHA: Enable the SHA HW Files")
+            else:
+                print("SHA: DISable the SHA HW Files")
+            return True
+
+    elif (retVal == True): 
+        print("SHA: DISable the SHA HW Files")
+        return True
+    else:
+        print("SHA: Do Nothing")
+        return False
+
 
 def SetupCryptoHashMenu(cryptoComponent):
 
@@ -248,7 +269,7 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.cryptoHwSha256EnabledSymbol.setDefaultValue(True)
     if ((g.cryptoHwSha256Supported == True)):
         g.cryptoSha256EnabledSymbol.setDependencies(
-                handleSha256Enabled, ["crypto_sha2_256"])
+                handleSha256Enabled, ["crypto_sha2_256_hw", "crypto_sha2_256"])
         if (g.cryptoSha256EnabledSymbol.getValue() == True):
             g.cryptoHwSha256EnabledSymbol.setVisible(True)
             g.cryptoHwSha256EnabledSymbol.setDefaultValue(True)
@@ -786,6 +807,7 @@ def handleSha224Enabled(symbol, event):
         data = symbol.getComponent()
 
 
+#Handler for Sha256 GUI enable and Sha256 HW Enable
 def handleSha256Enabled(symbol, event):
     if (g.cryptoSha256EnabledSymbol.getValue() == True):
         print("HASH: SHA256 Enabled")
@@ -796,13 +818,12 @@ def handleSha256Enabled(symbol, event):
             g.cryptoHwSha256EnabledSymbol.setValue(False)
             g.cryptoHwSha256EnabledSymbol.setVisible(False)
     else:
+        #HW not enabled
         g.cryptoHwSha256EnabledSymbol.setValue(False)
         g.cryptoHwSha256EnabledSymbol.setVisible(False)
-    if (ScanHash() == True):
-        data = symbol.getComponent()
-        print("HASH:  Local Component ID %s"%(data.getID()))
+
+    #Check for Sha HW Driver 
     ScanShaHw()
-    print("HASH: SHA HW %s"%(g.CONFIG_USE_SHA_HW.getValue()))
 
 def handleSha384Enabled(symbol, event):
     if (g.cryptoSha384EnabledSymbol.getValue() == True):

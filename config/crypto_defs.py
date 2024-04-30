@@ -89,6 +89,15 @@ hwDriverAvail = [
 "HAVE_MCHP_CRYPTO_AES_HW_6149",
 "HAVE_MCHP_CRYPTO_SHA_HW_6156"]
 
+# {<function>: [<files symbols>], ...}
+hwDriverDict = {"trng": [],
+                 "sha": [],
+                 "aes": [],
+                "tdes": [],
+                 "rsa": [],
+                 "ecc": []}
+
+
 
 
 ################################################################################

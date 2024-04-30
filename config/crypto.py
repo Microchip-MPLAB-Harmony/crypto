@@ -615,6 +615,7 @@ def SetupHwDriverFiles(basecomponent):
                                   basecomponent, #Component
                                   srcPath, 
                                   dstPath, False, projPath)
+
                 g.hwDriverFileSymbols.append(symId) #File Sym List
                 print("  fID(%s)  %s"%(symId, fileName))
 
