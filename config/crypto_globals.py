@@ -63,9 +63,14 @@ tdesHw = []
 rsaHw  = []
 eccHw  = []
 
-#HW Module FTL Symbol Strings
-hwSymStrings = []
-hwSymbol = []
+#HW Driver FTL Symbol Strings
+hwDriverStrings = []
+hwDriverSymbol  = []
+hwDriverFileSymbols = []
+
+#HW Driver File Generation
+hwDriver     = []
+hwDriverDict = []
 
 #===============================================================================
 #MENU

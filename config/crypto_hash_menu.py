@@ -74,10 +74,16 @@ def ScanShaHw():
     elif (g.cryptoHwSha512EnabledSymbol.getValue()    == True): newValue = True
     else: newValue = False
 
+    print("SHA: Use SHA %s"%(newValue))
+
     if (g.CONFIG_USE_SHA_HW.getValue() == newValue):
         return False
     else:
         g.CONFIG_USE_SHA_HW.setValue(newValue)
+        if(newValue == True):
+            print("SHA: Enable the SHA HW Files")
+        else:
+            print("SHA: DISable the SHA HW Files")
 
 def SetupCryptoHashMenu(cryptoComponent):
 
@@ -757,7 +763,6 @@ def handleSha1Enabled(symbol, event):
         else:
             g.cryptoHwSha1EnabledSymbol.setValue(False)
             g.cryptoHwSha1EnabledSymbol.setVisible(False)
-        ScanShaHw()
     else:
         g.cryptoHwSha1EnabledSymbol.setValue(False)
         g.cryptoHwSha1EnabledSymbol.setVisible(False)
@@ -780,6 +785,7 @@ def handleSha224Enabled(symbol, event):
     if (ScanHash() == True):
         data = symbol.getComponent()
 
+
 def handleSha256Enabled(symbol, event):
     if (g.cryptoSha256EnabledSymbol.getValue() == True):
         print("HASH: SHA256 Enabled")
@@ -794,6 +800,9 @@ def handleSha256Enabled(symbol, event):
         g.cryptoHwSha256EnabledSymbol.setVisible(False)
     if (ScanHash() == True):
         data = symbol.getComponent()
+        print("HASH:  Local Component ID %s"%(data.getID()))
+    ScanShaHw()
+    print("HASH: SHA HW %s"%(g.CONFIG_USE_SHA_HW.getValue()))
 
 def handleSha384Enabled(symbol, event):
     if (g.cryptoSha384EnabledSymbol.getValue() == True):

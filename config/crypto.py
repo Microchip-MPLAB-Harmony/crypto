@@ -51,13 +51,15 @@ mipslib_ext  = ('.a')
 
 #*******************************************************************************
 # Adds File to project database and enables/disables it
-# --Root Parent
+# -- Note that the file destination/source path is relative to  
+#    src/config/<config>
 def AddFileName(fileName, prefix, component,
                 srcPath, destPath, enabled, projectPath):
     fileID = prefix + fileName.replace('.', '_')
     fileNameSymbol = component.createFileSymbol(fileID, None)
     fileNameSymbol.setProjectPath(projectPath)
 
+    print("CRYPTO: Add %s"%(srcPath+fileName))
     fileNameSymbol.setSourcePath(srcPath + fileName)
     fileNameSymbol.setOutputName(fileName)
 
@@ -578,12 +580,54 @@ def ScanHardware(list):
                 return True
     return False
 
+#Add the HW Drivers
+#--Called after HW has been scanned and the HW Driver Symbols enabled.
+#--HW Driver Symbols (
+#  (TODO:  Drivers only for HW available and the HW function is selected)
+def SetupHwDriverFiles(basecomponent):
+
+    print("CRYPTO:  Adding HW Driver Files")
+    configName  = Variables.get("__CONFIGURATION_NAME")  # e.g. "default"
+    configPath  = "config/" + configName
+    srcPath     = "src/drivers/"
+    dstPath     = "crypto/driver"
+    projPath    = "config/" + configName + "/crypto/driver/"
+
+    #Create the HW Driver file symbols for the available Crypto HW
+    print("CRYPTO:  Driver Symbol ID's:")
+    for dSym in g.hwDriverSymbol:
+        print("    %s (%s)"%(dSym.getID(),dSym.getValue()))
+
+    count=0
+    #TODO:  For now create all drivers disabled for this HW
+    #       Later scan to see what HW functions are enabled
+    for [dKey, fDict] in g.hwDriverDict.items():  #Driver File Dict
+        #if (hwDrvSym.getID() in g.hwDriverStrings):
+        #indx = g.hwDriverStrings.index(hwDrvSym.getID())
+        print("CRYPTO: dKey %s:  "%(dKey))
+        for fKey in fDict:       #Driver Function Key to file Dict
+            print("  fKey %s"%(fKey))
+            for fileName in fDict[fKey]:
+                count += 1
+                (symId, tz) = AddFileName(
+                                  fileName,  #File Name 
+                                  "",        #id prefix
+                                  basecomponent, #Component
+                                  srcPath, 
+                                  dstPath, False, projPath)
+                g.hwDriverFileSymbols.append(symId) #File Sym List
+                print("  fID(%s)  %s"%(symId, fileName))
+
+
+
+
 ################################################################################
 # Detect MCU Target HW support for each particular crypto function
 # by scanning the ATDF file.
 # --Set HW Symbols to enable the implementation in the .ftl file
-#
-# crypto<hw function>Supported
+# --HW Driver symbols enabled if the hardware is available.
+#   (symbol ID same as the HW define strings).  Symbol in list HwDriverSymbol 
+# --HW Driver Define strings generated to crypto_config.h
 #
 ################################################################################
 def SetupHardwareSupport(cryptoComponent) :
@@ -593,22 +637,6 @@ def SetupHardwareSupport(cryptoComponent) :
     g.cryptoHwSupportedSymbol.setVisible(False)
     g.cryptoHwSupportedSymbol.setLabel("Crypto HW Supported")
     g.cryptoHwSupportedSymbol.setDefaultValue(False)
-
-    #Create HW Driver Support Symbols
-    g.hwSymbol = []
-    print("CRYPTO:  %d HW Symbol IDS"%(len(g.hwSymStrings)))
-    for hwStr in g.hwSymStrings:
-        print("CRYPTO:    %s"%(hwStr))
-    for hwStr in g.hwSymStrings:
-        print("CRYPTO:  HW STR #%d %s"%(g.hwSymStrings.index(hwStr), hwStr))
-        g.hwSymbol.append(cryptoComponent.createBooleanSymbol(
-                hwStr, None))
-        g.hwSymbol[-1].setVisible(False)
-        g.hwSymbol[-1].setLabel("Crypto HW Driver Supported")
-        g.hwSymbol[-1].setDefaultValue(False)
-    print("CRYPTO:  %d HW Driver Symbols"%(len(g.hwSymbol)))
-    for hwSym in g.hwSymbol:
-        print("CRYPTO:    %s"%(hwSym))
 
     print("CRYPTO:  Scan HW Support")
     g.cryptoHwTrngSupported   = ScanHardware(g.cryptoHwTrngSupport)
@@ -667,7 +695,7 @@ def SetupHardwareSupport(cryptoComponent) :
     #RSA
     g.cryptoHwRsaSupported    = ScanHardware(g.cryptoHwRsaSupport)
     if (g.cryptoHwRsaSupported):
-        print("CRYPTO HW:  HW ECC SUPPORTED")
+        print("CRYPTO HW:  HW RSA SUPPORTED")
 
     #ECC
     g.cryptoHwEccSupported    = ScanHardware(g.cryptoHwEccSupport)
@@ -700,19 +728,23 @@ def SetupHardwareSupport(cryptoComponent) :
 
     #Add the HW Module symbols
     g.cryptoHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
-    print("CRYPTO:  Additional HW defines:")
-    print(g.cryptoHwAdditionalDefines)
 
-    #NOTE: the symbol ID should match the string add. defines
-    for addDef in g.cryptoHwAdditionalDefines:
-        print("CRYPTO:  AddDef %s"%(addDef))
-        print(g.hwSymStrings)
-        indx =  g.hwSymStrings.index(addDef)
-        g.hwSymbol[indx].setValue(True)
-        print("CRYPTO:  Valid HS SymbolID %s"%(g.hwSymbol[indx].getID()))
+    #Create symbols for supported HW Drivers
+    #for addDef in g.cryptoHwAdditionalDefines:
+    #    indx =  g.hwDriverStrings.index(addDef) #Which driver
 
-    print("CRYPTO:  HW defines:")
-    print(g.cryptoHwDefines.getValue())
+    #Create symbols for all possible HW Drivers
+    for defStr in g.hwDriverStrings:
+        #Create the driver symbol
+        #--Initially true
+        g.hwDriverSymbol.append(cryptoComponent.createBooleanSymbol(
+                defStr, None))
+        g.hwDriverSymbol[-1].setVisible(False)
+        g.hwDriverSymbol[-1].setLabel("Crypto HW Driver Supported")
+        g.hwDriverSymbol[-1].setDefaultValue(False)
+
+    #Now generate the Driver for the Available HW
+    SetupHwDriverFiles(cryptoComponent)
 
 
 

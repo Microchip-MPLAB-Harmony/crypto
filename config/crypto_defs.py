@@ -42,9 +42,9 @@ CONFIG_USE_RSA_HW         = None  #TODO
 CONFIG_USE_ECC_HW         = None  #TODO
 
 #HW Module Symbol Strings
-hwSymStrings = [
+hwDriverStrings = [
 "HAVE_MCHP_CRYPTO_TRNG_HW_HSM",  #PIC32CZ CA90 
-"HAVE_MCHP_CRYPTO_TRNG_HW_6334", #ATSAMV70Q20B
+"HAVE_MCHP_CRYPTO_TRNG_HW_6334", #ATSAMV70Q20B/PIC32CX MT
 "HAVE_MCHP_CRYPTO_TRNG_HW_U2242",#ATSAML11
 "HAVE_MCHP_CRYPTO_TRNG_HW_03597",#PIC32CM Lx
 "HAVE_MCHP_CRYPTO_SHA_HW_HSM",   #
@@ -69,7 +69,18 @@ hwSymStrings = [
 "HAVE_MCHP_CRYPTO_HW_U2805",     #PIC32CM
 "HAVE_MCHP_CRYPTO_HW_03710"]
 
-hwSymbol = []
+#HW Driver Enable Symbol
+hwDriverSymbol = []
+hwDriverFileSymbols = []
+
+#HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
+hwDriverDict = { "CPKCC": { "RSA":[],
+                            "ECC":[] },
+                  "6149": { "AES":["drv_crypto_aes_hw_6149.h",
+                                   "drv_crypto_aes_hw_6149.c"] },
+                  "6156": { "SHA":[]},
+                  "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
+                                   "drv_crypto_trng_hw_6334.c"]} } #End of HW Driver file Dict
 
 #TODO:   Make all drivers available.  Only MISTRAL for now
 hwDriverAvail = [ 
