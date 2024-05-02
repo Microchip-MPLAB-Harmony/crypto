@@ -613,11 +613,15 @@ def SetupHwDriverFiles(basecomponent):
                               fileName,  #File Name 
                               "",        #id prefix
                               basecomponent, #Component
-                              srcPath, 
+                              srcPath,
                               dstPath, False, projPath)
 
                 g.hwDriverFileDict[fKey].append(fileSym)
                 print(" [%s] %s"%(fKey,fileSym.getOutputName()))
+
+    for fSym in g.hwDriverFileDict["SHA"]:
+        print("CRYPTO:  Create [SHA]%s(%s)"%(
+              fSym.getOutputName(),fSym.getEnabled()))
 
 
 ################################################################################
