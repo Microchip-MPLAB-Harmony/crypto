@@ -41,68 +41,109 @@ import crypto_defs as g #Modified globals
 #--Returns True if CONFIG_USE_HASH changes value
 ################################################################################
 def ScanHash():
-    if   (g.cryptoMd5EnabledSymbol.getValue()       == True): newValue = True
-    elif (g.cryptoSha1EnabledSymbol.getValue()      == True): newValue = True
-    elif (g.cryptoRipeMd160EnabledSymbol.getValue()      == True): newValue = True
-    elif (g.cryptoSha224EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoSha256EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoSha384EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoSha512EnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoSha3224EnabledSymbol.getValue()   == True): newValue = True
-    elif (g.cryptoSha3256EnabledSymbol.getValue()   == True): newValue = True
-    elif (g.cryptoSha3384EnabledSymbol.getValue()   == True): newValue = True
-    elif (g.cryptoSha3512EnabledSymbol.getValue()   == True): newValue = True
-    elif (g.cryptoSha3Shake128EnabledSymbol.getValue()   == True): newValue = True
-    elif (g.cryptoSha3Shake256EnabledSymbol.getValue()   == True): newValue = True
-    elif (g.cryptoBlake224EnabledSymbol.getValue()  == True): newValue = True
-    elif (g.cryptoBlake256EnabledSymbol.getValue()  == True): newValue = True
-    elif (g.cryptoBlake384EnabledSymbol.getValue()  == True): newValue = True
-    elif (g.cryptoBlake512EnabledSymbol.getValue()  == True): newValue = True
-    else: newValue = False
-    print("HASH: Use HASH SCAN = %s"%(newValue))
+
+    #MD5
+    if (g.cryptoMd5EnabledSymbol.getValue() == True): md5Value = True
+    else: md5Value = False
+
+    #RIPEMD160
+    if (g.cryptoRipeMd160EnabledSymbol.getValue()      == True): ripeValue = True
+    else: ripeValue = False
+
+    #SHA1/2
+    if   (g.cryptoSha1EnabledSymbol.getValue()      == True): shaValue = True
+    elif (g.cryptoSha224EnabledSymbol.getValue()    == True): shaValue = True
+    elif (g.cryptoSha256EnabledSymbol.getValue()    == True): shaValue = True
+    elif (g.cryptoSha384EnabledSymbol.getValue()    == True): shaValue = True
+    elif (g.cryptoSha512EnabledSymbol.getValue()    == True): shaValue = True
+    else: shaValue = False
+
+    #SHA3
+    if   (g.cryptoSha3224EnabledSymbol.getValue()   == True):      sha3Value = True
+    elif (g.cryptoSha3256EnabledSymbol.getValue()   == True):      sha3Value = True
+    elif (g.cryptoSha3384EnabledSymbol.getValue()   == True):      sha3Value = True
+    elif (g.cryptoSha3512EnabledSymbol.getValue()   == True):      sha3Value = True
+    else: sha3Value = False
+
+    #SHA3 SHAKE
+    if   (g.cryptoSha3Shake128EnabledSymbol.getValue()   == True): shakeValue = True
+    elif (g.cryptoSha3Shake256EnabledSymbol.getValue()   == True): shakeValue = True
+    else: shakeValue = False
+
+    #BLAKE
+    if   (g.cryptoBlake224EnabledSymbol.getValue()  == True): blakeValue = True
+    elif (g.cryptoBlake256EnabledSymbol.getValue()  == True): blakeValue = True
+    else: blakeValue = False
+
+    #BLAKE2
+    if   (g.cryptoBlake384EnabledSymbol.getValue()  == True): blake2Value = True
+    elif (g.cryptoBlake512EnabledSymbol.getValue()  == True): blake2Value = True
+    else: blake2Value = False
+
+
+    if (
+        md5Value or shaValue or sha3Value or
+        shakeValue or blakeValue or blake2Value):
+        newValue = True
+    else:
+        newValue = False
 
     if (g.CONFIG_USE_HASH.getValue() == newValue):
         return False
     else:
+        print("HASH: Use HASH SCAN = %s"%(newValue))
         g.CONFIG_USE_HASH.setValue(newValue)
         return True
 
+
 #Check if the SHA is enabled and the SHA HW Driver Files are needed.
+# TODO:  For now only Mistral 6156. Some mods required for other HW
+#--Returns True if the SHA HW Driver enable/disable has changed
 def ScanShaHw():
     retVal = False
-    if (ScanHash() == True):
-        retVal = True;
-    print("SHA: SCAN USE HASH %s"%(g.CONFIG_USE_HASH.getValue()))
+    fKey = "SHA"
 
-    if (g.CONFIG_USE_HASH.getValue() == True):
+    #SHA Scan
+    if   (g.cryptoSha1EnabledSymbol.getValue()   == True): shaValue = True
+    elif (g.cryptoSha224EnabledSymbol.getValue() == True): shaValue = True
+    elif (g.cryptoSha256EnabledSymbol.getValue() == True): shaValue = True
+    elif (g.cryptoSha384EnabledSymbol.getValue() == True): shaValue = True
+    elif (g.cryptoSha512EnabledSymbol.getValue() == True): shaValue = True
+    else: shaValue = False
 
-        #Check for HW driver to be enabled
-        if   (g.cryptoHwSha1EnabledSymbol.getValue()      == True): newValue = True
-        elif (g.cryptoHwSha224EnabledSymbol.getValue()    == True): newValue = True
-        elif (g.cryptoHwSha256EnabledSymbol.getValue()    == True): newValue = True
-        elif (g.cryptoHwSha384EnabledSymbol.getValue()    == True): newValue = True
-        elif (g.cryptoHwSha512EnabledSymbol.getValue()    == True): newValue = True
-        else: newValue = False
+    #Check for update
+    if (g.CONFIG_USE_SHA.getValue() != shaValue):
 
-        print("SHA: Use SHA SCAN %s"%(newValue))
+        g.CONFIG_USE_SHA.setValue(shaValue)
 
-        if (
-            g.CONFIG_USE_SHA_HW.getValue() == newValue and
-            retVal == False): return False
-        else:
-            g.CONFIG_USE_SHA_HW.setValue(newValue)
-            if(newValue == True):
-                print("SHA: Enable the SHA HW Files")
-            else:
-                print("SHA: DISable the SHA HW Files")
+        if (shaValue == False):
+            #Disable Hardware Driver 
+            print("CRYPTO:  SHA HW Driver Disabled")
+            for fSym in g.hwDriverFileDict[fKey]:
+                fSym.setEnabled(False)
             return True
 
-    elif (retVal == True): 
-        print("SHA: DISable the SHA HW Files")
-        return True
-    else:
-        print("SHA: Do Nothing")
-        return False
+        else:
+            #SHA Enabled
+            #--Check for HW driver Update 
+            if   (g.cryptoHwSha1EnabledSymbol.getValue()      == True): newValue = True
+            elif (g.cryptoHwSha224EnabledSymbol.getValue()    == True): newValue = True
+            elif (g.cryptoHwSha256EnabledSymbol.getValue()    == True): newValue = True
+            elif (g.cryptoHwSha384EnabledSymbol.getValue()    == True): newValue = True
+            elif (g.cryptoHwSha512EnabledSymbol.getValue()    == True): newValue = True
+            else: newValue = False
+
+            if (g.CONFIG_USE_SHA_HW.getValue() == newValue):
+                #No Change
+                return False
+            else:
+                #Update the file generation enable
+                g.CONFIG_USE_SHA_HW.setValue(newValue)
+                for fSym in g.hwDriverFileDict[fKey]:
+                    fSym.setEnabled(newValue)
+                print("CRYPTO:  SHA HW Function Enabled(%s)"%(newValue))
+
+                return True
 
 
 def SetupCryptoHashMenu(cryptoComponent):
@@ -123,8 +164,15 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.CONFIG_USE_HASH.setDefaultValue(False)
 
     #SHA HW Driver Generation Enable
+    g.CONFIG_USE_SHA = cryptoComponent.createBooleanSymbol(
+            "config_use_sha", g.hashMenu)
+    g.CONFIG_USE_SHA.setVisible(False)
+    g.CONFIG_USE_SHA.setLabel("Crypto HW")
+    g.CONFIG_USE_SHA.setDefaultValue(False)
+
+    #SHA HW Driver Generation Enable
     g.CONFIG_USE_SHA_HW = cryptoComponent.createBooleanSymbol(
-            "config_use_hash_hw", g.hashMenu)
+            "config_use_sha_hw", g.hashMenu)
     g.CONFIG_USE_SHA_HW.setVisible(False)
     g.CONFIG_USE_SHA_HW.setLabel("Crypto HW")
     g.CONFIG_USE_SHA_HW.setDefaultValue(False)
@@ -733,8 +781,13 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.cryptoHwBlake2b512EnabledSymbol.setHelp('CRYPT_BLAKE2_SUM')
 
     #Check to see if any of the Hash selections is True
-    #--Used to include the CC HASH API Files
-    ScanHash()
+    # TODO:  Use to init the CC HASH API Files
+    ScanHash()   #set g.CONFIG_USE_HASH
+
+    #Check to init the drivers to the SHA HW selections
+    ScanShaHw()  #set g.CONFIG_USE_SHA/g.CONFIG_USE_SHA_HW
+    for fSym in g.hwDriverFileDict['SHA']:
+        fSym.setEnabled(g.CONFIG_USE_SHA_HW.getValue())
 
 ################################################################################
 ## Menu Event Handlers
@@ -821,8 +874,20 @@ def handleSha256Enabled(symbol, event):
         g.cryptoHwSha256EnabledSymbol.setValue(False)
         g.cryptoHwSha256EnabledSymbol.setVisible(False)
 
-    #Check for Sha HW Driver 
-    ScanShaHw()
+    if (ScanHash() == True):
+        #Check for Sha HW Driver Update
+        if (ScanShaHw() == True):
+            numHwDrv = len(g.hwDriverFileDict['SHA'])
+            print("SHA256: %d Driver File Symbols Updated:"%(numHwDrv))
+            if (len(g.hwDriverFileDict['SHA']) > 0):
+                for sym in g.hwDriverFileDict['SHA']:
+                    print(" File(%s) - %s"%(sym.getEnabled(),sym.getOutputName()))
+            else: print("SHA256:  %d Driver Files Updated"%(numHwDrv))
+
+    for fSym in g.hwDriverFileDict["SHA"]:
+        print("SHA256:  Update [SHA]%s(%s)"%(
+              fSym.getOutputName(),fSym.getEnabled()))
+
 
 def handleSha384Enabled(symbol, event):
     if (g.cryptoSha384EnabledSymbol.getValue() == True):

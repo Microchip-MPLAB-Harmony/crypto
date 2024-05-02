@@ -56,6 +56,23 @@ cryptoTzEnabledSymbol     = None
 ################################################################################
 ## Crypto HW Drivers
 ################################################################################
+ 
+#Function Used 
+CONFIG_USE_TRNG           = None
+CONFIG_USE_SHA            = None
+CONFIG_USE_AES            = None
+CONFIG_USE_TDES           = None
+CONFIG_USE_RSA            = None  #TODO
+CONFIG_USE_ECC            = None  #TODO
+
+#HW Function Driver Used
+CONFIG_USE_TRNG_HW        = None
+CONFIG_USE_SHA_HW         = None
+CONFIG_USE_AES_HW         = None
+CONFIG_USE_TDES_HW        = None
+CONFIG_USE_RSA_HW         = None  #TODO
+CONFIG_USE_ECC_HW         = None  #TODO
+
 trngHw = []
 shaHw  = []
 aesHw  = []
@@ -372,10 +389,10 @@ cryptoKasEcdhEnableSymbol         = None
 
 #===============================================================================
 #TRNG
-CONFIG_USE_RNG                    = None
-cryptoCurrentHwRngSupport    = []
+CONFIG_USE_TRNG                   = None
+cryptoCurrentHwRngSupport         = []
 cryptoRngTrngEnabledSymbol        = None
-cryptoRngPrngEnabledSymbol         = None
+cryptoRngPrngEnabledSymbol        = None
 
 
 #===============================================================================

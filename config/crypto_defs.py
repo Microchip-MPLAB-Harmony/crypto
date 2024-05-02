@@ -33,7 +33,16 @@ CONFIG_USE_MAC            = None  #Any MAC Crypto
 CONFIG_USE_RNG            = None  #Any RNG method
 CONFIG_USE_ASYM           = None  #TODO: RSA/ECC/DES
 
-#HW Function Supported
+#Function Used 
+CONFIG_USE_TRNG           = None
+CONFIG_USE_SHA            = None
+CONFIG_USE_AES            = None
+CONFIG_USE_TDES           = None
+CONFIG_USE_RSA            = None  #TODO
+CONFIG_USE_ECC            = None  #TODO
+
+
+#HW Function Driver Used
 CONFIG_USE_TRNG_HW        = None
 CONFIG_USE_SHA_HW         = None
 CONFIG_USE_AES_HW         = None
@@ -75,13 +84,17 @@ hwDriverFileSymbols = []
 
 #HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
 #   { <dKey>: { <fKey>: [<driver files>] , ... ] }
-hwDriverDict = { "CPKCC": { "RSA":[],
-                            "ECC":[] },
+hwDriverDict = {
+                 "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcc.h",
+                                   "drv_crypto_rsa_hw_cpkcc.c"],
+                            "ECC":["drv_crypto_ecc_hw_cpkcc.h",
+                                   "drv_crypto_ecc_hw_cpkcc.c"] },
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
                                    "drv_crypto_aes_hw_6149.c"] },
-                  "6156": { "SHA":[]},
+                  "6156": { "SHA":["drv_crypto_sha_hw_6156.h",
+                                   "drv_crypto_sha_hw_6156.c"] },
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
-                                   "drv_crypto_trng_hw_6334.c"]} } #End of HW Driver file Dict
+                                   "drv_crypto_trng_hw_6334.c"]} } 
 
 #The dict list of file symbols loaded for each function
 # {<function>: [<files symbols>], ...}

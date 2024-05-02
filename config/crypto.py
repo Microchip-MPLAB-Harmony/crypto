@@ -594,19 +594,19 @@ def SetupHwDriverFiles(basecomponent):
     projPath    = "config/" + configName + "/crypto/driver/"
 
     #Create the HW Driver file symbols for the available Crypto HW
-    print("CRYPTO:  Driver Symbol ID's:")
-    for dSym in g.hwDriverSymbol:
-        print("    %s (%s)"%(dSym.getID(),dSym.getValue()))
+    #print("CRYPTO:  Driver Symbol ID's:")
+    #for dSym in g.hwDriverSymbol:
+    #    print("    %s (%s)"%(dSym.getID(),dSym.getValue()))
 
     count=0
     #TODO:  For now create all drivers disabled for this HW
     #       Later scan to see what HW functions are enabled
+    print("CRYPTO: Driver File Symbols Created:")
     for [dKey, fDict] in g.hwDriverDict.items():  #Driver File Dict
         #if (hwDrvSym.getID() in g.hwDriverStrings):
         #indx = g.hwDriverStrings.index(hwDrvSym.getID())
         print("CRYPTO: dKey %s:  "%(dKey))
         for fKey in fDict:       #Driver Function Key to file Dict
-            print("  fKey %s"%(fKey))
             for fileName in fDict[fKey]:
                 count += 1
                 fileSym = AddFileName(
@@ -617,13 +617,7 @@ def SetupHwDriverFiles(basecomponent):
                               dstPath, False, projPath)
 
                 g.hwDriverFileDict[fKey].append(fileSym)
-                print("  fID(%s)  %s"%(fileSym.getID(), fileName))
-        print("CRYPTO: Driver Files:")
-        for fKey in g.hwDriverFileDict:
-            print("    %s--"%(fKey))
-            print(g.hwDriverFileDict[fKey])
-
-
+                print(" [%s] %s"%(fKey,fileSym.getOutputName()))
 
 
 ################################################################################
