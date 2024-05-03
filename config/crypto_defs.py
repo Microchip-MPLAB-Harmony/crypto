@@ -191,7 +191,8 @@ cryptoHwTrngSupport = [
 ]
 cryptoHwTrngSupported       = False
 cryptoHwTrngEnabledSymbol   = None
-cryptoTrngEnabledSymbol     = None
+cryptoRngTrngEnabledSymbol     = None
+
 cryptoHashDrngEnabledSymbol = None
 
 #===============================================================================

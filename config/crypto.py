@@ -593,11 +593,6 @@ def SetupHwDriverFiles(basecomponent):
     dstPath     = "crypto/driver"
     projPath    = "config/" + configName + "/crypto/driver/"
 
-    #Create the HW Driver file symbols for the available Crypto HW
-    #print("CRYPTO:  Driver Symbol ID's:")
-    #for dSym in g.hwDriverSymbol:
-    #    print("    %s (%s)"%(dSym.getID(),dSym.getValue()))
-
     count=0
     #TODO:  For now create all drivers disabled for this HW
     #       Later scan to see what HW functions are enabled
@@ -619,8 +614,8 @@ def SetupHwDriverFiles(basecomponent):
                 g.hwDriverFileDict[fKey].append(fileSym)
                 print(" [%s] %s"%(fKey,fileSym.getOutputName()))
 
-    for fSym in g.hwDriverFileDict["SHA"]:
-        print("CRYPTO:  Create [SHA]%s(%s)"%(
+    for fSym in g.hwDriverFileDict["TRNG"]:
+        print("CRYPTO:  Create [TRNG]%s(%s)"%(
               fSym.getOutputName(),fSym.getEnabled()))
 
 
@@ -641,6 +636,7 @@ def SetupHardwareSupport(cryptoComponent) :
     g.cryptoHwSupportedSymbol.setLabel("Crypto HW Supported")
     g.cryptoHwSupportedSymbol.setDefaultValue(False)
 
+    #TRNG
     print("CRYPTO:  Scan HW Support")
     g.cryptoHwTrngSupported   = ScanHardware(g.cryptoHwTrngSupport)
     if (g.cryptoHwTrngSupported):
@@ -731,10 +727,6 @@ def SetupHardwareSupport(cryptoComponent) :
 
     #Add the HW Module symbols
     g.cryptoHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
-
-    #Create symbols for supported HW Drivers
-    #for addDef in g.cryptoHwAdditionalDefines:
-    #    indx =  g.hwDriverStrings.index(addDef) #Which driver
 
     #Create symbols for all possible HW Drivers
     for defStr in g.hwDriverStrings:

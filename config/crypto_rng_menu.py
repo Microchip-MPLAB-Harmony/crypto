@@ -48,8 +48,34 @@ def ScanRng():
         return False
     else:
         g.CONFIG_USE_RNG.setValue(newValue)
-        print("CRYPO:  CONFIG_USE_RNG = %s"%(g.CONFIG_USE_RNG.getValue()))
+        print("CRYPTO:  CONFIG_USE_RNG = %s"%(g.CONFIG_USE_RNG.getValue()))
         return True
+
+#Check if the TRNG is enabled and the TRNG HW Driver Files are needed.
+# TODO:  For now only Mistral 6146. Some mods required for other HW
+#--Returns True if the TRNG HW Driver enable/disable has changed
+def ScanTrngHw():
+    retVal = False
+    fKey = "TRNG"
+
+    #TRNG Scan
+    newValue = False
+    if (g.cryptoRngTrngEnabledSymbol.getValue()   == True):
+        if (g.cryptoHwRngTrngEnabledSymbol.getValue() == True):
+            newValue = True
+
+    print("TRNG: trng_hw - %s (newValue = %s)"%(
+        g.CONFIG_USE_TRNG_HW.getValue(), newValue))
+
+    if (g.CONFIG_USE_TRNG_HW.getValue() != newValue):
+        g.CONFIG_USE_TRNG_HW.setValue(newValue)
+        print("TRNG:  Enable HW (%s)"%(newValue))
+        for fSym in g.hwDriverFileDict[fKey]:
+            fSym.setEnabled(newValue)
+        return True
+    else:
+        print("TRNG: HW Unchanged (%s)"%(newValue))
+        return False
 
 
 def SetupCryptoRngMenu(cryptoComponent):
@@ -61,6 +87,13 @@ def SetupCryptoRngMenu(cryptoComponent):
     g.CONFIG_USE_RNG.setLabel("Crypto")
     g.CONFIG_USE_RNG.setDefaultValue(False)
 
+    #TRNG HW Driver Generation Enable
+    g.CONFIG_USE_TRNG_HW = cryptoComponent.createBooleanSymbol(
+            "config_use_trng_hw", g.hashMenu)
+    g.CONFIG_USE_TRNG_HW.setVisible(False)
+    g.CONFIG_USE_TRNG_HW.setLabel("Crypto TRNG HW")
+    g.CONFIG_USE_TRNG_HW.setDefaultValue(False)
+
     #RNG - Crypto RNG Algorithms Main Menu
     g.rngMenu = cryptoComponent.createMenuSymbol(
             "crypto_rng", None)
@@ -69,16 +102,33 @@ def SetupCryptoRngMenu(cryptoComponent):
     g.rngMenu.setVisible(True)
     g.rngMenu.setHelp('MC_CRYPTO_RNG_API_H')
 
-
     #RNG-TRNG
     g.cryptoRngTrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_rng_trng_en", g.rngMenu)
     g.cryptoRngTrngEnabledSymbol.setLabel("True RNG?")
     g.cryptoRngTrngEnabledSymbol.setDescription(
             "Enable support for the True RNG")
-    g.cryptoRngTrngEnabledSymbol.setVisible(False)
+    g.cryptoRngTrngEnabledSymbol.setVisible(True)
     g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
     g.cryptoRngTrngEnabledSymbol.setDefaultValue(False)
+
+    #TRNG HW Symbol 
+    g.cryptoHwRngTrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_rng_trng_hw", g.cryptoRngTrngEnabledSymbol)
+    g.cryptoHwRngTrngEnabledSymbol.setLabel(
+            "Use Hardware Acceleration?")
+    g.cryptoHwRngTrngEnabledSymbol.setDescription(
+            "Turn on the hardware acceleration" +
+            "for the TRNG Algorithm")
+    g.cryptoHwRngTrngEnabledSymbol.setVisible(False)
+    g.cryptoHwRngTrngEnabledSymbol.setDefaultValue(False)
+    if (g.cryptoHwTrngSupported == True):
+        g.cryptoHwRngTrngEnabledSymbol.setDependencies(
+            handleRngTrngEnabled, ["crypto_rng_trng_en", "crypto_rng_trng_hw"])
+        if (g.cryptoRngTrngEnabledSymbol.getValue() == True):
+            g.cryptoHwRngTrngEnabledSymbol.setVisible(True)
+            g.cryptoHwRngTrngEnabledSymbol.setDefaultValue(True)
+    g.cryptoHwRngTrngEnabledSymbol.setHelp('CRYPT_TRNG_SUM')
 
     #RNG-RNG
     g.cryptoRngPrngEnabledSymbol = cryptoComponent.createBooleanSymbol(
@@ -92,5 +142,44 @@ def SetupCryptoRngMenu(cryptoComponent):
 
     #Check to see if any of the AEAD selections is True
     #--Used to include the CC AEAD API Files
+    ScanRng() #set g.CONFIG_USE_TRNG and api file enables(TODO)
+
+    #Check to init the drivers to the TRNG HW selections
+    ScanTrngHw()  #set g.CONFIG_USE_TRNG_HW and driver file enable
+
+
+#-----------------------------------------------------
+#TRNG
+def handleRngTrngEnabled(symbol, event):
+    print("TRNG: Handle Event (HW supported %s"%(g.cryptoHwTrngSupported))
+    if (g.cryptoRngTrngEnabledSymbol.getValue() == True):
+        print("TRNG: Enabled")
+        if (g.cryptoHwTrngSupported):
+            print("TRNG: Set Visible")
+            g.cryptoHwRngTrngEnabledSymbol.setVisible(True)
+        else:
+            g.cryptoHwRngTrngEnabledSymbol.setValue(False)
+            g.cryptoHwRngTrngEnabledSymbol.setVisible(False)
+    else:
+        print("TRNG: Disabled")
+        g.cryptoHwRngTrngEnabledSymbol.setValue(False)
+        g.cryptoHwRngTrngEnabledSymbol.setVisible(False)
     ScanRng()
+
+    #Check for Sha HW Driver Update
+    if (ScanTrngHw() == True):
+        numHwDrv = len(g.hwDriverFileDict["TRNG"])
+        print("TRNG: %d Driver File Symbols Updated:"%(numHwDrv))
+        if (len(g.hwDriverFileDict["TRNG"]) > 0):
+            for fSym in g.hwDriverFileDict["TRNG"]:
+                print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
+        else: print("TRNG:  %d Driver Files Updated"%(numHwDrv))
+
+    print("TRNG: Update %d files"%(len(g.hwDriverFileDict["TRNG"])))
+    for fSym in g.hwDriverFileDict["TRNG"]:
+        print("TRNG :  Update [TRNG]%s(%s)"%(
+              fSym.getOutputName(),fSym.getEnabled()))
+
+
+
 
