@@ -422,5 +422,5 @@ cryptoWolfCryptDisabledMenuComponentsList = []
 
 cryptoHwSupportFound      = False
 
-cryptoAesModesSupported   = False
+cryptoSymAesModesSupported   = False
 cryptoAesModesMenu        = None

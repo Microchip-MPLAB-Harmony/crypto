@@ -96,6 +96,7 @@ hwDriverDict = {
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} } 
 
+
 #The dict list of file symbols loaded for each function
 # {<function>: [<files symbols>], ...}
 #--Key is same as the hwDriverDict fKey
@@ -467,17 +468,19 @@ cryptoBlake2b512EnabledSymbol        = None
 
 #===============================================================================
 #HW SYM AES
-cryptoAesEnabledSymbol           = None
-cryptoHwAesEnabledSymbol         = None
-cryptoHwAesSupported             = False
+cryptoSymAesEnabledSymbol           = None
+cryptoHwSymAesEnabledSymbol         = None
+cryptoHwSymAesSupported             = False
+cryptoAesHwEnSymbols                = []
+cryptoAesEnSymbols                  = []
 
-cryptoAesSmallTableEnabledSymbol = None
+cryptoSymAesSmallTableEnabledSymbol = None
 
-cryptoAesEcbEnabledSymbol        = None
-cryptoAesEcbHwEnabledSymbol      = None
+cryptoSymAesEcbEnabledSymbol        = None
+cryptoSymAesEcbHwEnabledSymbol      = None
 
 #SYM AES128
-cryptoHwAes128Support = [
+cryptoHwSymAes128Support = [
     ["HSM" ,"03785", "", [],
        set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])],       #PIC32CZ CA90 
     ["CRYPTO", "00158", "", [],
@@ -503,11 +506,11 @@ cryptoHwAes128Support = [
     ["AES", "6149", "ZN", [],
         set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
 ]
-cryptoHwAes128Supported   = False
-cryptoAes128EnabledSymbol = None
+cryptoHwSymAes128Supported   = False
+cryptoSymAes128EnabledSymbol = None
 
 #SYM AES192
-cryptoHwAes192Support = [
+cryptoHwSymAes192Support = [
     ["HSM" ,"03785",      "", [],
        set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])],            # PIC32CZ CA90
     ["CRYPTO", "00158", "", [],
@@ -529,11 +532,11 @@ cryptoHwAes192Support = [
     ["AES", "6149", "ZN", [],
         set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
 ]
-cryptoHwAes192Supported   = False
-cryptoAes192EnabledSymbol = None
+cryptoHwSymAes192Supported   = False
+cryptoSymAes192EnabledSymbol = None
 
 #SYM AES256
-cryptoHwAes256Support = [
+cryptoHwSymAes256Support = [
     ["HSM" ,"03785",      "", [],
        set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
     ["CRYPTO", "00158", "", [],
@@ -555,27 +558,29 @@ cryptoHwAes256Support = [
     ["AES", "6149", "ZN", [],
         set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
 ]
-cryptoHwAes256Supported   = False
-cryptoAes256EnabledSymbol = None
+cryptoHwSymAes256Supported   = False
+cryptoSymAes256EnabledSymbol = None
 
 symMenu = None
 aesMenu = None
 aesModesMenu = None
 aesCfbMenu = None
-cryptoAesModesMenu        = None
-cryptoAesModesSupported   = False
+cryptoSymAesModesMenu        = None
+cryptoSymAesModesSupported   = False
 
 #SYM AES ECB Mode
-cryptoHwAesEcbSupport       = [
+cryptoHwSymAesEcbSupport       = [
     ["HSM" ,"03785",      "", [],
-       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])] #PIC32CZ CA90 
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
 ]
-cryptoHwAesEcbSupported     = False
-cryptoHwAesEcbEnabledSymbol = None
-cryptoAesEcbEnabledSymbol   = None
+cryptoHwSymAesEcbSupported     = False
+cryptoHwSymAesEcbEnabledSymbol = None
+cryptoSymAesEcbEnabledSymbol   = None
 
 #SYM AES CBC Mode
-cryptoHwAesCbcSupport = [
+cryptoHwSymAesCbcSupport = [
     ["HSM" ,"03785",      "", [],
        set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])],    #PIC32CZ CA90 
     ["AES", "6149", "W", [],
@@ -593,49 +598,79 @@ cryptoHwAesCbcSupport = [
     ["AES", "6149", "ZN", [],
         set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]   #PIC32CX MT
 ]
-cryptoHwAesCbcSupported     = False
-cryptoHwAesCbcEnabledSymbol = None
-cryptoAesCbcEnabledSymbol   = None
+cryptoHwSymAesCbcSupported     = False
+cryptoHwSymAesCbcEnabledSymbol = None
+cryptoSymAesCbcEnabledSymbol   = None
 
 #SYM AES OFB Mode
-cryptoHwAesOfbSupport       = []
-cryptoHwAesOfbSupported     = False
-cryptoHwAesOfbEnabledSymbol = None
-cryptoAesOfbEnabledSymbol   = None
+cryptoHwSymAesOfbSupport       = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+]
+cryptoHwSymAesOfbSupported     = False
+cryptoHwSymAesOfbEnabledSymbol = None
+cryptoSymAesOfbEnabledSymbol   = None
 
 #TODO:  Is this Needed?
 #SYM AES CFB Mode
-cryptoHwAesCfbSupport       = []
-cryptoHwAesCfbSupported     = False
-cryptoHwAesCfbEnabledSymbol = None
-cryptoAesCfbEnabledSymbol   = None
+cryptoHwSymAesCfbSupport       = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+]
+cryptoHwSymAesCfbSupported     = False
+cryptoHwSymAesCfbEnabledSymbol = None
+cryptoSymAesCfbEnabledSymbol   = None
 
 #SYM AES CFB1 Mode
-cryptoHwAesCfb1Support       = []
-cryptoHwAesCfb1Supported     = False
-cryptoHwAesCfb1EnabledSymbol = None
-cryptoAesCfb1EnabledSymbol   = None
+cryptoHwSymAesCfb1Support       = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+]
+cryptoHwSymAesCfb1Supported     = False
+cryptoHwSymAesCfb1EnabledSymbol = None
+cryptoSymAesCfb1EnabledSymbol   = None
 
 #SYM AES CFB8 Mode
-cryptoHwAesCfb8Support       = []
-cryptoHwAesCfb8Supported     = False
-cryptoHwAesCfb8EnabledSymbol = None
-cryptoAesCfb8EnabledSymbol   = None
+cryptoHwSymAesCfb8Support       = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+]
+cryptoHwSymAesCfb8Supported     = False
+cryptoHwSymAesCfb8EnabledSymbol = None
+cryptoSymAesCfb8EnabledSymbol   = None
 
 #SYM AES CFB64 Mode
-cryptoHwAesCfb64Support       = []
-cryptoHwAesCfb64Supported     = False
-cryptoHwAesCfb64EnabledSymbol = None
-cryptoAesCfb64EnabledSymbol   = None
+cryptoHwSymAesCfb64Support       = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+]
+cryptoHwSymAesCfb64Supported     = False
+cryptoHwSymAesCfb64EnabledSymbol = None
+cryptoSymAesCfb64EnabledSymbol   = None
 
 #SYM AES CFB128 Mode
-cryptoHwAesCfb128Support       = []
-cryptoHwAesCfb128Supported     = False
-cryptoHwAesCfb128EnabledSymbol = None
-cryptoAesCfb128EnabledSymbol   = None
+cryptoHwSymAesCfb128Support       = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+]
+cryptoHwSymAesCfb128Supported     = False
+cryptoHwSymAesCfb128EnabledSymbol = None
+cryptoSymAesCfb128EnabledSymbol   = None
 
 #SYM AES CTR
-cryptoHwAesCtrSupport = [
+cryptoHwSymAesCtrSupport = [
     ["HSM" ,"03785",      "", [],
        set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])],    #PIC32CZ CA90 
     ["AES", "6149", "W", [],
@@ -653,24 +688,24 @@ cryptoHwAesCtrSupport = [
     ["AES", "6149", "ZN", [],
         set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]   #PIC32CX MT
 ]
-cryptoHwAesCtrSupported     = False
-cryptoHwAesCtrEnabledSymbol = None
-cryptoAesCtrEnabledSymbol   = None
+cryptoHwSymAesCtrSupported     = False
+cryptoHwSymAesCtrEnabledSymbol = None
+cryptoSymAesCtrEnabledSymbol   = None
 
 #SYM AES XTS
-cryptoHwAesXtsSupport       = []
-cryptoHwAesXtsSupported     = False
-cryptoHwAesXtsEnabledSymbol = None
-cryptoAesXtsEnabledSymbol   = None
+cryptoHwSymAesXtsSupport       = []
+cryptoHwSymAesXtsSupported     = False
+cryptoHwSymAesXtsEnabledSymbol = None
+cryptoSymAesXtsEnabledSymbol   = None
 
 #SYM AES EAX
-cryptoHwAesEaxSupport       = []
-cryptoHwAesEaxSupported     = False
-cryptoHwAesEaxEnabledSymbol = None
-cryptoAesEaxEnabledSymbol   = None
+cryptoHwSymAesEaxSupport       = []
+cryptoHwSymAesEaxSupported     = False
+cryptoHwSymAesEaxEnabledSymbol = None
+cryptoSymAesEaxEnabledSymbol   = None
 
 #SYM AES GCM
-cryptoHwAesGcmSupport = [
+cryptoHwSymAesGcmSupport = [
     ["HSM" ,"03785",      "", [],
        set(["HAVE_MCHP_CRYPTO_AES_HW_HSM"])], #PIC32CZ CA90 
     ["AES", "6149", "W", [],
@@ -688,16 +723,16 @@ cryptoHwAesGcmSupport = [
     ["AES", "6149", "ZN", [],
         set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
 ]
-cryptoHwAesGcmSupported     = False
-cryptoHwAesGcmEnabledSymbol = None
-cryptoAesGcmEnabledSymbol   = None
+cryptoHwSymAesGcmSupported     = False
+cryptoHwSymAesGcmEnabledSymbol = None
+cryptoSymAesGcmEnabledSymbol   = None
 
 #TODO: Supported at all?
 #SYM AES CMC
-cryptoHwAesCcmSupport       = []
-cryptoHwAesCcmSupported     = False
-cryptoHwAesCcmEnabledSymbol = None
-cryptoAesCcmEnabledSymbol   = None
+cryptoHwSymAesCcmSupport       = []
+cryptoHwSymAesCcmSupported     = False
+cryptoHwSymAesCcmEnabledSymbol = None
+cryptoSymAesCcmEnabledSymbol   = None
 
 #SYM DES 
 cryptoHwDesSupport = [

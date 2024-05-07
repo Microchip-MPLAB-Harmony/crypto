@@ -657,27 +657,27 @@ def SetupHardwareSupport(cryptoComponent) :
         print("CRYPTO HW:  HW SHA SUPPORTED")
 
     #AES
-    g.cryptoHwAes128Supported    = ScanHardware(g.cryptoHwAes128Support)
-    g.cryptoHwAes192Supported    = ScanHardware(g.cryptoHwAes192Support)
-    g.cryptoHwAes256Supported    = ScanHardware(g.cryptoHwAes256Support)
-    g.cryptoHwAesCbcSupported    = ScanHardware(g.cryptoHwAesCbcSupport)
-    g.cryptoHwAesCtrSupported    = ScanHardware(g.cryptoHwAesCtrSupport)
-    g.cryptoHwAesCfb1Supported   = ScanHardware(g.cryptoHwAesCfb1Support)
-    g.cryptoHwAesCfb8Supported   = ScanHardware(g.cryptoHwAesCfb8Support)
-    g.cryptoHwAesCfb64Supported  = ScanHardware(g.cryptoHwAesCfb64Support)
-    g.cryptoHwAesCfb128Supported = ScanHardware(g.cryptoHwAesCfb128Support)
-    g.cryptoHwAesOfbSupported    = ScanHardware(g.cryptoHwAesOfbSupport)
-    g.cryptoHwAesXtsSupported    = ScanHardware(g.cryptoHwAesXtsSupport)
-    g.cryptoHwAesGcmSupported    = ScanHardware(g.cryptoHwAesGcmSupport)
-    g.cryptoHwAesCcmSupported    = ScanHardware(g.cryptoHwAesCcmSupport)
+    g.cryptoHwSymAes128Supported    = ScanHardware(g.cryptoHwSymAes128Support)
+    g.cryptoHwSymAes192Supported    = ScanHardware(g.cryptoHwSymAes192Support)
+    g.cryptoHwSymAes256Supported    = ScanHardware(g.cryptoHwSymAes256Support)
+    g.cryptoHwSymAesCbcSupported    = ScanHardware(g.cryptoHwSymAesCbcSupport)
+    g.cryptoHwSymAesCtrSupported    = ScanHardware(g.cryptoHwSymAesCtrSupport)
+    g.cryptoHwSymAesCfb1Supported   = ScanHardware(g.cryptoHwSymAesCfb1Support)
+    g.cryptoHwSymAesCfb8Supported   = ScanHardware(g.cryptoHwSymAesCfb8Support)
+    g.cryptoHwSymAesCfb64Supported  = ScanHardware(g.cryptoHwSymAesCfb64Support)
+    g.cryptoHwSymAesCfb128Supported = ScanHardware(g.cryptoHwSymAesCfb128Support)
+    g.cryptoHwSymAesOfbSupported    = ScanHardware(g.cryptoHwSymAesOfbSupport)
+    g.cryptoHwSymAesXtsSupported    = ScanHardware(g.cryptoHwSymAesXtsSupport)
+    g.cryptoHwSymAesGcmSupported    = ScanHardware(g.cryptoHwSymAesGcmSupport)
+    g.cryptoHwSymAesCcmSupported    = ScanHardware(g.cryptoHwSymAesCcmSupport)
 
-    if (g.cryptoHwAes128Supported or g.cryptoHwAes128Supported or
-        g.cryptoHwAes192Supported or g.cryptoHwAes256Supported):
-        g.cryptoHwAesSupported = True
+    if (g.cryptoHwSymAes128Supported or g.cryptoHwSymAes128Supported or
+        g.cryptoHwSymAes192Supported or g.cryptoHwSymAes256Supported):
+        g.cryptoHwSymAesSupported = True
         print("CRYPTO HW:  HW AES SUPPORTED")
     else:
         #print("CRYPTO HW:  HW AES NOT SUPPORTED")
-        g.cryptoHwAesSupported = False
+        g.cryptoHwSymAesSupported = False
 
     #AEAD
 
@@ -702,7 +702,7 @@ def SetupHardwareSupport(cryptoComponent) :
         print("CRYPTO HW:  HW ECC SUPPORTED")
     else:
         #print("CRYPTO HW:  HW AES NOT SUPPORTED")
-        g.cryptoHwAesSupported = False
+        g.cryptoHwSymAesSupported = False
 
     #HW Modules
     g.cryptoHW_U2803Present   = ScanHardware(g.cryptoHW_U2803)
@@ -714,7 +714,7 @@ def SetupHardwareSupport(cryptoComponent) :
         g.cryptoHwSha1Supported     or
         g.cryptoHwSha224Supported   or  g.cryptoHwSha256Supported or
         g.cryptoHwSha384Supported   or  g.cryptoHwSha512Supported or
-        g.cryptoHwAesSupported      or  g.cryptoHwDesSupported or
+        g.cryptoHwSymAesSupported      or  g.cryptoHwDesSupported or
         g.cryptoHwRsaSupported      or  g.cryptoHwEccSupported):
         g.cryptoHwSupported = True
     else:
