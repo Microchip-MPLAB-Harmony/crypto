@@ -36,7 +36,7 @@ import crypto_defs as g #Modified globals
 #import superglobals
 
 
-#Scan for AES HW Suported Symbols
+#Scan for Updated AES HW Supported Symbols
 def ScanAesHwSymbols():
 
         #List all the HW supported symbols
@@ -64,11 +64,22 @@ def ScanAesHwSymbols():
         if (g.cryptoHwSymAesXtsSupported    == True):
             hwSymbols.append(g.cryptoSymAesXtsEnabledSymbol)
 
-        print("AES HW SCAN:")
+        newValue = False
         for hSym in hwSymbols:
-            print("  %s"%(hSym.getID()))
+            if (hSym.getValue() == True):
+                newValue = True
+                break;
 
         g.cryptoAesHwEnSymbols = hwSymbols
+
+        if (
+            g.cryptoHwSymAesEnabledSymbol.getValue() == True and
+            newValue == True):
+            g.CONFIG_USE_AES_HW.setValue(True)
+        else:
+            g.CONFIG_USE_AES_HW.setValue(False)
+
+        return
 
 ################################################################################
 #Scan to see if any of the Hash Selections is True and set the symbol
@@ -97,48 +108,6 @@ def ScanSym():
         print("CRYPO:  CONFIG_USE_SYM = %s"%(g.CONFIG_USE_SYM.getValue()))
         return True
 
-#Check if the AES is enabled and the AES HW Driver Files are needed.
-# TODO:  For now only Mistral 6146. Some mods required for other HW
-#--Returns True if the AES HW Driver enable/disable has changed
-def ScanSymAesHwLabels():
-    retVal = False
-    fKey = "AES"
-
-    newValue = False
-    if (g.cryptoSymAesEnabledSymbol.getValue()   == True):
-        if (g.cryptoHwSymAesEnabledSymbol.getValue() == True):
-            newValue = True
-        else:
-            newValue = False
-    else:
-         newValue = False
-    print("AES: aes_hw - %s (newValue = %s)"%(
-        g.CONFIG_USE_AES_HW.getValue(), newValue))
-
-    #Check if value changed
-    if (g.CONFIG_USE_AES_HW.getValue() != newValue):
-
-        g.CONFIG_USE_AES_HW.setValue(newValue)
-        print("AES:  Enable HW (%s)"%(newValue))
-        for fSym in g.hwDriverFileDict[fKey]:
-            fSym.setEnabled(newValue)
-
-        print("AES:  Update HW(%s) Symbol Labels"%(newValue))
-        for sym in g.cryptoAesHwEnSymbols:
-            lbl = sym.getLable()
-            print("  %s"%(lbl))
-            if (newValue == True):
-                lbl += " (HW)"
-            else:
-                lbl = lbl[:-4]
-            sym.setLable(lbl)
-
-        return True
-
-    else:
-        return False
-
-
 def SetupCryptoSymmetricMenu(cryptoComponent):
     #SYM - Symmetric Crypto Algorithms Main Menu
     g.symMenu = cryptoComponent.createMenuSymbol(
@@ -155,12 +124,6 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
     g.CONFIG_USE_SYM.setLabel("Crypto")
     g.CONFIG_USE_SYM.setDefaultValue(False)
 
-    #AES HW Driver Generation Enable
-    g.CONFIG_USE_AES_HW = cryptoComponent.createBooleanSymbol(
-            "config_use_aes_hw", g.hashMenu)
-    g.CONFIG_USE_AES_HW.setVisible(False)
-    g.CONFIG_USE_AES_HW.setLabel("Crypto AES HW")
-    g.CONFIG_USE_AES_HW.setDefaultValue(False) #Always initialize False
 
 
     #SYM AES Main Menu
@@ -178,6 +141,15 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
     g.cryptoSymAesEnabledSymbol.setDescription("Enable AES Algorithms")
     g.cryptoSymAesEnabledSymbol.setVisible(False)
     g.cryptoSymAesEnabledSymbol.setDefaultValue(True)
+
+    #TODO:  g.CONFIG_USE_AES
+
+    #AES HW Driver Generation Enable
+    g.CONFIG_USE_AES_HW = cryptoComponent.createBooleanSymbol(
+            "config_use_aes_hw", g.hashMenu)
+    g.CONFIG_USE_AES_HW.setVisible(False)
+    g.CONFIG_USE_AES_HW.setLabel("Crypto AES HW")
+    g.CONFIG_USE_AES_HW.setDefaultValue(False) #Always initialize False
 
     #SYM AES Enable (For all AES Algorithms with HW Support)
     g.cryptoHwSymAesEnabledSymbol = cryptoComponent.createBooleanSymbol(
@@ -197,7 +169,6 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
         g.cryptoHwSymAesEnabledSymbol.setDefaultValue(False)
     g.cryptoHwSymAesEnabledSymbol.setHelp('CRYPT_AES_SUM')
 
-
     #Global to indicate when AES Modes are visible
     g.cryptoSymAesModesSupported = True 
 
@@ -215,7 +186,6 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
     #                "crypto_sym_aes_128",
     #                "crypto_sym_aes_192",
     #                "crypto_sym_aes_256"])
-
 
     #AES-ECB Mode
     g.cryptoSymAesEcbEnabledSymbol = cryptoComponent.createBooleanSymbol(
@@ -477,38 +447,47 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
 
     #Check to see if any of the Sym selections is True
     #--Used to include the CC Sym API Files
-    ScanSym()
+    ScanSym() #CONFIG_USE_SYM
     ScanAesHwSymbols() #Setup list of hardware enabled symbols
-    #ScanSymAesHwLabels() #Label based on current HW setting
     newValue = g.cryptoHwSymAesEnabledSymbol.getValue()
     g.CONFIG_USE_AES_HW.setValue(newValue)
-    print("AES:  Enable HW (%s)"%(newValue))
 
     #Enable/Disable HW Driver Files
+    print("AES:  Enable HW (%s)"%(newValue))
     for fSym in g.hwDriverFileDict["AES"]:
         fSym.setEnabled(newValue)
+        print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
 
+def UpdateAesHwDriverFiles():
 
-#-----------------------------------------------------
-#AES
-def handleAesHwEnabled(symbol, event):
-    print("CRYPTO: handle AES HW (does nothing)")
+    ScanSym()          #Update CONFIG_USE_SYM
+    ScanAesHwSymbols() #Update CONFIG_USE_AES_HW
     newValue = g.cryptoHwSymAesEnabledSymbol.getValue()
-    if (g.CONFIG_USE_AES_HW.getValue() != newValue):
 
+    print("AES:  Update Driver SYM(%s) HW(%s-%s)"%(
+          g.CONFIG_USE_SYM.getValue(), newValue,
+          g.CONFIG_USE_AES_HW.getValue()))
+
+
+    if (g.CONFIG_USE_SYM.getValue() == True):
+        newValue = g.cryptoHwSymAesEnabledSymbol.getValue()
         g.CONFIG_USE_AES_HW.setValue(newValue)
         print("AES:  Enable HW (%s)"%(newValue))
 
         #Enable/Disable HW Driver Files
         for fSym in g.hwDriverFileDict["AES"]:
             fSym.setEnabled(newValue)
+            print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
+    else:
+          print("AES:  No SYM")
 
-        #Update the symbol label for HW or not
-        #for hSym in g.cryptoAesHwEnSymbols:
-        #    lbl = hSym.getLabel()
-        #    if (newValue == True): hSym.setLable(lbl + " (HW)")
-        #    else: hSym.setLable(lbl[:-4])
-
+#-----------------------------------------------------
+#AES
+def handleAesHwEnabled(symbol, event):
+    print("AES: Symbol - " + event["namespace"] + " EID " + event["id"])
+    print("AES: Handle Event SID %s (HW Support %s)"%(
+        symbol.getID(), g.cryptoHwSymAesEnabledSymbol.getValue()))
+    UpdateAesHwDriverFiles()
 
 def handleAesEcbEnabled(symbol, event):
     if (g.cryptoHwSymAesEcbSupported and (
@@ -518,8 +497,8 @@ def handleAesEcbEnabled(symbol, event):
     else:
         print("AES ECB: HW NOT Supported")
         g.cryptoSymAesEcbEnabledSymbol.setLabel("AES-ECB?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCbcEnabled(symbol, event):
@@ -528,20 +507,20 @@ def handleAesCbcEnabled(symbol, event):
         g.cryptoSymAesCbcEnabledSymbol.setLabel("AES-CBC (HW)?")
     else:
         g.cryptoSymAesCbcEnabledSymbol.setLabel("AES-CBC?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesOfbEnabled(symbol, event):
     if (g.cryptoHwSymAesOfbSupported and (
         g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
-        print("AES OFB: HW Supported")
+        #print("AES OFB: HW Supported")
         g.cryptoSymAesOfbEnabledSymbol.setLabel("AES-OFB (HW)?")
     else:
-        print("AES OFB: HW NOT Supported")
+        #print("AES OFB: HW NOT Supported")
         g.cryptoSymAesOfbEnabledSymbol.setLabel("AES-OFB?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCfb1Enabled(symbol, event):
@@ -550,8 +529,8 @@ def handleAesCfb1Enabled(symbol, event):
         g.cryptoSymAesCfb1EnabledSymbol.setLabel("AES-CFB(1) (HW)?")
     else:
         g.cryptoSymAesCfb1EnabledSymbol.setLabel("AES-CFB(1)?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCfb8Enabled(symbol, event):
@@ -560,8 +539,8 @@ def handleAesCfb8Enabled(symbol, event):
         g.cryptoSymAesCfb8EnabledSymbol.setLabel("AES-CFB(8) (HW)?")
     else:
         g.cryptoSymAesCfb8EnabledSymbol.setLabel("AES-CFB(8)?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCfb64Enabled(symbol, event):
@@ -570,8 +549,8 @@ def handleAesCfb64Enabled(symbol, event):
         g.cryptoSymAesCfb64EnabledSymbol.setLabel("AES-CFB(64) (HW)?")
     else:
         g.cryptoSymAesCfb64EnabledSymbol.setLabel("AES-CFB(64)?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCfb128Enabled(symbol, event):
@@ -580,8 +559,8 @@ def handleAesCfb128Enabled(symbol, event):
         g.cryptoSymAesCfb128EnabledSymbol.setLabel("AES-CFB(128) (HW)?")
     else:
         g.cryptoSymAesCfb128EnabledSymbol.setLabel("AES-CFB(128)?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCtrEnabled(symbol, event):
@@ -590,8 +569,8 @@ def handleAesCtrEnabled(symbol, event):
         g.cryptoSymAesCtrEnabledSymbol.setLabel("AES-CTR (HW)?")
     else:
         g.cryptoSymAesCtrEnabledSymbol.setLabel("AES-CTR?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesGcmEnabled(symbol, event):
@@ -600,8 +579,8 @@ def handleAesGcmEnabled(symbol, event):
         g.cryptoSymAesGcmEnabledSymbol.setLabel("AES-GCM (HW)?")
     else:
         g.cryptoSymAesGcmEnabledSymbol.setLabel("AES-GCM?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesCcmEnabled(symbol, event):
@@ -610,8 +589,8 @@ def handleAesCcmEnabled(symbol, event):
         g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM (HW)?")
     else:
         g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesXtsEnabled(symbol, event):
@@ -620,8 +599,8 @@ def handleAesXtsEnabled(symbol, event):
         g.cryptoSymAesXtsEnabledSymbol.setLabel("AES-XTS (HW)?")
     else:
         g.cryptoSymAesXtsEnabledSymbol.setLabel("AES-XTS?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
 def handleAesEaxEnabled(symbol, event):
@@ -630,7 +609,7 @@ def handleAesEaxEnabled(symbol, event):
         g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-XTS (HW)?")
     else:
         g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-XTS?")
-    if (ScanSym() == True):
-        data = symbol.getComponent()
+
+    UpdateAesHwDriverFiles()
     return
 
