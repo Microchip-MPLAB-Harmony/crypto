@@ -33,7 +33,6 @@ import ntpath
 print("CRYPTO: HASH Menu Package")
 import crypto_globals   #Initial globals
 import crypto_defs as g #Modified globals
-#import superglobals
 
 ################################################################################
 #Scan to see if any of the Hash Selections is True and set the symbol
