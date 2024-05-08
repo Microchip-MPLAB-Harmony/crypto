@@ -52,6 +52,30 @@ def ScanDigSign():
         print("CRYPO:  CONFIG_USE_DS = %s"%(g.CONFIG_USE_DS.getValue()))
         return True
 
+#Check if the ECDSA is enabled and the ECDSA HW Driver Files are needed.
+# TODO:  For now only Mistral 6156. Some mods required for other HW
+#--Returns True if the ECDSA HW Driver enable/disable has changed
+def ScanDigSignHw():
+    retVal = False
+    fKey = "ECDSA"
+
+    #DS Scan
+    newValue = False
+    if (g.cryptoDsEcdsaEnabledSymbol.getValue()   == True):
+        if (g.cryptoHwDsEcdsaEnabledSymbol.getValue() == True):
+            newValue = True
+
+    if (g.CONFIG_USE_ECDSA_HW.getValue() != newValue):
+        g.CONFIG_USE_ECDSA_HW.setValue(newValue)
+        print("ECDSA:  Enable HW(%s)"%(newValue))
+        for fSym in g.hwDriverFileDict[fKey]:
+            fSym.setEnabled(newValue)
+        return True
+    else:
+        print("ECDSA: HW Unchanged (%s)"%(newValue))
+        return False
+
+
 
 def SetupCryptoDsMenu(cryptoComponent):
 
@@ -61,6 +85,20 @@ def SetupCryptoDsMenu(cryptoComponent):
     g.CONFIG_USE_DS.setVisible(False)
     g.CONFIG_USE_DS.setLabel("Crypto")
     g.CONFIG_USE_DS.setDefaultValue(False)
+
+    #ECDSA File Generation Enable
+    g.CONFIG_USE_ECDSA= cryptoComponent.createBooleanSymbol(
+            "CONFIG_USE_ECDSA", None)
+    g.CONFIG_USE_ECDSA.setVisible(False)
+    g.CONFIG_USE_ECDSA.setLabel("Crypto ECDSA")
+    g.CONFIG_USE_ECDSA.setDefaultValue(False)
+
+    #ECDSA File Generation Enable
+    g.CONFIG_USE_ECDSA_HW= cryptoComponent.createBooleanSymbol(
+            "CONFIG_USE_ECDSA_HW", None)
+    g.CONFIG_USE_ECDSA_HW.setVisible(False)
+    g.CONFIG_USE_ECDSA_HW.setLabel("Crypto ECDSA HW")
+    g.CONFIG_USE_ECDSA_HW.setDefaultValue(False)
 
     #DS - Crypto DS Algorithms Main Menu
     g.dsMenu = cryptoComponent.createMenuSymbol(
@@ -79,22 +117,56 @@ def SetupCryptoDsMenu(cryptoComponent):
     g.cryptoDsEcdsaEnabledSymbol.setVisible(True)
     g.cryptoDsEcdsaEnabledSymbol.setReadOnly(False)
     g.cryptoDsEcdsaEnabledSymbol.setDefaultValue(True)
+    g.cryptoDsEcdsaEnabledSymbol.setHelp('CRYPT_ECDSA_SUM')
 
-    #TODO:  HW ECDSA Selection
-    
+    #DS ECDSA HW Symbol
+    g.cryptoHwDsEcdsaEnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_ds_ecdsa_hw_en", g.cryptoDsEcdsaEnabledSymbol)
+    g.cryptoHwDsEcdsaEnabledSymbol.setLabel("Use Hardware Acceleration?")
+    g.cryptoHwDsEcdsaEnabledSymbol.setDescription(
+       "Turn on hardware acceleration" +
+       "for the ECDSA Signing Algorithm")
+    g.cryptoHwDsEcdsaEnabledSymbol.setVisible(False)
+    g.cryptoHwDsEcdsaEnabledSymbol.setDefaultValue(False)
+    if ((g.cryptoHwDsEcdsaSupported == True)):
+        g.cryptoDsEcdsaEnabledSymbol.setDependencies(
+                handleDsEcdsaEnabled, ["crypto_ds_ecdsa_en",
+                                       "crypto_ds_ecdsa_hw_en"])
+        if (g.cryptoDsEcdsaEnabledSymbol.getValue() == True):
+            g.cryptoHwDsEcdsaEnabledSymbol.setVisible(True)
+            g.cryptoHwDsEcdsaEnabledSymbol.setDefaultValue(True)
+
     #Check to see if any of the Ds selections is True
     #--Used to include the CC DS API Files
     ScanDigSign()
+    ScanDigSignHw()
 
 #-----------------------------------------------------
-#DS-AES Handlers
+#DS-ECDSA Handlers
 
 def handleDsEcdsaEnabled(symbol, event):
-    if (g.cryptoHwDsEcdsaSupported and (
-        g.cryptoHwDsEcdsaEnabledSymbol.getValue() == True)):
-        g.cryptoDsEcdsaEnabledSymbol.setLabel("DS-AES CMAC (HW)?")
+    if (g.cryptoDsEcdsaEnabledSymbol.getValue() == True):
+        print("DS: ECDSA  Enabled")
+        if (g.cryptoHwDsEcdsaSupported):
+            print("DS: ECDSA HW Enabled")
+            g.cryptoHwDsEcdsaEnabledSymbol.setVisible(True)
+        else:
+            g.cryptoHwDsEcdsaEnabledSymbol.setValue(False)
+            g.cryptoHwDsEcdsaEnabledSymbol.setVisible(False)
     else:
-        g.cryptoDsEcdsaEnabledSymbol.setLabel("DS-AES CMAC?")
-    if (ScanDigSign() == True):
-        data = symbol.getComponent()
-    return
+        g.cryptoHwDsEcdsaEnabledSymbol.setValue(False)
+        g.cryptoHwDsEcdsaEnabledSymbol.setVisible(False)
+    ScanDigSign()
+
+    #Check for ECDSA HW Driver Update
+    if (ScanDigSignHw() == True):
+        numHwDrv = len(g.hwDriverFileDict["ECDSA"])
+        print("ECDSA: %d Driver File Symbols Updated:"%(numHwDrv))
+        if (len(g.hwDriverFileDict['ECDSA']) > 0):
+            for fSym in g.hwDriverFileDict['ECDSA']:
+                print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
+        else: print("ECDSA:  %d Driver Files Updated"%(numHwDrv))
+
+    for fSym in g.hwDriverFileDict["ECDSA"]:
+        print("ECDSA:  Update [ECDSA]%s(%s)"%(
+              fSym.getOutputName(),fSym.getEnabled()))

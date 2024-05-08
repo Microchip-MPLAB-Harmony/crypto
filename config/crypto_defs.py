@@ -33,22 +33,23 @@ CONFIG_USE_MAC            = None  #Any MAC Crypto
 CONFIG_USE_RNG            = None  #Any RNG method
 CONFIG_USE_ASYM           = None  #TODO: RSA/ECC/DES
 
-#Function Used 
+#Function Used in above
 CONFIG_USE_TRNG           = None
 CONFIG_USE_SHA            = None
 CONFIG_USE_AES            = None
 CONFIG_USE_TDES           = None
-CONFIG_USE_RSA            = None  #TODO
-CONFIG_USE_ECC            = None  #TODO
-
+CONFIG_USE_RSA            = None 
+CONFIG_USE_ECC            = None  
+CONFIG_USE_ECDSA            = None 
 
 #HW Function Driver Used
 CONFIG_USE_TRNG_HW        = None
 CONFIG_USE_SHA_HW         = None
 CONFIG_USE_AES_HW         = None
 CONFIG_USE_TDES_HW        = None
-CONFIG_USE_RSA_HW         = None  #TODO
-CONFIG_USE_ECC_HW         = None  #TODO
+CONFIG_USE_RSA_HW         = None
+CONFIG_USE_ECC_HW         = None 
+CONFIG_USE_ECDSA_HW         = None 
 
 #HW Module Symbol Strings
 hwDriverStrings = [
@@ -73,6 +74,7 @@ hwDriverStrings = [
 "HAVE_MCHP_CRYPTO_RSA_HW_CPKCC", #PIC32CX MT
 "HAVE_MCHP_CRYPTO_ECC_HW_BA414E",#PCI32MZ-W
 "HAVE_MCHP_CRYPTO_ECC_HW_CPKCC", #PIC32CX MT
+"HAVE_MCHP_CRYPTO_ECDSA_HW_CPKCC", #PIC32CX MT
 "HAVE_MCHP_CRYPTO_HW_BA414E",    #PCI32MZ-W
 "HAVE_MCHP_CRYPTO_HW_U2803",     #ATSAML11
 "HAVE_MCHP_CRYPTO_HW_U2805",     #PIC32CM
@@ -88,7 +90,9 @@ hwDriverDict = {
                  "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcc.h",
                                    "drv_crypto_rsa_hw_cpkcc.c"],
                             "ECC":["drv_crypto_ecc_hw_cpkcc.h",
-                                   "drv_crypto_ecc_hw_cpkcc.c"] },
+                                   "drv_crypto_ecc_hw_cpkcc.c"], 
+                          "ECDSA":["drv_crypto_ecdsa_hw_cpkcc.h",
+                                   "drv_crypto_ecdsa_hw_cpkcc.c"] },
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
                                    "drv_crypto_aes_hw_6149.c"] },
                   "6156": { "SHA":["drv_crypto_sha_hw_6156.h",
@@ -96,8 +100,8 @@ hwDriverDict = {
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} } 
 
-
-#The dict list of file symbols loaded for each function
+#The dict list of file symbols loaded for each function based on the
+#hwDriverDict
 # {<function>: [<files symbols>], ...}
 #--Key is same as the hwDriverDict fKey
 hwDriverFileDict = {
@@ -106,16 +110,8 @@ hwDriverFileDict = {
          "AES": [],
         "TDES": [],
          "RSA": [],
-         "ECC": []}
-
-#TODO:   Make all drivers available.  Only MISTRAL for now
-hwDriverAvail = [ 
-"HAVE_MCHP_CRYPTO_RSA_HW_CPKCC",  #PIC32CX MT
-"HAVE_MCHP_CRYPTO_ECC_HW_CPKCC",  #PIC32CX MT
-"HAVE_MCHP_CRYPTO_AES_HW_6149",
-"HAVE_MCHP_CRYPTO_SHA_HW_6156"]
-
-
+         "ECC": [],
+         "ECDSA":[]}
 
 ################################################################################
 ## Trustzone - for Unicorn/Omega/Lifeguard processors
@@ -871,7 +867,7 @@ cryptoRngPrngEnabledSymbol         = None
 # ASYM Hardware
 
 #ASYM RSA 
-cryptoHwRsaSupport = [
+cryptoHwAsymRsaSupport = [
     ["PUKCC", "U2009", "2.5.0", [],
      set(["HAVE_MCHP_CRYPTO_RSA_HW_PUKCC"])], #ATSAME54P20A
     ["PUKCC", "U2009", "2.5.0", [],
@@ -879,13 +875,13 @@ cryptoHwRsaSupport = [
     ["CPKCC", "44163", "B", [],
      set(["HAVE_MCHP_CRYPTO_RSA_HW_CPKCC"])]  #PIC32CX MT
 ]
-cryptoHwRsaSupported = False
-cryptoHwRsaEnabledSymbol = None
-cryptoRsaEnabledSymbol = None
+cryptoHwAsymRsaSupported = False
+cryptoHwAsymRsaEnabledSymbol = None
+cryptoAsymRsaEnabledSymbol = None
 
 
 #ASYM ECC 
-cryptoHwEccSupport = [
+cryptoHwAsymEccSupport = [
     ["PUKCC", "U2009", "2.5.0", [],
      set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
     ["BA414E", "00343", "", [],
@@ -894,10 +890,25 @@ cryptoHwEccSupport = [
     ["CPKCC", "44163", "B", [],
      set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
 ]
-cryptoHwEccSupported         = False
-cryptoHwEccEnabledSymbol     = None
+cryptoHwAsymEccSupported         = False
+cryptoHwAsymEccEnabledSymbol     = None
+cryptoAsymEccEnabledSymbol       = None
+
 cryptoSWCallBackEnableSymbol = None
-cryptoEccEnabledSymbol       = None
+
+#ASYM ECC-ECDSA 
+cryptoHwDsEcdsaSupport = [
+    ["PUKCC", "U2009", "2.5.0", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
+    ["BA414E", "00343", "", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_BA414E",
+          "HAVE_MCHP_CRYPTO_HW_BA414E"])],    #PCI32MZ-W
+    ["CPKCC", "44163", "B", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
+]
+cryptoHwDsEcdsaSupported         = False
+cryptoHwDsEcdsaEnabledSymbol     = None
+cryptoDsEcdsaEnabledSymbol       = None
 
 #===============================================================================
 #HW IDAU(2803)

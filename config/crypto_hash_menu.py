@@ -95,7 +95,7 @@ def ScanHash():
         g.CONFIG_USE_HASH.setValue(newValue)
         return True
 
-#Check if the SHA is enabled and the SHA HW Driver Files are needed.
+#Check if the SHA2 is enabled and the SHA HW Driver Files are needed.
 # TODO:  For now only Mistral 6156. Some mods required for other HW
 #--Returns True if the SHA HW Driver enable/disable has changed
 def ScanShaHw():
@@ -103,7 +103,7 @@ def ScanShaHw():
     fKey = "SHA"
     print("SHA: SCANSHAHW")
 
-    #SHA Scan
+    #SHA2 Function Scan
     newValue = False
     if (g.cryptoSha1EnabledSymbol.getValue()   == True):
         if (g.cryptoHwSha1EnabledSymbol.getValue() == True):

@@ -347,7 +347,7 @@ cryptoAesCcmEnabledSymbol         = None
 #ASYMMETRIC
 CONFIG_USE_ASYM                   = None
 
-#DES
+#Asym DES
 cryptoHwDesSupported              = False
 cryptoHwDesEnabledSymbol          = None
 cryptoDesEnabledSymbol            = None
@@ -366,16 +366,32 @@ cryptoHwDesOfbSupported           = False
 cryptoHwDesOfbEnabledSymbol       = None
 cryptoDesOfbEnabledSymbol         = None
 
-#RSA
-cryptoHwRsaSupported              = False
-cryptoHwRsaEnabledSymbol          = None
-cryptoRsaEnabledSymbol            = None
+#Asym RSA
+cryptoHwAsymRsaSupported              = False
+cryptoHwAsymRsaEnabledSymbol          = None
+cryptoAsymRsaEnabledSymbol            = None
 
-#ECC
-cryptoHwEccSupported              = False
-cryptoHwEccEnabledSymbol          = None
+#Asym ECC
+cryptoHwAsymEccSupported              = False
+cryptoHwAsymEccEnabledSymbol          = None
+cryptoAsymEccEnabledSymbol            = None
+
 cryptoSWCallBackEnableSymbol      = None
-cryptoEccEnabledSymbol            = None
+
+#ASYM ECC-ECDSA 
+cryptoHwEcdsaSupport = [
+    ["PUKCC", "U2009", "2.5.0", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
+    ["BA414E", "00343", "", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_BA414E",
+          "HAVE_MCHP_CRYPTO_HW_BA414E"])],    #PCI32MZ-W
+    ["CPKCC", "44163", "B", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
+]
+cryptoHwEcdsaSupported         = False
+cryptoHwEcdsaEnabledSymbol     = None
+cryptoEcdsaEnabledSymbol       = None
+
 
 #===============================================================================
 #DS - Digital Signing

@@ -594,8 +594,8 @@ def SetupHwDriverFiles(basecomponent):
     projPath    = "config/" + configName + "/crypto/driver/"
 
     count=0
-    #TODO:  For now create all drivers disabled for this HW
-    #       Later scan to see what HW functions are enabled
+    #create all drivers disabled for this HW
+    #--Later scan to see what HW functions are enabled
     print("CRYPTO: Driver File Symbols Created:")
     for [dKey, fDict] in g.hwDriverDict.items():  #Driver File Dict
         #if (hwDrvSym.getID() in g.hwDriverStrings):
@@ -683,26 +683,40 @@ def SetupHardwareSupport(cryptoComponent) :
 
     #HMAC
 
+    #ASYM - Asymmetric Crypto
+
     #DES
     g.cryptoHwDesSupported    = ScanHardware(g.cryptoHwDesSupport)
     g.cryptoHwDesCbcSupported = ScanHardware(g.cryptoHwDesCbcSupport)
     g.cryptoHwDesCfbSupported = ScanHardware(g.cryptoHwDesCfbSupport)
     g.cryptoHwDesOfbSupported = ScanHardware(g.cryptoHwDesOfbSupport)
     if (g.cryptoHwDesSupported):
-        print("CRYPTO HW:  HW DES SUPPORTED")
+        print("CRYPTO HW:  HW ASYM DES SUPPORTED")
+    else:
+        g.cryptoHwDesSupported = False
 
     #RSA
-    g.cryptoHwRsaSupported    = ScanHardware(g.cryptoHwRsaSupport)
-    if (g.cryptoHwRsaSupported):
-        print("CRYPTO HW:  HW RSA SUPPORTED")
+    g.cryptoHwAsymRsaSupported    = ScanHardware(g.cryptoHwAsymRsaSupport)
+    if (g.cryptoHwAsymRsaSupported):
+        print("CRYPTO HW:  HW ASYM RSA SUPPORTED")
+    else:
+        g.cryptoHwAsymRsaSupported = False
 
     #ECC
-    g.cryptoHwEccSupported    = ScanHardware(g.cryptoHwEccSupport)
-    if (g.cryptoHwEccSupported):
-        print("CRYPTO HW:  HW ECC SUPPORTED")
+    g.cryptoHwAsymEccSupported    = ScanHardware(g.cryptoHwAsymEccSupport)
+    if (g.cryptoHwAsymEccSupported):
+        print("CRYPTO HW:  HW ASYM ECC SUPPORTED")
     else:
-        #print("CRYPTO HW:  HW AES NOT SUPPORTED")
-        g.cryptoHwSymAesSupported = False
+        g.cryptoHwAsymEccSupported = False
+
+    #DS - Digital Signing
+
+    #DS ECDSA
+    g.cryptoHwDsEcdsaSupported    = ScanHardware(g.cryptoHwDsEcdsaSupport)
+    if (g.cryptoHwDsEcdsaSupported):
+        print("CRYPTO HW:  HW DS-ECDSA SUPPORTED")
+    else:
+        g.cryptoHwDsEcdsaSupported = False
 
     #HW Modules
     g.cryptoHW_U2803Present   = ScanHardware(g.cryptoHW_U2803)
@@ -715,7 +729,8 @@ def SetupHardwareSupport(cryptoComponent) :
         g.cryptoHwSha224Supported   or  g.cryptoHwSha256Supported or
         g.cryptoHwSha384Supported   or  g.cryptoHwSha512Supported or
         g.cryptoHwSymAesSupported      or  g.cryptoHwDesSupported or
-        g.cryptoHwRsaSupported      or  g.cryptoHwEccSupported):
+        g.cryptoHwAsymRsaSupported      or  g.cryptoHwAsymEccSupported or
+        g.cryptoHwDsEcdsaSupported):
         g.cryptoHwSupported = True
     else:
         g.cryptoHwSupported = False
