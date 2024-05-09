@@ -594,29 +594,28 @@ def SetupHwDriverFiles(basecomponent):
     projPath    = "config/" + configName + "/crypto/driver/"
 
     count=0
-    #create all drivers disabled for this HW
+    #create all possible drivers disabled for this HW
     #--Later scan to see what HW functions are enabled
     print("CRYPTO: Driver File Symbols Created:")
     for [dKey, fDict] in g.hwDriverDict.items():  #Driver File Dict
         #if (hwDrvSym.getID() in g.hwDriverStrings):
         #indx = g.hwDriverStrings.index(hwDrvSym.getID())
         print("CRYPTO: dKey %s:  "%(dKey))
+        fileNames = set([])
         for fKey in fDict:       #Driver Function Key to file Dict
             for fileName in fDict[fKey]:
-                count += 1
-                fileSym = AddFileName(
-                              fileName,  #File Name 
-                              "",        #id prefix
-                              basecomponent, #Component
-                              srcPath,
-                              dstPath, False, projPath)
+                if (fileNames.issuperset([fileName]) == False):
+                    count += 1
+                    fileSym = AddFileName(
+                                  fileName,  #File Name 
+                                  "",        #id prefix
+                                  basecomponent, #Component
+                                  srcPath,
+                                  dstPath, False, projPath)
 
-                g.hwDriverFileDict[fKey].append(fileSym)
-                print(" [%s] %s"%(fKey,fileSym.getOutputName()))
-
-    for fSym in g.hwDriverFileDict["TRNG"]:
-        print("CRYPTO:  Create [TRNG]%s(%s)"%(
-              fSym.getOutputName(),fSym.getEnabled()))
+                    g.hwDriverFileDict[fKey].append(fileSym)
+                    print(" [%s] %s"%(fKey,fileSym.getOutputName()))
+                    fileNames.update([fileName]) #Add new file
 
 
 ################################################################################
@@ -717,6 +716,13 @@ def SetupHardwareSupport(cryptoComponent) :
         print("CRYPTO HW:  HW DS-ECDSA SUPPORTED")
     else:
         g.cryptoHwDsEcdsaSupported = False
+
+    #KAS ECDH
+    g.cryptoHwKasEcdhSupported    = ScanHardware(g.cryptoHwKasEcdhSupport)
+    if (g.cryptoHwKasEcdhSupported):
+        print("CRYPTO HW:  HW KAS-ECDH SUPPORTED")
+    else:
+        g.cryptoHwKasEcdhSupported = False
 
     #HW Modules
     g.cryptoHW_U2803Present   = ScanHardware(g.cryptoHW_U2803)

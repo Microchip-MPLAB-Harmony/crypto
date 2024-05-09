@@ -38,9 +38,10 @@ CONFIG_USE_TRNG           = None
 CONFIG_USE_SHA            = None
 CONFIG_USE_AES            = None
 CONFIG_USE_TDES           = None
-CONFIG_USE_RSA            = None 
-CONFIG_USE_ECC            = None  
-CONFIG_USE_ECDSA            = None 
+CONFIG_USE_RSA            = None
+CONFIG_USE_ECC            = None
+CONFIG_USE_ECDSA          = None
+CONFIG_USE_ECDH_HW        = None
 
 #HW Function Driver Used
 CONFIG_USE_TRNG_HW        = None
@@ -48,8 +49,9 @@ CONFIG_USE_SHA_HW         = None
 CONFIG_USE_AES_HW         = None
 CONFIG_USE_TDES_HW        = None
 CONFIG_USE_RSA_HW         = None
-CONFIG_USE_ECC_HW         = None 
-CONFIG_USE_ECDSA_HW         = None 
+CONFIG_USE_ECC_HW         = None
+CONFIG_USE_ECDSA_HW       = None
+CONFIG_USE_ECDH_HW        = None
 
 #HW Module Symbol Strings
 hwDriverStrings = [
@@ -75,6 +77,7 @@ hwDriverStrings = [
 "HAVE_MCHP_CRYPTO_ECC_HW_BA414E",#PCI32MZ-W
 "HAVE_MCHP_CRYPTO_ECC_HW_CPKCC", #PIC32CX MT
 "HAVE_MCHP_CRYPTO_ECDSA_HW_CPKCC", #PIC32CX MT
+"HAVE_MCHP_CRYPTO_ECDH_HW_CPKCC",#PIC32CX MT/ECC Driver Only
 "HAVE_MCHP_CRYPTO_HW_BA414E",    #PCI32MZ-W
 "HAVE_MCHP_CRYPTO_HW_U2803",     #ATSAML11
 "HAVE_MCHP_CRYPTO_HW_U2805",     #PIC32CM
@@ -86,19 +89,62 @@ hwDriverFileSymbols = []
 
 #HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
 #   { <dKey>: { <fKey>: [<driver files>] , ... ] }
+# NOTE: Each driver file is uniquely listed.
 hwDriverDict = {
                  "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcc.h",
                                    "drv_crypto_rsa_hw_cpkcc.c"],
                             "ECC":["drv_crypto_ecc_hw_cpkcc.h",
-                                   "drv_crypto_ecc_hw_cpkcc.c"], 
+                                   "drv_crypto_ecc_hw_cpkcc.c"],
                           "ECDSA":["drv_crypto_ecdsa_hw_cpkcc.h",
-                                   "drv_crypto_ecdsa_hw_cpkcc.c"] },
+                                   "drv_crypto_ecdsa_hw_cpkcc.c",
+                                   "drv_crypto_ecc_hw_cpkcc.h",
+                                   "drv_crypto_ecc_hw_cpkcc.c"],
+                           "ECDH":["drv_crypto_ecdh_hw_cpkcc.h",
+                                   "drv_crypto_ecdh_hw_cpkcc.c",
+                                   "drv_crypto_ecc_hw_cpkcc.h",
+                                   "drv_crypto_ecc_hw_cpkcc.c"]},
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
                                    "drv_crypto_aes_hw_6149.c"] },
                   "6156": { "SHA":["drv_crypto_sha_hw_6156.h",
                                    "drv_crypto_sha_hw_6156.c"] },
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
-                                   "drv_crypto_trng_hw_6334.c"]} } 
+                                   "drv_crypto_trng_hw_6334.c"]} }
+
+hwDriverFileDepends= {
+        "TRNG": [],
+         "SHA": [],
+         "AES": [],
+        "TDES": [],
+         "RSA": [],
+         "ECC": ["ECDSA", "ECDH"],
+       "ECDSA": ["ECC", "ECDH"],
+        "ECDH": ["ECC", "ECDSA"]}
+
+hwDriverEnSymbols = {
+        "TRNG": [],
+         "SHA": [],
+         "AES": [],
+        "TDES": [],
+         "RSA": [],
+         "ECC": [],
+       "ECDSA": [],
+        "ECDH": []}
+
+#NOTE:  Any enabled driver with a dependency adds the dependency files
+#       to the driver genererate list.  All drivers with the same
+#       dependency will both need hw to be disabled to remove
+#       the dependency files from the list.  
+#       The direct enabling of the dependency files acts independently
+#       of the sources they are dependent on.
+hwDriverDepends= {
+                 "CPKCC": { "RSA": [],
+                            "ECC": [],
+                          "ECDSA": ["ECC"],
+                           "ECDH": ["ECC"] },
+                  "6149": { "AES": []},
+                  "6156": { "SHA": []},
+                  "6334": {"TRNG": []} }
+
 
 #The dict list of file symbols loaded for each function based on the
 #hwDriverDict
@@ -111,7 +157,8 @@ hwDriverFileDict = {
         "TDES": [],
          "RSA": [],
          "ECC": [],
-         "ECDSA":[]}
+       "ECDSA": [],
+        "ECDH": []}
 
 ################################################################################
 ## Trustzone - for Unicorn/Omega/Lifeguard processors
@@ -896,7 +943,7 @@ cryptoAsymEccEnabledSymbol       = None
 
 cryptoSWCallBackEnableSymbol = None
 
-#ASYM ECC-ECDSA 
+#Asym Dig Sign ECC-ECDSA 
 cryptoHwDsEcdsaSupport = [
     ["PUKCC", "U2009", "2.5.0", [],
      set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
@@ -909,6 +956,17 @@ cryptoHwDsEcdsaSupport = [
 cryptoHwDsEcdsaSupported         = False
 cryptoHwDsEcdsaEnabledSymbol     = None
 cryptoDsEcdsaEnabledSymbol       = None
+
+#Asym Key Auth ECC-ECDH
+cryptoHwKasEcdhSupport = [
+    ["PUKCC", "U2009", "2.5.0", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
+    ["CPKCC", "44163", "B", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
+]
+cryptoHwKasEcdhSupported         = False
+cryptoHwKasEcdhEnabledSymbol     = None
+cryptoKasEcdhEnabledSymbol       = None
 
 #===============================================================================
 #HW IDAU(2803)
