@@ -254,7 +254,7 @@ cryptoMd5EnabledSymbol   = None
 
 #----------------------------
 #HW HASH RIPEMD160 
-cryptoCurrentHwRipeMd160Support    = []
+cryptoHwRipeMd160Support    = []
 
 cryptoRipeMd160EnabledSymbol            = None
 cryptoHwRipeMd160Supported              = False
@@ -336,8 +336,6 @@ cryptoHwSha256Supported     = False
 cryptoHwSha256EnabledSymbol = None
 cryptoSha256EnabledSymbol   = None
 
-sha3Menu = None
-
 #HW HASH SHA384
 cryptoHwSha384Support = [
     ["HSM" ,"03785",      "", [],
@@ -364,8 +362,20 @@ cryptoHwSha512Supported          = False
 cryptoHwSha512EnabledSymbol      = None
 cryptoSha512EnabledSymbol        = None
 
+cryptoHwSha512_224Support = []
+cryptoHwSha512_224Supported           = False
+cryptoHwSha512_224EnabledSymbol       = None
+cryptoSha512_224EnabledSymbol         = None
+
+cryptoHwSha512_256Support = []
+cryptoHwSha512_256Supported           = False
+cryptoHwSha512_256EnabledSymbol       = None
+cryptoSha512_256EnabledSymbol         = None
+
 #----------------------------
-#TODO:  Update SHA3 Support
+#SHA 3
+sha3Menu = None
+
 #HW HASH SHA3-224
 cryptoHwSha3224Support = [
     ["HSM" ,"03785",      "", [],
@@ -741,11 +751,6 @@ cryptoHwSymAesXtsSupported     = False
 cryptoHwSymAesXtsEnabledSymbol = None
 cryptoSymAesXtsEnabledSymbol   = None
 
-#SYM AES EAX
-cryptoHwSymAesEaxSupport       = []
-cryptoHwSymAesEaxSupported     = False
-cryptoHwSymAesEaxEnabledSymbol = None
-cryptoSymAesEaxEnabledSymbol   = None
 
 #SYM AES GCM
 cryptoHwSymAesGcmSupport = [
@@ -769,6 +774,18 @@ cryptoHwSymAesGcmSupport = [
 cryptoHwSymAesGcmSupported     = False
 cryptoHwSymAesGcmEnabledSymbol = None
 cryptoSymAesGcmEnabledSymbol   = None
+
+#SYM AES EAX
+cryptoHwSymAesEaxSupport       = []
+cryptoHwSymAesEaxSupported     = False
+cryptoHwSymAesEaxEnabledSymbol = None
+cryptoSymAesEaxEnabledSymbol   = None
+
+#SYM AES Key Wrap (KW) 
+cryptoHwSymAesKwSupport       = [];
+cryptoHwSymAesKwSupported     = False
+cryptoHwSymAesKwEnabledSymbol = None
+cryptoSymAesKwEnabledSymbol   = None
 
 #TODO: Supported at all?
 #SYM AES CMC
@@ -850,22 +867,22 @@ cryptoHwAeadAesSivGcmSupported      = False
 cryptoHwAeadAesSivGcmEnabledSymbol  = None
 cryptoAeadAesSivGcmEnabledSymbol    = None
 
-cryptoCurrentHwCcmSupport    = []
+cryptoHwCcmSupport    = []
 cryptoHwAeadAesCcmSupported       = False
 cryptoHwAeadAesCcmEnabledSymbol   = None
 cryptoAeadAesCcmEnabledSymbol     = None
 
-cryptoCurrentHwEaxSupport    = []
+cryptoHwEaxSupport    = []
 cryptoHwAeadAesEaxSupported         = False
 cryptoHwAeadAesEaxEnabledSymbol     = None
 cryptoAeadAesEaxEnabledSymbol       = None
 
-cryptoCurrentHwSivCmacSupport    = []
+cryptoHwSivCmacSupport    = []
 cryptoHwAeadAesSivCmacSupported     = False
 cryptoHwAeadAesSivCmacEnabledSymbol = None
 cryptoAeadAesSivCmacEnabledSymbol   = None
 
-cryptoCurrentHwSivGcmSupport    = []
+cryptoHwSivGcmSupport    = []
 cryptoHwAeadAesSivGcmSupported      = False
 cryptoHwAeadAesSivGcmEnabledSymbol  = None
 cryptoAeadAesSivGcmEnabledSymbol    = None
@@ -906,7 +923,7 @@ cryptoKasEcdhEnableSymbol          = None
 
 #===============================================================================
 #RNG - Random Number Generation
-cryptoCurrentHwRngSupport          = []
+cryptoHwRngSupport          = []
 cryptoRngTrngEnabledSymbol         = None
 cryptoRngPrngEnabledSymbol         = None
 

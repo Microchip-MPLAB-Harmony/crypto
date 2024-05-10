@@ -445,6 +445,27 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
                 handleAesEaxEnabled,
                 ["crypto_sym_aes_hw"])
 
+    #AES-KW (Key Wrap)
+    g.cryptoSymAesKwEnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_sym_aes_kw_en", g.aesModesMenu)
+    g.cryptoSymAesKwEnabledSymbol.setLabel("AES Key Wrap (KW)? ")
+    g.cryptoSymAesKwEnabledSymbol.setDescription(
+            "Enable support for the AES KW Mode Algorithm.")
+    g.cryptoSymAesKwEnabledSymbol.setVisible(True)
+    g.cryptoSymAesKwEnabledSymbol.setDefaultValue(False)
+    g.cryptoSymAesKwEnabledSymbol.setReadOnly(True)
+    g.cryptoAesEnSymbols.append(g.cryptoSymAesKwEnabledSymbol)
+
+    #AES-KW (Key Wrap) HW
+    g.cryptoHwSymAesKwEnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_sym_aes_kw_hw_en", g.cryptoSymAesKwEnabledSymbol)
+    g.cryptoHwSymAesKwEnabledSymbol.setVisible(False)
+    g.cryptoHwSymAesKwEnabledSymbol.setDefaultValue(False)
+    if (g.cryptoHwSymAesKwSupported):
+        g.cryptoHwSymAesKwEnabledSymbol.setDependencies(
+                handleAesKwEnabled,
+                ["crypto_sym_aes_hw"])
+
     #Check to see if any of the Sym selections is True
     #--Used to include the CC Sym API Files
     ScanSym() #CONFIG_USE_SYM
@@ -606,9 +627,19 @@ def handleAesXtsEnabled(symbol, event):
 def handleAesEaxEnabled(symbol, event):
     if (g.cryptoHwSymAesEaxSupported and (
         g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
-        g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-XTS (HW)?")
+        g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-EAX (HW)?")
     else:
-        g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-XTS?")
+        g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-EAX?")
+
+    UpdateAesHwDriverFiles()
+    return
+
+def handleAesKwEnabled(symbol, event):
+    if (g.cryptoHwSymAesKwSupported and (
+        g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
+        g.cryptoSymAesKwEnabledSymbol.setLabel("AES Key Wrap (KW) - (HW)?")
+    else:
+        g.cryptoSymAesKwEnabledSymbol.setLabel("AES-Key Wrap (KW)?")
 
     UpdateAesHwDriverFiles()
     return

@@ -114,45 +114,55 @@ CONFIG_USE_HASH                   = None
 cryptoHwHashEnabledSymbol         = None
 
 #-------------------------------------------------------------------------------
-cryptoCurrentHwMd5Support    = []
+cryptoHwMd5Support    = []
 cryptoMd5EnabledSymbol            = None
 cryptoHwMd5Supported              = False
 cryptoHwMd5EnabledSymbol          = None
 
 #RIPEMD160----------------------------------------------------------------------
-cryptoCurrentHwRipeMd160Support = []
+cryptoHwRipeMd160Support = []
 cryptoRipeMd160EnabledSymbol      = None
 cryptoHwRipeMd160Supported        = False
 cryptoHwRipeMd160EnabledSymbol    = None
 
 #-------------------------------------------------------------------------------
 #SHA1
-cryptoCurrentHwSha1Support   = []
+cryptoHwSha1Support   = []
 cryptoSha1EnabledSymbol           = None
 cryptoHwSha1Supported             = False
 cryptoHwSha1EnabledSymbol         = None
 
 #-------------------------------------------------------------------------------
 #SHA2
-cryptoCurrentHwSha224Support = []
+cryptoHwSha224Support = []
 cryptoSha224EnabledSymbol         = None
 cryptoHwSha224Supported           = False
 cryptoHwSha224EnabledSymbol       = None
 
-cryptoCurrentHwSha256Support = []
+cryptoHwSha256Support = []
 cryptoHwSha256EnabledSymbol       = None
 cryptoSha256EnabledSymbol         = None
 cryptoHwSha256Supported           = False
 
-cryptoCurrentHwSha384Support = []
+cryptoHwSha384Support = []
 cryptoHwSha384Supported           = False
 cryptoHwSha384EnabledSymbol       = None
 cryptoSha384EnabledSymbol         = None
 
-cryptoCurrentHwSha512Support = []
+cryptoHwSha512Support = []
 cryptoHwSha512Supported           = False
 cryptoHwSha512EnabledSymbol       = None
 cryptoSha512EnabledSymbol         = None
+
+cryptoHwSha512_224Support = []
+cryptoHwSha512_224Supported           = False
+cryptoHwSha512_224EnabledSymbol       = None
+cryptoSha512_224EnabledSymbol         = None
+
+cryptoHwSha512_256Support = []
+cryptoHwSha512_256Supported           = False
+cryptoHwSha512_256EnabledSymbol       = None
+cryptoSha512_256EnabledSymbol         = None
 
 #-------------------------------------------------------------------------------
 #SHA3
@@ -221,34 +231,39 @@ cryptoBlake2b512EnabledSymbol      = None
 #===============================================================================
 #Aead
 CONFIG_USE_AEAD                   = None
-cryptoCurrentHwAesSupport         = []
+cryptoHwAesSupport         = []
 cryptoHwAeadAesSupported          = False
 cryptoHwAeadAesEnabledSymbol      = None
 cryptoAeadAesEnabledSymbol        = None
 
-cryptoCurrentHwDesSupport         = []
+cryptoHwDesSupport         = []
 
-cryptoCurrentHwAesGcmSupport      = []
+cryptoHwAesGcmSupport      = []
 cryptoHwAeadAesGcmSupported         = False
 cryptoHwAeadAesGcmEnabledSymbol     = None
 cryptoAeadAesGcmEnabledSymbol       = None
 
-cryptoCurrentHwAesCcmSupport        = []
+cryptoHwAesCcmSupport        = []
 cryptoHwAeadAesCcmSupported         = False
 cryptoHwAeadAesCcmEnabledSymbol     = None
 cryptoAeadAesCcmEnabledSymbol       = None
 
-cryptoCurrentHwEaxSupport    = []
+cryptoHwEaxSupport    = []
 cryptoHwAeadAesEaxSupported         = False
 cryptoHwAeadAesEaxEnabledSymbol     = None
 cryptoAeadAesEaxEnabledSymbol       = None
 
-cryptoCurrentHwAesSivCmacSupport    = []
+cryptoHwSymAesKwSupport       = [];
+cryptoHwSymAesKwSupported     = False
+cryptoHwSymAesKwEnabledSymbol = None
+cryptoSymAesKwEnabledSymbol   = None
+
+cryptoHwAesSivCmacSupport    = []
 cryptoHwAeadAesSivCmacSupported     = False
 cryptoHwAeadAesSivCmacEnabledSymbol = None
 cryptoAeadAesSivCmacEnabledSymbol   = None
 
-cryptoCurrentHwAesSivGcmSupport     = []
+cryptoHwAesSivGcmSupport     = []
 cryptoHwAeadAesSivGcmSupported      = False
 cryptoHwAeadAesSivGcmEnabledSymbol  = None
 cryptoAeadAesSivGcmEnabledSymbol    = None
@@ -406,7 +421,7 @@ cryptoKasEcdhEnableSymbol         = None
 #===============================================================================
 #TRNG
 CONFIG_USE_TRNG                   = None
-cryptoCurrentHwRngSupport         = []
+cryptoHwRngSupport         = []
 cryptoRngTrngEnabledSymbol        = None
 cryptoRngPrngEnabledSymbol        = None
 
