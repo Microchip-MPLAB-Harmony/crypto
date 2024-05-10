@@ -57,10 +57,6 @@ def ScanAesHwSymbols():
             hwSymbols.append(g.cryptoSymAesCfb128EnabledSymbol)
         if (g.cryptoHwSymAesOfbSupported    == True):
             hwSymbols.append(g.cryptoSymAesOfbEnabledSymbol)
-        if (g.cryptoHwSymAesGcmSupported    == True):
-            hwSymbols.append(g.cryptoSymAesGcmEnabledSymbol)
-        if (g.cryptoHwSymAesCcmSupported    == True):
-            hwSymbols.append(g.cryptoSymAesCcmEnabledSymbol)
         if (g.cryptoHwSymAesXtsSupported    == True):
             hwSymbols.append(g.cryptoSymAesXtsEnabledSymbol)
 
@@ -95,10 +91,7 @@ def ScanSym():
     elif (g.cryptoSymAesCfb64EnabledSymbol.getValue()  == True): newValue = True
     elif (g.cryptoSymAesCfb128EnabledSymbol.getValue() == True): newValue = True
     elif (g.cryptoSymAesCtrEnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoSymAesGcmEnabledSymbol.getValue()    == True): newValue = True
-    elif (g.cryptoSymAesCcmEnabledSymbol.getValue()    == True): newValue = True
     elif (g.cryptoSymAesXtsEnabledSymbol.getValue()    == True): newValue = True
-    #elif (g.cryptoSymAesEaxEnabledSymbol.getValue()    == True): newValue = True
     else: newValue = False
 
     if (g.CONFIG_USE_SYM.getValue() == newValue):
@@ -379,71 +372,6 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
                 handleAesXtsEnabled,
                 ["crypto_sym_aes_hw_en"])
 
-    g.cryptoSymAesGcmEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_gcm_en", g.aesModesMenu)
-    g.cryptoSymAesGcmEnabledSymbol.setDefaultValue(True)
-    if (g.cryptoHwSymAesGcmSupported    == True):
-        g.cryptoSymAesGcmEnabledSymbol.setLabel("AES-GCM Mode (HW)?")
-    else:
-        g.cryptoSymAesGcmEnabledSymbol.setLabel("AES-GCM Mode?")
-    g.cryptoSymAesGcmEnabledSymbol.setDescription(
-            "Enable support for the AES-GCM Mode Algorithm.")
-    g.cryptoSymAesGcmEnabledSymbol.setVisible(True)
-    g.cryptoAesEnSymbols.append(g.cryptoSymAesGcmEnabledSymbol)
-
-    #AES-Gcm Mode HW
-    g.cryptoHwSymAesGcmEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_gcm_hw_en", g.cryptoSymAesGcmEnabledSymbol)
-    g.cryptoHwSymAesGcmEnabledSymbol.setVisible(False)
-    g.cryptoHwSymAesGcmEnabledSymbol.setDefaultValue(False)
-    if (g.cryptoHwSymAesGcmSupported):
-        g.cryptoHwSymAesGcmEnabledSymbol.setDependencies(
-                handleAesGcmEnabled,
-                ["crypto_sym_aes_hw_en"])
-
-    g.cryptoSymAesCcmEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_ccm_en", g.aesModesMenu)
-    g.cryptoSymAesCcmEnabledSymbol.setDefaultValue(True)
-    if (g.cryptoHwSymAesCcmSupported    == True):
-        g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM Mode (HW)?")
-    else:
-        g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM Mode?")
-    g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM Mode?")
-    g.cryptoSymAesCcmEnabledSymbol.setDescription(
-            "Enable support for the AES-CCM Mode Algorithm.")
-    g.cryptoSymAesCcmEnabledSymbol.setVisible(True)
-    g.cryptoAesEnSymbols.append(g.cryptoSymAesCcmEnabledSymbol)
-
-    #AES-Ccm Mode HW
-    g.cryptoHwSymAesCcmEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_ccm_hw_en", g.cryptoSymAesCcmEnabledSymbol)
-    g.cryptoHwSymAesCcmEnabledSymbol.setVisible(False)
-    g.cryptoHwSymAesCcmEnabledSymbol.setDefaultValue(False)
-    if (g.cryptoHwSymAesCcmSupported):
-        g.cryptoHwSymAesCcmEnabledSymbol.setDependencies(
-                handleAesCcmEnabled,
-                ["crypto_sym_aes_hw_en"])
-
-    #AES-EAX
-    g.cryptoSymAesEaxEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_eax_en", g.aesModesMenu)
-    g.cryptoSymAesEaxEnabledSymbol.setLabel("AES EAX Mode? ")
-    g.cryptoSymAesEaxEnabledSymbol.setDescription(
-            "Enable support for the AES EAX Mode Algorithm.")
-    g.cryptoSymAesEaxEnabledSymbol.setVisible(True)
-    g.cryptoSymAesEaxEnabledSymbol.setDefaultValue(False)
-    g.cryptoSymAesEaxEnabledSymbol.setReadOnly(True)
-    g.cryptoAesEnSymbols.append(g.cryptoSymAesEaxEnabledSymbol)
-
-    #AES-EAX HW
-    g.cryptoHwSymAesEaxEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sym_aes_eax_hw_en", g.cryptoSymAesEaxEnabledSymbol)
-    g.cryptoHwSymAesEaxEnabledSymbol.setVisible(False)
-    g.cryptoHwSymAesEaxEnabledSymbol.setDefaultValue(False)
-    if (g.cryptoHwSymAesEaxSupported):
-        g.cryptoHwSymAesEaxEnabledSymbol.setDependencies(
-                handleAesEaxEnabled,
-                ["crypto_sym_aes_hw"])
 
     #AES-KW (Key Wrap)
     g.cryptoSymAesKwEnabledSymbol = cryptoComponent.createBooleanSymbol(
@@ -594,42 +522,12 @@ def handleAesCtrEnabled(symbol, event):
     UpdateAesHwDriverFiles()
     return
 
-def handleAesGcmEnabled(symbol, event):
-    if (g.cryptoHwSymAesGcmSupported and (
-        g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
-        g.cryptoSymAesGcmEnabledSymbol.setLabel("AES-GCM (HW)?")
-    else:
-        g.cryptoSymAesGcmEnabledSymbol.setLabel("AES-GCM?")
-
-    UpdateAesHwDriverFiles()
-    return
-
-def handleAesCcmEnabled(symbol, event):
-    if (g.cryptoHwSymAesCcmSupported and (
-        g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
-        g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM (HW)?")
-    else:
-        g.cryptoSymAesCcmEnabledSymbol.setLabel("AES-CCM?")
-
-    UpdateAesHwDriverFiles()
-    return
-
 def handleAesXtsEnabled(symbol, event):
     if (g.cryptoHwSymAesXtsSupported and (
         g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
         g.cryptoSymAesXtsEnabledSymbol.setLabel("AES-XTS (HW)?")
     else:
         g.cryptoSymAesXtsEnabledSymbol.setLabel("AES-XTS?")
-
-    UpdateAesHwDriverFiles()
-    return
-
-def handleAesEaxEnabled(symbol, event):
-    if (g.cryptoHwSymAesEaxSupported and (
-        g.cryptoHwSymAesEnabledSymbol.getValue() == True)):
-        g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-EAX (HW)?")
-    else:
-        g.cryptoSymAesEaxEnabledSymbol.setLabel("AES-EAX?")
 
     UpdateAesHwDriverFiles()
     return
