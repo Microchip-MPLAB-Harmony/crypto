@@ -33,6 +33,9 @@
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
+
+#define CRYPTO_HASH_SHA512CTX_SIZE (288)
+
 typedef enum {
 	CRYPTO_HASH_INVALID = 0,
             
@@ -145,7 +148,7 @@ typedef struct{
 	uint32_t shaSessionId;
 	crypto_Hash_Algo_E shaAlgo_en;
 	crypto_HandlerType_E shaHandler_en;
-	uint8_t arr_shaDataCtx[110];// __attribute__((alinged (8)));
+	uint8_t arr_shaDataCtx[CRYPTO_HASH_SHA512CTX_SIZE];// __attribute__((alinged (8)));
 }st_Crypto_Hash_Sha_Ctx;
 #endif /* CRYPTO_HASH_SHA1_EN || CRYPTO_HASH_SHA2_EN || CRYPTO_HASH_SHA3_EN */
 
@@ -156,7 +159,7 @@ typedef struct{
 	uint32_t digestLen;
 	crypto_Hash_Algo_E shakeAlgo_en;
 	crypto_HandlerType_E shakeHandler_en;
-	uint8_t arr_shakeDataCtx[110];// __attribute__((alinged (8)));
+	uint8_t arr_shakeDataCtx[CRYPTO_HASH_SHA512CTX_SIZE];// __attribute__((alinged (8)));
 }st_Crypto_Hash_Shake_Ctx;
 #endif /* CRYPTO_HASH_SHA3_SHAKE_EN */
 

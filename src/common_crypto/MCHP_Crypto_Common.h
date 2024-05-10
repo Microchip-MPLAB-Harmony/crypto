@@ -32,8 +32,9 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "crypto_config.h"
+#include "wolfssl/wolfcrypt/ecc.h"
 //******************************************************************************
-#define CRYPTO_ECC_MAX_KEY_LENGTH (66) //Max size of Private key and Public Key will be double of it for ECC
+#define CRYPTO_ECC_MAX_KEY_LENGTH (66) //Max size of Private key; Public Key will be double of it for ECC
 
 // *****************************************************************************
 // *****************************************************************************
@@ -57,7 +58,7 @@ typedef enum
     CRYPTO_AESKEYSIZE_128 = 16, //Enum used for AES key size of 128 bits
     CRYPTO_AESKEYSIZE_192 = 24, //Enum used for AES key size of 192 bits
     CRYPTO_AESKEYSIZE_256 = 32  //Enum used for AES key size of 256 bits        
-}cryto_AesKeySize_E;
+}crypto_AesKeySize_E;
 
 //This needs to be taken care when no using any Sym or Asym algorithm variant
 typedef enum
@@ -74,18 +75,30 @@ typedef enum
 {
     CRYPTO_ECC_CURVE_INVALID = 0,
 
-    /* NIST Prime Curves */
-    CRYPTO_ECC_CURVE_SECP256R1 = 1, //also called as NIST P-912 or prime192v1
+    /* Prime Curves */
+    
+    //Weierstrass Curves
+    CRYPTO_ECC_CURVE_P192 = 1,        
+    CRYPTO_ECC_CURVE_SECP192R1 = 1, //also called as NIST P-192 or prime192v1 
+    
+    CRYPTO_ECC_CURVE_P224 = 2,
+    CRYPTO_ECC_CURVE_SECP224R1 = 2,
+     
+    CRYPTO_ECC_CURVE_P256 = 3,        
+    CRYPTO_ECC_CURVE_SECP256R1 = 3, //also called as NIST P-256 or prime256v1
 
-    /* SECP Curves */
-    CRYPTO_ECC_CURVE_SECP384R1 = 2, //also called as NIST P-384
+    CRYPTO_ECC_CURVE_P384 = 4,
+    CRYPTO_ECC_CURVE_SECP384R1 = 4, //also called as NIST P-384
+            
+    CRYPTO_ECC_CURVE_P521 = 5,
+    CRYPTO_ECC_CURVE_SECP521R1 = 5,        
 
     /* Koblitz */
-    CRYPTO_ECC_CURVE_SECP256K1 = 3,
+    CRYPTO_ECC_CURVE_SECP256K1 = 6,
             
     /* Brainpool Curves */
-    CRYPTO_ECC_CURVE_BRAINPOOLP256R1 = 4,
-    CRYPTO_ECC_CURVE_BRAINPOOLP384R1 = 5,
+    CRYPTO_ECC_CURVE_BRAINPOOLP256R1 = 7,
+    CRYPTO_ECC_CURVE_BRAINPOOLP384R1 = 8,
             
     /* Twisted Edwards Curves */
 
@@ -93,4 +106,5 @@ typedef enum
 }crypto_EccCurveType_E;
 
 
+// *****************************************************************************
 #endif //MCHP_CRYPTO_COMMON_H

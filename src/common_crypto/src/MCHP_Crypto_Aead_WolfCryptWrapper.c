@@ -140,7 +140,7 @@ crypto_Aead_Status_E Crypto_Aead_Wc_AesEax_Init(void *ptr_aesEaxCtx, uint8_t *pt
     int wcAesStatus = BAD_FUNC_ARG;
     if(ptr_aesEaxCtx != NULL)
     {
-        wcAesStatus = wc_AesEaxInit((AesEax*) ptr_aesEaxCtx, (const byte*) ptr_key, (word32) ptr_key,
+        wcAesStatus = wc_AesEaxInit((AesEax*) ptr_aesEaxCtx, (const byte*) ptr_key, (word32) keySize,
                                      (const byte*) ptr_nonce, (word32) nonceLen, (const byte*) ptr_aad, (word32) aadLen);
         if(wcAesStatus == 0)
         {
@@ -345,6 +345,248 @@ crypto_Aead_Status_E Crypto_Aead_Wc_AesEax_EncDecAuthDirect(crypto_CipherOper_E 
     return ret_aesEaxStat_en;
 }        
 #endif /* WOLFSSL_AES_EAX */
+
+#if (defined(HAVE_AESGCM))
+
+#ifdef WOLFSSL_AESGCM_STREAM
+crypto_Aead_Status_E Crypto_Aead_Wc_AesGcm_Init(void *ptr_aesGcmCtx, uint8_t *ptr_key, uint32_t keySize, 
+                                                uint8_t *ptr_initVect, uint32_t initVectLen)
+{
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    int wcAesStatus = BAD_FUNC_ARG;
+    if(ptr_aesGcmCtx != NULL)
+    {       
+        wcAesStatus = wc_AesGcmInit((Aes*) ptr_aesGcmCtx, (const byte*) ptr_key, (word32)keySize, (const byte*)ptr_initVect, (word32)initVectLen);
+                
+        if(wcAesStatus == 0)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_CIPHER_SUCCESS;
+        }
+        else if (wcAesStatus == WC_KEY_SIZE_E)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_KEY;
+        }
+        else if(wcAesStatus == BAD_FUNC_ARG)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+        }
+        else
+        {
+            ret_aesGcmStat_en  = CRYPTO_AEAD_ERROR_CIPFAIL;
+        }
+    }
+    else
+    {
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CTX;
+    }
+    return ret_aesGcmStat_en;  
+}
+
+crypto_Aead_Status_E Crypto_Aead_Wc_AesGcm_AddAadData(crypto_CipherOper_E cipherOper_en, void *ptr_aesGcmCtx, uint8_t *ptr_aad, uint32_t aadLen)
+{
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    int wcAesGcmStatus = BAD_FUNC_ARG;
+  
+    if(ptr_aesGcmCtx != NULL)
+    {
+        if( cipherOper_en == CRYPTO_CIOP_ENCRYPT)
+        {
+            wcAesGcmStatus = wc_AesGcmEncryptUpdate((Aes*)ptr_aesGcmCtx, NULL, NULL, 0, ptr_aad, aadLen); 
+        }
+        else if(cipherOper_en == CRYPTO_CIOP_DECRYPT)
+        {
+            wcAesGcmStatus = wc_AesGcmDecryptUpdate((Aes*)ptr_aesGcmCtx, NULL, NULL, 0, ptr_aad, aadLen);
+        }
+        else
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPOPER;
+        }
+        if(wcAesGcmStatus == 0)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_CIPHER_SUCCESS;
+        }
+        else if(ret_aesGcmStat_en == CRYPTO_AEAD_ERROR_CIPOPER)
+        {
+            //do nothing
+        }
+        else
+        {
+            if(wcAesGcmStatus == BAD_FUNC_ARG)
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+            }
+            else
+            {
+                ret_aesGcmStat_en  = CRYPTO_AEAD_ERROR_CIPFAIL;
+            }
+        }
+    } //end of if of argument checking
+    else
+    {
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+    }
+    return ret_aesGcmStat_en;
+}
+
+crypto_Aead_Status_E Crypto_Aead_Wc_AesGcm_Cipher(crypto_CipherOper_E cipherOper_en, void *ptr_aesGcmCtx, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData)
+{
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    int wcAesGcmStatus = BAD_FUNC_ARG;
+  
+    if( (ptr_aesGcmCtx != NULL ) && (ptr_inputData != NULL) && (ptr_outData != NULL) )
+    {
+        if( cipherOper_en == CRYPTO_CIOP_ENCRYPT)
+        {
+            wcAesGcmStatus = wc_AesGcmEncryptUpdate((Aes*)ptr_aesGcmCtx, (byte*)ptr_outData, (const byte*)ptr_inputData, (word32)dataLen, NULL, 0); 
+        }
+        else if(cipherOper_en == CRYPTO_CIOP_DECRYPT)
+        {
+            wcAesGcmStatus = wc_AesGcmDecryptUpdate((Aes*)ptr_aesGcmCtx, (byte*)ptr_outData, (const byte*)ptr_inputData, dataLen, NULL, 0);
+        }
+        else
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPOPER;
+        }
+        if(wcAesGcmStatus == 0)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_CIPHER_SUCCESS;
+        }
+        else if(ret_aesGcmStat_en == CRYPTO_AEAD_ERROR_CIPOPER)
+        {
+            //do nothing
+        }
+        else
+        {
+            if(wcAesGcmStatus == BAD_FUNC_ARG)
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+            }
+            else
+            {
+                ret_aesGcmStat_en  = CRYPTO_AEAD_ERROR_CIPFAIL;
+            }
+        }
+    } //end of if of argument checking
+    else
+    {
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+    }
+    return ret_aesGcmStat_en;
+}
+
+crypto_Aead_Status_E Crypto_Aead_Wc_AesGcm_Final(crypto_CipherOper_E cipherOper_en, void *ptr_aesGcmCtx, uint8_t *ptr_authTag, uint32_t authTagLen)
+{
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    
+    int wcAesGcmStatus = BAD_FUNC_ARG;
+    
+    if( (ptr_aesGcmCtx != NULL) && (authTagLen <= (uint32_t)AES_BLOCK_SIZE) )
+    {
+        if( cipherOper_en == CRYPTO_CIOP_ENCRYPT)
+        {
+            wcAesGcmStatus = wc_AesGcmEncryptFinal((Aes*) ptr_aesGcmCtx, (byte*)ptr_authTag, (word32)authTagLen);
+        }
+        else if(cipherOper_en == CRYPTO_CIOP_DECRYPT)
+        {
+            wcAesGcmStatus = wc_AesGcmDecryptFinal((Aes*) ptr_aesGcmCtx, (byte*)ptr_authTag, (word32)authTagLen);
+        }
+        else
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPOPER;
+        }
+
+        if(wcAesGcmStatus == 0)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_CIPHER_SUCCESS;
+        }
+        else if(ret_aesGcmStat_en == CRYPTO_AEAD_ERROR_CIPOPER)
+        {
+           //do nothing 
+        }
+        else
+        {
+            if(wcAesGcmStatus == BAD_FUNC_ARG)
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+            }
+            else if(wcAesGcmStatus == AES_GCM_AUTH_E)
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
+            }
+            else
+            {
+                ret_aesGcmStat_en  = CRYPTO_AEAD_ERROR_CIPFAIL;
+            }
+        }
+    }
+    else
+    {
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+    }
+    return ret_aesGcmStat_en;
+}
+#endif /*WOLFSSL_AESGCM_STREAM */
+
+crypto_Aead_Status_E Crypto_Aead_Wc_AesGcm_EncDecAuthDirect(crypto_CipherOper_E cipherOper_en, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData, uint8_t *ptr_key, uint32_t keySize, 
+                                                uint8_t *ptr_initVect, uint32_t initVectLen, uint8_t *ptr_aad, uint32_t aadLen, uint8_t *ptr_authTag, uint32_t authTagLen)
+{
+    crypto_Aead_Status_E ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
+    int wcAesGcmStatus = BAD_FUNC_ARG;
+    Aes arr_aesGcmCtx[1];
+    
+    if((ptr_inputData != NULL) && (ptr_outData != NULL) )
+    {
+        wcAesGcmStatus = wc_AesGcmInit (arr_aesGcmCtx, (const byte*)ptr_key, (word32)keySize, (const byte*)ptr_initVect,(word32)initVectLen);
+        
+        if(wcAesGcmStatus == 0)
+        {
+            if( cipherOper_en == CRYPTO_CIOP_ENCRYPT)
+            {
+                wcAesGcmStatus = wc_AesGcmEncrypt(arr_aesGcmCtx, (byte*)ptr_outData, (const byte*)ptr_inputData, (word32)dataLen, ptr_initVect, initVectLen, 
+                                ptr_authTag, authTagLen, ptr_aad, aadLen);
+            }
+            else if(cipherOper_en == CRYPTO_CIOP_DECRYPT)
+            {
+                wcAesGcmStatus = wc_AesGcmDecrypt(arr_aesGcmCtx, (byte*)ptr_outData, (const byte*)ptr_inputData, (word32)dataLen, ptr_initVect, initVectLen, 
+                                ptr_authTag, authTagLen, ptr_aad, aadLen);
+            }
+            else
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_CIPOPER;
+            }
+        }
+        if(wcAesGcmStatus == 0)
+        {
+            ret_aesGcmStat_en = CRYPTO_AEAD_CIPHER_SUCCESS;
+        }
+        else if(ret_aesGcmStat_en == CRYPTO_AEAD_ERROR_CIPOPER)
+        {
+            //do nothing
+        }
+        else
+        {
+            if(wcAesGcmStatus == BAD_FUNC_ARG)
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+            }
+            else if(wcAesGcmStatus == AES_GCM_AUTH_E)
+            {
+                ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_AUTHTAG;
+            }
+            else
+            {
+                ret_aesGcmStat_en  = CRYPTO_AEAD_ERROR_CIPFAIL;
+            }
+        }
+    } //end of if of argument checking
+    else
+    {
+        ret_aesGcmStat_en = CRYPTO_AEAD_ERROR_ARG;
+    }
+    return ret_aesGcmStat_en;
+}
+
+#endif /* WOLFSSL_AES_GCM */
 
 #endif /* !NO_AES  */
 // *****************************************************************************

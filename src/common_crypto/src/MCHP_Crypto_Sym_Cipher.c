@@ -51,24 +51,31 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Init(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, c
     else if( (opMode_en <= CRYPTO_SYM_OPMODE_INVALID) || (opMode_en >= CRYPTO_SYM_OPMODE_MAX) )
     {
         ret_aesStatus_en = CRYPTO_SYM_ERROR_OPMODE;
-    }
-#ifdef CRYPTO_SYM_AESXTS_EN            
-    else if( (opMode_en != CRYPTO_SYM_OPMODE_XTS) && 
-                    ( (ptr_key == NULL) || (keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256) )  ) //key length check other than XTS mode 
+    }         
+    else if(
+#ifdef CRYPTO_SYM_AESXTS_EN             
+            (opMode_en != CRYPTO_SYM_OPMODE_XTS) && 
+#endif /* CRYPTO_SYM_AESXTS_EN */             
+            ( (ptr_key == NULL) || (keyLen < (uint32_t)CRYPTO_AESKEYSIZE_128) || (keyLen > (uint32_t)CRYPTO_AESKEYSIZE_256) )  ) //key length check other than XTS mode 
     {
        ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;
     }
+#ifdef CRYPTO_SYM_AESXTS_EN 
     else if( (opMode_en == CRYPTO_SYM_OPMODE_XTS) && 
-                    ( (ptr_key == NULL) || ((keyLen != (uint32_t)((uint32_t)CRYPTO_AESKEYSIZE_128*2Lu)) && (keyLen != (uint32_t)((uint32_t)CRYPTO_AESKEYSIZE_256*2Lu))) ) ) //key length check for XTS mode 
+                (   (ptr_key == NULL) 
+                    ||  ( (keyLen != (uint32_t) (((uint32_t)CRYPTO_AESKEYSIZE_128)*2UL)) 
+                            && (keyLen != (uint32_t)(((uint32_t)CRYPTO_AESKEYSIZE_256)*2UL)) )
+                )
+            )//key length check for XTS mode 
     {
         ret_aesStatus_en =  CRYPTO_SYM_ERROR_KEY;;
     }
-#endif /* CRYPTO_SYM_AESXTS_EN */            
+#endif /* CRYPTO_SYM_AESXTS_EN */       
     else if( (sessionID <= 0u) || (sessionID > (uint32_t)CRYPTO_SYM_SESSION_MAX) )
     {
        ret_aesStatus_en =  CRYPTO_SYM_ERROR_SID; 
     }
-    else if( (ptr_initVect == NULL) 
+    else if( ptr_initVect == NULL
 #ifdef  CRYPTO_SYM_AESECB_EN           
             && (opMode_en != CRYPTO_SYM_OPMODE_ECB)
 #endif /* CRYPTO_SYM_AESECB_EN */
@@ -101,8 +108,17 @@ crypto_Sym_Status_E Crypto_Sym_Aes_Init(st_Crypto_Sym_BlockCtx *ptr_aesCtx_st, c
                                                                       ptr_aesCtx_st->ptr_key, ptr_aesCtx_st->symKeySize);
                 }
                 else
-#endif /* CRYPTO_SYM_AESXTS_EN */                               
+#endif /* CRYPTO_SYM_AESXTS_EN */ 
+                    
+#ifdef CRYPTO_SYM_AESCTR_EN                      
+                if(ptr_aesCtx_st->symAlgoMode_en == CRYPTO_SYM_OPMODE_CTR)
+                {                   
+                    ret_aesStatus_en = Crypto_Sym_Wc_AesCTR_Init((void*)ptr_aesCtx_st->arr_symDataCtx,ptr_aesCtx_st->ptr_key, ptr_aesCtx_st->symKeySize, ptr_aesCtx_st->ptr_initVect);
+                }
+                else
+#endif /* CRYPTO_SYM_AESCTR_EN */     
                 {
+                
                     ret_aesStatus_en = Crypto_Sym_Wc_Aes_Init((void*)ptr_aesCtx_st->arr_symDataCtx,ptr_aesCtx_st->symCipherOper_en, 
                                                   ptr_aesCtx_st->ptr_key, ptr_aesCtx_st->symKeySize, ptr_aesCtx_st->ptr_initVect);
                 }
@@ -268,7 +284,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_EncryptDirect(crypto_HandlerType_E handlerTyp
         {
 #ifdef CRYPTO_SYM_WC_AES_EN            
             case CRYPTO_HANDLER_SW_WOLFCRYPT:
-                ret_aesStatus_en = Crypto_Sym_Wc_Aes_EncryptDirect(opMode_en, ptr_inputData, dataLen, ptr_outData, ptr_key, (keyLen/8u), ptr_initVect);
+                ret_aesStatus_en = Crypto_Sym_Wc_Aes_EncryptDirect(opMode_en, ptr_inputData, dataLen, ptr_outData, ptr_key, keyLen, ptr_initVect);
                 break;
 #endif /* CRYPTO_SYM_WC_AES_EN */                
             case CRYPTO_HANDLER_HW_INTERNAL:
@@ -321,7 +337,7 @@ crypto_Sym_Status_E Crypto_Sym_Aes_DecryptDirect(crypto_HandlerType_E handlerTyp
         {
 #ifdef CRYPTO_SYM_WC_AES_EN            
             case CRYPTO_HANDLER_SW_WOLFCRYPT:
-                ret_aesStatus_en = Crypto_Sym_Wc_Aes_DecryptDirect(opMode_en, ptr_inputData, dataLen, ptr_outData, ptr_key, (keyLen/8u), ptr_initVect);
+                ret_aesStatus_en = Crypto_Sym_Wc_Aes_DecryptDirect(opMode_en, ptr_inputData, dataLen, ptr_outData, ptr_key, keyLen, ptr_initVect);
                 break;
 #endif /* CRYPTO_SYM_WC_AES_EN */                
             case CRYPTO_HANDLER_HW_INTERNAL:
@@ -868,7 +884,7 @@ crypto_Sym_Status_E Crypto_Sym_AesKeyWrapDirect(crypto_HandlerType_E handlerType
 {
     crypto_Sym_Status_E ret_aesKwStat_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
     
-    if( (ptr_inputData == NULL) || (inputLen == 0u) || (inputLen < (uint32_t)((64Lu)*(2Lu)) ) )
+    if( (ptr_inputData == NULL) || (inputLen < (uint32_t)((8Lu)*(2Lu)) ) )
     {
         ret_aesKwStat_en = CRYPTO_SYM_ERROR_INPUTDATA;
     }
@@ -909,7 +925,7 @@ crypto_Sym_Status_E Crypto_Sym_AesKeyUnWrapDirect(crypto_HandlerType_E handlerTy
 {
     crypto_Sym_Status_E ret_aesKwStat_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
     
-    if( (ptr_inputData == NULL) || (inputLen == 0u) || (inputLen < (uint32_t)((64Lu)*(2Lu))) )
+    if( (ptr_inputData == NULL) || (inputLen < (uint32_t)((8Lu)*(2Lu))) )
     {
         ret_aesKwStat_en = CRYPTO_SYM_ERROR_INPUTDATA;
     }

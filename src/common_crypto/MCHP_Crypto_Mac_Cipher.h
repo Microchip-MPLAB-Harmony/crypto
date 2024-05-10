@@ -41,6 +41,8 @@ typedef enum
     CRYPTO_MAC_ERROR_SID = -120,  ////session ID Error
     CRYPTO_MAC_ERROR_ARG = -119,
     CRYPTO_MAC_ERROR_CIPFAIL = -118,
+    CRYPTO_MAC_ERROR_IV = -117,
+    CRYPTO_MAC_ERROR_AAD = -116,
     CRYPTO_MAC_CIPHER_SUCCESS = 0,        
 }crypto_Mac_Status_E;
 
@@ -69,5 +71,11 @@ crypto_Mac_Status_E Crypto_Mac_AesCmac_Direct(crypto_HandlerType_E macHandlerTyp
                                                 uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
 #endif /* CRYPTO_MAC_AESCMAC_EN */
 
+#ifdef CRYPTO_MAC_AESCMAC_EN
+crypto_Mac_Status_E Crypto_Mac_AesGmac_Init(st_Crypto_Mac_Aes_ctx *ptr_aesGmacCtx_st, crypto_HandlerType_E handlerType_en, 
+                                              uint8_t *ptr_key, uint32_t keyLen, uint32_t sessionID);
 
+crypto_Mac_Status_E Crypto_Mac_AesGmac_Direct(crypto_HandlerType_E macHandlerType_en, uint8_t *ptr_initVect, uint32_t initVectLen, uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, 
+                                                                                                  uint32_t keyLen, uint8_t *ptr_aad, uint32_t aadLen, uint32_t sessionID);
+#endif /* CRYPTO_MAC_AESCMAC_EN */
 #endif /* MCHP_CRYPTO_MAC_CIPHER_H */

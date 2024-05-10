@@ -35,16 +35,6 @@
 #include "crypto/common_crypto/MCHP_Crypto_DigSign_WolfcryptWrapper.h"
 #endif /* CRYPTO_DIGISIGN_WC_ALGO_EN */ 
 
-
-//const st_Crypto_EccCurveData EccCurveData_st[CRYPTO_ECC_CURVE_MAX] =  {  
-//                                                                            {CRYPTO_ECC_CURVE_SECP256R1,        32, 64},
-//                                                                            {CRYPTO_ECC_CURVE_SECP384R1,        48, 96},
-//                                                                            {CRYPTO_ECC_CURVE_SECP256K1,        32, 64},
-//                                                                            {CRYPTO_ECC_CURVE_BRAINPOOLP256R1,  32, 64},
-//                                                                            {CRYPTO_ECC_CURVE_BRAINPOOLP384R1,  48, 96},
-//                                                                        };
-
-
 #ifdef CRYPTO_DIGISIGN_ECDSA_EN
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(crypto_HandlerType_E ecdsaHandlerType_en, uint8_t *ptr_inputHash, uint32_t hashLen, uint8_t *ptr_outSig, 
                                                     uint32_t sigLen, uint8_t *ptr_privKey, uint32_t privKeyLen, crypto_EccCurveType_E eccCurveType_En, uint32_t ecdsaSessionId)
@@ -68,12 +58,13 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(crypto_HandlerType_E ecdsaHa
         ret_ecdsaStat_en = CRYPTO_DIGISIGN_ERROR_PRIVKEY;
     }
     else if(privKeyLen <= 0u)
-//    else if( (privKeyLen <= 0) || (privKeyLen != (EccCurveData_st[eccCurveType_En].curvePrivKeyLen)) )
-//    //else if( (privKeyLen <= 0) || (privKeyLen != (arr_EccCurveWcMap2[eccCurveType_En][1])) )
-//    //else if( (privKeyLen <= 0) || (privKeyLen > CRYPTO_ECC_MAX_KEY_LENGTH) )
     {
          ret_ecdsaStat_en = CRYPTO_DIGISIGN_ERROR_PRIVKEY;
     }
+//    else if()
+//    {
+//        /Check Signature Length
+//    }
     else if((ecdsaSessionId <= 0u) || (ecdsaSessionId > (uint32_t)CRYPTO_DIGISIGN_SESSION_MAX) )
     {
         ret_ecdsaStat_en = CRYPTO_DIGISIGN_ERROR_SID;

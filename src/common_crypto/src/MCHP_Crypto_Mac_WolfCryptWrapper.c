@@ -36,7 +36,11 @@
 
 #if !defined(NO_AES) && defined(WOLFSSL_CMAC)
 #include "wolfssl/wolfcrypt/cmac.h"
+
 #endif /* !NO_AES && WOLFSSL_CMAC */
+
+#include "wolfssl/wolfcrypt/aes.h"
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -45,7 +49,7 @@
 
 
 
-#if !defined(NO_AES) && defined(WOLFSSL_CMAC)
+#if ((!defined(NO_AES)) && defined(WOLFSSL_CMAC))
 
 crypto_Mac_Status_E Crypto_Mac_Wc_AesCmac_Init(void *ptr_aesCmacCtx, uint8_t *ptr_key, uint32_t keySize)
 {
@@ -83,7 +87,7 @@ crypto_Mac_Status_E Crypto_Mac_Wc_AesCmac_Cipher(void *ptr_aesCmacCtx, uint8_t *
   
     if( (ptr_aesCmacCtx != NULL ) && (ptr_inputData != NULL) )
     {
-        wcAesStatus = wc_CmacUpdate(ptr_aesCmacCtx, (const byte*)ptr_inputData, (word32)dataLen);
+        wcAesStatus = wc_CmacUpdate((Cmac*)ptr_aesCmacCtx, (const byte*)ptr_inputData, (word32)dataLen);
         
         if(wcAesStatus == 0)
         {
@@ -164,4 +168,108 @@ crypto_Mac_Status_E Crypto_Mac_Wc_AesCmac_Direct(uint8_t *ptr_inputData, uint32_
     
 #endif /* !NO_AES && WOLFSSL_CMAC */
 
+#ifdef CRYPTO_MAC_WC_AESGMAC_EN
+crypto_Mac_Status_E Crypto_Mac_Wc_AesGmac_Init(void *ptr_aesGmacCtx, uint8_t *ptr_key, uint32_t keySize)
+{
+    crypto_Mac_Status_E ret_aesGmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+    int wcAesStatus = BAD_FUNC_ARG;
+    
+    if(ptr_aesGmacCtx != NULL)
+    {
+        wcAesStatus = wc_AesInit((Aes*)ptr_aesGmacCtx, NULL, 0);
+        
+        if(wcAesStatus == 0)
+        {
+            wcAesStatus = wc_GmacSetKey((Gmac*)ptr_aesGmacCtx, (const byte*)ptr_key, (word32)keySize);
+        }
+        
+        if(wcAesStatus == 0)
+        {
+            ret_aesGmacStat_en = CRYPTO_MAC_CIPHER_SUCCESS;
+        }
+        else if(wcAesStatus == BAD_FUNC_ARG)
+        {
+            ret_aesGmacStat_en = CRYPTO_MAC_ERROR_ARG;
+        }
+        else
+        {
+            ret_aesGmacStat_en  = CRYPTO_MAC_ERROR_CIPFAIL;
+        }
+    }
+    else
+    {
+        ret_aesGmacStat_en = CRYPTO_MAC_ERROR_CTX;
+    }
+    return ret_aesGmacStat_en;
+}
+
+crypto_Mac_Status_E Crypto_Mac_Wc_AesGmac_Cipher(void *ptr_aesGmacCtx, uint8_t *ptr_initVect, uint32_t initVectLen, uint8_t *ptr_aad, uint32_t aadLen, 
+                                                                                                                uint8_t *ptr_outMac, uint32_t macLen)
+{
+    crypto_Mac_Status_E ret_aesGmacStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+    int wcAesStatus = BAD_FUNC_ARG;
+  
+    if(ptr_aesGmacCtx != NULL)
+    {
+        wcAesStatus = wc_GmacUpdate((Gmac*)ptr_aesGmacCtx, (const byte*)ptr_initVect, (word32) initVectLen,
+                                (const byte*)ptr_aad, (word32)aadLen, (byte*)ptr_outMac, (word32)macLen);  
+        if(wcAesStatus == 0)
+        {
+            ret_aesGmacStat_en = CRYPTO_MAC_CIPHER_SUCCESS;
+        }
+        else if(wcAesStatus == BAD_FUNC_ARG)
+        {
+            ret_aesGmacStat_en = CRYPTO_MAC_ERROR_ARG;
+        }
+        else
+        {
+            ret_aesGmacStat_en  = CRYPTO_MAC_ERROR_CIPFAIL;
+        }
+    } //end of if of argument checking
+    else
+    {
+        ret_aesGmacStat_en = CRYPTO_MAC_ERROR_ARG;
+    }
+    return ret_aesGmacStat_en;
+}
+
+crypto_Mac_Status_E Crypto_Mac_Wc_AesGmac_Direct(uint8_t *ptr_initVect, uint32_t initVectLen, uint8_t *ptr_outMac, uint32_t macLen, uint8_t *ptr_key, 
+                                                                                                  uint32_t keyLen, uint8_t *ptr_aad, uint32_t aadLen)
+{
+    crypto_Mac_Status_E ret_aesStat_en = CRYPTO_MAC_ERROR_CIPNOTSUPPTD;
+    int wcAesStatus = BAD_FUNC_ARG;
+    Gmac ptr_aesGmacCtx[1];
+    if(ptr_outMac != NULL)
+    {
+        wcAesStatus = wc_AesInit(&ptr_aesGmacCtx[0].aes, NULL, 0);
+        if(wcAesStatus == 0)
+        {
+            wcAesStatus = wc_GmacSetKey((Gmac*)ptr_aesGmacCtx, (const byte*)ptr_key, (word32)keyLen);
+            if(wcAesStatus == 0)
+            {
+                wcAesStatus = wc_GmacUpdate((Gmac*)ptr_aesGmacCtx, (const byte*)ptr_initVect, (word32) initVectLen,
+                                (const byte*)ptr_aad, (word32)aadLen, (byte*)ptr_outMac, (word32)macLen);  
+            }
+        }
+        
+        if(wcAesStatus == 0)
+        {
+            ret_aesStat_en = CRYPTO_MAC_CIPHER_SUCCESS;
+        }
+        else if(wcAesStatus == BAD_FUNC_ARG)
+        {
+            ret_aesStat_en = CRYPTO_MAC_ERROR_ARG;
+        }
+        else
+        {
+            ret_aesStat_en  = CRYPTO_MAC_ERROR_CIPFAIL;
+        }
+    } //end of if of argument checking
+    else
+    {
+        ret_aesStat_en = CRYPTO_MAC_ERROR_ARG;
+    }
+    return ret_aesStat_en;  
+}
+#endif /* CRYPTO_MAC_WC_AESGMAC_EN */
 // *****************************************************************************

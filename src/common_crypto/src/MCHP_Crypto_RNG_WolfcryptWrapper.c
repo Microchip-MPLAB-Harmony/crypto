@@ -36,19 +36,26 @@
 crypto_Rng_Status_E Crypto_Rng_Wc_Prng_GenerateBlock(uint8_t* ptr_rngData, uint32_t rngLen, uint8_t* ptr_nonce, uint32_t nonceLen)
 {
     crypto_Rng_Status_E ret_rngStat_en = CRYPTO_RNG_ERROR_FAIL;
-    WC_RNG rng_st[1];
+    WC_RNG rng_st;
     int wcStat = -1;
     
-    wcStat = wc_InitRngNonce(rng_st, ptr_nonce, nonceLen);
+    wcStat = wc_InitRng(&rng_st);
     
     if(wcStat == 0)
     {
-        wcStat = wc_RNG_GenerateBlock(rng_st, ptr_rngData, rngLen);
+        wcStat = wc_InitRngNonce(&rng_st, ptr_nonce, nonceLen);
+    }
+    
+    if(wcStat == 0)
+    {
+        wcStat = wc_RNG_GenerateBlock(&rng_st, ptr_rngData, rngLen);
     }
     else
     {
         //do nothing
     }
+    
+    wcStat = wc_FreeRng(&rng_st);
     
     if(wcStat == 0)
     {
@@ -62,7 +69,7 @@ crypto_Rng_Status_E Crypto_Rng_Wc_Prng_GenerateBlock(uint8_t* ptr_rngData, uint3
     {
         ret_rngStat_en = CRYPTO_RNG_ERROR_FAIL;
     }
-    wc_FreeRng(rng_st);
+    
     return ret_rngStat_en;
 }
 #endif  /* CRYPTO_RNG_WC_PRNG_EN */

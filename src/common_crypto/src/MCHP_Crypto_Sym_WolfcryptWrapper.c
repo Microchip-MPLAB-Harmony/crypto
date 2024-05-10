@@ -99,6 +99,19 @@ crypto_Sym_Status_E Crypto_Sym_Wc_Aes_Init(void *ptr_aesCtx, crypto_CipherOper_E
     return ret_aesStatus_en;
 }
 
+
+#if (defined(WOLFSSL_AES_COUNTER) && defined(CRYPTO_SYM_AESCTR_EN))  
+crypto_Sym_Status_E Crypto_Sym_Wc_AesCTR_Init(void *ptr_aesCtx, uint8_t *ptr_key, uint32_t keySize, uint8_t *ptr_initVect)
+{
+	crypto_Sym_Status_E ret_aesStatus_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
+    
+    ret_aesStatus_en = Crypto_Sym_Wc_Aes_Init(ptr_aesCtx, CRYPTO_CIOP_ENCRYPT, ptr_key, keySize, ptr_initVect);
+	
+    return ret_aesStatus_en;
+}
+#endif /* WOLFSSL_AES_COUNTER && CRYPTO_SYM_AESCTR_EN */
+
+
 crypto_Sym_Status_E Crypto_Sym_Wc_Aes_Encrypt(void *ptr_aesCtx, crypto_Sym_OpModes_E symAlgoMode_en, uint8_t *ptr_inputData, uint32_t dataLen, uint8_t *ptr_outData)
 {
     crypto_Sym_Status_E ret_aesStatus_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
@@ -385,7 +398,7 @@ crypto_Sym_Status_E Crypto_Sym_Wc_Aes_EncryptDirect(crypto_Sym_OpModes_E symAlgo
 #ifdef HAVE_AES_DECRYPT    
     int wcAesStatus = BAD_FUNC_ARG;
 #ifdef CRYPTO_SYM_AESXTS_EN    
-    if(symAlgoMode_en == CRYTPO_SYM_OPMODE_XTS)
+    if(symAlgoMode_en == CRYPTO_SYM_OPMODE_XTS)
     {
 #ifdef WOLFSSL_AES_XTS            
         XtsAes aesXtsCtx[1];
@@ -488,7 +501,7 @@ crypto_Sym_Status_E Crypto_Sym_Wc_Aes_DecryptDirect(crypto_Sym_OpModes_E symAlgo
     if( (ptr_inputData != NULL) && (dataLen > 0u) && (ptr_outData != NULL) && (ptr_key != NULL) && (keySize > 0u) )
     {
 #ifdef CRYPTO_SYM_AESXTS_EN        
-        if(symAlgoMode_en == CRYTPO_SYM_OPMODE_XTS)
+        if(symAlgoMode_en == CRYPTO_SYM_OPMODE_XTS)
         {
 #ifdef WOLFSSL_AES_XTS            
             XtsAes aesXtsCtx[1];
@@ -505,7 +518,17 @@ crypto_Sym_Status_E Crypto_Sym_Wc_Aes_DecryptDirect(crypto_Sym_OpModes_E symAlgo
 #endif /* CRYPTO_SYM_AESXTS_EN */            
         {
             Aes aesCtx[1];
-            wcAesStatus = wc_AesSetKey(aesCtx, (const byte*)ptr_key, (word32)keySize, NULL, AES_DECRYPTION);
+#if (defined(WOLFSSL_AES_COUNTER) && defined(CRYPTO_SYM_AESCTR_EN)) 			
+			if(symAlgoMode_en == CRYPTO_SYM_OPMODE_CTR)
+			{
+            	wcAesStatus = wc_AesSetKey(aesCtx, (const byte*)ptr_key, (word32)keySize, (const byte*)ptr_initVect, AES_ENCRYPTION);
+			}
+			else
+#endif /* WOLFSSL_AES_COUNTER && CRYPTO_SYM_AESCTR_EN */			
+			{
+				wcAesStatus = wc_AesSetKey(aesCtx, (const byte*)ptr_key, (word32)keySize, (const byte*)ptr_initVect, AES_DECRYPTION);
+			}
+			
             if(wcAesStatus == 0)
             {
                 switch(symAlgoMode_en)
@@ -1221,7 +1244,7 @@ crypto_Sym_Status_E Crypto_Sym_Wc_AesKeyUnWrap(void *ptr_aesCtx, uint8_t *ptr_in
     {
         wcAesKwStat = wc_AesKeyUnWrap_ex( (Aes*)ptr_aesCtx, (const byte*)ptr_inputData, (word32)inputLen, (byte*)ptr_outData, (word32)outputLen, (const byte*)ptr_initVect);
    
-        if(wcAesKwStat == (int)((int)inputLen + (int)KEYWRAP_BLOCK_SIZE) )
+        if(wcAesKwStat == (int)((int)inputLen - (int)KEYWRAP_BLOCK_SIZE) )
         {
             ret_aesKwStat_en = CRYPTO_SYM_CIPHER_SUCCESS;
         }
@@ -1242,7 +1265,7 @@ crypto_Sym_Status_E Crypto_Sym_Wc_AesKeyWrapDirect(uint8_t *ptr_inputData, uint3
 {
     crypto_Sym_Status_E ret_aesKwStat_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;    
     int wcAesKwStat = -1;
-    if( (ptr_inputData != NULL) && (inputLen > 0u) && (ptr_outData != NULL)  && (outputLen > 0u) )
+    if( (ptr_inputData == NULL) || (inputLen < (uint32_t)((8Lu)*(2Lu))) || (ptr_outData == NULL) || (outputLen == 0u))
     {
         ret_aesKwStat_en = CRYPTO_SYM_ERROR_ARG;
     }
@@ -1276,7 +1299,7 @@ crypto_Sym_Status_E Crypto_Sym_Wc_AesKeyUnWrapDirect(uint8_t *ptr_inputData, uin
     crypto_Sym_Status_E ret_aesKwStat_en = CRYPTO_SYM_ERROR_CIPNOTSUPPTD;
     
     int wcAesKwStat = -1;
-    if( (ptr_inputData != NULL) && (inputLen > 0u) && (ptr_outData != NULL)  && (outputLen > 0u) )
+    if( (ptr_inputData == NULL) || (inputLen < (uint32_t)((8Lu)*(2Lu))) || (ptr_outData == NULL) || (outputLen == 0u))
     {
         ret_aesKwStat_en = CRYPTO_SYM_ERROR_ARG;
     }
@@ -1288,7 +1311,7 @@ crypto_Sym_Status_E Crypto_Sym_Wc_AesKeyUnWrapDirect(uint8_t *ptr_inputData, uin
     {
         wcAesKwStat = wc_AesKeyUnWrap( (const byte*)ptr_key, (word32)keySize, (const byte*)ptr_inputData, (word32)inputLen, (byte*)ptr_outData, (word32)outputLen, (const byte*)ptr_initVect);
     
-        if(wcAesKwStat == (int)((int)inputLen + (int)KEYWRAP_BLOCK_SIZE) )
+        if(wcAesKwStat == (int)((int)inputLen - (int)KEYWRAP_BLOCK_SIZE) )
         {
             ret_aesKwStat_en = CRYPTO_SYM_CIPHER_SUCCESS;
         }

@@ -312,7 +312,10 @@ crypto_Hash_Status_E Crypto_Hash_Wc_Ripemd160Final(void *ptr_ripemdCtx_st, uint8
 crypto_Hash_Status_E Crypto_Hash_Wc_ShaDigest(uint8_t *ptr_data, uint32_t dataLen, uint8_t *ptr_digest, crypto_Hash_Algo_E hashAlgo_en)
 {
 	crypto_Hash_Status_E ret_shaStat_en = CRYPTO_HASH_ERROR_NOTSUPPTED;
-    uint8_t arr_shaDataCtx[CRYPTO_HASH_WC_SHACTX_SIZE];
+    
+    //As due to VLA misra Issue maximum Size is allocated
+    uint8_t arr_shaDataCtx[CRYPTO_HASH_SHA512CTX_SIZE];
+    
     if( (ptr_data != NULL) && (dataLen > 0u) && (ptr_digest != NULL) )
     {
         ret_shaStat_en = Crypto_Hash_Wc_ShaInit(arr_shaDataCtx, hashAlgo_en);
