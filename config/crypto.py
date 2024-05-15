@@ -88,6 +88,52 @@ def AddFileName(fileName, prefix, component,
 
     return (fileNameSymbol)
 
+#*******************************************************************************
+# Adds File to project database and enables/disables it
+# -- Note that the file destination/source path is relative to  
+#    src/config/<config>
+    g.trustZoneFileIds.append(ccHashConfigFile.getID())
+def AddMarkupFile(fileName, prefix, component,
+                srcPath, destPath, enabled, projectPath):
+    fileID = prefix + fileName.replace('.', '_')
+    fileNameSymbol = component.createFileSymbol(fileID, None)
+
+    fileNameSymbol.setMarkup(True)
+    fileNameSymbol.setOverwrite(True)
+    fileNameSymbol.setProjectPath(projectPath)
+
+    srcPath += fileName + ".ftl"
+
+    print("CRYPTO: Add %s"%(srcPath))
+    fileNameSymbol.setSourcePath(srcPath)
+    fileNameSymbol.setOutputName(fileName)
+
+    if prefix == 'misc' or prefix == 'imp':
+        fileNameSymbol.setDestPath(destPath)
+        fileNameSymbol.setType("IMPORTANT")
+    elif fileName[-2:] == '.h':
+        fileNameSymbol.setDestPath(destPath)
+        fileNameSymbol.setType("HEADER")
+    else:
+        fileNameSymbol.setDestPath(destPath)
+        fileNameSymbol.setType("SOURCE")
+
+    fileNameSymbol.setEnabled(enabled)
+
+    #TrustZone
+    #--TODO:  Make this a configurable option
+    g.trustZoneFileIds.append(fileID)
+    if (g.trustZoneSupported == True):
+        fileNameSymbol.setSecurity("SECURE")
+        tz = "S"
+        print("CRYPTO:  Project (TZ) ""%s"" "%(projectPath + fileName))
+    else:
+        fileNameSymbol.setSecurity("NON_SECURE")
+        tz = "N"
+        print("CRYPTO:  Project""%s"" "%(projectPath + fileName))
+
+    return (fileNameSymbol)
+
 
 def get_script_dir(follow_symlinks=True):
     if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
@@ -590,8 +636,10 @@ def SetupHwDriverFiles(basecomponent):
     configName  = Variables.get("__CONFIGURATION_NAME")  # e.g. "default"
     configPath  = "config/" + configName
     srcPath     = "src/drivers/"
+    mkupPath    = "templates/drivers/"
     dstPath     = "crypto/driver"
     projPath    = "config/" + configName + "/crypto/driver/"
+
 
     count=0
     #create all possible drivers disabled for this HW
@@ -606,17 +654,30 @@ def SetupHwDriverFiles(basecomponent):
             for fileName in fDict[fKey]:
                 if (fileNames.issuperset([fileName]) == False):
                     count += 1
-                    fileSym = AddFileName(
-                                  fileName,  #File Name 
-                                  "",        #id prefix
-                                  basecomponent, #Component
-                                  srcPath,
-                                  dstPath, False, projPath)
+                    if fileName.endswith(".ftl"):
+                        fileName = fileName[:len(fileName) - 4]
+                        print("CRYPTO: Adding Markup: %s"%(fileName))
+                        #NOTE:  markup files in templates/drivers
+                        fileSym = AddMarkupFile(
+                                      fileName,  #File Name 
+                                      "",        #id prefix
+                                      basecomponent, #Component
+                                      mkupPath,
+                                      dstPath, False, projPath)
+                    else:
+                        #NOTE:  standard files in src/drivers
+                        fileSym = AddFileName(
+                                      fileName,  #File Name 
+                                      "",        #id prefix
+                                      basecomponent, #Component
+                                      srcPath,
+                                      dstPath, False, projPath)
 
+                    #Add the symbol to the hwDriverFile Dict
+                    #Add the filename to the list of file names
                     g.hwDriverFileDict[fKey].append(fileSym)
                     print(" [%s] %s"%(fKey,fileSym.getOutputName()))
                     fileNames.update([fileName]) #Add new file
-
 
 ################################################################################
 # Detect MCU Target HW support for each particular crypto function

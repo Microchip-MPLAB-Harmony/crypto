@@ -89,7 +89,11 @@ hwDriverFileSymbols = []
 
 #HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
 #   { <dKey>: { <fKey>: [<driver files>] , ... ] }
-# NOTE: Each driver file is uniquely listed.
+# NOTE(S): 
+#    1) Each driver file is uniquely listed.
+#    2) .ftl files in templates/drivers
+#    3) other files in src/drivers
+#
 hwDriverDict = {
                  "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcc.h",
                                    "drv_crypto_rsa_hw_cpkcc.c"],
@@ -106,7 +110,7 @@ hwDriverDict = {
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
                                    "drv_crypto_aes_hw_6149.c"] },
                   "6156": { "SHA":["drv_crypto_sha_hw_6156.h",
-                                   "drv_crypto_sha_hw_6156.c"] },
+                                   "drv_crypto_sha_hw_6156.c.ftl"] },
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} }
 
