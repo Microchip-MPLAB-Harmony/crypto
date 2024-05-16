@@ -229,7 +229,7 @@ crypto_Hash_Status_E Crypto_Hash_Hw_Sha_Init(CRYPTO_HASH_HW_CONTEXT *shaCtx,
 {
 <#if HAVE_MCHP_CRYPTO_SHA_HW_6156 == false>
     return CRYPTO_HASH_ERROR_NOTSUPPTED;
-</#else>
+<#else>
     CRYPTO_SHA_ALGORITHM shaAlgo;
     crypto_Hash_Status_E result;
     
@@ -257,7 +257,7 @@ crypto_Hash_Status_E Crypto_Hash_Hw_Sha_Update(CRYPTO_HASH_HW_CONTEXT *shaCtx,
 {
 <#if HAVE_MCHP_CRYPTO_SHA_HW_6156 == false>
     return CRYPTO_HASH_ERROR_NOTSUPPTED;
-</#else>
+<#else>
     uint32_t *localBuffer = 0;
     uint32_t fill;
     uint32_t left;
@@ -309,7 +309,7 @@ crypto_Hash_Status_E Crypto_Hash_Hw_Sha_Final(CRYPTO_HASH_HW_CONTEXT *shaCtx,
 {
 <#if HAVE_MCHP_CRYPTO_SHA_HW_6156 == false>
     return CRYPTO_HASH_ERROR_NOTSUPPTED;
-</#else>
+<#else>
     uint32_t blockSizeBytes;
     uint32_t last;
     uint8_t lenMsg[16] = {0};
@@ -375,7 +375,7 @@ crypto_Hash_Status_E Crypto_Hash_Hw_Sha_Digest(uint8_t *data, uint32_t dataLen,
 {
 <#if HAVE_MCHP_CRYPTO_SHA_HW_6156 == false>
     return CRYPTO_HASH_ERROR_NOTSUPPTED;
-</#else>
+<#else>
     CRYPTO_HASH_HW_CONTEXT shaCtx;
     crypto_Hash_Status_E result = CRYPTO_HASH_SUCCESS;
 

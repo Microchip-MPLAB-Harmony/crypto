@@ -64,7 +64,7 @@ crypto_Rng_Status_E Crypto_Rng_Trng_Generate(uint8_t *rngData, uint32_t rngLen)
     DRV_CRYPTO_TRNG_Generate(rngData, rngLen);
     
     return CRYPTO_RNG_SUCCESS;
-</#else>
+<#else>
     return CRYPTO_RNG_ERROR_NOTSUPPTED;
 </#if>
 }    

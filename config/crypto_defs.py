@@ -109,7 +109,7 @@ hwDriverDict = {
                                    "drv_crypto_ecc_hw_cpkcc.c"]},
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
                                    "drv_crypto_aes_hw_6149.c"] },
-                  "6156": { "SHA":["drv_crypto_sha_hw_6156.h",
+                  "6156": { "SHA":["drv_crypto_sha_hw_6156.h.ftl",
                                    "drv_crypto_sha_hw_6156.c.ftl"] },
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} }

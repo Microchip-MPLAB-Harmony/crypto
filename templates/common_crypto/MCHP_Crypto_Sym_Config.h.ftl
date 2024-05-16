@@ -112,24 +112,31 @@ extern "C" {
 <#if crypto_sym_aes_ecb_en == true>
     <#lt>#define CRYPTO_SYM_AESECB_EN            //ECB mode is selected under AES algorithm in MCC-GUI
     </#if>
+
 <#if crypto_sym_aes_cbc_en == true>
    <#lt>#define CRYPTO_SYM_AESCBC_EN            //CBC mode is selected under AES algorithm in MCC-GUI
     </#if>
+
 <#if crypto_sym_aes_ofb_en == true>
     <#lt>#define CRYPTO_SYM_AESOFB_EN            //OFB mode is selected under AES algorithm in MCC-GUI
     </#if>
+    
 <#if crypto_sym_aes_cfb1_en == true>
     <#lt>#define CRYPTO_SYM_AESCFB1_EN           //CFB1 mode is selected under AES algorithm in MCC-GUI
     </#if>
+
 <#if crypto_sym_aes_cfb8_en == true>
     <#lt>#define CRYPTO_SYM_AESCFB8_EN           //CFB8 mode is selected under AES algorithm in MCC-GUI
     </#if>
+
 <#if crypto_sym_aes_cfb64_en == true>
     <#lt>#define CRYPTO_SYM_AESCFB64_EN          //CFB64 mode is selected under AES algorithm in MCC-GUI
     </#if>
+
 <#if crypto_sym_aes_cfb128_en == true>
     <#lt>#define CRYPTO_SYM_AESCFB128_EN         //CFB128 mode is selected under AES algorithm in MCC-GUI
     </#if>
+
 <#if crypto_sym_aes_ctr_en == true>
     <#lt>#define CRYPTO_SYM_AESCTR_EN            //CTR mode is selected under AES algorithm in MCC-GUI 
     </#if>
@@ -137,13 +144,6 @@ extern "C" {
 <#if crypto_sym_aes_xts_en == true>
     <#lt>#define CRYPTO_SYM_AESXTS_EN            //XTS mode is selected under AES algorithm in MCC-GUI
     </#if>
-//
-//<#if crypto_sym_aes_gcm_en == true>
-//    <#lt>#define CRYPTO_SYM_AESGCM_EN            //GCM mode is selected under AES algorithm in MCC-GUI
-//    </#if>
-//<#if crypto_sym_aes_eax_en == true>
-//    <#lt>#define CRYPTO_SYM_AESEAX_EN            //EAX mode is selected under AES algorithm in MCC-GUI
-//    </#if>
 
 <#if crypto_sym_aes_kw_en == true>
     <#lt>#define CRYPTO_SYM_AESKW_EN            //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI

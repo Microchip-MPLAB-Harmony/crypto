@@ -129,10 +129,8 @@ typedef union {
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t : 8;
     uint8_t UNLOCK : 1;
-    uint8_t : 7;    
-</#else>
-    uint16_t : 16;  
-</#if>
+    uint8_t : 7;
+//<#else> uint16_t : 16;  </#if>
   } s;
   uint32_t v;
 } CRYPTO_SHA_CR;
@@ -144,7 +142,7 @@ typedef union
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t : 1;
     uint8_t AOE : 1;
-</#else>
+<#else>
     uint8_t : 2;
 </#if>
     uint8_t PROCDLY : 1;
@@ -152,14 +150,14 @@ typedef union
     uint8_t UIEHV : 1;
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t BPE : 1;
-</#else>
+<#else>
     uint8_t : 1;
-<#if>
+</#if>
     CRYPTO_SHA_ALGORITHM ALGO : 4;
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t : 3;
     uint8_t TMPLCK : 1;
-</#else>
+<#else>
     uint8_t : 4;
 </#if>
     uint8_t DUALBUFF: 1;
@@ -179,7 +177,7 @@ typedef union
     uint8_t ENDTX : 1;
     uint8_t TXBUFE : 1;
     uint8_t : 5;
-</#else>
+<#else>
     uint8_t : 7;
 </#if>
     uint8_t URAD : 1;
@@ -189,7 +187,7 @@ typedef union
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t SECE : 1;
     uint8_t : 7;
-</#else>
+<#else>
     uint8_t : 8;
 </#if>
   } s;
@@ -207,7 +205,7 @@ typedef union
     uint8_t ENDTX : 1;
     uint8_t TXBUFE : 1;
     uint8_t : 1;
-</#else>
+<#else>
     uint8_t : 3;
 </#if>
     uint8_t WRDY : 1;
@@ -222,7 +220,7 @@ typedef union
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t SECE : 1;
     uint8_t : 7;
-</#else>
+<#else>
     uint8_t : 8;
 </#if>
   } s;
