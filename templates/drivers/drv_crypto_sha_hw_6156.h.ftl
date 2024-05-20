@@ -129,8 +129,10 @@ typedef union {
 <#if __PROCESSOR?matches("PIC32CX.*MT.*") || __PROCESSOR?matches("SAM9X60")>
     uint8_t : 8;
     uint8_t UNLOCK : 1;
-    uint8_t : 7;
-//<#else> uint16_t : 16;  </#if>
+    uint8_t : 7;    
+<#else>
+    uint16_t : 16;  
+</#if>
   } s;
   uint32_t v;
 } CRYPTO_SHA_CR;

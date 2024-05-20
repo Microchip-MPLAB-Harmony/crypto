@@ -333,7 +333,7 @@ crypto_Hash_Status_E Crypto_Hash_Hw_Sha_Final(CRYPTO_HASH_HW_CONTEXT *shaCtx,
         paddingLen = blockSizeBytes + paddingSizeBytes - last;
     }
 
-    Crypto_Hash_Hw_ShaUpdate(shaCtx, (uint8_t *)hashPaddingMsg, paddingLen);
+    Crypto_Hash_Hw_Sha_Update(shaCtx, (uint8_t *)hashPaddingMsg, paddingLen);
     
     /* Create the message bit length block */
     if (paddingSizeBytes == HASH_SHORT_PAD_SIZE_BYTES)
