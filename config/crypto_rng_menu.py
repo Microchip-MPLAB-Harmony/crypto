@@ -36,13 +36,16 @@ import crypto_defs as g #Modified globals
 
 ################################################################################
 #Scan to see if any of the Hash Selections is True and set the symbol
-#CONFIG_USE_CRYPTO
-#--Returns True if CONFIG_USE_MAC changes value
+#  CONFIG_USE_RNG
+#--Returns True if CONFIG_USE_RNG changes value
 ################################################################################
 def ScanRng():
-    if   (g.cryptoRngTrngEnabledSymbol.getValue()       == True): newValue = True
-    elif (g.cryptoRngPrngEnabledSymbol.getValue()        == True): newValue = True
-    else: newValue = False
+    if   (g.cryptoRngTrngEnabledSymbol.getValue() == True):
+        newValue = True
+    elif (g.cryptoRngPrngEnabledSymbol.getValue() == True):
+        newValue = True
+    else:
+        newValue = False
 
     if (g.CONFIG_USE_RNG.getValue() == newValue):
         return False
@@ -62,6 +65,8 @@ def ScanTrngHw():
         newValue = g.cryptoRngTrngEnabledSymbol.getValue()
         print("TRNG: Update(%s) %d files"%(
               newValue, len(g.hwDriverFileDict["TRNG"])))
+
+        #Enable Disable HW Driver File generation
         for fSym in g.hwDriverFileDict[fKey]:
             fSym.setEnabled(newValue)
             print("  %s(%s)"%(fSym.getID(),newValue))
@@ -122,7 +127,7 @@ def SetupCryptoRngMenu(cryptoComponent):
     g.cryptoRngPrngEnabledSymbol.setVisible(True)
     g.cryptoRngPrngEnabledSymbol.setReadOnly(False)
     g.cryptoRngPrngEnabledSymbol.setDefaultValue(True)
-    g.cryptoRngTrngEnabledSymbol.setDependencies(
+    g.cryptoRngPrngEnabledSymbol.setDependencies(
             handleRngPrngEnabled, ["crypto_rng_prng_en"])
 
     #Check to see if any of the AEAD selections is True
@@ -130,7 +135,7 @@ def SetupCryptoRngMenu(cryptoComponent):
     ScanRng() #set g.CONFIG_USE_TRNG and api file enables(TODO)
 
     #Check to init the drivers to the TRNG HW selections
-    ScanTrngHw()  #set g.CONFIG_USE_TRNG_HW and driver file enable
+    ScanTrngHw()  #Enable the HW driver files (when selected)
 
 
 #-----------------------------------------------------
@@ -138,15 +143,15 @@ def SetupCryptoRngMenu(cryptoComponent):
 def handleRngTrngEnabled(symbol, event):
     print("TRNG: Symbol - " + event["namespace"] + " EID " + event["id"])
     print("TRNG: Handle Event SID %s (HW Support %s)"%(
-        symbol.getID(), g.cryptoHwTrngSupported))
-    ScanRng()     #CONFIG_USE_RNG
-    ScanTrngHw()  #CONFIG_USE_TRNG_HW
+        symbol.getID(), g.cryptoHwTrngSupported), )
+    newValue = g.cryptoRngTrngEnabledSymbol.getValue()
+    g.CONFIG_USE_TRNG_HW.setValue(newValue)
+    ScanRng()
+    ScanTrngHw()
     print("TRNG:  HW(%s)"%(g.CONFIG_USE_TRNG_HW.getValue()))
-    for fSym in g.hwDriverFileDict["TRNG"]:
-        print("  %s (%s)"%(fSym.getID(), fSym.getEnabled()))
 
 def handleRngPrngEnabled(symbol, event):
-    print("TRNG: Symbol - " + event["namespace"] + " event - " + event["id"])
-    #print("   Value - %s"%(event["value"]))
-    print("TRNG: Handle Event (HW supported) %s"%(g.cryptoHwTrngSupported))
+    print("PRNG: Symbol - " + event["namespace"] + " event - " + event["id"])
+    print("PRNG: Handle Event SID %s (Value %s)"%(
+        symbol.getID(), g.cryptoRngPrngEnabledSymbol.getValue))
     ScanRng()
