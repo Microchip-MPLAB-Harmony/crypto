@@ -467,7 +467,7 @@ crypto_Aead_Status_E Crypto_Aead_AesGcm_AddAadData(st_Crypto_Aead_AesGcm_ctx *pt
         {
 #ifdef CRYPTO_AEAD_WC_AESGCM_EN             
             case CRYPTO_HANDLER_SW_WOLFCRYPT:
-                ret_aesGcmStat_en = Crypto_Aead_Wc_AesGcm_AddAadData(ptr_aesGcmCtx_st->aeadCipherOper_en, ptr_aesGcmCtx_st, ptr_aad, aadLen);
+                ret_aesGcmStat_en = Crypto_Aead_Wc_AesGcm_AddAadData(ptr_aesGcmCtx_st->aeadCipherOper_en, ptr_aesGcmCtx_st->arr_aeadDataCtx, ptr_aad, aadLen);
             break;  
 #endif /* CRYPTO_AEAD_WC_AESGCM_EN */         
             case CRYPTO_HANDLER_HW_INTERNAL:

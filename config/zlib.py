@@ -34,9 +34,10 @@ import wolfcrypt_globals
 import wolfcrypt_defs        as w
 import crypto_globals               #Initial globals
 import crypto_defs           as g   #Modified globals
-print("WOLFCRYPT: Start")
 
-ignoreFiles = ["gzwrite.c", "gzread.c", "gzlib.c"]
+ignoreFiles = ["gzwrite.c", "gzread.c", "gzclose.c", "gzlib.c"]
+#ignoreFiles = []
+
 
 
 def instantiateComponent(zlibComponent):
@@ -65,11 +66,14 @@ def trimFileNameList(rawList) :
         filename = ntpath.basename(file)
         if (not(filename in ignoreFiles)):
             newList.append(filename)
+        else:
+            print("ZLIB: Removed %s"%(filename)) 
+            print(newList)
     return newList
 
 
 def addFileName(fileName, prefix, component, srcPath, destPath, enabled, projectPath):
-    #print("Adding file: " + prefix + fileName.replace('.', '_'))
+    print("ZLIB: Add " + fileName) 
     filename = component.createFileSymbol(prefix + fileName.replace('.', '_'), None)
     filename.setProjectPath(projectPath)
     filename.setSourcePath(srcPath + fileName)
@@ -102,8 +106,21 @@ def setupFiles(basecomponent) :
     zlibSourceFiles = get_script_dir() + "/../../zlib/*.c"
     zlibHeaderFiles = get_script_dir() + "/../../zlib/*.h"
 
-    zsfl = trimFileNameList(glob.glob(zlibSourceFiles))
-    zhfl = trimFileNameList(glob.glob(zlibHeaderFiles))
+    print("ZLIB:  " + zlibSourceFiles) 
+    print("ZLIB:  " + zlibHeaderFiles) 
+
+    #All src/header files in the common/crypto directory
+    zphfl = glob.glob(zlibSourceFiles)
+    zpsfl = glob.glob(zlibHeaderFiles)
+    print("ZLIB: headers(%d) %s"%(len(zphfl),zlibHeaderFiles))
+    print("ZLIB: src(%d) %s"%(len(zpsfl),zlibSourceFiles))
+
+    zhfl = trimFileNameList(zphfl)
+    zsfl = trimFileNameList(zpsfl)
+    print("ZLIB: TR headers(%d)"%(len(zhfl)))
+    print(zhfl)
+    print("ZLIB: TR src(%d)"%(len(zhfl)))
+    print(zsfl)
 
     for file in zsfl:
         addFileName(file, "zlib", basecomponent, "../zlib/", "../../third_party/zlib/", True, "zlib")

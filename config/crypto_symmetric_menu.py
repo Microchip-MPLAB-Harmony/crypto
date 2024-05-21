@@ -381,7 +381,7 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
             "Enable support for the AES KW Mode Algorithm.")
     g.cryptoSymAesKwEnabledSymbol.setVisible(True)
     g.cryptoSymAesKwEnabledSymbol.setDefaultValue(False)
-    g.cryptoSymAesKwEnabledSymbol.setReadOnly(True)
+    g.cryptoSymAesKwEnabledSymbol.setReadOnly(False)
     g.cryptoAesEnSymbols.append(g.cryptoSymAesKwEnabledSymbol)
 
     #AES-KW (Key Wrap) HW
