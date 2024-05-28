@@ -122,7 +122,8 @@ hwDriverFileDepends= {
          "RSA": [],
          "ECC": ["ECDSA", "ECDH"],
        "ECDSA": ["ECC", "ECDH"],
-        "ECDH": ["ECC", "ECDSA"]}
+        "ECDH": ["ECC", "ECDSA"]
+}
 
 hwDriverEnSymbols = {
         "TRNG": [],
@@ -132,7 +133,8 @@ hwDriverEnSymbols = {
          "RSA": [],
          "ECC": [],
        "ECDSA": [],
-        "ECDH": []}
+        "ECDH": []
+}
 
 #NOTE:  Any enabled driver with a dependency adds the dependency files
 #       to the driver genererate list.  All drivers with the same
@@ -918,12 +920,31 @@ cryptoMacAesGmacEnabledSymbol      = None
 #DS - Digital Signing
 dsMenu                             = None
 cryptoDsEcdsaEnabledSymbol         = None
+cryptoHwDsEcdsaSupport = [
+    ["PUKCC", "U2009", "2.5.0", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
+    ["BA414E", "00343", "", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_BA414E",
+          "HAVE_MCHP_CRYPTO_HW_BA414E"])],    #PCI32MZ-W
+    ["CPKCC", "44163", "B", [],
+     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
+]
+cryptoHwDsEcdsaSupported         = False
+cryptoHwDsEcdsaEnabledSymbol     = None
+
 
 
 #===============================================================================
 #KAS - Key Authorization
 kasMenu      = None
-cryptoKasEcdhEnableSymbol          = None
+
+cryptoHwKasEcdhSupport    = [
+    ["CPKCC", "44163", "B", [],
+     set(["HAVE_MCHP_CRYPTO_RSA_HW_CPKCC"])]  #PIC32CX MT
+]
+cryptoKasEcdhEnabledSymbol       = None
+cryptoHwKasEcdhSupported       = False
+cryptoHwKasEcdhEnabledSymbol   = None
 
 #===============================================================================
 #RNG - Random Number Generation
@@ -964,30 +985,6 @@ cryptoAsymEccEnabledSymbol       = None
 
 cryptoSWCallBackEnableSymbol = None
 
-#Asym Dig Sign ECC-ECDSA 
-cryptoHwDsEcdsaSupport = [
-    ["PUKCC", "U2009", "2.5.0", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
-    ["BA414E", "00343", "", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_BA414E",
-          "HAVE_MCHP_CRYPTO_HW_BA414E"])],    #PCI32MZ-W
-    ["CPKCC", "44163", "B", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
-]
-cryptoHwDsEcdsaSupported         = False
-cryptoHwDsEcdsaEnabledSymbol     = None
-cryptoDsEcdsaEnabledSymbol       = None
-
-#Asym Key Auth ECC-ECDH
-cryptoHwKasEcdhSupport = [
-    ["PUKCC", "U2009", "2.5.0", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
-    ["CPKCC", "44163", "B", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
-]
-cryptoHwKasEcdhSupported         = False
-cryptoHwKasEcdhEnabledSymbol     = None
-cryptoKasEcdhEnabledSymbol       = None
 
 #===============================================================================
 #HW IDAU(2803)

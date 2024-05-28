@@ -86,8 +86,15 @@ def SetupCryptoKasMenu(cryptoComponent):
     g.CONFIG_USE_KAS= cryptoComponent.createBooleanSymbol(
             "CONFIG_USE_KAS", g.macMenu)
     g.CONFIG_USE_KAS.setVisible(False)
-    g.CONFIG_USE_KAS.setLabel("Crypto")
+    g.CONFIG_USE_KAS.setLabel("KAS")
     g.CONFIG_USE_KAS.setDefaultValue(False)
+
+    #KAS HW File Generation Enable
+    g.CONFIG_USE_KAS_HW= cryptoComponent.createBooleanSymbol(
+            "CONFIG_USE_KAS_HW", g.macMenu)
+    g.CONFIG_USE_KAS_HW.setVisible(False)
+    g.CONFIG_USE_KAS_HW.setLabel("KAS HW")
+    g.CONFIG_USE_KAS_HW.setDefaultValue(False)
 
     #KAS - Crypto KAS Algorithms Main Menu
     g.kasMenu = cryptoComponent.createMenuSymbol(

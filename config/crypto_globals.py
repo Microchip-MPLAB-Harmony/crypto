@@ -394,15 +394,7 @@ cryptoAsymEccEnabledSymbol            = None
 cryptoSWCallBackEnableSymbol      = None
 
 #ASYM ECC-ECDSA 
-cryptoHwEcdsaSupport = [
-    ["PUKCC", "U2009", "2.5.0", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
-    ["BA414E", "00343", "", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_BA414E",
-          "HAVE_MCHP_CRYPTO_HW_BA414E"])],    #PCI32MZ-W
-    ["CPKCC", "44163", "B", [],
-     set(["HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"])]  #PIC32CX MT
-]
+cryptoHwEcdsaSupport = []
 cryptoHwEcdsaSupported         = False
 cryptoHwEcdsaEnabledSymbol     = None
 cryptoEcdsaEnabledSymbol       = None
@@ -417,6 +409,9 @@ cryptoDsEcdsaEnabledSymbol        = None
 #KAS - Key Authorization
 CONFIG_USE_KAS                    = None
 cryptoKasEcdhEnableSymbol         = None
+cryptoHwKasEcdhSupport    = []
+cryptoHwKasEcdhSupported       = False
+cryptoHwKasEcdhEnabledSymbol   = None
 
 #===============================================================================
 #TRNG
