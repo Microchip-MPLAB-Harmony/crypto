@@ -48,7 +48,6 @@ Microchip or any third party.
 // *****************************************************************************
 
 #include <stdint.h>
-#include "configuration.h"
 #include "definitions.h"
 #include "drv_crypto_aes_hw_6149.h"
 
@@ -136,7 +135,7 @@ void DRV_CRYPTO_AES_SetConfig(CRYPTO_AES_CONFIG *aesCfg)
     aesEMR.s.PKRS = CRYPTO_AES_PRIVATE_KEY_KEYWR;
 
     AES_REGS->AES_EMR = aesEMR.v;
-<#/if>
+</#if>
 
     AES_REGS->AES_MR = aesMR.v;
 }

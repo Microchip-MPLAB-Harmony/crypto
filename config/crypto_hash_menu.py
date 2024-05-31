@@ -146,6 +146,7 @@ def ScanShaHw():
         for fSym in g.hwDriverFileDict[fKey]:
             fSym.setEnabled(newValue)
         return True
+
     else:
         print("SHA: HW Unchanged (%s)"%(newValue))
         return False

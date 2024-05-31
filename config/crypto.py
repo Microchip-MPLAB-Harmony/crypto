@@ -204,6 +204,59 @@ def SetupCommonCryptoFiles(basecomponent) :
                          True,                         #Enabled
                          projectPath)
 
+def SetupCpkclDriverFiles(basecomponent) :
+    global modulePath
+
+    configName = Variables.get("__CONFIGURATION_NAME")  # e.g. "default"$
+
+    print("CRYPTO:  setup CPKCC Driver Files %s"%(g.cpkclDriverPath))
+    headerFiles = (modulePath + g.cpkclDriverPath + "*.h")
+    sourceFiles = (modulePath + g.cpkclDriverPath + "*.c")
+    print("CPKCC: path %s"%(modulePath + g.cpkclDriverPath)) 
+
+    #All src/header files in the common/crypto directory
+    hfl = glob.glob(headerFiles)
+    sfl = glob.glob(sourceFiles)
+
+    print("CPKCC: %d Headers"%(len(hfl)))
+    print("CPKCC: %d Source "%(len(sfl)))
+    phfl = TrimFileNameList(glob.glob(headerFiles))
+    psfl = TrimFileNameList(glob.glob(sourceFiles))
+
+    phfl_trim = phfl
+    psfl_trim = psfl
+
+    g.cpkclDriverFileSyms = []
+
+    #All src files in the wolfssl/wolfcrypt/src directory
+    #--AddFileName(fileName, prefix, component, 
+    #              srcPath, destPath, enabled, projectPath):
+    projectPath = "config/" + configName + "/crypto/drivers/CryptoLib_CPKCL"
+    dstPath = "crypto/drivers/CryptoLib_CPKCL/"  #Path Dest
+    for fileName in phfl_trim:
+        #AddFileName(fileName, prefix, component, 
+        #            srcPath, destPath, enabled, projectPath):
+        print("CPKCL: Add %s"%(dstPath + fileName))
+        fileSym = AddFileName(fileName,                   #Filename 
+                         "cpkcc",                         #MCC Symbol Name Prefix
+                         basecomponent,                   #MCC Component
+                         g.cpkclDriverPath,                 #Src Path
+                         dstPath,                         #Path Dest
+                         True,                            #Enabled
+                         projectPath) #Project Path
+        g.cpkclDriverFileSyms.append(fileSym)
+
+    projectPath = "config/" + configName + "/crypto/drivers/CryptoLib_CPKCL"
+    for fileName in psfl_trim:
+        print("CPKCL: Add %s"%(dstPath + fileName))
+        fileSym = AddFileName(fileName,                   #Filename    
+                         "cpkcc",                         #MCC Symbol Name Prefix
+                         basecomponent,                   #MCC Component
+                         g.cpkclDriverPath,                 #Src Path
+                         dstPath,                         #Path Dest
+                         True,                            #Enabled
+                         projectPath) #Project Path
+        g.cpkclDriverFileSyms.append(fileSym)
 
 
 #################################################################################
@@ -323,23 +376,23 @@ def instantiateComponent(cryptoComponent):
 
     #INCLUDE FILE to configure WOLFCRYPT with the HAVE_CONFIG_H 
     #project define.
-    (fileSym) = AddFileName("config.h",                   #Filename    
-                     "common_crypto",              #MCC Symbol Name Prefix
-                     cryptoComponent,              #MCC Component
-                     "src/wolfcrypt/",             #Src Path
-                     "crypto/wolfcrypt/",          #Dest Path
-                     True,                         #Enabled
-                     projectPath)                  #Project Path
+    fileSym = AddFileName("config.h",          #Filename    
+                          "common_crypto",     #MCC Symbol Name Prefix
+                          cryptoComponent,     #MCC Component
+                          "src/wolfcrypt/",    #Src Path
+                          "crypto/wolfcrypt/", #Dest Path
+                          True,                #Enabled
+                          projectPath)         #Project Path
 
     #INCLUDE FILE to configure WOLFCRYPT with the WOLFSSL_USER_SETTINGS 
     #Project define
-    (fileSym) = AddFileName("user_settings.h",            #Filename    
-                     "common_crypto",              #MCC Symbol Name Prefix
-                     cryptoComponent,              #MCC Component
-                     "src/wolfcrypt/",             #Path Src
-                     "crypto/wolfcrypt/",          #Path Dest
-                     True,                         #Enabled
-                     projectPath)                  #Project Path
+    fileSym = AddFileName("user_settings.h",   #Filename    
+                          "common_crypto",     #MCC Symbol Name Prefix
+                          cryptoComponent,     #MCC Component
+                          "src/wolfcrypt/",    #Path Src
+                          "crypto/wolfcrypt/", #Path Dest
+                          True,                #Enabled
+                          projectPath)         #Project Path
 
     #--------------------------------------------------------
     #Crypto Function Group Configuration Files (for API optimization)
@@ -608,10 +661,19 @@ def handleHashDrngEnabled(symbol, event):
 # [ <atdf Module name>, <atdf Module ID number>, <atdf version code>,
 #   [], <set of HW Project Defines> ] 
 #
+# The list is given like the following: 
+#    [<dKey>, <ID>, <Version #>, [], <set of macros to be defined>]
+#
+# For example:
+#    [PUKCC", "U2009", "2.5.0", [],
+#     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])] #ATSAME54P20A
+#
+#
 ################################################################################
 def ScanHardware(list):
     periphNode = ATDF.getNode("/avr-tools-device-file/devices/device/peripherals")
     modules = periphNode.getChildren()
+
     for module in modules:
         for item in list:
             if (
@@ -620,9 +682,16 @@ def ScanHardware(list):
                 (((module.getAttribute("version") == item[2]) or
                   item[2] == ""))):
 
+                print("CRYPTO HW: name(%s) id(%s)"%(item[0],item[1]))
+
                 #Add to the symbol string to enable the HW module function
                 g.cryptoHwAdditionalDefines = (
-                    g.cryptoHwAdditionalDefines.union(item[4]))
+                        g.cryptoHwAdditionalDefines.union(item[4])) #MACRO
+
+                g.cryptoHwDevSupport = (
+                        g.cryptoHwDevSupport.union([item[0]])) #driver ID
+                g.cryptoHwIdSupport= (
+                        g.cryptoHwIdSupport.union([item[1]])) #driver ID
                 return True
     return False
 
@@ -637,47 +706,64 @@ def SetupHwDriverFiles(basecomponent):
     configPath  = "config/" + configName
     srcPath     = "src/drivers/"
     mkupPath    = "templates/drivers/"
-    dstPath     = "crypto/driver"
-    projPath    = "config/" + configName + "/crypto/driver/"
+    dstPath     = "crypto/drivers"
+    projPath    = "config/" + configName + "/crypto/drivers/"
 
+    print("CRYPTO HW: %d Driver Names: "%(len(g.cryptoHwDevSupport)))
+    print(g.cryptoHwDevSupport)
+    print("CRYPTO HW: %d Driver IDs: "%(len(g.cryptoHwIdSupport)))
+    print(g.cryptoHwIdSupport)
 
-    count=0
     #create all possible drivers disabled for this HW
     #--Later scan to see what HW functions are enabled
     print("CRYPTO: Driver File Symbols Created:")
     for [dKey, fDict] in g.hwDriverDict.items():  #Driver File Dict
-        #if (hwDrvSym.getID() in g.hwDriverStrings):
-        #indx = g.hwDriverStrings.index(hwDrvSym.getID())
-        print("CRYPTO: dKey %s:  "%(dKey))
-        fileNames = set([])
-        for fKey in fDict:       #Driver Function Key to file Dict
-            for fileName in fDict[fKey]:
-                if (fileNames.issuperset([fileName]) == False):
-                    count += 1
-                    if fileName.endswith(".ftl"):
-                        fileName = fileName[:len(fileName) - 4]
-                        print("CRYPTO: Adding Markup: %s"%(fileName))
-                        #NOTE:  markup files in templates/drivers
-                        fileSym = AddMarkupFile(
-                                      fileName,  #File Name 
-                                      "",        #id prefix
-                                      basecomponent, #Component
-                                      mkupPath,
-                                      dstPath, False, projPath)
-                    else:
-                        #NOTE:  standard files in src/drivers
-                        fileSym = AddFileName(
-                                      fileName,  #File Name 
-                                      "",        #id prefix
-                                      basecomponent, #Component
-                                      srcPath,
-                                      dstPath, False, projPath)
 
-                    #Add the symbol to the hwDriverFile Dict
-                    #Add the filename to the list of file names
-                    g.hwDriverFileDict[fKey].append(fileSym)
-                    print(" [%s] %s"%(fKey,fileSym.getOutputName()))
-                    fileNames.update([fileName]) #Add new file
+        #Check for Device Hardware Support functions
+        if ((dKey in g.cryptoHwDevSupport) or (dKey in g.cryptoHwIdSupport)):
+            print("CRYPTO: Supported Device Crypto HW Key %s:  "%(dKey))
+
+            if (dKey == "CPKCC"):
+                print("CRYPTO: Use CPKCC Driver Files ")
+                SetupCpkclDriverFiles(basecomponent)
+
+            fileNames = set([])
+            for fKey in fDict:       #Driver Function Key to file Dict
+                for fileName in fDict[fKey]:
+
+                    #Check for duplicate
+                    if (fileNames.issuperset([fileName]) == False):
+                        if fileName.endswith(".ftl"):
+                            fileName = fileName[:len(fileName) - 4]
+                            print("CRYPTO: Adding Markup: %s"%(fileName))
+                            #NOTE:  markup files in templates/drivers
+                            fileSym = AddMarkupFile(
+                                          fileName,  #File Name 
+                                          "",        #id prefix
+                                          basecomponent, #Component
+                                          mkupPath,
+                                          dstPath, False, projPath)
+                        else:
+                            #NOTE:  standard files in src/drivers
+                            fileSym = AddFileName(
+                                          fileName,  #File Name 
+                                          "",        #id prefix
+                                          basecomponent, #Component
+                                          srcPath,
+                                          dstPath, False, projPath)
+
+                        fileNames.update([fileName]) #Add new file
+                                            #Add the symbol to the hwDriverFile Dict
+                        #Add the filename to the list of file names
+                        g.hwDriverFileDict[fKey].append(fileSym)
+                        print(" [%s] %s"%(fKey,fileSym.getOutputName()))
+                        fileNames.update([fileName]) #Add new file
+
+                #Add the extra driver files for the given function and HW
+                if (dKey=="CPKCC"):
+                    g.hwDriverFileDict[fKey] += g.cpkclDriverFileSyms
+
+
 
 ################################################################################
 # Detect MCU Target HW support for each particular crypto function
@@ -689,7 +775,7 @@ def SetupHwDriverFiles(basecomponent):
 #
 ################################################################################
 def SetupHardwareSupport(cryptoComponent) :
-
+     
     g.cryptoHwSupportedSymbol= cryptoComponent.createBooleanSymbol(
             "cryptoHwSupported", None)
     g.cryptoHwSupportedSymbol.setVisible(False)
@@ -796,7 +882,6 @@ def SetupHardwareSupport(cryptoComponent) :
     g.cryptoHW_U2803Present   = ScanHardware(g.cryptoHW_U2803)
     g.cryptoHW_U2805Present   = ScanHardware(g.cryptoHW_U2805)
     g.cryptoHW_03710Present   = ScanHardware(g.cryptoHW_03710)
-
 
     if (g.cryptoHwTrngSupported     or  g.cryptoHwMd5Supported or
         g.cryptoHwSha1Supported     or

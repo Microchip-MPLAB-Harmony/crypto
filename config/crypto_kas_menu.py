@@ -204,10 +204,10 @@ def handleKasEcdhEnabled(symbol, event):
     else:
         g.cryptoHwKasEcdhEnabledSymbol.setValue(False)
         g.cryptoHwKasEcdhEnabledSymbol.setVisible(False)
-    ScanDigSign()
+    ScanKas()
 
     #Check for ECDH HW Driver Update
-    if (ScanDigSignHw() == True):
+    if (ScanKasHw() == True):
         numHwDrv = len(g.hwDriverFileDict["ECDH"])
         print("ECDH: %d Driver File Symbols Updated:"%(numHwDrv))
         if (len(g.hwDriverFileDict['ECDH']) > 0):

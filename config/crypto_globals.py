@@ -88,6 +88,11 @@ hwDriverFileSymbols = []
 #HW Driver File Generation
 hwDriverFileDict = {}
 
+cryptoHwDefines           = None
+cryptoHwAdditionalDefines = set([])
+cryptoHwDevSupport        = set([])    #Holds the device hw supported keys (dKey)
+cryptoHwIdSupport         = set([])    #Holds the device hw supported IDs (id)
+
 #===============================================================================
 #MENU
 hashMenu     = None

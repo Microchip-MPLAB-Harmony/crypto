@@ -14,6 +14,8 @@ from crypto_globals import *
 # SYMBOLS used by FTL are put in the cryptoHwAdditionalDefines
 cryptoHwDefines           = None
 cryptoHwAdditionalDefines = set([])
+cryptoHwDevSupport        = set([])    #Holds the device hw supported keys (dKey)
+cryptoHwIdSupport         = set([])    #Holds the device hw supported IDs (id)
 
 
 ################################################################################
@@ -95,24 +97,27 @@ hwDriverFileSymbols = []
 #    3) other files in src/drivers
 #
 hwDriverDict = {
-                 "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcc.h",
-                                   "drv_crypto_rsa_hw_cpkcc.c"],
-                            "ECC":["drv_crypto_ecc_hw_cpkcc.h",
-                                   "drv_crypto_ecc_hw_cpkcc.c"],
-                          "ECDSA":["drv_crypto_ecdsa_hw_cpkcc.h",
-                                   "drv_crypto_ecdsa_hw_cpkcc.c",
-                                   "drv_crypto_ecc_hw_cpkcc.h",
-                                   "drv_crypto_ecc_hw_cpkcc.c"],
-                           "ECDH":["drv_crypto_ecdh_hw_cpkcc.h",
-                                   "drv_crypto_ecdh_hw_cpkcc.c",
-                                   "drv_crypto_ecc_hw_cpkcc.h",
-                                   "drv_crypto_ecc_hw_cpkcc.c"]},
+                 "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcl.h",
+                                   "drv_crypto_rsa_hw_cpkcl.c"],
+                            "ECC":["drv_crypto_ecc_hw_cpkcl.h",
+                                   "drv_crypto_ecc_hw_cpkcl.c"],
+                          "ECDSA":["drv_crypto_ecdsa_hw_cpkcl.h",
+                                   "drv_crypto_ecdsa_hw_cpkcl.c",
+                                   "drv_crypto_ecc_hw_cpkcl.h",
+                                   "drv_crypto_ecc_hw_cpkcl.c"],
+                           "ECDH":["drv_crypto_ecdh_hw_cpkcl.h",
+                                   "drv_crypto_ecdh_hw_cpkcl.c",
+                                   "drv_crypto_ecc_hw_cpkcl.h",
+                                   "drv_crypto_ecc_hw_cpkcl.c"]},
                   "6149": { "AES":["drv_crypto_aes_hw_6149.h",
                                    "drv_crypto_aes_hw_6149.c"] },
                   "6156": { "SHA":["drv_crypto_sha_hw_6156.h.ftl",
                                    "drv_crypto_sha_hw_6156.c.ftl"] },
                   "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} }
+
+cpkclDriverPath     = "src/drivers/CryptoLib_CPKCL/"
+cpkclDriverFileSyms = []   #Extra files used by CPKCC driver
 
 hwDriverFileDepends= {
         "TRNG": [],
