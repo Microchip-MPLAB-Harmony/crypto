@@ -49,8 +49,8 @@ Microchip or any third party.
 
 #include <stdint.h>
 #include "crypto/common_crypto/MCHP_Crypto_Kas_HwWrapper.h"
-#include "crypto/driver/drv_crypto_ecc_hw_cpkcl.h"
-#include "crypto/driver/drv_crypto_ecdh_hw_cpkcl.h"
+#include "crypto/drivers/drv_crypto_ecc_hw_cpkcl.h"
+#include "crypto/drivers/drv_crypto_ecdh_hw_cpkcl.h"
 
 // *****************************************************************************
 // *****************************************************************************
