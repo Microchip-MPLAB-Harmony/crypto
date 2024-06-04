@@ -135,6 +135,8 @@ def AddMarkupFile(fileName, prefix, component,
     return (fileNameSymbol)
 
 
+################################################################################
+################################################################################
 def get_script_dir(follow_symlinks=True):
     if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
         path = os.path.abspath(sys.executable)
@@ -145,6 +147,8 @@ def get_script_dir(follow_symlinks=True):
     return os.path.dirname(path)
 
 
+################################################################################
+################################################################################
 def TrimFileNameList(rawList) :
     newList = []
     for file in rawList:
@@ -204,6 +208,8 @@ def SetupCommonCryptoFiles(basecomponent) :
                          True,                         #Enabled
                          projectPath)
 
+################################################################################
+################################################################################
 def SetupCpkclDriverFiles(basecomponent) :
     global modulePath
 
@@ -704,10 +710,12 @@ def SetupHwDriverFiles(basecomponent):
     print("CRYPTO:  Adding HW Driver Files")
     configName  = Variables.get("__CONFIGURATION_NAME")  # e.g. "default"
     configPath  = "config/" + configName
-    srcPath     = "src/drivers/"
-    mkupPath    = "templates/drivers/"
-    dstPath     = "crypto/drivers"
-    projPath    = "config/" + configName + "/crypto/drivers/"
+    srcPathDrv  = "src/drivers/"
+    mupPathDrv  = "templates/drivers/"
+    dstPathDrv  = "crypto/drivers"
+    dstPathApi  = "crypto/common_crypto"
+    projPathDrv = "config/" + configName + "/crypto/drivers/"
+    projPathApi = "config/" + configName + "/crypto/common_crypto/"
 
     print("CRYPTO HW: %d Driver Names: "%(len(g.cryptoHwDevSupport)))
     print(g.cryptoHwDevSupport)
@@ -733,28 +741,58 @@ def SetupHwDriverFiles(basecomponent):
 
                     #Check for duplicate
                     if (fileNames.issuperset([fileName]) == False):
-                        if fileName.endswith(".ftl"):
-                            fileName = fileName[:len(fileName) - 4]
-                            print("CRYPTO: Adding Markup: %s"%(fileName))
-                            #NOTE:  markup files in templates/drivers
-                            fileSym = AddMarkupFile(
-                                          fileName,  #File Name 
-                                          "",        #id prefix
-                                          basecomponent, #Component
-                                          mkupPath,
-                                          dstPath, False, projPath)
-                        else:
-                            #NOTE:  standard files in src/drivers
-                            fileSym = AddFileName(
-                                          fileName,  #File Name 
-                                          "",        #id prefix
-                                          basecomponent, #Component
-                                          srcPath,
-                                          dstPath, False, projPath)
+                        if (fileName[:4] == "drv_"):
+                            if fileName.endswith(".ftl"):
+                                fileName = fileName[:len(fileName) - 4]
+                                #NOTE:  markup files in templates/drivers
+                                fileSym = AddMarkupFile(
+                                              fileName,  #File Name 
+                                              "",        #id prefix
+                                              basecomponent, #Component
+                                              mupPathDrv,
+                                              dstPathDrv, False, projPathDrv)
+                            else:
+                                #NOTE:  standard files in src/drivers
+                                fileSym = AddFileName(
+                                              fileName,  #File Name 
+                                              "",        #id prefix
+                                              basecomponent, #Component
+                                              srcPathDrv,
+                                              dstPathDrv, False, projPathDrv)
+                        elif (fileName[:4] == "MCHP"):
+                            if fileName.endswith(".ftl"):
+                                fileName = fileName[:len(fileName) - 4]
+                                dstPath = (
+                                        dstPathApi if fileName[-1] == "h"
+                                        else dstPathApi + "src/")
+                                projPath = (
+                                        projPathApi if fileName[-1] == "h"
+                                        else projPathApi + "src/")
+                                #NOTE:  markup files in templates/common_crypto
+                                fileSym = AddMarkupFile(
+                                              fileName,  #File Name 
+                                              "",        #id prefix
+                                              basecomponent, #Component
+                                              mupPathDrv,
+                                              dstPathApi, False, projPathApi)
+                            else:
+                                dstPath = (
+                                        dstPathApi if fileName[-1] == "h"
+                                        else dstPathApi + "src/")
+                                projPath = (
+                                        projPathApi if fileName[-1] == "h"
+                                        else projPathApi + "src/")
+                                fileSym = AddFileName(
+                                              fileName,  #File Name 
+                                              "",        #id prefix
+                                              basecomponent, #Component
+                                              srcPathDrv,
+                                              dstPathApi, False, projPathApi)
 
                         fileNames.update([fileName]) #Add new file
                                             #Add the symbol to the hwDriverFile Dict
-                        #Add the filename to the list of file names
+                        #Add the filename to the dict list of Driver file names for
+                        #that function key (fKey)
                         g.hwDriverFileDict[fKey].append(fileSym)
                         print(" [%s] %s"%(fKey,fileSym.getOutputName()))
                         fileNames.update([fileName]) #Add new file
@@ -775,7 +813,7 @@ def SetupHwDriverFiles(basecomponent):
 #
 ################################################################################
 def SetupHardwareSupport(cryptoComponent) :
-     
+
     g.cryptoHwSupportedSymbol= cryptoComponent.createBooleanSymbol(
             "cryptoHwSupported", None)
     g.cryptoHwSupportedSymbol.setVisible(False)
@@ -899,10 +937,13 @@ def SetupHardwareSupport(cryptoComponent) :
     else:
         g.cryptoHwSupportedSymbol.setValue(False)
 
-    #Add the HW Module symbols
+    #String Implementation of defines for crypto_config.h.ftl
+    #--created from each of the additional define strings
     g.cryptoHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
+    print(g.cryptoHwAdditionalDefines)
 
     #Create symbols for all possible HW Drivers
+    print("CRYPTO HW: %d Symbols --"%(len(g.cryptoHwAdditionalDefines)))
     for defStr in g.hwDriverStrings:
         #Create the driver symbol
         #--Initially true
@@ -910,11 +951,14 @@ def SetupHardwareSupport(cryptoComponent) :
                 defStr, None))
         g.hwDriverSymbol[-1].setVisible(False)
         g.hwDriverSymbol[-1].setLabel("Crypto HW Driver Supported")
-        g.hwDriverSymbol[-1].setDefaultValue(False)
+        if (defStr in g.cryptoHwAdditionalDefines):
+            g.hwDriverSymbol[-1].setDefaultValue(True) 
+        else:
+            g.hwDriverSymbol[-1].setDefaultValue(False) 
+        print("    %s"%(g.hwDriverSymbol[-1].getID()))
 
     #Now generate the Driver for the Available HW
     SetupHwDriverFiles(cryptoComponent)
-
 
 
 ################################################################################

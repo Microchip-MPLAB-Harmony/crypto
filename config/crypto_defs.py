@@ -56,6 +56,7 @@ CONFIG_USE_ECDSA_HW       = None
 CONFIG_USE_ECDH_HW        = None
 
 #HW Module Symbol Strings
+#--all of them
 hwDriverStrings = [
 "HAVE_MCHP_CRYPTO_TRNG_HW_HSM",  #PIC32CZ CA90 
 "HAVE_MCHP_CRYPTO_TRNG_HW_6334", #ATSAMV70Q20B/PIC32CX MT
@@ -95,25 +96,38 @@ hwDriverFileSymbols = []
 #    1) Each driver file is uniquely listed.
 #    2) .ftl files in templates/drivers
 #    3) other files in src/drivers
+#    4) The drv prefix --> <config>/crypto/drivers
+#       The MCHP prefix --> <config>/crypto/common_crypto 
 #
 hwDriverDict = {
                  "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcl.h",
                                    "drv_crypto_rsa_hw_cpkcl.c"],
                             "ECC":["drv_crypto_ecc_hw_cpkcl.h",
                                    "drv_crypto_ecc_hw_cpkcl.c"],
-                          "ECDSA":["drv_crypto_ecdsa_hw_cpkcl.h",
+                          "ECDSA":["MCHP_Crypto_DigSign_HwWrapper.h",
+                                   "MCHP_Crypto_DigSign_HwWrapper.c",
+                                   "drv_crypto_ecdsa_hw_cpkcl.h",
                                    "drv_crypto_ecdsa_hw_cpkcl.c",
                                    "drv_crypto_ecc_hw_cpkcl.h",
                                    "drv_crypto_ecc_hw_cpkcl.c"],
-                           "ECDH":["drv_crypto_ecdh_hw_cpkcl.h",
+                           "ECDH":["MCHP_Crypto_Kas_HwWrapper.h",
+                                   "MCHP_Crypto_Kas_HwWrapper.c",
+                                   "drv_crypto_ecdh_hw_cpkcl.h",
                                    "drv_crypto_ecdh_hw_cpkcl.c",
                                    "drv_crypto_ecc_hw_cpkcl.h",
                                    "drv_crypto_ecc_hw_cpkcl.c"]},
-                  "6149": { "AES":["drv_crypto_aes_hw_6149.h",
-                                   "drv_crypto_aes_hw_6149.c"] },
-                  "6156": { "SHA":["drv_crypto_sha_hw_6156.h.ftl",
+                  "6149": { "AES":["MCHP_Crypto_Sym_HwWrapper.h",
+                                   "MCHP_Crypto_Sym_HwWrapper.c.ftl",
+                                   "MCHP_Crypto_Aead_HwWrapper.h",
+                                   "drv_crypto_aes_hw_6149.h.ftl",
+                                   "drv_crypto_aes_hw_6149.c.ftl"] },
+                  "6156": { "SHA":["MCHP_Crypto_Hash_HwWrapper.h",
+                                   "MCHP_Crypto_Hash_HwWrapper.c.ftl",
+                                   "drv_crypto_sha_hw_6156.h.ftl",
                                    "drv_crypto_sha_hw_6156.c.ftl"] },
-                  "6334": {"TRNG":["drv_crypto_trng_hw_6334.h",
+                  "6334": {"TRNG":["MCHP_Crypto_Trng_HwWrapper.h",
+                                   "MCHP_Crypto_Trng_HwWrapper.c.ftl",
+                                   "drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} }
 
 cpkclDriverPath     = "src/drivers/CryptoLib_CPKCL/"

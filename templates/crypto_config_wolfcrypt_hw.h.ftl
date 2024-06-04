@@ -143,10 +143,11 @@ extern "C" {
     <#if HAVE_MCHP_CRYPTO_HW_U2805      == true>
         <#lt>#warning "U2805 HW Driver Not Implemented"
     </#if>
-    <#if HAVE_MCHP_CRYPTO_HW_03710]     == true>
-        <#lt>#warning "03710 HW Driver Not Implemented"
-    </#if>
-    <#if HAVE_MCHP_CRYPTO_HW_U2803 == true>
+
+    //<#if HAVE_MCHP_CRYPTO_HW_03710      == true>
+    //    <#lt>#warning "03710 HW Driver Not Implemented"
+    //</#if>
+    <#if HAVE_MCHP_CRYPTO_HW_U2803      == true>
         <#lt>#warning "U2803 HW Driver Not Implemented"
     </#if>
 <#else>
