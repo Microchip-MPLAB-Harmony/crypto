@@ -125,8 +125,8 @@ hwDriverDict = {
                                    "MCHP_Crypto_Hash_HwWrapper.c.ftl",
                                    "drv_crypto_sha_hw_6156.h.ftl",
                                    "drv_crypto_sha_hw_6156.c.ftl"] },
-                  "6334": {"TRNG":["MCHP_Crypto_Trng_HwWrapper.h",
-                                   "MCHP_Crypto_Trng_HwWrapper.c.ftl",
+                  "6334": {"TRNG":["MCHP_Crypto_Rng_HwWrapper.h",
+                                   "MCHP_Crypto_Rng_HwWrapper.c.ftl",
                                    "drv_crypto_trng_hw_6334.h",
                                    "drv_crypto_trng_hw_6334.c"]} }
 

@@ -49,9 +49,9 @@ Microchip or any third party.
 #include <stdint.h>
 #include <string.h>
 #include "device.h"
-#include "MCHP_Crypto_Hash_HwWrapper.h"
+#include "crypto/common_crypto/MCHP_Crypto_Hash_HwWrapper.h"
 <#if HAVE_MCHP_CRYPTO_SHA_HW_6156 == true>
-#include "drv_crypto_sha_hw_6156.h"
+#include "crypto/drivers/drv_crypto_sha_hw_6156.h"
 </#if>
 
 // *****************************************************************************

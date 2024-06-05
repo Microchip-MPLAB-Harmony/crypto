@@ -47,9 +47,9 @@ Microchip or any third party.
 // *****************************************************************************
 
 #include <stdint.h>
-#include "MCHP_Crypto_Sym_HwWrapper.h"
+#include "crypto/common_crypto/MCHP_Crypto_Sym_HwWrapper.h"
 <#if HAVE_MCHP_CRYPTO_AES_HW_6149 == true>
-#include "drv_crypto_aes_hw_6149.h"
+#include "crypto/drivers/drv_crypto_aes_hw_6149.h"
 </#if>
 
 // *****************************************************************************
