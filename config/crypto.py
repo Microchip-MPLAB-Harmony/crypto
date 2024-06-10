@@ -55,12 +55,16 @@ mipslib_ext  = ('.a')
 #    src/config/<config>
 def AddFileName(fileName, prefix, component,
                 srcPath, destPath, enabled, projectPath):
+
     fileID = prefix + fileName.replace('.', '_')
     fileNameSymbol = component.createFileSymbol(fileID, None)
     fileNameSymbol.setProjectPath(projectPath)
 
-    print("CRYPTO: Add %s"%(srcPath+fileName))
-    fileNameSymbol.setSourcePath(srcPath + fileName)
+    srcPath += fileName
+    print("CRYPTO: Add(%s) ""%s"""%(enabled,srcPath))
+    print("    dstPath ""%s"""%(destPath))
+    print("   projPath ""%s"""%(projectPath))
+    fileNameSymbol.setSourcePath(srcPath)
     fileNameSymbol.setOutputName(fileName)
 
     if prefix == 'misc' or prefix == 'imp':
@@ -80,11 +84,11 @@ def AddFileName(fileName, prefix, component,
     if (g.trustZoneSupported == True):
         fileNameSymbol.setSecurity("SECURE")
         tz = "S"
-        print("CRYPTO:  Adding (TZ) ""%s"" "%(projectPath + fileName))
+        print("  --Added (TZ) ""%s"" "%(projectPath + fileName))
     else:
         fileNameSymbol.setSecurity("NON_SECURE")
         tz = "N"
-        print("CRYPTO:  Adding ""%s"" "%(projectPath + fileName))
+        print("  --Added ""%s"" "%(projectPath + fileName))
 
     return (fileNameSymbol)
 
@@ -104,9 +108,11 @@ def AddMarkupFile(fileName, prefix, component,
 
     srcPath += fileName + ".ftl"
 
-    print("CRYPTO: Add %s"%(srcPath))
+    print("CRYPTO: Add MU(%s) ""%s"""%(enabled,srcPath))
+    print("       dstPath ""%s"""%(destPath))
+    print("      projPath ""%s"""%(projectPath))
     fileNameSymbol.setSourcePath(srcPath)
-    fileNameSymbol.setOutputName(fileName)
+    fileNameSymbol.setOutputName(fileName) #without .ftl
 
     if prefix == 'misc' or prefix == 'imp':
         fileNameSymbol.setDestPath(destPath)
@@ -126,11 +132,11 @@ def AddMarkupFile(fileName, prefix, component,
     if (g.trustZoneSupported == True):
         fileNameSymbol.setSecurity("SECURE")
         tz = "S"
-        print("CRYPTO:  Project (TZ) ""%s"" "%(projectPath + fileName))
+        print("  --Added Project MU (TZ) ""%s"" "%(projectPath + fileName))
     else:
         fileNameSymbol.setSecurity("NON_SECURE")
         tz = "N"
-        print("CRYPTO:  Project""%s"" "%(projectPath + fileName))
+        print("  --Added Project MU ""%s"" "%(projectPath + fileName))
 
     return (fileNameSymbol)
 
@@ -350,16 +356,6 @@ def instantiateComponent(cryptoComponent):
     CONFIG_USE_CRYPTO.setLabel("Crypto")
     CONFIG_USE_CRYPTO.setDefaultValue(True)
 
-    #----------------------------------------------------------------
-    #WOLFCRYPT Library Configuration as used by CRYPTO component 
-    #
-    #TODO:  Has dependency on Wolfcrypt component 
-    #       Always generated for now.
-    #
-    #TODO: Header file search path (get this to work) 
-    #wolfcryptSearchPath = basecomponent.setPath("..\src\config\crypto\wolfcrypt")
-    #wolfcryptSearchPath = basecomponent.setPath("..\src\third_party\wolfssl\wolfssl")
-    #wolfcryptSearchPath = basecomponent.setPath("..\src\third_party\wolfssl\wolfssl")
 
     #Project Include Path Directories
     if (g.trustZoneSupported == True):
@@ -369,24 +365,37 @@ def instantiateComponent(cryptoComponent):
         ccIncludePath = cryptoComponent.createSettingSymbol("XC32_CRYPTO_INCLUDE_DIRS", None)
     ccIncludePath.setCategory("C32")
     ccIncludePath.setKey("extra-include-directories")
-    ccIncludePath.setValue( "../src/third_party/wolfssl/wolfssl/wolfcrypt"
+    ccIncludePath.setValue(    "../src/third_party/wolfssl/wolfssl/wolfcrypt"
                             + ";../src/third_party/wolfssl"
                             + ";../src/third_party/wolfcrypt"
-                            + ";../src/config/" + configName + "/crypto/wolfcrypt")
+                            + ";../src/config/" + configName + "/crypto/wolfcrypt"
+                            + ";../src/config/" + configName + "/crypto/drivers")
+
     ccIncludePath.setAppend(True, ";")
 
 
-    #<config>/MCHP_Crypto_Hash_Config.h - API File
-    projectPath = "config/" + configName + "/crypto/common_crypto/"
+    #----------------------------------------------------------------
+    #WOLFCRYPT Library Configuration as used by CRYPTO component 
+    #
+    #TODO:  Has dependency on connected Wolfcrypt component 
+    #       Wolfcrypt always generated for now.
+    #
+    #TODO: Header file search path (get this to work) 
+    #wolfcryptSearchPath = basecomponent.setPath("..\src\config\crypto\wolfcrypt")
+    #wolfcryptSearchPath = basecomponent.setPath("..\src\third_party\wolfssl\wolfssl")
+    #wolfcryptSearchPath = basecomponent.setPath("..\src\third_party\wolfssl\wolfssl")
 
-
+    #Crypto API Files - to configure Wolfcrypt for SW implementations
     #INCLUDE FILE to configure WOLFCRYPT with the HAVE_CONFIG_H 
     #project define.
+    projectPath = "config/" + configName + "/crypto/wolfcrypt/"
+    srcPath     = "src/wolfcrypt/"             #Src Path
+    dstPath     = "crypto/wolfcrypt/"
     fileSym = AddFileName("config.h",          #Filename    
                           "common_crypto",     #MCC Symbol Name Prefix
                           cryptoComponent,     #MCC Component
-                          "src/wolfcrypt/",    #Src Path
-                          "crypto/wolfcrypt/", #Dest Path
+                          srcPath,             #Src Path
+                          dstPath,             #Dest Path
                           True,                #Enabled
                           projectPath)         #Project Path
 
@@ -395,8 +404,8 @@ def instantiateComponent(cryptoComponent):
     fileSym = AddFileName("user_settings.h",   #Filename    
                           "common_crypto",     #MCC Symbol Name Prefix
                           cryptoComponent,     #MCC Component
-                          "src/wolfcrypt/",    #Path Src
-                          "crypto/wolfcrypt/", #Path Dest
+                          srcPath,             #Path Src
+                          dstPath,             #Path Dest
                           True,                #Enabled
                           projectPath)         #Project Path
 
@@ -435,8 +444,7 @@ def instantiateComponent(cryptoComponent):
     hm.SetupCryptoHashMenu(g.localCryptoComponent)
 
     #<config>/MCHP_Crypto_Hash_Config.h - API File
-    #fileName    = "MCHP_Crypto_Hash_Config.h"
-    #TODO:  Enable Dependency on CONFIG_USE_HASH
+    #TODO:  Enable file gen Dependency on CONFIG_USE_HASH
     fileName    = "MCHP_Crypto_Hash_Config.h"
     ccHashConfigFile= cryptoComponent.createFileSymbol(
             "CC_API_HASH_CONFIG", None)
@@ -460,7 +468,6 @@ def instantiateComponent(cryptoComponent):
         ccHashConfigFile.setSecurity("NON_SECURE")
         print("CRYPTO:  Adding HASH=%s ""%s"%(
                    g.CONFIG_USE_HASH.getValue(), projectPath + fileName + ".ftl" ))
-
 
     #SYM Function Group
     #--CONFIG_USE_SYM
@@ -688,18 +695,23 @@ def ScanHardware(list):
                 (((module.getAttribute("version") == item[2]) or
                   item[2] == ""))):
 
-                print("CRYPTO HW: name(%s) id(%s)"%(item[0],item[1]))
+                #print("CRYPTO HW: name(%s) id(%s)"%(item[0],item[1]))
 
-                #Add to the symbol string to enable the HW module function
+                #Add to the HW support Symbol ID  string to supported hw function
+                #--same string as used for the crypto_config.h configuration defines
                 g.cryptoHwAdditionalDefines = (
                         g.cryptoHwAdditionalDefines.union(item[4])) #MACRO
 
+                #Add the the HW support name String to the crypto_config.h 
+                #HW define configuration list
+                #--Same for the numerical ID string list
                 g.cryptoHwDevSupport = (
                         g.cryptoHwDevSupport.union([item[0]])) #driver ID
                 g.cryptoHwIdSupport= (
                         g.cryptoHwIdSupport.union([item[1]])) #driver ID
                 return True
     return False
+
 
 #Add the HW Drivers
 #--Called after HW has been scanned and the HW Driver Symbols enabled.
@@ -712,8 +724,8 @@ def SetupHwDriverFiles(basecomponent):
     configPath  = "config/" + configName
     srcPathDrv  = "src/drivers/"
     mupPathDrv  = "templates/drivers/"
-    dstPathDrv  = "crypto/drivers"
-    dstPathApi  = "crypto/common_crypto"
+    dstPathDrv  = "crypto/drivers/"
+    dstPathApi  = "crypto/common_crypto/"
     projPathDrv = "config/" + configName + "/crypto/drivers/"
     projPathApi = "config/" + configName + "/crypto/common_crypto/"
 
@@ -741,64 +753,79 @@ def SetupHwDriverFiles(basecomponent):
 
                     #Check for duplicate
                     if (fileNames.issuperset([fileName]) == False):
+
+                        #HW Driver Files
                         if (fileName[:4] == "drv_"):
                             if fileName.endswith(".ftl"):
                                 fileName = fileName[:len(fileName) - 4]
-                                #NOTE:  markup files in templates/drivers
+                                #NOTE:  standard files in src/drivers
+                                prePath = "src/" if (fileName.endswith(".c")) else ""
                                 fileSym = AddMarkupFile(
                                               fileName,  #File Name 
                                               "",        #id prefix
                                               basecomponent, #Component
-                                              mupPathDrv,
-                                              dstPathDrv, False, projPathDrv)
+                                              mupPathDrv + prePath,
+                                              dstPathDrv + prePath, False,
+                                              projPathDrv + prePath)
                             else:
                                 #NOTE:  standard files in src/drivers
+                                prePath = "src/" if fileName.endswith(".c") else ""
                                 fileSym = AddFileName(
                                               fileName,  #File Name 
                                               "",        #id prefix
                                               basecomponent, #Component
-                                              srcPathDrv,
-                                              dstPathDrv, False, projPathDrv)
+                                              srcPathDrv + prePath,
+                                              dstPathDrv + prePath, False,
+                                              projPathDrv + prePath)
+                        #API Files
                         elif (fileName[:4] == "MCHP"):
                             if fileName.endswith(".ftl"):
                                 fileName = fileName[:len(fileName) - 4]
-                                dstPath = (
-                                        dstPathApi if fileName[-1] == "h"
-                                        else dstPathApi + "src/")
-                                projPath = (
-                                        projPathApi if fileName[-1] == "h"
-                                        else projPathApi + "src/")
-                                #NOTE:  markup files in templates/common_crypto
+                                prePath = "src/" if fileName.endswith(".c") else ""
+                                #NOTE:  API markup files in templates/driver
+                                #       --but generated to src/common_crypto
                                 fileSym = AddMarkupFile(
                                               fileName,  #File Name 
                                               "",        #id prefix
                                               basecomponent, #Component
-                                              mupPathDrv,
-                                              dstPathApi, False, projPathApi)
+                                              mupPathDrv + prePath,
+                                              dstPathApi + prePath, False,
+                                              projPathApi + prePath)
                             else:
-                                dstPath = (
-                                        dstPathApi if fileName[-1] == "h"
-                                        else dstPathApi + "src/")
-                                projPath = (
-                                        projPathApi if fileName[-1] == "h"
-                                        else projPathApi + "src/")
+                                prePath = "src/" if fileName.endswith(".c") else ""
                                 fileSym = AddFileName(
                                               fileName,  #File Name 
                                               "",        #id prefix
                                               basecomponent, #Component
-                                              srcPathDrv,
-                                              dstPathApi, False, projPathApi)
+                                              srcPathDrv + prePath,
+                                              dstPathApi + prePath, False,
+                                              projPathApi + prePath)
+                        else:
+                            print("CRYPTO HW: Unknown ""%s"""%(fileName))
+                            continue
 
+                        #New File Added
                         fileNames.update([fileName]) #Add new file
                                             #Add the symbol to the hwDriverFile Dict
-                        #Add the filename to the dict list of Driver file names for
+
+                        #Add the file Symbol to the dict list of Driver file names for
                         #that function key (fKey)
+                        #--this dict used by function menu selection to enable/disable driver
+                        #  file generation
                         g.hwDriverFileDict[fKey].append(fileSym)
                         print(" [%s] %s"%(fKey,fileSym.getOutputName()))
                         fileNames.update([fileName]) #Add new file
 
-                #Add the extra driver files for the given function and HW
-                if (dKey=="CPKCC"):
+                    else:
+                        print("CRYPTO HW: Duplicate ""%s"""%(fileName))
+
+                #Add the extra driver files for the given function(fKey) and HW
+                #list to enable/disable from the menu
+                #TODO:  Disabling from the menu disables the files from being
+                #       included from other menus that use these files.
+                #       this should be fixed by checking the other menu
+                #       selections that could be using these driver files .
+                if (dKey=="CPKCC"):   #used by ECC/ECDH/ECDSA
                     g.hwDriverFileDict[fKey] += g.cpkclDriverFileSyms
 
 
@@ -940,7 +967,6 @@ def SetupHardwareSupport(cryptoComponent) :
     #String Implementation of defines for crypto_config.h.ftl
     #--created from each of the additional define strings
     g.cryptoHwDefines.setDefaultValue(", ".join(g.cryptoHwAdditionalDefines))
-    print(g.cryptoHwAdditionalDefines)
 
     #Create symbols for all possible HW Drivers
     print("CRYPTO HW: %d Symbols --"%(len(g.cryptoHwAdditionalDefines)))
@@ -955,7 +981,8 @@ def SetupHardwareSupport(cryptoComponent) :
             g.hwDriverSymbol[-1].setDefaultValue(True) 
         else:
             g.hwDriverSymbol[-1].setDefaultValue(False) 
-        print("    %s"%(g.hwDriverSymbol[-1].getID()))
+        print("    (%s)%s"%(g.hwDriverSymbol[-1].getValue(),
+                            g.hwDriverSymbol[-1].getID()) )
 
     #Now generate the Driver for the Available HW
     SetupHwDriverFiles(cryptoComponent)
@@ -977,7 +1004,7 @@ def AddAlwaysOnFiles(cryptoComponent):
     g.trustZoneFileIds = []
 
     #<config>/definitions.h include files for the crypto component API and
-    #Wolfcrypto implementation
+    #Wolfcrypt implementation
     srcPath = "templates/system/system_definitions.h.ftl"
     ccSystemDefIncFile = cryptoComponent.createFileSymbol("DRV_CC_SYSTEM_DEF", None)
     if (g.trustZoneSupported == True):
@@ -1033,20 +1060,6 @@ def AddAlwaysOnFiles(cryptoComponent):
 
 
 ################################################################################
-#  TODO: NOT USED.  This looks like a menu function that is not being used.
-#        Could use this for the sub-menu items to the General HW Enable 
-################################################################################
-def setHwEnabledMenuItems(enable):
-    for symbol in cryptoHwMenuComponentsList:
-        if enable:
-            if symbol.getLabel()[-2:] != "HW":
-                symbol.setLabel(symbol.getLabel() + " - HW")
-        else:
-            if symbol.getLabel()[-2:] == "HW":
-                symbol.setLabel(symbol.getLabel()[:-5])
-
-
-################################################################################
 ################################################################################
 # GUI Selection and Attachement Callbacks
 ################################################################################
@@ -1054,7 +1067,7 @@ def setHwEnabledMenuItems(enable):
 ################################################################################
 #-----------------------------------------------------
 #TrustZone
-#  TODO:  This is to make TrustZone optional
+#  TODO:  Make TrustZone optional
 #def handleTzEnabled(symbol, event):
     #if (g.cryptoTzEnabledSymbol.getValue() == True):
         #Set TrustZone <filelist>.setSecurity("SECURE")
