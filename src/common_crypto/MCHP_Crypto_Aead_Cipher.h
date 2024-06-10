@@ -70,6 +70,8 @@ typedef struct
     crypto_CipherOper_E aeadCipherOper_en;
     uint8_t *ptr_key;
     uint32_t aeadKeySize;
+    uint8_t *ptr_initVect;
+    uint16_t initVectLen;    
     uint8_t arr_aeadDataCtx[512];
 }st_Crypto_Aead_AesGcm_ctx;
 

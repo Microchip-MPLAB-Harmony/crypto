@@ -33,6 +33,10 @@
 #ifdef CRYPTO_HASH_WC_ALGO_EN
 #include "crypto/common_crypto/MCHP_Crypto_Hash_WolfcryptWrapper.h"
 #endif /* CRYPTO_HASH_WC_ALGO_EN */
+
+#ifdef CRYPTO_HASH_HW_ALGO_EN
+#include "crypto/common_crypto/MCHP_Crypto_Hash_HwWrapper.h"
+#endif /* CRYPTO_HASH_HW_ALGO_EN */
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -354,9 +358,13 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Digest(crypto_HandlerType_E shaHandler_en, 
                 ret_shaStat_en = Crypto_Hash_Wc_ShaDigest(ptr_data, dataLen, ptr_digest, shaAlgorithm_en);
                 break;
 #endif /* CRYPTO_HASH_WC_SHA1_EN || CRYPTO_HASH_WC_SHA2_EN || CRYPTO_HASH_WC_SHA3_EN */
-            case CRYPTO_HANDLER_HW_INTERNAL:
-                break;
 
+#ifdef CRYPTO_HASH_HW_SHA_EN           
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Digest((CRYPTO_HASH_HW_CONTEXT*)ptr_data, dataLen, ptr_digest, shaAlgorithm_en);
+                break;
+#endif /* CRYPTO_HASH_HW_SHA_EN */
+                
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
                 break;
@@ -394,9 +402,13 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Init(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st,
                 ret_shaStat_en = Crypto_Hash_Wc_ShaInit((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_shaCtx_st->shaAlgo_en);
                 break;
 #endif /* CRYPTO_HASH_WC_SHA1_EN || CRYPTO_HASH_WC_SHA2_EN || CRYPTO_HASH_WC_SHA3_EN */
+                
+#ifdef CRYPTO_HASH_HW_SHA_EN           
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Init((CRYPTO_HASH_HW_CONTEXT*)ptr_shaCtx_st->arr_shaDataCtx, ptr_shaCtx_st->shaAlgo_en);
                 break;
-
+#endif /* CRYPTO_HASH_HW_SHA_EN */
+                
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
                 break;
@@ -426,8 +438,12 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Update(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_s
                 ret_shaStat_en = Crypto_Hash_Wc_ShaUpdate((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_data, dataLen, ptr_shaCtx_st->shaAlgo_en);
                 break;
 #endif /* CRYPTO_HASH_WC_SHA1_EN || CRYPTO_HASH_WC_SHA2_EN || CRYPTO_HASH_WC_SHA3_EN */
+                
+#ifdef CRYPTO_HASH_HW_SHA_EN           
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Update((CRYPTO_HASH_HW_CONTEXT*)ptr_shaCtx_st->arr_shaDataCtx, ptr_data, dataLen);
                 break;
+#endif /* CRYPTO_HASH_HW_SHA_EN */
 
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;
@@ -458,8 +474,12 @@ crypto_Hash_Status_E Crypto_Hash_Sha_Final(st_Crypto_Hash_Sha_Ctx *ptr_shaCtx_st
                 ret_shaStat_en = Crypto_Hash_Wc_ShaFinal((void*)ptr_shaCtx_st->arr_shaDataCtx, ptr_digest, ptr_shaCtx_st->shaAlgo_en);
                 break;
 #endif /* CRYPTO_HASH_WC_SHA1_EN || CRYPTO_HASH_WC_SHA2_EN || CRYPTO_HASH_WC_SHA3_EN */
+                
+#ifdef CRYPTO_HASH_HW_SHA_EN           
             case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_shaStat_en = Crypto_Hash_Hw_Sha_Final((CRYPTO_HASH_HW_CONTEXT*)ptr_shaCtx_st->arr_shaDataCtx, ptr_digest);
                 break;
+#endif /* CRYPTO_HASH_HW_SHA_EN */
 
             default:
                 ret_shaStat_en = CRYPTO_HASH_ERROR_HDLR;

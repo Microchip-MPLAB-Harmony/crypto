@@ -129,7 +129,7 @@ typedef enum {
 typedef struct{
 	uint32_t md5SessionId;
 	crypto_HandlerType_E md5Handler_en;
-	uint8_t arr_md5DataCtx[110];// __attribute__((alinged (8)));
+	uint8_t arr_md5DataCtx[110];// __attribute__((aligned (8)));
 }st_Crypto_Hash_Md5_Ctx;
 #endif /* CRYPTO_HASH_MD5_EN */
 
@@ -138,7 +138,7 @@ typedef struct{
 typedef struct{
 	uint32_t ripemd160SessionId;
 	crypto_HandlerType_E ripedmd160Handler_en;
-	uint8_t arr_ripemd160DataCtx[110];// __attribute__((alinged (8)));
+	uint8_t arr_ripemd160DataCtx[110];// __attribute__((aligned (8)));
 }st_Crypto_Hash_Ripemd160_Ctx;
 #endif /* CRYPTO_HASH_RIPEMD160_EN */
 
@@ -148,7 +148,7 @@ typedef struct{
 	uint32_t shaSessionId;
 	crypto_Hash_Algo_E shaAlgo_en;
 	crypto_HandlerType_E shaHandler_en;
-	uint8_t arr_shaDataCtx[CRYPTO_HASH_SHA512CTX_SIZE];// __attribute__((alinged (8)));
+	uint8_t arr_shaDataCtx[CRYPTO_HASH_SHA512CTX_SIZE] __attribute__((aligned (4)));
 }st_Crypto_Hash_Sha_Ctx;
 #endif /* CRYPTO_HASH_SHA1_EN || CRYPTO_HASH_SHA2_EN || CRYPTO_HASH_SHA3_EN */
 
@@ -159,7 +159,7 @@ typedef struct{
 	uint32_t digestLen;
 	crypto_Hash_Algo_E shakeAlgo_en;
 	crypto_HandlerType_E shakeHandler_en;
-	uint8_t arr_shakeDataCtx[CRYPTO_HASH_SHA512CTX_SIZE];// __attribute__((alinged (8)));
+	uint8_t arr_shakeDataCtx[CRYPTO_HASH_SHA512CTX_SIZE];// __attribute__((aligned (8)));
 }st_Crypto_Hash_Shake_Ctx;
 #endif /* CRYPTO_HASH_SHA3_SHAKE_EN */
 
@@ -172,7 +172,7 @@ typedef struct{
 	crypto_HandlerType_E blakeHandler_en;
 	uint8_t *ptr_key;
 	uint32_t keyLen;
-	uint8_t arr_blakeDataCtx[400];// __attribute__((alinged (8)));
+	uint8_t arr_blakeDataCtx[400];// __attribute__((aligned (8)));
 }st_Crypto_Hash_Blake_Ctx;
 #endif /* CRYPTO_HASH_BLAKE2_EN */
 // *****************************************************************************

@@ -35,6 +35,9 @@
 #include "crypto/common_crypto/MCHP_Crypto_Kas_WolfcryptWrapper.h"
 #endif /* CRYPTO_KAS_WC_ALGO_EN */
 
+#ifdef CRYPTO_KAS_HW_ALGO_EN
+#include "crypto/common_crypto/MCHP_Crypto_Kas_HwWrapper.h"
+#endif /* CRYPTO_KAS_HW_ALGO_EN */
 
 #ifdef CRYPTO_KAS_ECDH_EN
 crypto_Kas_Status_E Crypto_Kas_Ecdh_SharedSecret(crypto_HandlerType_E ecdhHandlerType_en, uint8_t *ptr_privKey, uint32_t privKeyLen, uint8_t *ptr_pubKey, uint32_t pubKeyLen,
@@ -67,10 +70,15 @@ crypto_Kas_Status_E Crypto_Kas_Ecdh_SharedSecret(crypto_HandlerType_E ecdhHandle
                 ret_ecdhStat_en = Crypto_Kas_Wc_Ecdh_SharedSecret(ptr_privKey, privKeyLen, ptr_pubKey, pubKeyLen, ptr_sharedSecret,
                                                                     sharedSecretLen, eccCurveType_en);
             break; 
-#endif /* CRYPTO_KAS_WC_ECDH_EN */           
-            case CRYPTO_HANDLER_HW_INTERNAL:
+#endif /* CRYPTO_KAS_WC_ECDH_EN */  
 
+#ifdef CRYPTO_KAS_HW_ALGO_EN            
+            case CRYPTO_HANDLER_HW_INTERNAL:
+            ret_ecdhStat_en = Crypto_Kas_Ecdh_Hw_SharedSecret(ptr_privKey, privKeyLen, ptr_pubKey, pubKeyLen, ptr_sharedSecret,
+                                                                    sharedSecretLen, eccCurveType_en);
             break;
+#endif /* CRYPTO_KAS_HW_ALGO_EN */
+            
             default:
                 ret_ecdhStat_en = CRYPTO_KAS_ERROR_HDLR;
             break;

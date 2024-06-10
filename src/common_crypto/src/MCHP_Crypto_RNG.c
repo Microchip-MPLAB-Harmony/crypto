@@ -36,6 +36,10 @@
 #include "crypto/common_crypto/MCHP_Crypto_RNG_WolfcryptWrapper.h"
 #endif /* CRYPTO_RNG_WC_ALGO_EN */
 
+#ifdef CRYPTO_RNG_HW_ALGO_EN
+#include "crypto/common_crypto/MCHP_Crypto_Trng_HwWrapper.h"
+#endif /* CRYPTO_RNG_HW_ALGO_EN */
+
 crypto_Rng_Status_E Crypto_Rng_Prng_Generate(crypto_HandlerType_E rngHandlerType_en, uint8_t* ptr_rngData, uint32_t rngLen, uint8_t* ptr_nonce, uint32_t nonceLen, uint32_t sessionID)
 {
     crypto_Rng_Status_E ret_rngStat_en = CRYPTO_RNG_ERROR_NOTSUPPTED;
@@ -61,10 +65,14 @@ crypto_Rng_Status_E Crypto_Rng_Prng_Generate(crypto_HandlerType_E rngHandlerType
             case CRYPTO_HANDLER_SW_WOLFCRYPT:
                 ret_rngStat_en = Crypto_Rng_Wc_Prng_GenerateBlock(ptr_rngData, rngLen, ptr_nonce, nonceLen);
             break; 
-#endif /* CRYPTO_RNG_WC_PRNG_EN */           
-            case CRYPTO_HANDLER_HW_INTERNAL:
+#endif /* CRYPTO_RNG_WC_PRNG_EN */  
 
+#ifdef CRYPTO_RNG_HW_TRNG_EN            
+            case CRYPTO_HANDLER_HW_INTERNAL:
+                ret_rngStat_en = Crypto_Rng_Trng_Generate(ptr_rngData, rngLen);
             break;
+#endif /* CRYPTO_RNG_HW_TRNG_EN */
+            
             default:
                 ret_rngStat_en = CRYPTO_RNG_ERROR_HDLR;
             break;

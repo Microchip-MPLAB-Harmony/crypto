@@ -35,6 +35,10 @@
 #include "crypto/common_crypto/MCHP_Crypto_DigSign_WolfcryptWrapper.h"
 #endif /* CRYPTO_DIGISIGN_WC_ALGO_EN */ 
 
+#ifdef CRYPTO_DIGISIGN_HW_ALGO_EN 
+#include "crypto/common_crypto/MCHP_Crypto_DigSign_HwWrapper.h"
+#endif /* CRYPTO_DIGISIGN_HW_ALGO_EN */ 
+
 #ifdef CRYPTO_DIGISIGN_ECDSA_EN
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(crypto_HandlerType_E ecdsaHandlerType_en, uint8_t *ptr_inputHash, uint32_t hashLen, uint8_t *ptr_outSig, 
                                                     uint32_t sigLen, uint8_t *ptr_privKey, uint32_t privKeyLen, crypto_EccCurveType_E eccCurveType_En, uint32_t ecdsaSessionId)
@@ -77,10 +81,13 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(crypto_HandlerType_E ecdsaHa
             case CRYPTO_HANDLER_SW_WOLFCRYPT:
                 ret_ecdsaStat_en = Crypto_DigiSign_Wc_Ecdsa_Sign(ptr_inputHash, hashLen, ptr_outSig, sigLen, ptr_privKey, privKeyLen, eccCurveType_En);
             break; 
-#endif /* CRYPTO_DIGISIGN_WC_ECDSA_EN */           
-            case CRYPTO_HANDLER_HW_INTERNAL:
+#endif /* CRYPTO_DIGISIGN_WC_ECDSA_EN */ 
 
+#ifdef CRYPTO_DIGISIGN_HW_ALGO_EN             
+            case CRYPTO_HANDLER_HW_INTERNAL:
+            ret_ecdsaStat_en = Crypto_DigiSign_Ecdsa_Hw_Sign(ptr_inputHash, hashLen, ptr_outSig, sigLen, ptr_privKey, privKeyLen, eccCurveType_En);
             break;
+#endif /* CRYPTO_DIGISIGN_HW_ALGO_EN */            
             default:
                 ret_ecdsaStat_en = CRYPTO_DIGISIGN_ERROR_HDLR;
             break;
@@ -89,7 +96,6 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Sign(crypto_HandlerType_E ecdsaHa
 
     return ret_ecdsaStat_en;
 }
-
 
 crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify(crypto_HandlerType_E ecdsaHandlerType_en, uint8_t *ptr_inputHash, uint32_t hashLen, uint8_t *ptr_inputSig, uint32_t sigLen, 
                                                     uint8_t *ptr_pubKey, uint32_t pubKeyLen, int8_t *ptr_hashVerifyStat, crypto_EccCurveType_E eccCurveType_En, uint32_t ecdsaSessionId)
@@ -134,10 +140,15 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Verify(crypto_HandlerType_E ecdsa
             case CRYPTO_HANDLER_SW_WOLFCRYPT:
                 ret_ecdsaStat_en = Crypto_DigiSign_Wc_Ecdsa_Verify(ptr_inputHash, hashLen, ptr_inputSig, sigLen, ptr_pubKey, pubKeyLen, ptr_hashVerifyStat, eccCurveType_En);
             break; 
-#endif /* CRYPTO_DIGISIGN_WC_ECDSA_EN */           
+#endif /* CRYPTO_DIGISIGN_WC_ECDSA_EN */
+            
+#ifdef CRYPTO_DIGISIGN_HW_ALGO_EN             
             case CRYPTO_HANDLER_HW_INTERNAL:
-
+            ret_ecdsaStat_en = Crypto_DigiSign_Ecdsa_Hw_Verify(ptr_inputHash, hashLen, ptr_inputSig, sigLen, ptr_pubKey, pubKeyLen, 
+                                        ptr_hashVerifyStat, eccCurveType_En);
             break;
+#endif /* CRYPTO_DIGISIGN_HW_ALGO_EN */ 
+            
             default:
                 ret_ecdsaStat_en = CRYPTO_DIGISIGN_ERROR_HDLR;
             break;
