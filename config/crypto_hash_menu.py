@@ -568,7 +568,7 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.cryptoSha3Shake128EnabledSymbol.setDefaultValue(False)
     g.cryptoSha3Shake128EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
-    #Sha3/Shake-512 HW Symbol
+    #Sha3/Shake-128 HW Symbol
     g.cryptoHwSha3Shake128EnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_sha3_shake_128hw", g.cryptoSha3Shake128EnabledSymbol)
     g.cryptoHwSha3Shake128EnabledSymbol.setLabel("Use Hardware Acceleration?")
@@ -597,7 +597,36 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.cryptoSha3Shake256EnabledSymbol.setDefaultValue(False)
     g.cryptoSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
-    #Sha3/Shake-512 HW Symbol
+    #Sha3/Shake-256 HW Symbol
+    g.cryptoHwSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_sha3_shake_256hw", g.cryptoSha3Shake256EnabledSymbol)
+    g.cryptoHwSha3Shake256EnabledSymbol.setLabel("Use Hardware Acceleration?")
+    g.cryptoHwSha3Shake256EnabledSymbol.setDescription(
+       "Turn on hardware acceleration" +
+       "for the SHA3 SHAKE-256 Hash Algorithm")
+    g.cryptoHwSha3Shake256EnabledSymbol.setVisible(False)
+    g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(False)
+    if ((g.cryptoHwSha3Shake256Supported == True)):
+        g.cryptoSha3Shake256EnabledSymbol.setDependencies(
+                handleSha3Shake256Enabled,
+                ["crypto_sha3_shake_256",
+                "crypto_sha3_shake_256_hw"])
+        if (g.cryptoSha3Shake256EnabledSymbol.getValue() == True):
+            g.cryptoHwSha3Shake256EnabledSymbol.setVisible(True)
+            g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(True)
+    g.cryptoHwSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
+
+    #SHA-3/SHAKE-256 Symbol 
+    g.cryptoSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
+            "crypto_sha3_shake_256", g.sha3Menu)
+    g.cryptoSha3Shake256EnabledSymbol.setLabel("SHA3 SHAKE-256?")
+    g.cryptoSha3Shake256EnabledSymbol.setDescription(
+            "Use the SHA3 SHAKE-256 Hash Algorithm.")
+    g.cryptoSha3Shake256EnabledSymbol.setVisible(True)
+    g.cryptoSha3Shake256EnabledSymbol.setDefaultValue(False)
+    g.cryptoSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
+
+    #Sha3/Shake-256 HW Symbol
     g.cryptoHwSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_sha3_shake_256hw", g.cryptoSha3Shake256EnabledSymbol)
     g.cryptoHwSha3Shake256EnabledSymbol.setLabel("Use Hardware Acceleration?")
@@ -888,7 +917,7 @@ def handleMd5Enabled(symbol, event):
 
 #-----------------------------------------------------
 #RIPE MD5 - 160
-def handleRipeMd5160Enabled(symbol, event):
+def handleRipeMd160Enabled(symbol, event):
     if (g.cryptoRipeMd5160EnabledSymbol.getValue() == True):
         if (g.cryptoHwRipeMd5160Supported):
             g.cryptoHwRipeMd5160EnabledSymbol.setVisible(True)
@@ -1159,6 +1188,19 @@ def handleSha3Shake128Enabled(symbol, event):
     if (ScanHash() == True):
         data = symbol.getComponent()
 
+def handleSha3Shake256Enabled(symbol, event):
+    if (g.cryptoSha3Shake256EnabledSymbol.getValue() == True):
+        if (g.cryptoHwSha3Shake256Supported):
+            g.cryptoHwSha3Shake256EnabledSymbol.setVisible(True)
+        else:
+            g.cryptoHwSha3Shake256EnabledSymbol.setValue(False)
+            g.cryptoHwSha3Shake256EnabledSymbol.setVisible(False)
+    else:
+        g.cryptoHwSha3Shake256EnabledSymbol.setValue(False)
+        g.cryptoHwSha3Shake256EnabledSymbol.setVisible(False)
+    if (ScanHash() == True):
+        data = symbol.getComponent()
+
 #-----------------------------------------------------
 #BLAKE
 def handleBlake224Enabled(symbol, event):
@@ -1215,55 +1257,55 @@ def handleBlake512Enabled(symbol, event):
 
 #-----------------------------------------------------
 #BLAKE2
-def handleBlake2224Enabled(symbol, event):
-    if (g.cryptoBlake2224EnabledSymbol.getValue() == True):
-        if (g.cryptoHwBlake2224Supported):
-            g.cryptoHwBlake2224EnabledSymbol.setVisible(True)
+def handleBlake2s224Enabled(symbol, event):
+    if (g.cryptoBlake2s224EnabledSymbol.getValue() == True):
+        if (g.cryptoHwBlake2s224Supported):
+            g.cryptoHwBlake2s224EnabledSymbol.setVisible(True)
         else:
-            g.cryptoHwBlake2224EnabledSymbol.setValue(False)
-            g.cryptoHwBlake2224EnabledSymbol.setVisible(False)
+            g.cryptoHwBlake2s224EnabledSymbol.setValue(False)
+            g.cryptoHwBlake2s224EnabledSymbol.setVisible(False)
     else:
-        g.cryptoHwBlake2224EnabledSymbol.setValue(False)
-        g.cryptoHwBlake2224EnabledSymbol.setVisible(False)
+        g.cryptoHwBlake2s224EnabledSymbol.setValue(False)
+        g.cryptoHwBlake2s224EnabledSymbol.setVisible(False)
     if (ScanHash() == True):
         data = symbol.getComponent()
 
-def handleBlake2256Enabled(symbol, event):
-    if (g.cryptoBlake2256EnabledSymbol.getValue() == True):
-        if (g.cryptoHwBlake2256Supported):
-            g.cryptoHwBlake2256EnabledSymbol.setVisible(True)
+def handleBlake2s256Enabled(symbol, event):
+    if (g.cryptoBlake2s256EnabledSymbol.getValue() == True):
+        if (g.cryptoHwBlake2s256Supported):
+            g.cryptoHwBlake2s256EnabledSymbol.setVisible(True)
         else:
-            g.cryptoHwBlake2256EnabledSymbol.setValue(False)
-            g.cryptoHwBlake2256EnabledSymbol.setVisible(False)
+            g.cryptoHwBlake2s256EnabledSymbol.setValue(False)
+            g.cryptoHwBlake2s256EnabledSymbol.setVisible(False)
     else:
-        g.cryptoHwBlake2256EnabledSymbol.setValue(False)
-        g.cryptoHwBlake2256EnabledSymbol.setVisible(False)
+        g.cryptoHwBlake2s256EnabledSymbol.setValue(False)
+        g.cryptoHwBlake2s256EnabledSymbol.setVisible(False)
     if (ScanHash() == True):
         data = symbol.getComponent()
 
-def handleBlake2384Enabled(symbol, event):
-    if (g.cryptoBlake2384EnabledSymbol.getValue() == True):
-        if (g.cryptoHwBlake2384Supported):
-            g.cryptoHwBlake2384EnabledSymbol.setVisible(True)
+def handleBlake2b384Enabled(symbol, event):
+    if (g.cryptoBlake2b384EnabledSymbol.getValue() == True):
+        if (g.cryptoHwBlake2b384Supported):
+            g.cryptoHwBlake2b384EnabledSymbol.setVisible(True)
         else:
-            g.cryptoHwBlake2384EnabledSymbol.setValue(False)
-            g.cryptoHwBlake2384EnabledSymbol.setVisible(False)
+            g.cryptoHwBlake2b384EnabledSymbol.setValue(False)
+            g.cryptoHwBlake2b384EnabledSymbol.setVisible(False)
     else:
-        g.cryptoHwBlake2384EnabledSymbol.setValue(False)
-        g.cryptoHwBlake2384EnabledSymbol.setVisible(False)
+        g.cryptoHwBlake2b384EnabledSymbol.setValue(False)
+        g.cryptoHwBlake2b384EnabledSymbol.setVisible(False)
     if (ScanHash() == True):
         data = symbol.getComponent()
 
-def handleBlake2512Enabled(symbol, event):
-    if (g.cryptoBlake2512EnabledSymbol.getValue() == True):
-        if (g.cryptoHwBlake2512Supported):
-            g.cryptoHwBlake2512EnabledSymbol.setVisible(True)
+def handleBlake2b512Enabled(symbol, event):
+    if (g.cryptoBlake2b512EnabledSymbol.getValue() == True):
+        if (g.cryptoHwBlake2b512Supported):
+            g.cryptoHwBlake2b512EnabledSymbol.setVisible(True)
         else:
-            g.cryptoHwBlake2512EnabledSymbol.setValue(False)
-            g.cryptoHwBlake2512EnabledSymbol.setVisible(False)
+            g.cryptoHwBlake2b512EnabledSymbol.setValue(False)
+            g.cryptoHwBlake2b512EnabledSymbol.setVisible(False)
     else:
-        g.cryptoHwBlake2512EnabledSymbol.setValue(False)
-        g.cryptoHwBlake2512EnabledSymbol.setVisible(False)
+        g.cryptoHwBlake2b512EnabledSymbol.setValue(False)
+        g.cryptoHwBlake2b512EnabledSymbol.setVisible(False)
     if (ScanHash() == True):
         data = symbol.getComponent()
 
