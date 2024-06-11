@@ -570,7 +570,7 @@ def SetupCryptoHashMenu(cryptoComponent):
 
     #Sha3/Shake-128 HW Symbol
     g.cryptoHwSha3Shake128EnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sha3_shake_128hw", g.cryptoSha3Shake128EnabledSymbol)
+            "crypto_sha3_shake_128_hw", g.cryptoSha3Shake128EnabledSymbol)
     g.cryptoHwSha3Shake128EnabledSymbol.setLabel("Use Hardware Acceleration?")
     g.cryptoHwSha3Shake128EnabledSymbol.setDescription(
        "Turn on hardware acceleration" +
@@ -599,7 +599,7 @@ def SetupCryptoHashMenu(cryptoComponent):
 
     #Sha3/Shake-256 HW Symbol
     g.cryptoHwSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sha3_shake_256hw", g.cryptoSha3Shake256EnabledSymbol)
+            "crypto_sha3_shake_256_hw", g.cryptoSha3Shake256EnabledSymbol)
     g.cryptoHwSha3Shake256EnabledSymbol.setLabel("Use Hardware Acceleration?")
     g.cryptoHwSha3Shake256EnabledSymbol.setDescription(
        "Turn on hardware acceleration" +
@@ -628,7 +628,7 @@ def SetupCryptoHashMenu(cryptoComponent):
 
     #Sha3/Shake-256 HW Symbol
     g.cryptoHwSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sha3_shake_256hw", g.cryptoSha3Shake256EnabledSymbol)
+            "crypto_sha3_shake_256_hw", g.cryptoSha3Shake256EnabledSymbol)
     g.cryptoHwSha3Shake256EnabledSymbol.setLabel("Use Hardware Acceleration?")
     g.cryptoHwSha3Shake256EnabledSymbol.setDescription(
        "Turn on hardware acceleration" +
