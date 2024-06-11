@@ -53,7 +53,7 @@
 <#-- HASH RIPEMD-160 -->
 <#if crypto_ripe_md_160 == true>
     <#lt>#define CRYPTO_HASH_RIPEMD160_EN
-    <#if crypto_ripemd_160_hw == true>
+    <#if crypto_ripe_md_160_hw == true>
         <#lt>#define CRYPTO_HASH_HW_RIPEMD160_EN
     <#else>
         <#lt>#define CRYPTO_HASH_WC_RIPEMD160_EN
