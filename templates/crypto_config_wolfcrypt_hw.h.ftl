@@ -190,6 +190,7 @@ extern "C" {
 <#lt>//#if defined(HAVE_FIPS_VERSION) && HAVE_FIPS_VERSION == 2 
 <#lt>//&& ( defined(WOLFSSL_SP_ARM32_ASM) || defined(WOLFSSL_SP_ARM64_ASM) ) 
 <#lt>//#define WOLFSSL_SP_NO_256   
+<#lt>#define WOLFSSL_SP_384   
 
 <#lt>//#define WOLFSSL_SP_ARM32_ASM   //Dependent on MCU Arch.
 

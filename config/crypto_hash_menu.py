@@ -616,34 +616,6 @@ def SetupCryptoHashMenu(cryptoComponent):
             g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(True)
     g.cryptoHwSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
-    #SHA-3/SHAKE-256 Symbol 
-    g.cryptoSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sha3_shake_256", g.sha3Menu)
-    g.cryptoSha3Shake256EnabledSymbol.setLabel("SHA3 SHAKE-256?")
-    g.cryptoSha3Shake256EnabledSymbol.setDescription(
-            "Use the SHA3 SHAKE-256 Hash Algorithm.")
-    g.cryptoSha3Shake256EnabledSymbol.setVisible(True)
-    g.cryptoSha3Shake256EnabledSymbol.setDefaultValue(False)
-    g.cryptoSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
-
-    #Sha3/Shake-256 HW Symbol
-    g.cryptoHwSha3Shake256EnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_sha3_shake_256_hw", g.cryptoSha3Shake256EnabledSymbol)
-    g.cryptoHwSha3Shake256EnabledSymbol.setLabel("Use Hardware Acceleration?")
-    g.cryptoHwSha3Shake256EnabledSymbol.setDescription(
-       "Turn on hardware acceleration" +
-       "for the SHA3 SHAKE-256 Hash Algorithm")
-    g.cryptoHwSha3Shake256EnabledSymbol.setVisible(False)
-    g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(False)
-    if ((g.cryptoHwSha3Shake256Supported == True)):
-        g.cryptoSha3Shake256EnabledSymbol.setDependencies(
-                handleSha3Shake256Enabled,
-                ["crypto_sha3_shake_256",
-                "crypto_sha3_shake_256_hw"])
-        if (g.cryptoSha3Shake256EnabledSymbol.getValue() == True):
-            g.cryptoHwSha3Shake256EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(True)
-    g.cryptoHwSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #BLAKE Hash Menu
     g.blakeMenu = cryptoComponent.createMenuSymbol(

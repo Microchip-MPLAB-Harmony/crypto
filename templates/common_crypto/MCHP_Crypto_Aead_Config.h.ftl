@@ -77,17 +77,24 @@
 </#if>
 
 //****WolfcryptWrapper Algorithm Macros*************
+//NOTE:  AEAD-AES algorithms accelerated using the AES HW driver
+//       selection
+<#if crypto_aead_aes_gcm_hw_en == false>
+    <#lt>#define CRYPTO_AEAD_WC_AESGCM_EN
+<#else>
+    #warning "HW Implementation of AES-GCM algorithm not available"
+</#if>
+
 <#if crypto_aead_aes_ccm_hw_en == false>
     <#lt>#define CRYPTO_AEAD_WC_AESCCM_EN
 <#else>
-    #warning "HW Implementation of AES-CCM algorithm not implemented"
+    #warning "HW Implementation of AES-CCM algorithm not available"
 </#if>
 
 <#if crypto_aead_aes_eax_hw_en == false>
     <#lt>#define CRYPTO_AEAD_WC_AESEAX_EN
 <#else>
-    #warning "HW Implementation of AES-EAX algorithm not implemented"
+    #warning "HW Implementation of AES-EAX algorithm not available"
 </#if>
 
 #endif //MCHP_CRYPTO_AEAD_CONFIG_H
-
