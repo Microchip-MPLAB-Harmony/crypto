@@ -60,7 +60,7 @@ typedef struct
     crypto_HandlerType_E aeadHandlerType_en;
     uint8_t *ptr_key;
     uint32_t aeadKeySize;
-    uint8_t arr_aeadDataCtx[512];
+    uint8_t arr_aeadDataCtx[512]__attribute__((aligned (4)));
 }st_Crypto_Aead_AesCcm_ctx;
 
 typedef struct
@@ -72,7 +72,7 @@ typedef struct
     uint32_t aeadKeySize;
     uint8_t *ptr_initVect;
     uint16_t initVectLen;    
-    uint8_t arr_aeadDataCtx[512];
+    uint8_t arr_aeadDataCtx[512]__attribute__((aligned (4)));
 }st_Crypto_Aead_AesGcm_ctx;
 
 typedef struct
@@ -84,7 +84,7 @@ typedef struct
     uint32_t aeadKeySize;
     uint8_t *ptr_aeadNonce;
     uint32_t aeadNonceLen;
-    uint8_t arr_aeadDataCtx[512];
+    uint8_t arr_aeadDataCtx[512]__attribute__((aligned (4)));
 }st_Crypto_Aead_AesEax_ctx;
 // *****************************************************************************
 #ifdef CRYPTO_AEAD_AESCCM_EN 
