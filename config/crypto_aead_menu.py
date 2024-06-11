@@ -72,7 +72,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
     #AEAD-AES Main Menu
     g.aeadAesMenu = cryptoComponent.createMenuSymbol(
             "crypto_aead_aes", g.aeadMenu)
-    g.aeadAesMenu.setLabel("AES(AEAD)")
+    g.aeadAesMenu.setLabel("AED-AES(128/192/256)")
     g.aeadAesMenu.setDescription("AES AEAD Algorithms:")
     g.aeadAesMenu.setVisible(True)
     g.aeadAesMenu.setHelp('CRYPT_AEAD_AES_SUM')
@@ -106,12 +106,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
     g.aeadAesModesMenu.setLabel("AEAD-AES Algorithm Modes")
     g.aeadAesModesMenu.setDescription("AEAD-AES Modes:")
     g.aeadAesModesMenu.setHelp('CRYPT_AEAD_AES_MODES_SUM')
-    #if (g.cryptoAeadAesModesSupported):
     g.aeadAesModesMenu.setVisible(True)
-    #else:
-    #    g.aeadAesModesMenu.setVisible(False)
-    #g.aeadAesModesMenu.setDependencies(
-    #            handleAeadAesModesMenu, [
     #                "crypto_aead_aes_128",
     #                "crypto_aead_aes_192",
     #                "crypto_aead_aes_256"])

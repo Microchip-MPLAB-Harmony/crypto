@@ -60,14 +60,22 @@
 //*****OPERATION MODE ENABLE MACROS************
 
 //AEAD SW/HW Mode
-<#if crypto_aead_aes_ccm_hw_en == false || crypto_aead_aes_eax_hw_en == false>
+<#if (
+      crypto_aead_aes_gcm_hw_en == false ||
+      crypto_aead_aes_ccm_hw_en == false || 
+      crypto_aead_aes_eax_hw_en == false>
     <#lt>#define CRYPTO_AEAD_WC_ALGO_EN
 <#else>
-    #warning "HW Implementation of AEAD algorithms not implemented"
+    #warning "HW Implementation of AEAD algorithms not available"
 </#if>
 
 //------------------------------------------------------------------------------
 //AES Algorithms Operational Mode Macros
+
+<#if crypto_aead_aes_gcm_en == true>
+    <#lt>#define CRYPTO_AEAD_AESCCM_EN
+</#if>
+
 <#if crypto_aead_aes_ccm_en == true>
     <#lt>#define CRYPTO_AEAD_AESCCM_EN
 </#if>
