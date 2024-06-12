@@ -72,10 +72,10 @@ def SetupCryptoAeadMenu(cryptoComponent):
     #AEAD-AES Main Menu
     g.aeadAesMenu = cryptoComponent.createMenuSymbol(
             "crypto_aead_aes", g.aeadMenu)
-    g.aeadAesMenu.setLabel("AED-AES(128/192/256)")
-    g.aeadAesMenu.setDescription("AES AEAD Algorithms:")
+    g.aeadAesMenu.setLabel("AEAD-AES(128/192/256)")
+    g.aeadAesMenu.setDescription("AEAD-AES  Algorithms:")
     g.aeadAesMenu.setVisible(True)
-    g.aeadAesMenu.setHelp('CRYPT_AEAD_AES_SUM')
+    g.aeadAesMenu.setHelp('CRYPTO_AEAD_AES_SUM')
 
     #AEAD AES HW Enable (For all AEAD AES Algorithms that have HW Support)
     g.cryptoHwAeadAesEnabledSymbol = cryptoComponent.createBooleanSymbol(

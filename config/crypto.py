@@ -372,6 +372,8 @@ def instantiateComponent(cryptoComponent):
                             + ";../src/config/" + configName + "/crypto/drivers")
 
     ccIncludePath.setAppend(True, ";")
+    print("CRYPTO: Include Path -")
+    print(ccIncludePath.getValue())
 
 
     #----------------------------------------------------------------
