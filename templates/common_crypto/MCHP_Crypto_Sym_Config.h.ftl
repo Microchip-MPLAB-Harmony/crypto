@@ -146,7 +146,7 @@ extern "C" {
     </#if>
 
 <#if crypto_sym_aes_kw_en == true>
-    <#lt>#define CRYPTO_SYM_AESKEYWRAP_EN            //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI
+    <#lt>#define CRYPTO_SYM_AESKEYWRAP_ENABLE            //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI
     </#if>
 
 
@@ -164,15 +164,14 @@ extern "C" {
 
 //****WolfcryptWrapper Algorithm Macros*************
 #ifdef CRYPTO_SYM_AES_ENABLE
-    <#lt>#define CRYPTO_SYM_WC_ALGO_EN             //Any symmetric algorithm selected to use Wolfcrypt
-    <#lt>#define CRYPTO_SYM_WC_AES_EN              //AES algorithm selected to use Wolfcrypt 
-    <#lt>#define CRYPTO_SYM_WC_AESKW_EN            //AES Key Wrap Algorithm
+    <#lt>#define CRYPTO_SYM_WC_ALGO_EN         //Any symmetric algorithm selected to use Wolfcrypt
+    <#lt>#define CRYPTO_SYM_WC_AES_EN          //AES algorithm selected to use Wolfcrypt 
+    <#lt>#define CRYPTO_SYM_WC_AESKW_EN        //AES Key Wrap Algorithm
+    //<#lt>#define CRYPTO_SYM_WC_CAMELLIA_EN   //Camellia algorithm selected to use Wolfcrypt 
+    //<#lt>#define CRYPTO_SYM_WC_TDES_EN       //Wolfcrypt software library selected to use 3DES/TDES algorithm logic
+    //<#lt>#define CRYPTO_SYM_WC_CHACHA20_EN   //ChaCha20 algorithm is selected to use Wolfcrypt 
 #endif
 
-//<#lt>#define CRYPTO_SYM_WC_CAMELLIA_EN       //Camellia algorithm selected to use Wolfcrypt 
-//<#lt>#define CRYPTO_SYM_WC_TDES_EN           //Wolfcrypt software library selected to use 3DES/TDES algorithm logic
-//<#lt>#define CRYPTO_SYM_WC_AESKW_EN          //AES-Key-Wrap algorithm option selected to use Wolfcrypt
-//<#lt>#define CRYPTO_SYM_WC_CHACHA20_EN       //ChaCha20 algorithm is selected to use Wolfcrypt 
 //**************************************************
 
 
