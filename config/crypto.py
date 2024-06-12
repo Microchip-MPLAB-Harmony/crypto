@@ -254,7 +254,7 @@ def SetupCpkclDriverFiles(basecomponent) :
                          basecomponent,                   #MCC Component
                          g.cpkclDriverPath,                 #Src Path
                          dstPath,                         #Path Dest
-                         True,                            #Enabled
+                         False,                            #Enabled
                          projectPath) #Project Path
         g.cpkclDriverFileSyms.append(fileSym)
 
@@ -266,7 +266,7 @@ def SetupCpkclDriverFiles(basecomponent) :
                          basecomponent,                   #MCC Component
                          g.cpkclDriverPath,                 #Src Path
                          dstPath,                         #Path Dest
-                         True,                            #Enabled
+                         False,                            #Enabled
                          projectPath) #Project Path
         g.cpkclDriverFileSyms.append(fileSym)
 

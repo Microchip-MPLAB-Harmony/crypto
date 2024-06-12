@@ -77,29 +77,6 @@ def SetupCryptoAeadMenu(cryptoComponent):
     g.aeadAesMenu.setVisible(True)
     g.aeadAesMenu.setHelp('CRYPTO_AEAD_AES_SUM')
 
-    #AEAD AES HW Enable (For all AEAD AES Algorithms that have HW Support)
-    g.cryptoHwAeadAesEnabledSymbol = cryptoComponent.createBooleanSymbol(
-            "crypto_aead_aes_hw_en", g.aeadAesMenu)
-    g.cryptoHwAeadAesEnabledSymbol.setLabel("Enable AEAD-AES Hardware Acceleration?")
-    g.cryptoHwAeadAesEnabledSymbol.setDescription(
-        "Turn on the hardware acceleration" +
-        "for the AEAD AES Algorithms")
-    if (g.cryptoHwAeadAesSupported):
-        g.cryptoHwAeadAesEnabledSymbol.setDependencies(
-                handleAesHwEnabled,
-                ["crypto_aead_aes_hw_en"])
-        g.cryptoHwAeadAesEnabledSymbol.setVisible(True)
-        g.cryptoHwAeadAesEnabledSymbol.setDefaultValue(False)
-    else:
-        g.cryptoHwAeadAesEnabledSymbol.setVisible(False)
-        g.cryptoHwAeadAesEnabledSymbol.setDefaultValue(False)
-    g.cryptoHwAeadAesEnabledSymbol.setHelp('CRYPT_AES_SUM')
-    #TODO:  Add the Hardware
-    g.cryptoHwAeadAesEnabledSymbol.setReadOnly(True)
-
-    #Global to indicate when AES Modes are visible
-    g.cryptoAeadAesModesSupported = False
-
     #AEAD-AES MODES MENU
     g.aeadAesModesMenu = cryptoComponent.createMenuSymbol(
             "crypto_aead_aes_modes", g.aeadAesMenu)
