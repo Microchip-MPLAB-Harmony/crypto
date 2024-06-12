@@ -146,7 +146,7 @@ extern "C" {
     </#if>
 
 <#if crypto_sym_aes_kw_en == true>
-    <#lt>#define CRYPTO_SYM_AESKW_EN            //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI
+    <#lt>#define CRYPTO_SYM_AESKEYWRAP_EN            //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI
     </#if>
 
 
@@ -166,6 +166,7 @@ extern "C" {
 #ifdef CRYPTO_SYM_AES_ENABLE
     <#lt>#define CRYPTO_SYM_WC_ALGO_EN             //Any symmetric algorithm selected to use Wolfcrypt
     <#lt>#define CRYPTO_SYM_WC_AES_EN              //AES algorithm selected to use Wolfcrypt 
+    <#lt>#define CRYPTO_SYM_WC_AESKW_EN            //AES Key Wrap Algorithm
 #endif
 
 //<#lt>#define CRYPTO_SYM_WC_CAMELLIA_EN       //Camellia algorithm selected to use Wolfcrypt 
