@@ -81,8 +81,8 @@ def ScanHash():
 
 
     if (
-        md5Value or shaValue or sha3Value or
-        shakeValue or blakeValue or blake2Value):
+        md5Value or shaValue or sha3Value or ripeValue
+        shakeValue or blakeValue or blake2Value ):
         newValue = True
     else:
         newValue = False
@@ -137,7 +137,7 @@ def ScanShaHw():
             print("SHA:  512/256 Enabled")
             newValue = True
 
-    print("SHA: sha_hw - %s (newValue = %s)"%(
+    print("SHA: sha_hw - current = %s (newValue = %s)"%(
         g.CONFIG_USE_SHA_HW.getValue(), newValue))
 
     if (g.CONFIG_USE_SHA_HW.getValue() != newValue):
@@ -145,10 +145,15 @@ def ScanShaHw():
         print("SHA:  Enable HW (%s)"%(newValue))
         for fSym in g.hwDriverFileDict[fKey]:
             fSym.setEnabled(newValue)
+            print("SHA:  update [SHA]%s(%s)"%(
+                  fSym.getOutputName(),fSym.getEnabled()))
         return True
 
     else:
         print("SHA: HW Unchanged (%s)"%(newValue))
+        for fSym in g.hwDriverFileDict[fKey]:
+            print("SHA:  unchanged [SHA]%s(%s)"%(
+                  fSym.getOutputName(),fSym.getEnabled()))
         return False
 
 #TODO: ScanSha3Hw()
@@ -978,14 +983,10 @@ def handleSha256Enabled(symbol, event):
     if (ScanShaHw() == True):
         numHwDrv = len(g.hwDriverFileDict['SHA'])
         print("SHA256: %d Driver File Symbols Updated:"%(numHwDrv))
-        if (len(g.hwDriverFileDict['SHA']) > 0):
-            for fSym in g.hwDriverFileDict['SHA']:
-                print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
+        for fSym in g.hwDriverFileDict['SHA']:
+            print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
         else: print("SHA256:  %d Driver Files Updated"%(numHwDrv))
 
-    for fSym in g.hwDriverFileDict["SHA"]:
-        print("SHA256:  Update [SHA]%s(%s)"%(
-              fSym.getOutputName(),fSym.getEnabled()))
 
 
 def handleSha384Enabled(symbol, event):
@@ -1009,9 +1010,6 @@ def handleSha384Enabled(symbol, event):
                 print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
         else: print("SHA384:  %d Driver Files Updated"%(numHwDrv))
 
-    for fSym in g.hwDriverFileDict["SHA"]:
-        print("SHA384:  Update [SHA]%s(%s)"%(
-              fSym.getOutputName(),fSym.getEnabled()))
 
 def handleSha512Enabled(symbol, event):
     if (g.cryptoSha512EnabledSymbol.getValue() == True):
@@ -1036,9 +1034,6 @@ def handleSha512Enabled(symbol, event):
                 print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
         else: print("SHA512:  %d Driver Files Updated"%(numHwDrv))
 
-    for fSym in g.hwDriverFileDict["SHA"]:
-        print("SHA512:  Update [SHA]%s(%s)"%(
-              fSym.getOutputName(),fSym.getEnabled()))
 
 def handleSha512_224Enabled(symbol, event):
     if (g.cryptoSha512_224EnabledSymbol.getValue() == True):
@@ -1063,9 +1058,6 @@ def handleSha512_224Enabled(symbol, event):
                 print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
         else: print("SHA512_224:  %d Driver Files Updated"%(numHwDrv))
 
-    for fSym in g.hwDriverFileDict["SHA"]:
-        print("SHA512_224:  Update [SHA]%s(%s)"%(
-              fSym.getOutputName(),fSym.getEnabled()))
 
 def handleSha512_256Enabled(symbol, event):
     if (g.cryptoSha512_256EnabledSymbol.getValue() == True):
@@ -1089,10 +1081,6 @@ def handleSha512_256Enabled(symbol, event):
             for fSym in g.hwDriverFileDict['SHA']:
                 print(" File(%s) - %s"%(fSym.getEnabled(),fSym.getOutputName()))
         else: print("SHA512_256:  %d Driver Files Updated"%(numHwDrv))
-
-    for fSym in g.hwDriverFileDict["SHA"]:
-        print("SHA512_256:  Update [SHA]%s(%s)"%(
-              fSym.getOutputName(),fSym.getEnabled()))
 
 #SHA3
 def handleSha3224Enabled(symbol, event):
@@ -1118,6 +1106,7 @@ def handleSha3256Enabled(symbol, event):
     else:
         g.cryptoHwSha3256EnabledSymbol.setValue(False)
         g.cryptoHwSha3256EnabledSymbol.setVisible(False)
+
     if (ScanHash() == True):
         data = symbol.getComponent()
 
