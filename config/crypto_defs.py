@@ -119,6 +119,7 @@ hwDriverDict = {
                  "6149": {"AES":["MCHP_Crypto_Sym_HwWrapper.h",
                                  "MCHP_Crypto_Sym_HwWrapper.c.ftl",
                                  "MCHP_Crypto_Aead_HwWrapper.h",     #TODO: put this with "AEAD" fKey
+                                 "MCHP_Crypto_Aead_HwWrapper.c.ftl", #TODO: put this with "AEAD" fKey
                                  "drv_crypto_aes_hw_6149.h.ftl",
                                  "drv_crypto_aes_hw_6149.c.ftl"] },
                  "6156": {"SHA":["MCHP_Crypto_Hash_HwWrapper.h",
