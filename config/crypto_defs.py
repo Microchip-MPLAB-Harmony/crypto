@@ -87,8 +87,8 @@ hwDriverStrings = [
 "HAVE_MCHP_CRYPTO_HW_03710"]
 
 #HW Driver Enable Symbol
-hwDriverSymbol = []
-hwDriverFileSymbols = []
+hwDriverSymbol      = []   #Enabled HW Drivers
+hwDriverFileSymbols = []   #Files to Generate
 
 #HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
 #   { <dKey>: { <fKey>: [<driver files>] , ... ] }

@@ -972,13 +972,15 @@ def SetupHardwareSupport(cryptoComponent) :
 
     #Create symbols for all possible HW Drivers
     print("CRYPTO HW: %d Symbols --"%(len(g.cryptoHwAdditionalDefines)))
-    for defStr in g.hwDriverStrings:
+    for defStr in g.hwDriverStrings:    
         #Create the driver symbol
         #--Initially true
         g.hwDriverSymbol.append(cryptoComponent.createBooleanSymbol(
                 defStr, None))
         g.hwDriverSymbol[-1].setVisible(False)
         g.hwDriverSymbol[-1].setLabel("Crypto HW Driver Supported")
+
+        #Only enable file generation for supported drivers
         if (defStr in g.cryptoHwAdditionalDefines):
             g.hwDriverSymbol[-1].setDefaultValue(True) 
         else:
@@ -986,8 +988,32 @@ def SetupHardwareSupport(cryptoComponent) :
         print("    (%s)%s"%(g.hwDriverSymbol[-1].getValue(),
                             g.hwDriverSymbol[-1].getID()) )
 
-    #Now generate the Driver for the Available HW
+    #Now generate the Drivers for the available crypto HW
     SetupHwDriverFiles(cryptoComponent)
+
+    #Enable the peripheral clocks for available crypto HW
+    #TODO:  Only enable clocks when the driver function is selected.
+    #       For now always enable.
+    SetupHwPeripheralClocks(cryptoComponent)
+
+
+################################################################################
+################################################################################
+def SetupHwPeripheralClocks(baseComponent):
+    configName = Variables.get("__CONFIGURATION_NAME")  # e.g. "default"
+    processor  = Variables.get("__PROCESSOR")
+    Log.writeInfoMessage("Crypto: Project MCU  " + processor)
+
+    #TODO:  Enable peripheral clocks for Enabled Mistral Crypto/Trng HW
+    #  Database.clearSymbolValue("core", trngInstanceName.getValue()+"_CLOCK_ENABLE")
+    #
+    #if (HAVE_MCHP_CRYPTO_TRNG_HW_6334 in g.cryptoHwAdditionalDefines):
+    #    Database.setSymbolValue("core", trngInstanceName.getValue()+"_CLOCK_ENABLE", True, 2)
+    #  Database.setSymbolValue("core", aesInstanceName.getValue()+"_CLOCK_ENABLE", True, 2)
+    #  Database.setSymbolValue("core", shaInstanceName.getValue()+"_CLOCK_ENABLE", True, 2)
+    #  Database.setSymbolValue("core", cpkccInstanceName.getValue()+"_CLOCK_ENABLE", True, 2)
+    return
+
 
 
 ################################################################################

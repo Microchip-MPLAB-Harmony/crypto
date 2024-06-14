@@ -81,7 +81,7 @@ def ScanHash():
 
 
     if (
-        md5Value or shaValue or sha3Value or ripeValue
+        md5Value or shaValue or sha3Value or ripeValue or
         shakeValue or blakeValue or blake2Value ):
         newValue = True
     else:
