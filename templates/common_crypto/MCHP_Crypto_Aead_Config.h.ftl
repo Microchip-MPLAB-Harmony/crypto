@@ -60,9 +60,15 @@
 //*****OPERATION MODE ENABLE MACROS************
 
 //AEAD SW/HW Mode
+//TODO:  Make the SW Implementation configurable to include or not
+//       despite the hardware implementation.  This allows the
+//       testing of HW using the SW calculated result.
 <#if (crypto_aead_aes_gcm_hw_en == false ||
       crypto_aead_aes_ccm_hw_en == false || 
       crypto_aead_aes_eax_hw_en == false)>
+    <#lt>#define CRYPTO_AEAD_WC_ALGO_EN
+<#else>
+    //Always allow the solftware implementation 
     <#lt>#define CRYPTO_AEAD_WC_ALGO_EN
 </#if>
 
@@ -87,19 +93,19 @@
 <#if crypto_aead_aes_gcm_hw_en == false>
     <#lt>#define CRYPTO_AEAD_WC_AESGCM_EN
 <#else>
-    #warning "HW Implementation of AES-GCM algorithm not available"
+    <#lt>#define CRYPTO_AEAD_HW_AESGCM_EN
 </#if>
 
 <#if crypto_aead_aes_ccm_hw_en == false>
     <#lt>#define CRYPTO_AEAD_WC_AESCCM_EN
 <#else>
-    #warning "HW Implementation of AES-CCM algorithm not available"
+    <#lt>#define CRYPTO_AEAD_HW_AESCCM_EN
 </#if>
 
 <#if crypto_aead_aes_eax_hw_en == false>
     <#lt>#define CRYPTO_AEAD_WC_AESEAX_EN
 <#else>
-    #warning "HW Implementation of AES-EAX algorithm not available"
+    <#lt>#define CRYPTO_AEAD_HW_AESEAX_EN
 </#if>
 
 #endif //MCHP_CRYPTO_AEAD_CONFIG_H
