@@ -868,7 +868,10 @@ cryptoHwAeadAesSupported          = False
 cryptoHwAeadAesEnabledSymbol      = None
 cryptoAeadAesEnabledSymbol        = None
 
-cryptoHwAeadAesGcmSupport = []
+cryptoHwAeadAesGcmSupport = [
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+        ]
 cryptoHwAeadAesGcmSupported       = False
 cryptoHwAeadAesGcmEnabledSymbol   = None
 cryptoAeadAesGcmEnabledSymbol     = None

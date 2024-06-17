@@ -36,6 +36,11 @@
     <#lt>#define CRYPTO_DIGISIGN_WC_ECDSA_EN
     </#if>
 
+<#if CONFIG_USE_ECDSA_HW == true>
+    <#lt>#define CRYPTO_DIGISIGN_HW_ALGO_EN
+    </#if>
+    
+
 
 
 #endif /* MCHP_CRYPTO_DIGSIGN_CONFIG_H */

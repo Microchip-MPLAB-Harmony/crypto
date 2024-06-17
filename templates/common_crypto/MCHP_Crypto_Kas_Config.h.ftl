@@ -41,4 +41,8 @@
     <#lt>#define CRYPTO_KAS_WC_ECDH_EN
     </#if>
 
+<#if CONFIG_USE_ECDH_HW == true>
+    <#lt>#define CRYPTO_KAS_HW_ALGO_EN
+    </#if>
+
 #endif /* MCHP_CRYPTO_KAS_CONFIG_H */

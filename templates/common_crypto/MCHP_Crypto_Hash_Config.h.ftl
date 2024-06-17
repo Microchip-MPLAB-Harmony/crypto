@@ -61,7 +61,7 @@
     </#if>
 <#-- HASH SHA1 -->
 <#if crypto_sha1 == true>
-    <#lt> #define CRYPTO_HASH_SHA1_EN
+    <#lt>#define CRYPTO_HASH_SHA1_EN
     <#if crypto_sha1_hw == true>
         <#lt>#define CRYPTO_HASH_HW_SHA1_EN
     <#else>
@@ -101,10 +101,12 @@
         <#lt>#define CRYPTO_HASH_WC_SHA2_512_EN
         </#if>
     </#if>
+
 <#if false>
     //#define	CRYPTO_HASH_WC_SHA2_512_224_EN
     //#define	CRYPTO_HASH_WC_SHA2_512_256_EN
 </#if>
+
 <#-- HASH SHA3 -->
 <#if crypto_sha3_224 == true>
     <#lt>#define CRYPTO_HASH_SHA3_224_EN
@@ -232,26 +234,45 @@
 
 // ---------- FUNCTIONAL CONFIGURATION END ----------
 
+<#-- HASH SHA2 -->
 #if (defined(CRYPTO_HASH_SHA2_224_EN) || defined(CRYPTO_HASH_SHA2_256_EN) || \
      defined(CRYPTO_HASH_SHA2_384_EN) || defined(CRYPTO_HASH_SHA2_512_EN) || \
      defined(CRYPTO_HASH_SHA2_512_224_EN) || defined(CRYPTO_HASH_SHA2_512_256_EN))
 <#lt>#define CRYPTO_HASH_SHA2_EN
 #endif
+
+
 #if (defined(CRYPTO_HASH_WC_SHA2_224_EN) || defined(CRYPTO_HASH_WC_SHA2_256_EN) || \
      defined(CRYPTO_HASH_WC_SHA2_384_EN) || defined(CRYPTO_HASH_WC_SHA2_512_EN) || \
      defined(CRYPTO_HASH_WC_SHA2_512_224_EN) || defined(CRYPTO_HASH_WC_SHA2_512_256_EN) )
 <#lt>#define CRYPTO_HASH_WC_SHA2_EN
 #endif
+
+#if (defined(CRYPTO_HASH_HW_SHA2_224_EN) || defined(CRYPTO_HASH_HW_SHA2_256_EN) || \
+     defined(CRYPTO_HASH_HW_SHA2_384_EN) || defined(CRYPTO_HASH_HW_SHA2_512_EN))
+<#lt>#define CRYPTO_HASH_HW_SHA2_EN
+#endif
+
+<#-- HASH SHA3 -->
 #if (defined(CRYPTO_HASH_SHA3_224_EN) || defined(CRYPTO_HASH_SHA3_256_EN) || \
      defined(CRYPTO_HASH_SHA3_384_EN) || defined(CRYPTO_HASH_SHA3_512_EN))
 <#lt>#define CRYPTO_HASH_SHA3_EN
 #endif
+
 #if (defined(CRYPTO_HASH_WC_SHA3_224_EN) || \
      defined(CRYPTO_HASH_WC_SHA3_256_EN) || \
      defined(CRYPTO_HASH_WC_SHA3_384_EN) || \
      defined(CRYPTO_HASH_WC_SHA3_512_EN))
 <#lt>#define CRYPTO_HASH_WC_SHA3_EN
 #endif
+
+#if (defined(CRYPTO_HASH_HW_SHA3_224_EN) || \
+     defined(CRYPTO_HASH_HW_SHA3_256_EN) || \
+     defined(CRYPTO_HASH_HW_SHA3_384_EN) || \
+     defined(CRYPTO_HASH_HW_SHA3_512_EN))
+<#lt>#define CRYPTO_HASH_HW_SHA3_EN
+#endif
+
 #if (defined(CRYPTO_HASH_SHA3_SHAKE128_EN) || \
      defined(CRYPTO_HASH_SHA3_SHAKE256_EN))
 <#lt>#define CRYPTO_HASH_SHA3_SHAKE_EN
@@ -261,17 +282,40 @@
      defined(CRYPTO_HASH_WC_SHA3_SHAKE256_EN))
 <#lt>#define CRYPTO_HASH_WC_SHA3_SHAKE_EN
 #endif
+
+#if (defined(CRYPTO_HASH_HW_SHA3_SHAKE128_EN) || \
+     defined(CRYPTO_HASH_HW_SHA3_SHAKE256_EN))
+<#lt>#define CRYPTO_HASH_HW_SHA3_SHAKE_EN
+#endif
+
+<#-- HASH BLAKE -->
 #if (defined(CRYPTO_HASH_BLAKE2S_224_EN) || \
      defined(CRYPTO_HASH_BLAKE2S_256_EN) || \
      defined(CRYPTO_HASH_BLAKE2B_384_EN) || \
      defined(CRYPTO_HASH_BLAKE2B_512_EN))
 <#lt>#define CRYPTO_HASH_BLAKE2_EN
 #endif
+
 #if (defined(CRYPTO_HASH_WC_BLAKE2S_224_EN) || \
      defined(CRYPTO_HASH_WC_BLAKE2S_256_EN) || \
      defined(CRYPTO_HASH_WC_BLAKE2B_384_EN) || \
      defined(CRYPTO_HASH_WC_BLAKE2B_512_EN))
 <#lt>#define CRYPTO_HASH_WC_BLAKE2_EN
+#endif
+
+#if (defined(CRYPTO_HASH_HW_BLAKE2S_224_EN) || \
+     defined(CRYPTO_HASH_HW_BLAKE2S_256_EN) || \
+     defined(CRYPTO_HASH_HW_BLAKE2B_384_EN) || \
+     defined(CRYPTO_HASH_HW_BLAKE2B_512_EN))
+<#lt>#define CRYPTO_HASH_HW_BLAKE2_EN
+#endif
+
+<#-- HASH Global HW Enable-->
+#if (defined(CRYPTO_HASH_HW_BLAKE2_EN)  ||
+     defined(CRYPTO_HASH_HW_SHA3_SHAKE_EN)  ||
+     defined(CRYPTO_HASH_HW_SHA3_EN)  ||
+     defined(CRYPTO_HASH_HW_SHA2_EN)) 
+<#lt>#define CRYPTO_HASH_HW_ALGO_EN
 #endif
 
 #endif //MCHP_CRYPTO_HASH_CONFIG_H

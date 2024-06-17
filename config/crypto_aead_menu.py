@@ -194,6 +194,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
 
 #-----------------------------------------------------
 #AEAD-AES Handlers
+#--NOT USED
 def handleAesHwEnabled(symbol, event):
     print("CRYPTO: handle AES HW (does nothing)")
     if (ScanAead() == True):
