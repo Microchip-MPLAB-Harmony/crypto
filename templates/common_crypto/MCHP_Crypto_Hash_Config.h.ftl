@@ -311,9 +311,9 @@
 #endif
 
 <#-- HASH Global HW Enable-->
-#if (defined(CRYPTO_HASH_HW_BLAKE2_EN)  ||
-     defined(CRYPTO_HASH_HW_SHA3_SHAKE_EN)  ||
-     defined(CRYPTO_HASH_HW_SHA3_EN)  ||
+#if (defined(CRYPTO_HASH_HW_BLAKE2_EN)      || \
+     defined(CRYPTO_HASH_HW_SHA3_SHAKE_EN)  || \
+     defined(CRYPTO_HASH_HW_SHA3_EN)        || \
      defined(CRYPTO_HASH_HW_SHA2_EN)) 
 <#lt>#define CRYPTO_HASH_HW_ALGO_EN
 #endif
