@@ -899,7 +899,20 @@ def SetupHardwareSupport(cryptoComponent) :
         #print("CRYPTO HW:  HW AES NOT SUPPORTED")
         g.cryptoHwSymAesSupported = False
 
-    #AEAD
+    #AEAD-AES 
+    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesSupport)
+
+    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesGcmSupport)
+    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesCcmSupport)
+    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesEaxSupport)
+
+    if (g.cryptoHwAeadAesSupported or g.cryptoHwAeadAesGcmSupported or
+        g.cryptoHwAeadAesCcmSupported or g.cryptoHwAeadAesEaxSupported):
+        g.cryptoHwAeadAesSupported = True
+        print("CRYPTO HW:  HW AEAD=AES SUPPORTED")
+    else:
+        #print("CRYPTO HW:  HW AES NOT SUPPORTED")
+        g.cryptoHwAeadAesSupported = False
 
     #HMAC
 

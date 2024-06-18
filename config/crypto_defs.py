@@ -119,7 +119,8 @@ hwDriverDict = {
                  "6149": {"AES":["MCHP_Crypto_Sym_HwWrapper.h",
                                  "MCHP_Crypto_Sym_HwWrapper.c.ftl",
                                  "MCHP_Crypto_Aead_HwWrapper.h",     #TODO: put this with "AEAD" fKey
-                                 "MCHP_Crypto_Aead_HwWrapper.c.ftl", #TODO: put this with "AEAD" fKey
+                                 "MCHP_Crypto_Aead_HwWrapper.c.ftl", #      For now, enable HW AES to enable 
+                                                                     #      AEAD HW
                                  "drv_crypto_aes_hw_6149.h.ftl",
                                  "drv_crypto_aes_hw_6149.c.ftl"] },
                  "6156": {"SHA":["MCHP_Crypto_Hash_HwWrapper.h",
@@ -863,7 +864,10 @@ aeadMenu = None
 aeadAesMenu = None
 
 #AEAD Hardware
-cryptoHwAeadAesSupport = []
+cryptoHwAeadAesSupport = [
+    ["AES", "6149", "ZN", [],
+        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
+    ]
 cryptoHwAeadAesSupported          = False
 cryptoHwAeadAesEnabledSymbol      = None
 cryptoAeadAesEnabledSymbol        = None
@@ -892,26 +896,6 @@ cryptoHwAeadAesSivCmacEnabledSymbol = None
 cryptoAeadAesSivCmacEnabledSymbol   = None
 
 cryptoHwAeadAesSivGcmSupport = []
-cryptoHwAeadAesSivGcmSupported      = False
-cryptoHwAeadAesSivGcmEnabledSymbol  = None
-cryptoAeadAesSivGcmEnabledSymbol    = None
-
-cryptoHwCcmSupport    = []
-cryptoHwAeadAesCcmSupported       = False
-cryptoHwAeadAesCcmEnabledSymbol   = None
-cryptoAeadAesCcmEnabledSymbol     = None
-
-cryptoHwEaxSupport    = []
-cryptoHwAeadAesEaxSupported         = False
-cryptoHwAeadAesEaxEnabledSymbol     = None
-cryptoAeadAesEaxEnabledSymbol       = None
-
-cryptoHwSivCmacSupport    = []
-cryptoHwAeadAesSivCmacSupported     = False
-cryptoHwAeadAesSivCmacEnabledSymbol = None
-cryptoAeadAesSivCmacEnabledSymbol   = None
-
-cryptoHwSivGcmSupport    = []
 cryptoHwAeadAesSivGcmSupported      = False
 cryptoHwAeadAesSivGcmEnabledSymbol  = None
 cryptoAeadAesSivGcmEnabledSymbol    = None
