@@ -53,7 +53,7 @@ def ScanAead():
     #--based on SYM-AES HW Enable
     if (g.cryptoHwAeadAesGcmSupported == True):
         if (g.cryptoAeadAesGcmEnabledSymbol.getValue() == True):
-            g.cryptoHwAeadAesGcmEnabledSymbol.set_value(
+            g.cryptoHwAeadAesGcmEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
 
         if (g.cryptoAeadAesCcmEnabledSymbol.getValue() == True):
@@ -304,7 +304,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
 #--NOT USED
 def handleAeadAesHwEnabled(symbol, event):
     print("CRYPTO AEAD: Update HW settings") 
-    if (g.cryptoHwAeadAesSupported.getValue() == True):
+    if (g.cryptoHwAeadAesSupported == True):
         #Dependent on SYM-AES setting
         g.cryptoHwAeadAesEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
