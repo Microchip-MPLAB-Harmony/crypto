@@ -488,7 +488,7 @@ crypto_Aead_Status_E Crypto_Aead_Hw_AesGcm_Init(CRYPTO_GCM_HW_CONTEXT *gcmCtx,
     return CRYPTO_AEAD_ERROR_CIPNOTSUPPTD;
 <#else>  
     /* Initialize the context */
-    memset(&gcmCtx, 0, sizeof(CRYPTO_GCM_HW_CONTEXT));
+    memset(gcmCtx, 0, sizeof(CRYPTO_GCM_HW_CONTEXT));
     
     /* Get the default configuration from the driver */
     DRV_CRYPTO_AES_GetConfigDefault(&aesGcmCfg);
