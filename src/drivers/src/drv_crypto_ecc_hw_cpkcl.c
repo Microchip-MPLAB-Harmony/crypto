@@ -49,8 +49,12 @@ Microchip or any third party.
 
 #include <stdio.h>
 #include <string.h>
-#include "CryptoLib_CPKCL/CryptoLib_typedef_pb.h"
 #include "drv_crypto_ecc_hw_cpkcl.h"
+#include "CryptoLib_CPKCL/CryptoLib_typedef_pb.h"
+#include "CryptoLib_CPKCL/CryptoLib_mapping_pb.h"
+#include "CryptoLib_CPKCL/CryptoLib_Headers_pb.h"
+#include "CryptoLib_CPKCL/CryptoLib_JumpTable_Addr_pb.h"
+#include "CryptoLib_CPKCL/CryptoLib_cf.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -60,6 +64,15 @@ Microchip or any third party.
 
 PCPKCL_PARAM    pvCPKCLParam;
 CPKCL_PARAM     CPKCLParam;
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Macros
+// *****************************************************************************
+// *****************************************************************************
+
+#define CPKCL_SELFTEST_CHECKSUM1   0x6E70DDD2
+#define CPKCL_SELFTEST_CHECKSUM2   0x25C8D64F
 
 // *****************************************************************************
 // *****************************************************************************
@@ -428,11 +441,79 @@ const u1 p521_au1BCurve[] = {
 0x45, 0x1f, 0xd4, 0x6b, 0x50, 0x3f, 0x00
 };
 
+// Self test state for initialization
+static int8_t selfTestState = 0;
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: File Scope Functions
+// *****************************************************************************
+// *****************************************************************************
+
+static int8_t lDRV_CRYPTO_ECC_SelfTest(void)
+{
+    if (selfTestState != 0)
+    {
+        return selfTestState;
+    }
+    
+    /* Clear contents of CPKCL */
+    memset(&CPKCLParam, 0, sizeof(CPKCL_PARAM));
+    
+    pvCPKCLParam = &CPKCLParam;
+    
+    vCPKCL_Process(SelfTest, pvCPKCLParam);
+    
+    if (CPKCL(u2Status) != CPKCL_OK)
+    {
+	selfTestState = -1;
+    }
+    else if (pvCPKCLParam->P.CPKCL_SelfTest.u4Version != CPKCL_VERSION)
+    {
+        selfTestState = -2;
+    }
+    else if (pvCPKCLParam->P.CPKCL_SelfTest.u4CheckNum1 != CPKCL_SELFTEST_CHECKSUM1)
+    {
+        selfTestState = -3;
+    }
+    else if (pvCPKCLParam->P.CPKCL_SelfTest.u4CheckNum2 != CPKCL_SELFTEST_CHECKSUM2)
+    {
+        selfTestState = -4;
+    }
+    else if (pvCPKCLParam->P.CPKCL_SelfTest.u1Step != 0x03)
+    {
+        selfTestState = -5;
+    }
+    else
+    {
+        selfTestState = 1;
+    }
+    
+    return selfTestState;
+}
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: CPKCL Common Interface Implementation
 // *****************************************************************************
 // *****************************************************************************
+
+CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_InitCpkcl(void)
+{
+    /* Wait end of CPKCC RAM initialization */ 
+    while ((CPKCCSR & BIT_CPKCCSR_CLRRAM_BUSY) != 0)
+    {
+        ;
+    }
+  
+    /* Perform self test */
+    if (lDRV_CRYPTO_ECC_SelfTest() < 0)
+    {
+        return CRYPTO_CPKCL_RESULT_INIT_ERROR;
+    }
+    
+    return CRYPTO_CPKCL_RESULT_INIT_SUCCESS;
+}
 
 CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_InitCurveParams(CPKCL_ECC_DATA *pEcc, 
     CRYPTO_CPKCL_CURVE curveType)

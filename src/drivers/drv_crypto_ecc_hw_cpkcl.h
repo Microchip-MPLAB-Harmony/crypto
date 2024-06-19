@@ -210,6 +210,8 @@ extern CPKCL_PARAM     CPKCLParam;
 /* Result of CPKCL operation */
 typedef enum 
 {
+    CRYPTO_CPKCL_RESULT_INIT_SUCCESS,
+    CRYPTO_CPKCL_RESULT_INIT_ERROR,    
     CRYPTO_CPKCL_RESULT_CURVE_SUCCESS,        
     CRYPTO_CPKCL_RESULT_CURVE_ERROR,
     CRYPTO_CPKCL_RESULT_COORDINATES_SUCCESS,
@@ -305,6 +307,8 @@ typedef struct
 // Section: CPKCL Common Interface 
 // *****************************************************************************
 // *****************************************************************************
+
+CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_InitCpkcl(void);
 
 CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_InitCurveParams(CPKCL_ECC_DATA *pEcc, 
     CRYPTO_CPKCL_CURVE curveType);

@@ -76,6 +76,13 @@ CRYPTO_ECDH_RESULT DRV_CRYPTO_ECDH_InitEccParams(CPKCL_ECC_DATA *pEccData,
 {
     CRYPTO_CPKCL_RESULT result;
     
+    /* Initialize CPKCL */
+    result = DRV_CRYPTO_ECC_InitCpkcl();
+    if (result != CRYPTO_CPKCL_RESULT_INIT_SUCCESS) 
+    {
+        return CRYPTO_ECDH_RESULT_INIT_FAIL;
+    }
+    
     /* Fill curve parameters */
     result = DRV_CRYPTO_ECC_InitCurveParams(pEccData, eccCurveType);
     if (result != CRYPTO_CPKCL_RESULT_CURVE_SUCCESS) 

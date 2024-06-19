@@ -96,6 +96,7 @@ static crypto_DigiSign_Status_E lCrypto_DigSign_Ecdsa_Hw_MapResult(
         case CRYPTO_ECDSA_RESULT_ERROR_RNG:   
             return CRYPTO_DIGISIGN_ERROR_RNG;
         
+        case CRYPTO_ECDSA_RESULT_INIT_FAIL:
         case CRYPTO_ECDSA_RESULT_ERROR_FAIL:
             return CRYPTO_DIGISIGN_ERROR_FAIL;
             

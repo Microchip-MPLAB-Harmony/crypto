@@ -90,6 +90,7 @@ static crypto_Kas_Status_E lCrypto_Kas_Ecdh_Hw_MapResult(
         case CRYPTO_ECDH_RESULT_ERROR_CURVE:
             return CRYPTO_KAS_ERROR_CURVE;
         
+        case CRYPTO_ECDH_RESULT_INIT_FAIL:
         case CRYPTO_ECDH_RESULT_ERROR_FAIL:
             return CRYPTO_KAS_ERROR_FAIL;
             
