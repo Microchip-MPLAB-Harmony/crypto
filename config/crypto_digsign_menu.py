@@ -65,16 +65,11 @@ def ScanDigSignHw():
         if (g.cryptoHwDsEcdsaEnabledSymbol.getValue() == True):
             newValue = True
 
-    if (g.CONFIG_USE_ECDSA_HW.getValue() != newValue):
-        g.CONFIG_USE_ECDSA_HW.setValue(newValue)
-        print("ECDSA:  Enable HW(%s)"%(newValue))
-        for fSym in g.hwDriverFileDict[fKey]:
-            fSym.setEnabled(newValue)
-        return True
-    else:
-        print("ECDSA: HW Unchanged (%s)"%(newValue))
-        return False
-
+    g.CONFIG_USE_ECDSA_HW.setValue(newValue)
+    print("ECDSA:  Enable HW(%s)"%(newValue))
+    for fSym in g.hwDriverFileDict[fKey]:
+        fSym.setEnabled(newValue)
+    return True
 
 
 def SetupCryptoDsMenu(cryptoComponent):

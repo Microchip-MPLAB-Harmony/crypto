@@ -138,23 +138,15 @@ def ScanShaHw():
             newValue = True
 
     print("SHA: sha_hw - current = %s (newValue = %s)"%(
-        g.CONFIG_USE_SHA_HW.getValue(), newValue))
 
-    if (g.CONFIG_USE_SHA_HW.getValue() != newValue):
-        g.CONFIG_USE_SHA_HW.setValue(newValue)
-        print("SHA:  Enable HW (%s)"%(newValue))
-        for fSym in g.hwDriverFileDict[fKey]:
-            fSym.setEnabled(newValue)
-            print("SHA:  update [SHA]%s(%s)"%(
-                  fSym.getOutputName(),fSym.getEnabled()))
-        return True
+    g.CONFIG_USE_SHA_HW.getValue(), newValue))
+    for fSym in g.hwDriverFileDict[fKey]:
+        fSym.setEnabled(newValue)
+        print("SHA:  update [SHA]%s(%s)"%(
+              fSym.getOutputName(),fSym.getEnabled()))
 
-    else:
-        print("SHA: HW Unchanged (%s)"%(newValue))
-        for fSym in g.hwDriverFileDict[fKey]:
-            print("SHA:  unchanged [SHA]%s(%s)"%(
-                  fSym.getOutputName(),fSym.getEnabled()))
-        return False
+    return True
+
 
 #TODO: ScanSha3Hw()
 #TODO: ScanShakeHw()

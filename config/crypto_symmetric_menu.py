@@ -70,6 +70,10 @@ def ScanAesHwSymbols():
                 hwSymbols.append(g.cryptoAeadAesCcmEnabledSymbol)
             if (g.cryptoHwAeadAesEaxSupported    == True):
                 hwSymbols.append(g.cryptoAeadAesEaxEnabledSymbol)
+            if (g.cryptoHwAeadAesSivCmacSupported    == True):
+                hwSymbols.append(g.cryptoAeadAesSivCmacEnabledSymbol)
+            if (g.cryptoHwAeadAesSivGcmSupported    == True):
+                hwSymbols.append(g.cryptoAeadAesSivGcmEnabledSymbol)
 
 
         #Check to see if any of the HW enables is true
@@ -116,6 +120,11 @@ def ScanSym():
     elif (g.cryptoSymAesCfb128EnabledSymbol.getValue() == True): newValue = True
     elif (g.cryptoSymAesCtrEnabledSymbol.getValue()    == True): newValue = True
     elif (g.cryptoSymAesXtsEnabledSymbol.getValue()    == True): newValue = True
+    elif (g.cryptoAeadAesGcmEnabledSymbol.getValue()    == True): newValue = True
+    elif (g.cryptoAeadAesCcmEnabledSymbol.getValue()    == True): newValue = True
+    elif (g.cryptoAeadAesEaxEnabledSymbol.getValue()    == True): newValue = True
+    elif (g.cryptoAeadAesSivCmacEnabledSymbol.getValue()    == True): newValue = True
+    elif (g.cryptoAeadAesSivGcmEnabledSymbol.getValue()    == True): newValue = True
     else: newValue = False
 
     if (g.CONFIG_USE_SYM.getValue() == newValue):
@@ -500,19 +509,18 @@ def UpdateAesHwDriverFiles():
           g.CONFIG_USE_SYM.getValue(), newValue,
           g.CONFIG_USE_AES_HW.getValue()))
 
-    if (g.CONFIG_USE_SYM.getValue() == True):
-        newValue = g.cryptoHwSymAesEnabledSymbol.getValue()
-        print("AES:  Enable HW (%s)"%(newValue))
 
-        #Enable/Disable HW Driver Files
-        for fSym in g.hwDriverFileDict["AES"]:
-            fSym.setEnabled(newValue)
-            print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
-
-        UpdateAesMenuLabels(newValue)
+    if  (g.CONFIG_USE_AES_HW.getValue() == True):
+        newValue = True 
     else:
-        UpdateAesMenuLabels(False)
-        print("AES:  Not Selected")
+        newValue = False
+
+    #Enable/Disable HW Driver Files
+    for fSym in g.hwDriverFileDict["AES"]:
+        fSym.setEnabled(newValue)
+        print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
+
+    UpdateAesMenuLabels(newValue)
 
 
 #-----------------------------------------------------

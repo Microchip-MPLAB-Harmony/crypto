@@ -69,15 +69,10 @@ def ScanKasHw():
         if (g.cryptoHwKasEcdhEnabledSymbol.getValue() == True):
             newValue = True
 
-    if (g.CONFIG_USE_ECDH_HW.getValue() != newValue):
-        g.CONFIG_USE_ECDH_HW.setValue(newValue)
-        print("ECDH:  Enable HW(%s)"%(newValue))
-        for fSym in g.hwDriverFileDict[fKey]:
-            fSym.setEnabled(newValue)
-        return True
-    else:
-        print("ECDH: HW Unchanged (%s)"%(newValue))
-        return False
+    g.CONFIG_USE_ECDH_HW.setValue(newValue)
+    for fSym in g.hwDriverFileDict[fKey]:
+        fSym.setEnabled(newValue)
+    return True
 
 
 def SetupCryptoKasMenu(cryptoComponent):
