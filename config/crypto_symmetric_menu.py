@@ -33,6 +33,7 @@ import ntpath
 print("CRYPTO: HASH Menu Package")
 import crypto_globals   #Initial globals
 import crypto_defs as g #Modified globals
+import crypto_aead_menu  as am  #Aead Menu
 #import superglobals
 
 
@@ -60,11 +61,23 @@ def ScanAesHwSymbols():
         if (g.cryptoHwSymAesXtsSupported    == True):
             hwSymbols.append(g.cryptoSymAesXtsEnabledSymbol)
 
+        #Dependencies to AES HW Driver (AEAD-AES)
+        if (g.cryptoHwAeadAesSupported == True):
+            print("AES AEAD:  HW AEAD AES Supported")
+            if (g.cryptoHwAeadAesGcmSupported    == True):
+                hwSymbols.append(g.cryptoAeadAesGcmEnabledSymbol)
+            if (g.cryptoHwAeadAesCcmSupported    == True):
+                hwSymbols.append(g.cryptoAeadAesCcmEnabledSymbol)
+            if (g.cryptoHwAeadAesEaxSupported    == True):
+                hwSymbols.append(g.cryptoAeadAesEaxEnabledSymbol)
+
+
         #Check to see if any of the HW enables is true
-        newValue = False
+        #--Check that at least 1 item is selected
+        oneEnabled = False
         for hSym in hwSymbols:
             if (hSym.getValue() == True):
-                newValue = True
+                oneEnabled = True
                 break;
 
         g.cryptoAesHwEnSymbols = hwSymbols
@@ -73,10 +86,18 @@ def ScanAesHwSymbols():
         #-->Set the global AES HW enabled symbol
         if (
             g.cryptoHwSymAesEnabledSymbol.getValue() == True and
-            newValue == True):
+            oneEnabled == True):
             g.CONFIG_USE_AES_HW.setValue(True)
+
+            #Dependencies to AES HW Driver (AEAD-AES)
+            if (g.cryptoHwAeadAesSupported == True):
+                g.cryptoHwAeadAesEnabledSymbol.setValue(True)
         else:
             g.CONFIG_USE_AES_HW.setValue(False)
+
+            #Dependencies to AES HW Driver (AEAD-AES)
+            if (g.cryptoHwAeadAesSupported == True):
+                g.cryptoHwAeadAesEnabledSymbol.setValue(False)
 
         return
 
@@ -101,7 +122,7 @@ def ScanSym():
         return False
     else:
         g.CONFIG_USE_SYM.setValue(newValue)
-        print("CRYPO:  CONFIG_USE_SYM = %s"%(g.CONFIG_USE_SYM.getValue()))
+        print("CRYPTO:  CONFIG_USE_SYM = %s"%(g.CONFIG_USE_SYM.getValue()))
         return True
 
 def SetupCryptoSymmetricMenu(cryptoComponent):
@@ -162,10 +183,10 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
     else:
         g.cryptoHwSymAesEnabledSymbol.setVisible(False)
         g.cryptoHwSymAesEnabledSymbol.setDefaultValue(False)
-    g.cryptoHwSymAesEnabledSymbol.setHelp('CRYPT_AES_SUM')
+    g.cryptoHwSymAesEnabledSymbol.setHelp('CRYPTO_AES_SUM')
 
     #Global to indicate when AES Modes are visible
-    g.cryptoSymAesModesSupported = True 
+    g.cryptoSymAesModesSupported = True
 
     #----------
     #AES MODES MENU
@@ -199,7 +220,6 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
         g.cryptoSymAesEcbEnabledSymbol.setDependencies(
                 handleAesEcbEnabled,
                 ["crypto_sym_aes_hw_en", "crypto_sym_aes_ecb_en"])
-
 
     #AES-CBC
     g.cryptoSymAesCbcEnabledSymbol = cryptoComponent.createBooleanSymbol(
@@ -349,7 +369,7 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
     #AES-KW (Key Wrap)
     g.cryptoSymAesKwEnabledSymbol = cryptoComponent.createBooleanSymbol(
             "crypto_sym_aes_kw_en", g.aesModesMenu)
-    g.cryptoSymAesKwEnabledSymbol.setLabel("AES Key Wrap (KW)? ")
+    g.cryptoSymAesKwEnabledSymbol.setLabel("AES Key Wrap? ")
     g.cryptoSymAesKwEnabledSymbol.setDescription(
             "Enable support for the AES KW Mode Algorithm.")
     g.cryptoSymAesKwEnabledSymbol.setVisible(True)
@@ -362,6 +382,11 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
         g.cryptoSymAesKwEnabledSymbol.setDependencies(
                 handleAesKwEnabled,
                 ["crypto_sym_aes_hw_en", "crypto_sym_aes_kw_en"])
+
+    #===========================================================================
+    # AEAD-AES Menu Setup
+    am.SetupCryptoAeadMenu(cryptoComponent)
+    #===========================================================================
 
     #Check to see if any of the Sym selections is True
     #--Used to include the CC Sym API Files
@@ -467,6 +492,8 @@ def UpdateAesHwDriverFiles():
 
     ScanSym()          #Update CONFIG_USE_SYM
     ScanAesHwSymbols() #Update CONFIG_USE_AES_HW
+                       #and g.cryptoHwAeadAesEnabledSymbol
+
     newValue = g.cryptoHwSymAesEnabledSymbol.getValue()
 
     print("AES:  Update Driver SYM(%s) HW(%s-%s)"%(

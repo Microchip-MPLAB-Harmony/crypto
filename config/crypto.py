@@ -39,7 +39,6 @@ import crypto_globals               #Initial globals
 import crypto_defs           as g   #Modified globals
 import crypto_hash_menu      as hm  #HASH GUI
 import crypto_symmetric_menu as sm  #Symmetric Menu
-import crypto_aead_menu      as am  #Aead Menu
 import crypto_mac_menu       as mm  #Hmac Menu
 import crypto_digsign_menu   as ds  #Digital Signing Menu
 import crypto_kas_menu       as kas #Key Auth Menu
@@ -443,7 +442,7 @@ def instantiateComponent(cryptoComponent):
 
     #HASH Function Group
     #--CONFIG_USE_HASH
-    hm.SetupCryptoHashMenu(g.localCryptoComponent)
+    hm.SetupCryptoHashMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Hash_Config.h - API File
     #TODO:  Enable file gen Dependency on CONFIG_USE_HASH
@@ -473,7 +472,7 @@ def instantiateComponent(cryptoComponent):
 
     #SYM Function Group
     #--CONFIG_USE_SYM
-    sm.SetupCryptoSymmetricMenu(g.localCryptoComponent)
+    sm.SetupCryptoSymmetricMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Sym_Config.h - API File
     #fileName    = "MCHP_Crypto_Sym_Config.h"
@@ -502,9 +501,7 @@ def instantiateComponent(cryptoComponent):
                    g.CONFIG_USE_SYM.getValue(), projectPath + fileName + ".ftl" ))
 
     #AEAD Function Group
-    #--CONFIG_USE_AEAD
-    am.SetupCryptoAeadMenu(g.localCryptoComponent)
-
+    #NOTE:  AEAD Menu is setup with the SYM-AES Menu function
     #<config>/MCHP_Crypto_Aead_Config.h - API File
     fileName    = "MCHP_Crypto_Aead_Config.h"
     ccAeadConfigFile= cryptoComponent.createFileSymbol(
@@ -532,7 +529,7 @@ def instantiateComponent(cryptoComponent):
 
     #MAC Function Group
     #--CONFIG_USE_MAC
-    mm.SetupCryptoMacMenu(g.localCryptoComponent)
+    mm.SetupCryptoMacMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Mac_Config.h - API File
     fileName    = "MCHP_Crypto_Mac_Config.h"
@@ -561,7 +558,7 @@ def instantiateComponent(cryptoComponent):
 
     #KAS - Key Authorization Function Group
     #--CONFIG_USE_KAS
-    kas.SetupCryptoKasMenu(g.localCryptoComponent)
+    kas.SetupCryptoKasMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Kas_Config.h - API File
     fileName    = "MCHP_Crypto_Kas_Config.h"
@@ -590,7 +587,7 @@ def instantiateComponent(cryptoComponent):
 
     #DS - Digital Signing Function Group
     #--CONFIG_USE_DS
-    ds.SetupCryptoDsMenu(g.localCryptoComponent)
+    ds.SetupCryptoDsMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Ds_Config.h - API File
     fileName    = "MCHP_Crypto_DigSign_Config.h"
@@ -619,7 +616,7 @@ def instantiateComponent(cryptoComponent):
 
     #RNG - Digital Signing Function Group
     #--CONFIG_USE_RNG
-    rng.SetupCryptoRngMenu(g.localCryptoComponent)
+    rng.SetupCryptoRngMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Rng_Config.h - API File
     fileName    = "MCHP_Crypto_RNG_Config.h"
@@ -682,6 +679,8 @@ def handleHashDrngEnabled(symbol, event):
 # For example:
 #    [PUKCC", "U2009", "2.5.0", [],
 #     set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])] #ATSAME54P20A
+#
+# Updates the g.cryptoHwAdditionalDefines set with the listed MACRO
 #
 #
 ################################################################################
@@ -902,16 +901,19 @@ def SetupHardwareSupport(cryptoComponent) :
     #AEAD-AES 
     g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesSupport)
 
-    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesGcmSupport)
-    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesCcmSupport)
-    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesEaxSupport)
+    g.cryptoHwAeadAesGcmSupported = ScanHardware(g.cryptoHwAeadAesGcmSupport)
+    g.cryptoHwAeadAesCcmSupported = ScanHardware(g.cryptoHwAeadAesCcmSupport)
+    g.cryptoHwAeadAesEaxSupported = ScanHardware(g.cryptoHwAeadAesEaxSupport)
+    g.cryptoHwAeadAesSivCmacSupported = ScanHardware(g.cryptoHwAeadAesSivCmacSupport)
+    g.cryptoHwAeadAesSivGcmSupported = ScanHardware(g.cryptoHwAeadAesSivGcmSupport)
 
     if (g.cryptoHwAeadAesSupported or g.cryptoHwAeadAesGcmSupported or
-        g.cryptoHwAeadAesCcmSupported or g.cryptoHwAeadAesEaxSupported):
+          g.cryptoHwAeadAesCcmSupported or g.cryptoHwAeadAesEaxSupported or
+          g.cryptoHwAeadAesSivCmacSupported or g.cryptoHwAeadAesSivGmcSupported):
         g.cryptoHwAeadAesSupported = True
-        print("CRYPTO HW:  HW AEAD=AES SUPPORTED")
+        print("CRYPTO HW:  HW AEAD-AES SUPPORTED")
     else:
-        #print("CRYPTO HW:  HW AES NOT SUPPORTED")
+        print("CRYPTO HW:  HW AEAD-AES NOT SUPPORTED")
         g.cryptoHwAeadAesSupported = False
 
     #HMAC

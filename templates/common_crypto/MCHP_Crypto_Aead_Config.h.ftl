@@ -59,12 +59,20 @@
 
 //*****OPERATION MODE ENABLE MACROS************
 
-//AEAD SW/HW Mode
-<#if (crypto_aead_aes_gcm_hw_en == false ||
-      crypto_aead_aes_ccm_hw_en == false  || 
-      crypto_aead_aes_eax_hw_en == false)>
+//AEAD SW/HW Algorithms
+<#if (crypto_aead_aes_gcm_hw_en      == false ||
+      crypto_aead_aes_ccm_hw_en      == false || 
+      crypto_aead_aes_eax_hw_en      == false || 
+      crypto_aead_aes_siv_cmac_hw_en == false || 
+      crypto_aead_aes_siv_gcm_hw_en  == false)>
     <#lt>#define CRYPTO_AEAD_WC_ALGO_EN
-<#else>
+</#if>
+
+<#if (crypto_aead_aes_gcm_hw_en      == true  ||
+      crypto_aead_aes_ccm_hw_en      == true  || 
+      crypto_aead_aes_eax_hw_en      == true  || 
+      crypto_aead_aes_siv_cmac_hw_en == true  || 
+      crypto_aead_aes_siv_gcm_hw_en  == true)>
     <#lt>#define CRYPTO_AEAD_HW_ALGO_EN
 </#if>
 
@@ -73,35 +81,47 @@
 
 <#if crypto_aead_aes_gcm_en == true>
     <#lt>#define CRYPTO_AEAD_AESGCM_EN
+    <#if crypto_aead_aes_gcm_hw_en == false>
+        <#lt>#define CRYPTO_AEAD_WC_AESGCM_EN
+    <#else>
+        <#lt>#define CRYPTO_AEAD_HW_AESGCM_EN
+    </#if>
 </#if>
 
 <#if crypto_aead_aes_ccm_en == true>
     <#lt>#define CRYPTO_AEAD_AESCCM_EN
+    <#if crypto_aead_aes_ccm_hw_en == false>
+        <#lt>#define CRYPTO_AEAD_WC_AESCCM_EN
+    <#else>
+        <#lt>#define CRYPTO_AEAD_HW_AESCCM_EN
+    </#if>
 </#if>
 
 <#if crypto_aead_aes_eax_en == true>
     <#lt>#define CRYPTO_AEAD_AESEAX_EN
+    <#if crypto_aead_aes_eax_hw_en == false>
+        <#lt>#define CRYPTO_AEAD_WC_AESEAX_EN
+    <#else>
+        <#lt>#define CRYPTO_AEAD_HW_AESEAX_EN
+    </#if>
 </#if>
 
-//****WolfcryptWrapper Algorithm Macros*************
-//NOTE:  AEAD-AES algorithms accelerated using the AES HW driver
-//       selection (MISTRAL AES)
-<#if crypto_aead_aes_gcm_hw_en == false>
-    <#lt>#define CRYPTO_AEAD_WC_AESGCM_EN
-<#else>
-    <#lt>#define CRYPTO_AEAD_HW_AESGCM_EN
+<#if crypto_aead_aes_siv_cmac_en == true>
+    <#lt>#define CRYPTO_AEAD_AESSIVCMAC_EN
+    <#if crypto_aead_aes_sivc_mac_hw_en == false>
+        <#lt>#define CRYPTO_AEAD_WC_AESSIVCMAC_EN
+    <#else>
+        <#lt>#define CRYPTO_AEAD_HW_AESSIVCMAC_EN
+    </#if>
 </#if>
 
-<#if crypto_aead_aes_ccm_hw_en == false>
-    <#lt>#define CRYPTO_AEAD_WC_AESCCM_EN
-<#else>
-    <#lt>#define CRYPTO_AEAD_HW_AESCCM_EN
-</#if>
-
-<#if crypto_aead_aes_eax_hw_en == false>
-    <#lt>#define CRYPTO_AEAD_WC_AESEAX_EN
-<#else>
-    <#lt>#define CRYPTO_AEAD_HW_AESEAX_EN
+<#if crypto_aead_aes_siv_gcm_en == true>
+    <#lt>#define CRYPTO_AEAD_AESSIVGMC_EN
+    <#if crypto_aead_aes_siv_gcm_hw_en == false>
+        <#lt>#define CRYPTO_AEAD_WC_AESSIVGMC_EN
+    <#else>
+        <#lt>#define CRYPTO_AEAD_HW_AESSIVGMC_EN
+    </#if>
 </#if>
 
 #endif //MCHP_CRYPTO_AEAD_CONFIG_H

@@ -865,17 +865,33 @@ aeadAesMenu = None
 
 #AEAD Hardware
 cryptoHwAeadAesSupport = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AEAD_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "W", [],
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])], #ATSAMV70Q20B
+    ["AES", "6149", "ZB", [],
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])], #ATSAMA5D28
+    ["AES", "6149", "ZH", [],
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])], #ATSAM9x60
     ["AES", "6149", "ZN", [],
-        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
-    ]
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])]  #PIC32CX MT
+]
 cryptoHwAeadAesSupported          = False
 cryptoHwAeadAesEnabledSymbol      = None
 cryptoAeadAesEnabledSymbol        = None
 
 cryptoHwAeadAesGcmSupport = [
+    ["HSM" ,"03785",      "", [],
+       set(["HAVE_MCHP_CRYPTO_AEAD_HW_HSM"])], #PIC32CZ CA90 
+    ["AES", "6149", "W", [],
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])], #ATSAMV70Q20B
+    ["AES", "6149", "ZB", [],
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])], #ATSAMA5D28
+    ["AES", "6149", "ZH", [],
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])], #ATSAM9x60
     ["AES", "6149", "ZN", [],
-        set(["HAVE_MCHP_CRYPTO_AES_HW_6149"])]  #PIC32CX MT
-        ]
+        set(["HAVE_MCHP_CRYPTO_AEAD_HW_6149"])]  #PIC32CX MT
+]
 cryptoHwAeadAesGcmSupported       = False
 cryptoHwAeadAesGcmEnabledSymbol   = None
 cryptoAeadAesGcmEnabledSymbol     = None
