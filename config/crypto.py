@@ -909,7 +909,7 @@ def SetupHardwareSupport(cryptoComponent) :
 
     if (g.cryptoHwAeadAesSupported or g.cryptoHwAeadAesGcmSupported or
           g.cryptoHwAeadAesCcmSupported or g.cryptoHwAeadAesEaxSupported or
-          g.cryptoHwAeadAesSivCmacSupported or g.cryptoHwAeadAesSivGmcSupported):
+          g.cryptoHwAeadAesSivCmacSupported or g.cryptoHwAeadAesSivGcmSupported):
         g.cryptoHwAeadAesSupported = True
         print("CRYPTO HW:  HW AEAD-AES SUPPORTED")
     else:
