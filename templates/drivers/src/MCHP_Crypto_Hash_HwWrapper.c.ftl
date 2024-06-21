@@ -145,7 +145,7 @@ static uint32_t lCrypto_Hash_Hw_Sha_GetBlockSizeBytes(crypto_Hash_Algo_E shaAlgo
 {
     uint32_t blockLen = CRYPTO_SHA_BLOCK_SIZE_WORDS_32 << 2; // 128 bytes
     
-    CRYPTO_SHA_ALGORITHM shaAlgo;
+    CRYPTO_SHA_ALGORITHM shaAlgo = CRYPTO_SHA_ALGORITHM_SHA256;
     lCrypto_Hash_Hw_Sha_GetAlgorithm(shaAlgorithm, &shaAlgo);
     
     if ((shaAlgo == CRYPTO_SHA_ALGORITHM_SHA1) || 
@@ -162,7 +162,7 @@ static uint8_t lCrypto_Hash_Hw_Sha_GetPaddingSizeBytes(crypto_Hash_Algo_E shaAlg
 {
     uint8_t paddingLen = HASH_LONG_PAD_SIZE_BYTES;
     
-    CRYPTO_SHA_ALGORITHM shaAlgo;
+    CRYPTO_SHA_ALGORITHM shaAlgo = CRYPTO_SHA_ALGORITHM_SHA256;
     lCrypto_Hash_Hw_Sha_GetAlgorithm(shaAlgorithm, &shaAlgo);
     
     if ((shaAlgo == CRYPTO_SHA_ALGORITHM_SHA1) || 
@@ -180,7 +180,7 @@ static CRYPTO_SHA_DIGEST_SIZE lCrypto_Hash_Hw_Sha_GetDigestLen
 {
     CRYPTO_SHA_DIGEST_SIZE digestSize;
     
-    CRYPTO_SHA_ALGORITHM shaAlgo;
+    CRYPTO_SHA_ALGORITHM shaAlgo = CRYPTO_SHA_ALGORITHM_SHA256;
     lCrypto_Hash_Hw_Sha_GetAlgorithm(shaAlgorithm, &shaAlgo);
     
     switch(shaAlgo)
