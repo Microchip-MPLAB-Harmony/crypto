@@ -936,57 +936,57 @@ def SetupHardwareSupport(cryptoComponent) :
     #AES Modes
     g.cryptoHwSymAesEcbSupported = False
     devices = ScanHardware(g.cryptoHwSymAesEcbSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesEcbSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesEcbSupported = True
 
     g.cryptoHwSymAesCbcSupported  = False
     devices = ScanHardware(g.cryptoHwSymAesCbcSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesCbcSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCbcSupported = True
 
     g.cryptoHwSymAesCtrSupported  = False
     devices = ScanHardware(g.cryptoHwSymAesCtrSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesCtrSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCtrSupported = True
 
     g.cryptoHwSymAesCfb1Supported  = False
     devices = ScanHardware(g.cryptoHwSymAesCfb1Support)
-    if (len(driver) == 2): g.cryptoHwSymAesCfb1Supported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCfb1Supported = True
 
     g.cryptoHwSymAesCfb8Supported  = False
     devices  = ScanHardware(g.cryptoHwSymAesCfb8Support)
-    if (len(driver) == 2): g.cryptoHwSymAesCfb8Supported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCfb8Supported = True
 
     g.cryptoHwSymAesCfb64Supported   = False
     devices  = ScanHardware(g.cryptoHwSymAesCfb64Support)
-    if (len(driver) == 2): g.cryptoHwSymAesCfb64Supported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCfb64Supported = True
 
     g.cryptoHwSymAesCfb128Supported  = False
     devices  = ScanHardware(g.cryptoHwSymAesCfb128Support)
-    if (len(driver) == 2): g.cryptoHwSymAesCfb128Supported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCfb128Supported = True
 
     g.cryptoHwSymAesOfbSupported     = False
     devices  = ScanHardware(g.cryptoHwSymAesOfbSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesOfbSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesOfbSupported = True
 
     g.cryptoHwSymAesCcmSupported     = False
     devices  = ScanHardware(g.cryptoHwSymAesCcmSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesCcmSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesCcmSupported = True
 
     g.cryptoHwSymAesXtsSupported     = False
     devices  = ScanHardware(g.cryptoHwSymAesXtsSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesXtsSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesXtsSupported = True
 
     g.cryptoHwSymAesGcmSupported     = False
     devices  = ScanHardware(g.cryptoHwSymAesGcmSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesGcmSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesGcmSupported = True
 
     g.cryptoHwSymAesEaxSupported     = False
     devices  = ScanHardware(g.cryptoHwSymAesEaxSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesEaxSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesEaxSupported = True
 
     #======
     #AES Key Wrap
     g.cryptoHwSymAesKwSupported = False
     devices  = ScanHardware(g.cryptoHwSymAesKwSupport)
-    if (len(driver) == 2): g.cryptoHwSymAesKwSupported = True
+    if (len(devices) == 2): g.cryptoHwSymAesKwSupported = True
 
 
     ##########################

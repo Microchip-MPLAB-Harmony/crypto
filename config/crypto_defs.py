@@ -771,7 +771,7 @@ cryptoHwSymAesEaxEnabledSymbol = None
 cryptoSymAesEaxEnabledSymbol   = None
 
 #SYM AES Key Wrap (KW) 
-cryptoHwSymAesKwSupport       = [];
+cryptoHwSymAesKwSupport       = []
 cryptoHwSymAesKwSupported     = False
 cryptoHwSymAesKwEnabledSymbol = None
 cryptoSymAesKwEnabledSymbol   = None

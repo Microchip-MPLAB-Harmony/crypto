@@ -258,7 +258,7 @@ cryptoHwAeadAesEaxSupported         = False
 cryptoHwAeadAesEaxEnabledSymbol     = None
 cryptoAeadAesEaxEnabledSymbol       = None
 
-cryptoHwSymAesKwSupport       = [];
+cryptoHwSymAesKwSupport       = []
 cryptoHwSymAesKwSupported     = False
 cryptoHwSymAesKwEnabledSymbol = None
 cryptoSymAesKwEnabledSymbol   = None
