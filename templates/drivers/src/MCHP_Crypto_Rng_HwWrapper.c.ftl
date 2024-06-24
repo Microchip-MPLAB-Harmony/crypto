@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    MCHP_Crypto_RNG_HwWrapper.c
+    MCHP_Crypto_Rng_HwWrapper.c
 
   Summary:
     Crypto Framework Library wrapper file for hardware TRNG.
@@ -47,7 +47,7 @@ Microchip or any third party.
 // *****************************************************************************
 
 #include <stdint.h>
-#include "crypto/common_crypto/MCHP_Crypto_RNG_HwWrapper.h"
+#include "crypto/common_crypto/MCHP_Crypto_Rng_HwWrapper.h"
 <#if HAVE_MCHP_CRYPTO_TRNG_HW_6334 == true>
 #include "crypto/drivers/drv_crypto_trng_hw_6334.h"
 </#if>

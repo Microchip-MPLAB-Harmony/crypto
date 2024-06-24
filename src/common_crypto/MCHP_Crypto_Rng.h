@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    MCHP_Crypto_RNG.h
+    MCHP_Crypto_Rng.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -21,7 +21,7 @@
 #define MCHP_CRYPTO_RNG_H
 
 #include "MCHP_Crypto_Common.h"
-#include "MCHP_Crypto_RNG_Config.h"
+#include "MCHP_Crypto_Rng_Config.h"
 
 typedef enum
 {

@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    MCHP_Crypto_RNG_WolfcryptWrapper.c
+    MCHP_Crypto_Rng_WolfcryptWrapper.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -27,8 +27,8 @@
 // Section: Included Files
 // *****************************************************************************
 #include "crypto/common_crypto/MCHP_Crypto_Common.h"
-#include "crypto/common_crypto/MCHP_Crypto_RNG.h"
-#include "crypto/common_crypto/MCHP_Crypto_RNG_WolfcryptWrapper.h"
+#include "crypto/common_crypto/MCHP_Crypto_Rng.h"
+#include "crypto/common_crypto/MCHP_Crypto_Rng_WolfcryptWrapper.h"
 #include "wolfssl/wolfcrypt/random.h"
 #include "wolfssl/wolfcrypt/error-crypt.h"
 

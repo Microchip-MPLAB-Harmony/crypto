@@ -619,7 +619,7 @@ def instantiateComponent(cryptoComponent):
     rng.SetupCryptoRngMenu(cryptoComponent)
 
     #<config>/MCHP_Crypto_Rng_Config.h - API File
-    fileName    = "MCHP_Crypto_RNG_Config.h"
+    fileName    = "MCHP_Crypto_Rng_Config.h"
     ccRngConfigFile= cryptoComponent.createFileSymbol(
             "CC_API_RNG_CONFIG", None)
     ccRngConfigFile.setMarkup(True)

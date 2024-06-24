@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    MCHP_Crypto_RNG_WolfcryptWrapper.h
+    MCHP_Crypto_Rng_WolfcryptWrapper.h
 
   Summary:
     This header file provides prototypes and definitions for the application.

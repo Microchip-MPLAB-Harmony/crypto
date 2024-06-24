@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    MCHP_Crypto_RNG_Config.h
+    MCHP_Crypto_Rng_Config.h
 
   Summary:
     This header file provides prototypes and definitions for the application.

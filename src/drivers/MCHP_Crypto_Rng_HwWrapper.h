@@ -51,7 +51,7 @@ Microchip or any third party.
 
 #include <stdint.h>
 #include "crypto/common_crypto/MCHP_Crypto_Common.h"
-#include "crypto/common_crypto/MCHP_Crypto_RNG.h"
+#include "crypto/common_crypto/MCHP_Crypto_Rng.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
