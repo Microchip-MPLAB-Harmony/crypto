@@ -29,7 +29,7 @@
     </#if>
 
 <#if crypto_rng_trng_en == true>
-    <#lt>#define CRYPTO_RNG_TRNG_EN
+    <#lt>#define CRYPTO_RNG_HW_TRNG_EN
     </#if>
 
 #endif /* MCHP_CRYPTO_RNG_CONFIG_H */
