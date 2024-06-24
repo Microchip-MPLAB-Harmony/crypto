@@ -56,7 +56,7 @@ CONFIG_USE_ECDSA_HW       = None
 CONFIG_USE_ECDH_HW        = None
 
 #HW Module Symbol Strings
-#--all of them
+#--all known drivers
 hwDriverStrings = [
 "HAVE_MCHP_CRYPTO_TRNG_HW_HSM",  #PIC32CZ CA90 
 "HAVE_MCHP_CRYPTO_TRNG_HW_6334", #ATSAMV70Q20B/PIC32CX MT
@@ -90,7 +90,9 @@ hwDriverStrings = [
 hwDriverSymbol      = []   #Enabled HW Drivers
 hwDriverFileSymbols = []   #Files to Generate
 
-#HW Driver File Generation (TODO:  Only Mistral Drivers, for now)
+################################################################################
+#HW Driver File Generation 
+#
 #   { <dKey>: { <fKey>: [<driver files>] , ... ] }
 # NOTE(S): 
 #    1) Each driver file is uniquely listed.
@@ -99,6 +101,9 @@ hwDriverFileSymbols = []   #Files to Generate
 #    4) The drv prefix --> <config>/crypto/drivers
 #       The MCHP prefix --> <config>/crypto/common_crypto 
 #
+# (TODO:  Only Mistral Drivers, for now)
+#
+################################################################################
 hwDriverDict = {
                 "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcl.h",   #TODO: Not Implemented
                                   "drv_crypto_rsa_hw_cpkcl.c"],
@@ -107,15 +112,11 @@ hwDriverDict = {
                          "ECDSA":["MCHP_Crypto_DigSign_HwWrapper.h",
                                   "MCHP_Crypto_DigSign_HwWrapper.c",
                                   "drv_crypto_ecdsa_hw_cpkcl.h",
-                                  "drv_crypto_ecdsa_hw_cpkcl.c",
-                                  "drv_crypto_ecc_hw_cpkcl.h",
-                                  "drv_crypto_ecc_hw_cpkcl.c"],
+                                  "drv_crypto_ecdsa_hw_cpkcl.c"],
                          "ECDH":["MCHP_Crypto_Kas_HwWrapper.h",
                                   "MCHP_Crypto_Kas_HwWrapper.c",
                                   "drv_crypto_ecdh_hw_cpkcl.h",
-                                  "drv_crypto_ecdh_hw_cpkcl.c",
-                                  "drv_crypto_ecc_hw_cpkcl.h",
-                                  "drv_crypto_ecc_hw_cpkcl.c"]},
+                                  "drv_crypto_ecdh_hw_cpkcl.c" ]},
                  "6149": {"AES":["MCHP_Crypto_Sym_HwWrapper.h",
                                  "MCHP_Crypto_Sym_HwWrapper.c.ftl",
                                  "MCHP_Crypto_Aead_HwWrapper.h",     #TODO: put this with "AEAD" fKey
@@ -135,52 +136,40 @@ hwDriverDict = {
 cpkclDriverPath     = "src/drivers/CryptoLib_CPKCL/"
 cpkclDriverFileSyms = []   #Extra files used by CPKCC driver
 
-hwDriverFileDepends= {
-        "TRNG": [],
-         "SHA": [],
-         "AES": [],
-        "TDES": [],
-         "RSA": [],
-         "ECC": ["ECDSA", "ECDH"],
-       "ECDSA": ["ECC", "ECDH"],
-        "ECDH": ["ECC", "ECDSA"]
-}
-
-hwDriverEnSymbols = {
-        "TRNG": [],
-         "SHA": [],
-         "AES": [],
-        "TDES": [],
-         "RSA": [],
-         "ECC": [],
-       "ECDSA": [],
-        "ECDH": []
-}
-
-#NOTE:  Any enabled driver with a dependency adds the dependency files
-#       to the driver genererate list.  All drivers with the same
-#       dependency will both need hw to be disabled to remove
-#       the dependency files from the list.  
-#       The direct enabling of the dependency files acts independently
-#       of the sources they are dependent on.
-hwDriverDepends= {
-                 "CPKCC": { "RSA": [],
-                            "ECC": [],
-                          "ECDSA": ["ECC"],
-                           "ECDH": ["ECC"] },
-                  "6149": { "AES": []},
-                  "6156": { "SHA": []},
-                  "6334": {"TRNG": []} }
-
-
 #The dict list of file symbols loaded for each function based on the
 #hwDriverDict
 # {<function>: [<files symbols>], ...}
 #--Key is same as the hwDriverDict fKey
 hwDriverFileDict = {
         "TRNG": [],
+         "MD5": [],
+      "RIPEMD": [],
+        "SHA1": [],
          "SHA": [],
          "AES": [],
+        "AEAD": [],
+         "MAC": [],
+         "DES": [],
+        "TDES": [],
+         "RSA": [],
+         "ECC": [],
+       "ECDSA": [],
+        "ECDH": []}
+
+#The dict list of Drivers loaded for each function based on the
+#--Used to check if one function is using the same driver as another
+#  so as to generate it, even when one is deselected, while the other
+#  is still selected.
+hwFunctionDriverDict = {
+        "TRNG": [],
+         "MD5": [],
+      "RIPEMD": [],
+        "SHA1": [],
+         "SHA": [],
+         "AES": [],
+        "AEAD": [],
+         "MAC": [],
+         "DES": [],
         "TDES": [],
          "RSA": [],
          "ECC": [],
@@ -202,33 +191,6 @@ trustZoneDevices = [
 ]
 
 trustZoneFiles = []
-
-trngHw = [
-"HAVE_MCHP_CRYPTO_TRNG_HW_HSM",   #PIC32CZ CA90 
-"HAVE_MCHP_CRYPTO_TRNG_HW_6334",  #ATSAMV70Q20B
-"HAVE_MCHP_CRYPTO_TRNG_HW_U2242", #ATSAML11
-"HAVE_MCHP_CRYPTO_TRNG_HW_03597"] #PIC32CM'Lx ]
-
-shaHw = [
-"HAVE_MCHP_CRYPTO_SHA_HW_11105", #ATSAMV70Q20B
-"HAVE_MCHP_CRYPTO_SHA_HW_U2010", #ATSAME54P20A
-"HAVE_MCHP_CRYPTO_SHA_HW_6156",  #ATSAMA5D27
-"HAVE_MCHP_CRYPTO_SHA_HW_U2803", #ATSAML11
-"HAVE_MCHP_CRYPTO_SHA_HW_03710"]  #PIC32CM'Lx
-
-aesHw = [
-"HAVE_MCHP_CRYPTO_AES_HW_6149",  #ATSAMV70Q20B
-"HAVE_MCHP_CRYPTO_AES_HW_U2238"] #ATSAME54P20A
-
-tdesHw = [ "HAVE_MCHP_CRYPTO_TDES_HW_6150"] #ATSAMA5D27
-
-rsaHw = [
-"HAVE_MCHP_CRYPTO_RSA_HW_PUKCC", #ATSAME54P20A
-"HAVE_MCHP_CRYPTO_RSA_HW_CPKCC"] #PIC32CX MT
-
-eccHw = [
-"HAVE_MCHP_CRYPTO_ECC_HW_BA414E", #PCI32MZ-W
-"HAVE_MCHP_CRYPTO_ECC_HW_CPKCC"] #PIC32CX MT
 
 ################################################################################
 ## CRYPTO IMPLEMENTATIONS

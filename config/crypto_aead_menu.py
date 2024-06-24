@@ -297,7 +297,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
         print("AEAD: AEAD-AES HW GCM Supported")
         g.cryptoAeadAesGcmEnabledSymbol.setDependencies(
                 handleAeadAesGcmEnabled,
-                ["crypto_aead_aes_hw_en", "crypto_sym_aes_hw_en",
+                ["crypto_sym_aes_hw_en",
                  "crypto_aead_aes_gcm_en"])
 
     #AEAD-AES GCM HW Mode 
@@ -318,7 +318,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
     if (g.cryptoHwAeadAesCcmSupported == True):
         g.cryptoAeadAesCcmEnabledSymbol.setDependencies(
                 handleAeadAesCcmEnabled,
-                ["crypto_aead_aes_hw_en", "crypto_sym_aes_hw_en",
+                ["crypto_sym_aes_hw_en",
                  "crypto_aead_aes_ccm_en"])
 
     #AEAD-AES CCM HW Mode 
@@ -339,7 +339,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
     if (g.cryptoHwAeadAesEaxSupported == True):
         g.cryptoAeadAesEaxEnabledSymbol.setDependencies(
                 handleAeadAesEaxEnabled,
-                ["crypto_aead_aes_hw_en", "crypto_sym_aes_hw_en",
+                [ "crypto_sym_aes_hw_en",
                  "crypto_aead_aes_eax_en"])
 
     #AEAD-AES EAX HW Mode 
@@ -360,7 +360,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
     if (g.cryptoHwAeadAesSivCmacSupported == True):
         g.cryptoAeadAesSivCmacEnabledSymbol.setDependencies(
                 handleAeadAesSivCmacEnabled,
-                ["crypto_aead_aes_hw_en", "crypto_sym_aes_hw_en",
+                [ "crypto_sym_aes_hw_en",
                  "crypto_aead_aes_siv_cmac_en"])
 
     #AEAD-AES SIV-CMAC HW Mode 
@@ -381,7 +381,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
     if (g.cryptoHwAeadAesSivGcmSupported == True):
         g.cryptoAeadAesSivGcmEnabledSymbol.setDependencies(
                 handleAeadAesSivGcmEnabled,
-                ["crypto_aead_aes_hw_en", "crypto_sym_aes_hw_en",
+                [ "crypto_sym_aes_hw_en",
                  "crypto_aead_aes_siv_gcm_en"])
 
     #AEAD-AES SIV-GCM HW Mode 

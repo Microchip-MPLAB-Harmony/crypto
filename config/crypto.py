@@ -668,8 +668,8 @@ def handleHashDrngEnabled(symbol, event):
 
 
 ################################################################################
-# Scan the ATDF file for hardware module names given in the list items
-# where each item is a dictionary given by:
+# Scan the ATDF file for hardware crypto driver module names 
+# given in the list items, where each item is a dictionary given by:
 # [ <atdf Module name>, <atdf Module ID number>, <atdf version code>,
 #   [], <set of HW Project Defines> ] 
 #
@@ -710,14 +710,16 @@ def ScanHardware(list):
                         g.cryptoHwDevSupport.union([item[0]])) #driver ID
                 g.cryptoHwIdSupport= (
                         g.cryptoHwIdSupport.union([item[1]])) #driver ID
-                return True
-    return False
+                return [item[0], item[1]] #[<Driver name, Driver ID>]
+    return [] 
 
 
-#Add the HW Drivers
+################################################################################
+#Add the available HW Drivers
 #--Called after HW has been scanned and the HW Driver Symbols enabled.
 #--HW Driver Symbols (
 #  (TODO:  Drivers only for HW available and the HW function is selected)
+################################################################################
 def SetupHwDriverFiles(basecomponent):
 
     print("CRYPTO:  Adding HW Driver Files")
@@ -735,8 +737,9 @@ def SetupHwDriverFiles(basecomponent):
     print("CRYPTO HW: %d Driver IDs: "%(len(g.cryptoHwIdSupport)))
     print(g.cryptoHwIdSupport)
 
-    #create all possible drivers disabled for this HW
+    #create all possible driver files for this HW
     #--Later scan to see what HW functions are enabled
+    #--Create Dict List the driver used for each function
     print("CRYPTO: Driver File Symbols Created:")
     for [dKey, fDict] in g.hwDriverDict.items():  #Driver File Dict
 
@@ -826,9 +829,8 @@ def SetupHwDriverFiles(basecomponent):
                 #       included from other menus that use these files.
                 #       this should be fixed by checking the other menu
                 #       selections that could be using these driver files .
-                if (dKey=="CPKCC"):   #used by ECC/ECDH/ECDSA
-                    g.hwDriverFileDict[fKey] += g.cpkclDriverFileSyms
-
+                #if (dKey=="CPKCC"):   #used by ECC/ECDH/ECDSA
+                #    g.hwDriverFileDict[fKey] += g.cpkclDriverFileSyms
 
 
 ################################################################################
@@ -842,53 +844,86 @@ def SetupHwDriverFiles(basecomponent):
 ################################################################################
 def SetupHardwareSupport(cryptoComponent) :
 
+    print("CRYPTO:  HW Scan")
+
     g.cryptoHwSupportedSymbol= cryptoComponent.createBooleanSymbol(
             "cryptoHwSupported", None)
     g.cryptoHwSupportedSymbol.setVisible(False)
     g.cryptoHwSupportedSymbol.setLabel("Crypto HW Supported")
     g.cryptoHwSupportedSymbol.setDefaultValue(False)
 
+    ##########################
     #TRNG
-    print("CRYPTO:  Scan HW Support")
-    g.cryptoHwTrngSupported   = ScanHardware(g.cryptoHwTrngSupport)
-    if (g.cryptoHwTrngSupported):
-        print("CRYPTO HW:  HW TRNG SUPPORTED")
+    g.cryptoHwTrngSupported = False
+    g.hwFunctionDriverDict["TRNG"] = ScanHardware(g.cryptoHwTrngSupport)
+    if (len(g.hwFunctionDriverDict["TRNG"]) != 0): g.cryptoHwTrngSupported = True
+    if (g.cryptoHwTrngSupported): print("CRYPTO HW:  HW TRNG SUPPORTED")
 
+    ##########################
     #HASH
-    g.cryptoHwMd5Supported    = ScanHardware(g.cryptoHwMd5Support)
-    if (g.cryptoHwMd5Supported):
-        print("CRYPTO HW:  HW MD5 SUPPORTED")
-    g.cryptoHwSha1Supported   = ScanHardware(g.cryptoHwSha1Support)
-    if (g.cryptoHwSha1Supported):
-        print("CRYPTO HW:  HW SHA1 SUPPORTED")
-    g.cryptoHwSha224Supported = ScanHardware(g.cryptoHwSha224Support)
-    g.cryptoHwSha256Supported = ScanHardware(g.cryptoHwSha256Support)
-    g.cryptoHwSha384Supported = ScanHardware(g.cryptoHwSha384Support)
-    g.cryptoHwSha512Supported = ScanHardware(g.cryptoHwSha512Support)
-    if (g.cryptoHwSha256Supported):
-        print("CRYPTO HW:  HW SHA SUPPORTED")
 
+    #------
+    g.cryptoHwMd5Supported = False
+    g.hwFunctionDriverDict["MD5"] = ScanHardware(g.cryptoHwMd5Support)
+    if (len(g.hwFunctionDriverDict["MD5"]) == 2): g.cryptoHwMd5Supported = True
+    if (g.cryptoHwMd5Supported): print("CRYPTO HW:  HW MD5 SUPPORTED")
+
+
+    #------
+    g.cryptoHwSha1Supported = False
+    g.hwFunctionDriverDict["SHA1"] = ScanHardware(g.cryptoHwSha1Support)
+    if (len(g.hwFunctionDriverDict["SHA1"]) == 2): g.cryptoHwSha1Supported = True
+    if (g.cryptoHwSha1Supported): print("CRYPTO HW:  HW SHA1 SUPPORTED")
+
+    #------
+    #SHA2
+
+    g.cryptoHwSha224Supported = False
+    driver = ScanHardware(g.cryptoHwSha224Support)
+    if (len(driver) == 2): g.cryptoHwSha224Supported = True
+    if (g.cryptoHwSha224Supported): print("CRYPTO HW:  HW SHA224 SUPPORTED")
+
+    #NOTE: Always assume HW SHA support has at least SHA256
+    g.cryptoHwShaSupported = False
+    g.cryptoHwSha256Supported = False
+    g.hwFunctionDriverDict["SHA"] = ScanHardware(g.cryptoHwSha256Support)
+    if (len(g.hwFunctionDriverDict["SHA"]) == 2):
+        g.cryptoHwSha256Supported = True
+        g.cryptoHwShaSupported = True 
+    if (g.cryptoHwSha256Supported): print("CRYPTO HW:  HW SHA256 SUPPORTED")
+
+    g.cryptoHwSha384Supported = False
+    driver = ScanHardware(g.cryptoHwSha384Support)
+    if (len(driver) == 2): g.cryptoHwSha384Supported = True
+    if (g.cryptoHwSha384Supported): print("CRYPTO HW:  HW SHA384 SUPPORTED")
+
+    g.cryptoHwSha512Supported = False
+    driver = ScanHardware(g.cryptoHwSha512Support)
+    if (len(driver) == 2): g.cryptoHwSha512Supported = True
+    if (g.cryptoHwSha512Supported): print("CRYPTO HW:  HW SHA512 SUPPORTED")
+
+
+    ##########################
     #AES 
-    g.cryptoHwSymAes128Supported    = ScanHardware(g.cryptoHwSymAes128Support)
-    g.cryptoHwSymAes192Supported    = ScanHardware(g.cryptoHwSymAes192Support)
-    g.cryptoHwSymAes256Supported    = ScanHardware(g.cryptoHwSymAes256Support)
+    g.cryptoHwSymAes128Supported = False
+    driver = ScanHardware(g.cryptoHwSymAes128Support)
+    if (len(driver) == 2): g.cryptoHwSymAes128Supported = True
+    if (g.cryptoHwSymAes128Supported): print("CRYPTO HW:  HW AES 128 SUPPORTED")
 
-    #AES Modes
-    g.cryptoHwSymAesEcbSupported    = ScanHardware(g.cryptoHwSymAesEcbSupport)
-    g.cryptoHwSymAesCbcSupported    = ScanHardware(g.cryptoHwSymAesCbcSupport)
-    g.cryptoHwSymAesCtrSupported    = ScanHardware(g.cryptoHwSymAesCtrSupport)
-    g.cryptoHwSymAesCfb1Supported   = ScanHardware(g.cryptoHwSymAesCfb1Support)
-    g.cryptoHwSymAesCfb8Supported   = ScanHardware(g.cryptoHwSymAesCfb8Support)
-    g.cryptoHwSymAesCfb64Supported  = ScanHardware(g.cryptoHwSymAesCfb64Support)
-    g.cryptoHwSymAesCfb128Supported = ScanHardware(g.cryptoHwSymAesCfb128Support)
-    g.cryptoHwSymAesOfbSupported    = ScanHardware(g.cryptoHwSymAesOfbSupport)
-    g.cryptoHwSymAesCcmSupported    = ScanHardware(g.cryptoHwSymAesCcmSupport)
-    g.cryptoHwSymAesXtsSupported    = ScanHardware(g.cryptoHwSymAesXtsSupport)
-    g.cryptoHwSymAesGcmSupported    = ScanHardware(g.cryptoHwSymAesGcmSupport)
-    g.cryptoHwSymAesEaxSupported    = ScanHardware(g.cryptoHwSymAesEaxSupport)
+    g.cryptoHwSymAes192Supported = False 
+    driver = ScanHardware(g.cryptoHwSymAes192Support)
+    if (len(driver) == 2): g.cryptoHwSymAes192Supported = True
+    if (g.cryptoHwSymAes192Supported): 
+        print("CRYPTO HW:  HW AES 192 SUPPORTED")
 
-    #AES Key Wrap
-    g.cryptoHwSymAesKwSupported     = ScanHardware(g.cryptoHwSymAesKwSupport)
+    #NOTE: Always assume HW AES support has at least AES256
+    g.cryptoHwAesSupported =False 
+    g.cryptoHwSymAes256Supported = False
+    g.hwFunctionDriverDict["AES"] = ScanHardware(g.cryptoHwSymAes256Support)
+    if (len(g.hwFunctionDriverDict["AES"]) == 2):
+        g.cryptoHwSymAes256Supported = True
+        g.cryptoHwSymAesSupported = True 
+    if (g.cryptoHwSymAes256Supported): print("CRYPTO HW:  HW AES256 SUPPORTED")
 
     if (g.cryptoHwSymAes128Supported or g.cryptoHwSymAes128Supported or
         g.cryptoHwSymAes192Supported or g.cryptoHwSymAes256Supported):
@@ -898,38 +933,130 @@ def SetupHardwareSupport(cryptoComponent) :
         #print("CRYPTO HW:  HW AES NOT SUPPORTED")
         g.cryptoHwSymAesSupported = False
 
+    #AES Modes
+    g.cryptoHwSymAesEcbSupported = False
+    devices = ScanHardware(g.cryptoHwSymAesEcbSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesEcbSupported = True
+
+    g.cryptoHwSymAesCbcSupported  = False
+    devices = ScanHardware(g.cryptoHwSymAesCbcSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesCbcSupported = True
+
+    g.cryptoHwSymAesCtrSupported  = False
+    devices = ScanHardware(g.cryptoHwSymAesCtrSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesCtrSupported = True
+
+    g.cryptoHwSymAesCfb1Supported  = False
+    devices = ScanHardware(g.cryptoHwSymAesCfb1Support)
+    if (len(driver) == 2): g.cryptoHwSymAesCfb1Supported = True
+
+    g.cryptoHwSymAesCfb8Supported  = False
+    devices  = ScanHardware(g.cryptoHwSymAesCfb8Support)
+    if (len(driver) == 2): g.cryptoHwSymAesCfb8Supported = True
+
+    g.cryptoHwSymAesCfb64Supported   = False
+    devices  = ScanHardware(g.cryptoHwSymAesCfb64Support)
+    if (len(driver) == 2): g.cryptoHwSymAesCfb64Supported = True
+
+    g.cryptoHwSymAesCfb128Supported  = False
+    devices  = ScanHardware(g.cryptoHwSymAesCfb128Support)
+    if (len(driver) == 2): g.cryptoHwSymAesCfb128Supported = True
+
+    g.cryptoHwSymAesOfbSupported     = False
+    devices  = ScanHardware(g.cryptoHwSymAesOfbSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesOfbSupported = True
+
+    g.cryptoHwSymAesCcmSupported     = False
+    devices  = ScanHardware(g.cryptoHwSymAesCcmSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesCcmSupported = True
+
+    g.cryptoHwSymAesXtsSupported     = False
+    devices  = ScanHardware(g.cryptoHwSymAesXtsSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesXtsSupported = True
+
+    g.cryptoHwSymAesGcmSupported     = False
+    devices  = ScanHardware(g.cryptoHwSymAesGcmSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesGcmSupported = True
+
+    g.cryptoHwSymAesEaxSupported     = False
+    devices  = ScanHardware(g.cryptoHwSymAesEaxSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesEaxSupported = True
+
+    #======
+    #AES Key Wrap
+    g.cryptoHwSymAesKwSupported = False
+    devices  = ScanHardware(g.cryptoHwSymAesKwSupport)
+    if (len(driver) == 2): g.cryptoHwSymAesKwSupported = True
+
+
+    ##########################
     #AEAD-AES 
-    g.cryptoHwAeadAesSupported = ScanHardware(g.cryptoHwAeadAesSupport)
+    g.cryptoHwAeadAesSupported = False
+    g.hwFunctionDriverDict["AEAD"] = ScanHardware(g.cryptoHwAeadAesSupport)
+    if (len(g.hwFunctionDriverDict["AEAD"]) == 2): g.cryptoHwAeadAesSupported = True
+    if (g.cryptoHwAeadAesSupported): print("CRYPTO HW:  HW AEAD AES SUPPORTED")
 
-    g.cryptoHwAeadAesGcmSupported = ScanHardware(g.cryptoHwAeadAesGcmSupport)
-    g.cryptoHwAeadAesCcmSupported = ScanHardware(g.cryptoHwAeadAesCcmSupport)
-    g.cryptoHwAeadAesEaxSupported = ScanHardware(g.cryptoHwAeadAesEaxSupport)
-    g.cryptoHwAeadAesSivCmacSupported = ScanHardware(g.cryptoHwAeadAesSivCmacSupport)
-    g.cryptoHwAeadAesSivGcmSupported = ScanHardware(g.cryptoHwAeadAesSivGcmSupport)
+    g.cryptoHwAeadAesGcmSupported = False
+    driver = ScanHardware(g.cryptoHwAeadAesGcmSupport)
+    if (len(driver) == 2): g.cryptoHwAeadAesGcmSupported = True
+    if (g.cryptoHwAeadAesGcmSupported): print("CRYPTO HW:  HW AEAD AES Gcm SUPPORTED")
 
-    if (g.cryptoHwAeadAesSupported or g.cryptoHwAeadAesGcmSupported or
-          g.cryptoHwAeadAesCcmSupported or g.cryptoHwAeadAesEaxSupported or
-          g.cryptoHwAeadAesSivCmacSupported or g.cryptoHwAeadAesSivGcmSupported):
-        g.cryptoHwAeadAesSupported = True
-        print("CRYPTO HW:  HW AEAD-AES SUPPORTED")
-    else:
-        print("CRYPTO HW:  HW AEAD-AES NOT SUPPORTED")
-        g.cryptoHwAeadAesSupported = False
+    g.cryptoHwAeadAesCcmSupported = False
+    driver = ScanHardware(g.cryptoHwAeadAesCcmSupport)
+    if (len(driver) == 2): g.cryptoHwAeadAesCcmSupported = True
+    if (g.cryptoHwAeadAesCcmSupported): print("CRYPTO HW:  HW AEAD AES Ccm SUPPORTED")
 
+    g.cryptoHwAeadAesEaxSupported = False
+    driver = ScanHardware(g.cryptoHwAeadAesEaxSupport)
+    if (len(driver) == 2): g.cryptoHwAeadAesEaxSupported = True
+    if (g.cryptoHwAeadAesEaxSupported): print("CRYPTO HW:  HW AEAD AES Eax SUPPORTED")
+
+    g.cryptoHwAeadAesSivCmacSupported = False
+    driver = ScanHardware(g.cryptoHwAeadAesSivCmacSupport)
+    if (len(driver) == 2): g.cryptoHwAeadAesSivCmacSupported = True
+    if (g.cryptoHwAeadAesSivCmacSupported): print("CRYPTO HW:  HW AEAD AES SivCmac SUPPORTED")
+
+    g.cryptoHwAeadAesSivGcmSupported = False
+    driver = ScanHardware(g.cryptoHwAeadAesSivGcmSupport)
+    if (len(driver) == 2): g.cryptoHwAeadAesSivGcmSupported = True
+    if (g.cryptoHwAeadAesSivGcmSupported): print("CRYPTO HW:  HW AEAD AES SivGcm SUPPORTED")
+
+
+    if (g.cryptoHwAeadAesSupported): print("CRYPTO HW:  HW AEAD-AES SUPPORTED")
+    else: print("CRYPTO HW:  HW AEAD-AES NOT SUPPORTED")
+
+    #======
     #HMAC
 
+    ##########################
     #ASYM - Asymmetric Crypto
 
+    #======
     #DES
-    g.cryptoHwDesSupported    = ScanHardware(g.cryptoHwDesSupport)
-    g.cryptoHwDesCbcSupported = ScanHardware(g.cryptoHwDesCbcSupport)
-    g.cryptoHwDesCfbSupported = ScanHardware(g.cryptoHwDesCfbSupport)
-    g.cryptoHwDesOfbSupported = ScanHardware(g.cryptoHwDesOfbSupport)
-    if (g.cryptoHwDesSupported):
-        print("CRYPTO HW:  HW ASYM DES SUPPORTED")
-    else:
-        g.cryptoHwDesSupported = False
+    g.cryptoHwDesSupported    = False
+    g.cryptoHwDesSupported = False
+    g.hwFunctionDriverDict["DES"] = ScanHardware(g.cryptoHwDesSupport)
+    if (len(g.hwFunctionDriverDict["DES"]) == 2):
+        g.cryptoHwDesSupported = True
+    if (g.cryptoHwDesSupported): print("CRYPTO HW:  HW ASYM DES SUPPORTED")
 
+
+    g.cryptoHwDesCbcSupported = False
+    driver = ScanHardware(g.cryptoHwDesCbcSupport)
+    if (len(driver) == 2): g.cryptoHwDesCbcSupported = True
+    if (g.cryptoHwDesCbcSupported): print("CRYPTO HW:  HW ASYM DES Cbc SUPPORTED")
+
+    g.cryptoHwDesCfbSupported = False
+    driver = ScanHardware(g.cryptoHwDesCfbSupport)
+    if (len(driver) == 2): g.cryptoHwDesCfbSupported = True
+    if (g.cryptoHwDesCfbSupported): print("CRYPTO HW:  HW ASYM DES Cfb SUPPORTED")
+
+    g.cryptoHwDesOfbSupported = False
+    driver = ScanHardware(g.cryptoHwDesOfbSupport)
+    if (len(driver) == 2): g.cryptoHwDesOfbSupported = True
+    if (g.cryptoHwDesOfbSupported): print("CRYPTO HW:  HW ASYM DES Ofb SUPPORTED")
+
+    #======
     #RSA
     g.cryptoHwAsymRsaSupported    = ScanHardware(g.cryptoHwAsymRsaSupport)
     if (g.cryptoHwAsymRsaSupported):
@@ -937,22 +1064,32 @@ def SetupHardwareSupport(cryptoComponent) :
     else:
         g.cryptoHwAsymRsaSupported = False
 
+    #NOTE: Always assume HW AES support has at least AES256
+    g.cryptoHwAsymRsaSupported =False 
+    g.hwFunctionDriverDict["RSA"] = ScanHardware(g.cryptoHwAsymRsaSupport)
+    if (len(g.hwFunctionDriverDict["RSA"]) == 2):
+        g.cryptoHwAsymRsaSupported = True
+    if (g.cryptoHwAsymRsaSupported): print("CRYPTO HW:  HW ASYM RSA SUPPORTED")
+
+
+    #======
     #ECC
-    g.cryptoHwAsymEccSupported    = ScanHardware(g.cryptoHwAsymEccSupport)
-    if (g.cryptoHwAsymEccSupported):
-        print("CRYPTO HW:  HW ASYM ECC SUPPORTED")
-    else:
-        g.cryptoHwAsymEccSupported = False
+    g.cryptoHwAsymEccSupported =False 
+    g.hwFunctionDriverDict["ECC"] = ScanHardware(g.cryptoHwAsymEccSupport)
+    if (len(g.hwFunctionDriverDict["ECC"]) == 2):
+        g.cryptoHwAsymEccSupported = True
+    if (g.cryptoHwAsymEccSupported): print("CRYPTO HW:  HW ASYM ECC SUPPORTED")
 
+    #-----
     #DS - Digital Signing
-
     #DS ECDSA
-    g.cryptoHwDsEcdsaSupported    = ScanHardware(g.cryptoHwDsEcdsaSupport)
-    if (g.cryptoHwDsEcdsaSupported):
-        print("CRYPTO HW:  HW DS-ECDSA SUPPORTED")
-    else:
-        g.cryptoHwDsEcdsaSupported = False
+    g.cryptoHwDsEcdsaSupported =False 
+    g.hwFunctionDriverDict["ECDSA"] = ScanHardware(g.cryptoHwDsEcdsaSupport)
+    if (len(g.hwFunctionDriverDict["ECDSA"]) == 2):
+        g.cryptoHwDsEcdsaSupported = True
+    if (g.cryptoHwDsEcdsaSupported): print("CRYPTO HW:  HW DS ECDSA SUPPORTED")
 
+    #-----
     #KAS ECDH
     g.cryptoHwKasEcdhSupported    = ScanHardware(g.cryptoHwKasEcdhSupport)
     if (g.cryptoHwKasEcdhSupported):
@@ -960,10 +1097,28 @@ def SetupHardwareSupport(cryptoComponent) :
     else:
         g.cryptoHwKasEcdhSupported = False
 
+    g.cryptoHwKasEcdhSupported =False 
+    g.hwFunctionDriverDict["ECDH"] = ScanHardware(g.cryptoHwKasEcdhSupport)
+    if (len(g.hwFunctionDriverDict["ECDH"]) == 2):
+        g.cryptoHwKasEcdhSupported = True
+    if (g.cryptoHwKasEcdhSupported): print("CRYPTO HW:  HW KAS ECDH SUPPORTED")
+
+    #======
     #HW Modules
     g.cryptoHW_U2803Present   = ScanHardware(g.cryptoHW_U2803)
+    g.cryptoHW_U2803Present   = False
+    driver = ScanHardware(g.cryptoHW_U2803)
+    if (len(driver) == 2): g.cryptoHW_U2803Present = True
+
     g.cryptoHW_U2805Present   = ScanHardware(g.cryptoHW_U2805)
+    g.cryptoHW_U2805Present   = False
+    driver = ScanHardware(g.cryptoHW_U2805)
+    if (len(driver) == 2): g.cryptoHW_U2805Present = True
+
     g.cryptoHW_03710Present   = ScanHardware(g.cryptoHW_03710)
+    g.cryptoHW_03710Present   = False
+    driver = ScanHardware(g.cryptoHW_03710)
+    if (len(driver) == 2): g.cryptoHW_03710Present = True
 
     if (g.cryptoHwTrngSupported     or  g.cryptoHwMd5Supported or
         g.cryptoHwSha1Supported     or
@@ -987,7 +1142,7 @@ def SetupHardwareSupport(cryptoComponent) :
 
     #Create symbols for all possible HW Drivers
     print("CRYPTO HW: %d Symbols --"%(len(g.cryptoHwAdditionalDefines)))
-    for defStr in g.hwDriverStrings:    
+    for defStr in g.hwDriverStrings:
         #Create the driver symbol
         #--Initially true
         g.hwDriverSymbol.append(cryptoComponent.createBooleanSymbol(
