@@ -23,9 +23,7 @@
 <#lt>#define CRYPTO_RNG_SESSION_MAX (1)
 
 <#if crypto_rng_prng_en == true>
-    <#lt>#define CRYPTO_RNG_PRNG_EN
     <#lt>#define CRYPTO_RNG_WC_PRNG_EN
-    <#lt>#define CRYPTO_RNG_WC_ALGO_EN
     </#if>
 
 <#if crypto_rng_trng_en == true>
