@@ -261,10 +261,10 @@ cryptoHwSha1Support = [
     ["ICM", "U2010", "1.2.0", [],
        set(["HAVE_MCHP_CRYPTO_SHA_HW_11105",
             "HAVE_MCHP_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
-    ["SHA", "6156", "O", [],
-       set(["HAVE_MCHP_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27
-    ["SHA", "6156", "S", [],
-       set(["HAVE_MCHP_CRYPTO_SHA_HW_6156"])] #PI32CX MT/ATSAM9X60
+    [""" "SHA", "6156", "O", [],
+       set(["HAVE_MCHP_CRYPTO_SHA_HW_6156"]) """], #ATSAMA5D27
+    [""" "SHA", "6156", "S", [],
+       set(["HAVE_MCHP_CRYPTO_SHA_HW_6156"]) """] #PI32CX MT/ATSAM9X60
 ]
 cryptoHwSha1Supported     = False
 cryptoHwSha1EnabledSymbol = None

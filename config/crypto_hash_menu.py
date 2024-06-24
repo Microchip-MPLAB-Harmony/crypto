@@ -724,7 +724,7 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.cryptoHwBlake512EnabledSymbol.setDescription(
        "Turn on hardware acceleration" +
        "for the BLAKE-512 Hash Algorithm")
-    g.cryptoHwBlake512EnabledSymbol.setVisible(True)
+    g.cryptoHwBlake512EnabledSymbol.setVisible(False)
     g.cryptoHwBlake512EnabledSymbol.setDefaultValue(False)
     if ((g.cryptoHwBlake512Supported == True)):
         g.cryptoBlake512EnabledSymbol.setDependencies(
