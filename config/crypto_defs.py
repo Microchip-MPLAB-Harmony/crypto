@@ -43,7 +43,7 @@ CONFIG_USE_TDES           = None
 CONFIG_USE_RSA            = None
 CONFIG_USE_ECC            = None
 CONFIG_USE_ECDSA          = None
-CONFIG_USE_ECDH_HW        = None
+CONFIG_USE_ECDH           = None
 
 #HW Function Driver Used
 CONFIG_USE_TRNG_HW        = None
@@ -107,7 +107,7 @@ hwDriverFileSymbols = []   #Files to Generate
 hwDriverDict = {
                 "CPKCC": { "RSA":["drv_crypto_rsa_hw_cpkcl.h",   #TODO: Not Implemented
                                   "drv_crypto_rsa_hw_cpkcl.c"],
-                           "ECC":["drv_crypto_ecc_hw_cpkcl.h",   #No Menu for this
+                           "ECC":["drv_crypto_ecc_hw_cpkcl.h",       #Used by ECDSA/ECDH
                                   "drv_crypto_ecc_hw_cpkcl.c"],
                          "ECDSA":["MCHP_Crypto_DigSign_HwWrapper.h",
                                   "MCHP_Crypto_DigSign_HwWrapper.c",
@@ -118,10 +118,9 @@ hwDriverDict = {
                                   "drv_crypto_ecdh_hw_cpkcl.h",
                                   "drv_crypto_ecdh_hw_cpkcl.c" ]},
                  "6149": {"AES":["MCHP_Crypto_Sym_HwWrapper.h",
-                                 "MCHP_Crypto_Sym_HwWrapper.c.ftl",
-                                 "MCHP_Crypto_Aead_HwWrapper.h",     #TODO: put this with "AEAD" fKey
-                                 "MCHP_Crypto_Aead_HwWrapper.c.ftl", #      For now, enable HW AES to enable 
-                                                                     #      AEAD HW
+                                 "MCHP_Crypto_Sym_HwWrapper.c.ftl",  #Include AEAD Function
+                                 "MCHP_Crypto_Aead_HwWrapper.h",     #
+                                 "MCHP_Crypto_Aead_HwWrapper.c.ftl", # 
                                  "drv_crypto_aes_hw_6149.h.ftl",
                                  "drv_crypto_aes_hw_6149.c.ftl"] },
                  "6156": {"SHA":["MCHP_Crypto_Hash_HwWrapper.h",
@@ -156,7 +155,8 @@ hwDriverFileDict = {
        "ECDSA": [],
         "ECDH": []}
 
-#The dict list of Drivers loaded for each function based on the
+#The dict list of Drivers loaded for each function based on the 
+#hwDriverDict
 #--Used to check if one function is using the same driver as another
 #  so as to generate it, even when one is deselected, while the other
 #  is still selected.

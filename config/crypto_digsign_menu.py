@@ -40,19 +40,14 @@ import crypto_defs as g #Modified globals
 #--Returns True if CONFIG_USE_DS changes value
 ################################################################################
 def ScanDigSign():
-    if   (g.cryptoDsEcdsaEnabledSymbol.getValue()       == True): 
-        newValue = True
-    else:
-        newValue = False
+    g.CONFIG_USE_ECDSA.setValue(g.cryptoDsEcdsaEnabledSymbol.getValue())
 
-    if (g.CONFIG_USE_DS.getValue() == newValue):
-        g.CONFIG_USE_ECDSA.setValue(newValue)
-        return False
-    else:
-        g.CONFIG_USE_DS.setValue(newValue)
-        g.CONFIG_USE_ECDSA.setValue(newValue)
-        print("CRYPO:  CONFIG_USE_DS = %s"%(g.CONFIG_USE_DS.getValue()))
-        return True
+    if (g.CONFIG_USE_ECDSA.getValue() == False):
+        g.cryptoHwDsEcdsaEnabledSymbol.setValue(False)
+
+    g.CONFIG_USE_DS.setValue(g.CONFIG_USE_ECDSA.getValue())
+    print("CRYPTO:  CONFIG_USE_DS = %s"%(g.CONFIG_USE_DS.getValue()))
+    return True
 
 #Check if the ECDSA is enabled and the ECDSA HW Driver Files are needed.
 # TODO:  For now only Mistral 6156. Some mods required for other HW
@@ -63,7 +58,6 @@ def ScanDigSignHw():
 
     hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
     g.CONFIG_USE_ECDSA_HW.setValue(hwVal)
-
 
     print("ECDSA:  Enable HW(%s)"%(hwVal))
     for fSym in g.hwDriverFileDict["ECDSA"]:
@@ -83,6 +77,7 @@ def ScanDigSignHw():
     else:
         hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
 
+    #ECC/CPKCC Shared Drivers
     print("DS: ECDSA uses %s Driver(hw = %s)"%(
         g.hwFunctionDriverDict["ECDSA"], hwVal))
     if (g.hwFunctionDriverDict["ECDSA"][0] == "CPKCC"):
@@ -173,14 +168,10 @@ def handleDsEcdsaEnabled(symbol, event):
     else:
         g.cryptoHwDsEcdsaEnabledSymbol.setValue(False)
         g.cryptoHwDsEcdsaEnabledSymbol.setVisible(False)
-    ScanDigSign()
 
     #Check for ECDSA HW Driver Update
     if (ScanDigSignHw() == True):
         numHwDrv = len(g.hwDriverFileDict["ECDSA"])
         for fSym in g.hwDriverFileDict["ECDSA"]:
             print("ECDSA:  Update [ECDSA]%s(%s)"%(
-                  fSym.getOutputName(),fSym.getEnabled()))
-        for fSym in g.hwDriverFileDict["ECC"]:
-            print("ECC:  Update [ECC]%s(%s)"%(
                   fSym.getOutputName(),fSym.getEnabled()))

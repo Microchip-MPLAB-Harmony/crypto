@@ -32,14 +32,15 @@
 
 <#if crypto_ds_ecdsa_en == true>
     <#lt>#define CRYPTO_DIGISIGN_ECDSA_EN
+
+    <#if CONFIG_USE_ECDSA_HW == true>
+        <#lt>#define CRYPTO_DIGISIGN_HW_ALGO_EN
+        <#lt>#define CRYPTO_DIGISIGN_HW_ECDSA_EN
+    <#else>
+        <#lt>#define CRYPTO_DIGISIGN_WC_ALGO_EN
+        <#lt>#define CRYPTO_DIGISIGN_WC_ECDSA_EN
     </#if>
 
-<#if CONFIG_USE_ECDSA_HW == true>
-    <#lt>#define CRYPTO_DIGISIGN_HW_ALGO_EN
-    <#lt>#define CRYPTO_DIGISIGN_HW_ECDSA_EN
-<#else>
-    <#lt>#define CRYPTO_DIGISIGN_WC_ALGO_EN
-    <#lt>#define CRYPTO_DIGISIGN_WC_ECDSA_EN
 </#if>
 
 #endif /* MCHP_CRYPTO_DIGSIGN_CONFIG_H */
