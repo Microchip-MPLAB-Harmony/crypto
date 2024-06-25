@@ -42,6 +42,7 @@ import crypto_defs as g #Modified globals
 #--Returns True if CONFIG_USE_AEAD changes value
 ################################################################################
 def ScanAead():
+
     if   (g.cryptoAeadAesGcmEnabledSymbol.getValue()     == True): newValue = True
     elif (g.cryptoAeadAesCcmEnabledSymbol.getValue()     == True): newValue = True
     elif (g.cryptoAeadAesEaxEnabledSymbol.getValue()     == True): newValue = True
@@ -55,22 +56,36 @@ def ScanAead():
         if (g.cryptoAeadAesGcmEnabledSymbol.getValue() == True):
             g.cryptoHwAeadAesGcmEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
+        else: g.cryptoHwAeadAesGcmEnabledSymbol.setValue(False)
+    else: g.cryptoHwAeadAesGcmEnabledSymbol.setValue(False)
 
+    if (g.cryptoHwAeadAesCcmSupported == True):
         if (g.cryptoAeadAesCcmEnabledSymbol.getValue() == True):
             g.cryptoHwAeadAesCcmEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
+        else: g.cryptoHwAeadAesCcmEnabledSymbol.setValue(False)
+    else: g.cryptoHwAeadAesCcmEnabledSymbol.setValue(False)
 
+    if (g.cryptoHwAeadAesEaxSupported == True):
         if (g.cryptoAeadAesEaxEnabledSymbol.getValue() == True):
             g.cryptoHwAeadAesEaxEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
+        else: g.cryptoHwAeadAesEaxEnabledSymbol.setValue(False)
+    else: g.cryptoHwAeadAesEaxEnabledSymbol.setValue(False)
 
+    if (g.cryptoHwAeadAesSivCmacSupported == True):
         if (g.cryptoAeadAesSivCmacEnabledSymbol.getValue() == True):
             g.cryptoHwAeadAesSivCmacEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
+        else: g.cryptoHwAeadAesSivCmacEnabledSymbol.setValue(False)
+    else: g.cryptoHwAeadAesSivCmacEnabledSymbol.setValue(False)
 
+    if (g.cryptoHwAeadAesSivGcmSupported == True):
         if (g.cryptoAeadAesSivGcmEnabledSymbol.getValue() == True):
             g.cryptoHwAeadAesSivGcmEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
+        else: g.cryptoHwAeadAesSivGcmEnabledSymbol.setValue(False)
+    else: g.cryptoHwAeadAesSivGcmEnabledSymbol.setValue(False)
 
     if (g.CONFIG_USE_AEAD.getValue() == newValue):
         return False
@@ -403,9 +418,6 @@ def handleAeadAesHwEnabled(symbol, event):
         #Dependent on SYM-AES setting
         g.cryptoHwAeadAesEnabledSymbol.setValue(
                 g.cryptoHwSymAesEnabledSymbol.getValue())
-
-    if (ScanAead() == True):
-        data = symbol.getComponent()
     UpdateAeadAesHwDriverFiles()
     return
 
