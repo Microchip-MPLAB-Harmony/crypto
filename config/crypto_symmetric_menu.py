@@ -484,11 +484,11 @@ def UpdateAesMenuLabels(hwEnabled):
 
     if (g.cryptoHwSymAesKwSupported == True):
         if (hwEnabled == True):
-            g.cryptoSymAesKwEnabledSymbol.setLabel("AES Key Wrap (KW) - (HW)?")
+            g.cryptoSymAesKwEnabledSymbol.setLabel("AES Key Wrap (HW)?")
         else:
-            g.cryptoSymAesKwEnabledSymbol.setLabel("AES-Key Wrap (KW)?")
+            g.cryptoSymAesKwEnabledSymbol.setLabel("AES-Key Wrap?")
     else:
-        g.cryptoSymAesKwEnabledSymbol.setLabel("AES-Key Wrap (KW)?")
+        g.cryptoSymAesKwEnabledSymbol.setLabel("AES-Key Wrap?")
 
     return
 
