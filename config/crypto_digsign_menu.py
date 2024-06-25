@@ -46,9 +46,11 @@ def ScanDigSign():
         newValue = False
 
     if (g.CONFIG_USE_DS.getValue() == newValue):
+        g.CONFIG_USE_ECDSA.setValue(newValue)
         return False
     else:
         g.CONFIG_USE_DS.setValue(newValue)
+        g.CONFIG_USE_ECDSA.setValue(newValue)
         print("CRYPO:  CONFIG_USE_DS = %s"%(g.CONFIG_USE_DS.getValue()))
         return True
 
@@ -79,7 +81,7 @@ def ScanDigSignHw():
     else:
         hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
 
-    print("Ds: ECDSA uses %s Driver(hw = %s)"%(
+    print("DS: ECDSA uses %s Driver(hw = %s)"%(
         g.hwFunctionDriverDict["ECDSA"], hwVal))
     if (g.hwFunctionDriverDict["ECDSA"][0] == "CPKCC"):
         print("ECDSA: CPKCC Driver Enabled(%s)"%(hwVal))
@@ -110,7 +112,6 @@ def SetupCryptoDsMenu(cryptoComponent):
     g.CONFIG_USE_ECDSA.setLabel("Crypto ECDSA")
     g.CONFIG_USE_ECDSA.setDefaultValue(False)
 
-    #ECDSA File Generation Enable
     g.CONFIG_USE_ECDSA_HW= cryptoComponent.createBooleanSymbol(
             "CONFIG_USE_ECDSA_HW", None)
     g.CONFIG_USE_ECDSA_HW.setVisible(False)

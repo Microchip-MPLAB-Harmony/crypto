@@ -46,9 +46,11 @@ def ScanKas():
         newValue = False
 
     if (g.CONFIG_USE_KAS.getValue() == newValue):
+        g.CONFIG_USE_ECDH.setValue(newValue)
         return False
     else:
         g.CONFIG_USE_KAS.setValue(newValue)
+        g.CONFIG_USE_ECDH.setValue(newValue)
         print("CRYPO:  CONFIG_USE_KAS = %s"%(g.CONFIG_USE_KAS.getValue()))
         return True
 

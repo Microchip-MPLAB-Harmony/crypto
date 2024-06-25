@@ -37,12 +37,14 @@
 
 <#if crypto_kas_ecdh_en == true>
     <#lt>#define CRYPTO_KAS_ECDH_EN
-    <#lt>#define CRYPTO_KAS_WC_ALGO_EN
-    <#lt>#define CRYPTO_KAS_WC_ECDH_EN
     </#if>
 
 <#if CONFIG_USE_ECDH_HW == true>
     <#lt>#define CRYPTO_KAS_HW_ALGO_EN
-    </#if>
+    <#lt>#define CRYPTO_KAS_HW_ECDH_EN
+<#else>
+    <#lt>#define CRYPTO_KAS_WC_ALGO_EN
+    <#lt>#define CRYPTO_KAS_WC_ECDH_EN
+</#if>
 
 #endif /* MCHP_CRYPTO_KAS_CONFIG_H */
