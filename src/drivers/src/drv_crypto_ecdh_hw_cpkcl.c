@@ -59,11 +59,14 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
-static u1 sharedKeyX[P521_PUBLIC_KEY_COORDINATE_SIZE];    // Maximum size 
-static u1 sharedKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE];    // Maximum size 
-static u1 pubKeyX[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];   // Maximum size + 4
-static u1 pubKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];   // Maximum size + 4
-static u1 sharedKeyLen;
+// All buffers maximum size
+static u1 sharedKeyX[P521_PUBLIC_KEY_COORDINATE_SIZE];    
+static u1 sharedKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE];     
+
+// All buffers maximum size + 4
+static u1 pubKeyX[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];  
+static u1 pubKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE + 4]; 
+static u1 privateKey[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];
 
 // *****************************************************************************
 // *****************************************************************************
@@ -72,7 +75,7 @@ static u1 sharedKeyLen;
 // *****************************************************************************
 
 CRYPTO_ECDH_RESULT DRV_CRYPTO_ECDH_InitEccParams(CPKCL_ECC_DATA *pEccData, 
-    pfu1 privKey, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType)
+    pfu1 privKey, u4 privKeyLen, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType)
 {
     CRYPTO_CPKCL_RESULT result;
     
@@ -107,9 +110,10 @@ CRYPTO_ECDH_RESULT DRV_CRYPTO_ECDH_InitEccParams(CPKCL_ECC_DATA *pEccData,
     pEccData->pfu1PublicKeyX = (pfu1) pubKeyX;
     pEccData->pfu1PublicKeyY = (pfu1) pubKeyY;
     
-    pEccData->pfu1PrivateKey = (pfu1) privKey;
-    
-    sharedKeyLen = DRV_CRYPTO_ECC_GetPublickKeyLength(eccCurveType);
+    /* Store private key locally, leaving first 4 bytes empty  */
+    memset(privateKey, 0, sizeof(privateKey));
+    memcpy(&privateKey[4], privKey, privKeyLen);
+    pEccData->pfu1PrivateKey = (pfu1) privateKey;
     
     return CRYPTO_ECDH_RESULT_SUCCESS;
 }
@@ -198,10 +202,8 @@ CRYPTO_ECDH_RESULT DRV_CRYPTO_ECDH_GetSharedKey(CPKCL_ECC_DATA *pEccData,
         (pu1) ((BASE_SCA_MUL_POINT_A(u2ModuloPSize, u2OrderSize))) 
                 + u2ModuloPSize + 4, u2ModuloPSize + 4);   
 
-    /* Build secret key */  
-    u1 coordLen = sharedKeyLen / 2;
-    memcpy(sharedKey, sharedKeyX, (coordLen - 1));
-    memcpy(&sharedKey[coordLen], sharedKeyY, (coordLen -1));
+    /* Remove empty first four bytes */  
+    memcpy(sharedKey, &sharedKeyX[4], u2OrderSize);
     
     return CRYPTO_ECDH_RESULT_SUCCESS;
 }

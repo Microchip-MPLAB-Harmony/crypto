@@ -130,8 +130,12 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign(uint8_t *inputHash,
     }
     
     /* Initialize the hardware library for ECDSA signature generation */
-    hwResult = DRV_CRYPTO_ECDSA_InitEccParamsSign(&eccData, (pfu1)inputHash, 
-                                                  (pfu1)privKey, hwEccCurve);
+    hwResult = DRV_CRYPTO_ECDSA_InitEccParamsSign(&eccData, 
+                                                  (pfu1)inputHash,
+                                                  (u4) hashLen, 
+                                                  (pfu1)privKey, 
+                                                  (u4) privKeyLen, 
+                                                  hwEccCurve);
     if (hwResult != CRYPTO_ECDSA_RESULT_SUCCESS) 
     {
         return lCrypto_DigSign_Ecdsa_Hw_MapResult(hwResult);
@@ -139,7 +143,7 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Sign(uint8_t *inputHash,
     }
     
     /* Sign the message */
-    hwResult = DRV_CRYPTO_ECDSA_Sign(&eccData, (pfu1)outSig);
+    hwResult = DRV_CRYPTO_ECDSA_Sign(&eccData, (pfu1)outSig, (u4)sigLen);
 
     return lCrypto_DigSign_Ecdsa_Hw_MapResult(hwResult);
 }
@@ -162,8 +166,11 @@ crypto_DigiSign_Status_E Crypto_DigiSign_Ecdsa_Hw_Verify(uint8_t *inputHash,
     }
     
     /* Initialize the hardware library for ECDSA signature verification */
-    hwResult = DRV_CRYPTO_ECDSA_InitEccParamsVerify(&eccData, (pfu1)inputHash, 
-                                                    (pfu1)pubKey, hwEccCurve);
+    hwResult = DRV_CRYPTO_ECDSA_InitEccParamsVerify(&eccData, 
+                                                    (pfu1)inputHash,
+                                                    (u4) hashLen, 
+                                                    (pfu1)pubKey, 
+                                                    hwEccCurve);
     
     /* Verify the signature */
     hwResult = DRV_CRYPTO_ECDSA_Verify(&eccData, (pfu1)inputSig);

@@ -316,8 +316,6 @@ CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_InitCurveParams(CPKCL_ECC_DATA *pEcc,
 CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_SetPubKeyCoordinates(CPKCL_ECC_DATA *pEcc,
     pfu1 pubKey, pfu1 pubKeyX, pfu1 pubKeyY, CRYPTO_CPKCL_CURVE curveType);
     
-u1 DRV_CRYPTO_ECC_GetPublickKeyLength(CRYPTO_CPKCL_CURVE curveType);
-    
 void DRV_CRYPTO_ECC_SecureCopy(pu1 pu1Dest, pu1 pu1Src, u2 u2Length);
 
 // DOM-IGNORE-BEGIN

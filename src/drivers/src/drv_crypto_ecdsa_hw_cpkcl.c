@@ -59,8 +59,13 @@ Microchip or any third party.
 // *****************************************************************************
 // *****************************************************************************
 
-static u1 pubKeyX[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];    // Maximum size + 4
-static u1 pubKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];    // Maximum size + 4
+// All buffers maximum size + 4
+static u1 pubKeyX[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];    
+static u1 pubKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];  
+static u1 localHash[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];    
+static u1 privateKey[P521_PUBLIC_KEY_COORDINATE_SIZE + 4]; 
+static u1 signX[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];
+static u1 signY[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];
     
 // *****************************************************************************
 // *****************************************************************************
@@ -69,7 +74,8 @@ static u1 pubKeyY[P521_PUBLIC_KEY_COORDINATE_SIZE + 4];    // Maximum size + 4
 // *****************************************************************************
 
 CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_InitEccParamsSign(CPKCL_ECC_DATA *pEccData, 
-    pfu1 hash, pfu1 privKey, CRYPTO_CPKCL_CURVE eccCurveType)
+    pfu1 hash, u4 hashLen, pfu1 privKey, u4 privKeyLen, 
+    CRYPTO_CPKCL_CURVE eccCurveType)
 {
     CRYPTO_CPKCL_RESULT result;
     
@@ -87,15 +93,28 @@ CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_InitEccParamsSign(CPKCL_ECC_DATA *pEccData,
         return CRYPTO_ECDSA_RESULT_ERROR_CURVE;
     }
     
-    pEccData->pfu1HashValue = (pfu1) hash;
-	pEccData->pfu1PrivateKey = (pfu1) privKey;
+    /* Clean out local buffers */
+    memset(localHash, 0, sizeof(localHash));
+    memset(privateKey, 0, sizeof(privateKey));
+    
+    /* Copy leaving first 4 bytes empty */
+    memcpy(&localHash[4], hash, hashLen);
+    memcpy(&privateKey[4], privKey, privKeyLen);
+    
+    /* Store in context */
+    pEccData->pfu1HashValue = (pfu1) localHash;
+    pEccData->pfu1PrivateKey = (pfu1) privateKey;
     
     return CRYPTO_ECDSA_RESULT_SUCCESS;
 }
 
 CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_Sign(CPKCL_ECC_DATA *pEccData, 
-    pfu1 pfulSignature)
+    pfu1 pfulSignature, u4 signatureLen)
 {
+     /* Clean out local buffers */
+    memset(signX, 0, sizeof(signX));
+    memset(signY, 0, sizeof(signY));
+    
     /* Set sizes */
     u2 u2ModuloPSize = pEccData->u2ModuloPSize;
     u2 u2OrderSize = pEccData->u2OrderSize;
@@ -175,18 +194,21 @@ CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_Sign(CPKCL_ECC_DATA *pEccData,
     }
 
     /* Copy the result */
-    DRV_CRYPTO_ECC_SecureCopy(pfulSignature,
+    DRV_CRYPTO_ECC_SecureCopy(signX,
         (pu1) ((BASE_ECDSA_POINT_A(u2ModuloPSize, u2OrderSize))),
                 u2OrderSize + 4);
-    DRV_CRYPTO_ECC_SecureCopy(pfulSignature + u2OrderSize + 4,
+    DRV_CRYPTO_ECC_SecureCopy(signY,
         (pu1) ((BASE_ECDSA_POINT_A(u2ModuloPSize, u2OrderSize)))
                 + u2OrderSize + 4, u2OrderSize + 4);
+    
+    memcpy(pfulSignature, &signX[4], u2OrderSize);
+    memcpy(&pfulSignature[u2OrderSize], &signY[4], u2OrderSize);
                     
     return CRYPTO_ECDSA_RESULT_SUCCESS;
 }
 
  CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_InitEccParamsVerify(CPKCL_ECC_DATA *pEccData, 
-    pfu1 hash, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType)
+    pfu1 hash, u4 hashLen, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType)
 {
     CRYPTO_CPKCL_RESULT result;
     
@@ -214,7 +236,10 @@ CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_Sign(CPKCL_ECC_DATA *pEccData,
     pEccData->pfu1PublicKeyX = (pfu1) pubKeyX;
     pEccData->pfu1PublicKeyY = (pfu1) pubKeyY;
     
-    pEccData->pfu1HashValue = (pfu1) hash;
+    /* Store hash locally */
+    memset(localHash, 0, sizeof(localHash));
+    memcpy(&localHash[4], hash, hashLen);
+    pEccData->pfu1HashValue = (pfu1) localHash;
     
     return CRYPTO_ECDSA_RESULT_SUCCESS;
 }
@@ -227,13 +252,20 @@ CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_Verify(CPKCL_ECC_DATA *pEccData,
     /* Set sizes */
     u2 u2ModuloPSize = pEccData->u2ModuloPSize;	
     u2 u2OrderSize = pEccData->u2OrderSize;
+    
+    /* Clean out local buffers */
+    memset(signX, 0, sizeof(signX));
+    memset(signY, 0, sizeof(signY));
+    
+    /* Copy signature leaving first 4 bytes empty */
+    memcpy(&signX[4], pfu1Signature, u2OrderSize);
+    memcpy(&signY[4], &pfu1Signature[u2OrderSize], u2OrderSize);
 
     /* Copy the signature into appropriate memory area */
     /* Take care of the input signature format */
     pu1Tmp = (pu1) ((BASE_ECDSAV_SIGNATURE(u2ModuloPSize, u2OrderSize)));
-    DRV_CRYPTO_ECC_SecureCopy(pu1Tmp, pfu1Signature, u2OrderSize + 4);
-    DRV_CRYPTO_ECC_SecureCopy(pu1Tmp + u2OrderSize + 4, 
-        pfu1Signature + u2OrderSize + 4, u2OrderSize + 4);
+    DRV_CRYPTO_ECC_SecureCopy(pu1Tmp, signX, u2OrderSize + 4);
+    DRV_CRYPTO_ECC_SecureCopy(pu1Tmp + u2OrderSize + 4, signY, u2OrderSize + 4);
 
     /* Copy parameters for ECDSA signature verification in memory areas */
     DRV_CRYPTO_ECC_SecureCopy(

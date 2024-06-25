@@ -124,8 +124,8 @@ crypto_Kas_Status_E Crypto_Kas_Ecdh_Hw_SharedSecret(uint8_t *privKey,
         return result;
     }
      
-    hwResult = DRV_CRYPTO_ECDH_InitEccParams(&eccData, privKey, pubKey, 
-                                             hwEccCurve);
+    hwResult = DRV_CRYPTO_ECDH_InitEccParams(&eccData, privKey, (u4) privKeyLen,
+                                             pubKey, hwEccCurve);
     if (hwResult != CRYPTO_ECDH_RESULT_SUCCESS) 
     {
         return lCrypto_Kas_Ecdh_Hw_MapResult(hwResult);

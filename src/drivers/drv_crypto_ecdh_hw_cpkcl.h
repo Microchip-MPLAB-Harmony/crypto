@@ -81,7 +81,7 @@ typedef enum
 // *****************************************************************************
 
 CRYPTO_ECDH_RESULT DRV_CRYPTO_ECDH_InitEccParams(CPKCL_ECC_DATA *pEccData, 
-    pfu1 privKey, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType);
+    pfu1 privKey, u4 privKeyLen, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType);
     
 CRYPTO_ECDH_RESULT DRV_CRYPTO_ECDH_GetSharedKey(CPKCL_ECC_DATA *pEccData, 
     pfu1 sharedKey);

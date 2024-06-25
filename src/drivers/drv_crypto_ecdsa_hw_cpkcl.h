@@ -82,18 +82,19 @@ typedef enum
 // *****************************************************************************
 
 CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_InitEccParamsSign(CPKCL_ECC_DATA *pEccData, 
-    pfu1 hash, pfu1 privKey, CRYPTO_CPKCL_CURVE eccCurveType);
+    pfu1 hash, u4 hashLen, pfu1 privKey, u4 privKeyLen, 
+    CRYPTO_CPKCL_CURVE eccCurveType);
 
 /* The signature is in MSB mode with the following order: */
 /* 4 "0" bytes - S - 4 "0" bytes - R */
 CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_Sign(CPKCL_ECC_DATA *pEccData, 
-                                          pfu1 pfulSignature);
+    pfu1 pfulSignature, u4 signatureLen);
                                           
 CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_InitEccParamsVerify(CPKCL_ECC_DATA *pEccData, 
-    pfu1 hash, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType);
+    pfu1 hash, u4 hashLen, pfu1 pubKey, CRYPTO_CPKCL_CURVE eccCurveType);
 
 CRYPTO_ECDSA_RESULT DRV_CRYPTO_ECDSA_Verify(CPKCL_ECC_DATA *pEccData, 
-                                            pfu1 pfu1Signature);
+    pfu1 pfu1Signature);
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

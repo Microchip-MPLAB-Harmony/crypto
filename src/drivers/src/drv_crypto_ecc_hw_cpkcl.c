@@ -691,46 +691,20 @@ CRYPTO_CPKCL_RESULT DRV_CRYPTO_ECC_SetPubKeyCoordinates(CPKCL_ECC_DATA *pEcc,
     
     return CRYPTO_CPKCL_RESULT_CURVE_SUCCESS;
 }
-
-u1 DRV_CRYPTO_ECC_GetPublickKeyLength(CRYPTO_CPKCL_CURVE curveType)
-{
-     switch (curveType)
-    {
-        case CRYPTO_CPKCL_CURVE_P192:
-            return P192_PUBLIC_KEY_SIZE;
-        
-        case CRYPTO_CPKCL_CURVE_P224:
-            return P224_PUBLIC_KEY_SIZE;
-            
-        case CRYPTO_CPKCL_CURVE_P256:
-            return P256_PUBLIC_KEY_SIZE;
-        
-        case CRYPTO_CPKCL_CURVE_P384:
-            return P384_PUBLIC_KEY_SIZE;
-        
-        case CRYPTO_CPKCL_CURVE_P521:
-            return P521_PUBLIC_KEY_SIZE;
-            
-        default:  
-            return 0;
-    }
-    
-    return 0;
-}
     
 void DRV_CRYPTO_ECC_SecureCopy(pu1 pu1Dest, pu1 pu1Src, u2 u2Length)
 {   
     u2 u2Cpt;
-	pu1 pu1PtrDest;
+    pu1 pu1PtrDest;
 
-    // clean out the destination.
+    /* Clean out the destination */
     memset(pu1Dest, 0, u2Length);
-	
-	u2Cpt = 0;
-	pu1PtrDest = pu1Dest;
-	while (u2Cpt < u2Length) 
+    
+    u2Cpt = 0;
+    pu1PtrDest = pu1Dest;
+    while (u2Cpt < u2Length) 
     {
-		*(pu1PtrDest++) = pu1Src[u2Length - u2Cpt - 1];
-		u2Cpt++;
-	}
+        *(pu1PtrDest++) = pu1Src[u2Length - u2Cpt - 1];
+        u2Cpt++;
+    }
 }
