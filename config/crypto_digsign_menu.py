@@ -62,6 +62,8 @@ def ScanDigSignHw():
     ScanDigSign()
 
     hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
+    g.CONFIG_USE_ECDSA_HW.setValue(hwVal)
+
 
     print("ECDSA:  Enable HW(%s)"%(hwVal))
     for fSym in g.hwDriverFileDict["ECDSA"]:
