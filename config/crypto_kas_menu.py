@@ -158,8 +158,6 @@ def SetupCryptoKasMenu(cryptoComponent):
         if (g.cryptoKasEcdhEnabledSymbol.getValue() == True):
             g.cryptoHwKasEcdhEnabledSymbol.setVisible(True)
             g.cryptoHwKasEcdhEnabledSymbol.setDefaultValue(True)
-    else:
-        g.cryptoKasEcdhEnabledSymbol.setEnabled(False)
 
     #Check to see if any of the Kas selections is True
     #--Used to include the CC KAS API Files
