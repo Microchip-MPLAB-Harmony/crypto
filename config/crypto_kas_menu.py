@@ -52,38 +52,38 @@ def UpdateKasHwDriverFiles():
     else:
         print("CONFIG_USE_ECDH - TRUE")
 
-    hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
-    g.CONFIG_USE_ECDH_HW.setValue(hwVal)
-    print("KAS:  Update ECDH HW Driver (%s)"%(hwVal))
+    useHw = g.cryptoHwKasEcdhEnabledSymbol.getValue()
+    g.CONFIG_USE_ECDH_HW.setValue(useHw)
 
-    #Enable/Disable ECDH HW Driver Files
+    #Enable/Disable ECDH specific HW Driver Files
+    print("KAS:  Update ECDH specific HW Driver (%s)"%(useHw))
     for fSym in g.hwDriverFileDict["ECDH"]:
-        fSym.setEnabled(hwVal)
+        fSym.setEnabled(useHw)
         print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
 
-    #Additional Driver Files used by other functions
-    sameDriver = False
-    if (g.hwFunctionDriverDict["ECDH"] ==
-        g.hwFunctionDriverDict["ECDSA"]):
-        print("KAS:  Both KAS-ECDH and DS-ECDSA use %s driver"%
-              g.hwFunctionDriverDict["ECDH"])
-        sameDriver = True
+    if (useHw == True): 
 
-    if (sameDriver == True):
-        hwVal = (g.cryptoHwDsEcdsaEnabledSymbol.getValue() or
-                 g.cryptoHwKasEcdhEnabledSymbol.getValue())
-    else:
-        hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
+        #Additional Driver Files used by other functions
+        sameDriver = False
+        if ((g.hwFunctionDriverDict["ECDSA"][0] == 
+             g.hwFunctionDriverDict["ECDSA"][0])):
+            print("KAS:  Both KAS-ECDH and DS-ECDSA use %s driver"%
+                  g.hwFunctionDriverDict["ECDH"])
+            sameDriver = True
 
-    print("KAS: ECDH uses %s Driver(hw = %s)"%(
-        g.hwFunctionDriverDict["ECDH"], hwVal))
+        if (sameDriver == True):
+            hwVal =  (g.cryptoHwDsEcdsaEnabledSymbol != None) and (
+                      g.cryptoHwDsEcdsaEnabledSymbol.getValue() or
+                      g.cryptoHwKasEcdhEnabledSymbol.getValue())
+        else:
+            hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
 
-    #Shared ECDH HW Driver Files
-    if (g.hwFunctionDriverDict["ECDH"][0] == "CPKCC"):
+        #Shared ECDH HW Driver Files
+        if (g.hwFunctionDriverDict["ECDH"][0] == "CPKCC"):
 
-        print("ECDH: CPKCC Driver Enabled(%s)"%(hwVal))
-        for fSym in g.cpkclDriverFileSyms:
-            fSym.setEnabled(hwVal)
+            print("ECDH: CPKCC Driver Enabled(%s)"%(hwVal))
+            for fSym in g.cpkclDriverFileSyms:
+                fSym.setEnabled(hwVal)
 
         #Driver Dependency - ECC Curves
         print("ECDH: ECC Driver Enabled(%s)"%(hwVal))
@@ -96,9 +96,10 @@ def UpdateKasHwDriverFiles():
 
 ################################################################################
 # Setup the KAS Menu Items and File Generation
-# --Files are listed in g.hwFileDict["ECDH"] list dictionary
+# --HW Files symbols are listed in g.hwFileDict["ECDH"] list dictionary
 ################################################################################
 def SetupCryptoKasMenu(cryptoComponent):
+    print("CRYPTO: Setup KAS Menu")
 
     #KAS File Generation Enable
     g.CONFIG_USE_KAS= cryptoComponent.createBooleanSymbol(
@@ -162,7 +163,8 @@ def SetupCryptoKasMenu(cryptoComponent):
 
     #Check to see if any of the Kas selections is True
     #--Used to include the CC KAS API Files
-    UpdateKasHwDriverFiles
+    print("CRYPTO: KAS Update Hw Driver Files")
+    UpdateKasHwDriverFiles()
 
 #-----------------------------------------------------
 #KAS-ECDH Handlers

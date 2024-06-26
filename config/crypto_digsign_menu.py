@@ -56,43 +56,50 @@ def ScanDigSignHw():
 
     ScanDigSign()
 
-    hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
-    g.CONFIG_USE_ECDSA_HW.setValue(hwVal)
+    useHw = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
+    g.CONFIG_USE_ECDSA_HW.setValue(useHw)
 
-    print("ECDSA:  Enable HW(%s)"%(hwVal))
+    print("DS :  Enable ECDSA specific HW(%s)"%(useHw))
     for fSym in g.hwDriverFileDict["ECDSA"]:
-        fSym.setEnabled(hwVal)
+        fSym.setEnabled(useHw)
+        print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
 
-    #Additional Driver Files used by other functions
-    sameDriver = False
-    if (g.hwFunctionDriverDict["ECDH"] ==
-        g.hwFunctionDriverDict["ECDSA"]):
-        print("DS:  KAS-ECDH and DS-ECDSA use %s driver"%
-              g.hwFunctionDriverDict["ECDSA"])
-        sameDriver = True
+    if (useHw == True):
+        #Additional Driver Files used by other functions
+        sameDriver = False
+        if (g.hwFunctionDriverDict["ECDH"] ==
+            g.hwFunctionDriverDict["ECDSA"]):
+            print("DS:  KAS-ECDH and DS-ECDSA use %s driver"%
+                  g.hwFunctionDriverDict["ECDSA"])
+            sameDriver = True
 
-    if (sameDriver == True):
-        hwVal = (g.cryptoHwDsEcdsaEnabledSymbol.getValue() or
-                 g.cryptoHwKasEcdhEnabledSymbol.getValue())
-    else:
-        hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
+        if (sameDriver == True):
+            hwVal =  (g.cryptoHwKasEcdhEnabledSymbol != None)  and (
+                      g.cryptoHwDsEcdsaEnabledSymbol.getValue() or 
+                      g.cryptoHwKasEcdhEnabledSymbol.getValue())
+        else:
+            hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
 
-    #ECC/CPKCC Shared Drivers
-    print("DS: ECDSA uses %s Driver(hw = %s)"%(
-        g.hwFunctionDriverDict["ECDSA"], hwVal))
-    if (g.hwFunctionDriverDict["ECDSA"][0] == "CPKCC"):
-        print("ECDSA: CPKCC Driver Enabled(%s)"%(hwVal))
-        for fSym in g.cpkclDriverFileSyms:
-            fSym.setEnabled(hwVal)
+        #ECC/CPKCC Shared Drivers
+        print("DS: ECDSA uses %s Driver(hw = %s)"%(
+            g.hwFunctionDriverDict["ECDSA"], hwVal))
+        if (g.hwFunctionDriverDict["ECDSA"][0] == "CPKCC"):
+            print("ECDSA: CPKCC Driver Enabled(%s)"%(hwVal))
+            for fSym in g.cpkclDriverFileSyms:
+                fSym.setEnabled(hwVal)
 
-        #Driver Dependency - ECC Curves
-        print("ECDSA: ECC Driver Enabled(%s)"%(hwVal))
-        for fSym in g.hwDriverFileDict["ECC"]:
-            fSym.setEnabled(hwVal)
+            #Driver Dependency - ECC Curves
+            print("ECDSA: ECC Driver Enabled(%s)"%(hwVal))
+            for fSym in g.hwDriverFileDict["ECC"]:
+                fSym.setEnabled(hwVal)
 
-    return True
+    return True 
 
 
+################################################################################
+# Setup the DS Menu Items and File Generation
+# --HW File symbols are listed in g.hwFileDict["ECDSA"] list dictionary
+################################################################################
 def SetupCryptoDsMenu(cryptoComponent):
 
     #DS File Generation Enable
