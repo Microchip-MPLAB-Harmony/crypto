@@ -65,7 +65,7 @@ def UpdateKasHwDriverFiles():
 
         #Additional Driver Files used by other functions
         sameDriver = False
-        if ((g.hwFunctionDriverDict["ECDSA"][0] == 
+        if ((g.hwFunctionDriverDict["ECDH"][0] == 
              g.hwFunctionDriverDict["ECDSA"][0])):
             print("KAS:  Both KAS-ECDH and DS-ECDSA use %s driver"%
                   g.hwFunctionDriverDict["ECDH"])
