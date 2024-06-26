@@ -96,17 +96,19 @@ extern "C" {
      crypto_sym_aes_cfb128_en == true ||
      crypto_sym_aes_ctr_en == true ||
      crypto_sym_aes_xts_en == true>
-    <#lt>#define CRYPTO_SYM_AES_ENABLE      //any AES algorithm is selected in MCC GUI
-    <#lt>#define CRYPTO_SYM_WC_ALGO_EN      //Any symmetric algorithm selected to use Wolfcrypt
+    <#lt>#define CRYPTO_SYM_AES_ENABLE         //any AES algorithm is selected in MCC GUI
+    <#lt>#define CRYPTO_SYM_WC_ALGO_EN         //Any symmetric algorithm selected to use Wolfcrypt
     <#lt>#define CRYPTO_SYM_WC_AES_EN          //AES algorithm selected to use Wolfcrypt 
 <#else>
-     <#lt>#undef CRYPTO_SYM_AES_ENABLE      //No AES algorithm is selected in MCC GUI
+     <#lt>#undef CRYPTO_SYM_AES_ENABLE         //No AES algorithm is selected in MCC GUI
+</#if>
+<#if crypto_sym_aes_kw_en == true>
+    <#lt>#define CRYPTO_SYM_WC_AESKW_EN        //AES KeyWrap selected to use Wolfcrypt 
 </#if>
 
 //<#lt>#define CRYPTO_SYM_CAMELLIA_ENABLE      //Camellia algorithm is selected in MCC GUI
 //<#lt>#define CRYPTO_SYM_TDES_ENABLE          //3DES/TDES algorithm option is selected in MCC GUI
 //<#lt>#define CRYPTO_SYM_CHACHA20_ENABLE      //ChaCha20 algorithm is selected in MCC-GUI
-//<#lt>#define CRYPTO_SYM_AESKEYWRAP_ENABLE    //AES-Key-Wrap algorithm is selected in MCC GUI    
 //***************************************
 
 <#if crypto_sym_aes_hw_en == true>
@@ -121,8 +123,8 @@ extern "C" {
     </#if>
 
 <#if crypto_sym_aes_cbc_en == true>
-   <#lt>#define CRYPTO_SYM_AESCBC_EN            //CBC mode is selected under AES algorithm in MCC-GUI
-    </#if>
+   <#lt>#define CRYPTO_SYM_AESCBC_EN             //CBC mode is selected under AES algorithm in MCC-GUI
+   </#if>
 
 <#if crypto_sym_aes_ofb_en == true>
     <#lt>#define CRYPTO_SYM_AESOFB_EN            //OFB mode is selected under AES algorithm in MCC-GUI
@@ -153,7 +155,7 @@ extern "C" {
     </#if>
 
 <#if crypto_sym_aes_kw_en == true>
-    <#lt>#define CRYPTO_SYM_AESKEYWRAP_ENABLE            //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI
+    <#lt>#define CRYPTO_SYM_AESKEYWRAP_ENABLE    //Key Wrap (KW) mode is selected under AES algorithm in MCC-GUI
     </#if>
 
 
