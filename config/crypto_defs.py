@@ -11,6 +11,8 @@
 #GLOBALS 
 from crypto_globals import *
 
+print("CRYPTO: Loading Global Defs")
+
 # SYMBOLS used by FTL are put in the cryptoHwAdditionalDefines
 cryptoHwDefines           = None
 cryptoHwAdditionalDefines = set([])
@@ -916,6 +918,7 @@ cryptoHwDsEcdsaSupport = [
 ]
 cryptoHwDsEcdsaSupported         = False
 cryptoHwDsEcdsaEnabledSymbol     = None
+print("CRYPTO: cryptoHwDsEcdsa Defines as None")
 
 
 

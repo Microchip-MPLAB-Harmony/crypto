@@ -72,9 +72,11 @@ def UpdateKasHwDriverFiles():
             sameDriver = True
 
         if (sameDriver == True):
-            hwVal =  (g.cryptoHwDsEcdsaEnabledSymbol != None) and (
-                      g.cryptoHwDsEcdsaEnabledSymbol.getValue() or
-                      g.cryptoHwKasEcdhEnabledSymbol.getValue())
+            if (g.cryptoHwDsEcdsaEnabledSymbol == None):
+                hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
+            else:
+                hwVal =  g.cryptoHwDsEcdsaEnabledSymbol.getValue()
+                hwVal = hwVal or g.cryptoHwKasEcdhEnabledSymbol.getValue()
         else:
             hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
 
