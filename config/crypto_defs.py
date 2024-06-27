@@ -220,7 +220,7 @@ cryptoHwTrngSupport = [
     ["TRNG","U2242",   "1d0", [],
        set(["HAVE_MCHP_CRYPTO_TRNG_HW_U2242"])],#PIC32CM'Lx
     ["TRNG","03597",   "1d0", [],
-       set(["HAVE_MCHP_CRYPTO_TRNG_HW_03597"])],#PIC32CM'Lx
+       set(["HAVE_MCHP_CRYPTO_TRNG_HW_03597"])],#PIC32CM'Lx/PIC32CZ
     ["TRNG", "6334",     "S", [],
        set(["HAVE_MCHP_CRYPTO_TRNG_HW_6334"])], #PIC32CX MT
 ]

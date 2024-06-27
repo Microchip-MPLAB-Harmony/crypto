@@ -62,14 +62,15 @@ def ScanTrngHw():
 
     #TRNG Scan
     if (g.cryptoHwTrngSupported == True):
-        newValue = g.cryptoRngTrngEnabledSymbol.getValue()
+        hwValue = g.cryptoRngTrngEnabledSymbol.getValue()
+
         print("TRNG: Update(%s) %d files"%(
-              newValue, len(g.hwDriverFileDict["TRNG"])))
+              hwValue, len(g.hwDriverFileDict["TRNG"])))
 
         #Enable Disable HW Driver File generation
         for fSym in g.hwDriverFileDict[fKey]:
-            fSym.setEnabled(newValue)
-            print("  %s(%s)"%(fSym.getID(),newValue))
+            fSym.setEnabled(hwValue)
+            print("  %s(%s)"%(fSym.getID(),hwValue))
         return True
     else:
         print("TRNG: Not Supported")
@@ -107,16 +108,25 @@ def SetupCryptoRngMenu(cryptoComponent):
     g.cryptoRngTrngEnabledSymbol.setDescription(
             "Enable HW support for the True RNG")
     if (g.cryptoHwTrngSupported == True):
-        g.cryptoRngTrngEnabledSymbol.setVisible(True)
-        g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
-        g.cryptoRngTrngEnabledSymbol.setDefaultValue(True)
-        g.cryptoRngTrngEnabledSymbol.setDependencies(
+        if (len(g.hwDriverFileDict["TRNG"]) == 0):
+            print("CRYPTO:  TRNG HW Driver Not Available")
+            g.cryptoRngTrngEnabledSymbol.setVisible(True)
+            g.cryptoRngTrngEnabledSymbol.setReadOnly(True)
+            g.cryptoRngTrngEnabledSymbol.setDefaultValue(False)
+            g.CONFIG_USE_TRNG_HW.setValue(False) 
+        else:
+            print("CRYPTO:  TRNG HW Driver Supported")
+            g.cryptoRngTrngEnabledSymbol.setVisible(True)
+            g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
+            g.cryptoRngTrngEnabledSymbol.setDefaultValue(True)
+            g.cryptoRngTrngEnabledSymbol.setDependencies(
                 handleRngTrngEnabled, ["crypto_rng_trng_en"])
-        g.CONFIG_USE_TRNG_HW.setValue(True) 
+            g.CONFIG_USE_TRNG_HW.setValue(True) 
     else:
         g.cryptoRngTrngEnabledSymbol.setVisible(False)
         g.cryptoRngTrngEnabledSymbol.setReadOnly(True)
         g.cryptoRngTrngEnabledSymbol.setDefaultValue(False)
+        g.CONFIG_USE_TRNG_HW.setValue(False) 
 
     #RNG-RNG
     g.cryptoRngPrngEnabledSymbol = cryptoComponent.createBooleanSymbol(

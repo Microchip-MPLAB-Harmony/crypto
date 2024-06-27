@@ -74,11 +74,11 @@ def ScanDigSignHw():
             sameDriver = True
 
         if (sameDriver == True):
-            if (g.cryptoHwDsEcdhEnabledSymbol == None):
-                hwVal = g.cryptoHwKasEcdsaEnabledSymbol.getValue()
+            if (g.cryptoHwKasEcdhEnabledSymbol == None):
+                hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
             else:
-                hwVal =  g.cryptoHwDsEcdhEnabledSymbol.getValue()
-                hwVal = hwVal or g.cryptoHwEcdsaEnabledSymbol.getValue()
+                hwVal =  g.cryptoHwKasEcdhEnabledSymbol.getValue()
+                hwVal = hwVal or g.cryptoHwDsEcdsaEnabledSymbol.getValue()
         else:
             hwVal = g.cryptoHwDsEcdsaEnabledSymbol.getValue()
 
