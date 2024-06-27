@@ -108,7 +108,7 @@
 
 <#if crypto_aead_aes_siv_cmac_en == true>
     <#lt>#define CRYPTO_AEAD_AESSIVCMAC_EN
-    <#if crypto_aead_aes_sivc_mac_hw_en == false>
+    <#if crypto_aead_aes_siv_cmac_hw_en == false>
         <#lt>#define CRYPTO_AEAD_WC_AESSIVCMAC_EN
     <#else>
         <#lt>#define CRYPTO_AEAD_HW_AESSIVCMAC_EN
