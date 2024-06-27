@@ -321,13 +321,14 @@ def SetupCryptoHashMenu(cryptoComponent):
        "Turn on hardware acceleration" +
        "for the SHA-256 Hash Algorithm")
     g.cryptoHwSha256EnabledSymbol.setVisible(False)
-    g.cryptoHwSha256EnabledSymbol.setDefaultValue(True)
+    g.cryptoHwSha256EnabledSymbol.setDefaultValue(False)
     if ((g.cryptoHwSha256Supported == True)):
         g.cryptoSha256EnabledSymbol.setDependencies(
                 handleSha256Enabled, ["crypto_sha2_256_hw", "crypto_sha2_256"])
         if (g.cryptoSha256EnabledSymbol.getValue() == True):
             g.cryptoHwSha256EnabledSymbol.setVisible(True)
             g.cryptoHwSha256EnabledSymbol.setDefaultValue(True)
+
     g.cryptoHwSha224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
 
