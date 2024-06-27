@@ -329,7 +329,7 @@ def onAttachmentConnected(source, target):
         w.cryptoHaveZlib.setValue(True)
         #w.cryptoSupportCompression.setVisible(True)
 
-    #SYS_TIME
+    #SYS_TIME Dependency
     #if ((target["component"].getID() == 'sys_time') or
     #    (source["component"].getID() == 'LIB_WOLFCRYPT_Dependency')):
     #    #asn1Support.setReadOnly(False)

@@ -1283,12 +1283,8 @@ def onAttachmentConnected(source, target):
 def onAttachmentDisconnected(source, target):
     print("CRYPTO: Detached " + source["component"].getID() + "to dst " + target["component"].getID())
 
-    if (src["component"].getID() == "lib_wolfcrypt"):
+    if (source["component"].getID() == "lib_wolfcrypt"):
         print("CRYPTO: lib_wolfcrypt support DISconnected")
-
-    if (target["component"].getID() == "lib_zlib"):
-        g.cryptoHaveZlib.setValue(False)
-        #g.cryptoSupportCompression.setVisible(False)
 
     #TODO: put in wolfcrypt.py
     #if (target["component"].getID() == "sys_time"):
