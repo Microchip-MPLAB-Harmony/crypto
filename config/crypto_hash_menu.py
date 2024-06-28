@@ -31,7 +31,7 @@ import glob
 import ntpath
 
 print("CRYPTO: HASH Menu Package")
-import crypto_globals   #Initial globals
+#import crypto_globals   #Initial globals
 import crypto_defs as g #Modified globals
 
 ################################################################################

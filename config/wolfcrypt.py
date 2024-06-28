@@ -31,7 +31,7 @@ modulePath =  Module.getPath()
 sys.path.append(modulePath + "config")
 import wolfcrypt_globals
 import wolfcrypt_defs        as w
-import crypto_globals               #Initial globals
+#import crypto_globals               #Initial globals
 import crypto_defs           as g   #Modified globals
 
 if (g.trustZoneSupported != None): 

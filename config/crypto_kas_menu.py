@@ -30,7 +30,7 @@ import sys
 import glob
 import ntpath
 
-import crypto_globals   #Initial globals
+#import crypto_globals   #Initial globals
 import crypto_defs as g #Modified globals
 #import superglobals
 
@@ -61,36 +61,40 @@ def UpdateKasHwDriverFiles():
         fSym.setEnabled(useHw)
         print("  %s(%s)"%(fSym.getID(), fSym.getEnabled()))
 
-    if (useHw == True): 
 
-        #Additional Driver Files used by other functions
-        sameDriver = False
-        if ((g.hwFunctionDriverDict["ECDH"][0] == 
-             g.hwFunctionDriverDict["ECDSA"][0])):
-            print("KAS:  Both KAS-ECDH and DS-ECDSA use %s driver"%
-                  g.hwFunctionDriverDict["ECDH"])
-            sameDriver = True
+    #Additional Driver Files used by other functions
+    #TODO:  Add general shared driver list test
+    sameDriver = False
+    if ((g.hwFunctionDriverDict["ECDH"] ==
+         g.hwFunctionDriverDict["ECDSA"])):
+        print("KAS:  Both KAS-ECDH and DS-ECDSA use %s driver"%
+              g.hwFunctionDriverDict["ECDH"])
+        sameDriver = True
 
-        if (sameDriver == True):
-            if (g.cryptoHwDsEcdsaEnabledSymbol == None):
-                hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
-            else:
-                hwVal =  g.cryptoHwDsEcdsaEnabledSymbol.getValue()
-                hwVal = hwVal or g.cryptoHwKasEcdhEnabledSymbol.getValue()
-        else:
+    #Enable/Disable Shared Driver files with ECDSA
+    #TODO:  Add general shared driver test
+    if (sameDriver == True):
+        print("KAS ECDSA: %s"%(g.cryptoHwDsEcdsaEnabledSymbol))
+        if (g.cryptoHwDsEcdsaEnabledSymbol == None or
+            g.cryptoHwDsEcdsaEnabledSymbol == "Uninitialized"):
             hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
+        else:
+            hwVal =  g.cryptoHwDsEcdsaEnabledSymbol.getValue()
+            hwVal = hwVal or g.cryptoHwKasEcdhEnabledSymbol.getValue()
+    else:
+        hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
 
-        #Shared ECDH HW Driver Files
-        if (g.hwFunctionDriverDict["ECDH"][0] == "CPKCC"):
+    #CPKCC Shared ECDH HW Driver Files
+    if (g.hwFunctionDriverDict["ECDH"][0] == "CPKCC"):
 
-            print("ECDH: CPKCC Driver Enabled(%s)"%(hwVal))
-            for fSym in g.cpkclDriverFileSyms:
-                fSym.setEnabled(hwVal)
-
-        #Driver Dependency - ECC Curves
-        print("ECDH: ECC Driver Enabled(%s)"%(hwVal))
-        for fSym in g.hwDriverFileDict["ECC"]:
+        print("ECDH: CPKCC Driver Enabled(%s)"%(hwVal))
+        for fSym in g.cpkclDriverFileSyms:
             fSym.setEnabled(hwVal)
+
+    #Always Used Driver Dependency - ECC Curves
+    print("ECDH: ECC Driver Enabled(%s)"%(hwVal))
+    for fSym in g.hwDriverFileDict["ECC"]:
+        fSym.setEnabled(hwVal)
 
     return True
 

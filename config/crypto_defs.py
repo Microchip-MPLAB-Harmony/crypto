@@ -9,7 +9,7 @@
 # 
 
 #GLOBALS 
-from crypto_globals import *
+#from crypto_globals import *
 
 print("CRYPTO: Loading Global Defs")
 
@@ -193,6 +193,8 @@ trustZoneDevices = [
 ]
 
 trustZoneFiles = []
+trustZoneFileIds = []      #List of file ids
+
 
 ################################################################################
 ## CRYPTO IMPLEMENTATIONS
@@ -906,7 +908,7 @@ cryptoMacAesGmacEnabledSymbol      = None
 #===============================================================================
 #DS - Digital Signing
 dsMenu                             = None
-cryptoDsEcdsaEnabledSymbol         = None
+cryptoDsEcdsaEnabledSymbol         = "Uninitialized"
 cryptoHwDsEcdsaSupport = [
     ["PUKCC", "U2009", "2.5.0", [],
      set(["HAVE_MCHP_CRYPTO_ECC_HW_PUKCC"])], #ATSAME54P20A
@@ -930,7 +932,7 @@ cryptoHwKasEcdhSupport    = [
     ["CPKCC", "44163", "B", [],
      set(["HAVE_MCHP_CRYPTO_RSA_HW_CPKCC"])]  #PIC32CX MT
 ]
-cryptoKasEcdhEnabledSymbol       = None
+cryptoKasEcdhEnabledSymbol     = "Uninitialized"
 cryptoHwKasEcdhSupported       = False
 cryptoHwKasEcdhEnabledSymbol   = None
 

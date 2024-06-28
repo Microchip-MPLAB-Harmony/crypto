@@ -35,7 +35,7 @@ print("CRYPTO MODULE Path: " + Module.getPath())
 modulePath =  Module.getPath()
 sys.path.append(modulePath + "config")
 
-import crypto_globals               #Initial globals
+#import crypto_globals               #Initial globals
 import crypto_defs           as g   #Modified globals
 import crypto_hash_menu      as hm  #HASH GUI
 import crypto_symmetric_menu as sm  #Symmetric Menu
