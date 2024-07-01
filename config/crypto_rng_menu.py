@@ -118,7 +118,7 @@ def SetupCryptoRngMenu(cryptoComponent):
             print("CRYPTO:  TRNG HW Driver Supported")
             g.cryptoRngTrngEnabledSymbol.setVisible(True)
             g.cryptoRngTrngEnabledSymbol.setReadOnly(False)
-            g.cryptoRngTrngEnabledSymbol.setDefaultValue(True)
+            g.cryptoRngTrngEnabledSymbol.setDefaultValue(False)
             g.cryptoRngTrngEnabledSymbol.setDependencies(
                 handleRngTrngEnabled, ["crypto_rng_trng_en"])
             g.CONFIG_USE_TRNG_HW.setValue(True) 
@@ -136,7 +136,7 @@ def SetupCryptoRngMenu(cryptoComponent):
             "Enable support for the Pseudo RNG")
     g.cryptoRngPrngEnabledSymbol.setVisible(True)
     g.cryptoRngPrngEnabledSymbol.setReadOnly(False)
-    g.cryptoRngPrngEnabledSymbol.setDefaultValue(True)
+    g.cryptoRngPrngEnabledSymbol.setDefaultValue(False)
     g.cryptoRngPrngEnabledSymbol.setDependencies(
             handleRngPrngEnabled, ["crypto_rng_prng_en"])
 
