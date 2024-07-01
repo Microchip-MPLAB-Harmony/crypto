@@ -144,7 +144,7 @@ def SetupCryptoKasMenu(cryptoComponent):
             "Enable support for the Digital Signing ECDH protocol")
     g.cryptoKasEcdhEnabledSymbol.setVisible(True)
     g.cryptoKasEcdhEnabledSymbol.setReadOnly(False)
-    g.cryptoKasEcdhEnabledSymbol.setDefaultValue(True)
+    g.cryptoKasEcdhEnabledSymbol.setDefaultValue(False)
     g.cryptoKasEcdhEnabledSymbol.setHelp('CRYPT_ECDH_SUM')
 
     #KAS ECDH HW Symbol
@@ -163,7 +163,7 @@ def SetupCryptoKasMenu(cryptoComponent):
                                        "crypto_kas_ecdh_hw_en"])
         if (g.cryptoKasEcdhEnabledSymbol.getValue() == True):
             g.cryptoHwKasEcdhEnabledSymbol.setVisible(True)
-            g.cryptoHwKasEcdhEnabledSymbol.setDefaultValue(True)
+            g.cryptoHwKasEcdhEnabledSymbol.setDefaultValue(False)
 
     #Check to see if any of the Kas selections is True
     #--Used to include the CC KAS API Files

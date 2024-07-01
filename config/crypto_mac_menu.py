@@ -118,7 +118,7 @@ def SetupCryptoMacMenu(cryptoComponent):
             "Enable support for the MAC-AES CMAC Mode Algorithm.")
     g.cryptoMacAesCmacEnabledSymbol.setVisible(True)
     g.cryptoMacAesCmacEnabledSymbol.setReadOnly(False)
-    g.cryptoMacAesCmacEnabledSymbol.setDefaultValue(True)
+    g.cryptoMacAesCmacEnabledSymbol.setDefaultValue(False)
 
     #MAC-AES CMAC HW Mode 
     g.cryptoHwMacAesCmacEnabledSymbol = cryptoComponent.createBooleanSymbol(

@@ -142,7 +142,7 @@ def SetupCryptoDsMenu(cryptoComponent):
             "Enable support for the Digital Signing ECDSA protocol")
     g.cryptoDsEcdsaEnabledSymbol.setVisible(True)
     g.cryptoDsEcdsaEnabledSymbol.setReadOnly(False)
-    g.cryptoDsEcdsaEnabledSymbol.setDefaultValue(True)
+    g.cryptoDsEcdsaEnabledSymbol.setDefaultValue(False)
     g.cryptoDsEcdsaEnabledSymbol.setHelp('CRYPT_ECDSA_SUM')
 
     #DS ECDSA HW Symbol
@@ -160,7 +160,7 @@ def SetupCryptoDsMenu(cryptoComponent):
                                        "crypto_ds_ecdsa_hw_en"])
         if (g.cryptoDsEcdsaEnabledSymbol.getValue() == True):
             g.cryptoHwDsEcdsaEnabledSymbol.setVisible(True)
-            g.cryptoHwDsEcdsaEnabledSymbol.setDefaultValue(True)
+            g.cryptoHwDsEcdsaEnabledSymbol.setDefaultValue(False)
 
     #Check to see if any of the Ds selections is True
     #--Update the HW Driver files if enabled

@@ -222,7 +222,7 @@ def SetupCryptoSymmetricMenu(cryptoComponent):
             "Enable support for the AES-ECB Mode Algorithm.")
     g.cryptoSymAesEcbEnabledSymbol.setVisible(True)
     g.cryptoAesEnSymbols.append(g.cryptoSymAesEcbEnabledSymbol)
-    g.cryptoSymAesEcbEnabledSymbol.setDefaultValue(True)
+    g.cryptoSymAesEcbEnabledSymbol.setDefaultValue(False)
 
     #AES-Ecb Mode HW
     if (g.cryptoHwSymAesEcbSupported):

@@ -168,14 +168,14 @@ def SetupCryptoHashMenu(cryptoComponent):
             "config_use_hash", g.hashMenu)
     g.CONFIG_USE_HASH.setVisible(False)
     g.CONFIG_USE_HASH.setLabel("Crypto")
-    g.CONFIG_USE_HASH.setDefaultValue(False)
+    g.CONFIG_USE_HASH.setDefaultValue(True)
 
     #SHA HW Driver Generation Enable
     g.CONFIG_USE_SHA = cryptoComponent.createBooleanSymbol(
             "config_use_sha", g.hashMenu)
     g.CONFIG_USE_SHA.setVisible(False)
     g.CONFIG_USE_SHA.setLabel("Crypto HW")
-    g.CONFIG_USE_SHA.setDefaultValue(False)
+    g.CONFIG_USE_SHA.setDefaultValue(True)
 
     #SHA HW Driver Generation Enable
     g.CONFIG_USE_SHA_HW = cryptoComponent.createBooleanSymbol(
@@ -208,7 +208,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleMd5Enabled, ["crypto_md5", "crypto_md5_hw"])
         if (g.cryptoMd5EnabledSymbol.getValue() == True):
             g.cryptoHwMd5EnabledSymbol.setVisible(True)
-            g.cryptoHwMd5EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwMd5EnabledSymbol.setDefaultValue(False)
     g.cryptoHwMd5EnabledSymbol.setHelp('CRYPT_MD5_SUM')
 
 
@@ -237,7 +237,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_ripe_md_160","crypto_ripe_md_160_hw"])
         if (g.cryptoRipeMd160EnabledSymbol.getValue() == True):
             g.cryptoHwRipeMd160EnabledSymbol.setVisible(True)
-            g.cryptoHwRipeMd160EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwRipeMd160EnabledSymbol.setDefaultValue(False)
     g.cryptoHwRipeMd160EnabledSymbol.setHelp('CRYPT_RIPE_MD_SUM')
 
 
@@ -266,7 +266,7 @@ def SetupCryptoHashMenu(cryptoComponent):
             handleSha1Enabled, ["crypto_sha1", "crypto_sha1_hw"])
         if (g.cryptoSha1EnabledSymbol.getValue() == True):
             g.cryptoHwSha1EnabledSymbol.setVisible(True)
-            g.cryptoHwSha1EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha1EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha1EnabledSymbol.setHelp('CRYPT_SHA1_SUM')
 
     #SHA-2 Hash Menu
@@ -300,7 +300,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha224Enabled, ["crypto_sha2_224", "crypto_sha2_224_hw"])
         if (g.cryptoSha224EnabledSymbol.getValue() == True):
             g.cryptoHwSha224EnabledSymbol.setVisible(True)
-            g.cryptoHwSha224EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha224EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-2/SHA-256 Symbol
@@ -310,7 +310,7 @@ def SetupCryptoHashMenu(cryptoComponent):
     g.cryptoSha256EnabledSymbol.setDescription(
             "Enable support for the SHA-2 256 Hash Algoithm.")
     g.cryptoSha256EnabledSymbol.setVisible(True)
-    g.cryptoSha256EnabledSymbol.setDefaultValue(True)
+    g.cryptoSha256EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA2-256 HW Symbol
@@ -327,7 +327,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha256Enabled, ["crypto_sha2_256_hw", "crypto_sha2_256"])
         if (g.cryptoSha256EnabledSymbol.getValue() == True):
             g.cryptoHwSha256EnabledSymbol.setVisible(True)
-            g.cryptoHwSha256EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha256EnabledSymbol.setDefaultValue(False)
 
     g.cryptoHwSha224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
@@ -356,7 +356,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha384Enabled, ["crypto_sha2_384", "crypto_sha2_384_hw"])
         if (g.cryptoSha384EnabledSymbol.getValue() == True):
             g.cryptoHwSha384EnabledSymbol.setVisible(True)
-            g.cryptoHwSha384EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha384EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha384EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-2/SHA-512 Menu
@@ -383,7 +383,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha512Enabled, ["crypto_sha2_512", "crypto_sha2_512_hw"])
         if (g.cryptoSha512EnabledSymbol.getValue() == True):
             g.cryptoHwSha512EnabledSymbol.setVisible(True)
-            g.cryptoHwSha512EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha512EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha512EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-2/SHA-512/224 Menu
@@ -410,7 +410,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha512_224Enabled, ["crypto_sha2_512_224", "crypto_sha2_512_224_hw"])
         if (g.cryptoSha512_224EnabledSymbol.getValue() == True):
             g.cryptoHwSha512_224EnabledSymbol.setVisible(True)
-            g.cryptoHwSha512_224EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha512_224EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha512_224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-2/SHA-512/256 Menu
@@ -437,7 +437,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha512_256Enabled, ["crypto_sha2_512_256", "crypto_sha2_512_256_hw"])
         if (g.cryptoSha512_256EnabledSymbol.getValue() == True):
             g.cryptoHwSha512_256EnabledSymbol.setVisible(True)
-            g.cryptoHwSha512_256EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha512_256EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha512_256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-3 Hash Menu
@@ -472,7 +472,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha3224Enabled, ["crypto_sha3_224", "crypto_sha3_224_hw"])
         if (g.cryptoSha3224EnabledSymbol.getValue() == True):
             g.cryptoHwSha3224EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3224EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha3224EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha3224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-3/SHA-256 Symbol
@@ -499,7 +499,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha3256Enabled, ["crypto_sha3_256", "crypto_sha3_256_hw" ])
         if (g.cryptoSha3256EnabledSymbol.getValue() == True):
             g.cryptoHwSha3256EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3256EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha3256EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha3256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-3/SHA-384 Symbol
@@ -526,7 +526,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha3384Enabled, ["crypto_sha3_384", "crypto_sha3_384_hw"])
         if (g.cryptoSha3384EnabledSymbol.getValue() == True):
             g.cryptoHwSha3384EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3384EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha3384EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha3384EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-3/SHA3-512 Symbol 
@@ -553,7 +553,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 handleSha3512Enabled, ["crypto_sha3_512", "crypto_sha3_512_hw"])
         if (g.cryptoSha3512EnabledSymbol.getValue() == True):
             g.cryptoHwSha3512EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3512EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha3512EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha3512EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-3/SHAKE-128 Symbol 
@@ -582,7 +582,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 "crypto_sha3_shake_128_hw"])
         if (g.cryptoSha3Shake128EnabledSymbol.getValue() == True):
             g.cryptoHwSha3Shake128EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3Shake128EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha3Shake128EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha3Shake128EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #SHA-3/SHAKE-256 Symbol 
@@ -611,7 +611,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 "crypto_sha3_shake_256_hw"])
         if (g.cryptoSha3Shake256EnabledSymbol.getValue() == True):
             g.cryptoHwSha3Shake256EnabledSymbol.setVisible(True)
-            g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwSha3Shake256EnabledSymbol.setDefaultValue(False)
     g.cryptoHwSha3Shake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
 
@@ -648,7 +648,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake_224", "crypto_blake_224_hw"])
         if (g.cryptoBlake224EnabledSymbol.getValue() == True):
             g.cryptoHwBlake224EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake224EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake224EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #BLAKE/BLAKE-256  Symbol
@@ -676,7 +676,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake_256", "crypto_blake_256_hw"])
         if (g.cryptoBlake256EnabledSymbol.getValue() == True):
             g.cryptoHwBlake256EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake256EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake256EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
 
@@ -705,7 +705,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake_384", "crypto_blake_384_hw"])
         if (g.cryptoBlake384EnabledSymbol.getValue() == True):
             g.cryptoHwBlake384EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake384EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake384EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake384EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #BLAKE/BLAKE-512 Symbol
@@ -733,7 +733,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake_512", "crypto_blake_512_hw"])
         if (g.cryptoBlake512EnabledSymbol.getValue() == True):
             g.cryptoHwBlake512EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake512EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake512EnabledSymbol.setDefaultValue(False)
     g.cryptoBlake512EnabledSymbol.setHelp('CRYPT_BLAKE_SUM')
 
     #BLAKE2 Hash Menu
@@ -768,7 +768,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake2_224", "crypto_blake2_224_hw"])
         if (g.cryptoBlake2s224EnabledSymbol.getValue() == True):
             g.cryptoHwBlake2s224EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake2s224EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake2s224EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake2s224EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
     #BLAKE2/BLAKE2s-256 Symbol 
@@ -796,7 +796,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake2s_256", "crypto_blake2s_256_hw"])
         if (g.cryptoBlake2s256EnabledSymbol.getValue() == True):
             g.cryptoHwBlake2s256EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake2s256EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake2s256EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake2s256EnabledSymbol.setHelp('CRYPT_SHA_SUM')
 
 
@@ -825,7 +825,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake2s_384", "crypto_blake2s_384_hw"])
         if (g.cryptoBlake2b384EnabledSymbol.getValue() == True):
             g.cryptoHwBlake2b384EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake2b384EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake2b384EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake2b384EnabledSymbol.setHelp('CRYPT_BLAKE2B_SUM')
 
     #BLAKE2/BLAKE2B-512 Symbol
@@ -853,7 +853,7 @@ def SetupCryptoHashMenu(cryptoComponent):
                 ["crypto_blake2b_512", "crypto_blake2b_512_hw"])
         if (g.cryptoBlake2b512EnabledSymbol.getValue() == True):
             g.cryptoHwBlake2b512EnabledSymbol.setVisible(True)
-            g.cryptoHwBlake2b512EnabledSymbol.setDefaultValue(True)
+            g.cryptoHwBlake2b512EnabledSymbol.setDefaultValue(False)
     g.cryptoHwBlake2b512EnabledSymbol.setHelp('CRYPT_BLAKE2_SUM')
 
     #Check to see if any of the Hash selections is True

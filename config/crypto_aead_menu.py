@@ -350,7 +350,7 @@ def SetupCryptoAeadMenu(cryptoComponent):
             "Enable support for the AEAD-AES EAX Mode Algorithm.")
     g.cryptoAeadAesEaxEnabledSymbol.setVisible(True)
     g.cryptoAeadAesEaxEnabledSymbol.setReadOnly(False)
-    g.cryptoAeadAesEaxEnabledSymbol.setDefaultValue(True)
+    g.cryptoAeadAesEaxEnabledSymbol.setDefaultValue(False)
     if (g.cryptoHwAeadAesEaxSupported == True):
         g.cryptoAeadAesEaxEnabledSymbol.setDependencies(
                 handleAeadAesEaxEnabled,
