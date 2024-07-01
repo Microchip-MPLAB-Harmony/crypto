@@ -55,7 +55,7 @@ Microchip or any third party.
 #include "CryptoLib_Fill_pb.h"
 #include "CryptoLib_Fmult_pb.h"
 #include "CryptoLib_GCD_pb.h"
-#include "CryptoLib_Nop_pb.h"
+#include "CryptoLib_NOP_pb.h"
 #include "CryptoLib_PrimeGen_pb.h"
 #include "CryptoLib_RedMod_pb.h"
 #include "CryptoLib_Rng_pb.h"
