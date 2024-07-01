@@ -85,8 +85,8 @@ def UpdateKasHwDriverFiles():
         hwVal = g.cryptoHwKasEcdhEnabledSymbol.getValue()
 
     #CPKCC Shared ECDH HW Driver Files
-    if (g.hwFunctionDriverDict["ECDH"][0] == "CPKCC"):
-
+    if (len(g.hwFunctionDriverDict["ECDH"]) == 2 and 
+        g.hwFunctionDriverDict["ECDH"][0] == "CPKCC"):
         print("ECDH: CPKCC Driver Enabled(%s)"%(hwVal))
         for fSym in g.cpkclDriverFileSyms:
             fSym.setEnabled(hwVal)

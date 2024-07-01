@@ -85,7 +85,9 @@ def ScanDigSignHw():
     #CPKCC Shared Drivers Enable/Disable
     print("DS: ECDSA uses %s Driver(hw = %s)"%(
         g.hwFunctionDriverDict["ECDSA"], hwVal))
-    if (g.hwFunctionDriverDict["ECDSA"][0] == "CPKCC"):
+
+    if (len(g.hwFunctionDriverDict["ECDSA"]) == 2 and
+        g.hwFunctionDriverDict["ECDSA"][0] == "CPKCC"):
         print("ECDSA: CPKCC Driver Enabled(%s)"%(hwVal))
         for fSym in g.cpkclDriverFileSyms:
             fSym.setEnabled(hwVal)
