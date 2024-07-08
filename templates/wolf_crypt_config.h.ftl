@@ -482,6 +482,7 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 </#if>
 <#if wolfcrypt_errorstrings == false>
     <#lt>#define NO_ERROR_STRINGS
+    <#lt>#define WOLFSSL_MAX_ERROR_SZ 38 // Fix Mandatory Misra 21.18 caused by removing error strings with defining NO_ERROR_STRINGS
 </#if>
 <#if wolfcrypt_memorycallbacks == true>
     <#if wolfcrypt_memorytracking == true>
