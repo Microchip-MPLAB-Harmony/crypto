@@ -2,6 +2,13 @@
 ![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
 
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.8.2
+### New Features
+
+### Bug Fixes
+- Fixed mandatory MISRA violations
+
+# Microchip MPLAB® Harmony 3 Release Notes
 ## Crypto Release v3.8.1
 ### New Features
 
