@@ -1271,6 +1271,11 @@ def instantiateComponent(wolfCryptComponent):
     wolfcryptIgnoreFileWarn.setValue("WOLFSSL_IGNORE_FILE_WARN")
     wolfcryptIgnoreFileWarn.setAppend(True, ";")
 
+    wolfcryptCustomConfig = wolfCryptComponent.createSettingSymbol("wolfsslCustomConfig", None)
+    wolfcryptCustomConfig.setCategory("C32")
+    wolfcryptCustomConfig.setKey("preprocessor-macros")
+    wolfcryptCustomConfig.setValue("WOLFSSL_CUSTOM_CONFIG")
+    wolfcryptCustomConfig.setAppend(True, ";")
 
     series = ATDF.getNode("/avr-tools-device-file/devices/device").getAttribute("series")
     wolfcryptCoreSeries = wolfCryptComponent.createStringSymbol("wolfcryptCoreSeries", None)

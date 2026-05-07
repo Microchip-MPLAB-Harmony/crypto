@@ -51,6 +51,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     <#lt>#define TFM_NO_ASM
     <#lt>#define WOLFSSL_NO_ASM
     <#lt>#define SIZEOF_LONG_LONG 8
+	<#lt>#define WOLFSSL_NO_SOCK
     <#lt>#define WOLFSSL_USER_IO
     <#lt>#define NO_WRITEV
     <#lt>#define MICROCHIP_TCPIP
@@ -138,7 +139,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
     </#if>
     <#if !wolfsslNoErrorStrings>
         <#lt>#define NO_ERROR_STRINGS
-		<#lt>#define WOLFSSL_MAX_ERROR_SZ 38 // Fix Mandatory Misra 21.18 caused by removing error strings with defining NO_ERROR_STRINGS
+		<#lt>#define WOLFSSL_MAX_ERROR_SZ 64 // Fix Mandatory Misra 21.18 caused by removing error strings with defining NO_ERROR_STRINGS
     </#if>
     <#if !wolfsslNoOldTls>
         <#lt>#define NO_OLD_TLS
