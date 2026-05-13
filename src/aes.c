@@ -5294,7 +5294,8 @@ static void AesSetKey_C(Aes* aes, const byte* key, word32 keySz, int dir)
 #ifndef WC_AES_BITSLICED
     #if defined(LITTLE_ENDIAN_ORDER) && !defined(WOLFSSL_PIC32MZ_CRYPT) && \
         (!defined(WOLFSSL_ESP32_CRYPT) || defined(NO_WOLFSSL_ESP32_CRYPT_AES)) \
-        && !defined(MAX3266X_AES)
+        && !defined(MAX3266X_AES) && \
+		(!(defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_AES_DIRECT)))
 
         /* software */
         ByteReverseWords(aes->key, aes->key, keylen);
