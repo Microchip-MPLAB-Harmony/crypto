@@ -5295,7 +5295,7 @@ static void AesSetKey_C(Aes* aes, const byte* key, word32 keySz, int dir)
     #if defined(LITTLE_ENDIAN_ORDER) && !defined(WOLFSSL_PIC32MZ_CRYPT) && \
         (!defined(WOLFSSL_ESP32_CRYPT) || defined(NO_WOLFSSL_ESP32_CRYPT_AES)) \
         && !defined(MAX3266X_AES) && \
-		(!(defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_AES_DIRECT)))
+        (!(defined(WOLFSSL_HAVE_MCHP_HW_CRYPTO) && defined(WOLFSSL_HAVE_MCHP_HW_AES_DIRECT)))
 
         /* software */
         ByteReverseWords(aes->key, aes->key, keylen);
@@ -15324,10 +15324,10 @@ static WARN_UNUSED_RESULT int _AesXtsHelper(
     xorbuf(out, in, totalSz);
 #ifndef WOLFSSL_RISCV_ASM
     if (dir == AES_ENCRYPTION) {
-        return _AesEcbEncrypt(aes, out, out, totalSz);
+        return wc_AesEcbEncrypt(aes, out, out, totalSz);
     }
     else {
-        return _AesEcbDecrypt(aes, out, out, totalSz);
+        return wc_AesEcbDecrypt(aes, out, out, totalSz);
     }
 #else
     if (dir == AES_ENCRYPTION) {
