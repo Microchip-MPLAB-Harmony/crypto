@@ -509,7 +509,7 @@ static void CRYPT_AES_sam6149SaveDesc(Aes * aesCfg)
     }
     for (x = 0; x < sizeof(AES_REGS->AES_GCMHR) >> 2; x++)
     {
-        ((uint32_t*)aesCfg->H)[x] = AES_REGS->AES_GCMHR[x];        
+        ((uint32_t*)aesCfg->gcm.H)[x] = AES_REGS->AES_GCMHR[x];        
     }
 }
 
@@ -636,7 +636,7 @@ int CRYPT_AES_GcmResetCtx(Aes * aes)
     aes->nonceSz = 0;
     memset(aes->tmp, 0, AES_BLOCK_SIZE);
     aes->invokeCtr[0] = 0;
-    memset(aes->H, 0, AES_BLOCK_SIZE);
+    memset(aes->gcm.H, 0, AES_BLOCK_SIZE);
     return 0;
 }
 

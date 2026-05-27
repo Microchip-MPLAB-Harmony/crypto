@@ -261,7 +261,7 @@ int Crypt_ECC_HandleEccSignReq(int devId, wc_CryptoInfo* info, void* ctx)
     mp_clear(&scratchLI);
     mp_read_radix(&scratchLI, info->pk.eccsign.key->dp->Af, MP_RADIX_HEX);
     SecureCopy((void*)BASE_ECDSA_A(size, size), size+4, (void*)(&scratchLI.dp), size, 0);
-    SecureCopy((void*)BASE_PRIVATE_KEY(size, size), size+4, (void*)(&info->pk.eccsign.key->k.dp), size, 0);
+    SecureCopy((void*)BASE_PRIVATE_KEY(size, size), size+4, (void*)(&info->pk.eccsign.key->k->dp), size, 0);
     
     WC_RNG rngCtx;
     wc_InitRng(&rngCtx);

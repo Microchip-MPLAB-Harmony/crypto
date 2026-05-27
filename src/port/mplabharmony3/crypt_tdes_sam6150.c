@@ -210,7 +210,7 @@ int  CRYPT_DES_EcbEncrypt(Des* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES_LoadKeyIv(&des->key[0], NULL);
+  CRYPT_DES_LoadKeyIv((uint32_t*)(&(des->key[0])), NULL);
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
@@ -254,7 +254,7 @@ int  CRYPT_DES3_EcbEncrypt(Des3* des, byte* out, const byte* in, word32 sz)
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES3_LoadKeyIv(des->key[0], NULL);
+  CRYPT_DES3_LoadKeyIv((uint32_t *)des->key[0], NULL);
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   return 0;
@@ -291,7 +291,7 @@ WOLFSSL_API int  wc_Des3_CbcEncrypt(Des3* des, byte* out,
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES3_LoadKeyIv(des->key[0], des->reg);
+  CRYPT_DES3_LoadKeyIv((uint32_t*)des->key[0], (uint32_t *)des->reg);;
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   
@@ -317,7 +317,7 @@ WOLFSSL_API int  wc_Des3_CbcDecrypt(Des3* des, byte* out,
   
   TDES_REGS->TDES_MR = mr.v;
   
-  CRYPT_DES3_LoadKeyIv(des->key[0], des->reg);
+  CRYPT_DES3_LoadKeyIv((uint32_t *)des->key[0], (uint32_t *)des->reg);
 
   CRYPT_DES_ProcessBlocks((uint32_t*)out, (const uint32_t*)in, sz);
   

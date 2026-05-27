@@ -139,7 +139,7 @@ int Crypt_ECC_HandleEccSignReq(int devId, wc_CryptoInfo* info, void* ctx, DRV_HA
             &domain, 
             (uint8_t*)&(r.dp),
             (uint8_t*)&(s.dp),
-            (uint8_t*)&(info->pk.eccsign.key->k.dp),
+            (uint8_t*)&(info->pk.eccsign.key->k->dp),
             eccScratchPad,
             info->pk.eccsign.in,
             info->pk.eccsign.inlen,
