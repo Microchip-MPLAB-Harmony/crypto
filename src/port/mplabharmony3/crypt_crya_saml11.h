@@ -60,20 +60,20 @@ extern "C" {
 // FIPS Publication 180-4
 typedef void (*crya_sha256_process_t)
     (uint32_t hash_in_out[8], const uint8_t data[64], uint32_t ram_buf[64]);
-#define secure_crya_sha256_process ((crya_sha256_process_t ) (0x02001900 | 0x1))
+#define secure_crya_sha256_process_hw ((crya_sha256_process_t ) (0x02001900 | 0x1))
  
 // FIPS Publication 197 -- key must be 128b (16B)
 typedef void (*crya_aes128_encrypt_t)
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst);
 typedef void (*crya_aes128_decrypt_t)
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst);
-#define secure_crya_aes128_encrypt ((crya_aes128_encrypt_t ) (0x02001904 | 0x1))
-#define secure_crya_aes128_decrypt ((crya_aes128_decrypt_t ) (0x02001908 | 0x1))
+#define secure_crya_aes128_encrypt_hw ((crya_aes128_encrypt_t ) (0x02001904 | 0x1))
+#define secure_crya_aes128_decrypt_hw ((crya_aes128_decrypt_t ) (0x02001908 | 0x1))
  
 // NIST Special Publication 800-38D -- GCM mode inner loop
 typedef void (*crya_gf_mult128_t)
     (const uint32_t *block1, const uint32_t *block2, uint32_t *dst);
-#define secure_crya_gf_mult128 ((crya_gf_mult128_t ) (0x0200190C | 0x1))
+#define secure_crya_gf_mult128_hw ((crya_gf_mult128_t ) (0x0200190C | 0x1))
 
 
 #ifdef	__cplusplus

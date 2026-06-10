@@ -61,8 +61,8 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 
 #include "definitions.h"
 #include "wolfssl/wolfcrypt/port/pic32/crypt_crya_saml11.h"
- 
-#define assert_dbug(X) __conditional_software_breakpoint((X))
+
+#include "trustZone/nonsecure_entry.h"
 
 /* *********************************************************************
    *********************************************************************
@@ -116,7 +116,7 @@ struct crya_tellTale_SAML11_s crya_tellTale = {0};
  * for the ROM-based CRYA AES functions, if they exist.
  * TODO: these are duplicated in the drivers/crya library; use those
  */
-#if defined(secure_crya_aes128_encrypt)
+#if defined(secure_crya_aes128_encrypt_hw)
 __attribute__((used))
 static void crya_aes128_encrypt
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst)
@@ -132,7 +132,7 @@ static void crya_aes128_encrypt
 }
 #endif
 
-#if defined(secure_crya_aes128_decrypt)
+#if defined(secure_crya_aes128_decrypt_hw)
 __attribute__((used))
 static void crya_aes128_decrypt
     (const uint8_t *keys, uint32_t key_len, const uint8_t *src, uint8_t *dst)
