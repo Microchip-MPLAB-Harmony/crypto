@@ -545,15 +545,15 @@ void CRYPT_AES_GcmLoadKey(Aes* aes)
 
 void CRYPT_AES_GcmLoadKeyCalculateJ0(Aes* aes, const uint8_t * iv, uint32_t iv_len)
 {
-    memset(aes->reg, 0, sizeof(aes->reg));
+    //memset(aes->reg, 0, sizeof(aes->reg));
     if (iv_len == 12)
     {
-        
         memcpy(aes->reg, iv, 12);
-        
+        ((uint8_t*)(aes->reg))[12] = 0x00;
+        ((uint8_t*)(aes->reg))[13] = 0x00;
+        ((uint8_t*)(aes->reg))[14] = 0x00;
         ((uint8_t*)(aes->reg))[15] = 0x1;
-        return;
-                
+        return;          
     }    
     uint32_t workBuf[4] = {0};
     CRYPT_AES_u2238LoadDataBlock((uint8_t*)workBuf, 1);
@@ -749,6 +749,96 @@ void CRYPT_AES_GCMGenerateTag(Aes* aes, uint32_t * tag, uint32_t tag_len)
     ctrla->v = 0;    
 }
 
+void CRYPT_AES_GCMRunBlocks_Encrypt(Aes* aes, const uint8_t * in, uint8_t * out, uint32_t len)
+{
+    // Set up the counter.
+    // Convert from big -> Little
+    uint8_t * ivPtr = (uint8_t*)(aes->reg);
+    uint32_t ctr = ivPtr[12] << 24 |
+                   ivPtr[13] << 16 |
+                   ivPtr[14] << 8 |
+                   ivPtr[15];
+    // Add in the current counter
+    ctr = ctr + aes->invokeCtr[0];
+    // Convert from little -> big
+    ctr = (ctr << 24) | 
+         ((ctr << 8) & 0x00ff0000) |
+         ((ctr >> 8) & 0xff00) |
+         ((ctr >> 24) & 0xff);
+    volatile CRYPT_AES_U2238_AES_CTRLA * ctrla = (CRYPT_AES_U2238_AES_CTRLA  *)(&AES_REGS->AES_CTRLA);
+    volatile CRYPT_AES_U2238_AES_CTRLB * ctrlb = (CRYPT_AES_U2238_AES_CTRLB  *)(&AES_REGS->AES_CTRLB);
+    volatile CRYPT_AES_U2238_AES_INTFLAG * intFlag = (CRYPT_AES_U2238_AES_INTFLAG *)(&AES_REGS->AES_INTFLAG);
+    ctrla->s.ENABLE = 1;
+    intFlag->s.ENCCMP = 1;
+    ctrlb->s.NEWMSG = 1;
+    AES_REGS->AES_CIPLEN = len;
+    uint32_t workBuf[4] = {0};
+    memcpy(workBuf, aes->reg, 12);
+    workBuf[3] = ctr;
+ 
+    CRYPT_AES_u2238LoadIV(workBuf);
+    const uint32_t * inPtr = (uint32_t*)in;
+    uint32_t * outPtr = (uint32_t*)out;
+    uint32_t numBlocks = len >> 4;
+    aes->invokeCtr[0] += numBlocks;
+    for (int x = 0; x < numBlocks; x++)
+    {
+        if (((len & 0xf) == 0) && (x == (numBlocks -1)))
+        {
+            ctrlb->s.EOM = 1;
+        }
+        CRYPT_AES_u2238InOutBlock((const uint8_t*)inPtr, (uint8_t*)outPtr);
+        if (inPtr != NULL)
+        {
+            inPtr+=4;
+        }
+        if (outPtr != NULL)
+        {
+            outPtr+=4;
+        }
+    }
+    uint8_t leftBytes = len & 0xf;
+    uint8_t outworkbuf[16] = {0};
+    uint32_t ghashBuffer[4] = {0};
+    if (leftBytes != 0)
+    {
+        if (inPtr != NULL)
+        {
+            memcpy(workBuf, inPtr, leftBytes);
+        }
+        ctrlb->s.EOM = 1;
+        for (int x = 0; x < 4; x++)
+        {
+            ((uint32_t*)ghashBuffer)[x] = AES_REGS->AES_GHASH[x];
+        }
+        CRYPT_AES_u2238InOutBlock((const uint8_t*)workBuf, (uint8_t*)outworkbuf);
+ 
+        if (outPtr != NULL)
+        {
+            memcpy(outPtr, outworkbuf, leftBytes);
+        }
+        uint8_t setZeroByte = 16-leftBytes;
+        memset(&outworkbuf[leftBytes], 0x00, setZeroByte);
+
+        for(int i = 0; i < 4; i++)
+        {
+            AES_REGS->AES_GHASH[i] =  ghashBuffer[i];
+        }
+        ctrla->s.ENABLE = 0;
+        uint32_t * ptr = (uint32_t *)outworkbuf;
+        AES_REGS->AES_INDATA = ptr[0];
+        AES_REGS->AES_INDATA = ptr[1];
+        AES_REGS->AES_INDATA = ptr[2];
+        AES_REGS->AES_INDATA = ptr[3];
+ 
+        ctrlb->s.GFMUL = 1;
+        ctrlb->s.START = 1;
+        while ((AES_REGS->AES_INTFLAG & 0x2) == 0);
+        ctrlb->s.GFMUL = 0;
+        ctrla->s.ENABLE = 0;        
+    }
+}
+
   int  wc_AesGcmEncrypt(Aes* aes, byte* out,
                                    const byte* in, word32 sz,
                                    const byte* iv, word32 ivSz,
@@ -761,12 +851,23 @@ void CRYPT_AES_GCMGenerateTag(Aes* aes, uint32_t * tag, uint32_t tag_len)
     CRYPT_AES_GCMProcessAAD(aes, authIn, authInSz);
     volatile CRYPT_AES_U2238_AES_CTRLA * ctrla = (CRYPT_AES_U2238_AES_CTRLA  *)(&AES_REGS->AES_CTRLA);
     ctrla->s.CIPER = CRYPT_AES_U2238_ENCRYPTION;
-    CRYPT_AES_GCMRunBlocks(aes, in, out, sz);
+    CRYPT_AES_GCMRunBlocks_Encrypt(aes, in, out, sz);
     CRYPT_AES_GCMGenerateFinalGHash(aes, sz);     
     CRYPT_AES_GCMGenerateTag(aes, (uint32_t*)authTag, authTagSz);
     return 0; 
  }
 #if defined(HAVE_AES_DECRYPT)
+ 
+static int GCMConstantCompare(const byte* a, const byte* b,
+                                             int length)
+{
+    int i;
+    int compareSum = 0;
+    for (i = 0; i < length; i++) {
+        compareSum |= a[i] ^ b[i];
+    }
+    return compareSum;
+}
 
 int  wc_AesGcmDecrypt(Aes* aes, byte* out,
                                    const byte* in, word32 sz,
@@ -774,6 +875,7 @@ int  wc_AesGcmDecrypt(Aes* aes, byte* out,
                                    const byte* authTag, word32 authTagSz,
                                    const byte* authIn, word32 authInSz)
 {
+    uint8_t genTag[16] = {0};
     aes->invokeCtr[0] = 1;
     CRYPT_AES_GcmLoadKey(aes);
     CRYPT_AES_GcmLoadKeyCalculateJ0(aes, iv, ivSz);
@@ -782,8 +884,8 @@ int  wc_AesGcmDecrypt(Aes* aes, byte* out,
     ctrla->s.CIPER = CRYPT_AES_U2238_DECRYPTION;
     CRYPT_AES_GCMRunBlocks(aes, in, out, sz);
     CRYPT_AES_GCMGenerateFinalGHash(aes, sz);     
-    CRYPT_AES_GCMGenerateTag(aes, (uint32_t*)authTag, authTagSz);
-    return 0; 
+    CRYPT_AES_GCMGenerateTag(aes, (uint32_t*)genTag, authTagSz);
+    return GCMConstantCompare(genTag, authTag, authTagSz);
  }
 #endif
 

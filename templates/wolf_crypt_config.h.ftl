@@ -37,6 +37,9 @@ THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 #define NO_PWDBASED
 #define HAVE_MCAPI
 #define WOLF_CRYPTO_CB  // provide call-back support
+<#if wolfcryptCoreSeries?starts_with("SAM9X6")>
+<#lt>#define WOLFSSL_NO_ATOMIC
+</#if>
 <#if wolfcrypt_sw_cb == true>
         <#lt>#define WOLF_CRYPTO_CB_ONLY_ECC
         <#lt>#define WOLF_CRYPTO_CB_ONLY_RSA
