@@ -1,5 +1,5 @@
 #/*****************************************************************************
-# Copyright (C) 2013-2019 Microchip Technology Inc. and its subsidiaries.
+# Copyright (C) 2013-2026 Microchip Technology Inc. and its subsidiaries.
 #
 # Microchip Technology Inc. and its subsidiaries.
 #
