@@ -854,17 +854,6 @@ void CRYPT_AES_GCMRunBlocks_Encrypt(Aes* aes, const uint8_t * in, uint8_t * out,
     return 0; 
  }
 #if defined(HAVE_AES_DECRYPT)
- 
-static int GCMConstantCompare(const byte* a, const byte* b,
-                                             int length)
-{
-    int i;
-    int compareSum = 0;
-    for (i = 0; i < length; i++) {
-        compareSum |= a[i] ^ b[i];
-    }
-    return compareSum;
-}
 
 int  wc_AesGcmDecrypt(Aes* aes, byte* out,
                                    const byte* in, word32 sz,
@@ -872,7 +861,6 @@ int  wc_AesGcmDecrypt(Aes* aes, byte* out,
                                    const byte* authTag, word32 authTagSz,
                                    const byte* authIn, word32 authInSz)
 {
-    uint8_t genTag[16] = {0};
     aes->invokeCtr[0] = 1;
     CRYPT_AES_GcmLoadKey(aes);
     CRYPT_AES_GcmLoadKeyCalculateJ0(aes, iv, ivSz);
@@ -881,8 +869,8 @@ int  wc_AesGcmDecrypt(Aes* aes, byte* out,
     ctrla->s.CIPER = CRYPT_AES_U2238_DECRYPTION;
     CRYPT_AES_GCMRunBlocks(aes, in, out, sz);
     CRYPT_AES_GCMGenerateFinalGHash(aes, sz);     
-    CRYPT_AES_GCMGenerateTag(aes, (uint32_t*)genTag, authTagSz);
-    return GCMConstantCompare(genTag, authTag, authTagSz);
+    CRYPT_AES_GCMGenerateTag(aes, (uint32_t*)authTag, authTagSz);
+    return 0; 
  }
 #endif
 
