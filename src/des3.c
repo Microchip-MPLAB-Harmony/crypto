@@ -1235,49 +1235,49 @@
 
     int wc_Des_CbcEncrypt(Des* des, byte* out, const byte* in, word32 sz)
     {
-        word32 blocks = sz / DES_BLOCK_SIZE;
-
         if (des == NULL || out == NULL || in == NULL)
             return BAD_FUNC_ARG;
+        if (sz % DES_BLOCK_SIZE != 0)
+            return BAD_LENGTH_E;
 
         return wc_Pic32DesCrypt(des->key, DES_KEYLEN, des->reg, DES_IVLEN,
-            out, in, (blocks * DES_BLOCK_SIZE),
+            out, in, sz,
             PIC32_ENCRYPTION, PIC32_ALGO_DES, PIC32_CRYPTOALGO_CBC);
     }
 
     int wc_Des_CbcDecrypt(Des* des, byte* out, const byte* in, word32 sz)
     {
-        word32 blocks = sz / DES_BLOCK_SIZE;
-
         if (des == NULL || out == NULL || in == NULL)
             return BAD_FUNC_ARG;
+        if (sz % DES_BLOCK_SIZE != 0)
+            return BAD_LENGTH_E;
 
         return wc_Pic32DesCrypt(des->key, DES_KEYLEN, des->reg, DES_IVLEN,
-            out, in, (blocks * DES_BLOCK_SIZE),
+            out, in, sz,
             PIC32_DECRYPTION, PIC32_ALGO_DES, PIC32_CRYPTOALGO_CBC);
     }
 
     int wc_Des3_CbcEncrypt(Des3* des, byte* out, const byte* in, word32 sz)
     {
-        word32 blocks = sz / DES_BLOCK_SIZE;
-
         if (des == NULL || out == NULL || in == NULL)
             return BAD_FUNC_ARG;
+        if (sz % DES_BLOCK_SIZE != 0)
+            return BAD_LENGTH_E;
 
         return wc_Pic32DesCrypt(des->key[0], DES3_KEYLEN, des->reg, DES3_IVLEN,
-            out, in, (blocks * DES_BLOCK_SIZE),
+            out, in, sz,
             PIC32_ENCRYPTION, PIC32_ALGO_TDES, PIC32_CRYPTOALGO_TCBC);
     }
 
     int wc_Des3_CbcDecrypt(Des3* des, byte* out, const byte* in, word32 sz)
     {
-        word32 blocks = sz / DES_BLOCK_SIZE;
-
         if (des == NULL || out == NULL || in == NULL)
             return BAD_FUNC_ARG;
+        if (sz % DES_BLOCK_SIZE != 0)
+            return BAD_LENGTH_E;
 
         return wc_Pic32DesCrypt(des->key[0], DES3_KEYLEN, des->reg, DES3_IVLEN,
-            out, in, (blocks * DES_BLOCK_SIZE),
+            out, in, sz,
             PIC32_DECRYPTION, PIC32_ALGO_TDES, PIC32_CRYPTOALGO_TCBC);
     }
 
@@ -1650,6 +1650,8 @@
         if (ret != 0)
             return ret;
 
+        des->keySet = 1;
+
         return wc_Des3_SetIV(des, iv);
     }
 
@@ -1735,12 +1737,17 @@
 
     int wc_Des_CbcEncrypt(Des* des, byte* out, const byte* in, word32 sz)
     {
-        word32 blocks = sz / DES_BLOCK_SIZE;
+        word32 blocks;
 
         if (des == NULL || out == NULL || in == NULL) {
             return BAD_FUNC_ARG;
         }
 
+        if (sz % DES_BLOCK_SIZE != 0) {
+            return BAD_LENGTH_E;
+        }
+
+        blocks = sz / DES_BLOCK_SIZE;
         while (blocks--) {
             xorbuf((byte*)des->reg, in, DES_BLOCK_SIZE);
             DesProcessBlock(des, (byte*)des->reg, (byte*)des->reg);
@@ -1754,12 +1761,17 @@
 
     int wc_Des_CbcDecrypt(Des* des, byte* out, const byte* in, word32 sz)
     {
-        word32 blocks = sz / DES_BLOCK_SIZE;
+        word32 blocks;
 
         if (des == NULL || out == NULL || in == NULL) {
             return BAD_FUNC_ARG;
         }
 
+        if (sz % DES_BLOCK_SIZE != 0) {
+            return BAD_LENGTH_E;
+        }
+
+        blocks = sz / DES_BLOCK_SIZE;
         while (blocks--) {
             XMEMCPY(des->tmp, in, DES_BLOCK_SIZE);
             DesProcessBlock(des, (byte*)des->tmp, out);
@@ -1778,6 +1790,14 @@
 
         if (des == NULL || out == NULL || in == NULL) {
             return BAD_FUNC_ARG;
+        }
+
+        if (sz % DES_BLOCK_SIZE != 0) {
+            return BAD_LENGTH_E;
+        }
+
+        if (!des->keySet) {
+            return MISSING_KEY;
         }
 
     #ifdef WOLF_CRYPTO_CB
@@ -1829,6 +1849,14 @@
 
         if (des == NULL || out == NULL || in == NULL) {
             return BAD_FUNC_ARG;
+        }
+
+        if (sz % DES_BLOCK_SIZE != 0) {
+            return BAD_LENGTH_E;
+        }
+
+        if (!des->keySet) {
+            return MISSING_KEY;
         }
 
     #ifdef WOLF_CRYPTO_CB
@@ -1952,6 +1980,7 @@ int wc_Des3Init(Des3* des3, void* heap, int devId)
         return BAD_FUNC_ARG;
 
     des3->heap = heap;
+    des3->keySet = 0;
 
 #ifdef WOLF_CRYPTO_CB
     des3->devId = devId;
@@ -1985,6 +2014,7 @@ void wc_Des3Free(Des3* des3)
         (defined(WOLFSSL_ASYNC_CRYPT) && defined(WC_ASYNC_ENABLE_3DES))
     ForceZero(des3->devKey, sizeof(des3->devKey));
 #endif
+    ForceZero(des3, sizeof(Des3));
 #ifdef WOLFSSL_CHECK_MEM_ZERO
     wc_MemZero_Check(des3, sizeof(Des3));
 #endif

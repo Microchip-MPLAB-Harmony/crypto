@@ -353,8 +353,6 @@
         return ret;
     }
 
-#elif defined(WOLFSSL_HAVE_MCHP_HW_SHA1)
-
 #elif (defined(WOLFSSL_RENESAS_TSIP_TLS) || \
     defined(WOLFSSL_RENESAS_TSIP_CRYPTONLY)) && \
     !defined(NO_WOLFSSL_RENESAS_TSIP_CRYPT_HASH)
@@ -369,6 +367,9 @@
 #elif defined(WOLFSSL_IMXRT_DCP)
     #include <wolfssl/wolfcrypt/port/nxp/dcp_port.h>
     /* implemented in wolfcrypt/src/port/nxp/dcp_port.c */
+
+#elif defined(WOLFSSL_NXP_HASHCRYPT_SHA)
+    /* implemented in wolfcrypt/src/port/nxp/hashcrypt_port.c */
 
 #elif defined(WOLFSSL_SILABS_SE_ACCEL)
 

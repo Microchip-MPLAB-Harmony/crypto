@@ -371,10 +371,10 @@
             #define _WINSOCKAPI_ /* block inclusion of winsock.h header file. */
             #include <windows.h>
             #undef _WINSOCKAPI_ /* undefine it for MINGW winsock2.h header */
-//            #ifndef WOLFSSL_USER_IO
-//                #include <winsock2.h>
-//                #include <ws2tcpip.h> /* required for InetPton */
-//            #endif
+/*            #ifndef WOLFSSL_USER_IO   */
+/*                #include <winsock2.h> */
+/*                #include <ws2tcpip.h> *//* required for InetPton */
+/*            #endif */
         #endif /* WOLFSSL_SGX */
     #endif
     #if !defined(SINGLE_THREADED) && !defined(_WIN32_WCE)
@@ -403,11 +403,11 @@
     #include "fsl_os_abstraction.h"
 #elif defined(WOLFSSL_VXWORKS)
     #include <semLib.h>
-//    #ifdef WOLFSSL_VXWORKS_6_x
-//        #ifndef SEM_ID_NULL
-//           #define SEM_ID_NULL ((SEM_ID)NULL)
-//        #endif
-//    #endif
+/*    #ifdef WOLFSSL_VXWORKS_6_x */
+/*        #ifndef SEM_ID_NULL */
+/*            #define SEM_ID_NULL ((SEM_ID)NULL) */
+/*        #endif */
+/*    #endif */
 #elif defined(WOLFSSL_uITRON4)
     #include "stddef.h"
     #include "kernel.h"
@@ -507,14 +507,14 @@
     #ifdef __cplusplus
         extern "C" {
     #endif
-//#elif defined(WOLFSSL_EMBOS)
+/* #elif defined(WOLFSSL_EMBOS) */
     /* do nothing */
 #else
     #ifndef SINGLE_THREADED
         #ifndef WOLFSSL_USER_MUTEX
             #if defined(WOLFSSL_LINUXKM)
                 /* definitions are in linuxkm/linuxkm_wc_port.h */
-				#define WOLFSSL_KTHREADS
+		#define WOLFSSL_KTHREADS
             #elif defined(WOLFSSL_BSDKM)
                 /* definitions are in bsdkm/bsdkm_wc_port.h */
             #else
@@ -582,8 +582,8 @@
         #endif
         typedef pthread_mutex_t wolfSSL_Mutex;
         #define WOLFSSL_MUTEX_INITIALIZER(lockname) PTHREAD_MUTEX_INITIALIZER
-    #elif defined(WOLFSSL_KTHREADS) //Manually Added
-        typedef struct mutex wolfSSL_Mutex;  //Manually Added
+    #elif defined(WOLFSSL_KTHREADS) /* Manually Added */
+        typedef struct mutex wolfSSL_Mutex;  /* Manually Added */
 	#elif defined(THREADX)
         typedef TX_MUTEX wolfSSL_Mutex;
     #elif defined(WOLFSSL_DEOS)
@@ -634,13 +634,13 @@
         typedef struct k_mutex wolfSSL_Mutex;
     #elif defined(WOLFSSL_TELIT_M2MB)
         typedef M2MB_OS_MTX_HANDLE wolfSSL_Mutex;
-//    #elif defined(WOLFSSL_EMBOS)
-//        typedef OS_MUTEX wolfSSL_Mutex;
+/*    #elif defined(WOLFSSL_EMBOS) */
+/*        typedef OS_MUTEX wolfSSL_Mutex; */
     #elif defined(WOLFSSL_USER_MUTEX)
         /* typedef User_Mutex wolfSSL_Mutex; */
     #elif defined(WOLFSSL_LINUXKM)
         /* definitions are in linuxkm/linuxkm_wc_port.h */
-		typedef struct mutex wolfSSL_Mutex; //Manually Added
+	typedef struct mutex wolfSSL_Mutex; /* Manually Added */
     #elif defined(WOLFSSL_BSDKM)
         /* definitions are in bsdkm/bsdkm_wc_port.h */
     #elif defined(__WATCOMC__)
@@ -667,6 +667,16 @@
     typedef wolfSSL_Mutex wolfSSL_RwLock;
 #endif
 
+#if defined(WC_ATOMIC_INT_ARG) != defined(WC_ATOMIC_UINT_ARG)
+    #error WC_ATOMIC_INT_ARG and WC_ATOMIC_UINT_ARG overrides must be paired.
+#endif
+#ifndef WC_ATOMIC_INT_ARG
+    #define WC_ATOMIC_INT_ARG int
+#endif
+#ifndef WC_ATOMIC_UINT_ARG
+    #define WC_ATOMIC_UINT_ARG unsigned int
+#endif
+
 #ifndef WOLFSSL_NO_ATOMICS
     #if defined(WOLFSSL_USER_DEFINED_ATOMICS)
         /* user-supplied bindings for wolfSSL_Atomic_Int etc. */
@@ -678,11 +688,11 @@
             #define WOLFSSL_ATOMIC_OPS
         #endif
     #elif defined(SINGLE_THREADED)
-        typedef int wolfSSL_Atomic_Int;
-        typedef unsigned int wolfSSL_Atomic_Uint;
+        typedef WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int;
+        typedef WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint;
         #define WOLFSSL_ATOMIC_INITIALIZER(x) (x)
         #define WOLFSSL_ATOMIC_LOAD(x) (x)
-        #define WOLFSSL_ATOMIC_STORE(x, val) (x) = (val)
+        #define WOLFSSL_ATOMIC_STORE(x, val) (void)((x) = (val))
         #define WOLFSSL_ATOMIC_OPS
     #elif defined(WOLFSSL_BSDKM)
     /* Note: <stdatomic.h> can be safely included in both linux kernel and
@@ -710,7 +720,8 @@
         #define WOLFSSL_ATOMIC_STORE(x, val) __atomic_store_n(&(x), \
                                                   val, __ATOMIC_RELEASE)
         #define WOLFSSL_ATOMIC_OPS
-    #elif defined(_MSC_VER) && !defined(WOLFSSL_NOT_WINDOWS_API)
+    #elif defined(_MSC_VER) && defined(USE_WINDOWS_API) && \
+            !defined(WOLFSSL_NOT_WINDOWS_API)
         /* Use MSVC compiler intrinsics for atomic ops */
         #ifdef _WIN32_WCE
             #include <armintr.h>
@@ -720,8 +731,15 @@
         typedef volatile long wolfSSL_Atomic_Int;
         typedef volatile unsigned long wolfSSL_Atomic_Uint;
         #define WOLFSSL_ATOMIC_INITIALIZER(x) (x)
-        #define WOLFSSL_ATOMIC_LOAD(x) (x)
-        #define WOLFSSL_ATOMIC_STORE(x, val) (x) = (val)
+        /* Acquire-ordered load via idempotent RMW: OR-with-0 leaves the value
+         * unchanged but provides atomicity + acquire ordering. On cl.exe this
+         * is a locked RMW; LLVM (clang-cl) may lower it to a plain acquire
+         * load.
+         */
+        #define WOLFSSL_ATOMIC_LOAD(x) \
+            InterlockedOrAcquire((volatile long *)&(x), 0)
+        #define WOLFSSL_ATOMIC_STORE(x, val) \
+            (void)InterlockedExchange((volatile long *)&(x), (long)(val))
         #define WOLFSSL_ATOMIC_OPS
     #endif
 
@@ -732,6 +750,8 @@
 #endif /* !WOLFSSL_NO_ATOMICS */
 
 #ifdef WOLFSSL_NO_ATOMICS
+    typedef volatile int wolfSSL_Atomic_Int;
+    typedef volatile unsigned int wolfSSL_Atomic_Uint;
     #define WOLFSSL_ATOMIC_INITIALIZER(x) (x)
     #define WOLFSSL_ATOMIC_LOAD(x) (x)
     #define WOLFSSL_ATOMIC_STORE(x, val) (x) = (val)
@@ -742,10 +762,10 @@
  * Allows a user-supplied override definition with type introspection.
  */
 #ifndef WOLFSSL_ATOMIC_COERCE_INT
-    #define WOLFSSL_ATOMIC_COERCE_INT(x) ((int)(x))
+    #define WOLFSSL_ATOMIC_COERCE_INT(x) ((WC_ATOMIC_INT_ARG)(x))
 #endif
 #ifndef WOLFSSL_ATOMIC_COERCE_UINT
-    #define WOLFSSL_ATOMIC_COERCE_UINT(x) ((unsigned int)(x))
+    #define WOLFSSL_ATOMIC_COERCE_UINT(x) ((WC_ATOMIC_UINT_ARG)(x))
 #endif
 
 #ifdef WOLFSSL_USER_DEFINED_ATOMICS
@@ -753,32 +773,39 @@
      * wolfSSL_Atomic_Int_FetchAdd(), etc.
      */
 #elif defined(WOLFSSL_ATOMIC_OPS) && !defined(SINGLE_THREADED)
-    WOLFSSL_API void wolfSSL_Atomic_Int_Init(wolfSSL_Atomic_Int* c, int i);
+    WOLFSSL_API void wolfSSL_Atomic_Int_Init(wolfSSL_Atomic_Int* c,
+                                             WC_ATOMIC_INT_ARG i);
     WOLFSSL_API void wolfSSL_Atomic_Uint_Init(
-        wolfSSL_Atomic_Uint* c, unsigned int i);
+        wolfSSL_Atomic_Uint* c, WC_ATOMIC_UINT_ARG i);
     /* FetchOp functions return the value of the counter immediately preceding
      * the effects of the operation.
      * OpFetch functions return the value of the counter immediately after
      * the effects of the operation.
      */
-    WOLFSSL_API int wolfSSL_Atomic_Int_FetchAdd(wolfSSL_Atomic_Int* c, int i);
-    WOLFSSL_API int wolfSSL_Atomic_Int_FetchSub(wolfSSL_Atomic_Int* c, int i);
-    WOLFSSL_API int wolfSSL_Atomic_Int_AddFetch(wolfSSL_Atomic_Int* c, int i);
-    WOLFSSL_API int wolfSSL_Atomic_Int_SubFetch(wolfSSL_Atomic_Int* c, int i);
-    WOLFSSL_API int wolfSSL_Atomic_Int_Exchange(
-        wolfSSL_Atomic_Int* c, int new_i);
+    WOLFSSL_API WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_FetchAdd(
+        wolfSSL_Atomic_Int* c, WC_ATOMIC_INT_ARG i);
+    WOLFSSL_API WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_FetchSub(
+        wolfSSL_Atomic_Int* c, WC_ATOMIC_INT_ARG i);
+    WOLFSSL_API WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_AddFetch(
+        wolfSSL_Atomic_Int* c, WC_ATOMIC_INT_ARG i);
+    WOLFSSL_API WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_SubFetch(
+        wolfSSL_Atomic_Int* c, WC_ATOMIC_INT_ARG i);
+    WOLFSSL_API WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_Exchange(
+        wolfSSL_Atomic_Int* c, WC_ATOMIC_INT_ARG new_i);
     WOLFSSL_API int wolfSSL_Atomic_Int_CompareExchange(
-        wolfSSL_Atomic_Int* c, int *expected_i, int new_i);
-    WOLFSSL_API unsigned int wolfSSL_Atomic_Uint_FetchAdd(
-        wolfSSL_Atomic_Uint* c, unsigned int i);
-    WOLFSSL_API unsigned int wolfSSL_Atomic_Uint_FetchSub(
-        wolfSSL_Atomic_Uint* c, unsigned int i);
-    WOLFSSL_API unsigned int wolfSSL_Atomic_Uint_AddFetch(
-        wolfSSL_Atomic_Uint* c, unsigned int i);
-    WOLFSSL_API unsigned int wolfSSL_Atomic_Uint_SubFetch(
-        wolfSSL_Atomic_Uint* c, unsigned int i);
+        wolfSSL_Atomic_Int* c, WC_ATOMIC_INT_ARG *expected_i,
+        WC_ATOMIC_INT_ARG new_i);
+    WOLFSSL_API WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_FetchAdd(
+        wolfSSL_Atomic_Uint* c, WC_ATOMIC_UINT_ARG i);
+    WOLFSSL_API WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_FetchSub(
+        wolfSSL_Atomic_Uint* c, WC_ATOMIC_UINT_ARG i);
+    WOLFSSL_API WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_AddFetch(
+        wolfSSL_Atomic_Uint* c, WC_ATOMIC_UINT_ARG i);
+    WOLFSSL_API WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_SubFetch(
+        wolfSSL_Atomic_Uint* c, WC_ATOMIC_UINT_ARG i);
     WOLFSSL_API int wolfSSL_Atomic_Uint_CompareExchange(
-        wolfSSL_Atomic_Uint* c, unsigned int *expected_i, unsigned int new_i);
+        wolfSSL_Atomic_Uint* c, WC_ATOMIC_UINT_ARG *expected_i,
+        WC_ATOMIC_UINT_ARG new_i);
     WOLFSSL_API int wolfSSL_Atomic_Ptr_CompareExchange(
         void* volatile * c, void **expected_ptr, void *new_ptr);
 #else
@@ -788,33 +815,47 @@
      * !defined(WOLFSSL_ATOMIC_OPS) && !defined(SINGLE_THREADED).  This forces
      * local awareness of thread-unsafe semantics.
      */
+
     #define wolfSSL_Atomic_Int_Init(c, i) (*(c) = (i))
     #define wolfSSL_Atomic_Uint_Init(c, i) (*(c) = (i))
-    static WC_INLINE int wolfSSL_Atomic_Int_FetchAdd(int *c, int i) {
-        int ret = *c;
+    static WC_INLINE WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_FetchAdd(
+        WC_ATOMIC_INT_ARG *c,
+        WC_ATOMIC_INT_ARG i)
+    {
+        WC_ATOMIC_INT_ARG ret = *c;
         *c += i;
         return ret;
     }
-    static WC_INLINE int wolfSSL_Atomic_Int_FetchSub(int *c, int i) {
-        int ret = *c;
+    static WC_INLINE WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_FetchSub(
+        WC_ATOMIC_INT_ARG *c,
+        WC_ATOMIC_INT_ARG i)
+    {
+        WC_ATOMIC_INT_ARG ret = *c;
         *c -= i;
         return ret;
     }
-    static WC_INLINE int wolfSSL_Atomic_Int_AddFetch(int *c, int i) {
+    static WC_INLINE WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_AddFetch(
+        WC_ATOMIC_INT_ARG *c,
+        WC_ATOMIC_INT_ARG i)
+    {
         return (*c += i);
     }
-    static WC_INLINE int wolfSSL_Atomic_Int_SubFetch(int *c, int i) {
+    static WC_INLINE WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_SubFetch(
+        WC_ATOMIC_INT_ARG *c,
+        WC_ATOMIC_INT_ARG i)
+    {
         return (*c -= i);
     }
-    static WC_INLINE int wolfSSL_Atomic_Int_Exchange(
-        int *c, int new_i)
+    static WC_INLINE WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_Exchange(
+        WC_ATOMIC_INT_ARG *c, WC_ATOMIC_INT_ARG new_i)
     {
-        int ret = *c;
+        WC_ATOMIC_INT_ARG ret = *c;
         *c = new_i;
         return ret;
     }
-    static WC_INLINE int wolfSSL_Atomic_Int_CompareExchange(
-        int *c, int *expected_i, int new_i)
+    static WC_INLINE WC_ATOMIC_INT_ARG wolfSSL_Atomic_Int_CompareExchange(
+        WC_ATOMIC_INT_ARG *c, WC_ATOMIC_INT_ARG *expected_i,
+        WC_ATOMIC_INT_ARG new_i)
     {
         if (*c == *expected_i) {
             *c = new_i;
@@ -837,32 +878,33 @@
             return 0;
         }
     }
-    static WC_INLINE unsigned int wolfSSL_Atomic_Uint_FetchAdd(
-        unsigned int *c, unsigned int i)
+    static WC_INLINE WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_FetchAdd(
+        WC_ATOMIC_UINT_ARG *c, WC_ATOMIC_UINT_ARG i)
     {
-        unsigned int ret = *c;
+        WC_ATOMIC_UINT_ARG ret = *c;
         *c += i;
         return ret;
     }
-    static WC_INLINE unsigned int wolfSSL_Atomic_Uint_FetchSub(
-        unsigned int *c, unsigned int i)
+    static WC_INLINE WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_FetchSub(
+        WC_ATOMIC_UINT_ARG *c, WC_ATOMIC_UINT_ARG i)
     {
-        unsigned int ret = *c;
+        WC_ATOMIC_UINT_ARG ret = *c;
         *c -= i;
         return ret;
     }
-    static WC_INLINE unsigned int wolfSSL_Atomic_Uint_AddFetch(
-        unsigned int *c, unsigned int i)
+    static WC_INLINE WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_AddFetch(
+        WC_ATOMIC_UINT_ARG *c, WC_ATOMIC_UINT_ARG i)
     {
         return (*c += i);
     }
-    static WC_INLINE unsigned int wolfSSL_Atomic_Uint_SubFetch(
-        unsigned int *c, unsigned int i)
+    static WC_INLINE WC_ATOMIC_UINT_ARG wolfSSL_Atomic_Uint_SubFetch(
+        WC_ATOMIC_UINT_ARG *c, WC_ATOMIC_UINT_ARG i)
     {
         return (*c -= i);
     }
     static WC_INLINE int wolfSSL_Atomic_Uint_CompareExchange(
-        unsigned int *c, unsigned int *expected_i, unsigned int new_i)
+        WC_ATOMIC_UINT_ARG *c, WC_ATOMIC_UINT_ARG *expected_i,
+        WC_ATOMIC_UINT_ARG new_i)
     {
         if (*c == *expected_i) {
             *c = new_i;
@@ -1092,6 +1134,52 @@ WOLFSSL_API int wc_SetMutexCb(mutex_cb* cb);
 WOLFSSL_API mutex_cb* wc_GetMutexCb(void);
 #endif
 
+/* Internal APIs for counting initialization depth, with deallocation races
+ * fully mitigated.  Used by wolfCrypt_Init() and wolfCrypt_Cleanup().
+ */
+#ifdef WOLFSSL_ATOMIC_OPS
+    typedef wolfSSL_Atomic_Uint wc_init_state_t;
+    #define WC_INIT_STATE_INITIALIZER WOLFSSL_ATOMIC_INITIALIZER(0)
+#else
+    typedef WC_ATOMIC_UINT_ARG wc_init_state_t;
+    #define WC_INIT_STATE_INITIALIZER 0
+#endif
+#define WC_DECLARE_INIT_STATE(x) wc_init_state_t x = WC_INIT_STATE_INITIALIZER
+#define WC_INIT_STATE_UNINITED 0U
+#define WC_INIT_STATE_INITING 1U
+#define WC_INIT_STATE_INITED 2U
+#define WC_INIT_STATE_CLEANING_UP 3U
+#define WC_INIT_STATE_BAD_STATE 4U
+#define WC_INIT_STATE_STATE_BITS 3
+#define WC_INIT_STATE_COUNT_BITS ((sizeof(WC_ATOMIC_UINT_ARG) * 8) - WC_INIT_STATE_STATE_BITS)
+union wc_init_state_bitfields {
+    WC_ATOMIC_UINT_ARG u;
+    struct {
+        WC_ATOMIC_UINT_ARG state:WC_INIT_STATE_STATE_BITS;
+        WC_ATOMIC_UINT_ARG count:WC_INIT_STATE_COUNT_BITS;
+    } c;
+};
+/* Modules with no provisions for cleanup after a partially successful init need
+ * to enter a degraded state, returning BAD_STATE_E to the caller, signaling
+ * that restart is needed.  This macro should only be called while
+ * _STATE_INITING (after wc_local_InitUp() returns _STATE_INITING and before
+ * wc_local_InitUpDone()), to assure the store is uncontended.
+ */
+#define WC_INIT_STATE_RAISE_BAD_STATE(x) do {                     \
+        union wc_init_state_bitfields _x;                         \
+        _x.u = WOLFSSL_ATOMIC_LOAD(x);                            \
+        _x.c.state = WC_INIT_STATE_BAD_STATE;                     \
+        WOLFSSL_ATOMIC_STORE(x, _x.u);                            \
+    } while (0)
+/* wc_local_InitUp() opens the critical span of an init sequence. */
+WOLFSSL_LOCAL int wc_local_InitUp(wc_init_state_t *s);
+/* wc_local_InitUpDone() closes the critical span of an init sequence. */
+WOLFSSL_LOCAL int wc_local_InitUpDone(wc_init_state_t *s);
+/* wc_local_InitDown() opens the critical span of a cleanup sequence. */
+WOLFSSL_LOCAL int wc_local_InitDown(wc_init_state_t *s);
+/* wc_local_InitDownDone() closes the critical span of a cleanup sequence. */
+WOLFSSL_LOCAL int wc_local_InitDownDone(wc_init_state_t *s);
+
 /* main crypto initialization function */
 WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Init(void);
 WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
@@ -1114,7 +1202,7 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
                                              * EBSnet feedback */
 
     #define XFILE                    int
-    #define XFOPEN(NAME, MODE)       vf_open((const char *)NAME, VO_RDONLY, 0); //manully added
+    #define XFOPEN(NAME, MODE)       vf_open((const char *)NAME, VO_RDONLY, 0); /* manully added */
     #define XFSEEK                   ebsnet_fseek
     #define XFTELL                   vf_tell
     #define XFREAD(BUF, SZ, AMT, FD) vf_read(FD, BUF, SZ*AMT)
@@ -1130,7 +1218,7 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
 #elif defined(LSR_FS)
     #include <fs.h>
     #define XFILE                   struct fs_file*
-    #define XFOPEN(NAME, MODE)      fs_open((char*)NAME);		//Manually Added
+    #define XFOPEN(NAME, MODE)      fs_open((char*)NAME);		/* Manually Added */
     #define XFSEEK(F, O, W)         (void)F
     #define XFTELL(F)               (F)->len
     #define XFREAD(BUF, SZ, AMT, F) fs_read(F, (char*)BUF, SZ*AMT)
@@ -1205,7 +1293,7 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
         }  /* extern "C" */
     #endif
 
-    #include <zephyr/fs/fs.h> //TODO: Manually changes Pending to add
+    #include <zephyr/fs/fs.h> /* TODO: Manually changes Pending to add */
 
     #ifdef __cplusplus
         extern "C" {
@@ -1267,22 +1355,22 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XSEEK_END                0
     #define XBADFILE                 NULL
     #define XFGETS(b,s,f)            f_gets((b), (s), (f))
-//#elif defined (_WIN32_WCE)
-//    /* stdio, WINCE case */
-//    #include <stdio.h>
-//    #define XFILE      FILE*
-//    #define XFOPEN     fopen
-//    #define XFDOPEN    fdopen
-//    #define XFSEEK     fseek
-//    #define XFTELL     ftell
-//    #define XFREAD     fread
-//    #define XFWRITE    fwrite
-//    #define XFCLOSE    fclose
-//    #define XSEEK_SET  SEEK_SET
-//    #define XSEEK_END  SEEK_END
-//    #define XBADFILE   NULL
-//    #define XFGETS     fgets
-//    #define XVSNPRINTF _vsnprintf
+/* #elif defined (_WIN32_WCE) */
+      /* stdio, WINCE case */
+/*    #include <stdio.h> */
+/*    #define XFILE      FILE* */
+/*    #define XFOPEN     fopen */
+/*    #define XFDOPEN    fdopen */
+/*    #define XFSEEK     fseek */
+/*    #define XFTELL     ftell */
+/*    #define XFREAD     fread */
+/*    #define XFWRITE    fwrite */
+/*    #define XFCLOSE    fclose */
+/*    #define XSEEK_SET  SEEK_SET */
+/*    #define XSEEK_END  SEEK_END */
+/*    #define XBADFILE   NULL */
+/*    #define XFGETS     fgets */
+/*    #define XVSNPRINTF _vsnprintf */
 
 #elif defined(FUSION_RTOS)
     #include <fclstdio.h>
@@ -1317,7 +1405,7 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define strncasecmp FCL_STRNCASECMP
 
     /* FUSION SPECIFIC ERROR CODE */
-    #define FUSION_IO_SEND_E 63  //FCL_EWOULDBLOCK
+    #define FUSION_IO_SEND_E 63  /* FCL_EWOULDBLOCK */
 
 #elif defined(WOLFSSL_USER_FILESYSTEM)
     /* To be defined in user_settings.h */
@@ -1343,85 +1431,85 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XBADFD     (-1)
     #define XFGETS     fgets
     #define XFPRINTF   fprintf
-//    #define XFFLUSH    fflush
+/*    #define XFFLUSH    fflush */
     #define XFEOF(fp)  feof(fp)
     #define XFERROR(fp) ferror(fp)
     #define XCLEARERR(fp) clearerr(fp)
 
-    #if !defined(USE_WINDOWS_API) && !defined(NO_WOLFSSL_DIR)\   //Manually Added
+    #if !defined(USE_WINDOWS_API) && !defined(NO_WOLFSSL_DIR)\   /* Manually Added */
         && !defined(WOLFSSL_NUCLEUS) && !defined(WOLFSSL_NUCLEUS_1_2)
-//        #if defined(__WATCOMC__)
-//            #include <unistd.h>
-//            #include <sys/stat.h>
-//            #define XWRITE      write
-//            #define XREAD       read
-//            #define XCLOSE      close
-//            #define XSTAT       stat
-//            #define XS_ISREG(s) S_ISREG(s)
-//            #if defined(__UNIX__)
-//                #include <dirent.h>
-//                #define SEPARATOR_CHAR ':'
-//            #else
-//                #include <direct.h>
-//                #define SEPARATOR_CHAR ';'
-//            #endif
-//            #if defined(__NT__)
-//                #define XALTHOMEVARNAME "USERPROFILE"
-//            #endif
-//        #elif defined(USE_WINDOWS_API)
-//            #include <io.h>
-//            #include <sys/stat.h>
-//            #ifndef XSTAT
-//                #define XSTAT       _stat
-//            #endif
-//            #define XS_ISREG(s) (s & _S_IFREG)
-//            #define SEPARATOR_CHAR ';'
-//            #define XWRITE      _write
-//            #define XREAD       _read
-//            #define XALTHOMEVARNAME "USERPROFILE"
-//
-//        #elif defined(ARDUINO)
-//            #ifndef XSTAT
-//                #define XSTAT       _stat
-//            #endif
-//            #define XS_ISREG(s) (s & _S_IFREG)
-//            #define SEPARATOR_CHAR ';'
-//
-//        #elif defined(INTIME_RTOS)
-//            #include <sys/stat.h>
-//            #ifndef XSTAT
-//           #define XSTAT _stat64
-//            #endif
-//            #define XS_ISREG(s) S_ISREG(s)
-//            #define SEPARATOR_CHAR ';'
-//            #define XWRITE      write
-//            #define XREAD       read
-//            #define XCLOSE      close
-//
-//        #elif defined(WOLFSSL_TELIT_M2MB)
-//            #ifndef XSTAT
-//            #define XSTAT       m2mb_fs_stat
-//            #endif
-//            #define XS_ISREG(s) (s & M2MB_S_IFREG)
-//            #define SEPARATOR_CHAR ':'
-//
-//        #else
+/*        #if defined(__WATCOMC__) */
+/*            #include <unistd.h> */
+/*            #include <sys/stat.h> */
+/*            #define XWRITE      write */
+/*            #define XREAD       read */
+/*            #define XCLOSE      close */
+/*            #define XSTAT       stat */
+/*            #define XS_ISREG(s) S_ISREG(s) */
+/*            #if defined(__UNIX__) */
+/*                #include <dirent.h> */
+/*                #define SEPARATOR_CHAR ':' */
+/*            #else */
+/*                #include <direct.h> */
+/*                #define SEPARATOR_CHAR ';' */
+/*            #endif */
+/*            #if defined(__NT__) */
+/*                #define XALTHOMEVARNAME "USERPROFILE" */
+/*            #endif */
+/*        #elif defined(USE_WINDOWS_API) */
+/*            #include <io.h> */
+/*            #include <sys/stat.h> */
+/*            #ifndef XSTAT */
+/*                #define XSTAT       _stat */
+/*            #endif */
+/*            #define XS_ISREG(s) (s & _S_IFREG) */
+/*            #define SEPARATOR_CHAR ';' */
+/*            #define XWRITE      _write */
+/*            #define XREAD       _read */
+/*            #define XALTHOMEVARNAME "USERPROFILE" */
+/* */
+/*        #elif defined(ARDUINO) */
+/*            #ifndef XSTAT */
+/*                #define XSTAT       _stat */
+/*            #endif */
+/*            #define XS_ISREG(s) (s & _S_IFREG) */
+/*            #define SEPARATOR_CHAR ';' */
+/* */
+/*        #elif defined(INTIME_RTOS) */
+/*            #include <sys/stat.h> */
+/*            #ifndef XSTAT */
+/*           #define XSTAT _stat64 */
+/*            #endif */
+/*            #define XS_ISREG(s) S_ISREG(s) */
+/*            #define SEPARATOR_CHAR ';' */
+/*            #define XWRITE      write */
+/*            #define XREAD       read */
+/*            #define XCLOSE      close */
+/* */
+/*        #elif defined(WOLFSSL_TELIT_M2MB) */
+/*            #ifndef XSTAT */
+/*            #define XSTAT       m2mb_fs_stat */
+/*            #endif */
+/*            #define XS_ISREG(s) (s & M2MB_S_IFREG) */
+/*            #define SEPARATOR_CHAR ':' */
+/* */
+/*        #else */
             #include <dirent.h>
             #include <unistd.h>
             #include <sys/stat.h>
             #define XWRITE      write
             #define XREAD       read
             #define XCLOSE      close
-//            #ifndef XSTAT
-//            #define XSTAT       stat
-//            #endif
-//            #define XS_ISREG(s) S_ISREG(s)
-//            #define SEPARATOR_CHAR ':'
-//        #endif
+/*            #ifndef XSTAT */
+/*            #define XSTAT       stat */
+/*            #endif */
+/*            #define XS_ISREG(s) S_ISREG(s) */
+/*            #define SEPARATOR_CHAR ':' */
+/*        #endif */
 
-//        #ifndef XSTAT_TYPE
-//            #define XSTAT_TYPE struct XSTAT
-//        #endif
+/*        #ifndef XSTAT_TYPE */
+/*            #define XSTAT_TYPE struct XSTAT */
+/*        #endif */
     #endif /* !NO_WOLFSSL_DIR !WOLFSSL_NUCLEUS !WOLFSSL_NUCLEUS_1_2 */
 #endif
 
@@ -1450,7 +1538,7 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #ifdef USE_WINDOWS_API
         WIN32_FIND_DATAA FindFileData;
         HANDLE hFind;
-        // XSTAT_TYPE s;
+        /* XSTAT_TYPE s; */
     #elif defined(WOLFSSL_ZEPHYR)
         struct fs_dirent entry;
         struct fs_dir_t  dir;
@@ -1461,20 +1549,19 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
         M2MB_DIR_T* dir;
         struct M2MB_DIRENT* entry;
         struct M2MB_STAT s;
-//    #elif defined(INTIME_RTOS)
-//        struct stat64 s;
-//        struct _find64 FindFileData;
-//       #define IntimeFindFirst(name, data) (0 == _findfirst64(name, data))
-//        #define IntimeFindNext(data)  (0 == _findnext64(data))
-//        #define IntimeFindClose(data) (0 == _findclose64(data))
-//        #define IntimeFilename(ctx)   ctx->FindFileData.f_filename
+/*    #elif defined(INTIME_RTOS) */
+/*        struct stat64 s; */
+/*        struct _find64 FindFileData; */
+/*       #define IntimeFindFirst(name, data) (0 == _findfirst64(name, data)) */
+/*        #define IntimeFindNext(data)  (0 == _findnext64(data)) */
+/*        #define IntimeFindClose(data) (0 == _findclose64(data)) */
+/*        #define IntimeFilename(ctx)   ctx->FindFileData.f_filename */
     #elif defined(ARDUINO)
         /* TODO: board specific features */
     #else
         struct dirent* entry;
         DIR*   dir;
-		//XSTAT_TYPE s;
-        struct stat s; //Manually Added
+        XSTAT_TYPE s;
     #endif
         char name[MAX_FILENAME_SZ];
     } ReadDirCtx;
@@ -1485,9 +1572,9 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     WOLFSSL_API int wc_ReadDirNext(ReadDirCtx* ctx, const char* path, char** name);
     WOLFSSL_API void wc_ReadDirClose(ReadDirCtx* ctx);
 #endif /* !NO_WOLFSSL_DIR */
-//    #define WC_ISFILEEXIST_NOFILE (-1)
+/*    #define WC_ISFILEEXIST_NOFILE (-1) */
 
-//    WOLFSSL_API int wc_FileExists(const char* fname);
+/*    WOLFSSL_API int wc_FileExists(const char* fname); */
 
 #endif /* !NO_FILESYSTEM */
 
@@ -1540,10 +1627,10 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #endif /* max */
 #endif /* USE_WINDOWS_API */
 
-//#ifdef __QNXNTO__
-//    #define WOLFSSL_HAVE_MIN
-//    #define WOLFSSL_HAVE_MAX
-//#endif
+#ifdef __QNXNTO__
+    #define WOLFSSL_HAVE_MIN
+    #define WOLFSSL_HAVE_MAX
+#endif
 
 /* TIME SECTION */
 /* Time functions */
@@ -1591,19 +1678,19 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define XGMTIME(c, t)   rtpsys_gmtime((c))
 
 #elif defined(WOLFSSL_DEOS) || defined(WOLFSSL_DEOS_RTEMS)
-//    #include <time.h>
-//        #ifndef XTIME
-//            extern time_t deos_time(time_t* timer);
-//            #define XTIME(t1) deos_time((t1))
-//        #endif
-		
-	//-----------------------------
-	// Manually added
-    #define XTIME(t1)       deos_time((t1) //Manually Added
-    #define WOLFSSL_GMTIME //Manually Added
-    #define USE_WOLF_TM //Manually Added
-    #define USE_WOLF_TIME_T //Manually Added
-	//--------------------------------
+/*    #include <time.h> */
+/*        #ifndef XTIME */
+/*            extern time_t deos_time(time_t* timer); */
+/*            #define XTIME(t1) deos_time((t1)) */
+/*        #endif */
+
+	/*----------------------------- */
+	/* Manually added */
+    #define XTIME(t1)       deos_time((t1) /*Manually Added */
+    #define WOLFSSL_GMTIME /*Manually Added */
+    #define USE_WOLF_TM /*Manually Added */
+    #define USE_WOLF_TIME_T /*Manually Added */
+	/*-------------------------------- */
 #elif defined(MICRIUM)
     #include <clk.h>
     #include <time.h>
@@ -1613,9 +1700,9 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
 #elif defined(MICROCHIP_TCPIP_V5) || defined(MICROCHIP_TCPIP)
     #include <time.h>
     extern time_t pic32_time(time_t* timer);
-	#ifndef XTIME //Manually Added
+	#ifndef XTIME /*Manually Added */
     #define XTIME(t1)       pic32_time((t1))
-	#endif //Manually Added
+	#endif /*Manually Added */
     #define XGMTIME(c, t)   gmtime((c))
 
 #elif defined(FREESCALE_RTC)
@@ -1671,31 +1758,31 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #define _WINSOCKAPI_ /* block inclusion of winsock.h header file */
     #include <windows.h>
     #undef _WINSOCKAPI_ /* undefine it for MINGW winsock2.h header file */
-//    #include <stdlib.h> /* For file system */
+/*    #include <stdlib.h> */ /* For file system */
 
-//    time_t windows_time(time_t* timer);
+/*    time_t windows_time(time_t* timer); */
 
-//    #define FindNextFileA(h, d) FindNextFile(h, (LPWIN32_FIND_DATAW) d)
-//    #define FindFirstFileA(fn, d) FindFirstFile((LPCWSTR) fn, \
-//                                                (LPWIN32_FIND_DATAW) d)
+/*    #define FindNextFileA(h, d) FindNextFile(h, (LPWIN32_FIND_DATAW) d) */
+/*    #define FindFirstFileA(fn, d) FindFirstFile((LPCWSTR) fn, \ */
+/*                                                (LPWIN32_FIND_DATAW) d) */
     #define XTIME(t1)       windows_time((t1))
     #define WOLFSSL_GMTIME
 
     /* if struct tm is not defined in WINCE SDK */
-//    #ifndef _TM_DEFINED
-//        struct tm {
-//            int tm_sec;     /* seconds */
-//            int tm_min;     /* minutes */
-//            int tm_hour;    /* hours */
-//            int tm_mday;    /* day of month (month specific) */
-//            int tm_mon;     /* month */
-//            int tm_year;    /* year */
-//            int tm_wday;    /* day of week (out of 1-7)*/
-//            int tm_yday;    /* day of year (out of 365) */
-//            int tm_isdst;   /* is it daylight savings */
-//            };
-//            #define _TM_DEFINED
-//    #endif
+/*    #ifndef _TM_DEFINED */
+/*        struct tm { */
+/*            int tm_sec; */     /* seconds */
+/*            int tm_min; */     /* minutes */
+/*            int tm_hour; */    /* hours */
+/*            int tm_mday; */    /* day of month (month specific) */
+/*            int tm_mon; */     /* month */
+/*            int tm_year; */    /* year */
+/*            int tm_wday; */    /* day of week (out of 1-7)*/
+/*            int tm_yday; */    /* day of year (out of 365) */
+/*            int tm_isdst; */   /* is it daylight savings */
+/*            }; */
+/*            #define _TM_DEFINED */
+/*    #endif */
 
 #elif defined(WOLFSSL_APACHE_MYNEWT)
     #include "os/os_time.h"
@@ -1739,14 +1826,14 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
         extern "C" {
     #endif
 
-	typedef signed int time_t;  //Manually added
+	typedef signed int time_t;  /*Manually added */
     time_t z_time(time_t *timer);
 
     #define XTIME(tl)       z_time((tl))
     #define XGMTIME(c, t)   gmtime((c))
 
-	#define WOLFSSL_GMTIME //Manually added
-	#define USE_WOLF_TM    //Manualy Added
+	#define WOLFSSL_GMTIME /*Manually added */
+	#define USE_WOLF_TM    /*Manualy Added */
 	
 #elif defined(WOLFSSL_TELIT_M2MB)
     typedef long time_t;
@@ -1768,7 +1855,7 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
 
     /* definitions are in linuxkm/linuxkm_wc_port.h */
    
-	// Manually Added
+	/* Manually Added */
 	/* includes are all above, with incompatible warnings masked out. */
 	#ifdef BUILDING_WOLFSSL
 	    
@@ -1808,8 +1895,8 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
         #define TIME_T_NOT_64BIT
     #endif
 
-//    #define XMKTIME(tm) mktime(tm)
-//    #define XDIFFTIME(to, from) difftime(to, from)
+/*    #define XMKTIME(tm) mktime(tm) */
+/*    #define XDIFFTIME(to, from) difftime(to, from) */
 #endif
 
 #ifdef SIZEOF_TIME_T
@@ -1841,11 +1928,11 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
 
 #if !defined(XGMTIME) && !defined(TIME_OVERRIDES)
     /* Always use gmtime_r if available. */
-//    #if defined(HAVE_GMTIME_S)
-//        /* reentrant version */
-//        #define XGMTIME(c, t)   gmtime_s((c), (t))
-//        #define NEED_TMP_TIME
-//    #el
+/*    #if defined(HAVE_GMTIME_S) */
+/*         reentrant version */
+/*        #define XGMTIME(c, t)   gmtime_s((c), (t)) */
+/*        #define NEED_TMP_TIME */
+/*    #el */
     #if defined(HAVE_GMTIME_R)
         #define XGMTIME(c, t)   gmtime_r((c), (t))
         #define NEED_TMP_TIME
@@ -1912,20 +1999,23 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
 
 #if (!defined(WOLFSSL_LEANPSK) && !defined(STRING_USER)) || \
     defined(USE_WOLF_STRNSTR)
-    WOLFSSL_TEST_VIS char* wolfSSL_strnstr(const char* s1, const char* s2, unsigned int n);
+    #ifndef NO_STDDEF_H
+        #include <stddef.h> /* for size_t */
+    #endif /* NO_STDDEF_H */
+    WOLFSSL_TEST_VIS char* wolfSSL_strnstr(const char* s1, const char* s2, size_t n);
 #endif
 
 #ifndef FILE_BUFFER_SIZE
 
-//    /* default static file buffer size for input, will use dynamic buffer if
-//     * not big enough */
-//    #ifdef WOLFSSL_CERT_EXT
-//    #define FILE_BUFFER_SIZE (3*1024)
-//    #else
-//    #define FILE_BUFFER_SIZE (1*1024)
-//    #endif
+/*     default static file buffer size for input, will use dynamic buffer if */
+/*      * not big enough */
+/*    #ifdef WOLFSSL_CERT_EXT */
+/*    #define FILE_BUFFER_SIZE (3*1024) */
+/*    #else */
+/*    #define FILE_BUFFER_SIZE (1*1024) */
+/*    #endif */
 
-	//Manually Added	
+	/*Manually Added */
     #define FILE_BUFFER_SIZE 1024     /* default static file buffer size for input, \
                                     will use dynamic buffer if not big enough */
 #endif
@@ -1972,8 +2062,8 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
     #ifdef XFENCE
         /* use user-supplied XFENCE definition. */
     #elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) && \
-          !defined(__STDC_NO_ATOMICS__)
-        #ifdef WOLFSSL_NO_ATOMIC
+          !defined(__STDC_NO_ATOMICS__) && !defined(NO_STDATOMIC_H)
+        #ifdef WOLFSSL_NO_STDATOMIC_FENCE
             #define XFENCE() WC_DO_NOTHING
         #else
             #include <stdatomic.h>
@@ -2048,6 +2138,25 @@ WOLFSSL_ABI WOLFSSL_API int wolfCrypt_Cleanup(void);
 
 #if defined(WC_RNG_SEED_CB) && !defined(WC_GENERATE_SEED_DEFAULT)
     #define WC_GENERATE_SEED_DEFAULT wc_GenerateSeed
+#endif
+
+#if (defined(__unix__) || defined(__APPLE__)) && \
+    !defined(WOLFSSL_KERNEL_MODE) && !defined(WOLFSSL_ZEPHYR) && \
+    !defined(WOLFSSL_SGX)
+    WOLFSSL_LOCAL void wc_set_cloexec(int fd);
+    WOLFSSL_LOCAL int wc_open_cloexec(const char* path, int flags);
+    WOLFSSL_LOCAL int wc_socket_cloexec(int domain, int type, int protocol);
+    WOLFSSL_LOCAL int wc_accept_cloexec(int sockfd, void* addr, void* addrlen);
+#else
+    /* Platforms without POSIX close-on-exec semantics (Windows, OS/2 OW,
+     * FreeBSD/Linux kernel module, Zephyr, etc.): pass through to plain
+     * syscalls where the underlying headers are available in the caller. */
+    #define wc_set_cloexec(fd) ((void)(fd))
+    #define wc_open_cloexec(path, flags) open((path), (flags))
+    #define wc_socket_cloexec(domain, type, protocol) \
+        socket((domain), (type), (protocol))
+    #define wc_accept_cloexec(sockfd, addr, addrlen) \
+        accept((sockfd), (addr), (addrlen))
 #endif
 
 #ifdef __cplusplus
