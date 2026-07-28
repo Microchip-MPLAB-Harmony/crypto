@@ -353,6 +353,8 @@
         return ret;
     }
 
+#elif defined(WOLFSSL_HAVE_MCHP_HW_SHA1)
+
 #elif (defined(WOLFSSL_RENESAS_TSIP_TLS) || \
     defined(WOLFSSL_RENESAS_TSIP_CRYPTONLY)) && \
     !defined(NO_WOLFSSL_RENESAS_TSIP_CRYPT_HASH)
