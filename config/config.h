@@ -1,5 +1,5 @@
-#ifndef _WOLFCRYPT_REQUIRED_CONFIG_H_
-#define _WOLFCRYPT_REQUIRED_CONFIG_H_
+#ifndef WOLFCRYPT_REQUIRED_CONFIG_H
+#define WOLFCRYPT_REQUIRED_CONFIG_H
 
 #include "configuration.h"
 

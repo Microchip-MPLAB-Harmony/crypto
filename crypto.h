@@ -56,8 +56,11 @@ Microchip or any third party.
 
 /* MD5 */
 typedef struct CRYPT_MD5_CTX {
-    int holder[110];   /* This structure should be large enough to hold 
-                          the internal representation, the size is checked 
+    /* Aligned to 8 bytes so that the holder satisfies the alignment
+       requirement of the underlying wolfSSL structure it is cast to. */
+    int holder[110] __attribute__((aligned (8)));
+                       /* This structure should be large enough to hold
+                          the internal representation, the size is checked
                           during initialization*/
 } CRYPT_MD5_CTX;
 
@@ -1197,8 +1200,11 @@ enum {
 
 /* RNG */
 typedef struct CRYPT_RNG_CTX {
-    int holder[66];   /* This structure should be large enough to hold 
-                         the internal representation, the size is checked 
+    /* Aligned to 8 bytes so that the holder satisfies the alignment
+       requirement of the underlying wolfSSL structure it is cast to. */
+    int holder[66] __attribute__((aligned (8)));
+                      /* This structure should be large enough to hold
+                         the internal representation, the size is checked
                          during initialization*/
 } CRYPT_RNG_CTX;
 
@@ -1360,8 +1366,11 @@ int CRYPT_RNG_BlockGenerate(CRYPT_RNG_CTX* rng, unsigned char* b, unsigned int s
 
 /* TDES */
 typedef struct CRYPT_TDES_CTX {
-    int holder[112];   /* This structure should be large enough to hold 
-                          the internal representation, the size is checked 
+    /* Aligned to 8 bytes so that the holder satisfies the alignment
+       requirement of the underlying wolfSSL structure it is cast to. */
+    int holder[112] __attribute__((aligned (8)));
+                       /* This structure should be large enough to hold
+                          the internal representation, the size is checked
                           during initialization*/
 } CRYPT_TDES_CTX;
 
@@ -1572,8 +1581,11 @@ enum {
 
 /* AES */
 typedef struct CRYPT_AES_CTX {
-    int holder[116];   /* This structure should be large enough to hold 
-                         the internal representation, the size is checked 
+    /* Aligned to 8 bytes so that the holder satisfies the alignment
+       requirement of the underlying wolfSSL structure it is cast to. */
+    int holder[116] __attribute__((aligned (8)));
+                      /* This structure should be large enough to hold
+                         the internal representation, the size is checked
                          during initialization*/
 } CRYPT_AES_CTX;
 
