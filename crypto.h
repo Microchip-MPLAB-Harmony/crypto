@@ -6,7 +6,7 @@
 
   File Name:
     crypto.h
-  
+
   Summary:
     Crypto Framework Library header for cryptographic functions.
 
@@ -49,20 +49,199 @@ Microchip or any third party.
 #ifndef MC_CRYPTO_API_H
 #define MC_CRYPTO_API_H
 
-
-#ifdef __cplusplus
-    extern "C" {
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
+#ifdef HAVE_CONFIG_H
+    #include "config.h"
+#endif
+#include "configuration.h"
+#ifndef NO_MD5
+    #include "wolfssl/wolfcrypt/md5.h"
+#endif
+#ifndef NO_SHA
+    #include "wolfssl/wolfcrypt/sha.h"
+#endif
+#if !defined(NO_SHA256) || defined(WOLFSSL_SHA224)
+    #include "wolfssl/wolfcrypt/sha256.h"
+#endif
+#if defined(WOLFSSL_SHA512) || defined(WOLFSSL_SHA384)
+    #include "wolfssl/wolfcrypt/sha512.h"
+#endif
+#ifndef NO_HMAC
+    #include "wolfssl/wolfcrypt/hmac.h"
+#endif
+#ifndef NO_RNG
+    #include "wolfssl/wolfcrypt/random.h"
+#endif
+#ifndef NO_DES3
+    #include "wolfssl/wolfcrypt/des3.h"
+#endif
+#ifndef NO_AES
+    #include "wolfssl/wolfcrypt/aes.h"
+#endif
+#ifndef NO_RSA
+    #include "wolfssl/wolfcrypt/rsa.h"
+#endif
+#ifdef HAVE_ECC
+    #include "wolfssl/wolfcrypt/ecc.h"
 #endif
 
+// DOM-IGNORE-BEGIN
+#ifdef __cplusplus  // Provide C++ Compatibility
+
+extern "C" {
+
+#endif
+// DOM-IGNORE-END
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Data types and constants
+// *****************************************************************************
+// *****************************************************************************
+
 /* MD5 */
+#ifndef NO_MD5
 typedef struct CRYPT_MD5_CTX {
-    /* Aligned to 8 bytes so that the holder satisfies the alignment
-       requirement of the underlying wolfSSL structure it is cast to. */
-    int holder[110] __attribute__((aligned (8)));
-                       /* This structure should be large enough to hold
-                          the internal representation, the size is checked
-                          during initialization*/
+    wc_Md5 holder;   /* the underlying wolfSSL context */
 } CRYPT_MD5_CTX;
+
+enum {
+    CRYPT_MD5_DIGEST_SIZE = 16
+};
+#endif /* NO_MD5 */
+
+/* SHA */
+#ifndef NO_SHA
+typedef struct CRYPT_SHA_CTX
+{
+    wc_Sha holder;   /* the underlying wolfSSL context */
+} CRYPT_SHA_CTX;
+
+enum {
+    CRYPT_SHA_DIGEST_SIZE = 20
+};
+#endif /* NO_SHA */
+
+/* SHA-256 */
+#if !defined(NO_SHA256) || defined(WOLFSSL_SHA224)
+typedef struct CRYPT_SHA256_CTX {
+    wc_Sha256 holder;   /* the underlying wolfSSL context */
+} CRYPT_SHA256_CTX;
+#endif /* NO_SHA256 || WOLFSSL_SHA224 */
+
+#ifndef NO_SHA256
+enum {
+    CRYPT_SHA256_DIGEST_SIZE = 32
+};
+#endif /* NO_SHA256 */
+
+#ifdef WOLFSSL_SHA224
+enum {
+    CRYPT_SHA224_DIGEST_SIZE = 28
+};
+#endif /* WOLFSSL_SHA224 */
+
+/* SHA-384 */
+#ifdef WOLFSSL_SHA384
+typedef struct CRYPT_SHA384_CTX {
+    wc_Sha384 holder;   /* the underlying wolfSSL context */
+} CRYPT_SHA384_CTX;
+
+enum {
+    CRYPT_SHA384_DIGEST_SIZE = 48
+};
+#endif /* WOLFSSL_SHA384 */
+
+/* SHA-512 */
+#ifdef WOLFSSL_SHA512
+typedef struct CRYPT_SHA512_CTX {
+    wc_Sha512 holder;   /* the underlying wolfSSL context */
+} CRYPT_SHA512_CTX;
+
+enum {
+    CRYPT_SHA512_DIGEST_SIZE = 64
+};
+#endif /* WOLFSSL_SHA512 */
+
+/* HMAC */
+#ifndef NO_HMAC
+typedef struct CRYPT_HMAC_CTX {
+    Hmac holder;   /* the underlying wolfSSL context */
+} CRYPT_HMAC_CTX;
+
+/* HMAC types */
+enum {
+    CRYPT_HMAC_SHA    = 1,
+    CRYPT_HMAC_SHA256 = 2,
+    CRYPT_HMAC_SHA384 = 5,
+    CRYPT_HMAC_SHA512 = 4
+};
+#endif /* NO_HMAC */
+
+/* Huffman */
+#ifdef HAVE_LIBZ
+enum {
+    CRYPT_HUFFMAN_COMPRESS_STATIC = 1
+};
+#endif /* HAVE_LIBZ */
+
+/* RNG */
+#ifndef NO_RNG
+typedef struct CRYPT_RNG_CTX {
+    WC_RNG holder;   /* the underlying wolfSSL context */
+} CRYPT_RNG_CTX;
+#endif /* NO_RNG */
+
+/* TDES */
+#ifndef NO_DES3
+typedef struct CRYPT_TDES_CTX {
+    Des3 holder;   /* the underlying wolfSSL context */
+} CRYPT_TDES_CTX;
+
+/* key direction flags for setup */
+enum {
+    CRYPT_TDES_ENCRYPTION = 0,
+    CRYPT_TDES_DECRYPTION = 1
+};
+#endif /* NO_DES3 */
+
+/* AES */
+#ifndef NO_AES
+typedef struct CRYPT_AES_CTX {
+    Aes holder;   /* the underlying wolfSSL context */
+} CRYPT_AES_CTX;
+
+/* key direction flags for setup, ctr always uses ENCRYPT flag */
+enum {
+    CRYPT_AES_ENCRYPTION = 0,
+    CRYPT_AES_DECRYPTION = 1,
+    CRYPT_AES_BLOCK_SIZE = 16
+};
+#endif /* NO_AES */
+
+/* RSA */
+#ifndef NO_RSA
+typedef struct CRYPT_RSA_CTX {
+    RsaKey* holder;
+} CRYPT_RSA_CTX;
+#endif /* NO_RSA */
+
+/* ECC */
+#ifdef HAVE_ECC
+typedef struct CRYPT_ECC_CTX {
+    ecc_key* holder;
+} CRYPT_ECC_CTX;
+#endif /* HAVE_ECC */
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Interface Routines
+// *****************************************************************************
+// *****************************************************************************
 
 //******************************************************************************
 /* Function:
@@ -76,7 +255,7 @@ typedef struct CRYPT_MD5_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     md5             - Pointer to CRYPT_MD5_CTX structure which holds the hash values.
 
@@ -89,7 +268,7 @@ typedef struct CRYPT_MD5_CTX {
 	CRYPT_MD5_CTX md5;
 	uint8_t buffer[1024];
 	uint8_t md5sum[MD5_DIGEST_SIZE];
-	
+
     CRYPT_MD5_Initialize(&md5);
 	CRYPT_MD5_DataAdd(&md5, buffer, sizeof(buffer));
 	CRYPT_MD5_Finalize(&md5, md5sum);
@@ -100,6 +279,7 @@ typedef struct CRYPT_MD5_CTX {
 	to it. This function sets the necessary values for the structure.
 */
 
+#ifndef NO_MD5
 int CRYPT_MD5_Initialize(CRYPT_MD5_CTX* md5);
 
 //******************************************************************************
@@ -107,7 +287,7 @@ int CRYPT_MD5_Initialize(CRYPT_MD5_CTX* md5);
     int CRYPT_MD5_DataSizeSet(CRYPT_MD5_CTX* md5, unsigned int msgSize)
 
   Summary:
-    This function sets the size of the input data for use with hardware accelerated 
+    This function sets the size of the input data for use with hardware accelerated
     encryption.
 
   Description:
@@ -148,18 +328,18 @@ int CRYPT_MD5_DataSizeSet(CRYPT_MD5_CTX* md5, unsigned int sz);
 /*
   Function:
     int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input, unsigned int sz)
-    
+
   Summary:
     Updates the hash with the data provided.
-	
+
   Description:
     This function updates the hash with the data provided.
-	
+
   Preconditions:
     The MD5 context must be initialized prior to the first call of this
     function. The context must not be modified by code outside of this
     function.
-	
+
   Parameters:
     md5   -  Pointer to CRYPT_MD5_CTX structure which holds the hash values.
     input -  Pointer to the data to use to update the hash.
@@ -167,21 +347,21 @@ int CRYPT_MD5_DataSizeSet(CRYPT_MD5_CTX* md5, unsigned int sz);
   Returns:
       * BAD_FUNC_ARG - An invalid pointer was passed to the function, either in md5 or input
       * 0 - An invalid pointer was not passed to the function
-	  
+
   Example:
     <code>
     CRYPT_MD5_CTX md5;
     uint8_t buffer[1024];
     uint8_t md5sum[MD5_DIGEST_SIZE];
-    
+
     CRYPT_MD5_Initialize(&md5);
     CRYPT_MD5_DataAdd(&md5, buffer, sizeof(buffer));
     CRYPT_MD5_Finalize(&md5, md5sum);
     </code>
-	
+
   Remarks:
     To preserve the validity of the MD5 hash, nothing must modify
-    the context holding variable between calls to CRYPT_MD5_DataAdd.                         
+    the context holding variable between calls to CRYPT_MD5_DataAdd.
 */
 
 int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input, unsigned int sz);
@@ -199,7 +379,7 @@ int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input, unsigned i
   Precondition:
 	The MD5 context must be initialized prior to calling this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     md5             - Pointer to CRYPT_MD5_CTX structure which holds the hash values.
 	digest			- Pointer to byte array to store hash result.
@@ -213,7 +393,7 @@ int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input, unsigned i
 	CRYPT_MD5_CTX md5;
 	uint8_t buffer[1024];
 	uint8_t md5sum[MD5_DIGEST_SIZE];
-	
+
     CRYPT_MD5_Initialize(&md5);
 	CRYPT_MD5_DataAdd(&md5, buffer, sizeof(buffer));
 	CRYPT_MD5_Finalize(&md5, md5sum);
@@ -225,19 +405,8 @@ int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input, unsigned i
 */
 
 int CRYPT_MD5_Finalize(CRYPT_MD5_CTX* md5, unsigned char* digest);
+#endif /* NO_MD5 */
 
-enum {
-    CRYPT_MD5_DIGEST_SIZE = 16 
-};
-
-
-/* SHA */
-typedef struct CRYPT_SHA_CTX 
-{
-    /* This structure should be large enough to hold the internal representation, the size 
-       is checked during initialization*/
-    int holder[110] __attribute__((aligned (8)));
-} CRYPT_SHA_CTX;
 
 //******************************************************************************
 /* Function:
@@ -251,7 +420,7 @@ typedef struct CRYPT_SHA_CTX
 
   Precondition:
 	None.
-	
+
   Parameters:
     sha             - Pointer to CRYPT_SHA_CTX structure which holds the hash values.
 
@@ -263,7 +432,7 @@ typedef struct CRYPT_SHA_CTX
     <code>
 	CRYPT_SHA_CTX sha;
 	uint8_t shaSum[SHA_DIGEST_SIZE];
-	
+
     CRYPT_SHA_Initialize(&sha);
 	CRYPT_SHA_DataAdd(&sha, buffer, sizeof(buffer));
 	CRYPT_SHA_Finalize(&sha, shaSum);
@@ -274,6 +443,7 @@ typedef struct CRYPT_SHA_CTX
 	to it. This function sets the necessary values for the structure.
 */
 
+#ifndef NO_SHA
 int CRYPT_SHA_Initialize(CRYPT_SHA_CTX* sha);
 
 //******************************************************************************
@@ -322,7 +492,7 @@ int CRYPT_SHA_DataSizeSet(CRYPT_SHA_CTX* sha, unsigned int sz);
     int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input, unsigned int sz)
 
   Summary:
-    Updates the hash with the data provided. 
+    Updates the hash with the data provided.
 
   Description:
     This function updates the hash with the data provided.
@@ -330,7 +500,7 @@ int CRYPT_SHA_DataSizeSet(CRYPT_SHA_CTX* sha, unsigned int sz);
   Precondition:
 	The SHA context must be initialized prior to the first call of this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha             - Pointer to CRYPT_SHA_CTX structure which holds the hash values.
     input			- Pointer to the data to use to update the hash.
@@ -345,7 +515,7 @@ int CRYPT_SHA_DataSizeSet(CRYPT_SHA_CTX* sha, unsigned int sz);
 	CRYPT_SHA_CTX sha;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA_DIGEST_SIZE];
-	
+
     CRYPT_SHA_Initialize(&sha);
 	CRYPT_SHA_DataAdd(&sha, buffer, sizeof(buffer));
 	CRYPT_SHA_Finalize(&sha, shaSum);
@@ -371,7 +541,7 @@ int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input, unsigned i
   Precondition:
 	The SHA context must be initialized prior to calling this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha             - Pointer to CRYPT_SHA_CTX structure which holds the hash values.
 	digest			- Pointer to byte array to store hash result.
@@ -385,7 +555,7 @@ int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input, unsigned i
 	CRYPT_SHA_CTX sha;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA_DIGEST_SIZE];
-	
+
     CRYPT_SHA_Initialize(&sha);
 	CRYPT_SHA_DataAdd(&sha, buffer, sizeof(buffer));
 	CRYPT_SHA_Finalize(&sha, shaSum);
@@ -397,18 +567,8 @@ int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input, unsigned i
 */
 
 int CRYPT_SHA_Finalize(CRYPT_SHA_CTX* sha, unsigned char* digest);
+#endif /* NO_SHA */
 
-enum {
-    CRYPT_SHA_DIGEST_SIZE = 20
-};
-
-
-/* SHA-256 */
-typedef struct CRYPT_SHA256_CTX {
-    /* This structure should be large enough to hold the internal representation, the size 
-       is checked during initialization*/
-    int holder[110] __attribute__((aligned (8)));
-} CRYPT_SHA256_CTX;
 
 //******************************************************************************
 /* Function:
@@ -422,7 +582,7 @@ typedef struct CRYPT_SHA256_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     sha256			- Pointer to context which saves state between calls.
 
@@ -434,7 +594,7 @@ typedef struct CRYPT_SHA256_CTX {
     <code>
 	CRYPT_SHA256_CTX sha;
 	uint8_t shaSum[SHA256_DIGEST_SIZE];
-	
+
     CRYPT_SHA256_Initialize(&sha);
 	CRYPT_SHA256_DataAdd(&sha, buffer, sizeof(buffer));
 	CRYPT_SHA256_Finalize(&sha, shaSum);
@@ -445,6 +605,7 @@ typedef struct CRYPT_SHA256_CTX {
 	to it. This function sets the necessary values for the structure.
 */
 
+#ifndef NO_SHA256
 int CRYPT_SHA256_Initialize(CRYPT_SHA256_CTX* sha256);
 
 //******************************************************************************
@@ -493,7 +654,7 @@ int CRYPT_SHA256_DataSizeSet(CRYPT_SHA256_CTX* sha256, unsigned int sz);
     int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input, unsigned int sz)
 
   Summary:
-    Updates the hash with the data provided. 
+    Updates the hash with the data provided.
 
   Description:
     This function updates the hash with the data provided.
@@ -501,7 +662,7 @@ int CRYPT_SHA256_DataSizeSet(CRYPT_SHA256_CTX* sha256, unsigned int sz);
   Precondition:
 	The SHA256 context must be initialized prior to the first call of this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha256          - Pointer to CRYPT_SHA256_CTX structure which holds the hash values.
     input			- Pointer to the data to use to update the hash.
@@ -516,7 +677,7 @@ int CRYPT_SHA256_DataSizeSet(CRYPT_SHA256_CTX* sha256, unsigned int sz);
 	CRYPT_SHA256_CTX sha256;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA256_DIGEST_SIZE];
-	
+
     CRYPT_SHA256_Initialize(&sha256);
 	CRYPT_SHA256_DataAdd(&sha256, buffer, sizeof(buffer));
 	CRYPT_SHA256_Finalize(&sha256, shaSum);
@@ -542,7 +703,7 @@ int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input, u
   Precondition:
 	The SHA256 context must be initialized prior to calling this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha256          - Pointer to CRYPT_SHA256_CTX structure which holds the hash values.
 	digest			- Pointer to byte array to store hash result.
@@ -556,7 +717,7 @@ int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input, u
 	CRYPT_SHA256_CTX sha256;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA256_DIGEST_SIZE];
-	
+
     CRYPT_SHA256_Initialize(&sha256);
 	CRYPT_SHA256_DataAdd(&sha256, buffer, sizeof(buffer));
 	CRYPT_SHA256_Finalize(&sha256, shaSum);
@@ -568,10 +729,8 @@ int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input, u
 */
 
 int CRYPT_SHA256_Finalize(CRYPT_SHA256_CTX* sha256, unsigned char* digest);
+#endif /* NO_SHA256 */
 
-enum {
-    CRYPT_SHA256_DIGEST_SIZE = 32 
-};
 
 //******************************************************************************
 /* Function:
@@ -581,12 +740,12 @@ enum {
     Initializes the internal structures necessary for SHA224 hash calculations.
 
   Description:
-    This function initializes the internal structures necessary for SHA224 
+    This function initializes the internal structures necessary for SHA224
     hash calculations.
 
   Precondition:
 	None.
-	
+
   Parameters:
     sha224		- Pointer to context which saves state between calls.
 
@@ -598,7 +757,7 @@ enum {
     <code>
 	CRYPT_SHA256_CTX sha;
 	uint8_t shaSum[SHA224_DIGEST_SIZE];
-	
+
     CRYPT_SHA224_Initialize(&sha);
 	CRYPT_SHA224_DataAdd(&sha, buffer, sizeof(buffer));
 	CRYPT_SHA224_Finalize(&sha, shaSum);
@@ -609,6 +768,7 @@ enum {
 	to it. This function sets the necessary values for the structure.
 */
 
+#ifdef WOLFSSL_SHA224
 int CRYPT_SHA224_Initialize(CRYPT_SHA256_CTX* sha224);
 
 //******************************************************************************
@@ -616,7 +776,7 @@ int CRYPT_SHA224_Initialize(CRYPT_SHA256_CTX* sha224);
     int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input, unsigned int sz)
 
   Summary:
-    Updates the hash with the data provided. 
+    Updates the hash with the data provided.
 
   Description:
     This function updates the hash with the data provided.
@@ -624,7 +784,7 @@ int CRYPT_SHA224_Initialize(CRYPT_SHA256_CTX* sha224);
   Precondition:
 	The SHA224 context must be initialized prior to the first call of this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha224          - Pointer to CRYPT_SHA256_CTX structure which holds the hash values.
     input			- Pointer to the data to use to update the hash.
@@ -639,7 +799,7 @@ int CRYPT_SHA224_Initialize(CRYPT_SHA256_CTX* sha224);
 	CRYPT_SHA256_CTX sha224;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA224_DIGEST_SIZE];
-	
+
     CRYPT_SHA224_Initialize(&sha224);
 	CRYPT_SHA224_DataAdd(&sha224, buffer, sizeof(buffer));
 	CRYPT_SHA224_Finalize(&sha224, shaSum);
@@ -665,7 +825,7 @@ int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input, u
   Precondition:
 	The SHA224 context must be initialized prior to calling this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha224          - Pointer to CRYPT_SHA256_CTX structure which holds the hash values.
 	digest			- Pointer to byte array to store hash result.
@@ -679,7 +839,7 @@ int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input, u
 	CRYPT_SHA256_CTX sha224;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA224_DIGEST_SIZE];
-	
+
     CRYPT_SHA224_Initialize(&sha224);
 	CRYPT_SHA224_DataAdd(&sha224, buffer, sizeof(buffer));
 	CRYPT_SHA224_Finalize(&sha224, shaSum);
@@ -691,18 +851,8 @@ int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input, u
 */
 
 int CRYPT_SHA224_Finalize(CRYPT_SHA256_CTX* sha224, unsigned char* digest);
+#endif /* WOLFSSL_SHA224 */
 
-enum {
-    CRYPT_SHA224_DIGEST_SIZE = 28 
-};
-
-
-/* SHA-384 */
-typedef struct CRYPT_SHA384_CTX {
-    uint64_t holder[32];       /* This structure should be large enough to hold the internal 
-                                   representation, the size is checked during initialization*/
-
-} CRYPT_SHA384_CTX;
 
 //******************************************************************************
 /* Function:
@@ -716,7 +866,7 @@ typedef struct CRYPT_SHA384_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     sha384          - Pointer to CRYPT_SHA384_CTX structure which holds the hash values.
 
@@ -728,7 +878,7 @@ typedef struct CRYPT_SHA384_CTX {
     <code>
 	CRYPT_SHA384_CTX sha384;
 	uint8_t shaSum[SHA384_DIGEST_SIZE];
-	
+
     CRYPT_SHA384_Initialize(&sha384);
 	CRYPT_SHA384_DataAdd(&sha384, buffer, sizeof(buffer));
 	CRYPT_SHA384_Finalize(&sha384, shaSum);
@@ -739,6 +889,7 @@ typedef struct CRYPT_SHA384_CTX {
 	to it. This function sets the necessary values for the structure.
 */
 
+#ifdef WOLFSSL_SHA384
 int CRYPT_SHA384_Initialize(CRYPT_SHA384_CTX* sha384);
 
 //******************************************************************************
@@ -746,7 +897,7 @@ int CRYPT_SHA384_Initialize(CRYPT_SHA384_CTX* sha384);
     int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input, unsigned int sz)
 
   Summary:
-    Updates the hash with the data provided. 
+    Updates the hash with the data provided.
 
   Description:
     This function updates the hash with the data provided.
@@ -754,7 +905,7 @@ int CRYPT_SHA384_Initialize(CRYPT_SHA384_CTX* sha384);
   Precondition:
 	The SHA384 context must be initialized prior to the first call of this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha384          - Pointer to CRYPT_SHA384_CTX structure which holds the hash values.
     input			- Pointer to the data to use to update the hash.
@@ -769,7 +920,7 @@ int CRYPT_SHA384_Initialize(CRYPT_SHA384_CTX* sha384);
 	CRYPT_SHA384_CTX sha384;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA384_DIGEST_SIZE];
-	
+
     CRYPT_SHA384_Initialize(&sha384);
 	CRYPT_SHA384_DataAdd(&sha384, buffer, sizeof(buffer));
 	CRYPT_SHA384_Finalize(&sha384, shaSum);
@@ -795,7 +946,7 @@ int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input, u
   Precondition:
 	The SHA384 context must be initialized prior to calling this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha384          - Pointer to CRYPT_SHA384_CTX structure which holds the hash values.
 	digest			- Pointer to byte array to store hash result.
@@ -809,7 +960,7 @@ int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input, u
 	CRYPT_SHA384_CTX sha384;
 	uint8_t buffer[1024];
 	uint8_t shaSum[SHA384_DIGEST_SIZE];
-	
+
     CRYPT_SHA384_Initialize(&sha384);
 	CRYPT_SHA384_DataAdd(&sha384, buffer, sizeof(buffer));
 	CRYPT_SHA384_Finalize(&sha384, shaSum);
@@ -821,19 +972,8 @@ int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input, u
 */
 
 int CRYPT_SHA384_Finalize(CRYPT_SHA384_CTX* sha384, unsigned char* digest);
+#endif /* WOLFSSL_SHA384 */
 
-enum {
-    CRYPT_SHA384_DIGEST_SIZE = 48
-};
-
-
-/* SHA-512 */
-typedef struct CRYPT_SHA512_CTX {
-    uint64_t holder[36];       /* This structure should be large enough to hold 
-                                   the internal representation, the size is checked 
-                                   during initialization*/
-
-} CRYPT_SHA512_CTX;
 
 //******************************************************************************
 /* Function:
@@ -847,7 +987,7 @@ typedef struct CRYPT_SHA512_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     sha512          - Pointer to CRYPT_SHA512_CTX structure which holds the hash values.
 
@@ -859,7 +999,7 @@ typedef struct CRYPT_SHA512_CTX {
     <code>
 	CRYPT_SHA512_CTX sha512;
 	uint8_t sha512Sum[SHA512_DIGEST_SIZE];
-	
+
     CRYPT_SHA512_Initialize(&sha512);
 	CRYPT_SHA512_DataAdd(&sha512, buffer, sizeof(buffer));
 	CRYPT_SHA512_Finalize(&sha512, sha512Sum);
@@ -870,6 +1010,7 @@ typedef struct CRYPT_SHA512_CTX {
 	to it. This function sets the necessary values for the structure.
 */
 
+#ifdef WOLFSSL_SHA512
 int CRYPT_SHA512_Initialize(CRYPT_SHA512_CTX* sha512);
 
 //******************************************************************************
@@ -877,7 +1018,7 @@ int CRYPT_SHA512_Initialize(CRYPT_SHA512_CTX* sha512);
     int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input, unsigned int sz)
 
   Summary:
-    Updates the hash with the data provided. 
+    Updates the hash with the data provided.
 
   Description:
     This function updates the hash with the data provided.
@@ -885,7 +1026,7 @@ int CRYPT_SHA512_Initialize(CRYPT_SHA512_CTX* sha512);
   Precondition:
 	The SHA512 context must be initialized prior to the first call of this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha512          - Pointer to CRYPT_SHA512_CTX structure which holds the hash values.
     input			- Pointer to the data to use to update the hash.
@@ -900,7 +1041,7 @@ int CRYPT_SHA512_Initialize(CRYPT_SHA512_CTX* sha512);
 	CRYPT_SHA512_CTX sha512;
 	uint8_t buffer[1024];
 	uint8_t sha512Sum[SHA512_DIGEST_SIZE];
-	
+
     CRYPT_SHA512_Initialize(&sha512);
 	CRYPT_SHA512_DataAdd(&sha512, buffer, sizeof(buffer));
 	CRYPT_SHA512_Finalize(&sha512, sha512Sum);
@@ -926,7 +1067,7 @@ int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input, u
   Precondition:
 	The SHA512 context must be initialized prior to calling this function.
 	The context must not be modified by code outside of this function.
-	
+
   Parameters:
     sha512          - Pointer to CRYPT_SHA512_CTX structure which holds the hash values.
 	digest			- Pointer to byte array to store hash result.
@@ -940,7 +1081,7 @@ int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input, u
 	CRYPT_SHA512_CTX sha512;
 	uint8_t buffer[1024];
 	uint8_t sha512Sum[SHA512_DIGEST_SIZE];
-	
+
     CRYPT_SHA512_Initialize(&sha512);
 	CRYPT_SHA512_DataAdd(&sha512, buffer, sizeof(buffer));
 	CRYPT_SHA512_Finalize(&sha512, sha512Sum);
@@ -952,33 +1093,23 @@ int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input, u
 */
 
 int CRYPT_SHA512_Finalize(CRYPT_SHA512_CTX* sha512, unsigned char* digest);
+#endif /* WOLFSSL_SHA512 */
 
-enum {
-    CRYPT_SHA512_DIGEST_SIZE = 64 
-};
-
-
-/* HMAC */
-typedef struct CRYPT_HMAC_CTX {
-    uint64_t holder[96];   /* This structure should be large enough to hold 
-                               the internal representation, the size is checked 
-                               during initialization*/
-} CRYPT_HMAC_CTX;
 
 //*****************************************************************************
 /*
   Function:
     int CRYPT_HMAC_SetKey(CRYPT_HMAC_CTX* hmac, int type, const unsigned char* key, unsigned int sz)
-    
+
   Summary:
 	Initializes the HMAC context and set the key for the hash.
-	
+
   Description:
 	This function initializes the HMAC context and set the key for the hash.
-  
+
   Preconditions:
 	None.
-	
+
   Parameters:
     hmac -  Pointer to context which saves state between calls.
     type -  Type of SHA operation to use with HMAC. Must be one of the
@@ -989,68 +1120,69 @@ typedef struct CRYPT_HMAC_CTX {
             * CRYPT_HMAC_SHA512
     key -   Secret key used for the hash.
 	sz	-	Size of the input data in bytes.
-	
+
   Returns:
-    * BAD_FUNC_ARG 	- An invalid pointer was passed to the function. 
+    * BAD_FUNC_ARG 	- An invalid pointer was passed to the function.
 	* 0				- An invalid pointer was not passed to the function.
-	
+
   Example:
     <code>
     CRYPT_HMAC_CTX mcHmac;
     byte           mcDigest[CRYPT_SHA512_DIGEST_SIZE];
-    
+
     CRYPT_HMAC_SetKey(&mcHmac, CRYPT_HMAC_SHA, key, 4);
-    
+
     CRYPT_HMAC_DataAdd(&mcHmac, ourData, OUR_DATA_SIZE);
-    
+
     CRYPT_HMAC_Finalize(&mcHmac, mcDigest);
     </code>
-	
+
   Remarks:
-    None.  
+    None.
 */
 
+#ifndef NO_HMAC
 int CRYPT_HMAC_SetKey(CRYPT_HMAC_CTX* hmac, int type, const unsigned char* key, unsigned int sz);
 
 //*********************************************************************************
 /*
   Function:
     int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX*, const unsigned char*, unsigned int)
-    
+
   Summary:
 	Adds data to the HMAC calculation.
-	
+
   Description:
 	This function adds data to the HMAC so that multiple blocks of data can be processed.
-	
+
   Preconditions:
     The CRYPT_HMAC_CTX context must be initialized using the
     CRYPT_HMAC_SetKey function prior to any call to this function.
-	
+
   Parameters:
     hmac  -  Pointer to context that saves state between calls.
     input -  Pointer to the data to use to update the hash.
     sz    -  Size of the input data in bytes.
-	
+
   Returns:
     * BAD_FUNC_ARG - An invalid pointer was passed to the function.
 	* 0 - An invalid pointer was not passed to the function.
-	
+
   Example:
     <code>
     CRYPT_HMAC_CTX mcHmac;
     byte           mcDigest[CRYPT_SHA512_DIGEST_SIZE];
-    
+
     CRYPT_HMAC_SetKey(&mcHmac, CRYPT_HMAC_SHA, key, 4);
-    
+
     CRYPT_HMAC_DataAdd(&mcHmac, ourData, OUR_DATA_SIZE);
-    
+
     CRYPT_HMAC_Finalize(&mcHmac, mcDigest);
     </code>
-	
+
   Remarks:
     None.
-  
+
 */
 
 int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX* hmac, const unsigned char* input, unsigned int sz);
@@ -1061,15 +1193,15 @@ int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX* hmac, const unsigned char* input, unsigne
 
   Summary:
 	Completes the HMAC calculation and get the results.
-	
+
   Description:
-	This function completes the HMAC calculations. The results are placed in 
+	This function completes the HMAC calculations. The results are placed in
 	the location pointed to by the digest parameter.
 
   Precondition:
     The CRYPT_HMAC_CTX context must be initialized using the
     CRYPT_HMAC_SetKey function prior to any call to this function.
-	
+
   Parameters:
     hmac		- Pointer to context which saves state between calls.
     digest		- Pointer to place to put the final HMAC digest results.
@@ -1095,14 +1227,7 @@ int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX* hmac, const unsigned char* input, unsigne
 */
 
 int CRYPT_HMAC_Finalize(CRYPT_HMAC_CTX* hmac, unsigned char* digest);
-
-/* HMAC types */
-enum {
-    CRYPT_HMAC_SHA    = 1, 
-    CRYPT_HMAC_SHA256 = 2, 
-    CRYPT_HMAC_SHA384 = 5, 
-    CRYPT_HMAC_SHA512 = 4 
-};
+#endif /* NO_HMAC */
 
 
 /* Huffman */
@@ -1120,7 +1245,7 @@ enum {
 
   Precondition:
 	None.
-	
+
   Parameters:
     out		- Pointer to location to store the compressed data.
     outSz	- Maximum size of the output data in bytes.
@@ -1138,9 +1263,9 @@ enum {
 	unsigned int inSz = sizeof(text);
 	unsigned int outSz;
 	unsigned char cBuffer[1024];
-	
+
 	int ret;
-	
+
 	ret = CRYPT_HUFFMAN_COMPRESS(cBuffer, sizeof(cBuffer), text, inSz, 0);
     </code>
 
@@ -1148,6 +1273,7 @@ enum {
 	Output buffer must be large enough to hold the contents of the operation.
 */
 
+#ifdef HAVE_LIBZ
 int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
                            const unsigned char* in, unsigned int inSz,
                            unsigned int flags);
@@ -1164,7 +1290,7 @@ int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
 
   Precondition:
 	None.
-	
+
   Parameters:
     out		- Pointer to destination buffer
     outSz	- Size of destination buffer
@@ -1181,7 +1307,7 @@ int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
     unsigned char dBuffer[1024];
 
 	int ret
-	
+
 	ret = CRYPT_HUFFMAN_DeCompress(dBuffer, sizeof(dBuffer), cBuffer, msglen);
     </code>
 
@@ -1191,22 +1317,10 @@ int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
 
 int CRYPT_HUFFMAN_DeCompress(unsigned char* out, unsigned int outSz,
                              const unsigned char* in, unsigned int inSz);
+#endif /* HAVE_LIBZ */
 
 /* flag to use static huffman */
-enum {
-    CRYPT_HUFFMAN_COMPRESS_STATIC = 1 
-};
 
-
-/* RNG */
-typedef struct CRYPT_RNG_CTX {
-    /* Aligned to 8 bytes so that the holder satisfies the alignment
-       requirement of the underlying wolfSSL structure it is cast to. */
-    int holder[66] __attribute__((aligned (8)));
-                      /* This structure should be large enough to hold
-                         the internal representation, the size is checked
-                         during initialization*/
-} CRYPT_RNG_CTX;
 
 //******************************************************************************
 /* Function:
@@ -1221,7 +1335,7 @@ typedef struct CRYPT_RNG_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     rng		- Pointer to random number generator context.
 
@@ -1238,9 +1352,9 @@ typedef struct CRYPT_RNG_CTX {
 	CRYPT_RNG_CTX mcRng;
 
 	byte          out[RANDOM_BYTE_SZ];
-	
+
 	ret = CRYPT_RNG_Initialize(&mcRng);
-	
+
 	ret = CRYPT_RNG_Get(&mcRng, &out[0]);
 
     ret = CRYPT_RNG_BlockGenerate(&mcRng, out, RANDOM_BYTE_SZ);
@@ -1248,9 +1362,10 @@ typedef struct CRYPT_RNG_CTX {
 
     ret = CRYPT_RNG_Deinitialize(&mcRng);
 
-  Remarks:  
+  Remarks:
 */
 
+#ifndef NO_RNG
 int CRYPT_RNG_Initialize(CRYPT_RNG_CTX* rng);
 
 //******************************************************************************
@@ -1259,13 +1374,13 @@ int CRYPT_RNG_Initialize(CRYPT_RNG_CTX* rng);
 
   Summary:
     Frees resources used by an RNG instance
-  
+
   Description:
 	This function releases memory allocated on init of the RNG.
 
   Precondition:
 	RNG context was initialized using the CRYPT_RNG_Initialize function.
-	
+
   Parameters:
     rng		- Pointer to context which saves state between calls.
 
@@ -1287,7 +1402,7 @@ int CRYPT_RNG_Deinitialize(CRYPT_RNG_CTX* rng);
 
   Precondition:
 	RNG context was initialized using the CRYPT_RNG_Initialize function.
-	
+
   Parameters:
     rng		- Pointer to context which saves state between calls.
     b		- Pointer to 8-bit location to store the result.
@@ -1304,14 +1419,14 @@ int CRYPT_RNG_Deinitialize(CRYPT_RNG_CTX* rng);
 	int           ret;
 	CRYPT_RNG_CTX mcRng;
 	byte          out[RANDOM_BYTE_SZ];
-	
+
 	ret = CRYPT_RNG_Initialize(&mcRng);
-	
+
 	ret = CRYPT_RNG_Get(&mcRng, &out[0]);
 
     ret = CRYPT_RNG_BlockGenerate(&mcRng, out, RANDOM_BYTE_SZ);
     </code>
-    
+
     ret = CRYPT_RNG_Deinitialize(&mcRng);
 
   Remarks:
@@ -1331,7 +1446,7 @@ int CRYPT_RNG_Get(CRYPT_RNG_CTX* rng, unsigned char* b);
 
   Precondition:
 	RNG context was initialized using the CRYPT_RNG_Initialize function.
-	
+
   Parameters:
     rng		- Pointer to context which saves state between calls.
     b		- Pointer to buffer to store the random numbers.
@@ -1348,31 +1463,22 @@ int CRYPT_RNG_Get(CRYPT_RNG_CTX* rng, unsigned char* b);
 	int           ret;
 	CRYPT_RNG_CTX mcRng;
 	byte          out[RANDOM_BYTE_SZ];
-	
+
 	ret = CRYPT_RNG_Initialize(&mcRng);
-	
+
 	ret = CRYPT_RNG_Get(&mcRng, &out[0]);
 
     ret = CRYPT_RNG_BlockGenerate(&mcRng, out, RANDOM_BYTE_SZ);
     </code>
-    
+
     ret = CRYPT_RNG_Deinitialize(&mcRng);
-    
+
   Remarks:
 */
 
 int CRYPT_RNG_BlockGenerate(CRYPT_RNG_CTX* rng, unsigned char* b, unsigned int sz);
+#endif /* NO_RNG */
 
-
-/* TDES */
-typedef struct CRYPT_TDES_CTX {
-    /* Aligned to 8 bytes so that the holder satisfies the alignment
-       requirement of the underlying wolfSSL structure it is cast to. */
-    int holder[112] __attribute__((aligned (8)));
-                       /* This structure should be large enough to hold
-                          the internal representation, the size is checked
-                          during initialization*/
-} CRYPT_TDES_CTX;
 
 //******************************************************************************
 /* Function:
@@ -1386,7 +1492,7 @@ typedef struct CRYPT_TDES_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     tdes	- Pointer to context which saves state between calls.
     key		- Pointer to buffer holding the key. Must be 24 bytes in size.
@@ -1414,7 +1520,7 @@ typedef struct CRYPT_TDES_CTX {
     ret = CRYPT_TDES_CBC_Encrypt(&mcDes3, out1, ourData, TDES_SIZE);
 
     ret = CRYPT_TDES_KeySet(&mcDes3, key, iv, CRYPT_TDES_DECRYPTION);
-	
+
     ret = CRYPT_TDES_CBC_Decrypt(&mcDes3, out2, out1, TDES_TEST_SIZE);
     </code>
 
@@ -1422,6 +1528,7 @@ typedef struct CRYPT_TDES_CTX {
 	The input data must be a multiple of 8 bytes, and must be padded at the end with zeros to meet the length.
 */
 
+#ifndef NO_DES3
 int CRYPT_TDES_KeySet(CRYPT_TDES_CTX* tdes, const unsigned char* key,
                       const unsigned char* iv, int dir);
 
@@ -1437,7 +1544,7 @@ int CRYPT_TDES_KeySet(CRYPT_TDES_CTX* tdes, const unsigned char* key,
 
   Precondition:
 	None.
-	
+
   Parameters:
     tdes	- Pointer to context which saves state between calls.
     iv		- Pointer to buffer holding the initialization vector. Must be 8 bytes in size.
@@ -1463,7 +1570,7 @@ int CRYPT_TDES_KeySet(CRYPT_TDES_CTX* tdes, const unsigned char* key,
     ret = CRYPT_TDES_CBC_Encrypt(&mcDes3, out1, ourData, TDES_SIZE);
 
     ret = CRYPT_TDES_KeySet(&mcDes3, key, iv, CRYPT_TDES_DECRYPTION);
-	
+
     ret = CRYPT_TDES_CBC_Decrypt(&mcDes3, out2, out1, TDES_TEST_SIZE);
     </code>
 
@@ -1485,7 +1592,7 @@ int CRYPT_TDES_IvSet(CRYPT_TDES_CTX* tdes, const unsigned char* iv);
 
   Precondition:
 	The context tdes must be set earlier using CRYPT_TDES_KeySet. The input block must be a multiple of 8 bytes long.
-	
+
   Parameters:
     tdes	- Pointer to context which saves state between calls.
     out		- Pointer to output buffer to store the results.
@@ -1511,7 +1618,7 @@ int CRYPT_TDES_IvSet(CRYPT_TDES_CTX* tdes, const unsigned char* iv);
     ret = CRYPT_TDES_CBC_Encrypt(&mcDes3, out1, ourData, TDES_SIZE);
 
     ret = CRYPT_TDES_KeySet(&mcDes3, key, iv, CRYPT_TDES_DECRYPTION);
-	
+
     ret = CRYPT_TDES_CBC_Decrypt(&mcDes3, out2, out1, TDES_TEST_SIZE);
     </code>
 
@@ -1534,7 +1641,7 @@ int CRYPT_TDES_CBC_Encrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
 
   Precondition:
 	The context tdes must be set earlier using CRYPT_TDES_KeySet. The input block must be a multiple of 8 bytes long.
-	
+
   Parameters:
     tdes	- Pointer to context which saves state between calls.
     out		- Pointer to output buffer to store the results.
@@ -1560,7 +1667,7 @@ int CRYPT_TDES_CBC_Encrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
     ret = CRYPT_TDES_CBC_Encrypt(&mcDes3, out1, ourData, TDES_SIZE);
 
     ret = CRYPT_TDES_KeySet(&mcDes3, key, iv, CRYPT_TDES_DECRYPTION);
-	
+
     ret = CRYPT_TDES_CBC_Decrypt(&mcDes3, out2, out1, TDES_TEST_SIZE);
     </code>
 
@@ -1571,27 +1678,14 @@ int CRYPT_TDES_CBC_Encrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
 
 int CRYPT_TDES_CBC_Decrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
                            const unsigned char* in, unsigned int inSz);
+#endif /* NO_DES3 */
 
 /* key direction flags for setup */
-enum {
-    CRYPT_TDES_ENCRYPTION = 0,
-    CRYPT_TDES_DECRYPTION = 1 
-};
 
-
-/* AES */
-typedef struct CRYPT_AES_CTX {
-    /* Aligned to 8 bytes so that the holder satisfies the alignment
-       requirement of the underlying wolfSSL structure it is cast to. */
-    int holder[116] __attribute__((aligned (8)));
-                      /* This structure should be large enough to hold
-                         the internal representation, the size is checked
-                         during initialization*/
-} CRYPT_AES_CTX;
 
 //******************************************************************************
 /* Function:
-    int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key, 
+    int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key,
 	                  unsigned int keylen, const unsigned char* iv, int dir)
 
   Summary:
@@ -1603,7 +1697,7 @@ typedef struct CRYPT_AES_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     key		- Pointer to buffer holding the key itself.
@@ -1629,6 +1723,7 @@ typedef struct CRYPT_AES_CTX {
   Remarks:
 */
 
+#ifndef NO_AES
 int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key,
                      unsigned int keyLen, const unsigned char* iv, int dir);
 
@@ -1644,7 +1739,7 @@ int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key,
 
   Precondition:
 	The key must be set previously with CRYPT_AES_KeySet.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     iv		- Pointer to buffer holding the initialization vector.
@@ -1668,6 +1763,7 @@ int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key,
 */
 
 int CRYPT_AES_IvSet(CRYPT_AES_CTX* aes, const unsigned char* iv);
+#endif /* NO_AES */
 
 //******************************************************************************
 /* Function:
@@ -1684,7 +1780,7 @@ int CRYPT_AES_IvSet(CRYPT_AES_CTX* aes, const unsigned char* iv);
   Precondition:
 	Key and Initialization Vector (IV) must be set earlier with a call to
 	CRYPT_AES_KeySet and CRYPT_AES_IvSet.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the encryption pass.
@@ -1712,6 +1808,7 @@ int CRYPT_AES_IvSet(CRYPT_AES_CTX* aes, const unsigned char* iv);
 	The output buffer must be equal in size to the input buffer.
 */
 
+#if defined(NO_AES) == 0 && defined(HAVE_AES_CBC)
 int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                           const unsigned char* in, unsigned int inSz);
 
@@ -1730,7 +1827,7 @@ int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
   Precondition:
 	Key and Initialization Vector (IV) must be set earlier with a call to
 	CRYPT_AES_KeySet and CRYPT_AES_IvSet.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the decryption pass.
@@ -1761,6 +1858,7 @@ int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 
 int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                           const unsigned char* in, unsigned int inSz);
+#endif /* NO_AES && HAVE_AES_CBC */
 
 
 //******************************************************************************
@@ -1777,7 +1875,7 @@ int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
   Precondition:
 	Key and Initialization Vector (IV) must be set earlier with a call to
 	CRYPT_AES_KeySet and CRYPT_AES_IvSet.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the encryption pass.
@@ -1805,8 +1903,10 @@ int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 	The output buffer must be equal in size to the input buffer.
 */
 
+#if defined(NO_AES) == 0 && defined(WOLFSSL_AES_COUNTER)
 int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                           const unsigned char* in, unsigned int inSz);
+#endif /* NO_AES && WOLFSSL_AES_COUNTER */
 //******************************************************************************
 /* Function:
     int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key, unsigned int len);
@@ -1819,7 +1919,7 @@ int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 
   Precondition:
 	None.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     key		- Pointer to buffer holding the key itself.
@@ -1842,6 +1942,7 @@ int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
   Remarks:
 */
 
+#if defined(NO_AES) == 0 && defined(HAVE_AESGCM)
 int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key, unsigned int len);
 
 
@@ -1857,13 +1958,13 @@ int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key, unsigned 
 	Performs AES encryption using Galois/Counter Mode (GCM).
 
   Description:
-	This function encrypts a block of data using the AES algorithm in Galois/Counter 
+	This function encrypts a block of data using the AES algorithm in Galois/Counter
 	Mode (GCM). mode.
 
   Precondition:
 	Key must be set earlier with a call to
 	CRYPT_AES_GCM_SetKey.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the encryption pass.
@@ -1875,7 +1976,7 @@ int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key, unsigned 
 	authTagSz - Size of the authentication tag
 	authIn  - Pointer to the additional authentication data.
 	authInSz - Size of the additional autentication data.
-	
+
   Returns:
 	- BAD_FUNC_ARG 	- An invalid pointer was passed to the function.
 	- 0				- An invalid pointer was not passed to the function.
@@ -1889,7 +1990,7 @@ int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                                    const unsigned char* iv, unsigned int ivSz,
                                    unsigned char* authTag, unsigned int authTagSz,
                                    const unsigned char* authIn, unsigned int authInSz);
-								   
+
 //******************************************************************************
 /* Function:
 	int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -1901,13 +2002,13 @@ int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 	Performs AES decryption using Galois/Counter Mode (GCM).
 
   Description:
-	This function decrypts a block of data using the AES algorithm in Galois/Counter 
+	This function decrypts a block of data using the AES algorithm in Galois/Counter
 	Mode (GCM) mode.
 
   Precondition:
 	Key must be set earlier with a call to
 	CRYPT_AES_GCM_SetKey.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the encryption pass.
@@ -1919,7 +2020,7 @@ int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 	authTagSz - Size of the authentication tag
 	authIn  - Pointer to the additional authentication data.
 	authInSz - Size of the additional autentication data.
-	
+
   Returns:
 	- BAD_FUNC_ARG 	- An invalid pointer was passed to the function.
 	- AES_GCM_AUTH_E - The authTag is incorrect.
@@ -1927,13 +2028,14 @@ int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 
   Remarks:
 	The output buffer must be equal in size to the input buffer.
-*/								   
-								   
+*/
+
 int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                                    const unsigned char* in, unsigned int sz,
                                    const unsigned char* iv, unsigned int ivSz,
                                    const unsigned char* authTag, unsigned int authTagSz,
                                    const unsigned char* authIn, unsigned int authInSz);
+#endif /* NO_AES && HAVE_AESGCM */
 //******************************************************************************
 /* Function:
     int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -1948,7 +2050,7 @@ int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
   Precondition:
 	Key and Initialization Vector (IV) must be set earlier with a call to
 	CRYPT_AES_KeySet and CRYPT_AES_IvSet.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the encryption.
@@ -1975,6 +2077,7 @@ int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 	Input and output buffers must be equal in size (CRYPT_AES_BLOCK_SIZE).
 */
 
+#if defined(NO_AES) == 0 && defined(WOLFSSL_AES_DIRECT)
 int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                              const unsigned char* in);
 
@@ -1992,7 +2095,7 @@ int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
   Precondition:
 	Key and Initialization Vector (IV) must be set earlier with a call to
 	CRYPT_AES_KeySet and CRYPT_AES_IvSet.
-	
+
   Parameters:
     aes		- Pointer to context which saves state between calls.
     out		- Pointer to buffer to store the results of the decryption.
@@ -2022,20 +2125,9 @@ int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
 
 int CRYPT_AES_DIRECT_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                              const unsigned char* in);
+#endif /* NO_AES && WOLFSSL_AES_DIRECT */
 
 /* key direction flags for setup, ctr always uses ENCRYPT flag */
-enum {
-    CRYPT_AES_ENCRYPTION = 0,
-    CRYPT_AES_DECRYPTION = 1,
-    CRYPT_AES_BLOCK_SIZE = 16
-};
-
-
-
-/* RSA */
-typedef struct CRYPT_RSA_CTX {
-    void* holder;
-} CRYPT_RSA_CTX;
 
 
 //******************************************************************************
@@ -2051,7 +2143,7 @@ typedef struct CRYPT_RSA_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     rsa		- Pointer to RSA context which saves state between calls.
 
@@ -2071,6 +2163,7 @@ typedef struct CRYPT_RSA_CTX {
   Remarks:
 */
 
+#ifndef NO_RSA
 int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa);
 
 //******************************************************************************
@@ -2086,7 +2179,7 @@ int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa);
 
   Precondition:
 	The context must have been set up previously with a call to CRYPT_RSA_Initialize.
-	
+
   Parameters:
     rsa		- Pointer to context which saves state between calls.
 
@@ -2123,7 +2216,7 @@ int CRYPT_RSA_Free(CRYPT_RSA_CTX* rsa);
 
   Precondition:
 	The context must have been initialized with a call to CRYPT_RSA_Initialize.
-	
+
   Parameters:
     rsa		- Pointer to context which saves state between calls.
     in		- Pointer to buffer containing the certificate to process to extract the public key.
@@ -2164,7 +2257,7 @@ int CRYPT_RSA_PublicKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
 
   Precondition:
 	The context must have been initialized with a call to CRYPT_RSA_Initialize.
-	
+
   Parameters:
     rsa		- Pointer to context which saves state between calls.
     in		- Pointer to buffer containing the certificate to process to extract the private key.
@@ -2208,7 +2301,7 @@ int CRYPT_RSA_PrivateKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
 	The context must be initialized using CRYPT_RSA_Initialized and the Public Key
 	Decoded using CRYPT_RSA_PublicKeyDecode prior to calling this function.
 	The random number generator must be initialized with a call to CRYPT_RNG_Initialize.
-	
+
   Parameters:
     rsa		- Pointer to context which saves state between calls.
     out		- Pointer to output buffer to store results.
@@ -2259,7 +2352,7 @@ int CRYPT_RSA_PublicEncrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
   Precondition:
 	The context must be initialized using CRYPT_RSA_Initialized and the Private Key
 	Decoded using CRYPT_RSA_PrivateKeyDecode prior to calling this function.
-	
+
   Parameters:
     rsa		- Pointer to context which saves state between calls.
     out		- Pointer to output buffer to store results.
@@ -2306,7 +2399,7 @@ int CRYPT_RSA_PrivateDecrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
   Precondition:
 	The context must be initialized with a call to CRYPT_RSA_Initialize and the keys
 	decoded either with CRYPT_RSA_PrivateKeyDecode or CRYPT_RSA_PublicKeyDecode.
-	
+
   Parameters:
     rsa 	- Pointer to context which saves state between calls.
 
@@ -2324,21 +2417,15 @@ int CRYPT_RSA_PrivateDecrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
     ret = CRYPT_RSA_Initialize(&mcRsa);
 
     ret = CRYPT_RSA_PrivateKeyDecode(&mcRsa, client_key_der_1024, keySz);
-	
+
 	ret = CRYPT_RSA_EncryptSizeGet(&mcRsa);
     </code>
 
   Remarks:
 */
 
-int CRYPT_RSA_EncryptSizeGet(CRYPT_RSA_CTX* rsa);                             
-
-
-
-/* ECC */
-typedef struct CRYPT_ECC_CTX {
-    void* holder;
-} CRYPT_ECC_CTX;
+int CRYPT_RSA_EncryptSizeGet(CRYPT_RSA_CTX* rsa);
+#endif /* NO_RSA */
 
 
 //******************************************************************************
@@ -2355,7 +2442,7 @@ typedef struct CRYPT_ECC_CTX {
 
   Precondition:
 	None.
-	
+
   Parameters:
     ecc		- Pointer to context to initialize.
 
@@ -2366,7 +2453,7 @@ typedef struct CRYPT_ECC_CTX {
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
 
     ret = CRYPT_ECC_Initialize(&userA);
@@ -2375,6 +2462,7 @@ typedef struct CRYPT_ECC_CTX {
   Remarks:
 */
 
+#ifdef HAVE_ECC
 int CRYPT_ECC_Initialize(CRYPT_ECC_CTX* ecc);
 
 //******************************************************************************
@@ -2390,7 +2478,7 @@ int CRYPT_ECC_Initialize(CRYPT_ECC_CTX* ecc);
   Precondition:
 	The context must have been initialized previously with a call to
 	CRYPT_ECC_Initialize.
-	
+
   Parameters:
     ecc		- Pointer to context to clean up.
 
@@ -2400,7 +2488,7 @@ int CRYPT_ECC_Initialize(CRYPT_ECC_CTX* ecc);
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
 
     ret = CRYPT_ECC_Initialize(&userA);
@@ -2416,7 +2504,7 @@ int CRYPT_ECC_Free(CRYPT_ECC_CTX* ecc);
 
 //******************************************************************************
 /* Function:
-    int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out, 
+    int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
 								unsigned int outSz, unsigned int* usedSz)
 
   Summary:
@@ -2429,7 +2517,7 @@ int CRYPT_ECC_Free(CRYPT_ECC_CTX* ecc);
 	The context must be initialized previously with a call to CRYPT_ECC_Initialize.
 	The key must also have been constructed with a call to CRYPT_ECC_DHE_KeyMake.
 	A random number generator must all have been initialized with a call to CRYPT_RNG_Initialize.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls.
     out		- Buffer in which to store the public key.
@@ -2443,7 +2531,7 @@ int CRYPT_ECC_Free(CRYPT_ECC_CTX* ecc);
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
 	byte          sharedA[100];
 	unsigned int  aSz = (unsigned int)sizeof(sharedA);
@@ -2462,7 +2550,7 @@ int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
 
 //******************************************************************************
 /* Function:
-    int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in, 
+    int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in,
 	                           unsigned int inSz)
 
   Summary:
@@ -2474,7 +2562,7 @@ int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
   Precondition:
 	The ECC context must have previously been initialized with a call to
 	CRYPT_ECC_Initialize.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls.
     in		- Input buffer the holds the public key.
@@ -2488,7 +2576,7 @@ int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
 
   Example:
     <code>
-    CRYPT_ECC_CTX userB; 
+    CRYPT_ECC_CTX userB;
     int           ret;
 	byte          sharedA[100];
 	unsigned int  aSz = (unsigned int)sizeof(sharedA);
@@ -2506,8 +2594,8 @@ int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in, unsigned
 
 //******************************************************************************
 /* Function:
-    int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv, 
-	                            unsigned int privSz, const unsigned char* pub, 
+    int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv,
+	                            unsigned int privSz, const unsigned char* pub,
 								unsigned int pubSz)
 
   Summary:
@@ -2518,7 +2606,7 @@ int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in, unsigned
 
   Precondition:
 	The context must have been initialized with a call to CRYPT_ECC_Initialize.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls.
     priv	- Pointer to the private key.
@@ -2533,7 +2621,7 @@ int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in, unsigned
   Example:
     <code>
     CRYPT_ECC_CTX ecc;
-	
+
 	CRYPT_ECC_Initialize(&ecc);
 	...
 	CRYPT_ECC_PrivateImport(&ecc, priv_key, sizeof(priv_key), pub_key, sizeof(pub_key));
@@ -2560,7 +2648,7 @@ int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv,
 	The context must have been initialized with a call to CRYPT_ECC_Initialize.
 	The random number generator context must have been initialized with a call to
 	CRYPT_RNG_Initialize.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls.
     rng		- Pointer to the context for the random number generator.
@@ -2573,7 +2661,7 @@ int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv,
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
 	byte          sharedA[100];
 	unsigned int  aSz = (unsigned int)sizeof(sharedA);
@@ -2596,13 +2684,13 @@ int CRYPT_ECC_DHE_KeyMake(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng, int keySz);
 	Creates an ECC shared secret between two keys.
 
   Description:
-	This function takes two ECC contexts (one public, one private) and creates 
+	This function takes two ECC contexts (one public, one private) and creates
 	a shared secret between the two. The secret conforms to EC-DH from ANSI X9.63.
 
   Precondition:
 	Both contexts must have been initialized with a call to CRYPT_ECC_Initialize.
 	Both contexts have had their respective keys imported or created.
-	
+
   Parameters:
     priv		- Pointer to the private ECC context (with the private key).
     pub 		- Pointer to the public ECC context (with the public key).
@@ -2617,7 +2705,7 @@ int CRYPT_ECC_DHE_KeyMake(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng, int keySz);
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     CRYPT_ECC_CTX userB;
     int           ret;
     byte          sharedA[100];
@@ -2654,7 +2742,7 @@ int CRYPT_ECC_DHE_SharedSecretMake(CRYPT_ECC_CTX* priv, CRYPT_ECC_CTX* pub,
 	The RNG context must have been initialized with a call to CRYPT_RNG_Initialize.
 	The private key used for the signature must have been imported or created prior to
 	calling this function.
-	
+
   Parameters:
     ecc		- Pointer to ECC context which saves state between calls and holds keys.
     rng		- Pointer to Random Number Generator context.
@@ -2670,7 +2758,7 @@ int CRYPT_ECC_DHE_SharedSecretMake(CRYPT_ECC_CTX* priv, CRYPT_ECC_CTX* pub,
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
     byte          sig[100];
     unsigned int  sigSz = (unsigned int)sizeof(sig);
@@ -2705,7 +2793,7 @@ int CRYPT_ECC_DSA_HashSign(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng,
 	The ECC context must have been initialized with a call to CRYPT_ECC_Initialize.
 	The key used for the signature must have been imported or created prior to
 	calling this function.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls.
     sig		- The signature to verify.
@@ -2721,7 +2809,7 @@ int CRYPT_ECC_DSA_HashSign(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng,
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
     byte          sig[100];
     unsigned int  sigSz = (unsigned int)sizeof(sig);
@@ -2755,7 +2843,7 @@ int CRYPT_ECC_DSA_HashVerify(CRYPT_ECC_CTX* ecc, const unsigned char* sig,
   Precondition:
 	The ECC context must have been initialized with a call to CRYPT_ECC_Initialize.
 	The key must have been imported or created prior to	calling this function.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls and contains the key.
 
@@ -2765,7 +2853,7 @@ int CRYPT_ECC_DSA_HashVerify(CRYPT_ECC_CTX* ecc, const unsigned char* sig,
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
     byte          sig[100];
     unsigned int  sigSz = (unsigned int)sizeof(sig);
@@ -2795,7 +2883,7 @@ int CRYPT_ECC_KeySizeGet(CRYPT_ECC_CTX* ecc);
   Precondition:
 	The ECC context must have been initialized with a call to CRYPT_ECC_Initialize.
 	The keys must have been imported or created prior to calling this function.
-	
+
   Parameters:
     ecc		- Pointer to context which saves state between calls, and contains the signature.
 
@@ -2805,7 +2893,7 @@ int CRYPT_ECC_KeySizeGet(CRYPT_ECC_CTX* ecc);
 
   Example:
     <code>
-    CRYPT_ECC_CTX userA; 
+    CRYPT_ECC_CTX userA;
     int           ret;
     byte          sig[100];
     unsigned int  sigSz = (unsigned int)sizeof(sig);
@@ -2821,7 +2909,7 @@ int CRYPT_ECC_KeySizeGet(CRYPT_ECC_CTX* ecc);
 */
 
 int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc);
-
+#endif /* HAVE_ECC */
 
 
 //******************************************************************************
@@ -2836,7 +2924,7 @@ int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc);
 
   Precondition:
 	None.
-	
+
   Parameters:
     int		- Error code to convert.
     str		- Pointer to buffer to store the message. Must hold at least 80 characters.
@@ -2848,7 +2936,7 @@ int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc);
   Example:
     <code>
 	char msg[80];
-	
+
 	CRYPT_ERR_StringGet(ret, msg);
     </code>
 
@@ -2859,9 +2947,11 @@ int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc);
 int CRYPT_ERROR_StringGet(int err, char* str);
 
 
+//DOM-IGNORE-BEGIN
 #ifdef __cplusplus
-    }  /* extern "C" */ 
+}
 #endif
+//DOM-IGNORE-END
 
 
 #endif /* MC_CRYPTO_API_H */

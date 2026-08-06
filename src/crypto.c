@@ -41,42 +41,32 @@ Microchip or any third party.
 
 //DOM-IGNORE-END
 
-
+// *****************************************************************************
+// *****************************************************************************
+// Section: Included Files
+// *****************************************************************************
+// *****************************************************************************
 /* Implements Microchip CRYPTO API layer */
-#ifdef HAVE_CONFIG_H
-    #include "config.h"
-#endif
-#include "configuration.h"
-
 #include "crypto/crypto.h"
-
-#include "wolfssl/wolfcrypt/md5.h"
-#include "wolfssl/wolfcrypt/sha.h"
-#include "wolfssl/wolfcrypt/sha256.h"
-#include "wolfssl/wolfcrypt/sha512.h"
-#include "wolfssl/wolfcrypt/hmac.h"
 #include "wolfssl/wolfcrypt/compress.h"
-#include "wolfssl/wolfcrypt/random.h"
-#include "wolfssl/wolfcrypt/des3.h"
-#include "wolfssl/wolfcrypt/aes.h"
-#include "wolfssl/wolfcrypt/rsa.h"
-#include "wolfssl/wolfcrypt/ecc.h"
 #include "wolfssl/wolfcrypt/error-crypt.h"
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Microchip CRYPTO APIs
+// *****************************************************************************
+// *****************************************************************************
 
 #ifndef NO_MD5
 /* Initialize MD5 */
 int CRYPT_MD5_Initialize(CRYPT_MD5_CTX* md5)
 {
-    //typedef char md5_test[sizeof(CRYPT_MD5_CTX) >= sizeof(Md5) ? 1 : -1];
-    //(void)sizeof(md5_test);
-    _Static_assert(sizeof(CRYPT_MD5_CTX) >= sizeof(Md5), "Size of CRYPT_MD5_CTX is too small to support underlying structure");
-
     if (md5 == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    (void)wc_InitMd5((Md5*)md5);
+    (void)wc_InitMd5(&md5->holder);
 
     return 0;
 }
@@ -89,12 +79,11 @@ int CRYPT_MD5_DataSizeSet(CRYPT_MD5_CTX* md5, unsigned int sz)
     }
 
 #ifdef WOLFSSL_PIC32MZ_HASH
-    wc_Md5SizeSet((Md5*)md5, sz);
+    wc_Md5SizeSet(&md5->holder, sz);
 #endif
 
     return 0;
 }
-
 
 /* Add data to MD5 */
 int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input,
@@ -105,9 +94,8 @@ int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Md5Update((Md5*)md5, input, sz);
+    return wc_Md5Update(&md5->holder, input, sz);
 }
-
 
 /* Get MD5 Final into digest */
 int CRYPT_MD5_Finalize(CRYPT_MD5_CTX* md5, unsigned char* digest)
@@ -117,63 +105,20 @@ int CRYPT_MD5_Finalize(CRYPT_MD5_CTX* md5, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Md5Final((Md5*)md5, digest);
+    return wc_Md5Final(&md5->holder, digest);
 }
-#else  /* NO_MD5 */
-
-/* MD5 is not compiled in. The definitions below are retained so that every
-   prototype declared in crypto.h has exactly one external definition
-   (MISRA C-2023 Rule 8.6) and so that the ABI of this module is identical
-   across configurations. */
-
-int CRYPT_MD5_Initialize(CRYPT_MD5_CTX* md5)
-{
-    (void)md5;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_MD5_DataSizeSet(CRYPT_MD5_CTX* md5, unsigned int sz)
-{
-    (void)md5;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_MD5_DataAdd(CRYPT_MD5_CTX* md5, const unsigned char* input,
-                      unsigned int sz)
-{
-    (void)md5;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_MD5_Finalize(CRYPT_MD5_CTX* md5, unsigned char* digest)
-{
-    (void)md5;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  // NO_MD5
 
 #ifndef NO_SHA
 /* Initialize SHA */
 int CRYPT_SHA_Initialize(CRYPT_SHA_CTX* sha)
 {
-    //typedef char sha_test[sizeof(CRYPT_SHA_CTX) >= sizeof(Sha) ? 1 : -1];
-    //(void)sizeof(sha_test);
-    _Static_assert(sizeof(CRYPT_SHA_CTX) >= sizeof(Sha), "Size of CRYPT_SHA_CTX is too small to support underlying structure");
     if (sha == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_InitSha((Sha*)sha);
+    return wc_InitSha(&sha->holder);
 }
 
 int CRYPT_SHA_DataSizeSet(CRYPT_SHA_CTX* sha, unsigned int sz)
@@ -184,12 +129,11 @@ int CRYPT_SHA_DataSizeSet(CRYPT_SHA_CTX* sha, unsigned int sz)
     }
 
 #ifdef WOLFSSL_PIC32MZ_HASH
-    wc_ShaSizeSet((Sha*)sha, sz);
+    wc_ShaSizeSet(&sha->holder, sz);
 #endif
 
     return 0;
 }
-
 
 /* Add data to SHA */
 int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input,
@@ -200,9 +144,8 @@ int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ShaUpdate((Sha*)sha, input, sz);
+    return wc_ShaUpdate(&sha->holder, input, sz);
 }
-
 
 /* Get SHA Final into digest */
 int CRYPT_SHA_Finalize(CRYPT_SHA_CTX* sha, unsigned char* digest)
@@ -212,62 +155,21 @@ int CRYPT_SHA_Finalize(CRYPT_SHA_CTX* sha, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ShaFinal((Sha*)sha, digest);
+    return wc_ShaFinal(&sha->holder, digest);
 }
-#else  /* NO_SHA */
-
-/* SHA-1 is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_SHA_Initialize(CRYPT_SHA_CTX* sha)
-{
-    (void)sha;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA_DataSizeSet(CRYPT_SHA_CTX* sha, unsigned int sz)
-{
-    (void)sha;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA_DataAdd(CRYPT_SHA_CTX* sha, const unsigned char* input,
-                       unsigned int sz)
-{
-    (void)sha;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA_Finalize(CRYPT_SHA_CTX* sha, unsigned char* digest)
-{
-    (void)sha;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif // NO_SHA
 
 #ifndef NO_SHA256
 /* Initialize SHA-256 */
 int CRYPT_SHA256_Initialize(CRYPT_SHA256_CTX* sha256)
 {
-    //typedef char sha_test[sizeof(CRYPT_SHA256_CTX) >= sizeof(Sha256) ? 1 : -1];
-    //(void)sizeof(sha_test);
-    _Static_assert(sizeof(CRYPT_SHA256_CTX) >= sizeof(Sha256), "Size of CRYPT_SHA256_CTX is too small to support underlying structure");
 
     if (sha256 == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_InitSha256((Sha256*)sha256);
+    return wc_InitSha256(&sha256->holder);
 }
 
 int CRYPT_SHA256_DataSizeSet(CRYPT_SHA256_CTX* sha256, unsigned int sz)
@@ -278,12 +180,11 @@ int CRYPT_SHA256_DataSizeSet(CRYPT_SHA256_CTX* sha256, unsigned int sz)
     }
 
 #ifdef WOLFSSL_PIC32MZ_HASH
-    wc_Sha256SizeSet((Sha256*)sha256, sz);
+    wc_Sha256SizeSet(&sha256->holder, sz);
 #endif
 
     return 0;
 }
-
 
 /* Add data to SHA-256 */
 int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input,
@@ -294,9 +195,8 @@ int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha256Update((Sha256*)sha256, input, sz);
+    return wc_Sha256Update(&sha256->holder, input, sz);
 }
-
 
 /* Get SHA-256 Final into digest */
 int CRYPT_SHA256_Finalize(CRYPT_SHA256_CTX* sha256, unsigned char* digest)
@@ -306,66 +206,21 @@ int CRYPT_SHA256_Finalize(CRYPT_SHA256_CTX* sha256, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha256Final((Sha256*)sha256, digest);
+    return wc_Sha256Final(&sha256->holder, digest);
 }
-#else  /* NO_SHA256 */
-
-/* SHA-256 is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_SHA256_Initialize(CRYPT_SHA256_CTX* sha256)
-{
-    (void)sha256;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA256_DataSizeSet(CRYPT_SHA256_CTX* sha256, unsigned int sz)
-{
-    (void)sha256;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA256_DataAdd(CRYPT_SHA256_CTX* sha256, const unsigned char* input,
-                         unsigned int sz)
-{
-    (void)sha256;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA256_Finalize(CRYPT_SHA256_CTX* sha256, unsigned char* digest)
-{
-    (void)sha256;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif // NO_SHA256
-#ifdef WOLFSSL_SHA224
 
+#ifdef WOLFSSL_SHA224
 /* Initialize SHA-224 */
 int CRYPT_SHA224_Initialize(CRYPT_SHA256_CTX* sha224)
 {
-    //typedef char sha_test[sizeof(CRYPT_SHA256_CTX) >= sizeof(Sha224) ? 1 : -1];
-    //(void)sizeof(sha_test);
-    _Static_assert(sizeof(CRYPT_SHA256_CTX) >= sizeof(Sha224), "Size of CRYPT_SHA256_CTX is too small to support underlying structure");
-    
-    
-    
     if (sha224 == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_InitSha224((Sha224*)sha224);
+    return wc_InitSha224(&sha224->holder);
 }
-
 
 /* Add data to SHA-224 */
 int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input,
@@ -376,9 +231,8 @@ int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha224Update((Sha224*)sha224, input, sz);
+    return wc_Sha224Update(&sha224->holder, input, sz);
 }
-
 
 /* Get SHA-224 Final into digest */
 int CRYPT_SHA224_Finalize(CRYPT_SHA256_CTX* sha224, unsigned char* digest)
@@ -388,57 +242,22 @@ int CRYPT_SHA224_Finalize(CRYPT_SHA256_CTX* sha224, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha224Final((Sha224*)sha224, digest);
+    return wc_Sha224Final(&sha224->holder, digest);
 }
-
-#else  /* WOLFSSL_SHA224 */
-
-/* SHA-224 is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_SHA224_Initialize(CRYPT_SHA256_CTX* sha224)
-{
-    (void)sha224;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA224_DataAdd(CRYPT_SHA256_CTX* sha224, const unsigned char* input,
-                         unsigned int sz)
-{
-    (void)sha224;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA224_Finalize(CRYPT_SHA256_CTX* sha224, unsigned char* digest)
-{
-    (void)sha224;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  // WOLFSSL_SHA224
-#ifdef WOLFSSL_SHA384
 
+#ifdef WOLFSSL_SHA384
 /* Initialize SHA-384 */
 int CRYPT_SHA384_Initialize(CRYPT_SHA384_CTX* sha384)
 {
-    //typedef char sha_test[sizeof(CRYPT_SHA384_CTX) >= sizeof(Sha384) ? 1 : -1];
-    //(void)sizeof(sha_test);
-    _Static_assert(sizeof(CRYPT_SHA384_CTX) >= sizeof(Sha384), "Size of CRYPT_SHA384_CTX is too small to support underlying structure");
 
     if (sha384 == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_InitSha384((Sha384*)sha384);
+    return wc_InitSha384(&sha384->holder);
 }
-
 
 /* Add data to SHA-384 */
 int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input,
@@ -449,9 +268,8 @@ int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha384Update((Sha384*)sha384, input, sz);
+    return wc_Sha384Update(&sha384->holder, input, sz);
 }
-
 
 /* Get SHA-384 Final into digest */
 int CRYPT_SHA384_Finalize(CRYPT_SHA384_CTX* sha384, unsigned char* digest)
@@ -461,58 +279,22 @@ int CRYPT_SHA384_Finalize(CRYPT_SHA384_CTX* sha384, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha384Final((Sha384*)sha384, digest);
+    return wc_Sha384Final(&sha384->holder, digest);
 }
-
-#else  /* WOLFSSL_SHA384 */
-
-/* SHA-384 is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_SHA384_Initialize(CRYPT_SHA384_CTX* sha384)
-{
-    (void)sha384;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA384_DataAdd(CRYPT_SHA384_CTX* sha384, const unsigned char* input,
-                         unsigned int sz)
-{
-    (void)sha384;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA384_Finalize(CRYPT_SHA384_CTX* sha384, unsigned char* digest)
-{
-    (void)sha384;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  // WOLFSSL_SHA384
 
 #ifdef WOLFSSL_SHA512
-
 /* Initialize SHA-512 */
 int CRYPT_SHA512_Initialize(CRYPT_SHA512_CTX* sha512)
 {
-    //typedef char sha_test[sizeof(CRYPT_SHA512_CTX) >= sizeof(Sha512) ? 1 : -1];
-    //(void)sizeof(sha_test);
-    _Static_assert(sizeof(CRYPT_SHA512_CTX) >= sizeof(Sha512), "Size of CRYPT_SHA512_CTX is too small to support underlying structure");
 
     if (sha512 == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_InitSha512((Sha512*)sha512);
+    return wc_InitSha512(&sha512->holder);
 }
-
 
 /* Add data to SHA-512 */
 int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input,
@@ -523,9 +305,8 @@ int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha512Update((Sha512*)sha512, input, sz);
+    return wc_Sha512Update(&sha512->holder, input, sz);
 }
-
 
 /* Get SHA-512 Final into digest */
 int CRYPT_SHA512_Finalize(CRYPT_SHA512_CTX* sha512, unsigned char* digest)
@@ -535,50 +316,15 @@ int CRYPT_SHA512_Finalize(CRYPT_SHA512_CTX* sha512, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Sha512Final((Sha512*)sha512, digest);
+    return wc_Sha512Final(&sha512->holder, digest);
 }
-
-#else  /* WOLFSSL_SHA512 */
-
-/* SHA-512 is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_SHA512_Initialize(CRYPT_SHA512_CTX* sha512)
-{
-    (void)sha512;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA512_DataAdd(CRYPT_SHA512_CTX* sha512, const unsigned char* input,
-                         unsigned int sz)
-{
-    (void)sha512;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_SHA512_Finalize(CRYPT_SHA512_CTX* sha512, unsigned char* digest)
-{
-    (void)sha512;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  // WOLFSSL_SHA512
 
 #ifndef NO_HMAC
-
 /* Set HMAC key with type */
 int CRYPT_HMAC_SetKey(CRYPT_HMAC_CTX* hmac, int type, const unsigned char* key,
                       unsigned int sz)
 {
-    //typedef char hmac_test[sizeof(CRYPT_HMAC_CTX) >= sizeof(Hmac) ? 1 : -1];
-    //(void)sizeof(hmac_test);
-    _Static_assert(sizeof(CRYPT_HMAC_CTX) >= sizeof(Hmac), "Size of CRYPT_HMAC_CTX is too small to support underlying structure");
 
     if ((hmac == NULL) || (key == NULL) || (0U == sz))
     {
@@ -586,18 +332,17 @@ int CRYPT_HMAC_SetKey(CRYPT_HMAC_CTX* hmac, int type, const unsigned char* key,
     }
 
     int wc_sha;
-    if      (CRYPT_HMAC_SHA    == type) {wc_sha = WC_SHA;}
-    else if (CRYPT_HMAC_SHA256 == type) {wc_sha = WC_SHA256;}
-    else if (CRYPT_HMAC_SHA384 == type) {wc_sha = WC_SHA384;}
-    else if (CRYPT_HMAC_SHA512 == type) {wc_sha = WC_SHA512;}
+    if      (CRYPT_HMAC_SHA    == type) {wc_sha = (int)WC_SHA;}
+    else if (CRYPT_HMAC_SHA256 == type) {wc_sha = (int)WC_SHA256;}
+    else if (CRYPT_HMAC_SHA384 == type) {wc_sha = (int)WC_SHA384;}
+    else if (CRYPT_HMAC_SHA512 == type) {wc_sha = (int)WC_SHA512;}
     else
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_HmacSetKey((Hmac*)hmac, wc_sha, key, sz);
+    return wc_HmacSetKey(&hmac->holder, wc_sha, key, sz);
 }
-
 
 int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX* hmac, const unsigned char* input,
                        unsigned int sz)
@@ -607,9 +352,8 @@ int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX* hmac, const unsigned char* input,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_HmacUpdate((Hmac*)hmac, input, sz);
+    return wc_HmacUpdate(&hmac->holder, input, sz);
 }
-
 
 /* Get HMAC Final into digest */
 int CRYPT_HMAC_Finalize(CRYPT_HMAC_CTX* hmac, unsigned char* digest)
@@ -619,47 +363,11 @@ int CRYPT_HMAC_Finalize(CRYPT_HMAC_CTX* hmac, unsigned char* digest)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_HmacFinal((Hmac*)hmac, digest);
+    return wc_HmacFinal(&hmac->holder, digest);
 }
-
-#else  /* NO_HMAC */
-
-/* HMAC is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_HMAC_SetKey(CRYPT_HMAC_CTX* hmac, int type, const unsigned char* key,
-                      unsigned int sz)
-{
-    (void)hmac;
-    (void)type;
-    (void)key;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_HMAC_DataAdd(CRYPT_HMAC_CTX* hmac, const unsigned char* input,
-                       unsigned int sz)
-{
-    (void)hmac;
-    (void)input;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_HMAC_Finalize(CRYPT_HMAC_CTX* hmac, unsigned char* digest)
-{
-    (void)hmac;
-    (void)digest;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif // NO_HMAC
 
 #ifdef HAVE_LIBZ
-
 /* Huffman Compression, set flag to do static, otherwise dynamic */
 /* return compressed size, otherwise < 0 for error */
 int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
@@ -674,7 +382,6 @@ int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
     return wc_Compress(out, outSz, in, inSz, flags);
 }
 
-
 /* Huffman DeCompression, self determines type */
 /* return decompressed size, otherwise < 0 for error */
 int CRYPT_HUFFMAN_DeCompress(unsigned char* out, unsigned int outSz,
@@ -687,47 +394,12 @@ int CRYPT_HUFFMAN_DeCompress(unsigned char* out, unsigned int outSz,
 
     return wc_DeCompress(out, outSz, in, inSz);
 }
-
-#else  /* HAVE_LIBZ */
-
-/* Huffman compression is not compiled in. Definitions retained to satisfy
-   MISRA C-2023 Rule 8.6 and to keep the module ABI stable across
-   configurations. */
-
-int CRYPT_HUFFMAN_Compress(unsigned char* out, unsigned int outSz,
-                           const unsigned char* in, unsigned int inSz,
-                           unsigned int flags)
-{
-    (void)out;
-    (void)outSz;
-    (void)in;
-    (void)inSz;
-    (void)flags;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_HUFFMAN_DeCompress(unsigned char* out, unsigned int outSz,
-                             const unsigned char* in, unsigned int inSz)
-{
-    (void)out;
-    (void)outSz;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  // HAVE_LIBZ
 
 #ifndef NO_RNG
-
 /* RNG Initialize, < 0 on error */
 int CRYPT_RNG_Initialize(CRYPT_RNG_CTX* rng)
 {
-    //typedef char rng_test[sizeof(CRYPT_RNG_CTX) >= sizeof(WC_RNG) ? 1 : -1];
-    //(void)sizeof(rng_test);
-    _Static_assert(sizeof(CRYPT_RNG_CTX) >= sizeof(WC_RNG), "Size of CRYPT_RNG_CTX is too small to support underlying structure");
 
     if (rng == NULL)
     {
@@ -737,7 +409,7 @@ int CRYPT_RNG_Initialize(CRYPT_RNG_CTX* rng)
 #ifdef WOLFSSL_MICROCHIP_SAME70
 	return same70_InitRng();
 #else
-    return wc_InitRng((WC_RNG*)rng);
+    return wc_InitRng(&rng->holder);
 #endif
 }
 
@@ -748,13 +420,11 @@ int CRYPT_RNG_Deinitialize(CRYPT_RNG_CTX* rng)
     {
         return (int)BAD_FUNC_ARG;
     }
-	
-    WC_RNG* __attribute__((unused))myRng = (WC_RNG*)(rng);
-    (void)wc_FreeRng(myRng);
+
+    (void)wc_FreeRng(&rng->holder);
 
     return 0;
 }
-
 
 /* RNG Get single bytes, < 0 on error */
 int CRYPT_RNG_Get(CRYPT_RNG_CTX* rng, unsigned char* b)
@@ -764,9 +434,8 @@ int CRYPT_RNG_Get(CRYPT_RNG_CTX* rng, unsigned char* b)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_RNG_GenerateByte((WC_RNG*)rng, (byte*)b);
+    return wc_RNG_GenerateByte(&rng->holder, (byte*)b);
 }
-
 
 /* RNG Block Generation of sz bytes, < 0 on error */
 int CRYPT_RNG_BlockGenerate(CRYPT_RNG_CTX* rng, unsigned char* b,
@@ -780,47 +449,9 @@ int CRYPT_RNG_BlockGenerate(CRYPT_RNG_CTX* rng, unsigned char* b,
 #if defined(WOLFSSL_MICROCHIP_SAME70)
     return same70_RNG_GenerateBlock(b, sz);
 #else
-    return wc_RNG_GenerateBlock((WC_RNG*)rng, b, sz);
+    return wc_RNG_GenerateBlock(&rng->holder, b, sz);
 #endif
 }
-
-#else  /* NO_RNG */
-
-/* The RNG is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_RNG_Initialize(CRYPT_RNG_CTX* rng)
-{
-    (void)rng;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RNG_Deinitialize(CRYPT_RNG_CTX* rng)
-{
-    (void)rng;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RNG_Get(CRYPT_RNG_CTX* rng, unsigned char* b)
-{
-    (void)rng;
-    (void)b;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RNG_BlockGenerate(CRYPT_RNG_CTX* rng, unsigned char* b,
-                            unsigned int sz)
-{
-    (void)rng;
-    (void)b;
-    (void)sz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  /* NO_RNG */
 
 #ifndef NO_DES3
@@ -828,18 +459,14 @@ int CRYPT_RNG_BlockGenerate(CRYPT_RNG_CTX* rng, unsigned char* b,
 int CRYPT_TDES_KeySet(CRYPT_TDES_CTX* tdes, const unsigned char* key,
                       const unsigned char* iv, int dir)
 {
-    //typedef char tdes_test[sizeof(CRYPT_TDES_CTX) >= sizeof(Des3) ? 1 : -1];
-    //(void)sizeof(tdes_test);
-    _Static_assert(sizeof(CRYPT_TDES_CTX) >= sizeof(Des3), "Size of CRYPT_TDES_CTX is too small to support underlying structure");    
 
     if (tdes == NULL || key == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Des3_SetKey((Des3*)tdes, key, iv, dir);
+    return wc_Des3_SetKey(&tdes->holder, key, iv, dir);
 }
-
 
 /* Triple DES Iv Set, sometimes added later */
 int CRYPT_TDES_IvSet(CRYPT_TDES_CTX* tdes, const unsigned char* iv)
@@ -849,9 +476,8 @@ int CRYPT_TDES_IvSet(CRYPT_TDES_CTX* tdes, const unsigned char* iv)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Des3_SetIV((Des3*)tdes, iv);
+    return wc_Des3_SetIV(&tdes->holder, iv);
 }
-
 
 /* Triple DES CBC Encrypt */
 int CRYPT_TDES_CBC_Encrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
@@ -862,9 +488,8 @@ int CRYPT_TDES_CBC_Encrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Des3_CbcEncrypt((Des3*)tdes, out, in, inSz);
+    return wc_Des3_CbcEncrypt(&tdes->holder, out, in, inSz);
 }
-
 
 /* Triple DES CBC Decrypt */
 int CRYPT_TDES_CBC_Decrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
@@ -875,75 +500,23 @@ int CRYPT_TDES_CBC_Decrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_Des3_CbcDecrypt((Des3*)tdes, out, in, inSz);
+    return wc_Des3_CbcDecrypt(&tdes->holder, out, in, inSz);
 }
-
-#else  /* NO_DES3 */
-
-/* Triple DES is not compiled in. Definitions retained to satisfy MISRA
-   C-2023 Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_TDES_KeySet(CRYPT_TDES_CTX* tdes, const unsigned char* key,
-                      const unsigned char* iv, int dir)
-{
-    (void)tdes;
-    (void)key;
-    (void)iv;
-    (void)dir;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_TDES_IvSet(CRYPT_TDES_CTX* tdes, const unsigned char* iv)
-{
-    (void)tdes;
-    (void)iv;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_TDES_CBC_Encrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
-                           const unsigned char* in, unsigned int inSz)
-{
-    (void)tdes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_TDES_CBC_Decrypt(CRYPT_TDES_CTX* tdes, unsigned char* out,
-                           const unsigned char* in, unsigned int inSz)
-{
-    (void)tdes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  /* NO_DES3 */
 
 #ifndef NO_AES
-
 /* AES Key Set, may have iv, will have direction */
 int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key,
                      unsigned int keyLen, const unsigned char* iv, int dir)
 {
-    //typedef char aes_test[sizeof(CRYPT_AES_CTX) >= sizeof(Aes) ? 1 : -1];
-    //(void)sizeof(aes_test);
-    _Static_assert(sizeof(CRYPT_AES_CTX) >= sizeof(Aes), "Size of CRYPT_AES_CTX is too small to support underlying structure");
 
     if (aes == NULL || key == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_AesSetKey((Aes*)aes, key, keyLen, iv, dir);
+    return wc_AesSetKey(&aes->holder, key, keyLen, iv, dir);
 }
-
 
 /* AES Iv Set, sometimes added later */
 int CRYPT_AES_IvSet(CRYPT_AES_CTX* aes, const unsigned char* iv)
@@ -953,9 +526,8 @@ int CRYPT_AES_IvSet(CRYPT_AES_CTX* aes, const unsigned char* iv)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_AesSetIV((Aes*)aes, iv);
+    return wc_AesSetIV(&aes->holder, iv);
 }
-
 
 #ifdef HAVE_AES_CBC
 int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -966,9 +538,8 @@ int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_AesCbcEncrypt((Aes*)aes, out, in, inSz);
+    return wc_AesCbcEncrypt(&aes->holder, out, in, inSz);
 }
-
 
 /* AES CBC Decrypt */
 int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -979,38 +550,11 @@ int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_AesCbcDecrypt((Aes*)aes, out, in, inSz);
-}
-#else  /* HAVE_AES_CBC */
-
-/* AES-CBC is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                          const unsigned char* in, unsigned int inSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                          const unsigned char* in, unsigned int inSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
+    return wc_AesCbcDecrypt(&aes->holder, out, in, inSz);
 }
 #endif /* HAVE_AES_CBC */
 
 #ifdef WOLFSSL_AES_COUNTER
-
 /* AES CTR Encrypt (used for decrypt too, with ENCRYPT key setup) */
 int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                           const unsigned char* in, unsigned int inSz)
@@ -1020,40 +564,20 @@ int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_AesCtrEncrypt((Aes*)aes, out, in, inSz);
+    return wc_AesCtrEncrypt(&aes->holder, out, in, inSz);
 }
-
-#else  /* WOLFSSL_AES_COUNTER */
-
-/* AES-CTR is not compiled in. Definition retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                          const unsigned char* in, unsigned int inSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif /* WOLFSSL_AES_COUNTER */
 
 #if defined(HAVE_AESGCM)
 int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key, unsigned int len)
 {
-    //typedef char aes_test[sizeof(CRYPT_AES_CTX) >= sizeof(Aes) ? 1 : -1];
-    //(void)sizeof(aes_test);
-    _Static_assert(sizeof(CRYPT_AES_CTX) >= sizeof(Aes), "Size of CRYPT_AES_CTX is too small to support underlying structure");
 
 
     if (aes == NULL || key == NULL)
     {
         return (int)BAD_FUNC_ARG;
     }
-    return wc_AesGcmSetKey((Aes*)aes, key, len);
+    return wc_AesGcmSetKey(&aes->holder, key, len);
 }
 
 int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -1066,7 +590,7 @@ int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
     {
         return (int)BAD_FUNC_ARG;
     }
-    return wc_AesGcmEncrypt((Aes*)aes, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
+    return wc_AesGcmEncrypt(&aes->holder, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
 }
 
 int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -1079,68 +603,11 @@ int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
     {
         return (int)BAD_FUNC_ARG;
     }
-    return wc_AesGcmDecrypt((Aes*)aes, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
+    return wc_AesGcmDecrypt(&aes->holder, out, in, sz, iv, ivSz, authTag, authTagSz, authIn, authInSz);
 }
-
-#else  /* HAVE_AESGCM */
-
-/* AES-GCM is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key,
-                         unsigned int len)
-{
-    (void)aes;
-    (void)key;
-    (void)len;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                                   const unsigned char* in, unsigned int sz,
-                                   const unsigned char* iv, unsigned int ivSz,
-                                   unsigned char* authTag, unsigned int authTagSz,
-                                   const unsigned char* authIn, unsigned int authInSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)sz;
-    (void)iv;
-    (void)ivSz;
-    (void)authTag;
-    (void)authTagSz;
-    (void)authIn;
-    (void)authInSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                                   const unsigned char* in, unsigned int sz,
-                                   const unsigned char* iv, unsigned int ivSz,
-                                   const unsigned char* authTag, unsigned int authTagSz,
-                                   const unsigned char* authIn, unsigned int authInSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)sz;
-    (void)iv;
-    (void)ivSz;
-    (void)authTag;
-    (void)authTagSz;
-    (void)authIn;
-    (void)authInSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif  /* HAVE_AESGCM */
 
 #ifdef WOLFSSL_AES_DIRECT
-
 /* AES Direct mode encrypt, one block at a time */
 int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
                              const unsigned char* in)
@@ -1150,11 +617,10 @@ int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    (void)wc_AesEncryptDirect((Aes*)aes, out, in);
+    (void)wc_AesEncryptDirect(&aes->holder, out, in);
 
     return 0;
 }
-
 
 /* AES Direct mode decrypt, one block at a time */
 int CRYPT_AES_DIRECT_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
@@ -1165,172 +631,40 @@ int CRYPT_AES_DIRECT_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    (void)wc_AesDecryptDirect((Aes*)aes, out, in);
+    (void)wc_AesDecryptDirect(&aes->holder, out, in);
 
     return 0;
 }
-
-#else  /* WOLFSSL_AES_DIRECT */
-
-/* AES direct mode is not compiled in. Definitions retained to satisfy MISRA
-   C-2023 Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                             const unsigned char* in)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_DIRECT_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                             const unsigned char* in)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif /* WOLFSSL_AES_DIRECT */
-
-#else  /* NO_AES */
-
-/* AES is not compiled in at all. Every AES entry point declared in crypto.h
-   is defined here so that each prototype has exactly one external definition
-   (MISRA C-2023 Rule 8.6) and the module ABI stays stable across
-   configurations. The nested feature guards above are not evaluated in this
-   branch, so all AES modes are covered here. */
-
-int CRYPT_AES_KeySet(CRYPT_AES_CTX* aes, const unsigned char* key,
-                     unsigned int keyLen, const unsigned char* iv, int dir)
-{
-    (void)aes;
-    (void)key;
-    (void)keyLen;
-    (void)iv;
-    (void)dir;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_IvSet(CRYPT_AES_CTX* aes, const unsigned char* iv)
-{
-    (void)aes;
-    (void)iv;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_CBC_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                          const unsigned char* in, unsigned int inSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_CBC_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                          const unsigned char* in, unsigned int inSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_CTR_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                          const unsigned char* in, unsigned int inSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_GCM_SetKey(CRYPT_AES_CTX* aes, const unsigned char* key,
-                         unsigned int len)
-{
-    (void)aes;
-    (void)key;
-    (void)len;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_GCM_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                                   const unsigned char* in, unsigned int sz,
-                                   const unsigned char* iv, unsigned int ivSz,
-                                   unsigned char* authTag, unsigned int authTagSz,
-                                   const unsigned char* authIn, unsigned int authInSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)sz;
-    (void)iv;
-    (void)ivSz;
-    (void)authTag;
-    (void)authTagSz;
-    (void)authIn;
-    (void)authInSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_GCM_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                                   const unsigned char* in, unsigned int sz,
-                                   const unsigned char* iv, unsigned int ivSz,
-                                   const unsigned char* authTag, unsigned int authTagSz,
-                                   const unsigned char* authIn, unsigned int authInSz)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-    (void)sz;
-    (void)iv;
-    (void)ivSz;
-    (void)authTag;
-    (void)authTagSz;
-    (void)authIn;
-    (void)authInSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_DIRECT_Encrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                             const unsigned char* in)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_AES_DIRECT_Decrypt(CRYPT_AES_CTX* aes, unsigned char* out,
-                             const unsigned char* in)
-{
-    (void)aes;
-    (void)out;
-    (void)in;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif /* NO_AES */
 
 #ifndef NO_RSA
+/* MISRAC 2023 deviation block start */
+/* Following MISRA-C rules deviated in this block  */
+/* MISRA C-2023 Directive 4.12 - Deviation record ID - H3_MISRAC_2023_D_4_12_DR_1 */
+/* MISRA C-2023 Rule 21.3 - Deviation record ID - H3_MISRAC_2023_R_21_3_DR_1 */
+/* MISRA C-2023 Rule 14.4 - Deviation record ID - H3_MISRAC_2023_R_14_4_DR_1 */
+/* MISRA C-2023 Rule 15.6 - Deviation record ID - H3_MISRAC_2023_R_15_6_DR_1 */
+
+/* The RSA key is allocated from the heap because its size depends on
+   FP_MAX_BITS and is too large to embed in the context on small targets.
+   Allocation is confined to the two functions below, every allocation is
+   checked against NULL, and each XMALLOC is paired with exactly one XFREE.
+
+   Rules 14.4 and 15.6 are deviated because the wolfSSL XFREE macro expands to
+   "do { void* xp = (p); if (xp) <release>; } while (0)", which tests a pointer
+   rather than an essentially boolean expression and omits braces on the
+   then-branch. Both constructs are internal to the macro and cannot be
+   corrected from this file. XFREE is retained deliberately: it selects the
+   deallocator that matches the active wolfSSL memory backend, which for a
+   static memory pool is not interchangeable with free(). */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+#pragma coverity compliance block \
+(deviate:1 "MISRA C-2023 Directive 4.12" "H3_MISRAC_2023_D_4_12_DR_1" )\
+(deviate:2 "MISRA C-2023 Rule 21.3" "H3_MISRAC_2023_R_21_3_DR_1" )\
+(deviate:2 "MISRA C-2023 Rule 14.4" "H3_MISRAC_2023_R_14_4_DR_1" )\
+(deviate:1 "MISRA C-2023 Rule 15.6" "H3_MISRAC_2023_R_15_6_DR_1" )
 
 /* RSA Initialize */
 int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa)
@@ -1340,15 +674,14 @@ int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa)
         return (int)BAD_FUNC_ARG;
     }
 
-    rsa->holder = (RsaKey*)XMALLOC(sizeof(RsaKey), NULL, DYNAMIC_TYPE_RSA);
+    rsa->holder = XMALLOC(sizeof(RsaKey), NULL, DYNAMIC_TYPE_RSA);
     if (rsa->holder == NULL)
     {
         return -1;
     }
 
-    return wc_InitRsaKey_ex((RsaKey*)rsa->holder, NULL, 0);
+    return wc_InitRsaKey_ex(rsa->holder, NULL, 0);
 }
-
 
 /* RSA Free resources */
 int CRYPT_RSA_Free(CRYPT_RSA_CTX* rsa)
@@ -1358,13 +691,22 @@ int CRYPT_RSA_Free(CRYPT_RSA_CTX* rsa)
         return (int)BAD_FUNC_ARG;
     }
 
-    (void)wc_FreeRsaKey((RsaKey*)rsa->holder);
-    XFREE(rsa->holder, NULL, DYNAMIC_TYPE_RSA);
-    rsa->holder = NULL;
+    if (rsa->holder != NULL)
+    {
+        (void)wc_FreeRsaKey(rsa->holder);
+        XFREE(rsa->holder, NULL, DYNAMIC_TYPE_RSA);
+        rsa->holder = NULL;
+    }
 
     return 0;
 }
 
+#pragma coverity compliance end_block "MISRA C-2023 Directive 4.12"
+#pragma coverity compliance end_block "MISRA C-2023 Rule 21.3"
+#pragma coverity compliance end_block "MISRA C-2023 Rule 14.4"
+#pragma coverity compliance end_block "MISRA C-2023 Rule 15.6"
+#pragma GCC diagnostic pop
+/* MISRAC 2023 deviation block end */
 
 /* RSA Public key decode ASN.1 */
 int CRYPT_RSA_PublicKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
@@ -1378,9 +720,8 @@ int CRYPT_RSA_PublicKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_RsaPublicKeyDecode(in, &idx, (RsaKey*)rsa->holder, inSz);
+    return wc_RsaPublicKeyDecode(in, &idx, rsa->holder, inSz);
 }
-
 
 /* RSA Private key decode ASN.1 */
 int CRYPT_RSA_PrivateKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
@@ -1394,9 +735,8 @@ int CRYPT_RSA_PrivateKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_RsaPrivateKeyDecode(in, &idx, (RsaKey*)rsa->holder, inSz);
+    return wc_RsaPrivateKeyDecode(in, &idx, rsa->holder, inSz);
 }
-
 
 /* RSA Public Encrypt */
 int CRYPT_RSA_PublicEncrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
@@ -1408,10 +748,9 @@ int CRYPT_RSA_PublicEncrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_RsaPublicEncrypt(in, inSz, out, outSz, (RsaKey*)rsa->holder,
-                            (WC_RNG*)rng);
+    return wc_RsaPublicEncrypt(in, inSz, out, outSz, rsa->holder,
+                            &rng->holder);
 }
-
 
 /* RSA Private Decrypt */
 int CRYPT_RSA_PrivateDecrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
@@ -1423,9 +762,8 @@ int CRYPT_RSA_PrivateDecrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_RsaPrivateDecrypt(in, inSz, out, outSz, (RsaKey*)rsa->holder);
+    return wc_RsaPrivateDecrypt(in, inSz, out, outSz, rsa->holder);
 }
-
 
 /* RSA Get Encrypt size helper */
 int CRYPT_RSA_EncryptSizeGet(CRYPT_RSA_CTX* rsa)
@@ -1435,85 +773,37 @@ int CRYPT_RSA_EncryptSizeGet(CRYPT_RSA_CTX* rsa)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_RsaEncryptSize((RsaKey*)rsa->holder);
+    return wc_RsaEncryptSize(rsa->holder);
 }
-
-#else  /* NO_RSA */
-
-/* RSA is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_RSA_Initialize(CRYPT_RSA_CTX* rsa)
-{
-    (void)rsa;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RSA_Free(CRYPT_RSA_CTX* rsa)
-{
-    (void)rsa;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RSA_PublicKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
-                              unsigned int inSz)
-{
-    (void)rsa;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RSA_PrivateKeyDecode(CRYPT_RSA_CTX* rsa, const unsigned char* in,
-                               unsigned int inSz)
-{
-    (void)rsa;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RSA_PublicEncrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
-                            unsigned int outSz, const unsigned char* in,
-                            unsigned int inSz, CRYPT_RNG_CTX* rng)
-{
-    (void)rsa;
-    (void)out;
-    (void)outSz;
-    (void)in;
-    (void)inSz;
-    (void)rng;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RSA_PrivateDecrypt(CRYPT_RSA_CTX* rsa, unsigned char* out,
-                             unsigned int outSz, const unsigned char* in,
-                             unsigned int inSz)
-{
-    (void)rsa;
-    (void)out;
-    (void)outSz;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_RSA_EncryptSizeGet(CRYPT_RSA_CTX* rsa)
-{
-    (void)rsa;
-
-    return (int)NOT_COMPILED_IN;
-}
-
 #endif // NO_RSA
 
 #ifdef HAVE_ECC
+/* MISRAC 2023 deviation block start */
+/* Following MISRA-C rules deviated in this block  */
+/* MISRA C-2023 Directive 4.12 - Deviation record ID - H3_MISRAC_2023_D_4_12_DR_1 */
+/* MISRA C-2023 Rule 21.3 - Deviation record ID - H3_MISRAC_2023_R_21_3_DR_1 */
+/* MISRA C-2023 Rule 14.4 - Deviation record ID - H3_MISRAC_2023_R_14_4_DR_1 */
+/* MISRA C-2023 Rule 15.6 - Deviation record ID - H3_MISRAC_2023_R_15_6_DR_1 */
+
+/* The ECC key is allocated from the heap because its size depends on which
+   curves are enabled and is too large to embed in the context on small targets.
+   Allocation is confined to the two functions below, every allocation is
+   checked against NULL, and each XMALLOC is paired with exactly one XFREE.
+
+   Rules 14.4 and 15.6 are deviated because the wolfSSL XFREE macro expands to
+   "do { void* xp = (p); if (xp) <release>; } while (0)", which tests a pointer
+   rather than an essentially boolean expression and omits braces on the
+   then-branch. Both constructs are internal to the macro and cannot be
+   corrected from this file. XFREE is retained deliberately: it selects the
+   deallocator that matches the active wolfSSL memory backend, which for a
+   static memory pool is not interchangeable with free(). */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+#pragma coverity compliance block \
+(deviate:1 "MISRA C-2023 Directive 4.12" "H3_MISRAC_2023_D_4_12_DR_1" )\
+(deviate:2 "MISRA C-2023 Rule 21.3" "H3_MISRAC_2023_R_21_3_DR_1" )\
+(deviate:2 "MISRA C-2023 Rule 14.4" "H3_MISRAC_2023_R_14_4_DR_1" )\
+(deviate:1 "MISRA C-2023 Rule 15.6" "H3_MISRAC_2023_R_15_6_DR_1" )
 
 /* ECC init */
 int CRYPT_ECC_Initialize(CRYPT_ECC_CTX* ecc)
@@ -1523,13 +813,13 @@ int CRYPT_ECC_Initialize(CRYPT_ECC_CTX* ecc)
         return (int)BAD_FUNC_ARG;
     }
 
-    ecc->holder = (ecc_key*)XMALLOC(sizeof(ecc_key), NULL, DYNAMIC_TYPE_ECC);
+    ecc->holder = XMALLOC(sizeof(ecc_key), NULL, DYNAMIC_TYPE_ECC);
     if (ecc->holder == NULL)
     {
         return -1;
     }
 
-    return wc_ecc_init((ecc_key*)ecc->holder);
+    return wc_ecc_init(ecc->holder);
 }
 
 
@@ -1541,13 +831,22 @@ int CRYPT_ECC_Free(CRYPT_ECC_CTX* ecc)
         return (int)BAD_FUNC_ARG;
     }
 
-    (void) wc_ecc_free((ecc_key*)ecc->holder);
-    XFREE(ecc->holder, NULL, DYNAMIC_TYPE_ECC);
-    ecc->holder = NULL;
+    if (ecc->holder != NULL)
+    {
+        (void) wc_ecc_free(ecc->holder);
+        XFREE(ecc->holder, NULL, DYNAMIC_TYPE_ECC);
+        ecc->holder = NULL;
+    }
 
     return 0;
 }
 
+#pragma coverity compliance end_block "MISRA C-2023 Directive 4.12"
+#pragma coverity compliance end_block "MISRA C-2023 Rule 21.3"
+#pragma coverity compliance end_block "MISRA C-2023 Rule 14.4"
+#pragma coverity compliance end_block "MISRA C-2023 Rule 15.6"
+#pragma GCC diagnostic pop
+/* MISRAC 2023 deviation block end */
 
 /* ECC Public x963 Export */
 int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
@@ -1561,7 +860,7 @@ int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
         return (int)BAD_FUNC_ARG;
     }
 
-    ret = wc_ecc_export_x963((ecc_key*)ecc->holder, out, &inOut);
+    ret = wc_ecc_export_x963(ecc->holder, out, &inOut);
     if (ret == 0)
     {
         *usedSz = inOut;
@@ -1569,7 +868,6 @@ int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
 
     return ret;
 }
-
 
 /* ECC Public x963 Import */
 int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in,
@@ -1580,9 +878,8 @@ int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ecc_import_x963(in, inSz, (ecc_key*)ecc->holder);
+    return wc_ecc_import_x963(in, inSz, ecc->holder);
 }
-
 
 /* ECC Private x963 Import */
 int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv,
@@ -1594,9 +891,8 @@ int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv,
     }
 
     return wc_ecc_import_private_key(priv, privSz, pub, pubSz,
-                                 (ecc_key*)ecc->holder);
+                                 ecc->holder);
 }
-
 
 /* ECC DHE Make key */
 int CRYPT_ECC_DHE_KeyMake(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng, int keySz)
@@ -1606,9 +902,8 @@ int CRYPT_ECC_DHE_KeyMake(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng, int keySz)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ecc_make_key((WC_RNG*)rng, keySz, (ecc_key*)ecc->holder);
+    return wc_ecc_make_key(&rng->holder, keySz, ecc->holder);
 }
-
 
 /* ECC DHE Make shared secret with our private and peer public */
 int CRYPT_ECC_DHE_SharedSecretMake(CRYPT_ECC_CTX* priv, CRYPT_ECC_CTX* pub,
@@ -1622,7 +917,7 @@ int CRYPT_ECC_DHE_SharedSecretMake(CRYPT_ECC_CTX* priv, CRYPT_ECC_CTX* pub,
         return (int)BAD_FUNC_ARG;
     }
 
-    ret = wc_ecc_shared_secret((ecc_key*)priv->holder, (ecc_key*)pub->holder,
+    ret = wc_ecc_shared_secret(priv->holder, pub->holder,
                             out, &inOut);
     if (ret == 0)
     {
@@ -1631,7 +926,6 @@ int CRYPT_ECC_DHE_SharedSecretMake(CRYPT_ECC_CTX* priv, CRYPT_ECC_CTX* pub,
 
     return ret;
 }
-
 
 /* ECC DSA Hash Sign */
 int CRYPT_ECC_DSA_HashSign(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng,
@@ -1648,8 +942,8 @@ int CRYPT_ECC_DSA_HashSign(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng,
         return (int)BAD_FUNC_ARG;
     }
 
-    ret = wc_ecc_sign_hash(in, inSz, sig, &inOut, (WC_RNG*)rng,
-                       (ecc_key*)ecc->holder);
+    ret = wc_ecc_sign_hash(in, inSz, sig, &inOut, &rng->holder,
+                       ecc->holder);
     if (ret == 0)
     {
         *usedSz = inOut;
@@ -1657,7 +951,6 @@ int CRYPT_ECC_DSA_HashSign(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng,
 
     return ret;
 }
-
 
 /* ECC DSA Hash Verify */
 int CRYPT_ECC_DSA_HashVerify(CRYPT_ECC_CTX* ecc, const unsigned char* sig,
@@ -1669,10 +962,15 @@ int CRYPT_ECC_DSA_HashVerify(CRYPT_ECC_CTX* ecc, const unsigned char* sig,
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ecc_verify_hash(sig, sigSz, hash, hashSz, status,
-                          (ecc_key*)ecc->holder);
-}
+    int ret = wc_ecc_verify_hash(sig, sigSz, hash, hashSz, status,
+                          ecc->holder);
+    if (ret != 0)
+    {
+        *status = 0;
+    }
 
+    return ret;
+}
 
 /* ECC get key size helper */
 int CRYPT_ECC_KeySizeGet(CRYPT_ECC_CTX* ecc)
@@ -1682,9 +980,8 @@ int CRYPT_ECC_KeySizeGet(CRYPT_ECC_CTX* ecc)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ecc_size((ecc_key*)ecc->holder);
+    return wc_ecc_size(ecc->holder);
 }
-
 
 /* ECC get signature size helper */
 int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc)
@@ -1694,126 +991,9 @@ int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc)
         return (int)BAD_FUNC_ARG;
     }
 
-    return wc_ecc_sig_size((ecc_key*)ecc->holder);
-}
-#else  /* HAVE_ECC */
-
-/* ECC is not compiled in. Definitions retained to satisfy MISRA C-2023
-   Rule 8.6 and to keep the module ABI stable across configurations. */
-
-int CRYPT_ECC_Initialize(CRYPT_ECC_CTX* ecc)
-{
-    (void)ecc;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_Free(CRYPT_ECC_CTX* ecc)
-{
-    (void)ecc;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_PublicExport(CRYPT_ECC_CTX* ecc, unsigned char* out,
-                           unsigned int outSz, unsigned int* usedSz)
-{
-    (void)ecc;
-    (void)out;
-    (void)outSz;
-    (void)usedSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_PublicImport(CRYPT_ECC_CTX* ecc, const unsigned char* in,
-                           unsigned int inSz)
-{
-    (void)ecc;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_PrivateImport(CRYPT_ECC_CTX* ecc, const unsigned char* priv,
-         unsigned int privSz, const unsigned char* pub, unsigned int pubSz)
-{
-    (void)ecc;
-    (void)priv;
-    (void)privSz;
-    (void)pub;
-    (void)pubSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_DHE_KeyMake(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng, int keySz)
-{
-    (void)ecc;
-    (void)rng;
-    (void)keySz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_DHE_SharedSecretMake(CRYPT_ECC_CTX* priv, CRYPT_ECC_CTX* pub,
-                  unsigned char* out, unsigned int outSz, unsigned int* usedSz)
-{
-    (void)priv;
-    (void)pub;
-    (void)out;
-    (void)outSz;
-    (void)usedSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_DSA_HashSign(CRYPT_ECC_CTX* ecc, CRYPT_RNG_CTX* rng,
-                           unsigned char* sig, unsigned int sigSz,
-                           unsigned int* usedSz, const unsigned char* in,
-                           unsigned int inSz)
-{
-    (void)ecc;
-    (void)rng;
-    (void)sig;
-    (void)sigSz;
-    (void)usedSz;
-    (void)in;
-    (void)inSz;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_DSA_HashVerify(CRYPT_ECC_CTX* ecc, const unsigned char* sig,
-                             unsigned int sigSz, unsigned char* hash,
-                             unsigned int hashSz, int* status)
-{
-    (void)ecc;
-    (void)sig;
-    (void)sigSz;
-    (void)hash;
-    (void)hashSz;
-    (void)status;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_KeySizeGet(CRYPT_ECC_CTX* ecc)
-{
-    (void)ecc;
-
-    return (int)NOT_COMPILED_IN;
-}
-
-int CRYPT_ECC_SignatureSizeGet(CRYPT_ECC_CTX* ecc)
-{
-    (void)ecc;
-
-    return (int)NOT_COMPILED_IN;
+    return wc_ecc_sig_size(ecc->holder);
 }
 #endif // HAVE_ECC
-
 
 /* Save error string from err to str which needs to be >= 80 chars */
 int CRYPT_ERROR_StringGet(int err, char* str)
@@ -1832,7 +1012,7 @@ int CRYPT_ERROR_StringGet(int err, char* str)
         static const char noStr[] = "no support for error strings built in";
 
         (void)err;
-        XMEMCPY(str, noStr, sizeof(noStr));
+        (void)XMEMCPY(str, noStr, sizeof(noStr));
     }
 #else
     wc_ErrorString(err, str);
