@@ -44,7 +44,7 @@ Microchip or any third party.
 #ifndef _CRYPT_SHA_SAM11105_H_
 #define _CRYPT_SHA_SAM11105_H_
 
-#include "definitions.h"
+#include <stdint.h>
 
 /**
  *  ICM region descriptor in main list.
