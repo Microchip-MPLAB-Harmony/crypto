@@ -55,7 +55,7 @@ cryptoMd5EnabledSymbol = None
 
 cryptoHwSha1Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["ICM", "11105", "H", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20B
-                       ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
+                       ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAM9X60
                       ]
@@ -65,7 +65,7 @@ cryptoSha1EnabledSymbol = None
 
 cryptoHwSha224Support = [
                        ["ICM", "11105", "H", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
-                       ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
+                       ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156_R"])], #ATSAM9X60
                        ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11
@@ -78,7 +78,7 @@ cryptoSha224EnabledSymbol = None
 
 cryptoHwSha256Support = [["CRYPTO", "00158", "", [], set([])], #PIC32MZ EF
                        ["ICM", "11105", "H", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105"])], #ATSAMV70Q20
-                       ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
+                       ["ICM", "U2010", "1.2.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_11105", "WOLFSSL_HAVE_MCHP_CRYPTO_SHA_HW_U2010"])], #ATSAME54P20A
                        ["SHA", "6156", "O", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAMA5D27
                        ["SHA", "6156", "S", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_6156"])], #ATSAM9X60
                        ["IDAU", "U2803", "1.0.0", [], set(["WOLFSSL_HAVE_MCHP_HW_CRYPTO_SHA_HW_U2803"])], #ATSAML11
@@ -902,8 +902,8 @@ def instantiateComponent(wolfCryptComponent):
     cryptoHwEccEnabledSymbol.setDefaultValue(False)
     cryptoHwEccEnabledSymbol.setHelp('CRYPT_ECC_SUM')
 
-    
-    
+
+
 
     cryptoKdfEnableSymbol = wolfCryptComponent.createBooleanSymbol("wolfcrypt_kdf", cryptoEccEnableSymbol)
     cryptoKdfEnableSymbol.setLabel("KDF Support?")
