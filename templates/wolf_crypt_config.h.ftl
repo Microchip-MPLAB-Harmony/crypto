@@ -36,7 +36,7 @@ Microchip or any third party.
 #define HAVE_MCAPI
 #define WOLF_CRYPTO_CB  // provide call-back support
 <#if wolfcryptCoreSeries?starts_with("SAM9X6")>
-<#lt>#define WOLFSSL_NO_ATOMIC
+<#lt>#define WOLFSSL_NO_STDATOMIC_FENCE
 </#if>
 <#if wolfcrypt_sw_cb == true>
         <#lt>#define WOLF_CRYPTO_CB_ONLY_ECC
@@ -207,8 +207,8 @@ Microchip or any third party.
         <#-- disabling and enabling must be mutually exclusive -->
         <#lt>#define NO_AES_128
     </#if>
-    <#if wolfcrypt_aes_192 == false 
-         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true 
+    <#if wolfcrypt_aes_192 == false
+         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true
                 && (cryptoCrya_U2803 == true || cryptoCrya_03710 == true))>
         <#-- disable if AES HW is enabled and this is a SAML11 or PIC32CM'Lx -->
         <#lt>#define NO_AES_192 // not supported by HW accelerator
@@ -216,8 +216,8 @@ Microchip or any third party.
         <#-- disabling and enabling must be mutually exclusive -->
         <#lt>#define WOLFSSL_AES_192
     </#if>
-    <#if wolfcrypt_aes_256 == false 
-         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true 
+    <#if wolfcrypt_aes_256 == false
+         || (wolfcrypt_hw == true && wolfcrypt_aes_hw == true
                 && (cryptoCrya_U2803 == true || cryptoCrya_03710 == true))>
         <#-- disable if AES HW is enabled and this is a SAML11 or PIC32CM'Lx -->
         <#lt>#define NO_AES_256 // not supported by HW accelerator
@@ -470,7 +470,7 @@ Microchip or any third party.
             <#lt>#define WOLFSSL_CERT_REQ
             <#if wolfcrypt_certrequestext == true>
                 <#lt>#define WOLFSSL_CERT_EXT
-            </#if>            
+            </#if>
         </#if>
     </#if>
 <#else>
@@ -510,7 +510,7 @@ Microchip or any third party.
 <#if lib_wolfssl?has_content>
     <#if (lib_wolfssl.wolfsslLoadTNGTLSCert)?has_content && ((lib_wolfssl.wolfsslLoadTNGTLSCert) == true)>
         <#lt>/*Enabling TNGTLS certificate loading*/
-        <#if !lib_wolfssl.wolfsslTlsEccCurvesExt || !lib_wolfssl.wolfsslTLS13> 
+        <#if !lib_wolfssl.wolfsslTlsEccCurvesExt || !lib_wolfssl.wolfsslTLS13>
             <#lt>#define HAVE_SUPPORTED_CURVES
         </#if>
         <#lt>#define WOLFSSL_ATECC608A
