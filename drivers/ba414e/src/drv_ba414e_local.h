@@ -116,7 +116,7 @@ typedef enum
 
 typedef struct
 {
-    const DRV_BA414E_ECC_DOMAIN * domain;
+    const DRV_BA414E_ECC_DOMAIN * eccDomain;
     uint8_t * R;
     uint8_t * S;
     const uint8_t * privateKey;
@@ -127,7 +127,7 @@ typedef struct
 
 typedef struct
 {
-    const DRV_BA414E_ECC_DOMAIN * domain;
+    const DRV_BA414E_ECC_DOMAIN * eccDomain;
     uint8_t * R;
     uint8_t * S;
     const uint8_t * publicKeyX;
@@ -138,7 +138,7 @@ typedef struct
 
 typedef struct
 {
-    const DRV_BA414E_ECC_DOMAIN * domain;
+    const DRV_BA414E_ECC_DOMAIN * eccDomain;
     uint8_t * outX;
     uint8_t * outY;
     const uint8_t * p1X;
@@ -148,7 +148,7 @@ typedef struct
 
 typedef struct
 {
-    const DRV_BA414E_ECC_DOMAIN * domain;
+    const DRV_BA414E_ECC_DOMAIN * eccDomain;
     uint8_t * outX;
     uint8_t * outY;
     const uint8_t * p1X;
@@ -160,7 +160,7 @@ typedef struct
 
 typedef struct
 {
-    const DRV_BA414E_ECC_DOMAIN * domain;
+    const DRV_BA414E_ECC_DOMAIN * eccDomain;
     uint8_t * outX;
     uint8_t * outY;
     const uint8_t * p1X;
@@ -171,7 +171,7 @@ typedef struct
 
 typedef struct
 {
-    const DRV_BA414E_ECC_DOMAIN * domain;
+    const DRV_BA414E_ECC_DOMAIN * eccDomain;
     const uint8_t * p1X;
     const uint8_t * p1Y;
 
@@ -217,7 +217,7 @@ typedef struct
 
 
     DRV_IO_INTENT ioIntent;
-    DRV_BA414E_OPERATIONS currentOp : 8;
+    DRV_BA414E_OPERATIONS currentOp;
     uint8_t inUse;
 }DRV_BA414E_ClientData;
 
@@ -229,8 +229,8 @@ typedef struct
     OSAL_SEM_DECLARE(wfi);
 #endif
     DRV_BA414E_ClientData * currentClient;
-    SYS_STATUS status : 8;
-    DRV_BA414E_STATEs state : 8;
+    SYS_STATUS status;
+    DRV_BA414E_STATEs state;
     uint8_t inited;
     uint8_t doneInterrupt;
     uint8_t errorInterrupt;
@@ -272,18 +272,18 @@ typedef enum
     BA414E_OPC_DSA_SIGN = 0x19,
     BA414E_OPC_DSA_VERIFY = 0x1A,
     BA414E_OPC_SRP_CLIENT_SESSION_KEY_GEN = 0x1C,
-    BA414E_OPC_PRIM_ECC_POINT_DOUBLE = 0x20,
-    BA414E_OPC_PRIM_ECC_POINT_ADDITION = 0x21,
-    BA414E_OPC_PRIM_ECC_POINT_MULTI = 0x22,
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_AB = 0x23,
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_N = 0x24,
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_COUPLE_LESS_PRIME = 0x25,
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_POINT_ON_CURVE = 0x26,
-    BA414E_OPC_PRIM_ECC_POINT_CURVE25519_POINT_MULT = 0x28,
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_XRECOVER = 0x29,
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_SCALARMULT = 0x2A,
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_CHECKVALID = 0x2B,
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_CHECK_POINT_ON_CURVE = 0x2C,
+    BA414E_OPC_PRIM_ECCP_DOUBLE = 0x20,
+    BA414E_OPC_PRIM_ECCP_ADDITION = 0x21,
+    BA414E_OPC_PRIM_ECCP_MULTI = 0x22,
+    BA414E_OPC_PRIM_ECCP_CHECK_AB = 0x23,
+    BA414E_OPC_PRIM_ECCP_CHECK_N = 0x24,
+    BA414E_OPC_PRIM_ECCP_CHECK_COUPLE_LESS_PRIME = 0x25,
+    BA414E_OPC_PRIM_ECCP_CHECK_POINT_ON_CURVE = 0x26,
+    BA414E_OPC_PRIM_ECCP_CURVE25519_POINT_MULT = 0x28,
+    BA414E_OPC_PRIM_ECCP_ED_XRECOVER = 0x29,
+    BA414E_OPC_PRIM_ECCP_ED_SCALARMULT = 0x2A,
+    BA414E_OPC_PRIM_ECCP_ED_CHECKVALID = 0x2B,
+    BA414E_OPC_PRIM_ECCP_ED_CHECK_POINT_ON_CURVE = 0x2C,
     BA414E_OPC_ECC_ECDSA_SIGN = 0x30,
     BA414E_OPC_ECC_ECDSA_VERIFY = 0x31,
     BA414E_OPC_ECC_ECDSA_DOMAIN_PARAM_VALID = 0x32,

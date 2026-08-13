@@ -473,7 +473,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * R,
     uint8_t * S,
     const uint8_t * privateKey,
@@ -501,7 +501,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
   Parameters:
     handle       - A valid open-instance handle, returned from the driver's
                    open routine
-    domain       - The structure describing the domain of the ECC curve that
+    eccDomain    - The structure describing the domain of the ECC curve that
                    is being used
     R            - The R component of the generated signature
     S            - The S component of the generated signature
@@ -539,7 +539,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
     eccDomain.b = (uint8_t*)&(mpB);
 
     DRV_BA414E_OP_RESULT ret = DRV_BA414E_ECDSA_Sign(handle,
-            &domain,
+            &eccDomain,
             (uint8_t*)&(r),
             (uint8_t*)&(s),
             (uint8_t*)&(key),
@@ -553,7 +553,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
 */
 DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * R,
     uint8_t * S,
     const uint8_t * privateKey,
@@ -567,7 +567,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * R,
     uint8_t * S,
     const uint8_t * privateKey,
@@ -595,7 +595,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
   Parameters:
     handle       - A valid open-instance handle, returned from the driver's
                    open routine
-    domain       - The structure describing the domain of the ECC curve that
+    eccDomain    - The structure describing the domain of the ECC curve that
                    is being used
     publicKeyX   - The X coordinate of the public key
     publicKeyY   - The Y coordinate of the public key
@@ -633,7 +633,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
     eccDomain.b = (uint8_t*)&(mpB);
 
     DRV_BA414E_OP_RESULT ret = DRV_BA414E_ECDSA_Verify(
-            handle, &domain,
+            handle, &eccDomain,
             pubkey.x,
             pubkey.y,
             (uint8_t*)&(r),
@@ -648,7 +648,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
 */
 DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     const uint8_t * publicKeyX,
     const uint8_t * publicKeyY,
     uint8_t * R,
@@ -662,7 +662,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * outX,
     uint8_t * outY,
     const uint8_t * p1X,
@@ -676,7 +676,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
 
   Description:
  This routine takes the provided point (p1) and doubles it on the provided
- curve (domain).
+ curve (eccDomain).
 
   Precondition:
     The DRV_BA414E_Initialize routine must have been called for
@@ -688,7 +688,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
   Parameters:
     handle       - A valid open-instance handle, returned from the driver's
                    open routine
-    domain       - The structure describing the domain of the ECC curve that
+    eccDomain    - The structure describing the domain of the ECC curve that
                    is being used
     outX         - The X of the doubled point
     outY         - The Y of the doubled point
@@ -732,7 +732,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * outX,
     uint8_t * outY,
     const uint8_t * p1X,
@@ -744,7 +744,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * outX,
     uint8_t * outY,
     const uint8_t * p1X,
@@ -760,7 +760,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
 
   Description:
  This routine takes the provided points (p1 & P2) and adds them together on
- the provided curve (domain).  The operation is C = A + B
+ the provided curve (eccDomain).  The operation is C = A + B
 
   Precondition:
     The DRV_BA414E_Initialize routine must have been called for
@@ -772,7 +772,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
   Parameters:
     handle       - A valid open-instance handle, returned from the driver's
                    open routine
-    domain       - The structure describing the domain of the ECC curve that
+    eccDomain    - The structure describing the domain of the ECC curve that
                    is being used
     outX         - The X of the output (C)
     outY         - The Y of the output (C)
@@ -822,7 +822,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * outX,
     uint8_t * outY,
     const uint8_t * p1X,
@@ -837,7 +837,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * outX,
     uint8_t * outY,
     const uint8_t * p1X,
@@ -852,7 +852,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
 
   Description:
  This routine takes the provided point (p1) and multiplies it with a scalar (k)
- on the provided curve (domain).  The operation is C = k * A
+ on the provided curve (eccDomain).  The operation is C = k * A
 
   Precondition:
     The DRV_BA414E_Initialize routine must have been called for
@@ -864,7 +864,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
   Parameters:
     handle       - A valid open-instance handle, returned from the driver's
                    open routine
-    domain       - The structure describing the domain of the ECC curve that
+    eccDomain    - The structure describing the domain of the ECC curve that
                    is being used
     outX         - The X of the output (C)
     outY         - The Y of the output (C)
@@ -909,7 +909,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
 */
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     uint8_t * outX,
     uint8_t * outY,
     const uint8_t * p1X,
@@ -923,7 +923,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_DRV_BA414E_PRIM_EccCheckPointOnCurve(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
@@ -936,7 +936,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
 
   Description:
  This routine takes the provided point (p1) and checks to see if it is on the
- provided curve (domain)
+ provided curve (eccDomain)
 
   Precondition:
     The DRV_BA414E_Initialize routine must have been called for
@@ -948,7 +948,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
   Parameters:
     handle       - A valid open-instance handle, returned from the driver's
                    open routine
-    domain       - The structure describing the domain of the ECC curve that
+    eccDomain    - The structure describing the domain of the ECC curve that
                    is being used
     p1X          - The X of the first point (A)
     p1Y          - The Y of the first point (A)
@@ -991,7 +991,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
     const DRV_HANDLE handle,
-    const DRV_BA414E_ECC_DOMAIN * domain,
+    const DRV_BA414E_ECC_DOMAIN * eccDomain,
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
