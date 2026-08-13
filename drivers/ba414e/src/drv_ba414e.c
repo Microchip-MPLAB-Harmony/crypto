@@ -355,7 +355,7 @@ static void DRV_BA414E_MemCopy(void * dst, const void * src, uint32_t dstLen, ui
 
 }
 
-static uint32_t DRV_BA414E_getSlotAddr(uint8_t slot_num)
+static uint32_t DRV_BA414E_getSlotAddr(uint32_t slot_num)
 {
     uint32_t addr = 0UL;
 
@@ -369,7 +369,7 @@ static uint32_t DRV_BA414E_getSlotAddr(uint8_t slot_num)
 
 static void DRV_BA414E_copyToScm4(const void* pdata,
                       uint32_t numBytes,
-                      uint8_t slot_num,
+                      uint32_t slot_num,
                       uint8_t swapBytes,
                       uint8_t swapWords,
                       uint8_t packToBack)
@@ -377,7 +377,7 @@ static void DRV_BA414E_copyToScm4(const void* pdata,
     uint8_t __attribute__((aligned(16))) tempBuffer[DRV_BA414E_MAX_KEY_SIZE];
     BA414E_PKCOMMANDbits cmd = {{0}};
     cmd.v = PKCOMMAND;
-    uint32_t slotSize = cmd.s.OPSIZE * 8;
+    uint32_t slotSize = (uint32_t)cmd.s.OPSIZE * 8U;
 
     DRV_BA414E_MemCopy(tempBuffer, pdata, slotSize, numBytes, swapBytes, swapWords, packToBack);
 
@@ -393,7 +393,7 @@ static void DRV_BA414E_copyToScm4(const void* pdata,
 
 static void DRV_BA414E_copyFromScm2(void* pdata,
                                     uint32_t numBytes,
-                                    uint8_t slotNum,
+                                    uint32_t slotNum,
                                     uint8_t swapBytes,
                                     uint8_t swapWords,
                                     uint8_t packToBack)
@@ -401,7 +401,7 @@ static void DRV_BA414E_copyFromScm2(void* pdata,
     uint8_t __attribute__((aligned(16))) tempBuffer[DRV_BA414E_MAX_KEY_SIZE];
     BA414E_PKCOMMANDbits cmd = {{0}};
     cmd.v = PKCOMMAND;
-    uint32_t slotSize = cmd.s.OPSIZE * 8;
+    uint32_t slotSize = (uint32_t)cmd.s.OPSIZE * 8U;
     uint32_t addr = DRV_BA414E_getSlotAddr(slotNum);
     uint32_t counter;
     uint32_t *pSrc = (uint32_t *)addr;
@@ -641,7 +641,7 @@ void DRV_BA414E_InterruptHandler(void)
     opData.doneInterrupt = 1;
     opData.lastStatus = PKSTATUS;
     PKCONTROL = 0;
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
+    (void)SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
 }
 
 void DRV_BA414E_ErrorInterruptHandler(void)
@@ -652,7 +652,7 @@ void DRV_BA414E_ErrorInterruptHandler(void)
     opData.errorInterrupt = 1;
     opData.lastStatus = PKSTATUS;
     PKCONTROL = 0;
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
+    (void)SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
 }
 
 static void DRV_BA414E_StartOp(void)
@@ -922,8 +922,8 @@ static void DRV_BA414E_PrimModExp(DRV_BA414E_ClientData * cd)
 static void DRV_BA414E_Prepare(DRV_BA414E_ClientData * cd)
 {
     PKCONTROL = 0;
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
+    (void)SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
+    (void)SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1_FAULT);
     opData.doneInterrupt = 0;
@@ -1224,8 +1224,8 @@ static void DRV_BA414E_ProcessRsaModExp(DRV_BA414E_ClientData * cd)
 static void DRV_BA414E_Process(DRV_BA414E_ClientData * cd)
 {
     PKCONTROL = 0;
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
+    (void)SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
+    (void)SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1_FAULT);
     switch(cd->currentOp)
