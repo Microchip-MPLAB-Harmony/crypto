@@ -11,9 +11,9 @@
     BA414E Driver Interface Header File
 
   Description:
-    This device driver provides a simple interface to manage the asymmetric 
-    cryptography module on Microchip's PIC32MZ1025W104132 family of 
-    microcontrollers.  This file provides the interface definition for this 
+    This device driver provides a simple interface to manage the asymmetric
+    cryptography module on Microchip's PIC32MZ1025W104132 family of
+    microcontrollers.  This file provides the interface definition for this
     driver.
 *******************************************************************************/
 
@@ -84,8 +84,8 @@ Microchip or any third party.
     Number of valid BA414E crypto drivers
 
   Description:
-    This constant identifies the maximum number of BA414E Crypto 
-    Driver instances that should be defined in the system. Defining more 
+    This constant identifies the maximum number of BA414E Crypto
+    Driver instances that should be defined in the system. Defining more
     instances than this constant will waste RAM memory space.
 
     This constant can also be used by the system and application to identify the
@@ -98,7 +98,7 @@ Microchip or any third party.
 #define DRV_BA414E_COUNT  /*DOM-IGNORE-BEGIN*/ 1/*DOM-IGNORE-END*/
 
 #define DRV_BA414E_MAX_KEY_SIZE                64
-        
+
 // *****************************************************************************
 /* BA414E Crypto Driver Result
 
@@ -127,20 +127,20 @@ typedef enum
     /* Argument invalid */
     DRV_BA414E_ARG_INVALID,
 
-    /* Module is currently in use */            
+    /* Module is currently in use */
     DRV_BA414E_RESULT_COULD_NOT_GET_MUTEX,
 
-    /* The result of the operation returned the point at infinity */            
+    /* The result of the operation returned the point at infinity */
     DRV_BA414E_RESULT_POINT_AT_INFINITY,
 
-    /* A parameter validation operation determined that the specified 
-     * parameters were not valid 
+    /* A parameter validation operation determined that the specified
+     * parameters were not valid
      Possible operations:
         Signature validation
         Check ECC a and b parameters
         Check ECC order
         Check ECC point coordinates
-        Check ECC point-on-curve 
+        Check ECC point-on-curve
         ECC k value leads to r == 0 or s == 0*/
     DRV_BA414E_RESULT_CHECK_PARAMS_INVALID,
 } DRV_BA414E_RESULT;
@@ -170,7 +170,7 @@ typedef enum
 
     /* There was an error while performing the crypto operation. */
     DRV_BA414E_EVENT_ERROR
-            
+
 } DRV_BA414E_EVENT;
 
 
@@ -181,10 +181,10 @@ typedef enum
     Pointer to a BA414E Crypto Driver Event handler function
 
    Description
-    This data type defines the required function signature for the BA414E 
-    Crypto driver event handling callback function. A client must 
-    register a pointer to an event handling function whose function signature 
-    (parameter and return value types) match the types specified by this 
+    This data type defines the required function signature for the BA414E
+    Crypto driver event handling callback function. A client must
+    register a pointer to an event handling function whose function signature
+    (parameter and return value types) match the types specified by this
     function pointer in order to receive event calls back from the driver.
 
     The parameters and return values and are described here and
@@ -210,31 +210,31 @@ typedef enum
         {
             case DRV_BA414E_EVENT_COMPLETE:
 
-                // Retrieve the crypto operation result
+                [Retrieve the crypto operation result]
                 break;
 
             case DRV_BA414E_EVENT_ERROR:
             default:
 
-                // Handle error.
+                [Handle error.]
                 break;
         }
     }
     </code>
 
   Remarks:
-    If the event is DRV_BA414E_EVENT_COMPLETE, it means that the 
+    If the event is DRV_BA414E_EVENT_COMPLETE, it means that the
     operation completed successfully.
 
-    If the event is DRV_BA414E_EVENT_ERROR, it means that the 
+    If the event is DRV_BA414E_EVENT_ERROR, it means that the
     operation did not complete successfully.
 
     The context parameter contains the a handle to the client context,
     provided at the time the event handling function was registered using the
-    DRV_BA414E_EventHandlerSet function.  This context handle value 
-    is passed back to the client as the "context" parameter.  It can be any 
-    value necessary to identify the client context or instance (such as a 
-    pointer to the client's data) instance of the client that made the buffer 
+    DRV_BA414E_EventHandlerSet function.  This context handle value
+    is passed back to the client as the "context" parameter.  It can be any
+    value necessary to identify the client context or instance (such as a
+    pointer to the client's data) instance of the client that made the buffer
     add request.
 
     The event handler function executes in the driver peripheral's interrupt
@@ -253,13 +253,13 @@ typedef void ( *DRV_BA414E_EVENT_HANDLER )
 /* BA414E Crypto Driver Initialization Data
 
   Summary:
-    Defines the data required to initialize or reinitialize the BA414E 
+    Defines the data required to initialize or reinitialize the BA414E
     Crypto driver
 
   Description:
     This data type defines the data required to initialize or reinitialize the
-    BA414E Crypto driver. If the driver is built statically, the 
-    members of this data structure are statically over-ridden by static override 
+    BA414E Crypto driver. If the driver is built statically, the
+    members of this data structure are statically over-ridden by static override
     definitions in the system_config.h file.
 
   Remarks:

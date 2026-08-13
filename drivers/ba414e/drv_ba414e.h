@@ -11,9 +11,9 @@
     BA414E Driver Interface Header File
 
   Description:
-    This device driver provides a simple interface to manage the asymmetric 
-    cryptography module on Microchip's PIC32MZ1025W104132 family of 
-    microcontrollers.  This file provides the interface definition for this 
+    This device driver provides a simple interface to manage the asymmetric
+    cryptography module on Microchip's PIC32MZ1025W104132 family of
+    microcontrollers.  This file provides the interface definition for this
     driver.
 *******************************************************************************/
 
@@ -77,12 +77,12 @@ typedef enum
     DRV_BA414E_OP_SUCCESS = 0,
     DRV_BA414E_OP_PENDING = 1,
     DRV_BA414E_OP_POINT_NOT_ON_CURVE = 2,
-    DRV_BA414E_OP_POINT_AT_INFINITY = 3,           
-    DRV_BA414E_OP_ERROR = -1,        
-    DRV_BA414E_OP_BUSY = -2,  
+    DRV_BA414E_OP_POINT_AT_INFINITY = 3,
+    DRV_BA414E_OP_ERROR = -1,
+    DRV_BA414E_OP_BUSY = -2,
     DRV_BA414E_OP_SIGN_VERIFY_FAIL = -3,
-    DRV_BA414E_OP_ERROR_POINT_AT_INFINITY = -4,           
-            
+    DRV_BA414E_OP_ERROR_POINT_AT_INFINITY = -4,
+
 } DRV_BA414E_OP_RESULT;
 
 // *****************************************************************************
@@ -92,7 +92,7 @@ typedef enum
     Pointer to a BA414E Callback function
 
    Description
-    This data type defines the required function signature for the BA414E 
+    This data type defines the required function signature for the BA414E
  callback function.  This callback function can be used while the driver is in
  non-blocking mode.  This callback function will not be used when the driver is
  in blocking mode.
@@ -164,15 +164,15 @@ typedef struct
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    This routine initializes the BA414E crypto driver instance 
-    for the specified driver index, making it ready for clients to open and use 
-    it. The initialization data is specified by the init parameter. The 
-    initialization may fail if the number of driver objects allocated are 
-    insufficient or if the specified driver instance is already initialized. 
-    The driver instance index is independent of the crypto module ID. For 
-    example, driver instance 1 can be assigned to Crypto module 1.  If the 
-    driver is built statically, then some of the initialization parameters are 
-    overridden by configuration macros. Refer to the description of the 
+    This routine initializes the BA414E crypto driver instance
+    for the specified driver index, making it ready for clients to open and use
+    it. The initialization data is specified by the init parameter. The
+    initialization may fail if the number of driver objects allocated are
+    insufficient or if the specified driver instance is already initialized.
+    The driver instance index is independent of the crypto module ID. For
+    example, driver instance 1 can be assigned to Crypto module 1.  If the
+    driver is built statically, then some of the initialization parameters are
+    overridden by configuration macros. Refer to the description of the
     DRV_BA414E_INIT data structure for more details on
     which members on this data structure are overridden.
 
@@ -190,30 +190,30 @@ typedef struct
     Otherwise, returns SYS_MODULE_OBJ_INVALID.
 
   Example:
+    The following code snippet shows an example driver initialization.
+    The current driver implementation does not require any initialization
+    parameters.
     <code>
-    // The following code snippet shows an example driver initialization.
-    // The current driver implementation does not require any initialization 
-    // parameters.
 
     DRV_BA414E_INIT    cryptoInit;
     SYS_MODULE_OBJ                  objectHandle;
 
     objectHandle = DRV_BA414E_Initialize(
-        DRV_BA414E_MODULE_IDX, 
+        DRV_BA414E_MODULE_IDX,
         (SYS_MODULE_INIT*)&cryptoInit);
- 
+
     if (SYS_MODULE_OBJ_INVALID == objectHandle)
     {
-        // Handle error
+        [Handle error]
     }
     </code>
 
   Remarks:
-    This routine must be called before any other BA414E routine is 
+    This routine must be called before any other BA414E routine is
     called.
 
     This routine should only be called once during system initialization
-    unless DRV_BA414E_Deinitialize is called to deinitialize the 
+    unless DRV_BA414E_Deinitialize is called to deinitialize the
     driver instance. This routine will NEVER block for hardware access.
 */
 
@@ -228,17 +228,17 @@ SYS_MODULE_OBJ DRV_BA414E_Initialize
     void DRV_BA414E_Deinitialize( SYS_MODULE_OBJ object)
 
   Summary:
-    Deinitializes the specified instance of the BA414E asymmetric crypto 
+    Deinitializes the specified instance of the BA414E asymmetric crypto
     driver module.
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    Deinitializes the specified instance of the BA414E asymmetric crypto 
-    driver module, disabling its operation (and any hardware).  Invalidates all 
+    Deinitializes the specified instance of the BA414E asymmetric crypto
+    driver module, disabling its operation (and any hardware).  Invalidates all
     the internal data.
 
   Precondition:
-    Function DRV_BA414E_Initialize should have been called before 
+    Function DRV_BA414E_Initialize should have been called before
     calling this function.
 
   Parameters:
@@ -250,7 +250,7 @@ SYS_MODULE_OBJ DRV_BA414E_Initialize
 
   Example:
     <code>
-    SYS_MODULE_OBJ      object;     //  Returned from DRV_CRYPTO_P32MZW1_ASYM_Initialize
+    SYS_MODULE_OBJ      object;
     SYS_STATUS          status;
 
     DRV_BA414E_Deinitialize(object);
@@ -258,8 +258,8 @@ SYS_MODULE_OBJ DRV_BA414E_Initialize
     status = DRV_BA414E_Status(object);
     if (SYS_MODULE_DEINITIALIZED != status)
     {
-        // Check again later if you need to know
-        // when the driver is deinitialized.
+        [Check again later if you need to know
+         when the driver is deinitialized.]
     }
     </code>
 
@@ -280,11 +280,11 @@ void DRV_BA414E_Deinitialize( SYS_MODULE_OBJ object);
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    This routine provides the current status of the BA414E crypto 
+    This routine provides the current status of the BA414E crypto
     driver module.
 
   Precondition:
-    Function DRV_BA414E_Initialize should have been called before 
+    Function DRV_BA414E_Initialize should have been called before
     calling this function.
 
   Parameters:
@@ -301,14 +301,14 @@ void DRV_BA414E_Deinitialize( SYS_MODULE_OBJ object);
 
   Example:
     <code>
-    SYS_MODULE_OBJ      object;     // Returned from DRV_CRYPTO_P32MZW1_ASYM_Initialize
+    SYS_MODULE_OBJ      object;
     SYS_STATUS          status;
 
     status = DRV_BA414E_Status(object);
     if (SYS_STATUS_READY == status)
     {
-        // This means the driver can be opened using the
-        // DRV_BA414E_Open() function.
+        [This means the driver can be opened using the
+         DRV_BA414E_Open() function.]
     }
     </code>
 
@@ -323,9 +323,9 @@ SYS_STATUS DRV_BA414E_Status( SYS_MODULE_OBJ object);
   Summary:
     MPLAB Harmony tasks function used for BA414E tasks.
 	<p><b>Implementation:</b> Dynamic</p>
-    
+
   Description:
-    This function is called by the main loop.  
+    This function is called by the main loop.
 
   Preconditions:
     The layer must be successfully initialized with DRV_BA414E_Initialize.
@@ -335,7 +335,7 @@ SYS_STATUS DRV_BA414E_Status( SYS_MODULE_OBJ object);
 
   Returns:
     None.
-	  
+
     */
 
 void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj);
@@ -355,23 +355,23 @@ void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj);
     )
 
   Summary:
-    Opens the specified BA414E crypto driver instance and returns 
+    Opens the specified BA414E crypto driver instance and returns
     a handle to it.
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    This routine opens the specified BA414E crypto driver 
-    instance and provides a handle that must be provided to all other 
-    client-level operations to identify the caller and the instance of the 
-    driver. The ioIntent parameter defines how the client interacts with this 
+    This routine opens the specified BA414E crypto driver
+    instance and provides a handle that must be provided to all other
+    client-level operations to identify the caller and the instance of the
+    driver. The ioIntent parameter defines how the client interacts with this
     driver instance.
 
     The DRV_IO_INTENT_BLOCKING and DRV_IO_INTENT_NONBLOCKING ioIntent options
-    additionally affect the behavior of the cryptographic operation functions. 
-    If the ioIntent is DRV_IO_INTENT_NONBLOCKING, then these functions will not 
+    additionally affect the behavior of the cryptographic operation functions.
+    If the ioIntent is DRV_IO_INTENT_NONBLOCKING, then these functions will not
     block during cryptographic primitive execution.
-    If the ioIntent is DRV_IO_INTENT_BLOCKING, these functions will block until 
-    the the cryptographic primitive execution has completed.  Blocking mode is 
+    If the ioIntent is DRV_IO_INTENT_BLOCKING, these functions will block until
+    the the cryptographic primitive execution has completed.  Blocking mode is
     only available in projects with an RTOS enabled
 
     Specifying a DRV_IO_INTENT_EXCLUSIVE will cause the driver to provide
@@ -379,7 +379,7 @@ void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj);
     other client.
 
   Precondition:
-    Function DRV_CRYPTO_P32MZW1_ASYM_Initialize must have been called before 
+    Function DRV_CRYPTO_P32MZW1_ASYM_Initialize must have been called before
     calling this function.
 
   Parameters:
@@ -410,25 +410,25 @@ void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj);
     <code>
     DRV_HANDLE handle;
 
-    handle = DRV_BA414E_Open(DRV_BA414E_MODULE_IDX, 
+    handle = DRV_BA414E_Open(DRV_BA414E_MODULE_IDX,
         DRV_IO_INTENT_EXCLUSIVE);
     if (DRV_HANDLE_INVALID == handle)
     {
-        // Unable to open the driver
-        // May be the driver is not initialized or the initialization
-        // is not complete.
+        [Unable to open the driver
+         May be the driver is not initialized or the initialization
+         is not complete.]
     }
     </code>
 
   Remarks:
-    The handle returned is valid until the DRV_BA414E_Close routine 
+    The handle returned is valid until the DRV_BA414E_Close routine
     is called.
     This routine will NEVER block waiting for hardware. If the requested intent
     flags are not supported, the routine will return DRV_HANDLE_INVALID.  This
     function is thread safe in a RTOS application.
 */
 
-DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index, 
+DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
         const DRV_IO_INTENT ioIntent);
 
 // *****************************************************************************
@@ -440,17 +440,17 @@ DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    This routine closes an opened-instance of the BA414E crypto 
-    driver, invalidating the handle. After calling this routine, the handle 
-    passed in "handle" must not be used with any of the remaining driver 
-    routines. A new handle must be obtained by calling 
+    This routine closes an opened-instance of the BA414E crypto
+    driver, invalidating the handle. After calling this routine, the handle
+    passed in "handle" must not be used with any of the remaining driver
+    routines. A new handle must be obtained by calling
     DRV_BA414E_Open before the caller may use the driver again.
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -462,7 +462,7 @@ DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
 
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
 
     DRV_BA414E_Close(handle);
 
@@ -488,14 +488,14 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    This routine takes the provided parameters and returns a EcDSA signature 
+    This routine takes the provided parameters and returns a EcDSA signature
    (R & S).
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -517,7 +517,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
 
   Returns:
     DRV_BA414E_OP_SUCCESS - If the operation completed successfully
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
@@ -527,7 +527,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
 
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
     DRV_BA414E_ECC_DOMAIN eccDomain;
     eccDomain.keySize = 32;
     eccDomain.opSize = DRV_BA414E_OPSZ_256;
@@ -538,15 +538,15 @@ void DRV_BA414E_Close( const DRV_HANDLE handle);
     eccDomain.a = (uint8_t*)&(mpA);
     eccDomain.b = (uint8_t*)&(mpB);
 
-    DRV_BA414E_OP_RESULT ret = DRV_BA414E_ECDSA_Sign(handle, 
-            &domain, 
+    DRV_BA414E_OP_RESULT ret = DRV_BA414E_ECDSA_Sign(handle,
+            &domain,
             (uint8_t*)&(r),
             (uint8_t*)&(s),
             (uint8_t*)&(key),
             k,
             hash,
             hashSz,
-            0, 0            
+            0, 0
             );
 
     </code>
@@ -561,7 +561,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
     const uint8_t * msgHash,
     int msgHashSz,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context  
+    uintptr_t context
 );
 
 // *****************************************************************************
@@ -582,14 +582,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
     <p><b>Implementation:</b> Static</p>
 
   Description:
-    This routine takes the provided parameters and returns a success or signature 
+    This routine takes the provided parameters and returns a success or signature
  verification failure based on the provided signature
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -609,9 +609,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the
                             signature is valid
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
@@ -621,7 +621,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
 
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
     DRV_BA414E_ECC_DOMAIN eccDomain;
     eccDomain.keySize = 32;
     eccDomain.opSize = DRV_BA414E_OPSZ_256;
@@ -633,14 +633,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
     eccDomain.b = (uint8_t*)&(mpB);
 
     DRV_BA414E_OP_RESULT ret = DRV_BA414E_ECDSA_Verify(
-            handle, &domain, 
+            handle, &domain,
             pubkey.x,
             pubkey.y,
             (uint8_t*)&(r),
             (uint8_t*)&(s),
             hash,
             hashSz,
-            0, 0            
+            0, 0
             );
 
 
@@ -656,7 +656,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
     const uint8_t * msgHash,
     int msgHashSz,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context  
+    uintptr_t context
 );
 
 // *****************************************************************************
@@ -679,10 +679,10 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
  curve (domain).
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -701,15 +701,15 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
 
   Returns:
     DRV_BA414E_OP_SUCCESS - If the operation completed successfully
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
     DRV_BA414E_ECC_DOMAIN eccDomain;
     eccDomain.keySize = 32;
     eccDomain.opSize = DRV_BA414E_OPSZ_256;
@@ -720,11 +720,11 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
     eccDomain.a = (uint8_t*)&(mpA);
     eccDomain.b = (uint8_t*)&(mpB);
 
-    ret = DRV_BA414E_PRIM_EccPointDouble(ba414Handle, &eccDomain, 
-                                        (uint8_t*)&(outX), 
-                                        (uint8_t*)&(outY), 
-                                        (uint8_t*)&(inX), 
-                                        (uint8_t*)&(inY), 
+    ret = DRV_BA414E_PRIM_EccPointDouble(ba414Handle, &eccDomain,
+                                        (uint8_t*)&(outX),
+                                        (uint8_t*)&(outY),
+                                        (uint8_t*)&(inX),
+                                        (uint8_t*)&(inY),
                                         0, 0);
 
     </code>
@@ -738,7 +738,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 // *****************************************************************************
@@ -759,14 +759,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
     <p><b>Implementation:</b> Static</p>
 
   Description:
- This routine takes the provided points (p1 & P2) and adds them together on 
+ This routine takes the provided points (p1 & P2) and adds them together on
  the provided curve (domain).  The operation is C = A + B
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -787,17 +787,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
 
   Returns:
     DRV_BA414E_OP_SUCCESS - If the operation completed successfully
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    DRV_BA414E_OP_ERROR_POINT_AT_INFINITY - The operation resulted in a point 
+    DRV_BA414E_OP_ERROR_POINT_AT_INFINITY - The operation resulted in a point
                                             that is positioned at infinity
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
     DRV_BA414E_ECC_DOMAIN eccDomain;
     eccDomain.keySize = 32;
     eccDomain.opSize = DRV_BA414E_OPSZ_256;
@@ -808,13 +808,13 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
     eccDomain.a = (uint8_t*)&(mpA);
     eccDomain.b = (uint8_t*)&(mpB);
 
-    ret = DRV_BA414E_PRIM_EccPointAddition(ba414Handle, &eccDomain, 
-                                    (uint8_t*)&(outX), 
-                                    (uint8_t*)&(outY), 
-                                    (uint8_t*)&(p1X), 
-                                    (uint8_t*)&(p1Y), 
-                                    (uint8_t*)&(p2X), 
-                                    (uint8_t*)&(p2Y), 
+    ret = DRV_BA414E_PRIM_EccPointAddition(ba414Handle, &eccDomain,
+                                    (uint8_t*)&(outX),
+                                    (uint8_t*)&(outY),
+                                    (uint8_t*)&(p1X),
+                                    (uint8_t*)&(p1Y),
+                                    (uint8_t*)&(p2X),
+                                    (uint8_t*)&(p2Y),
                                     0, 0);
 
     </code>
@@ -830,7 +830,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
     const uint8_t * p2X,
     const uint8_t * p2Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 
@@ -851,14 +851,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
     <p><b>Implementation:</b> Static</p>
 
   Description:
- This routine takes the provided point (p1) and multiplies it with a scalar (k) 
+ This routine takes the provided point (p1) and multiplies it with a scalar (k)
  on the provided curve (domain).  The operation is C = k * A
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -877,16 +877,16 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully 
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
     DRV_BA414E_ECC_DOMAIN eccDomain;
     eccDomain.keySize = 32;
     eccDomain.opSize = DRV_BA414E_OPSZ_256;
@@ -897,12 +897,12 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
     eccDomain.a = (uint8_t*)&(mpA);
     eccDomain.b = (uint8_t*)&(mpB);
 
-    ret = DRV_BA414E_PRIM_EccPointAddition(ba414Handle, &eccDomain, 
-                                    (uint8_t*)&(outX), 
-                                    (uint8_t*)&(outY), 
-                                    (uint8_t*)&(p1X), 
-                                    (uint8_t*)&(p1Y), 
-                                    (uint8_t*)&(k), 
+    ret = DRV_BA414E_PRIM_EccPointAddition(ba414Handle, &eccDomain,
+                                    (uint8_t*)&(outX),
+                                    (uint8_t*)&(outY),
+                                    (uint8_t*)&(p1X),
+                                    (uint8_t*)&(p1Y),
+                                    (uint8_t*)&(k),
                                     0, 0);
 
     </code>
@@ -916,7 +916,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
     const uint8_t * p1Y,
     const uint8_t * k,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 // *****************************************************************************
@@ -927,7 +927,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 
   Summary:
@@ -939,10 +939,10 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
  provided curve (domain)
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -958,18 +958,18 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the
                             point is on the curve
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
     DRV_BA414E_OP_POINT_NOT_ON_CURVE - the point is not on the curve.
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
+    DRV_HANDLE handle;
     DRV_BA414E_ECC_DOMAIN eccDomain;
     eccDomain.keySize = 32;
     eccDomain.opSize = DRV_BA414E_OPSZ_256;
@@ -980,10 +980,10 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
     eccDomain.a = (uint8_t*)&(mpA);
     eccDomain.b = (uint8_t*)&(mpB);
 
-    ret = DRV_BA414E_PRIM_DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle, 
-                                   &eccDomain, 
-                                    (uint8_t*)&(p1X), 
-                                    (uint8_t*)&(p1Y), 
+    ret = DRV_BA414E_PRIM_DRV_BA414E_PRIM_EccCheckPointOnCurve(ba414Handle,
+                                   &eccDomain,
+                                    (uint8_t*)&(p1X),
+                                    (uint8_t*)&(p1Y),
                                     0, 0);
 
     </code>
@@ -995,20 +995,20 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
     const DRV_HANDLE handle,
-    DRV_BA414E_OPERAND_SIZE opSize,    // Hardware operand size
+    DRV_BA414E_OPERAND_SIZE opSize,
     uint8_t * c,
     const uint8_t * p,
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 
   Summary:
@@ -1016,14 +1016,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
     <p><b>Implementation:</b> Static</p>
 
   Description:
- TThis routine takes the inputs and conducts a modular addition operation. 
+ TThis routine takes the inputs and conducts a modular addition operation.
  (C = (a + b) mod P
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -1040,23 +1040,23 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the
                             point is on the curve
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
-    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModAddition(ba414Handle, 
-                                            DRV_BA414E_OPSZ_256, 
-                                            (uint8_t*)&(mpC), 
-                                            (uint8_t*)&(mpPrime), 
-                                            (uint8_t*)&(mpA), 
-                                            (uint8_t*)&(mpB), 
+    DRV_HANDLE handle;
+    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModAddition(ba414Handle,
+                                            DRV_BA414E_OPSZ_256,
+                                            (uint8_t*)&(mpC),
+                                            (uint8_t*)&(mpPrime),
+                                            (uint8_t*)&(mpA),
+                                            (uint8_t*)&(mpB),
                                             0, 0);
 
     </code>
@@ -1070,20 +1070,20 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
-  
+
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
     const DRV_HANDLE handle,
-    DRV_BA414E_OPERAND_SIZE opSize,    // Hardware operand size
+    DRV_BA414E_OPERAND_SIZE opSize,
     uint8_t * c,
     const uint8_t * p,
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 
   Summary:
@@ -1091,14 +1091,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
     <p><b>Implementation:</b> Static</p>
 
   Description:
- TThis routine takes the inputs and conducts a modular addition operation. 
+ TThis routine takes the inputs and conducts a modular addition operation.
  (C = (a - b) mod P
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -1115,23 +1115,23 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the
                             point is on the curve
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
-    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModSubtraction(ba414Handle, 
-                                            DRV_BA414E_OPSZ_256, 
-                                            (uint8_t*)&(mpC), 
-                                            (uint8_t*)&(mpPrime), 
-                                            (uint8_t*)&(mpA), 
-                                            (uint8_t*)&(mpB), 
+    DRV_HANDLE handle;
+    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModSubtraction(ba414Handle,
+                                            DRV_BA414E_OPSZ_256,
+                                            (uint8_t*)&(mpC),
+                                            (uint8_t*)&(mpPrime),
+                                            (uint8_t*)&(mpA),
+                                            (uint8_t*)&(mpB),
                                             0, 0);
 
     </code>
@@ -1144,20 +1144,20 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 // *****************************************************************************
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
     const DRV_HANDLE handle,
-    DRV_BA414E_OPERAND_SIZE opSize,    // Hardware operand size
+    DRV_BA414E_OPERAND_SIZE opSize,
     uint8_t * c,
     const uint8_t * p,
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 
   Summary:
@@ -1165,14 +1165,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
     <p><b>Implementation:</b> Static</p>
 
   Description:
- TThis routine takes the inputs and conducts a modular multiplication operation. 
+ TThis routine takes the inputs and conducts a modular multiplication operation.
  (C = (a * b) mod P
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -1189,23 +1189,23 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the
                             point is on the curve
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
-    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModMultiplication(ba414Handle, 
-                                            DRV_BA414E_OPSZ_256, 
-                                            (uint8_t*)&(mpC), 
-                                            (uint8_t*)&(mpPrime), 
-                                            (uint8_t*)&(mpA), 
-                                            (uint8_t*)&(mpB), 
+    DRV_HANDLE handle;
+    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModMultiplication(ba414Handle,
+                                            DRV_BA414E_OPSZ_256,
+                                            (uint8_t*)&(mpC),
+                                            (uint8_t*)&(mpPrime),
+                                            (uint8_t*)&(mpA),
+                                            (uint8_t*)&(mpB),
                                             0, 0);
 
     </code>
@@ -1218,7 +1218,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 
@@ -1226,13 +1226,13 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
 /* Function:
     DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
     const DRV_HANDLE handle,
-    DRV_BA414E_OPERAND_SIZE opSize,    // Hardware operand size
+    DRV_BA414E_OPERAND_SIZE opSize,
     uint8_t * C,
     const uint8_t * n,
     const uint8_t * M,
     const uint8_t * e,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 
   Summary:
@@ -1240,14 +1240,14 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
     <p><b>Implementation:</b> Static</p>
 
   Description:
- TThis routine takes the inputs and conducts a modular exponentiation operation. 
+ TThis routine takes the inputs and conducts a modular exponentiation operation.
  (C = (M^e) mod n
 
   Precondition:
-    The DRV_BA414E_Initialize routine must have been called for 
+    The DRV_BA414E_Initialize routine must have been called for
     the specified BA414E crypto driver instance.
 
-    DRV_BA414E_Open must have been called to obtain a valid opened 
+    DRV_BA414E_Open must have been called to obtain a valid opened
     device handle.
 
   Parameters:
@@ -1264,23 +1264,23 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
                    is complete. (Not used with blocking operations)
 
   Returns:
-    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the 
+    DRV_BA414E_OP_SUCCESS - If the operation completed successfully and the
                             point is on the curve
-    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals 
+    DRV_BA414E_OP_PENDING - With non-blocking operations, this return signals
                             that the operation is pending
     DRV_BA414E_OP_ERROR   - There was an error with the operation
     DRV_BA414E_OP_BUSY    - There is currently an operation pending, the caller
                             should wait and try again later
-    
+
   Example:
     <code>
-    DRV_HANDLE handle;  // Returned from DRV_BA414E_Open
-    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModExponentiation(ba414Handle, 
-                                            DRV_BA414E_OPSZ_256, 
-                                            (uint8_t*)&(mpC), 
-                                            (uint8_t*)&(mpN), 
-                                            (uint8_t*)&(mpM), 
-                                            (uint8_t*)&(mpE), 
+    DRV_HANDLE handle;
+    DRV_BA414E_OP_RESULT ret = DRV_BA414E_PRIM_ModExponentiation(ba414Handle,
+                                            DRV_BA414E_OPSZ_256,
+                                            (uint8_t*)&(mpC),
+                                            (uint8_t*)&(mpN),
+                                            (uint8_t*)&(mpM),
+                                            (uint8_t*)&(mpE),
                                             0, 0);
 
     </code>
@@ -1293,7 +1293,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
     const uint8_t * M,
     const uint8_t * e,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 );
 
 
