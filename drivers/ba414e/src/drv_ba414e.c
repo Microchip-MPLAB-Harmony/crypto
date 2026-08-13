@@ -8,7 +8,7 @@
     drv_ba414e.c
 
   Summary:
-    Source code for the BA414E Crypto driver dynamic 
+    Source code for the BA414E Crypto driver dynamic
     implementation.
 
   Description:
@@ -57,9 +57,36 @@ Microchip or any third party.
 #include "system/int/sys_int.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "interrupts.h"
 
-extern char * dbgBufferPtr;
-extern uint32_t debugBufferSize;
+// *****************************************************************************
+// *****************************************************************************
+// Section: Local Function Declarations
+// *****************************************************************************
+// *****************************************************************************
+static void DRV_BA414E_MemCopy(void * dst, const void * src, uint32_t dstLen, uint32_t srcLen, uint8_t reverseWords, uint8_t reverseBytes, uint8_t packEnd);
+static void DRV_BA414E_InitialStateHandler(void);
+static void DRV_BA414E_StartOp(void);
+static void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_PrepareEcdsaVerify(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_PrimEccPointDouble(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_PrimEccPointAddition(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_PrimEccPointMultiplication(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_PrimEccCheckPointOnCurve(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_PrimModAddition(DRV_BA414E_ClientData * cd, BA414E_OP_CODES op);
+static void DRV_BA414E_PrimModExp(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_Prepare(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessEcdsaSign(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessEcdsaVerify(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessPrimEccPointDouble(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessPrimEccPointAddition(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessPrimEccPointMultiplication(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessEccCheckPointOnCurve(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessPrimModOp(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_ProcessRsaModExp(DRV_BA414E_ClientData * cd);
+static void DRV_BA414E_Process(DRV_BA414E_ClientData * cd);
+static void DRV_BA414_BlockingCallback(DRV_BA414E_OP_RESULT result, uintptr_t context);
+static DRV_BA414E_OP_RESULT DRV_BA414_BlockingHelper(DRV_BA414E_ClientData * cd);
 
 // *****************************************************************************
 // *****************************************************************************
@@ -164,7 +191,7 @@ static const uint32_t init_ucode_array[810]={
 };
 
 #define TUPLE_COUNT         90
-#define min(i, j) (((i) < (j)) ? (i) : (j)) 
+#define min(i, j) (((i) < (j)) ? (i) : (j))
 
 // *****************************************************************************
 // *****************************************************************************
@@ -182,7 +209,7 @@ static inline void DRV_BA414E_DirectCopy(void * dst, const void * src, uint32_t 
     uint32_t * pDst = (uint32_t *)dst;
     uint32_t * pSrc = (uint32_t *)src;
     uint32_t counter = 0;
-    memset(dst, 0, dstLen);
+    (void)memset(dst, 0, dstLen);
     for (counter = 0; counter < numWords; counter++)
     {
         *(pDst++) = *(pSrc++);
@@ -214,7 +241,7 @@ static inline void DRV_BA414E_ReverseWordCopy(void * dst, const void * src, uint
     }
     uint32_t * pSrc = (uint32_t *)src;
     uint32_t counter = 0;
-    memset(dst, 0, dstLen);
+    (void)memset(dst, 0, dstLen);
     for (counter = 0; counter < numWords; counter++)
     {
         *(pDst--) = *(pSrc++);
@@ -241,7 +268,7 @@ static inline void DRV_BA414E_ReverseBytesCopy(void * dst, const void * src, uin
     uint32_t * pDst = (uint32_t *)dst;
     uint32_t * pSrc = (uint32_t *)src;
     uint32_t counter = 0;
-    memset(dst, 0, dstLen);
+    (void)memset(dst, 0, dstLen);
     for (counter = 0; counter < numWords; counter++)
     {
         uint32_t tmp = *(pSrc++);
@@ -277,18 +304,18 @@ static inline void DRV_BA414E_ReverseBytesWordsCopy(void * dst, const void * src
     uint8_t * pDst = (uint8_t *)dst + numBytes - 1;
     uint8_t * pSrc = (uint8_t *)src;
     uint32_t counter = 0;
-    memset(dst, 0, dstLen);
+    (void)memset(dst, 0, dstLen);
     for (counter = 0; counter < numBytes; counter++)
     {
         *(pDst--) = *(pSrc++);
     }
 }
 
-void DRV_BA414E_MemCopy(void * dst, const void * src, uint32_t dstLen, uint32_t srcLen, uint8_t reverseWords, uint8_t reverseBytes, uint8_t packEnd)
+static void DRV_BA414E_MemCopy(void * dst, const void * src, uint32_t dstLen, uint32_t srcLen, uint8_t reverseWords, uint8_t reverseBytes, uint8_t packEnd)
 {
     uint8_t __attribute__((aligned(16))) slotMax[DRV_BA414E_MAX_KEY_SIZE];
-    memset(slotMax, 0, DRV_BA414E_MAX_KEY_SIZE);
-    memset(dst, 0, dstLen);
+    (void)memset(slotMax, 0, DRV_BA414E_MAX_KEY_SIZE);
+    (void)memset(dst, 0, dstLen);
     uint32_t numBytes = srcLen;
     if (srcLen > dstLen)
     {
@@ -310,22 +337,27 @@ void DRV_BA414E_MemCopy(void * dst, const void * src, uint32_t dstLen, uint32_t 
     {
         DRV_BA414E_ReverseBytesWordsCopy(slotMax, src, dstLen, srcLen);
     }
+    else
+    {
+        /* reverseWords and reverseBytes are booleans, so the four cases above
+           are exhaustive. No copy is performed for any other combination. */
+    }
     if (packEnd == 0)
     {
-        memcpy(dst, slotMax, numBytes);
+        (void)memcpy(dst, slotMax, numBytes);
     }
     else
     {
         uint8_t * pDst = (uint8_t *)dst;
         pDst += (dstLen - numBytes);
-        memcpy(pDst, slotMax, numBytes);
+        (void)memcpy(pDst, slotMax, numBytes);
     }
 
 }
 
 static uint32_t DRV_BA414E_getSlotAddr(uint8_t slot_num)
 {
-    uint32_t addr = 0ul;
+    uint32_t addr = 0UL;
 
     if ( slot_num < DRV_BA414E_MAX_SLOT_NUM ) {
         addr = (uint32_t)(DRV_BA414E_SCMEM_BASE) + ((uint32_t)(slot_num) << (DRV_BA414E_SCM_SLOT_LS));
@@ -336,7 +368,7 @@ static uint32_t DRV_BA414E_getSlotAddr(uint8_t slot_num)
 
 
 static void DRV_BA414E_copyToScm4(const void* pdata,
-                      uint16_t numBytes, 
+                      uint32_t numBytes,
                       uint8_t slot_num,
                       uint8_t swapBytes,
                       uint8_t swapWords,
@@ -359,9 +391,9 @@ static void DRV_BA414E_copyToScm4(const void* pdata,
     }
 }
 
-static void DRV_BA414E_copyFromScm2(void* pdata, 
+static void DRV_BA414E_copyFromScm2(void* pdata,
                                     uint32_t numBytes,
-                                    uint8_t slotNum, 
+                                    uint8_t slotNum,
                                     uint8_t swapBytes,
                                     uint8_t swapWords,
                                     uint8_t packToBack)
@@ -380,7 +412,7 @@ static void DRV_BA414E_copyFromScm2(void* pdata,
     }
     numBytes = min(numBytes, slotSize);
     DRV_BA414E_MemCopy(pdata, tempBuffer, numBytes, slotSize, swapBytes, swapWords, packToBack);
-        
+
 }
 
 static void DRV_BA414E_scmClear(void)
@@ -389,7 +421,7 @@ static void DRV_BA414E_scmClear(void)
 
     while ( addr < (DRV_BA414E_SCMEM_END) ) {
         *(uint32_t*)(addr) = 0x0;
-        addr += 4ul;
+        addr += 4UL;
     }
 }
 
@@ -400,7 +432,7 @@ static void DRV_BA414E_ucmemInit(void)
     uint32_t * inPtr = (uint32_t *)init_ucode_array;
 
     uCodeMem = (uint32_t*)(__CRYPTO1UCM_BASE | 0x20000000);
-        
+
     for (i = 0; i < TUPLE_COUNT; i++)
     {
         uCodeMem[0] = inPtr[0] >> 14;
@@ -431,7 +463,7 @@ static void DRV_BA414E_ucmemInit(void)
         {
             uCodeMem[j] &= 0x3FFFF;
         }
-        
+
         inPtr += 9;
         uCodeMem += 16;
     }
@@ -443,7 +475,7 @@ static void DRV_BA414E_ucmemInit(void)
 // *****************************************************************************
 // *****************************************************************************
 
-void DRV_BA414E_InitialStateHandler()
+static void DRV_BA414E_InitialStateHandler(void)
 {
     DRV_BA414E_ucmemInit();
     DRV_BA414E_scmClear();
@@ -471,7 +503,7 @@ SYS_MODULE_OBJ DRV_BA414E_Initialize
     }
     else
     {
-        memset(&opData, 0, sizeof(DRV_BA414E_OperationalData));
+        (void)memset(&opData, 0, sizeof(DRV_BA414E_OperationalData));
         opData.inited = 1;
         opData.state = DRV_BA414E_INITIALIZE;
         opData.status = SYS_STATUS_UNINITIALIZED;
@@ -481,16 +513,16 @@ SYS_MODULE_OBJ DRV_BA414E_Initialize
     #if !defined(DRV_BA414_RTOS_TASK_DELAY)
         OSAL_SEM_Create(&opData.clientAction, OSAL_SEM_TYPE_COUNTING, DRV_BA414E_NUM_CLIENTS, 0);
     #endif
-#endif        
-        memset(&clientData, 0, sizeof(clientData));
+#endif
+        (void)memset(&clientData, 0, sizeof(clientData));
         int counter;
         for (counter = 0; counter < DRV_BA414E_NUM_CLIENTS; counter++)
         {
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
             OSAL_SEM_Create(&(clientData[counter].clientBlock), OSAL_SEM_TYPE_BINARY, 1, 0);
-#endif            
+#endif
         }
-        
+
         ret = (SYS_MODULE_OBJ)&opData;
     }
     return ret;
@@ -506,20 +538,20 @@ void DRV_BA414E_Deinitialize( SYS_MODULE_OBJ object)
     #if !defined(DRV_BA414_RTOS_TASK_DELAY)
         OSAL_SEM_Delete(&opData.clientAction);
     #endif
-#endif        
+#endif
         int counter;
         for (counter = 0; counter < DRV_BA414E_NUM_CLIENTS; counter++)
         {
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
             OSAL_SEM_Delete(&(clientData[counter].clientBlock));
-#endif            
+#endif
         }
-        memset(&clientData, 0, sizeof(clientData));
-        memset(&opData, 0, sizeof(DRV_BA414E_OperationalData));
+        (void)memset(&clientData, 0, sizeof(clientData));
+        (void)memset(&opData, 0, sizeof(DRV_BA414E_OperationalData));
     }
 }
 
-DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index, 
+DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
         const DRV_IO_INTENT ioIntent)
 {
     DRV_HANDLE ret = DRV_HANDLE_INVALID;
@@ -528,7 +560,7 @@ DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
 #if !defined(DRV_BA414E_RTOS_STACK_SIZE)
         if ((ioIntent & DRV_IO_INTENT_NONBLOCKING) == DRV_IO_INTENT_NONBLOCKING)
 #endif
-        {        
+        {
             if ((ioIntent & DRV_IO_INTENT_WRITE) == DRV_IO_INTENT_WRITE)
             {
                 uint8_t lookingForExclusive = 0;
@@ -539,7 +571,7 @@ DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
                 uint8_t found = -1;
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Pend(&opData.clientListSema, OSAL_WAIT_FOREVER);
-#endif                
+#endif
                 int counter;
                 for (counter = 0; counter < DRV_BA414E_NUM_CLIENTS; counter++)
                 {
@@ -564,12 +596,12 @@ DRV_HANDLE DRV_BA414E_Open( const SYS_MODULE_INDEX index,
                 }
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
                 OSAL_SEM_Post(&opData.clientListSema);
-#endif                                
+#endif
             }
-        }  
-        
+        }
+
     }
-        
+
     return ret;
 }
 
@@ -579,14 +611,14 @@ void DRV_BA414E_Close( const DRV_HANDLE handle)
     {
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
         OSAL_SEM_Pend(&opData.clientListSema, OSAL_WAIT_FOREVER);
-#endif                
+#endif
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData*)handle;
         cd->ioIntent = 0;
-        cd->inUse = 0;                
+        cd->inUse = 0;
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
         OSAL_SEM_Post(&opData.clientListSema);
-#endif                                
-    }           
+#endif
+    }
 }
 
 
@@ -601,7 +633,7 @@ SYS_STATUS DRV_BA414E_Status( SYS_MODULE_OBJ object)
 }
 
 
-void DRV_BA414E_InterruptHandler()
+void DRV_BA414E_InterruptHandler(void)
 {
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
     OSAL_SEM_PostISR(&opData.wfi);
@@ -612,7 +644,7 @@ void DRV_BA414E_InterruptHandler()
     SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
 }
 
-void DRV_BA414E_ErrorInterruptHandler()
+void DRV_BA414E_ErrorInterruptHandler(void)
 {
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
     OSAL_SEM_PostISR(&opData.wfi);
@@ -620,10 +652,10 @@ void DRV_BA414E_ErrorInterruptHandler()
     opData.errorInterrupt = 1;
     opData.lastStatus = PKSTATUS;
     PKCONTROL = 0;
-    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);    
+    SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
 }
 
-void DRV_BA414E_StartOp()
+static void DRV_BA414E_StartOp(void)
 {
     PKCONTROL = 0;
     //snprintf(dbgBufferPtr, debugBufferSize, "%s\r\n%s: PKSTATUS %08X Done %d Error %d\r\n", dbgBufferPtr, __FUNCTION__, PKSTATUS, opData.doneInterrupt, opData.errorInterrupt);
@@ -637,7 +669,7 @@ void DRV_BA414E_StartOp()
         //snprintf(dbgBufferPtr, debugBufferSize, "%s\r\n%s: Int still triggered\r\n", dbgBufferPtr, __FUNCTION__);
         PKCONTROL = 0;
         SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1_FAULT);
-        SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1);        
+        SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1);
     }
     //snprintf(dbgBufferPtr, debugBufferSize, "%s\r\n%s: PKSTATUS %08X Done %d Error %d\r\n", dbgBufferPtr, __FUNCTION__, PKSTATUS, opData.doneInterrupt, opData.errorInterrupt);
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
@@ -646,7 +678,7 @@ void DRV_BA414E_StartOp()
     PKCONTROL = 1;
 }
 
-void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->ecdsaSignParams.domain->keySize;
 
@@ -657,17 +689,17 @@ void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd)
     cmd.s.CALCR2 = 1;
     PKCOMMAND = cmd.v;
     PKCONFIG = 0;
-    
-    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->primeField, len, BA414E_ECDSA_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->order, len, BA414E_ECDSA_SLOT_N, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->generatorX, len, BA414E_ECDSA_SLOT_GX, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->generatorY, len, BA414E_ECDSA_SLOT_GY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->a, len, BA414E_ECDSA_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->b, len, BA414E_ECDSA_SLOT_B, 0, 0, 0);    
-    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.privateKey, len, BA414E_ECDSA_SLOT_PRIV_KEY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.k, len, BA414E_ECDSA_SLOT_K, 0, 0, 0);    
+
+
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->primeField, len, BA414E_ECDSA_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->order, len, BA414E_ECDSA_SLOT_N, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->generatorX, len, BA414E_ECDSA_SLOT_GX, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->generatorY, len, BA414E_ECDSA_SLOT_GY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->a, len, BA414E_ECDSA_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.domain->b, len, BA414E_ECDSA_SLOT_B, 0, 0, 0);
+
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.privateKey, len, BA414E_ECDSA_SLOT_PRIV_KEY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.k, len, BA414E_ECDSA_SLOT_K, 0, 0, 0);
     DRV_BA414E_copyToScm4(cd->ecdsaSignParams.msgHash, cd->ecdsaSignParams.msgHashSz, BA414E_ECDSA_SLOT_H, 1, 1, 0);
     opData.doneInterrupt = 0;
     opData.errorInterrupt = 0;
@@ -676,7 +708,7 @@ void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd)
     PKCONTROL = 1;
 }
 
-void DRV_BA414E_PrepareEcdsaVerify(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrepareEcdsaVerify(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->ecdsaVerifyParams.domain->keySize;
 
@@ -687,28 +719,28 @@ void DRV_BA414E_PrepareEcdsaVerify(DRV_BA414E_ClientData * cd)
     cmd.s.CALCR2 = 1;
     PKCOMMAND = cmd.v;
     PKCONFIG = 0;
-        
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->primeField, len, BA414E_ECDSA_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->order, len, BA414E_ECDSA_SLOT_N, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->generatorX, len, BA414E_ECDSA_SLOT_GX, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->generatorY, len, BA414E_ECDSA_SLOT_GY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->a, len, BA414E_ECDSA_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->b, len, BA414E_ECDSA_SLOT_B, 0, 0, 0);    
-    
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.publicKeyX, len, BA414E_ECDSA_SLOT_X0, 0, 0, 0);    
+
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->primeField, len, BA414E_ECDSA_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->order, len, BA414E_ECDSA_SLOT_N, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->generatorX, len, BA414E_ECDSA_SLOT_GX, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->generatorY, len, BA414E_ECDSA_SLOT_GY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->a, len, BA414E_ECDSA_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.domain->b, len, BA414E_ECDSA_SLOT_B, 0, 0, 0);
+
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.publicKeyX, len, BA414E_ECDSA_SLOT_X0, 0, 0, 0);
     DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.publicKeyY, len, BA414E_ECDSA_SLOT_Y0, 0, 0, 0);
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.R, len, BA414E_ECDSA_SLOT_R, 0, 0, 0);    
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.R, len, BA414E_ECDSA_SLOT_R, 0, 0, 0);
     DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.S, len, BA414E_ECDSA_SLOT_S, 0, 0, 0);
-    
+
     DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.msgHash, cd->ecdsaSignParams.msgHashSz, BA414E_ECDSA_SLOT_H, 1, 1, 0);
     opData.doneInterrupt = 0;
-    opData.errorInterrupt = 0;    
+    opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
-    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);    
+    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);
     PKCONTROL = 1;
 }
 
-void DRV_BA414E_PrimEccPointDouble(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrimEccPointDouble(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->eccPointDoubleParams.domain->keySize;
 
@@ -722,25 +754,25 @@ void DRV_BA414E_PrimEccPointDouble(DRV_BA414E_ClientData * cd)
     cfg.s.OPPTRC = BA414E_ECCP_SLOT_P3X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
-    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);    
-    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);    
-    
+
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);
+
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointDoubleParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);
+
     opData.doneInterrupt = 0;
-    opData.errorInterrupt = 0;    
+    opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
-    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);    
-    PKCONTROL = 1;    
+    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);
+    PKCONTROL = 1;
 }
 
-void DRV_BA414E_PrimEccPointAddition(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrimEccPointAddition(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->eccPointDoubleParams.domain->keySize;
 
@@ -755,27 +787,27 @@ void DRV_BA414E_PrimEccPointAddition(DRV_BA414E_ClientData * cd)
     cfg.s.OPPTRC = BA414E_ECCP_SLOT_P3X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
-    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);    
-    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p2X, len, BA414E_ECCP_SLOT_P2X, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p2Y, len, BA414E_ECCP_SLOT_P2Y, 0, 0, 0);    
-    
+
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);
+
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p2X, len, BA414E_ECCP_SLOT_P2X, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointAdditionParams.p2Y, len, BA414E_ECCP_SLOT_P2Y, 0, 0, 0);
+
     opData.doneInterrupt = 0;
-    opData.errorInterrupt = 0;    
+    opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
-    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);    
-    PKCONTROL = 1;    
+    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);
+    PKCONTROL = 1;
 }
 
-void DRV_BA414E_PrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->eccPointDoubleParams.domain->keySize;
 
@@ -790,27 +822,27 @@ void DRV_BA414E_PrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
     cfg.s.OPPTRC = BA414E_ECCP_SLOT_P3X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
-    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);    
-    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.k, len, BA414E_ECCP_SLOT_K, 0, 0, 0);    
-    
+
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);
+
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccPointMultiplicationParams.k, len, BA414E_ECCP_SLOT_K, 0, 0, 0);
+
     opData.doneInterrupt = 0;
-    opData.errorInterrupt = 0;    
+    opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
-    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);    
-    PKCONTROL = 1;    
+    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);
+    PKCONTROL = 1;
 }
 
 
-void DRV_BA414E_PrimEccCheckPointOnCurve(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrimEccCheckPointOnCurve(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->eccPointDoubleParams.domain->keySize;
 
@@ -823,25 +855,25 @@ void DRV_BA414E_PrimEccCheckPointOnCurve(DRV_BA414E_ClientData * cd)
     cfg.s.OPPTRA = BA414E_ECCP_SLOT_P1X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
-    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);    
-    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);    
-    
+
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->primeField, len, BA414E_ECCP_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->order, len, BA414E_ECCP_SLOT_N, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->generatorX, len, BA414E_ECCP_SLOT_GX, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->generatorY, len, BA414E_ECCP_SLOT_GY, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->a, len, BA414E_ECCP_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.domain->b, len, BA414E_ECCP_SLOT_B, 0, 0, 0);
+
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.p1X, len, BA414E_ECCP_SLOT_P1X, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->eccCheckPointOnCurveParams.p1Y, len, BA414E_ECCP_SLOT_P1Y, 0, 0, 0);
+
     opData.doneInterrupt = 0;
-    opData.errorInterrupt = 0;    
+    opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
-    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);    
-    PKCONTROL = 1;    
+    SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1);
+    PKCONTROL = 1;
 }
 
-void DRV_BA414E_PrimModAddition(DRV_BA414E_ClientData * cd, BA414E_OP_CODES op)
+static void DRV_BA414E_PrimModAddition(DRV_BA414E_ClientData * cd, BA414E_OP_CODES op)
 {
     uint32_t len = cd->modOperationParams.opSize * 8;
 
@@ -856,14 +888,14 @@ void DRV_BA414E_PrimModAddition(DRV_BA414E_ClientData * cd, BA414E_OP_CODES op)
     cfg.s.OPPTRC = BA414E_MODP_SLOT_C;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
-    DRV_BA414E_copyToScm4(cd->modOperationParams.p, len, BA414E_MODP_SLOT_P, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->modOperationParams.a, len, BA414E_MODP_SLOT_A, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->modOperationParams.b, len, BA414E_MODP_SLOT_B, 0, 0, 0);    
+    DRV_BA414E_copyToScm4(cd->modOperationParams.p, len, BA414E_MODP_SLOT_P, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modOperationParams.a, len, BA414E_MODP_SLOT_A, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modOperationParams.b, len, BA414E_MODP_SLOT_B, 0, 0, 0);
 
     DRV_BA414E_StartOp();
 }
 
-void DRV_BA414E_PrimModExp(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_PrimModExp(DRV_BA414E_ClientData * cd)
 {
     uint32_t len = cd->modExpParams.opSize * 8;
 
@@ -878,50 +910,50 @@ void DRV_BA414E_PrimModExp(DRV_BA414E_ClientData * cd)
     cfg.s.OPPTRC = BA414E_RSA_MODEXP_C;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
-    
-    DRV_BA414E_copyToScm4(cd->modExpParams.n, len, BA414E_RSA_MODEXP_n, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->modExpParams.M, len, BA414E_RSA_MODEXP_M, 0, 0, 0);    
-    DRV_BA414E_copyToScm4(cd->modExpParams.e, len, BA414E_RSA_MODEXP_e, 0, 0, 0);    
-    
-    DRV_BA414E_StartOp();   
+
+    DRV_BA414E_copyToScm4(cd->modExpParams.n, len, BA414E_RSA_MODEXP_n, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modExpParams.M, len, BA414E_RSA_MODEXP_M, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modExpParams.e, len, BA414E_RSA_MODEXP_e, 0, 0, 0);
+
+    DRV_BA414E_StartOp();
 }
 
 
-void DRV_BA414E_Prepare(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_Prepare(DRV_BA414E_ClientData * cd)
 {
-    PKCONTROL = 0;   
+    PKCONTROL = 0;
     SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
     SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1_FAULT);
     opData.doneInterrupt = 0;
-    opData.errorInterrupt = 0;    
+    opData.errorInterrupt = 0;
     switch(cd->currentOp)
     {
         case DRV_BA414E_OP_ECDSA_SIGN:
             DRV_BA414E_PrepareEcdsaSign(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_ECDSA_VERIFY:
             DRV_BA414E_PrepareEcdsaVerify(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_ECC_POINT_DOUBLE:
             DRV_BA414E_PrimEccPointDouble(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_ECC_POINT_ADDITION:
             DRV_BA414E_PrimEccPointAddition(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_ECC_POINT_MULTIPLICATION:
             DRV_BA414E_PrimEccPointMultiplication(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_ECC_CHECK_POINT_ON_CURVE:
             DRV_BA414E_PrimEccCheckPointOnCurve(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_MOD_ADDITION:
             DRV_BA414E_PrimModAddition(cd, BA414E_OPC_PRIM_MOD_ADD);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_MOD_SUBTRACTION:
             DRV_BA414E_PrimModAddition(cd, BA414E_OPC_PRIM_MOD_SUB);
-            break;            
+            break;
         case DRV_BA414E_OP_PRIM_MOD_MULTIPLICATION:
             DRV_BA414E_PrimModAddition(cd, BA414E_OPC_PRIM_MOD_MULT);
             break;
@@ -930,20 +962,21 @@ void DRV_BA414E_Prepare(DRV_BA414E_ClientData * cd)
             break;
         case DRV_BA414E_OP_NONE:
         default:
+            /* No action required for any other operation. */
             break;
     }
 }
-void DRV_BA414E_ProcessEcdsaSign(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessEcdsaSign(DRV_BA414E_ClientData * cd)
 {
     BA414E__PKSTATUSbits currentStatus;
     uint32_t len = cd->ecdsaSignParams.domain->keySize;
     currentStatus.v = opData.lastStatus;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((opData.errorInterrupt == 1) || (currentStatus.s.SIGINVAL == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_ERROR, cd->context);
         }
     }
@@ -951,56 +984,64 @@ void DRV_BA414E_ProcessEcdsaSign(DRV_BA414E_ClientData * cd)
     {
         DRV_BA414E_copyFromScm2(cd->ecdsaSignParams.R, len, BA414E_ECDSA_SLOT_R, 0, 0, 0);
         DRV_BA414E_copyFromScm2(cd->ecdsaSignParams.S, len, BA414E_ECDSA_SLOT_S, 0, 0, 0);
-        
-        if (cd->callback != 0)
-        {            
+
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_SUCCESS, cd->context);
         }
     }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessEcdsaVerify(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessEcdsaVerify(DRV_BA414E_ClientData * cd)
 {
     BA414E__PKSTATUSbits currentStatus;
     currentStatus.v = opData.lastStatus;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((currentStatus.s.SIGINVAL == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_SIGN_VERIFY_FAIL, cd->context);
-        }        
+        }
     }
     else if ((opData.errorInterrupt == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_ERROR, cd->context);
         }
     }
     else if (opData.doneInterrupt == 1)
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_SUCCESS, cd->context);
         }
     }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessPrimEccPointDouble(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessPrimEccPointDouble(DRV_BA414E_ClientData * cd)
 {
 
     BA414E__PKSTATUSbits currentStatus;
     currentStatus.v = opData.lastStatus;
     uint32_t len = cd->eccPointDoubleParams.domain->keySize;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((opData.errorInterrupt == 1))
     {
         DRV_BA414E_OP_RESULT opRes = (currentStatus.s.PXINF == 0) ? DRV_BA414E_OP_ERROR : DRV_BA414E_OP_ERROR_POINT_AT_INFINITY;
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(opRes, cd->context);
         }
     }
@@ -1009,27 +1050,31 @@ void DRV_BA414E_ProcessPrimEccPointDouble(DRV_BA414E_ClientData * cd)
         DRV_BA414E_OP_RESULT opRes = (currentStatus.s.PXINF == 0) ? DRV_BA414E_OP_SUCCESS : DRV_BA414E_OP_POINT_AT_INFINITY;
         DRV_BA414E_copyFromScm2(cd->eccPointDoubleParams.outX, len, BA414E_ECCP_SLOT_P3X, 0, 0, 0);
         DRV_BA414E_copyFromScm2(cd->eccPointDoubleParams.outY, len, BA414E_ECCP_SLOT_P3Y, 0, 0, 0);
-        
-        if (cd->callback != 0)
-        {            
+
+        if (cd->callback != NULL)
+        {
             (cd->callback)(opRes, cd->context);
         }
-    }  
+    }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessPrimEccPointAddition(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessPrimEccPointAddition(DRV_BA414E_ClientData * cd)
 {
 
     uint32_t len = cd->eccPointAdditionParams.domain->keySize;
     BA414E__PKSTATUSbits currentStatus;
     currentStatus.v = opData.lastStatus;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((opData.errorInterrupt == 1))
     {
         DRV_BA414E_OP_RESULT opRes = (currentStatus.s.PXINF == 0) ? DRV_BA414E_OP_ERROR : DRV_BA414E_OP_ERROR_POINT_AT_INFINITY;
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(opRes, cd->context);
         }
     }
@@ -1038,29 +1083,33 @@ void DRV_BA414E_ProcessPrimEccPointAddition(DRV_BA414E_ClientData * cd)
         DRV_BA414E_OP_RESULT opRes = (currentStatus.s.PXINF == 0) ? DRV_BA414E_OP_SUCCESS : DRV_BA414E_OP_POINT_AT_INFINITY;
         DRV_BA414E_copyFromScm2(cd->eccPointAdditionParams.outX, len, BA414E_ECCP_SLOT_P3X, 0, 0, 0);
         DRV_BA414E_copyFromScm2(cd->eccPointAdditionParams.outY, len, BA414E_ECCP_SLOT_P3Y, 0, 0, 0);
-        
-        if (cd->callback != 0)
-        {            
+
+        if (cd->callback != NULL)
+        {
             (cd->callback)(opRes, cd->context);
         }
-    }  
+    }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessPrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessPrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
 {
 
     uint32_t len = cd->eccPointMultiplicationParams.domain->keySize;
     BA414E__PKSTATUSbits currentStatus;
     currentStatus.v = opData.lastStatus;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((opData.errorInterrupt == 1))
     {
         BA414E__PKSTATUSbits currentStatus;
         currentStatus.v = opData.lastStatus;
         DRV_BA414E_OP_RESULT opRes = (currentStatus.s.PXINF == 0) ? DRV_BA414E_OP_ERROR : DRV_BA414E_OP_ERROR_POINT_AT_INFINITY;
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(opRes, cd->context);
         }
     }
@@ -1069,96 +1118,112 @@ void DRV_BA414E_ProcessPrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
         DRV_BA414E_OP_RESULT opRes = (currentStatus.s.PXINF == 0) ? DRV_BA414E_OP_SUCCESS : DRV_BA414E_OP_POINT_AT_INFINITY;
         DRV_BA414E_copyFromScm2(cd->eccPointMultiplicationParams.outX, len, BA414E_ECCP_SLOT_P3X, 0, 0, 0);
         DRV_BA414E_copyFromScm2(cd->eccPointMultiplicationParams.outY, len, BA414E_ECCP_SLOT_P3Y, 0, 0, 0);
-        
-        if (cd->callback != 0)
-        {            
+
+        if (cd->callback != NULL)
+        {
             (cd->callback)(opRes, cd->context);
         }
-    }  
+    }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessEccCheckPointOnCurve(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessEccCheckPointOnCurve(DRV_BA414E_ClientData * cd)
 {
     BA414E__PKSTATUSbits currentStatus;
     currentStatus.v = opData.lastStatus;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((currentStatus.s.PXNOC == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_POINT_NOT_ON_CURVE, cd->context);
-        }        
+        }
     }
     else if ((opData.errorInterrupt == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_ERROR, cd->context);
         }
     }
     else if (opData.doneInterrupt == 1)
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_SUCCESS, cd->context);
         }
     }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessPrimModOp(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessPrimModOp(DRV_BA414E_ClientData * cd)
 {
 
     uint32_t len = cd->modOperationParams.opSize * 8;
 //     bytesToString(domain.a, domain.keySize, 4, 16);
-//    snprintf(dbgBufferPtr, debugBufferSize, "%s\r\n%s: A: \n\r%s", dbgBufferPtr, __FUNCTION__, byteString);    
+//    snprintf(dbgBufferPtr, debugBufferSize, "%s\r\n%s: A: \n\r%s", dbgBufferPtr, __FUNCTION__, byteString);
     //snprintf(dbgBufferPtr, debugBufferSize, "%s\r\n%s: PKSTATUS %08X Done %d Error %d\r\n", dbgBufferPtr, __FUNCTION__, PKSTATUS, opData.doneInterrupt, opData.errorInterrupt);
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((opData.errorInterrupt == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_ERROR, cd->context);
         }
     }
     else if (opData.doneInterrupt == 1)
     {
         DRV_BA414E_copyFromScm2(cd->modOperationParams.c, len, BA414E_MODP_SLOT_C, 0, 0, 0);
-        
-        if (cd->callback != 0)
-        {            
+
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_SUCCESS, cd->context);
         }
-    }  
+    }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_ProcessRsaModExp(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_ProcessRsaModExp(DRV_BA414E_ClientData * cd)
 {
 
     uint32_t len = cd->modExpParams.opSize * 8;
-    
+
     cd->currentOp = DRV_BA414E_OP_NONE;
     if ((opData.errorInterrupt == 1))
     {
-        if (cd->callback != 0)
-        {            
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_ERROR, cd->context);
         }
     }
     else if (opData.doneInterrupt == 1)
     {
         DRV_BA414E_copyFromScm2(cd->modExpParams.C, len, BA414E_RSA_MODEXP_C, 0, 0, 0);
-        
-        if (cd->callback != 0)
-        {            
+
+        if (cd->callback != NULL)
+        {
             (cd->callback)(DRV_BA414E_OP_SUCCESS, cd->context);
         }
-    }  
+    }
+    else
+    {
+        /* No interrupt pending: nothing to report to the client. */
+    }
 }
 
-void DRV_BA414E_Process(DRV_BA414E_ClientData * cd)
+static void DRV_BA414E_Process(DRV_BA414E_ClientData * cd)
 {
-    PKCONTROL = 0;    
+    PKCONTROL = 0;
     SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1);
     SYS_INT_SourceDisable(INT_SOURCE_CRYPTO1_FAULT);
     SYS_INT_SourceStatusClear(INT_SOURCE_CRYPTO1);
@@ -1167,7 +1232,7 @@ void DRV_BA414E_Process(DRV_BA414E_ClientData * cd)
     {
         case DRV_BA414E_OP_ECDSA_SIGN:
             DRV_BA414E_ProcessEcdsaSign(cd);
-            break;            
+            break;
         case DRV_BA414E_OP_ECDSA_VERIFY:
             DRV_BA414E_ProcessEcdsaVerify(cd);
             break;
@@ -1193,6 +1258,7 @@ void DRV_BA414E_Process(DRV_BA414E_ClientData * cd)
             break;
         case DRV_BA414E_OP_NONE:
         default:
+            /* No action required for any other operation. */
             break;
     }
 
@@ -1217,7 +1283,7 @@ void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj)
                 for (counter = 0; counter < DRV_BA414E_NUM_CLIENTS; counter++)
                 {
                     if (clientData[counter].currentOp != DRV_BA414E_OP_NONE)
-                    {                        
+                    {
                         opData.state = DRV_BA414E_PREPARING;
                         opData.currentClient = &clientData[counter];
                         break;
@@ -1236,8 +1302,8 @@ void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj)
                         DRV_BA414E_Prepare(&clientData[counter]);
                         break;
                     }
-                }                
-            }   
+                }
+            }
             break;
             case DRV_BA414E_WAITING:
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
@@ -1250,15 +1316,16 @@ void DRV_BA414E_Tasks(SYS_MODULE_OBJ obj)
                 break;
             case DRV_BA414E_PROCESSING:
                 DRV_BA414E_Process(opData.currentClient);
-                opData.state = DRV_BA414E_READY;                
+                opData.state = DRV_BA414E_READY;
                 break;
             default:
+                /* No action required for any other operation. */
                 break;
         }
     }
 }
 
-void DRV_BA414_BlockingCallback(DRV_BA414E_OP_RESULT result, uintptr_t context)
+static void DRV_BA414_BlockingCallback(DRV_BA414E_OP_RESULT result, uintptr_t context)
 {
     DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData*)context;
     cd->blockingResult = result;
@@ -1267,7 +1334,7 @@ void DRV_BA414_BlockingCallback(DRV_BA414E_OP_RESULT result, uintptr_t context)
 #endif
 }
 
-DRV_BA414E_OP_RESULT DRV_BA414_BlockingHelper(DRV_BA414E_ClientData * cd)
+static DRV_BA414E_OP_RESULT DRV_BA414_BlockingHelper(DRV_BA414E_ClientData * cd)
 {
     cd->context = (uintptr_t)cd;
     cd->callback = DRV_BA414_BlockingCallback;
@@ -1288,17 +1355,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Sign(
     const uint8_t * msgHash,
     int msgHashSz,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context  
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->ecdsaSignParams, 0, sizeof(DRV_BA414E_ecdsaSignOpParams));
+            (void)memset(&cd->ecdsaSignParams, 0, sizeof(DRV_BA414E_ecdsaSignOpParams));
             cd->ecdsaSignParams.domain = domain;
             cd->ecdsaSignParams.R = R;
             cd->ecdsaSignParams.S = S;
@@ -1338,17 +1405,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
     const uint8_t * msgHash,
     int msgHashSz,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context  
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->ecdsaVerifyParams, 0, sizeof(DRV_BA414E_ecdsaVerifyOpParams));
+            (void)memset(&cd->ecdsaVerifyParams, 0, sizeof(DRV_BA414E_ecdsaVerifyOpParams));
             cd->ecdsaVerifyParams.domain = domain;
             cd->ecdsaVerifyParams.R = R;
             cd->ecdsaVerifyParams.S = S;
@@ -1373,7 +1440,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_ECDSA_Verify(
         }
     }
     return ret;
-    
+
 }
 
 
@@ -1385,17 +1452,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->eccPointDoubleParams, 0, sizeof(DRV_BA414E_primEccPointDoubleOpParams));
+            (void)memset(&cd->eccPointDoubleParams, 0, sizeof(DRV_BA414E_primEccPointDoubleOpParams));
             cd->eccPointDoubleParams.domain = domain;
             cd->eccPointDoubleParams.outX = outX;
             cd->eccPointDoubleParams.outY = outY;
@@ -1416,7 +1483,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointDouble(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
+    }
     return ret;
 
 }
@@ -1431,17 +1498,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
     const uint8_t * p2X,
     const uint8_t * p2Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->eccPointAdditionParams, 0, sizeof(DRV_BA414E_primEccPointAdditionOpParams));
+            (void)memset(&cd->eccPointAdditionParams, 0, sizeof(DRV_BA414E_primEccPointAdditionOpParams));
             cd->eccPointAdditionParams.domain = domain;
             cd->eccPointAdditionParams.outX = outX;
             cd->eccPointAdditionParams.outY = outY;
@@ -1464,8 +1531,8 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointAddition(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
-    return ret;    
+    }
+    return ret;
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
@@ -1477,17 +1544,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
     const uint8_t * p1Y,
     const uint8_t * k,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->eccPointMultiplicationParams, 0, sizeof(DRV_BA414E_primEccPointMultiplicationOpParams));
+            (void)memset(&cd->eccPointMultiplicationParams, 0, sizeof(DRV_BA414E_primEccPointMultiplicationOpParams));
             cd->eccPointMultiplicationParams.domain = domain;
             cd->eccPointMultiplicationParams.outX = outX;
             cd->eccPointMultiplicationParams.outY = outY;
@@ -1509,9 +1576,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccPointMultiplication(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
+    }
     return ret;
-    
+
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
@@ -1520,17 +1587,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
     const uint8_t * p1X,
     const uint8_t * p1Y,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->eccCheckPointOnCurveParams, 0, sizeof(DRV_BA414E_primEccCheckPointOnCurveOpParams));
+            (void)memset(&cd->eccCheckPointOnCurveParams, 0, sizeof(DRV_BA414E_primEccCheckPointOnCurveOpParams));
             cd->eccCheckPointOnCurveParams.domain = domain;
             cd->eccCheckPointOnCurveParams.p1X = p1X;
             cd->eccCheckPointOnCurveParams.p1Y = p1Y;
@@ -1549,9 +1616,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_EccCheckPointOnCurve(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
+    }
     return ret;
-    
+
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
@@ -1562,17 +1629,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->modOperationParams, 0, sizeof(DRV_BA414E_primModOperationParams));
+            (void)memset(&cd->modOperationParams, 0, sizeof(DRV_BA414E_primModOperationParams));
             cd->modOperationParams.opSize = opSize;
             cd->modOperationParams.c = c;
             cd->modOperationParams.p = p;
@@ -1593,9 +1660,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModAddition(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
+    }
     return ret;
-    
+
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
@@ -1606,17 +1673,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->modOperationParams, 0, sizeof(DRV_BA414E_primModOperationParams));
+            (void)memset(&cd->modOperationParams, 0, sizeof(DRV_BA414E_primModOperationParams));
             cd->modOperationParams.opSize = opSize;
             cd->modOperationParams.c = c;
             cd->modOperationParams.p = p;
@@ -1637,9 +1704,9 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModSubtraction(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
+    }
     return ret;
-    
+
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
@@ -1650,17 +1717,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
     const uint8_t * a,
     const uint8_t * b,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->modOperationParams, 0, sizeof(DRV_BA414E_primModOperationParams));
+            (void)memset(&cd->modOperationParams, 0, sizeof(DRV_BA414E_primModOperationParams));
             cd->modOperationParams.opSize = opSize;
             cd->modOperationParams.c = c;
             cd->modOperationParams.p = p;
@@ -1681,8 +1748,8 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModMultiplication(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
-    return ret;  
+    }
+    return ret;
 }
 
 DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
@@ -1693,17 +1760,17 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
     const uint8_t * M,
     const uint8_t * e,
     DRV_BA414E_CALLBACK callback,
-    uintptr_t context          
+    uintptr_t context
 )
 {
     DRV_BA414E_RESULT ret = DRV_BA414E_OP_ERROR;
-    
-    if (handle != DRV_HANDLE_INVALID)    
+
+    if (handle != DRV_HANDLE_INVALID)
     {
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData *)handle;
         if (cd->currentOp == DRV_BA414E_OP_NONE)
         {
-            memset(&cd->modExpParams, 0, sizeof(DRV_BA414E_primModExpOpParams));
+            (void)memset(&cd->modExpParams, 0, sizeof(DRV_BA414E_primModExpOpParams));
             cd->modExpParams.opSize = opSize;
             cd->modExpParams.C = C;
             cd->modExpParams.n = n;
@@ -1724,7 +1791,7 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
                 ret = DRV_BA414_BlockingHelper(cd);
             }
         }
-    }   
-    return ret;  
-    
+    }
+    return ret;
+
 }

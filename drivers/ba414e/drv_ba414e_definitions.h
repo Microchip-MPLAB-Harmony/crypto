@@ -43,8 +43,8 @@ Microchip or any third party.
 
 //DOM-IGNORE-END
 
-#ifndef _DRV_BA414E_DEFINITIONS_H_
-#define _DRV_BA414E_DEFINITIONS_H_
+#ifndef DRV_BA414E_DEFINITIONS_H
+#define DRV_BA414E_DEFINITIONS_H
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -277,4 +277,4 @@ typedef struct
 #endif
 //DOM-IGNORE-END
 
-#endif //_DRV_BA414E_DEFINITIONS_H_
+#endif //DRV_BA414E_DEFINITIONS_H

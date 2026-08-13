@@ -43,8 +43,8 @@ Microchip or any third party.
 
 //DOM-IGNORE-END
 
-#ifndef _DRV_BA414E_H_
-#define _DRV_BA414E_H_
+#ifndef DRV_BA414E_H
+#define DRV_BA414E_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -1307,4 +1307,4 @@ DRV_BA414E_OP_RESULT DRV_BA414E_PRIM_ModExponentiation(
 
 
 
-#endif //_DRV_BA414E_H_
+#endif //DRV_BA414E_H

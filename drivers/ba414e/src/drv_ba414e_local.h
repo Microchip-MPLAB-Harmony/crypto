@@ -11,9 +11,9 @@
     BA414E Driver Interface Header File
 
   Description:
-    This device driver provides a simple interface to manage the asymmetric 
-    cryptography module on Microchip's PIC32MZ1025W104132 family of 
-    microcontrollers.  This file provides the interface definition for this 
+    This device driver provides a simple interface to manage the asymmetric
+    cryptography module on Microchip's PIC32MZ1025W104132 family of
+    microcontrollers.  This file provides the interface definition for this
     driver.
 *******************************************************************************/
 
@@ -43,8 +43,8 @@ Microchip or any third party.
 
 //DOM-IGNORE-END
 
-#ifndef _DRV_BA414E_LOCAL_H_
-#define _DRV_BA414E_LOCAL_H_
+#ifndef DRV_BA414E_LOCAL_H
+#define DRV_BA414E_LOCAL_H
 
 #include <stdint.h>
 #include "configuration.h"
@@ -80,24 +80,24 @@ Microchip or any third party.
 #define DRV_BA414E_ALIGNMENT_MASK          0x3
 // Microcode memory size
 #define DRV_BA414E_MAX_uCODE_SIZE          1432
-        
-        
-        
+
+
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Data Types
 // *****************************************************************************
 // *****************************************************************************
 
-typedef enum 
+typedef enum
 {
     DRV_BA414E_INITIALIZE = 0,
     DRV_BA414E_READY,
     DRV_BA414E_PREPARING,
     DRV_BA414E_WAITING,
-    DRV_BA414E_PROCESSING        
+    DRV_BA414E_PROCESSING
 }DRV_BA414E_STATEs;
-        
+
 typedef enum
 {
     DRV_BA414E_OP_NONE = 0,
@@ -110,8 +110,8 @@ typedef enum
     DRV_BA414E_OP_PRIM_MOD_ADDITION,
     DRV_BA414E_OP_PRIM_MOD_SUBTRACTION,
     DRV_BA414E_OP_PRIM_MOD_MULTIPLICATION,
-    DRV_BA414E_OP_PRIM_MOD_EXP,            
-            
+    DRV_BA414E_OP_PRIM_MOD_EXP,
+
 }DRV_BA414E_OPERATIONS;
 
 typedef struct
@@ -122,7 +122,7 @@ typedef struct
     const uint8_t * privateKey;
     const uint8_t * k;
     const uint8_t * msgHash;
-    int msgHashSz;    
+    int msgHashSz;
 }DRV_BA414E_ecdsaSignOpParams;
 
 typedef struct
@@ -133,7 +133,7 @@ typedef struct
     const uint8_t * publicKeyX;
     const uint8_t * publicKeyY;
     const uint8_t * msgHash;
-    int msgHashSz;    
+    int msgHashSz;
 }DRV_BA414E_ecdsaVerifyOpParams;
 
 typedef struct
@@ -209,19 +209,19 @@ typedef struct
         DRV_BA414E_primEccPointMultiplicationOpParams eccPointMultiplicationParams;
         DRV_BA414E_primEccCheckPointOnCurveOpParams eccCheckPointOnCurveParams;
         DRV_BA414E_primModOperationParams modOperationParams;
-        DRV_BA414E_primModExpOpParams modExpParams;        
+        DRV_BA414E_primModExpOpParams modExpParams;
     };
     DRV_BA414E_CALLBACK callback;
     uintptr_t context;
     DRV_BA414E_OP_RESULT blockingResult;
 
-    
+
     DRV_IO_INTENT ioIntent;
     DRV_BA414E_OPERATIONS currentOp : 8;
     uint8_t inUse;
 }DRV_BA414E_ClientData;
-        
-typedef struct 
+
+typedef struct
 {
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
     OSAL_SEM_DECLARE(clientListSema);
@@ -236,7 +236,7 @@ typedef struct
     uint8_t errorInterrupt;
     uint32_t lastStatus;
 }DRV_BA414E_OperationalData;
-        
+
 
 
 typedef enum
@@ -272,18 +272,18 @@ typedef enum
     BA414E_OPC_DSA_SIGN = 0x19,
     BA414E_OPC_DSA_VERIFY = 0x1A,
     BA414E_OPC_SRP_CLIENT_SESSION_KEY_GEN = 0x1C,
-    BA414E_OPC_PRIM_ECC_POINT_DOUBLE = 0x20,           
-    BA414E_OPC_PRIM_ECC_POINT_ADDITION = 0x21,           
-    BA414E_OPC_PRIM_ECC_POINT_MULTI = 0x22,           
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_AB = 0x23,           
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_N = 0x24,           
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_COUPLE_LESS_PRIME = 0x25,           
-    BA414E_OPC_PRIM_ECC_POINT_CHECK_POINT_ON_CURVE = 0x26,           
-    BA414E_OPC_PRIM_ECC_POINT_CURVE25519_POINT_MULT = 0x28,           
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_XRECOVER = 0x29,           
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_SCALARMULT = 0x2A,           
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_CHECKVALID = 0x2B,           
-    BA414E_OPC_PRIM_ECC_POINT_ED25519_CHECK_POINT_ON_CURVE = 0x2C,           
+    BA414E_OPC_PRIM_ECC_POINT_DOUBLE = 0x20,
+    BA414E_OPC_PRIM_ECC_POINT_ADDITION = 0x21,
+    BA414E_OPC_PRIM_ECC_POINT_MULTI = 0x22,
+    BA414E_OPC_PRIM_ECC_POINT_CHECK_AB = 0x23,
+    BA414E_OPC_PRIM_ECC_POINT_CHECK_N = 0x24,
+    BA414E_OPC_PRIM_ECC_POINT_CHECK_COUPLE_LESS_PRIME = 0x25,
+    BA414E_OPC_PRIM_ECC_POINT_CHECK_POINT_ON_CURVE = 0x26,
+    BA414E_OPC_PRIM_ECC_POINT_CURVE25519_POINT_MULT = 0x28,
+    BA414E_OPC_PRIM_ECC_POINT_ED25519_XRECOVER = 0x29,
+    BA414E_OPC_PRIM_ECC_POINT_ED25519_SCALARMULT = 0x2A,
+    BA414E_OPC_PRIM_ECC_POINT_ED25519_CHECKVALID = 0x2B,
+    BA414E_OPC_PRIM_ECC_POINT_ED25519_CHECK_POINT_ON_CURVE = 0x2C,
     BA414E_OPC_ECC_ECDSA_SIGN = 0x30,
     BA414E_OPC_ECC_ECDSA_VERIFY = 0x31,
     BA414E_OPC_ECC_ECDSA_DOMAIN_PARAM_VALID = 0x32,
@@ -309,7 +309,7 @@ typedef enum
     BA414E_ECDSA_SLOT_H = 0xC,
     BA414E_ECDSA_SLOT_W = 0xD,
     BA414E_ECDSA_SLOT_P1X = 0xE,
-    BA414E_ECDSA_SLOT_P1Y = 0xF,           
+    BA414E_ECDSA_SLOT_P1Y = 0xF,
 } BA414E_ECDSA_SLOTS;
 
 typedef enum
