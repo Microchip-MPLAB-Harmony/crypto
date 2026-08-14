@@ -617,7 +617,7 @@ void DRV_BA414E_Close( const DRV_HANDLE handle)
         OSAL_SEM_Pend(&opData.clientListSema, OSAL_WAIT_FOREVER);
 #endif
         DRV_BA414E_ClientData * cd = (DRV_BA414E_ClientData*)handle;
-        cd->ioIntent = 0;
+        cd->ioIntent = (DRV_IO_INTENT)0;
         cd->inUse = 0;
 #if defined(DRV_BA414E_RTOS_STACK_SIZE)
         OSAL_SEM_Post(&opData.clientListSema);
@@ -688,9 +688,9 @@ static void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_ECC_ECDSA_SIGN;
-    cmd.s.OPSIZE = (uint32_t)cd->ecdsaSignParams.eccDomain->opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_ECC_ECDSA_SIGN;
+    cmd.s.OPSIZE = (uint8_t)cd->ecdsaSignParams.eccDomain->opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     PKCOMMAND = cmd.v;
     PKCONFIG = 0;
 
@@ -704,7 +704,7 @@ static void DRV_BA414E_PrepareEcdsaSign(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_copyToScm4(cd->ecdsaSignParams.privateKey, len, (uint32_t)BA414E_ECDSA_SLOT_PRIV_KEY, 0, 0, 0);
     DRV_BA414E_copyToScm4(cd->ecdsaSignParams.k, len, (uint32_t)BA414E_ECDSA_SLOT_K, 0, 0, 0);
-    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.msgHash, cd->ecdsaSignParams.msgHashSz, (uint32_t)BA414E_ECDSA_SLOT_H, 1, 1, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaSignParams.msgHash, (uint32_t)cd->ecdsaSignParams.msgHashSz, (uint32_t)BA414E_ECDSA_SLOT_H, 1, 1, 0);
     opData.doneInterrupt = 0;
     opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
@@ -718,9 +718,9 @@ static void DRV_BA414E_PrepareEcdsaVerify(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_ECC_ECDSA_VERIFY;
-    cmd.s.OPSIZE = (uint32_t)cd->ecdsaVerifyParams.eccDomain->opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_ECC_ECDSA_VERIFY;
+    cmd.s.OPSIZE = (uint8_t)cd->ecdsaVerifyParams.eccDomain->opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     PKCOMMAND = cmd.v;
     PKCONFIG = 0;
 
@@ -736,7 +736,7 @@ static void DRV_BA414E_PrepareEcdsaVerify(DRV_BA414E_ClientData * cd)
     DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.R, len, (uint32_t)BA414E_ECDSA_SLOT_R, 0, 0, 0);
     DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.S, len, (uint32_t)BA414E_ECDSA_SLOT_S, 0, 0, 0);
 
-    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.msgHash, cd->ecdsaSignParams.msgHashSz, (uint32_t)BA414E_ECDSA_SLOT_H, 1, 1, 0);
+    DRV_BA414E_copyToScm4(cd->ecdsaVerifyParams.msgHash, (uint32_t)cd->ecdsaSignParams.msgHashSz, (uint32_t)BA414E_ECDSA_SLOT_H, 1, 1, 0);
     opData.doneInterrupt = 0;
     opData.errorInterrupt = 0;
     SYS_INT_SourceEnable(INT_SOURCE_CRYPTO1_FAULT);
@@ -750,12 +750,12 @@ static void DRV_BA414E_PrimEccPointDouble(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_PRIM_ECCP_DOUBLE;
-    cmd.s.OPSIZE = (uint32_t)cd->eccPointDoubleParams.eccDomain->opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_PRIM_ECCP_DOUBLE;
+    cmd.s.OPSIZE = (uint8_t)cd->eccPointDoubleParams.eccDomain->opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     BA414E__PKCONFIGbits cfg = {{0}};
-    cfg.s.OPPTRA = (uint32_t)BA414E_ECCP_SLOT_P1X;
-    cfg.s.OPPTRC = (uint32_t)BA414E_ECCP_SLOT_P3X;
+    cfg.s.OPPTRA = (uint8_t)BA414E_ECCP_SLOT_P1X;
+    cfg.s.OPPTRC = (uint8_t)BA414E_ECCP_SLOT_P3X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
 
@@ -782,13 +782,13 @@ static void DRV_BA414E_PrimEccPointAddition(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_PRIM_ECCP_ADDITION;
-    cmd.s.OPSIZE = (uint32_t)cd->eccPointAdditionParams.eccDomain->opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_PRIM_ECCP_ADDITION;
+    cmd.s.OPSIZE = (uint8_t)cd->eccPointAdditionParams.eccDomain->opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     BA414E__PKCONFIGbits cfg = {{0}};
-    cfg.s.OPPTRA = (uint32_t)BA414E_ECCP_SLOT_P1X;
-    cfg.s.OPPTRB = (uint32_t)BA414E_ECCP_SLOT_P2X;
-    cfg.s.OPPTRC = (uint32_t)BA414E_ECCP_SLOT_P3X;
+    cfg.s.OPPTRA = (uint8_t)BA414E_ECCP_SLOT_P1X;
+    cfg.s.OPPTRB = (uint8_t)BA414E_ECCP_SLOT_P2X;
+    cfg.s.OPPTRC = (uint8_t)BA414E_ECCP_SLOT_P3X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
 
@@ -817,13 +817,13 @@ static void DRV_BA414E_PrimEccPointMultiplication(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_PRIM_ECCP_MULTI;
-    cmd.s.OPSIZE = (uint32_t)cd->eccPointAdditionParams.eccDomain->opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_PRIM_ECCP_MULTI;
+    cmd.s.OPSIZE = (uint8_t)cd->eccPointAdditionParams.eccDomain->opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     BA414E__PKCONFIGbits cfg = {{0}};
-    cfg.s.OPPTRA = (uint32_t)BA414E_ECCP_SLOT_P1X;
-    cfg.s.OPPTRB = (uint32_t)BA414E_ECCP_SLOT_K;
-    cfg.s.OPPTRC = (uint32_t)BA414E_ECCP_SLOT_P3X;
+    cfg.s.OPPTRA = (uint8_t)BA414E_ECCP_SLOT_P1X;
+    cfg.s.OPPTRB = (uint8_t)BA414E_ECCP_SLOT_K;
+    cfg.s.OPPTRC = (uint8_t)BA414E_ECCP_SLOT_P3X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
 
@@ -852,11 +852,11 @@ static void DRV_BA414E_PrimEccCheckPointOnCurve(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_PRIM_ECCP_CHECK_POINT_ON_CURVE;
-    cmd.s.OPSIZE = (uint32_t)cd->eccPointAdditionParams.eccDomain->opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_PRIM_ECCP_CHECK_POINT_ON_CURVE;
+    cmd.s.OPSIZE = (uint8_t)cd->eccPointAdditionParams.eccDomain->opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     BA414E__PKCONFIGbits cfg = {{0}};
-    cfg.s.OPPTRA = (uint32_t)BA414E_ECCP_SLOT_P1X;
+    cfg.s.OPPTRA = (uint8_t)BA414E_ECCP_SLOT_P1X;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
 
@@ -883,13 +883,13 @@ static void DRV_BA414E_PrimModAddition(DRV_BA414E_ClientData * cd, BA414E_OP_COD
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)op;
-    cmd.s.OPSIZE = (uint32_t)cd->modOperationParams.opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)op;
+    cmd.s.OPSIZE = (uint8_t)cd->modOperationParams.opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     BA414E__PKCONFIGbits cfg = {{0}};
-    cfg.s.OPPTRA = (uint32_t)BA414E_MODP_SLOT_A;
-    cfg.s.OPPTRB = (uint32_t)BA414E_MODP_SLOT_B;
-    cfg.s.OPPTRC = (uint32_t)BA414E_MODP_SLOT_C;
+    cfg.s.OPPTRA = (uint8_t)BA414E_MODP_SLOT_A;
+    cfg.s.OPPTRB = (uint8_t)BA414E_MODP_SLOT_B;
+    cfg.s.OPPTRC = (uint8_t)BA414E_MODP_SLOT_C;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
     DRV_BA414E_copyToScm4(cd->modOperationParams.p, len, (uint32_t)BA414E_MODP_SLOT_P, 0, 0, 0);
@@ -905,19 +905,19 @@ static void DRV_BA414E_PrimModExp(DRV_BA414E_ClientData * cd)
 
     DRV_BA414E_scmClear();
     BA414E_PKCOMMANDbits cmd = {{0}};
-    cmd.s.OPERATION = (uint32_t)BA414E_OPC_RSA_MOD_EXP;
-    cmd.s.OPSIZE = (uint32_t)cd->modExpParams.opSize;
-    cmd.s.CALCR2 = 1U;
+    cmd.s.OPERATION = (uint8_t)BA414E_OPC_RSA_MOD_EXP;
+    cmd.s.OPSIZE = (uint8_t)cd->modExpParams.opSize;
+    cmd.s.CALCR2 = (uint8_t)1;
     BA414E__PKCONFIGbits cfg = {{0}};
-    cfg.s.OPPTRA = (uint32_t)BA414E_RSA_MODEXP_M;
-    cfg.s.OPPTRB = (uint32_t)BA414E_RSA_MODEXP_e;
-    cfg.s.OPPTRC = (uint32_t)BA414E_RSA_MODEXP_C;
+    cfg.s.OPPTRA = (uint8_t)BA414E_RSA_MODEXP_M;
+    cfg.s.OPPTRB = (uint8_t)BA414E_RSA_MODEXP_e;
+    cfg.s.OPPTRC = (uint8_t)BA414E_RSA_MODEXP_C;
     PKCONFIG = cfg.v;
     PKCOMMAND = cmd.v;
 
-    DRV_BA414E_copyToScm4(cd->modExpParams.n, len, BA414E_RSA_MODEXP_n, 0, 0, 0);
-    DRV_BA414E_copyToScm4(cd->modExpParams.M, len, BA414E_RSA_MODEXP_M, 0, 0, 0);
-    DRV_BA414E_copyToScm4(cd->modExpParams.e, len, BA414E_RSA_MODEXP_e, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modExpParams.n, len, (uint32_t)BA414E_RSA_MODEXP_n, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modExpParams.M, len, (uint32_t)BA414E_RSA_MODEXP_M, 0, 0, 0);
+    DRV_BA414E_copyToScm4(cd->modExpParams.e, len, (uint32_t)BA414E_RSA_MODEXP_e, 0, 0, 0);
 
     DRV_BA414E_StartOp();
 }
@@ -1210,7 +1210,7 @@ static void DRV_BA414E_ProcessRsaModExp(DRV_BA414E_ClientData * cd)
     }
     else if (opData.doneInterrupt == 1)
     {
-        DRV_BA414E_copyFromScm2(cd->modExpParams.C, len, BA414E_RSA_MODEXP_C, 0, 0, 0);
+        DRV_BA414E_copyFromScm2(cd->modExpParams.C, len, (uint32_t)BA414E_RSA_MODEXP_C, 0, 0, 0);
 
         if (cd->callback != NULL)
         {
