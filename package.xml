@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Package name="crypto">
     <Dependencies>
-        <Dependency name="core" version="v3.12.0"/>
-        <Dependency name="wolfssl" version="v5.4.0"/>
+        <Dependency name="core" version="v3.17.0"/>
+        <Dependency name="wolfssl" version="v5.9.2"/>
         <Dependency name="zlib" version="v1.2.11"/>        
     </Dependencies>
 </Package>

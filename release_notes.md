@@ -2,6 +2,28 @@
 ![Harmony logo small](https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_mplab_harmony_logo_small.png)
 
 # Microchip MPLAB® Harmony 3 Release Notes
+## Crypto Release v3.9.0
+
+- The release of the Crypto Apps Speed Test Application corresponds to the MPLAB Harmony 3 Crypto Library version v3.9.0.
+
+### New Features
+- None
+
+### Bug fixes and and Improvements
+- Fixed MISRA compliance issues in the Crypto source files.
+- Fixed MISRA compliance issues in the BA414E driver files.
+
+### Known issues
+- None
+
+### Development Tools
+
+* [MPLAB® X IDE v6.35](https://www.microchip.com/mplab/mplab-x-ide)
+* [MPLAB® XC32 C/C++ Compiler v6.00](https://www.microchip.com/mplab/compilers)
+* MPLAB® X IDE plug-ins:
+	* MPLAB® Code Configurator v5.7.0
+
+# Microchip MPLAB® Harmony 3 Release Notes
 ## Crypto Release v3.8.2
 ### New Features
 
