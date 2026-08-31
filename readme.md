@@ -26,7 +26,6 @@ The crypto module contains the Harmony 3 API for cryptography, the Microchip 32-
 |-----------|------------------------------------------------------------|
 | apps      | Example applications for crypto library components           |
 | config    | Crypto module configuration scripts                          |
-| docs      | Crypto module library help documentation                     |
 | drivers   | Crypto hw driver source files                              |
 | src       | MPLAB Harmony crypto library source code                   |
 | templates | Crypto file templates                                      |

@@ -14,7 +14,7 @@
 - Fixed MISRA compliance issues in the BA414E driver files.
 
 ### Known issues
-- None
+- On the SAME70 net applications, the “wolfssl_tcp_server” demo currently fails due to a “Tag Mismatch” error observed on the test client during SSL/TLS communication. Additionally, the “web_net_server_sdcard_fatfs” demo fails with an “ERR_SSL_PROTOCOL_ERROR” reported by the browser/client, indicating an SSL/TLS protocol negotiation issue.
 
 ### Development Tools
 
