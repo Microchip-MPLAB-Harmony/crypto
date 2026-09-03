@@ -30,7 +30,7 @@ The crypto module contains the Harmony 3 API for cryptography, the Microchip 32-
 
 ## Documentation
 
-Click [here](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=MH3_crypto3.x&redirect=true) to view the online documentation for the Crypto v3.x APIs.
+Click [here](https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=MH3_crypto3.x&redirect=true) to view the online documentation for the Crypto v3.9.0 APIs.
 
 To view the documentation offline, follow these steps:
  - Download the publication as a zip file from [here](https://onlinedocs.microchip.com/download/GUID-9FC01DF6-78C3-44B0-B280-77A8641731C8?type=webhelp).
